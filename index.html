@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연봉 실수령액 계산기 - 내 월급 얼마야?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(160deg, #FFF9E6 0%, #FFF1CC 25%, #FFE8D6 60%, #FFE0EB 100%);
+            min-height: 100vh;
+            padding: 20px 16px 60px;
+        }
+
+        .container { max-width: 760px; margin: 0 auto; }
+
+        /* ── Header ── */
+        .header { text-align: center; padding: 36px 0 28px; }
+        .header .sun { font-size: 52px; margin-bottom: 10px; animation: spin 8s linear infinite; display: inline-block; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .header h1 {
+            font-size: 2rem; font-weight: 900;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF9F1C 50%, #FFBF69 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 8px; letter-spacing: -0.5px;
+        }
+        .header p { color: #999; font-size: 0.9rem; }
+
+        /* ── Ad Placeholder ── */
+        .ad-box {
+            background: rgba(255,255,255,0.7);
+            border: 2px dashed #FFCC80;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            color: #FFAB40;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 28px 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 24px rgba(255, 150, 50, 0.10);
+        }
+        .card-title {
+            font-size: 0.95rem; font-weight: 700; color: #666;
+            margin-bottom: 22px; display: flex; align-items: center; gap: 6px;
+        }
+
+        /* ── Input ── */
+        .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: #555; margin-bottom: 8px; }
+        .input-wrap { position: relative; margin-bottom: 12px; }
+        .salary-input {
+            width: 100%; padding: 16px 60px 16px 20px;
+            font-size: 1.5rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+            border: 2px solid #FFE0B2; border-radius: 16px; outline: none; color: #333;
+            text-align: right; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .salary-input:focus { border-color: #FF9F1C; box-shadow: 0 0 0 4px rgba(255,159,28,0.12); }
+        .input-unit {
+            position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+            font-size: 1rem; font-weight: 700; color: #FF9F1C; pointer-events: none;
+        }
+
+        /* ── Slider ── */
+        .salary-slider {
+            width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px;
+            background: linear-gradient(to right, #FF6B35, #FF9F1C, #FFBF69);
+            outline: none; cursor: pointer;
+        }
+        .salary-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%;
+            background: white; border: 3px solid #FF9F1C;
+            box-shadow: 0 2px 10px rgba(255,159,28,0.45); cursor: pointer;
+        }
+        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.72rem; color: #bbb; }
+
+        /* ── Options ── */
+        .options-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+        .option-group label { display: block; font-size: 0.82rem; font-weight: 700; color: #666; margin-bottom: 6px; }
+        .option-select {
+            width: 100%; padding: 11px 14px; border: 2px solid #F0F0F0; border-radius: 12px;
+            font-size: 0.9rem; font-family: 'Noto Sans KR', sans-serif; color: #333;
+            outline: none; background: white; transition: border-color 0.2s;
+        }
+        .option-select:focus { border-color: #FF9F1C; }
+
+        /* ── Button ── */
+        .calc-btn {
+            width: 100%; padding: 18px; margin-top: 22px;
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFBF69);
+            background-size: 200% 200%; animation: gradMove 3s ease infinite;
+            border: none; border-radius: 16px;
+            font-size: 1.05rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+            color: white; cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255,107,53,0.35); transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.45); }
+        .calc-btn:active { transform: translateY(0); }
+        @keyframes gradMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        /* ── Result Card ── */
+        .result-card {
+            background: linear-gradient(135deg, #1B5E20, #2E7D32, #43A047);
+            border-radius: 24px; padding: 32px 24px; margin-bottom: 16px;
+            text-align: center; display: none;
+            box-shadow: 0 8px 32px rgba(46,125,50,0.30);
+        }
+        .result-card.show { display: block; animation: fadeUp 0.5s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+        .result-label { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-bottom: 6px; font-weight: 500; }
+        .result-main { font-size: 3.2rem; font-weight: 900; color: #fff; letter-spacing: -1.5px; }
+        .result-main-unit { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 2px; }
+        .result-row {
+            display: flex; justify-content: center; gap: 0;
+            margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .result-sub { flex: 1; padding: 0 12px; }
+        .result-sub + .result-sub { border-left: 1px solid rgba(255,255,255,0.2); }
+        .result-sub-label { color: rgba(255,255,255,0.6); font-size: 0.75rem; margin-bottom: 4px; }
+        .result-sub-val { color: white; font-size: 1rem; font-weight: 700; }
+
+        .cheer-msg {
+            background: rgba(255,255,255,0.13); border-radius: 12px;
+            padding: 12px 16px; margin-top: 16px;
+            color: rgba(255,255,255,0.92); font-size: 0.88rem; font-weight: 500;
+        }
+
+        /* ── Breakdown ── */
+        .breakdown-card { display: none; }
+        .breakdown-card.show { display: block; animation: fadeUp 0.5s ease 0.08s both; }
+
+        .b-item { display: flex; align-items: center; margin-bottom: 14px; }
+        .b-item:last-child { margin-bottom: 0; }
+        .b-icon {
+            width: 38px; height: 38px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; margin-right: 12px; flex-shrink: 0;
+        }
+        .b-info { flex: 1; }
+        .b-name { font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 5px; }
+        .b-bar-wrap { background: #F5F5F5; border-radius: 4px; height: 7px; overflow: hidden; }
+        .b-bar { height: 100%; border-radius: 4px; width: 0; transition: width 0.9s cubic-bezier(0.4,0,0.2,1); }
+        .b-amount { font-size: 0.88rem; font-weight: 700; color: #444; margin-left: 12px; min-width: 90px; text-align: right; }
+
+        .b-total {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 0 0; margin-top: 16px; border-top: 2px dashed #F0F0F0;
+        }
+        .b-total-label { font-size: 0.92rem; font-weight: 700; color: #333; }
+        .b-total-val { font-size: 1rem; font-weight: 700; color: #E64A19; }
+
+        /* ── Comparison ── */
+        .comparison-card { display: none; }
+        .comparison-card.show { display: block; animation: fadeUp 0.5s ease 0.16s both; }
+
+        .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .raise-label-text { font-size: 0.85rem; font-weight: 700; color: #555; }
+        .raise-badge {
+            background: linear-gradient(135deg, #7B1FA2, #E91E63);
+            color: white; padding: 4px 14px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 700;
+        }
+        .raise-slider {
+            width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px;
+            background: linear-gradient(to right, #7B1FA2, #E91E63);
+            outline: none; cursor: pointer; margin-bottom: 6px;
+        }
+        .raise-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
+            background: white; border: 3px solid #E91E63;
+            box-shadow: 0 2px 8px rgba(233,30,99,0.4); cursor: pointer;
+        }
+        .raise-range { display: flex; justify-content: space-between; font-size: 0.72rem; color: #bbb; margin-bottom: 20px; }
+
+        .cmp-table { width: 100%; border-collapse: collapse; }
+        .cmp-table th {
+            padding: 10px 12px; font-size: 0.8rem; font-weight: 700; color: #888;
+            background: #FAFAFA; text-align: center;
+        }
+        .cmp-table th:first-child { text-align: left; }
+        .cmp-table td {
+            padding: 13px 12px; font-size: 0.88rem; text-align: center;
+            border-bottom: 1px solid #F5F5F5; color: #444;
+        }
+        .cmp-table td:first-child { text-align: left; font-weight: 600; color: #555; }
+        .cmp-table .green { color: #2E7D32; font-weight: 700; }
+        .cmp-table .pink { color: #E91E63; font-weight: 700; font-size: 0.82rem; }
+
+        /* ── Footer ── */
+        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.55rem; }
+            .result-main { font-size: 2.4rem; }
+            .options-row { grid-template-columns: 1fr; }
+            .result-sub-val { font-size: 0.88rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="sun">☀️</div>
+        <h1>연봉 실수령액 계산기</h1>
+        <p>세금 다 떼고 실제로 얼마 받는지 확인해보세요!</p>
+    </div>
+
+    <!-- 광고 (상단) -->
+    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
+
+    <!-- 입력 카드 -->
+    <div class="card">
+        <div class="card-title">📝 내 연봉 입력</div>
+
+        <label class="input-label">연봉 (세전)</label>
+        <div class="input-wrap">
+            <input type="text" class="salary-input" id="salaryInput" placeholder="35,000,000">
+            <span class="input-unit">원</span>
+        </div>
+        <input type="range" class="salary-slider" id="salarySlider"
+            min="20000000" max="200000000" step="1000000" value="35000000">
+        <div class="slider-labels">
+            <span>2,000만원</span>
+            <span>6,000만원</span>
+            <span>1억원</span>
+            <span>2억원</span>
+        </div>
+
+        <div class="options-row">
+            <div class="option-group">
+                <label>부양가족 수 (본인 포함)</label>
+                <select class="option-select" id="dependents">
+                    <option value="1">1명 (본인만)</option>
+                    <option value="2">2명</option>
+                    <option value="3">3명</option>
+                    <option value="4">4명</option>
+                    <option value="5">5명 이상</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label>월 비과세 금액</label>
+                <select class="option-select" id="nonTaxable">
+                    <option value="0">없음</option>
+                    <option value="100000">10만원 (식대)</option>
+                    <option value="200000">20만원</option>
+                    <option value="300000">30만원</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="calc-btn" onclick="calculate()">💡 실수령액 계산하기</button>
+    </div>
+
+    <!-- 결과 카드 -->
+    <div class="result-card" id="resultCard">
+        <div class="result-label">월 실수령액</div>
+        <div class="result-main" id="monthlyResult">0</div>
+        <div class="result-main-unit">원 / 월</div>
+        <div class="result-row">
+            <div class="result-sub">
+                <div class="result-sub-label">연 실수령액</div>
+                <div class="result-sub-val" id="annualResult">—</div>
+            </div>
+            <div class="result-sub">
+                <div class="result-sub-label">실효 공제율</div>
+                <div class="result-sub-val" id="effectiveRate">—</div>
+            </div>
+            <div class="result-sub">
+                <div class="result-sub-label">월 총 공제액</div>
+                <div class="result-sub-val" id="totalDed">—</div>
+            </div>
+        </div>
+        <div class="cheer-msg" id="cheerMsg">🌟 오늘도 수고하셨습니다!</div>
+    </div>
+
+    <!-- 공제 상세 카드 -->
+    <div class="card breakdown-card" id="breakdownCard">
+        <div class="card-title">📊 월 공제 항목 상세</div>
+        <div id="breakdownItems"></div>
+        <div class="b-total">
+            <span class="b-total-label">월 총 공제액</span>
+            <span class="b-total-val" id="breakdownTotal">—</span>
+        </div>
+    </div>
+
+    <!-- 광고 (중간) -->
+    <div class="ad-box" id="midAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
+
+    <!-- 연봉 인상 시뮬레이터 -->
+    <div class="card comparison-card" id="comparisonCard">
+        <div class="card-title">📈 연봉 인상 시뮬레이터</div>
+
+        <div class="raise-row">
+            <span class="raise-label-text">연봉 인상률</span>
+            <span class="raise-badge" id="raiseBadge">+10%</span>
+        </div>
+        <input type="range" class="raise-slider" id="raiseSlider" min="5" max="50" step="5" value="10">
+        <div class="raise-range"><span>+5%</span><span>+50%</span></div>
+
+        <table class="cmp-table">
+            <thead>
+                <tr>
+                    <th>항목</th>
+                    <th>현재</th>
+                    <th>인상 후</th>
+                    <th>증가액</th>
+                </tr>
+            </thead>
+            <tbody id="cmpBody"></tbody>
+        </table>
+    </div>
+
+    <!-- 광고 (하단) -->
+    <div class="ad-box" id="botAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
+
+    <div class="footer">
+        <p>본 계산기는 <strong>2024년 기준</strong> 근로소득 간이세액표를 적용한 추정값입니다.</p>
+        <p>실제 공제액은 개인 상황(연말정산 등)에 따라 다를 수 있습니다.</p>
+    </div>
+
+</div>
+
+<script>
+// ── 유틸 ──────────────────────────────────────────────
+function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
+function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
+
+// ── 슬라이더 연동 ────────────────────────────────────
+const salaryInput  = document.getElementById('salaryInput');
+const salarySlider = document.getElementById('salarySlider');
+const raiseSlider  = document.getElementById('raiseSlider');
+
+salaryInput.addEventListener('input', function () {
+    const v = parseVal(this.value);
+    this.value = v ? v.toLocaleString('ko-KR') : '';
+    if (v >= 20000000 && v <= 200000000) salarySlider.value = v;
+});
+salarySlider.addEventListener('input', function () {
+    salaryInput.value = parseInt(this.value).toLocaleString('ko-KR');
+});
+raiseSlider.addEventListener('input', function () {
+    document.getElementById('raiseBadge').textContent = '+' + this.value + '%';
+    updateComparison();
+});
+
+// ── 세금 계산 ─────────────────────────────────────────
+function incomeDeduction(s) {
+    if (s <= 5000000)   return s * 0.7;
+    if (s <= 15000000)  return 3500000  + (s - 5000000)  * 0.40;
+    if (s <= 45000000)  return 7500000  + (s - 15000000) * 0.15;
+    if (s <= 100000000) return 12000000 + (s - 45000000) * 0.05;
+    return 14750000;
+}
+
+function taxFromBase(t) {
+    if (t <= 0)           return 0;
+    if (t <= 14000000)    return t * 0.06;
+    if (t <= 50000000)    return 840000   + (t - 14000000)  * 0.15;
+    if (t <= 88000000)    return 6240000  + (t - 50000000)  * 0.24;
+    if (t <= 150000000)   return 15360000 + (t - 88000000)  * 0.35;
+    if (t <= 300000000)   return 37060000 + (t - 150000000) * 0.38;
+    if (t <= 500000000)   return 94060000 + (t - 300000000) * 0.40;
+    if (t <= 1000000000)  return 174060000+ (t - 500000000) * 0.42;
+    return 384060000 + (t - 1000000000) * 0.45;
+}
+
+function annualIncomeTax(salary, deps, aPension, aHealth, aEmploy) {
+    const workIncome   = salary - incomeDeduction(salary);
+    const personalDed  = deps * 1500000;
+    const insuranceDed = aPension + aHealth + aEmploy;
+    const taxBase      = Math.max(0, workIncome - personalDed - insuranceDed);
+    const gross        = taxFromBase(taxBase);
+
+    const creditLimit  = salary <= 33000000 ? 740000 : salary <= 70000000 ? 660000 : 500000;
+    const credit       = Math.min(gross <= 1300000 ? gross * 0.55 : 715000 + (gross - 1300000) * 0.30, creditLimit);
+
+    return Math.max(0, gross - credit - 130000); // 표준세액공제 13만원
+}
+
+function calcSalary(annual, deps, monthlyNonTax) {
+    const monthly      = annual / 12;
+    const taxable      = monthly - monthlyNonTax;
+
+    const pension      = Math.round(Math.min(taxable, 5900000) * 0.045);   // 국민연금 4.5%
+    const health       = Math.round(taxable * 0.03545);                    // 건강보험 3.545%
+    const longCare     = Math.round(health  * 0.1281);                     // 장기요양 12.81%
+    const employ       = Math.round(taxable * 0.009);                      // 고용보험 0.9%
+    const incomeTax    = Math.round(annualIncomeTax(annual, deps, pension * 12, health * 12, employ * 12) / 12);
+    const localTax     = Math.round(incomeTax * 0.1);                      // 지방소득세 10%
+
+    const totalDed     = pension + health + longCare + employ + incomeTax + localTax;
+    const takeHome     = Math.round(monthly - totalDed);
+
+    return {
+        monthly: Math.round(monthly), takeHome,
+        annual: Math.round(annual), annualTakeHome: takeHome * 12,
+        ded: { pension, health, longCare, employ, incomeTax, localTax, total: totalDed }
+    };
+}
+
+// ── 동기부여 메시지 ───────────────────────────────────
+function cheer(m) {
+    if (m >= 10000000) return '🏆 월 1천만원 이상! 정말 대단해요!';
+    if (m >= 7000000)  return '🌟 꾸준히 커리어를 쌓아온 결과예요. 훌륭해요!';
+    if (m >= 5000000)  return '💪 멋져요! 열심히 일한 당신을 응원합니다!';
+    if (m >= 3500000)  return '😊 오늘도 열심히 해준 자신을 칭찬해줘요!';
+    if (m >= 2500000)  return '🌱 지금도 훌륭해요. 앞으로가 더 기대됩니다!';
+    return '🔥 시작이 반! 차근차근 올라가면 돼요!';
+}
+
+// ── 숫자 카운터 애니메이션 ────────────────────────────
+function counter(id, target, ms = 900) {
+    const el = document.getElementById(id);
+    const t0 = performance.now();
+    function tick(now) {
+        const p = Math.min((now - t0) / ms, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * e).toLocaleString('ko-KR');
+        if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+// ── 메인 계산 ─────────────────────────────────────────
+let saved = null;
+
+function calculate() {
+    const annual = parseVal(salaryInput.value);
+    if (!annual || annual < 5000000) { alert('연봉을 올바르게 입력해주세요.'); return; }
+
+    const deps       = parseInt(document.getElementById('dependents').value);
+    const nonTax     = parseInt(document.getElementById('nonTaxable').value);
+    saved            = calcSalary(annual, deps, nonTax);
+    const r          = saved;
+
+    // 결과 카드
+    document.getElementById('resultCard').classList.add('show');
+    counter('monthlyResult', r.takeHome);
+    document.getElementById('annualResult').textContent  = fmt(r.annualTakeHome) + '원';
+    document.getElementById('effectiveRate').textContent = ((r.ded.total / r.monthly) * 100).toFixed(1) + '%';
+    document.getElementById('totalDed').textContent      = fmt(r.ded.total) + '원';
+    document.getElementById('cheerMsg').textContent      = cheer(r.takeHome);
+
+    // 공제 상세
+    const items = [
+        { name: '국민연금',    amount: r.ded.pension,    icon: '🏛️', color: '#1565C0', bg: '#E3F2FD' },
+        { name: '건강보험',    amount: r.ded.health,     icon: '🏥', color: '#6A1B9A', bg: '#F3E5F5' },
+        { name: '장기요양보험', amount: r.ded.longCare,  icon: '🤝', color: '#00695C', bg: '#E0F2F1' },
+        { name: '고용보험',    amount: r.ded.employ,     icon: '💼', color: '#E65100', bg: '#FFF3E0' },
+        { name: '소득세',      amount: r.ded.incomeTax,  icon: '📋', color: '#B71C1C', bg: '#FFEBEE' },
+        { name: '지방소득세',  amount: r.ded.localTax,   icon: '🏙️', color: '#4E342E', bg: '#EFEBE9' },
+    ];
+    const maxAmt = Math.max(...items.map(i => i.amount));
+
+    document.getElementById('breakdownItems').innerHTML = items.map(item => `
+        <div class="b-item">
+            <div class="b-icon" style="background:${item.bg}">${item.icon}</div>
+            <div class="b-info">
+                <div class="b-name">${item.name}</div>
+                <div class="b-bar-wrap">
+                    <div class="b-bar" data-w="${maxAmt > 0 ? (item.amount/maxAmt*100).toFixed(1) : 0}"
+                         style="background:${item.color}"></div>
+                </div>
+            </div>
+            <div class="b-amount">-${fmt(item.amount)}원</div>
+        </div>
+    `).join('');
+    document.getElementById('breakdownTotal').textContent = '-' + fmt(r.ded.total) + '원';
+    document.getElementById('breakdownCard').classList.add('show');
+
+    // 바 애니메이션 (DOM 반영 후)
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        document.querySelectorAll('.b-bar').forEach(bar => {
+            bar.style.width = bar.dataset.w + '%';
+        });
+    }));
+
+    // 중간 광고 & 비교 카드
+    document.getElementById('midAd').style.display = 'block';
+    document.getElementById('botAd').style.display = 'block';
+    document.getElementById('comparisonCard').classList.add('show');
+    updateComparison();
+}
+
+function updateComparison() {
+    if (!saved) return;
+    const annual  = parseVal(salaryInput.value);
+    const deps    = parseInt(document.getElementById('dependents').value);
+    const nonTax  = parseInt(document.getElementById('nonTaxable').value);
+    const rate    = parseInt(raiseSlider.value) / 100;
+    const newSal  = Math.round(annual * (1 + rate));
+    const nr      = calcSalary(newSal, deps, nonTax);
+    const r       = saved;
+
+    const rows = [
+        { label: '연봉 (세전)',  cur: r.annual,        next: nr.annual        },
+        { label: '월 실수령액',  cur: r.takeHome,      next: nr.takeHome      },
+        { label: '연 실수령액',  cur: r.annualTakeHome, next: nr.annualTakeHome },
+        { label: '월 공제액',    cur: r.ded.total,     next: nr.ded.total     },
+    ];
+
+    document.getElementById('cmpBody').innerHTML = rows.map(row => {
+        const diff = row.next - row.cur;
+        return `
+            <tr>
+                <td>${row.label}</td>
+                <td>${fmt(row.cur)}원</td>
+                <td class="green">${fmt(row.next)}원</td>
+                <td class="pink">+${fmt(diff)}원</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// 초기값 설정
+salaryInput.value = (35000000).toLocaleString('ko-KR');
+salarySlider.value = 35000000;
+</script>
+</body>
+</html>
