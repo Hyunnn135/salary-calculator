@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실업급여 계산기 - 얼마나 받을 수 있을까? | 급여계산기</title>
+    <meta name="description" content="실업급여(구직급여) 계산기. 퇴직 전 월급과 고용보험 가입기간을 입력하면 예상 수급액을 바로 계산해드립니다.">
+    <meta name="keywords" content="실업급여계산기, 구직급여, 실업급여얼마, 실업급여조건, 고용보험">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,180,80,0.2); box-shadow: 0 2px 12px rgba(255,150,50,0.08); }
+        .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; background: linear-gradient(135deg, #FF6B35, #FF9F1C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 2px; }
+        .nav-links a { padding: 5px 9px; border-radius: 18px; font-size: 0.78rem; font-weight: 600; text-decoration: none; color: #666; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { background: #FFF3E0; color: #FF6B35; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; padding: 4px 8px; }
+        .nav-mobile { display: none; padding: 8px 16px 12px; background: white; }
+        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #555; }
+        .nav-mobile a:hover { background: #FFF3E0; color: #FF6B35; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+
+        body { font-family: 'Noto Sans KR', sans-serif; background: linear-gradient(160deg, #FFF9E6 0%, #FFF1CC 25%, #FFE8D6 60%, #FFE0EB 100%); min-height: 100vh; color: #333; }
+        .container { max-width: 760px; margin: 0 auto; padding: 28px 16px 60px; }
+
+        .header { text-align: center; padding: 36px 0 28px; }
+        .header h1 { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFBF69); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+        .header p { color: #999; font-size: 0.9rem; }
+
+        .ad-box { background: rgba(255,255,255,0.7); border: 2px dashed #FFCC80; border-radius: 16px; padding: 20px; text-align: center; color: #FFAB40; font-size: 0.82rem; font-weight: 600; margin-bottom: 16px; }
+
+        .card { background: white; border-radius: 24px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 4px 24px rgba(255,150,50,0.10); }
+        .card-title { font-size: 0.95rem; font-weight: 700; color: #666; margin-bottom: 20px; display: flex; align-items: center; gap: 6px; }
+
+        .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: #555; margin-bottom: 8px; }
+        .input-wrap { position: relative; margin-bottom: 20px; }
+        .salary-input { width: 100%; padding: 15px 56px 15px 18px; font-size: 1.3rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; border: 2px solid #FFE0B2; border-radius: 14px; outline: none; color: #333; text-align: right; transition: border-color 0.2s; }
+        .salary-input:focus { border-color: #FF9F1C; box-shadow: 0 0 0 4px rgba(255,159,28,0.10); }
+        .input-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.95rem; font-weight: 700; color: #FF9F1C; pointer-events: none; }
+
+        .options-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+        .option-group label { display: block; font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 7px; }
+        .option-select { width: 100%; padding: 12px 14px; border: 2px solid #F0F0F0; border-radius: 12px; font-size: 0.9rem; font-family: 'Noto Sans KR', sans-serif; color: #333; outline: none; background: white; transition: border-color 0.2s; }
+        .option-select:focus { border-color: #FF9F1C; }
+
+        .calc-btn { width: 100%; padding: 17px; background: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFBF69); background-size: 200% 200%; animation: gradMove 3s ease infinite; border: none; border-radius: 14px; font-size: 1.05rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; box-shadow: 0 6px 20px rgba(255,107,53,0.35); transition: transform 0.15s; }
+        .calc-btn:hover { transform: translateY(-2px); }
+        @keyframes gradMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        .result-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #43A047); border-radius: 24px; padding: 32px 24px; margin-bottom: 16px; display: none; box-shadow: 0 8px 32px rgba(46,125,50,0.30); }
+        .result-card.show { display: block; animation: fadeUp 0.5s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+        .result-label { color: rgba(255,255,255,0.75); font-size: 0.88rem; margin-bottom: 5px; font-weight: 500; text-align: center; }
+        .result-main { font-size: 2.8rem; font-weight: 900; color: #fff; letter-spacing: -1px; text-align: center; }
+        .result-main-unit { color: rgba(255,255,255,0.65); font-size: 0.85rem; text-align: center; margin-bottom: 20px; }
+        .result-row { display: flex; justify-content: center; gap: 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .result-sub { flex: 1; text-align: center; padding: 0 8px; }
+        .result-sub + .result-sub { border-left: 1px solid rgba(255,255,255,0.2); }
+        .result-sub-label { color: rgba(255,255,255,0.6); font-size: 0.7rem; margin-bottom: 4px; }
+        .result-sub-val { color: white; font-size: 0.92rem; font-weight: 700; }
+
+        .cheer-msg { background: rgba(255,255,255,0.13); border-radius: 12px; padding: 12px 16px; margin-top: 16px; color: rgba(255,255,255,0.92); font-size: 0.88rem; font-weight: 500; text-align: center; }
+
+        .info-card { background: white; border-radius: 24px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); }
+        .info-card h2 { font-size: 1.05rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #FFF3E0; display: flex; align-items: center; gap: 8px; }
+        .info-card p { color: #555; line-height: 1.9; font-size: 0.92rem; margin-bottom: 12px; }
+        .info-card p:last-child { margin-bottom: 0; }
+        .info-card ul { padding-left: 18px; margin-bottom: 12px; }
+        .info-card ul li { color: #555; line-height: 1.9; font-size: 0.92rem; margin-bottom: 4px; }
+
+        .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+        .cond-item { border-radius: 14px; padding: 16px; border: 2px solid; }
+        .cond-item h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 6px; }
+        .cond-item p { font-size: 0.82rem; line-height: 1.6; color: #555; margin: 0; }
+
+        .days-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .days-table th { background: #FFF3E0; padding: 9px 12px; text-align: center; font-weight: 700; color: #555; font-size: 0.82rem; }
+        .days-table td { padding: 9px 12px; border-bottom: 1px solid #F5F5F5; text-align: center; color: #444; }
+        .days-table tr:last-child td { border-bottom: none; }
+        .days-table .period-col { text-align: left; font-weight: 600; }
+
+        .highlight { background: #FFF9E6; border: 1px solid #FFE0B2; border-radius: 14px; padding: 16px 18px; margin: 12px 0; }
+        .highlight p { color: #555; font-size: 0.88rem; line-height: 1.8; margin: 0; }
+
+        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 6px; }
+
+        @media (max-width: 480px) { .header h1 { font-size: 1.55rem; } .result-main { font-size: 2.2rem; } .options-row { grid-template-columns: 1fr; } .cond-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">☀️ 급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html">연봉계산기</a>
+            <a href="retirement.html">퇴직금</a>
+            <a href="unemployment.html" class="active">실업급여</a>
+            <a href="tax-guide.html">연말정산가이드</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+        </div>
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">💰 연봉계산기</a>
+        <a href="retirement.html">🏖️ 퇴직금계산기</a>
+        <a href="unemployment.html">📋 실업급여계산기</a>
+        <a href="tax-guide.html">📝 연말정산가이드</a>
+        <a href="about.html">ℹ️ 소개</a>
+        <a href="contact.html">✉️ 문의</a>
+        <a href="privacy.html">🔒 개인정보처리방침</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="header">
+        <div style="font-size:48px; margin-bottom:10px;">📋</div>
+        <h1>실업급여 계산기</h1>
+        <p>퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요</p>
+    </div>
+
+    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
+
+    <div class="card">
+        <div class="card-title">📝 정보 입력</div>
+
+        <label class="input-label">퇴직 전 월 평균 급여 (세전)</label>
+        <div class="input-wrap">
+            <input type="text" class="salary-input" id="salaryInput" placeholder="3,000,000">
+            <span class="input-unit">원</span>
+        </div>
+
+        <div class="options-row">
+            <div class="option-group">
+                <label>나이</label>
+                <select class="option-select" id="ageGroup">
+                    <option value="under50">50세 미만</option>
+                    <option value="over50">50세 이상</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label>고용보험 가입 기간</label>
+                <select class="option-select" id="insurancePeriod">
+                    <option value="under1">1년 미만</option>
+                    <option value="1to3">1년 이상 ~ 3년 미만</option>
+                    <option value="3to5" selected>3년 이상 ~ 5년 미만</option>
+                    <option value="5to10">5년 이상 ~ 10년 미만</option>
+                    <option value="over10">10년 이상</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="calc-btn" onclick="calculate()">📋 실업급여 계산하기</button>
+    </div>
+
+    <!-- 결과 -->
+    <div class="result-card" id="resultCard">
+        <div class="result-label">예상 실업급여 총액</div>
+        <div class="result-main" id="totalResult">0</div>
+        <div class="result-main-unit">원</div>
+        <div class="result-row">
+            <div class="result-sub">
+                <div class="result-sub-label">1일 수급액</div>
+                <div class="result-sub-val" id="dailyResult">—</div>
+            </div>
+            <div class="result-sub">
+                <div class="result-sub-label">수급 기간</div>
+                <div class="result-sub-val" id="daysResult">—</div>
+            </div>
+            <div class="result-sub">
+                <div class="result-sub-label">월 환산 수령액</div>
+                <div class="result-sub-val" id="monthlyResult">—</div>
+            </div>
+        </div>
+        <div class="cheer-msg" id="cheerMsg">🌱 힘내세요! 더 좋은 기회가 기다리고 있어요.</div>
+    </div>
+
+    <div class="ad-box" id="midAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
+
+    <!-- 수급 조건 -->
+    <div class="info-card">
+        <h2>✅ 실업급여 수급 조건</h2>
+        <p>아래 조건을 모두 충족해야 실업급여를 받을 수 있습니다.</p>
+
+        <div class="cond-grid">
+            <div class="cond-item" style="background:#EBF3FF; border-color:#1565C0;">
+                <h3 style="color:#1565C0;">📅 고용보험 가입 기간</h3>
+                <p>퇴직일 이전 18개월 중 <strong>180일 이상</strong> 고용보험에 가입되어 있어야 합니다.</p>
+            </div>
+            <div class="cond-item" style="background:#E8F5E9; border-color:#2E7D32;">
+                <h3 style="color:#2E7D32;">🚫 비자발적 퇴직</h3>
+                <p>본인의 의지로 그만둔 경우(자발적 퇴직)에는 원칙적으로 실업급여를 받을 수 없습니다.</p>
+            </div>
+            <div class="cond-item" style="background:#FFF9E6; border-color:#F9A825;">
+                <h3 style="color:#E65100;">🔍 재취업 의지</h3>
+                <p>적극적으로 재취업 활동을 하고 있어야 합니다. 실업 인정 신청을 주기적으로 해야 합니다.</p>
+            </div>
+            <div class="cond-item" style="background:#FCE4EC; border-color:#C2185B;">
+                <h3 style="color:#C2185B;">📝 수급 신청</h3>
+                <p>퇴직 후 <strong>12개월 이내</strong>에 신청해야 합니다. 기간이 지나면 수급 자격이 소멸됩니다.</p>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <p>💡 <strong>자발적 퇴직도 받는 경우:</strong> 임금 체불, 직장 내 괴롭힘, 통근 불가능한 거리로 사업장 이전,
+            임신·출산·육아, 건강 악화로 인한 퇴직 등 정당한 이직 사유가 있으면 수급 가능합니다.</p>
+        </div>
+    </div>
+
+    <!-- 수급 기간표 -->
+    <div class="info-card">
+        <h2>📅 소정급여일수 (수급 기간)</h2>
+        <p>나이와 고용보험 가입기간에 따라 받을 수 있는 기간이 달라집니다. (2019년 10월 이후 기준)</p>
+
+        <table class="days-table">
+            <thead>
+                <tr>
+                    <th class="period-col">고용보험 가입기간</th>
+                    <th>50세 미만</th>
+                    <th>50세 이상<br>및 장애인</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="period-col">1년 미만</td><td>120일</td><td>120일</td></tr>
+                <tr><td class="period-col">1년 이상 ~ 3년 미만</td><td>150일</td><td>180일</td></tr>
+                <tr><td class="period-col">3년 이상 ~ 5년 미만</td><td>180일</td><td>210일</td></tr>
+                <tr><td class="period-col">5년 이상 ~ 10년 미만</td><td>210일</td><td>240일</td></tr>
+                <tr><td class="period-col">10년 이상</td><td>240일</td><td>270일</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 금액 계산 -->
+    <div class="info-card">
+        <h2>💰 실업급여 금액 계산 방법</h2>
+        <p>1일 실업급여(구직급여) = 퇴직 전 평균임금의 <strong>60%</strong></p>
+        <ul>
+            <li><strong>1일 상한액:</strong> 66,000원 (2024년 기준)</li>
+            <li><strong>1일 하한액:</strong> 63,104원 (2024년 최저임금 기준)</li>
+        </ul>
+        <p>월급이 아주 높거나 아주 낮더라도 위 상한·하한 범위 안에서 지급됩니다.</p>
+
+        <div class="highlight">
+            <p>📌 <strong>예시:</strong> 월 300만원 받던 분이 퇴직한 경우<br>
+            1일 평균임금 = 3,000,000 ÷ 30.4 = 약 98,684원<br>
+            1일 실업급여 = 98,684 × 60% = 59,210원 → 하한액 적용 → <strong>63,104원/일</strong><br>
+            3년 이상~5년 미만 가입(50세 미만) → 180일 수급<br>
+            총 수급액 = 63,104 × 180 = <strong>약 1,135만원</strong></p>
+        </div>
+    </div>
+
+    <!-- 신청 방법 -->
+    <div class="info-card">
+        <h2>📋 실업급여 신청 방법</h2>
+        <p>퇴직 후 고용센터를 방문하거나 고용보험 홈페이지에서 온라인으로 신청할 수 있습니다.</p>
+        <ul>
+            <li><strong>1단계:</strong> 퇴직 확인 — 회사가 고용보험 상실 신고를 해야 합니다</li>
+            <li><strong>2단계:</strong> 수급 자격 신청 — 고용센터 방문 또는 온라인 신청</li>
+            <li><strong>3단계:</strong> 수급자 교육 이수 — 온라인 또는 오프라인</li>
+            <li><strong>4단계:</strong> 실업 인정 신청 — 매 1~4주마다 재취업 활동 보고</li>
+            <li><strong>5단계:</strong> 급여 수령 — 실업 인정일 다음 날 지급</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>
+            <a href="index.html">연봉계산기</a>
+            <a href="retirement.html">퇴직금계산기</a>
+            <a href="tax-guide.html">연말정산가이드</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </p>
+        <p style="margin-top:8px;">© 2024 급여계산기 · 본 계산 결과는 참고용이며 실제와 다를 수 있습니다.</p>
+    </div>
+
+</div>
+
+<script>
+function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
+function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
+
+document.getElementById('salaryInput').addEventListener('input', function() {
+    const v = parseVal(this.value);
+    this.value = v ? v.toLocaleString('ko-KR') : '';
+});
+
+const DAYS_TABLE = {
+    under50: { under1: 120, '1to3': 150, '3to5': 180, '5to10': 210, over10: 240 },
+    over50:  { under1: 120, '1to3': 180, '3to5': 210, '5to10': 240, over10: 270 }
+};
+
+function calculate() {
+    const salary = parseVal(document.getElementById('salaryInput').value);
+    if (!salary) { alert('월 평균 급여를 입력해주세요.'); return; }
+
+    const ageGroup = document.getElementById('ageGroup').value;
+    const period   = document.getElementById('insurancePeriod').value;
+    const days     = DAYS_TABLE[ageGroup][period];
+
+    const dailyWage    = salary / 30.4;
+    const UPPER        = 66000;
+    const LOWER        = 63104;
+    const dailyBenefit = Math.max(LOWER, Math.min(UPPER, dailyWage * 0.6));
+    const total        = dailyBenefit * days;
+
+    counter('totalResult', total);
+    document.getElementById('dailyResult').textContent   = fmt(dailyBenefit) + '원';
+    document.getElementById('daysResult').textContent    = days + '일';
+    document.getElementById('monthlyResult').textContent = fmt(dailyBenefit * 30) + '원';
+
+    const msgs = [
+        '🌱 힘내세요! 더 좋은 기회가 기다리고 있어요.',
+        '💪 잠깐의 쉼표, 다음 챕터를 준비하는 시간이에요.',
+        '🌟 충분히 쉬고 더 좋은 직장으로 도약하세요!',
+        '☀️ 지금은 힘들어도 반드시 좋은 날이 올 거예요.',
+    ];
+    document.getElementById('cheerMsg').textContent = msgs[Math.floor(Math.random() * msgs.length)];
+
+    document.getElementById('resultCard').classList.add('show');
+    document.getElementById('midAd').style.display = 'block';
+}
+
+function counter(id, target, ms = 900) {
+    const el = document.getElementById(id);
+    const t0 = performance.now();
+    function tick(now) {
+        const p = Math.min((now - t0) / ms, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * e).toLocaleString('ko-KR');
+        if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+document.getElementById('salaryInput').value = (3000000).toLocaleString('ko-KR');
+</script>
+</body>
+</html>

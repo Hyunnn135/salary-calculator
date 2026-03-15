@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024년 연말정산 완벽 가이드 - 13월의 월급 더 받는 방법 | 급여계산기</title>
+    <meta name="description" content="2024년 연말정산 완벽 가이드. 소득공제와 세액공제 차이, 놓치기 쉬운 공제 항목, 환급액 늘리는 꿀팁까지 모두 정리했습니다.">
+    <meta name="keywords" content="연말정산, 소득공제, 세액공제, 연말정산환급, 13월의월급, 연말정산꿀팁">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,180,80,0.2); box-shadow: 0 2px 12px rgba(255,150,50,0.08); }
+        .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; background: linear-gradient(135deg, #FF6B35, #FF9F1C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 2px; }
+        .nav-links a { padding: 5px 9px; border-radius: 18px; font-size: 0.78rem; font-weight: 600; text-decoration: none; color: #666; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { background: #FFF3E0; color: #FF6B35; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; padding: 4px 8px; }
+        .nav-mobile { display: none; padding: 8px 16px 12px; background: white; }
+        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #555; }
+        .nav-mobile a:hover { background: #FFF3E0; color: #FF6B35; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+
+        body { font-family: 'Noto Sans KR', sans-serif; background: linear-gradient(160deg, #FFF9E6 0%, #FFF1CC 25%, #FFE8D6 60%, #FFE0EB 100%); min-height: 100vh; color: #333; }
+        .container { max-width: 860px; margin: 0 auto; padding: 28px 16px 60px; }
+
+        .hero { text-align: center; padding: 44px 24px 36px; background: white; border-radius: 28px; box-shadow: 0 4px 24px rgba(255,150,50,0.10); margin-bottom: 24px; }
+        .hero-tag { display: inline-block; background: #FFF3E0; color: #FF6B35; padding: 5px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; margin-bottom: 12px; }
+        .hero h1 { font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFBF69); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.3; }
+        .hero p { color: #777; font-size: 0.93rem; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+        .hero-meta { margin-top: 16px; font-size: 0.78rem; color: #BBB; }
+
+        .ad-box { background: rgba(255,255,255,0.7); border: 2px dashed #FFCC80; border-radius: 16px; padding: 20px; text-align: center; color: #FFAB40; font-size: 0.82rem; font-weight: 600; margin-bottom: 20px; }
+
+        .card { background: white; border-radius: 24px; padding: 32px 28px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); }
+        .card h2 { font-size: 1.15rem; font-weight: 800; color: #333; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid #FFF3E0; display: flex; align-items: center; gap: 8px; }
+        .card h3 { font-size: 0.98rem; font-weight: 700; color: #444; margin: 20px 0 8px; }
+        .card p { color: #555; line-height: 1.9; font-size: 0.93rem; margin-bottom: 12px; }
+        .card p:last-child { margin-bottom: 0; }
+        .card ul, .card ol { padding-left: 20px; margin-bottom: 12px; }
+        .card ul li, .card ol li { color: #555; line-height: 1.9; font-size: 0.93rem; margin-bottom: 5px; }
+
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+        .compare-item { border-radius: 16px; padding: 20px; border: 2px solid; }
+        .compare-item h3 { margin: 0 0 8px; font-size: 0.95rem; font-weight: 800; }
+        .compare-item p { font-size: 0.85rem; line-height: 1.7; margin: 0; color: #555; }
+        .compare-item .compare-ex { margin-top: 8px; font-size: 0.82rem; color: #888; }
+
+        .deduction-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.87rem; }
+        .deduction-table th { background: #FFF3E0; padding: 10px 14px; text-align: left; font-weight: 700; color: #555; }
+        .deduction-table td { padding: 11px 14px; border-bottom: 1px solid #F5F5F5; color: #444; vertical-align: top; line-height: 1.7; }
+        .deduction-table tr:last-child td { border-bottom: none; }
+        .deduction-table .name-col { font-weight: 700; color: #333; white-space: nowrap; }
+        .deduction-table .amt-col { color: #FF6B35; font-weight: 700; white-space: nowrap; }
+
+        .tip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 14px 0; }
+        .tip-item { background: #FFF9E6; border-radius: 14px; padding: 16px; border-left: 4px solid #FF9F1C; }
+        .tip-item h3 { font-size: 0.88rem; font-weight: 800; color: #333; margin-bottom: 6px; }
+        .tip-item p { font-size: 0.82rem; line-height: 1.7; color: #555; margin: 0; }
+
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F5F5F5; font-size: 0.92rem; color: #555; line-height: 1.7; }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before { content: "☐"; font-size: 1.1rem; color: #FF9F1C; flex-shrink: 0; margin-top: 1px; }
+
+        .timeline { list-style: none; padding: 0; position: relative; }
+        .timeline::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: #FFE0B2; }
+        .timeline li { position: relative; padding: 0 0 20px 48px; }
+        .timeline li:last-child { padding-bottom: 0; }
+        .timeline .t-dot { position: absolute; left: 10px; top: 2px; width: 18px; height: 18px; background: #FF9F1C; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #FF9F1C; }
+        .timeline .t-month { font-size: 0.8rem; font-weight: 700; color: #FF6B35; margin-bottom: 3px; }
+        .timeline .t-title { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 3px; }
+        .timeline .t-desc { font-size: 0.85rem; color: #666; line-height: 1.6; }
+
+        .highlight { background: #FFF9E6; border: 1px solid #FFE0B2; border-radius: 14px; padding: 16px 18px; margin: 14px 0; }
+        .highlight p { color: #555; font-size: 0.9rem; line-height: 1.8; margin: 0; }
+
+        .cta-card { background: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFBF69); border-radius: 24px; padding: 32px 24px; text-align: center; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(255,107,53,0.30); }
+        .cta-card h2 { color: white; font-size: 1.2rem; font-weight: 900; margin-bottom: 8px; }
+        .cta-card p { color: rgba(255,255,255,0.85); font-size: 0.9rem; margin-bottom: 16px; }
+        .cta-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { display: inline-block; padding: 12px 24px; background: white; border-radius: 25px; font-weight: 800; font-size: 0.88rem; text-decoration: none; color: #FF6B35; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .cta-btn:hover { transform: translateY(-2px); }
+
+        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 6px; }
+
+        @media (max-width: 520px) { .hero h1 { font-size: 1.45rem; } .compare-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">☀️ 급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html">연봉계산기</a>
+            <a href="retirement.html">퇴직금</a>
+            <a href="unemployment.html">실업급여</a>
+            <a href="tax-guide.html" class="active">연말정산가이드</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+        </div>
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">💰 연봉계산기</a>
+        <a href="retirement.html">🏖️ 퇴직금계산기</a>
+        <a href="unemployment.html">📋 실업급여계산기</a>
+        <a href="tax-guide.html">📝 연말정산가이드</a>
+        <a href="about.html">ℹ️ 소개</a>
+        <a href="contact.html">✉️ 문의</a>
+        <a href="privacy.html">🔒 개인정보처리방침</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+        <div class="hero-tag">📝 2024년 기준</div>
+        <h1>연말정산 완벽 가이드<br>13월의 월급 더 받는 방법</h1>
+        <p>
+            매년 1~2월, 직장인들에게 찾아오는 연말정산 시즌.<br>
+            제대로 알면 수십만 원을 더 돌려받을 수 있습니다.
+        </p>
+        <div class="hero-meta">최종 업데이트: 2024년 12월 · 읽는 시간 약 7분</div>
+    </div>
+
+    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
+
+    <!-- 연말정산이란 -->
+    <div class="card">
+        <h2>📖 연말정산이란?</h2>
+        <p>
+            직장인은 매달 급여에서 소득세를 <strong>미리(간이세액표 기준)</strong> 냅니다.
+            하지만 미리 낸 세금이 실제로 내야 할 세금과 맞지 않을 수 있습니다.
+            연말정산은 이 차이를 1년에 한 번 정확히 계산해서 맞추는 과정입니다.
+        </p>
+        <p>
+            내야 할 세금보다 <strong>더 많이 낸 경우</strong> → 돌려받음 (환급) ✅<br>
+            내야 할 세금보다 <strong>덜 낸 경우</strong> → 추가 납부 ⚠️
+        </p>
+        <div class="highlight">
+            <p>💡 연말정산을 "13월의 월급"이라 부르는 이유가 바로 환급입니다.
+            공제 항목을 꼼꼼히 챙길수록 돌려받는 금액이 커집니다.</p>
+        </div>
+    </div>
+
+    <!-- 소득공제 vs 세액공제 -->
+    <div class="card">
+        <h2>⚖️ 소득공제 vs 세액공제 — 무엇이 다를까?</h2>
+        <p>연말정산 공제는 크게 두 가지로 나뉩니다. 이 차이를 이해하는 게 핵심입니다.</p>
+
+        <div class="compare-grid">
+            <div class="compare-item" style="background:#EBF5FB; border-color:#1976D2;">
+                <h3 style="color:#1976D2;">📉 소득공제</h3>
+                <p>세금을 계산하는 기준인 <strong>과세표준(소득)을 줄여주는</strong> 방식입니다. 소득이 높을수록 효과가 커집니다.</p>
+                <p class="compare-ex">예: 100만원 소득공제 시 → 세율 15% 적용이라면 15만원 절세</p>
+            </div>
+            <div class="compare-item" style="background:#E8F5E9; border-color:#2E7D32;">
+                <h3 style="color:#2E7D32;">💸 세액공제</h3>
+                <p>계산된 <strong>세금 자체를 직접 깎아주는</strong> 방식입니다. 소득 수준에 관계없이 동일하게 혜택을 받습니다.</p>
+                <p class="compare-ex">예: 100만원 세액공제 시 → 소득에 관계없이 정확히 100만원 절세</p>
+            </div>
+        </div>
+        <p>일반적으로 <strong>세액공제가 소득공제보다 유리</strong>한 경우가 많습니다.
+        같은 금액이라도 세금에서 직접 빼주기 때문입니다.</p>
+    </div>
+
+    <!-- 주요 소득공제 -->
+    <div class="card">
+        <h2>📋 주요 소득공제 항목</h2>
+        <p>과세표준을 줄여주는 소득공제 항목들입니다.</p>
+
+        <table class="deduction-table">
+            <thead>
+                <tr><th>항목</th><th>공제 금액</th><th>조건</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="name-col">인적공제 (기본)</td>
+                    <td class="amt-col">150만원/인</td>
+                    <td>본인 포함, 연소득 100만원 이하 부양가족 1인당</td>
+                </tr>
+                <tr>
+                    <td class="name-col">인적공제 (추가)</td>
+                    <td class="amt-col">100~200만원</td>
+                    <td>경로우대(70세↑), 장애인, 부녀자, 한부모 등</td>
+                </tr>
+                <tr>
+                    <td class="name-col">국민연금 보험료</td>
+                    <td class="amt-col">납부액 전액</td>
+                    <td>월급에서 공제된 국민연금 전액 소득공제</td>
+                </tr>
+                <tr>
+                    <td class="name-col">건강·고용보험료</td>
+                    <td class="amt-col">납부액 전액</td>
+                    <td>건강보험+장기요양+고용보험 납부액</td>
+                </tr>
+                <tr>
+                    <td class="name-col">주택청약저축</td>
+                    <td class="amt-col">납입액 40%<br>(최대 96만원)</td>
+                    <td>무주택 세대주, 총급여 7,000만원 이하, 연 240만원 한도</td>
+                </tr>
+                <tr>
+                    <td class="name-col">신용카드 등 사용액</td>
+                    <td class="amt-col">초과분의 15~40%</td>
+                    <td>총급여의 25% 초과 사용분, 신용카드 15% / 체크카드 30% / 전통시장 40%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
+
+    <!-- 주요 세액공제 -->
+    <div class="card">
+        <h2>💰 주요 세액공제 항목</h2>
+        <p>계산된 세금에서 직접 빼주는 세액공제 항목들입니다. 놓치면 손해!</p>
+
+        <table class="deduction-table">
+            <thead>
+                <tr><th>항목</th><th>공제 금액</th><th>조건</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="name-col">자녀세액공제</td>
+                    <td class="amt-col">15~30만원/인</td>
+                    <td>8세~20세 자녀 1인 15만원, 2인 30만원, 3인부터 30만원 추가</td>
+                </tr>
+                <tr>
+                    <td class="name-col">보험료 세액공제</td>
+                    <td class="amt-col">납부액의 12%</td>
+                    <td>보장성 보험 연 100만원 한도 → 최대 12만원 공제</td>
+                </tr>
+                <tr>
+                    <td class="name-col">의료비 세액공제</td>
+                    <td class="amt-col">초과분의 15%</td>
+                    <td>총급여 3% 초과 의료비의 15% (한도 없음, 난임시술 30%)</td>
+                </tr>
+                <tr>
+                    <td class="name-col">교육비 세액공제</td>
+                    <td class="amt-col">납부액의 15%</td>
+                    <td>본인 전액, 자녀 유치원~대학교, 취학전아동 연 300만원 한도</td>
+                </tr>
+                <tr>
+                    <td class="name-col">기부금 세액공제</td>
+                    <td class="amt-col">15~40%</td>
+                    <td>법정·지정기부금 15%, 1,000만원 초과분 30%, 정치자금 40%</td>
+                </tr>
+                <tr>
+                    <td class="name-col">월세 세액공제</td>
+                    <td class="amt-col">월세의 15~17%</td>
+                    <td>총급여 8,000만원 이하 무주택자, 연 1,000만원 한도</td>
+                </tr>
+                <tr>
+                    <td class="name-col">연금저축·IRP</td>
+                    <td class="amt-col">납입액의 13~16.5%</td>
+                    <td>연금저축 600만원 + IRP 포함 900만원 한도</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 놓치기 쉬운 항목 -->
+    <div class="card">
+        <h2>🔍 놓치기 쉬운 공제 항목 7가지</h2>
+        <p>많은 직장인들이 존재조차 모르고 지나치는 공제 항목들입니다. 꼭 챙기세요!</p>
+
+        <div class="tip-grid">
+            <div class="tip-item">
+                <h3>🏠 월세 세액공제</h3>
+                <p>월세를 내고 있다면 연간 최대 170만원까지 세금을 돌려받을 수 있습니다. 임대차계약서와 이체 내역만 있으면 됩니다.</p>
+            </div>
+            <div class="tip-item">
+                <h3>💊 안경·렌즈 구매비</h3>
+                <p>안경이나 콘택트렌즈 구매비도 의료비 공제 대상입니다. 1인당 연 50만원 한도. 영수증 챙겨두세요.</p>
+            </div>
+            <div class="tip-item">
+                <h3>🎓 취업 전 교육비</h3>
+                <p>대학교 재학 중 납부한 등록금도 본인 교육비로 공제 가능합니다. 자퇴 전 납부분도 해당됩니다.</p>
+            </div>
+            <div class="tip-item">
+                <h3>👨‍👩‍👧 형제자매 부양공제</h3>
+                <p>소득 없는 형제자매(만 20세 이하 또는 만 60세 이상)를 부양하면 기본공제를 받을 수 있습니다.</p>
+            </div>
+            <div class="tip-item">
+                <h3>🚌 전통시장·대중교통</h3>
+                <p>전통시장 40%, 대중교통 40% 공제율로 신용카드 공제보다 유리합니다. 별도 한도도 있습니다.</p>
+            </div>
+            <div class="tip-item">
+                <h3>📱 중고생 교복 구입비</h3>
+                <p>중·고등학교 재학 자녀의 교복 구입비도 교육비 공제 항목입니다. 1인당 연 50만원 한도.</p>
+            </div>
+            <div class="tip-item">
+                <h3>🏥 부모님 의료비</h3>
+                <p>부모님이 부양가족으로 등록되어 있다면 부모님을 위해 지출한 의료비도 공제받을 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 연말정산 절세 전략 -->
+    <div class="card">
+        <h2>💡 환급액 늘리는 전략</h2>
+
+        <h3>1. 연금저축 + IRP 활용</h3>
+        <p>연금저축과 IRP(개인형 퇴직연금)는 세액공제율이 13~16.5%로 매우 높습니다.
+        연봉 5,500만원 이하라면 공제율이 16.5%까지 올라갑니다.
+        연간 최대 900만원(연금저축 600만원 + IRP 300만원)까지 납입하면 최대 148.5만원을 절세할 수 있습니다.</p>
+
+        <h3>2. 신용카드보다 체크카드 활용</h3>
+        <p>연봉의 25%를 이미 카드로 썼다면 그 이후부터는 체크카드나 현금영수증을 활용하세요.
+        신용카드 공제율 15%에 비해 체크카드는 30%로 2배입니다.
+        단, 카드 혜택을 따지면 신용카드가 유리한 경우도 있으니 상황에 맞게 판단하세요.</p>
+
+        <h3>3. 의료비는 한 명에게 몰아주기</h3>
+        <p>가족 중 총급여가 낮은 사람에게 의료비를 몰아주면 3% 공제 문턱을 넘기 쉬워져 공제받기 유리합니다.
+        단, 부양가족 요건을 충족해야 합니다.</p>
+
+        <h3>4. 연말에 기부하기</h3>
+        <p>연말에 기부금을 내면 15~40%의 세액공제를 받을 수 있습니다.
+        어차피 기부할 계획이 있다면 연말 전에 하는 것이 유리합니다.</p>
+
+        <div class="highlight">
+            <p>⚠️ <strong>주의:</strong> 절세가 목적이어서 필요하지 않은 지출을 늘리는 것은 역효과입니다.
+            실제로 필요한 지출을 공제 혜택이 큰 방식으로 하는 것이 올바른 전략입니다.</p>
+        </div>
+    </div>
+
+    <!-- 연말정산 일정 -->
+    <div class="card">
+        <h2>📅 연말정산 일정</h2>
+
+        <ul class="timeline">
+            <li>
+                <div class="t-dot"></div>
+                <div class="t-month">11~12월</div>
+                <div class="t-title">미리보기 서비스</div>
+                <div class="t-desc">국세청 홈택스에서 연말정산 미리보기 가능. 예상 환급·납부액 확인 후 남은 기간 절세 전략 수립</div>
+            </li>
+            <li>
+                <div class="t-dot"></div>
+                <div class="t-month">1월 15일~</div>
+                <div class="t-title">간소화 서비스 개통</div>
+                <div class="t-desc">국세청 홈택스 연말정산 간소화 서비스 시작. 의료비, 교육비, 카드 사용액 등 자동 조회 가능</div>
+            </li>
+            <li>
+                <div class="t-dot"></div>
+                <div class="t-month">1월 말~2월 초</div>
+                <div class="t-title">회사에 서류 제출</div>
+                <div class="t-desc">간소화 서비스 자료 출력 후 회사 제출. 추가 서류(월세계약서, 기부금영수증 등) 직접 준비 필요</div>
+            </li>
+            <li>
+                <div class="t-dot"></div>
+                <div class="t-month">2월 급여일</div>
+                <div class="t-title">정산 결과 반영</div>
+                <div class="t-desc">2월 급여에서 환급 또는 추가납부 반영. 환급받는 경우 2월 급여가 평소보다 많아짐</div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 체크리스트 -->
+    <div class="card">
+        <h2>✅ 연말정산 준비 체크리스트</h2>
+
+        <ul class="checklist">
+            <li>홈택스 간소화 서비스에서 자료 미리 확인하기</li>
+            <li>월세 납부 중이라면 임대차계약서 + 이체 내역 준비</li>
+            <li>안경·렌즈·보청기 구매 영수증 챙겨두기</li>
+            <li>기부금 영수증 발급받기 (기관에 직접 요청)</li>
+            <li>부양가족(부모님, 형제자매) 공제 가능 여부 확인</li>
+            <li>연금저축·IRP 납입 한도까지 추가 납입 여부 검토</li>
+            <li>현금 거래 시 현금영수증 발급 여부 확인</li>
+            <li>전통시장·대중교통 이용금액 별도 합산 확인</li>
+        </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-card">
+        <h2>다른 계산기도 사용해보세요!</h2>
+        <p>연봉 실수령액부터 퇴직금, 실업급여까지 모두 무료로 계산할 수 있어요.</p>
+        <div class="cta-row">
+            <a href="index.html" class="cta-btn">💰 연봉 계산기</a>
+            <a href="retirement.html" class="cta-btn">🏖️ 퇴직금 계산기</a>
+            <a href="unemployment.html" class="cta-btn">📋 실업급여 계산기</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            <a href="index.html">연봉계산기</a>
+            <a href="retirement.html">퇴직금계산기</a>
+            <a href="unemployment.html">실업급여계산기</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </p>
+        <p style="margin-top:8px;">© 2024 급여계산기 · 본 내용은 참고용이며 실제 세액과 다를 수 있습니다.</p>
+    </div>
+
+</div>
+</body>
+</html>
