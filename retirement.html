@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퇴직금 계산기 - 내 퇴직금 얼마야? | 급여계산기</title>
-    <meta name="description" content="퇴직금 계산기. 월급과 근속기간을 입력하면 퇴직금과 세후 수령액을 바로 계산해드립니다. 2024년 기준.">
+    <meta name="description" content="퇴직금 계산기. 월급과 근속기간을 입력하면 퇴직금과 세후 수령액을 바로 계산해드립니다. 2026년 기준.">
     <meta name="keywords" content="퇴직금계산기, 퇴직금계산, 퇴직소득세, 세후퇴직금, 퇴직금얼마">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,7 +260,7 @@
         </p>
         <ul>
             <li>근속연수가 길수록 퇴직소득공제가 커져 실제 세율이 낮아집니다</li>
-            <li>5년 근무자: 150만원 공제 / 10년: 400만원 공제 / 20년: 1,200만원 공제</li>
+            <li>5년 근무자: 500만원 공제 / 10년: 1,500만원 공제 / 20년: 4,000만원 공제 (2023년 대폭 인상)</li>
             <li>퇴직금이 적거나 근속연수가 짧으면 세금이 거의 없을 수 있습니다</li>
         </ul>
 
@@ -293,7 +293,7 @@
             <a href="contact.html">문의</a>
             <a href="privacy.html">개인정보처리방침</a>
         </p>
-        <p style="margin-top:8px;">© 2024 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
+        <p style="margin-top:8px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
         <p style="margin-top:4px;">본 계산 결과는 참고용이며, 정확한 내용은 전문가에게 문의하세요.</p>
     </div>
 
@@ -320,12 +320,12 @@ function taxFromBase(t) {
     return 94060000 + (t - 300000000) * 0.40;
 }
 
-// 근속연수공제
+// 근속연수공제 (2023년 개정, 2026년 현행)
 function yearsDeduction(y) {
-    if (y <= 5)  return y * 300000;
-    if (y <= 10) return 1500000  + (y - 5)  * 500000;
-    if (y <= 20) return 4000000  + (y - 10) * 800000;
-    return 12000000 + (y - 20) * 1200000;
+    if (y <= 5)  return y * 1000000;
+    if (y <= 10) return 5000000  + (y - 5)  * 2000000;
+    if (y <= 20) return 15000000 + (y - 10) * 2500000;
+    return 40000000 + (y - 20) * 3000000;
 }
 
 // 환산급여공제

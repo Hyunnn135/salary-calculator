@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>연봉 실수령액 계산기 - 세후 월급 계산 | 급여계산기</title>
-    <meta name="description" content="2024년 기준 연봉 실수령액 계산기. 국민연금, 건강보험, 소득세 등 공제 후 실제 받는 월급을 정확하게 계산하세요.">
+    <meta name="description" content="2026년 기준 연봉 실수령액 계산기. 국민연금, 건강보험, 소득세 등 공제 후 실제 받는 월급을 정확하게 계산하세요.">
     <meta name="keywords" content="연봉계산기, 실수령액, 월급계산기, 세후연봉, 4대보험계산기, 소득세계산">
     <meta property="og:title" content="연봉 실수령액 계산기 - 내 월급 얼마야?">
     <meta property="og:description" content="세금 다 떼고 실제로 얼마 받는지 바로 확인하세요. 무료 연봉 실수령액 계산기.">
@@ -390,14 +390,14 @@
     <div class="ad-box" id="botAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
 
     <div class="footer">
-        <p>본 계산기는 <strong>2024년 기준</strong> 근로소득 간이세액표를 적용한 추정값입니다.</p>
+        <p>본 계산기는 <strong>2026년 기준</strong> 근로소득 간이세액표를 적용한 추정값입니다.</p>
         <p>실제 공제액은 개인 상황(연말정산 등)에 따라 다를 수 있습니다.</p>
         <div style="margin-top:16px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
             <a href="about.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">소개</a>
             <a href="contact.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">문의하기</a>
             <a href="privacy.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">개인정보처리방침</a>
         </div>
-        <p style="margin-top:12px;">© 2024 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
+        <p style="margin-top:12px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
     </div>
 
 </div>
@@ -463,9 +463,9 @@ function calcSalary(annual, deps, monthlyNonTax) {
     const monthly      = annual / 12;
     const taxable      = monthly - monthlyNonTax;
 
-    const pension      = Math.round(Math.min(taxable, 5900000) * 0.045);   // 국민연금 4.5%
-    const health       = Math.round(taxable * 0.03545);                    // 건강보험 3.545%
-    const longCare     = Math.round(health  * 0.1281);                     // 장기요양 12.81%
+    const pension      = Math.round(Math.min(taxable, 6370000) * 0.0475);  // 국민연금 4.75% (2026년, 상한 637만원)
+    const health       = Math.round(taxable * 0.03595);                    // 건강보험 3.595% (2026년)
+    const longCare     = Math.round(health  * 0.1314);                     // 장기요양 13.14% (2026년)
     const employ       = Math.round(taxable * 0.009);                      // 고용보험 0.9%
     const incomeTax    = Math.round(annualIncomeTax(annual, deps, pension * 12, health * 12, employ * 12) / 12);
     const localTax     = Math.round(incomeTax * 0.1);                      // 지방소득세 10%
