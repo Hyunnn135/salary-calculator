@@ -3,12 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>연봉 실수령액 계산기 - 내 월급 얼마야?</title>
+    <title>연봉 실수령액 계산기 - 세후 월급 계산 | 급여계산기</title>
+    <meta name="description" content="2024년 기준 연봉 실수령액 계산기. 국민연금, 건강보험, 소득세 등 공제 후 실제 받는 월급을 정확하게 계산하세요.">
+    <meta name="keywords" content="연봉계산기, 실수령액, 월급계산기, 세후연봉, 4대보험계산기, 소득세계산">
+    <meta property="og:title" content="연봉 실수령액 계산기 - 내 월급 얼마야?">
+    <meta property="og:description" content="세금 다 떼고 실제로 얼마 받는지 바로 확인하세요. 무료 연봉 실수령액 계산기.">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ── Navbar ── */
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,180,80,0.2);
+            box-shadow: 0 2px 12px rgba(255,150,50,0.08);
+        }
+        .nav-inner {
+            max-width: 760px; margin: 0 auto;
+            padding: 0 16px;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 56px;
+        }
+        .nav-logo {
+            font-size: 1rem; font-weight: 900; text-decoration: none;
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; gap: 4px; }
+        .nav-links a {
+            padding: 6px 12px; border-radius: 20px;
+            font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #666;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: #FFF3E0; color: #FF6B35;
+        }
+        .nav-toggle {
+            display: none; background: none; border: none;
+            font-size: 1.3rem; cursor: pointer; padding: 4px 8px;
+        }
+        .nav-mobile { display: none; padding: 8px 16px 12px; }
+        .nav-mobile a {
+            display: block; padding: 10px 12px; border-radius: 10px;
+            font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #555;
+        }
+        .nav-mobile a:hover { background: #FFF3E0; color: #FF6B35; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 520px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+        }
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -212,6 +261,27 @@
     </style>
 </head>
 <body>
+
+<!-- 네비게이션 -->
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">☀️ 급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html" class="active">연봉계산기</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">🏠 홈 (연봉계산기)</a>
+        <a href="about.html">ℹ️ 소개</a>
+        <a href="contact.html">✉️ 문의</a>
+        <a href="privacy.html">🔒 개인정보처리방침</a>
+    </div>
+</nav>
+
 <div class="container">
 
     <!-- Header -->
@@ -332,6 +402,12 @@
     <div class="footer">
         <p>본 계산기는 <strong>2024년 기준</strong> 근로소득 간이세액표를 적용한 추정값입니다.</p>
         <p>실제 공제액은 개인 상황(연말정산 등)에 따라 다를 수 있습니다.</p>
+        <div style="margin-top:16px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+            <a href="about.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">소개</a>
+            <a href="contact.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">문의하기</a>
+            <a href="privacy.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">개인정보처리방침</a>
+        </div>
+        <p style="margin-top:12px;">© 2024 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
     </div>
 
 </div>

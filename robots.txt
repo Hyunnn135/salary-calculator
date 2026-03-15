@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://salary-calculator.hyunnn135.workers.dev/sitemap.xml

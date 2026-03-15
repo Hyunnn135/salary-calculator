@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보처리방침 | 급여계산기</title>
+    <meta name="description" content="급여계산기의 개인정보처리방침입니다. 쿠키, 광고 서비스 이용 등에 관한 정책을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,180,80,0.2);
+            box-shadow: 0 2px 12px rgba(255,150,50,0.08);
+        }
+        .nav-inner {
+            max-width: 860px; margin: 0 auto; padding: 0 16px;
+            display: flex; align-items: center; justify-content: space-between; height: 56px;
+        }
+        .nav-logo {
+            font-size: 1rem; font-weight: 900; text-decoration: none;
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; gap: 4px; }
+        .nav-links a { padding: 6px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #666; transition: background 0.2s, color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { background: #FFF3E0; color: #FF6B35; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; padding: 4px 8px; }
+        .nav-mobile { display: none; padding: 8px 16px 12px; }
+        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #555; }
+        .nav-mobile a:hover { background: #FFF3E0; color: #FF6B35; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 520px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(160deg, #FFF9E6 0%, #FFF1CC 25%, #FFE8D6 60%, #FFE0EB 100%);
+            min-height: 100vh; color: #333;
+        }
+        .container { max-width: 860px; margin: 0 auto; padding: 40px 16px 60px; }
+
+        .hero {
+            text-align: center; padding: 40px 24px 32px;
+            background: white; border-radius: 28px;
+            box-shadow: 0 4px 24px rgba(255,150,50,0.10); margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 1.7rem; font-weight: 900;
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin: 10px 0 8px;
+        }
+        .hero p { color: #888; font-size: 0.88rem; }
+
+        .card {
+            background: white; border-radius: 24px;
+            padding: 32px 28px; margin-bottom: 16px;
+            box-shadow: 0 4px 24px rgba(255,150,50,0.08);
+        }
+        .card h2 {
+            font-size: 1.05rem; font-weight: 800; color: #333;
+            margin-bottom: 16px; padding-bottom: 12px;
+            border-bottom: 2px solid #FFF3E0;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .card h3 { font-size: 0.95rem; font-weight: 700; color: #444; margin: 18px 0 8px; }
+        .card p { color: #555; line-height: 1.9; margin-bottom: 12px; font-size: 0.92rem; }
+        .card p:last-child { margin-bottom: 0; }
+        .card ul { padding-left: 20px; margin-bottom: 12px; }
+        .card ul li { color: #555; line-height: 1.9; font-size: 0.92rem; margin-bottom: 4px; }
+
+        .highlight-box {
+            background: #FFF9E6; border: 1px solid #FFE0B2;
+            border-radius: 14px; padding: 18px 20px; margin: 14px 0;
+        }
+        .highlight-box p { margin: 0; font-size: 0.9rem; color: #555; line-height: 1.8; }
+
+        .update-date {
+            text-align: right; color: #AAA; font-size: 0.8rem; margin-bottom: 20px;
+        }
+
+        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 8px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">☀️ 급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html">연봉계산기</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html" class="active">개인정보처리방침</a>
+        </div>
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">🏠 홈 (연봉계산기)</a>
+        <a href="about.html">ℹ️ 소개</a>
+        <a href="contact.html">✉️ 문의</a>
+        <a href="privacy.html">🔒 개인정보처리방침</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+        <div style="font-size:44px;">🔒</div>
+        <h1>개인정보처리방침</h1>
+        <p>급여계산기는 이용자의 개인정보를 소중히 여깁니다.</p>
+    </div>
+
+    <p class="update-date">최종 업데이트: 2024년 12월 1일</p>
+
+    <!-- 1. 총칙 -->
+    <div class="card">
+        <h2>1. 총칙</h2>
+        <p>
+            급여계산기(이하 "서비스")는 대한민국 직장인을 위한 무료 연봉 실수령액 계산 서비스입니다.
+            본 개인정보처리방침은 서비스 운영 과정에서 수집·이용되는 정보의 처리 방식을 안내합니다.
+        </p>
+        <p>
+            서비스를 이용함으로써 본 방침에 동의한 것으로 간주됩니다.
+            방침이 변경될 경우 본 페이지를 통해 사전 공지합니다.
+        </p>
+    </div>
+
+    <!-- 2. 수집하는 정보 -->
+    <div class="card">
+        <h2>2. 수집하는 정보</h2>
+        <h3>직접 수집 정보</h3>
+        <p>
+            본 서비스는 이용자가 직접 입력하는 연봉 금액, 부양가족 수, 비과세 금액 등의 정보를
+            수집하지 않습니다. 계산기 입력값은 이용자의 브라우저 내에서만 처리되며,
+            서버에 저장되거나 전송되지 않습니다.
+        </p>
+
+        <h3>자동 수집 정보 (쿠키 및 로그 데이터)</h3>
+        <p>서비스 이용 시 아래 정보가 자동으로 수집될 수 있습니다.</p>
+        <ul>
+            <li>방문 페이지, 접속 시간, 체류 시간 등 이용 기록</li>
+            <li>IP 주소, 브라우저 종류, 운영체제 등 기기 정보</li>
+            <li>쿠키(Cookie) 및 유사 기술을 통한 정보</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p>
+                📌 <strong>쿠키란?</strong> 웹사이트가 이용자의 브라우저에 저장하는 작은 텍스트 파일입니다.
+                서비스 이용 편의를 높이고 광고 효율을 분석하는 데 사용됩니다.
+                브라우저 설정에서 쿠키를 거부할 수 있으나, 일부 서비스 기능이 제한될 수 있습니다.
+            </p>
+        </div>
+    </div>
+
+    <!-- 3. 구글 애드센스 및 제3자 광고 서비스 -->
+    <div class="card">
+        <h2>3. 구글 애드센스 및 제3자 광고 서비스</h2>
+        <p>
+            본 서비스는 <strong>Google AdSense</strong>를 통해 광고를 제공합니다.
+            Google AdSense는 Google LLC가 운영하는 광고 서비스로,
+            이용자의 관심사에 맞는 맞춤 광고를 표시하기 위해 쿠키를 사용합니다.
+        </p>
+
+        <h3>Google AdSense 쿠키 사용 안내</h3>
+        <ul>
+            <li>Google은 DoubleClick 쿠키를 사용하여 이용자의 웹 사용 패턴을 분석합니다.</li>
+            <li>이 쿠키를 통해 이전 방문 기록을 바탕으로 관련성 높은 광고가 표시될 수 있습니다.</li>
+            <li>Google의 광고 쿠키 사용은 Google의 개인정보처리방침을 따릅니다.</li>
+        </ul>
+
+        <h3>맞춤 광고 거부 방법</h3>
+        <p>
+            맞춤 광고를 원하지 않으시면 아래 방법으로 설정을 변경할 수 있습니다.
+        </p>
+        <ul>
+            <li><strong>Google 광고 설정:</strong> Google 광고 설정 페이지에서 맞춤 광고를 비활성화할 수 있습니다.</li>
+            <li><strong>브라우저 설정:</strong> 브라우저의 쿠키 설정에서 서드파티 쿠키를 차단할 수 있습니다.</li>
+            <li><strong>NAI 옵트아웃:</strong> 네트워크 광고 이니셔티브(NAI)의 옵트아웃 페이지를 이용할 수 있습니다.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p>
+                ℹ️ Google의 개인정보 처리 방식에 대한 자세한 내용은
+                <strong>Google 개인정보처리방침(policies.google.com/privacy)</strong>에서 확인하실 수 있습니다.
+            </p>
+        </div>
+    </div>
+
+    <!-- 4. 정보의 이용 목적 -->
+    <div class="card">
+        <h2>4. 정보의 이용 목적</h2>
+        <p>자동 수집된 정보는 아래 목적으로만 사용됩니다.</p>
+        <ul>
+            <li>서비스 품질 개선 및 이용 통계 분석</li>
+            <li>광고 효율 측정 및 맞춤 광고 제공</li>
+            <li>서비스 장애 감지 및 보안 유지</li>
+        </ul>
+        <p>
+            수집된 정보는 법령에 근거하거나 이용자의 동의 없이 제3자에게 제공되지 않습니다.
+            단, 구글 애드센스 등 광고 서비스 운영을 위해 필요한 최소한의 정보가
+            해당 서비스 제공업체에 전달될 수 있습니다.
+        </p>
+    </div>
+
+    <!-- 5. 이용자의 권리 -->
+    <div class="card">
+        <h2>5. 이용자의 권리</h2>
+        <p>이용자는 아래 권리를 행사할 수 있습니다.</p>
+        <ul>
+            <li><strong>쿠키 거부:</strong> 브라우저 설정에서 쿠키 저장을 거부할 수 있습니다.</li>
+            <li><strong>맞춤 광고 거부:</strong> Google 광고 설정에서 관심사 기반 광고를 비활성화할 수 있습니다.</li>
+            <li><strong>문의:</strong> 개인정보 관련 문의사항은 문의하기 페이지를 통해 연락 주시기 바랍니다.</li>
+        </ul>
+    </div>
+
+    <!-- 6. 보안 -->
+    <div class="card">
+        <h2>6. 보안</h2>
+        <p>
+            본 서비스는 HTTPS(SSL/TLS) 암호화를 적용하여 이용자와 서버 간의
+            통신을 보호합니다. 이용자가 계산기에 입력하는 연봉 정보 등은
+            서버에 전송되지 않고 브라우저 내에서만 처리됩니다.
+        </p>
+    </div>
+
+    <!-- 7. 방침 변경 -->
+    <div class="card">
+        <h2>7. 개인정보처리방침 변경</h2>
+        <p>
+            법령 변경, 서비스 변경 등에 따라 본 방침이 변경될 수 있습니다.
+            변경 시 본 페이지 상단의 "최종 업데이트" 날짜를 갱신하고
+            주요 변경사항은 서비스 첫 화면에 7일 이상 공지합니다.
+        </p>
+    </div>
+
+    <!-- 8. 문의 -->
+    <div class="card">
+        <h2>8. 개인정보 관련 문의</h2>
+        <p>
+            개인정보 처리와 관련된 문의, 불만 사항이 있으시면 아래로 연락해 주세요.
+            빠른 시일 내에 성실히 답변드리겠습니다.
+        </p>
+        <ul>
+            <li><strong>이메일:</strong> hyunnn135@gmail.com</li>
+            <li><strong>문의 페이지:</strong> <a href="contact.html" style="color:#FF6B35; font-weight:600;">문의하기</a></li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>
+            <a href="index.html">홈</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의하기</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </p>
+        <p style="margin-top: 8px;">© 2024 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
+    </div>
+
+</div>
+</body>
+</html>

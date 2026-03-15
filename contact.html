@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기 | 급여계산기</title>
+    <meta name="description" content="급여계산기에 대한 문의, 오류 신고, 개선 제안을 보내주세요. 빠르게 답변드리겠습니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,180,80,0.2);
+            box-shadow: 0 2px 12px rgba(255,150,50,0.08);
+        }
+        .nav-inner {
+            max-width: 860px; margin: 0 auto; padding: 0 16px;
+            display: flex; align-items: center; justify-content: space-between; height: 56px;
+        }
+        .nav-logo {
+            font-size: 1rem; font-weight: 900; text-decoration: none;
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; gap: 4px; }
+        .nav-links a { padding: 6px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #666; transition: background 0.2s, color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { background: #FFF3E0; color: #FF6B35; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; padding: 4px 8px; }
+        .nav-mobile { display: none; padding: 8px 16px 12px; }
+        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #555; }
+        .nav-mobile a:hover { background: #FFF3E0; color: #FF6B35; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 520px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(160deg, #FFF9E6 0%, #FFF1CC 25%, #FFE8D6 60%, #FFE0EB 100%);
+            min-height: 100vh; color: #333;
+        }
+        .container { max-width: 680px; margin: 0 auto; padding: 40px 16px 60px; }
+
+        .hero {
+            text-align: center; padding: 44px 24px 36px;
+            background: white; border-radius: 28px;
+            box-shadow: 0 4px 24px rgba(255,150,50,0.10); margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 1.8rem; font-weight: 900;
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin: 10px 0 10px;
+        }
+        .hero p { color: #777; font-size: 0.95rem; line-height: 1.8; }
+
+        .card {
+            background: white; border-radius: 24px;
+            padding: 32px 28px; margin-bottom: 16px;
+            box-shadow: 0 4px 24px rgba(255,150,50,0.08);
+        }
+        .card h2 {
+            font-size: 1.05rem; font-weight: 800; color: #333;
+            margin-bottom: 20px; padding-bottom: 12px;
+            border-bottom: 2px solid #FFF3E0;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        /* 문의 유형 카드 */
+        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+        .type-item {
+            border-radius: 16px; padding: 18px 16px; text-align: center;
+            border: 2px solid #F0F0F0; cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .type-item:hover { border-color: #FF9F1C; box-shadow: 0 4px 16px rgba(255,159,28,0.15); }
+        .type-item .type-icon { font-size: 1.8rem; margin-bottom: 6px; }
+        .type-item .type-name { font-size: 0.85rem; font-weight: 700; color: #444; }
+        .type-item .type-desc { font-size: 0.75rem; color: #888; margin-top: 3px; line-height: 1.5; }
+
+        /* 이메일 강조 */
+        .email-box {
+            background: linear-gradient(135deg, #FFF9E6, #FFF3E0);
+            border: 2px solid #FFE0B2; border-radius: 20px;
+            padding: 28px; text-align: center; margin-bottom: 16px;
+        }
+        .email-icon { font-size: 40px; margin-bottom: 10px; }
+        .email-label { font-size: 0.85rem; color: #888; font-weight: 600; margin-bottom: 6px; }
+        .email-addr {
+            font-size: 1.2rem; font-weight: 900; color: #FF6B35;
+            text-decoration: none; display: inline-block;
+            border-bottom: 2px dashed #FF9F1C; padding-bottom: 2px;
+        }
+        .email-addr:hover { color: #FF9F1C; }
+        .email-note { font-size: 0.82rem; color: #AAA; margin-top: 10px; }
+
+        /* 폼 */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #555; margin-bottom: 7px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 13px 16px;
+            border: 2px solid #F0F0F0; border-radius: 14px;
+            font-size: 0.92rem; font-family: 'Noto Sans KR', sans-serif;
+            color: #333; outline: none; transition: border-color 0.2s;
+            background: white;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #FF9F1C; box-shadow: 0 0 0 3px rgba(255,159,28,0.10);
+        }
+        .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
+
+        .submit-btn {
+            width: 100%; padding: 16px;
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFBF69);
+            background-size: 200% 200%; animation: gradMove 3s ease infinite;
+            border: none; border-radius: 14px;
+            font-size: 1rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+            color: white; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255,107,53,0.30);
+            transition: transform 0.15s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        @keyframes gradMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        .success-msg {
+            display: none; text-align: center; padding: 20px;
+            background: #E8F5E9; border-radius: 14px; margin-top: 16px;
+            color: #2E7D32; font-weight: 700; font-size: 0.95rem;
+        }
+        .success-msg.show { display: block; }
+
+        /* FAQ */
+        .faq-item { margin-bottom: 16px; border-bottom: 1px solid #F5F5F5; padding-bottom: 16px; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
+        .faq-q::before { content: "Q."; color: #FF6B35; font-weight: 900; flex-shrink: 0; }
+        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
+
+        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 8px; }
+
+        @media (max-width: 480px) { .type-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">☀️ 급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html">연봉계산기</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html" class="active">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">🏠 홈 (연봉계산기)</a>
+        <a href="about.html">ℹ️ 소개</a>
+        <a href="contact.html">✉️ 문의</a>
+        <a href="privacy.html">🔒 개인정보처리방침</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+        <div style="font-size:48px;">✉️</div>
+        <h1>문의하기</h1>
+        <p>계산 오류, 개선 제안, 기타 문의사항을 남겨주세요.<br>
+        검토 후 빠르게 답변드리겠습니다.</p>
+    </div>
+
+    <!-- 이메일 직접 문의 -->
+    <div class="email-box">
+        <div class="email-icon">📬</div>
+        <div class="email-label">이메일로 직접 문의</div>
+        <a href="mailto:hyunnn135@gmail.com" class="email-addr">hyunnn135@gmail.com</a>
+        <div class="email-note">평균 응답 시간: 1~2 영업일 이내</div>
+    </div>
+
+    <!-- 문의 유형 -->
+    <div class="card">
+        <h2>✍️ 문의 남기기</h2>
+
+        <div class="type-grid">
+            <div class="type-item">
+                <div class="type-icon">🐛</div>
+                <div class="type-name">오류 신고</div>
+                <div class="type-desc">계산 결과가 이상해요</div>
+            </div>
+            <div class="type-item">
+                <div class="type-icon">💡</div>
+                <div class="type-name">기능 제안</div>
+                <div class="type-desc">이런 기능이 있으면 좋겠어요</div>
+            </div>
+            <div class="type-item">
+                <div class="type-icon">❓</div>
+                <div class="type-name">사용 문의</div>
+                <div class="type-desc">사용 방법이 궁금해요</div>
+            </div>
+            <div class="type-item">
+                <div class="type-icon">💬</div>
+                <div class="type-name">기타</div>
+                <div class="type-desc">그 외 문의사항</div>
+            </div>
+        </div>
+
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label>문의 유형</label>
+                <select name="type" required>
+                    <option value="">선택해주세요</option>
+                    <option value="bug">🐛 오류 신고</option>
+                    <option value="feature">💡 기능 제안</option>
+                    <option value="question">❓ 사용 문의</option>
+                    <option value="other">💬 기타</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>이메일 (답변 받으실 주소)</label>
+                <input type="email" name="email" placeholder="example@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>문의 내용</label>
+                <textarea name="message" placeholder="문의하실 내용을 자세히 작성해 주세요. 오류 신고의 경우 어떤 연봉을 입력했을 때 어떤 결과가 나왔는지 함께 적어주시면 빠른 수정에 도움이 됩니다." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">📨 문의 보내기</button>
+        </form>
+
+        <div class="success-msg" id="successMsg">
+            ✅ 문의가 접수되었습니다! 빠른 시일 내에 답변드리겠습니다. 감사합니다.
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card">
+        <h2>💬 자주 묻는 질문</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">계산 결과가 실제 급여명세서와 다른데 왜 그런가요?</div>
+            <div class="faq-a">
+                본 계산기는 2024년 기준 근로소득 간이세액표를 활용한 추정값입니다.
+                의료비·교육비 공제, 주택 관련 공제 등 연말정산 항목은 반영되지 않아
+                실제 공제액과 차이가 생길 수 있습니다. 정확한 세액은 국세청 홈택스를 이용해 주세요.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">비과세 금액은 무엇을 입력해야 하나요?</div>
+            <div class="faq-a">
+                식대, 자가운전보조금 등 회사에서 비과세로 지급하는 금액입니다.
+                대부분의 직장인은 식대 월 10만원이 비과세로 처리되며,
+                급여명세서에서 확인할 수 있습니다. 모르시면 0으로 두셔도 됩니다.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">계산기는 어떤 기준으로 만들어졌나요?</div>
+            <div class="faq-a">
+                2024년 기준 4대보험 요율(국민연금 4.5%, 건강보험 3.545%, 장기요양 12.81%, 고용보험 0.9%)과
+                소득세법상 근로소득 간이세액표를 기반으로 개발되었습니다.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">모바일에서도 사용할 수 있나요?</div>
+            <div class="faq-a">
+                네! 스마트폰, 태블릿 등 모든 기기에서 최적화된 화면으로 이용하실 수 있습니다.
+                앱 설치 없이 브라우저에서 바로 사용 가능합니다.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            <a href="index.html">홈</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의하기</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </p>
+        <p style="margin-top: 8px;">© 2024 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
+    </div>
+
+</div>
+
+<script>
+function handleSubmit(e) {
+    e.preventDefault();
+    // 실제 폼 전송은 이메일 서비스 연동 후 처리
+    // 현재는 성공 메시지만 표시
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+}
+</script>
+</body>
+</html>
