@@ -259,7 +259,7 @@
             <a href="about.html">소개</a>
             <a href="contact.html">문의</a>
         </div>
-        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <a href="index.html">💰 연봉계산기</a>
