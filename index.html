@@ -10,6 +10,7 @@
     <meta property="og:title" content="연봉 실수령액 계산기 - 내 월급 얼마야?">
     <meta property="og:description" content="세금 다 떼고 실제로 얼마 받는지 바로 확인하세요. 무료 연봉 실수령액 계산기.">
     <meta property="og:type" content="website">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -226,6 +227,19 @@
         .cmp-table .green { color: #2E7D32; font-weight: 700; }
         .cmp-table .pink { color: #E91E63; font-weight: 700; font-size: 0.82rem; }
 
+        /* ── 이미지 저장 ── */
+        .save-btn-wrap { display: none; margin-bottom: 16px; }
+        .save-btn-wrap.show { display: block; }
+        .save-btn {
+            width: 100%; padding: 14px;
+            background: white; border: 2px solid #E85722; border-radius: 12px;
+            font-size: 0.92rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+            color: #E85722; cursor: pointer; transition: background 0.15s, color 0.15s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .save-btn:hover { background: #FEF0EB; }
+        .save-btn.loading { opacity: 0.6; cursor: wait; }
+
         /* ── Footer ── */
         .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
 
@@ -323,6 +337,9 @@
         <button class="calc-btn" onclick="calculate()">💡 실수령액 계산하기</button>
     </div>
 
+    <!-- 캡처 영역 시작 -->
+    <div id="captureArea">
+
     <!-- 결과 카드 -->
     <div class="result-card" id="resultCard">
         <div class="result-label">월 실수령액</div>
@@ -353,6 +370,16 @@
             <span class="b-total-label">월 총 공제액</span>
             <span class="b-total-val" id="breakdownTotal">—</span>
         </div>
+    </div>
+
+    </div><!-- 캡처 영역 끝 -->
+
+    <!-- 이미지 저장 버튼 -->
+    <div class="save-btn-wrap" id="saveBtnWrap">
+        <button class="save-btn" id="saveBtn" onclick="saveImage()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            결과 이미지로 저장
+        </button>
     </div>
 
     <!-- 광고 (중간) -->
@@ -553,6 +580,9 @@ function calculate() {
         });
     }));
 
+    // 이미지 저장 버튼 표시
+    document.getElementById('saveBtnWrap').classList.add('show');
+
     // 중간 광고 & 비교 카드
     document.getElementById('midAd').style.display = 'block';
     document.getElementById('botAd').style.display = 'block';
@@ -588,6 +618,31 @@ function updateComparison() {
             </tr>
         `;
     }).join('');
+}
+
+// ── 이미지 저장 ───────────────────────────────────────
+function saveImage() {
+    const btn = document.getElementById('saveBtn');
+    btn.classList.add('loading');
+    btn.innerHTML = '저장 중...';
+
+    const area = document.getElementById('captureArea');
+    html2canvas(area, {
+        backgroundColor: '#F4F5F7',
+        scale: 2,
+        useCORS: true
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = '급여계산결과.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.classList.remove('loading');
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 결과 이미지로 저장';
+    }).catch(() => {
+        btn.classList.remove('loading');
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 결과 이미지로 저장';
+        alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
+    });
 }
 
 // 초기값 설정
