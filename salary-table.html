@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연봉별 실수령액 표 2026 | 연봉 실수령 한눈에 보기</title>
+    <meta name="google-site-verification" content="NA1iQwcPKxIdM6lsBboLMhz5abvQv4Cva1bh6LGtapY" />
+    <meta name="description" content="2026년 기준 연봉별 실수령액 표입니다. 연봉 2400만원부터 1억원까지 4대보험, 소득세 공제 후 실수령액을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            background: white;
+            border-bottom: 1px solid #E8E8EC;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .nav-inner {
+            max-width: 860px; margin: 0 auto; padding: 0 20px;
+            display: flex; align-items: center; justify-content: space-between; height: 56px;
+        }
+        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; color: #E85722; letter-spacing: -0.3px; }
+        .nav-links { display: flex; gap: 2px; }
+        .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { background: #FEF0EB; color: #E85722; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #444; padding: 4px 8px; }
+        .nav-mobile { display: none; padding: 8px 20px 16px; background: white; border-top: 1px solid #F0F0F2; }
+        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #444; }
+        .nav-mobile a:hover { background: #FEF0EB; color: #E85722; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F4F5F7; min-height: 100vh; color: #1A1A1A; }
+        .container { max-width: 900px; margin: 0 auto; padding: 32px 16px 60px; }
+
+        .page-header { margin-bottom: 24px; }
+        .page-header h1 { font-size: 1.6rem; font-weight: 900; color: #1A1A1A; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .page-header p { color: #777; font-size: 0.9rem; }
+        .tag { display: inline-block; background: #FEF0EB; color: #E85722; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; }
+
+        .ad-box { background: white; border: 1px dashed #DDD; border-radius: 12px; padding: 18px; text-align: center; color: #BBB; font-size: 0.82rem; font-weight: 600; margin-bottom: 20px; }
+
+        .filter-bar {
+            background: white; border-radius: 12px; padding: 16px 20px;
+            margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+        }
+        .filter-bar label { font-size: 0.85rem; font-weight: 700; color: #444; white-space: nowrap; }
+        .filter-bar select {
+            padding: 8px 12px; border: 1.5px solid #E0E0E0; border-radius: 8px;
+            font-size: 0.85rem; font-family: 'Noto Sans KR', sans-serif; color: #333;
+            outline: none; background: white; transition: border-color 0.15s;
+        }
+        .filter-bar select:focus { border-color: #E85722; }
+        .filter-note { font-size: 0.78rem; color: #999; }
+
+        .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .card-title { font-size: 0.9rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #F0F0F0; }
+
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.84rem; min-width: 640px; }
+        thead th {
+            background: #F8F8FA; padding: 11px 12px;
+            text-align: right; font-weight: 700; color: #555;
+            border-bottom: 2px solid #E8E8EC; white-space: nowrap;
+        }
+        thead th:first-child { text-align: left; }
+        tbody td {
+            padding: 11px 12px; text-align: right;
+            border-bottom: 1px solid #F2F2F4; color: #333;
+            white-space: nowrap;
+        }
+        tbody td:first-child { text-align: left; font-weight: 700; color: #1A1A1A; }
+        tbody tr:hover { background: #FAFAFA; }
+        tbody tr.highlight-row { background: #FEF8F5; }
+        tbody tr.highlight-row td:first-child { color: #E85722; }
+        .net-col { font-weight: 800; color: #E85722 !important; }
+        .deduct-col { color: #888; }
+
+        .info-card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .info-card h2 { font-size: 0.95rem; font-weight: 800; color: #333; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #F0F0F0; }
+        .info-card p { color: #555; font-size: 0.88rem; line-height: 1.9; margin-bottom: 10px; }
+        .info-card p:last-child { margin-bottom: 0; }
+
+        .tip-box { background: #F8F9FB; border-left: 3px solid #E85722; border-radius: 0 8px 8px 0; padding: 14px 16px; margin-top: 14px; }
+        .tip-box p { font-size: 0.85rem; color: #555; line-height: 1.8; margin: 0; }
+
+        .footer { text-align: center; padding: 24px 0 0; color: #BBB; font-size: 0.78rem; line-height: 2; }
+        .footer a { color: #E85722; text-decoration: none; font-weight: 600; margin: 0 8px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html">연봉계산기</a>
+            <a href="minimum-wage.html">최저시급</a>
+            <a href="salary-table.html" class="active">실수령액표</a>
+            <a href="retirement.html">퇴직금</a>
+            <a href="unemployment.html">실업급여</a>
+            <a href="tax-guide.html">연말정산</a>
+        </div>
+        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">연봉계산기</a>
+        <a href="minimum-wage.html">최저시급 계산기</a>
+        <a href="salary-table.html">연봉별 실수령액 표</a>
+        <a href="retirement.html">퇴직금 계산기</a>
+        <a href="unemployment.html">실업급여 계산기</a>
+        <a href="tax-guide.html">연말정산 가이드</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="page-header">
+        <div class="tag">2026년 최신</div>
+        <h1>연봉별 실수령액 표</h1>
+        <p>4대보험 및 소득세 공제 후 실제 받는 월급을 확인하세요</p>
+    </div>
+
+    <div class="ad-box">광고 영역</div>
+
+    <div class="filter-bar">
+        <label>부양가족 수</label>
+        <select id="depSelect" onchange="renderTable()">
+            <option value="1">본인 1명</option>
+            <option value="2">2명 (배우자 등)</option>
+            <option value="3">3명</option>
+            <option value="4">4명</option>
+        </select>
+        <span class="filter-note">* 비과세 없음 기준 · 부양가족 수 변경 시 소득세 자동 재계산</span>
+    </div>
+
+    <div class="card">
+        <div class="card-title">연봉별 월 실수령액 (세전 → 세후)</div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>연봉</th>
+                        <th>월급(세전)</th>
+                        <th>국민연금</th>
+                        <th>건강보험</th>
+                        <th>장기요양</th>
+                        <th>고용보험</th>
+                        <th>소득세</th>
+                        <th>지방세</th>
+                        <th>총 공제</th>
+                        <th>월 실수령</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="ad-box">광고 영역</div>
+
+    <div class="info-card">
+        <h2>계산 기준 안내</h2>
+        <p>위 표는 2026년 기준 세율을 적용한 <strong>근사값</strong>입니다. 실제 수령액은 회사 규정, 비과세 항목, 추가 공제 여부에 따라 다를 수 있습니다.</p>
+        <p>
+            <strong>적용 세율 (2026년)</strong><br>
+            국민연금 4.75% (상한 월 637만원) · 건강보험 3.595% · 장기요양 건강보험료의 13.14% · 고용보험 0.9%
+        </p>
+        <div class="tip-box">
+            <p>비과세 항목(식대, 교통비 등)이 있으면 실수령액이 더 높아집니다. 정확한 계산은 <a href="index.html" style="color:#E85722; font-weight:700;">연봉 실수령액 계산기</a>를 이용하세요.</p>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h2>자주 찾는 연봉 실수령액</h2>
+        <p>많은 분들이 아래 연봉대의 실수령액을 검색합니다. 표에서 해당 행을 확인하세요.</p>
+        <p>
+            <strong>연봉 3000만원</strong> · <strong>연봉 4000만원</strong> · <strong>연봉 5000만원</strong> ·
+            <strong>연봉 6000만원</strong> · <strong>연봉 7000만원</strong> · <strong>연봉 1억원</strong>
+        </p>
+        <p style="margin-top:10px; color:#999; font-size:0.82rem;">
+            * 실수령액은 부양가족 수(인적공제)에 따라 달라집니다. 위 필터에서 부양가족 수를 변경해 확인하세요.
+        </p>
+    </div>
+
+    <div class="ad-box">광고 영역</div>
+
+    <div class="footer">
+        <p>
+            <a href="index.html">홈</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의하기</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </p>
+        <p style="margin-top:8px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
+    </div>
+</div>
+
+<script>
+const SALARIES = [
+    2400,2600,2800,3000,3200,3400,3600,3800,
+    4000,4200,4500,4800,5000,5500,6000,
+    6500,7000,7500,8000,9000,10000
+];
+const POPULAR = [3000,4000,5000,6000,7000,10000];
+
+function earnedDeduction(a) {
+    if (a <= 5000000)   return a * 0.70;
+    if (a <= 15000000)  return 3500000  + (a - 5000000)   * 0.40;
+    if (a <= 45000000)  return 7500000  + (a - 15000000)  * 0.15;
+    if (a <= 100000000) return 12000000 + (a - 45000000)  * 0.05;
+    return 14750000 + (a - 100000000) * 0.02;
+}
+
+function taxFromBase(t) {
+    if (t <= 14000000)   return t * 0.06;
+    if (t <= 50000000)   return 840000   + (t - 14000000)  * 0.15;
+    if (t <= 88000000)   return 6240000  + (t - 50000000)  * 0.24;
+    if (t <= 150000000)  return 15360000 + (t - 88000000)  * 0.35;
+    if (t <= 300000000)  return 37060000 + (t - 150000000) * 0.38;
+    if (t <= 500000000)  return 94060000 + (t - 300000000) * 0.40;
+    if (t <= 1000000000) return 174060000+ (t - 500000000) * 0.42;
+    return 384060000 + (t - 1000000000) * 0.45;
+}
+
+function calcRow(annualMan, dep) {
+    const annual = annualMan * 10000;
+    const monthlyGross = Math.round(annual / 12);
+
+    const pension   = Math.round(Math.min(monthlyGross, 6370000) * 0.0475);
+    const health    = Math.round(monthlyGross * 0.03595);
+    const longCare  = Math.round(health * 0.1314);
+    const employ    = Math.round(monthlyGross * 0.009);
+
+    const taxBase   = Math.max(0, annual - earnedDeduction(annual) - dep * 1500000);
+    const grossTax  = taxFromBase(taxBase);
+    let credit;
+    if (annual <= 33000000)      credit = Math.min(grossTax * 0.55, 740000);
+    else if (annual <= 70000000) credit = Math.min(grossTax * 0.55, 660000);
+    else                         credit = Math.min(grossTax * 0.50, 500000);
+    const annualTax  = Math.max(0, grossTax - credit);
+    const incomeTax  = Math.round(annualTax / 12);
+    const localTax   = Math.round(incomeTax * 0.1);
+
+    const totalDeduct = pension + health + longCare + employ + incomeTax + localTax;
+    const netMonthly  = monthlyGross - totalDeduct;
+
+    return { monthlyGross, pension, health, longCare, employ, incomeTax, localTax, totalDeduct, netMonthly };
+}
+
+function fmt(n) { return n.toLocaleString('ko-KR'); }
+
+function renderTable() {
+    const dep = parseInt(document.getElementById('depSelect').value);
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+
+    SALARIES.forEach(sal => {
+        const r = calcRow(sal, dep);
+        const isPopular = POPULAR.includes(sal);
+        const tr = document.createElement('tr');
+        if (isPopular) tr.className = 'highlight-row';
+        tr.innerHTML = `
+            <td>${(sal / 10000).toFixed(0) === String(sal / 10000) ? sal / 10000 : (sal / 10000).toFixed(1)}억${sal >= 10000 ? '' : `<span style="font-size:0.75rem;color:#999;font-weight:400;">만원</span>`}</td>
+            <td>${fmt(r.monthlyGross)}</td>
+            <td class="deduct-col">${fmt(r.pension)}</td>
+            <td class="deduct-col">${fmt(r.health)}</td>
+            <td class="deduct-col">${fmt(r.longCare)}</td>
+            <td class="deduct-col">${fmt(r.employ)}</td>
+            <td class="deduct-col">${fmt(r.incomeTax)}</td>
+            <td class="deduct-col">${fmt(r.localTax)}</td>
+            <td class="deduct-col"><strong>${fmt(r.totalDeduct)}</strong></td>
+            <td class="net-col">${fmt(r.netMonthly)}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// 연봉 표시 수정
+function renderTable() {
+    const dep = parseInt(document.getElementById('depSelect').value);
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+
+    SALARIES.forEach(sal => {
+        const r = calcRow(sal, dep);
+        const isPopular = POPULAR.includes(sal);
+        const tr = document.createElement('tr');
+        if (isPopular) tr.className = 'highlight-row';
+
+        let salLabel;
+        if (sal >= 10000) salLabel = `${sal / 10000}억원`;
+        else salLabel = `${sal}만원`;
+
+        tr.innerHTML = `
+            <td>${salLabel}</td>
+            <td>${fmt(r.monthlyGross)}</td>
+            <td class="deduct-col">${fmt(r.pension)}</td>
+            <td class="deduct-col">${fmt(r.health)}</td>
+            <td class="deduct-col">${fmt(r.longCare)}</td>
+            <td class="deduct-col">${fmt(r.employ)}</td>
+            <td class="deduct-col">${fmt(r.incomeTax)}</td>
+            <td class="deduct-col">${fmt(r.localTax)}</td>
+            <td class="deduct-col"><strong>${fmt(r.totalDeduct)}</strong></td>
+            <td class="net-col">${fmt(r.netMonthly)}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+window.onload = renderTable;
+</script>
+</body>
+</html>
