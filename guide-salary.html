@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026년 연봉 실수령액 완벽 가이드 — 세금 얼마나 떼이나? | 급여계산기</title>
+    <meta name="google-site-verification" content="NA1iQwcPKxIdM6lsBboLMhz5abvQv4Cva1bh6LGtapY" />
+    <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
+    <meta name="description" content="2026년 기준 연봉 실수령액 계산 방법을 완벽하게 정리했습니다. 4대보험, 소득세, 지방소득세 공제 항목과 연봉 구간별 실수령액을 확인하세요.">
+    <meta name="keywords" content="연봉 실수령액, 세후 연봉, 연봉계산기, 월급계산기, 세금공제">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .navbar { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid #E8E8EC; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+        .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; color: #E85722; letter-spacing: -0.3px; }
+        .nav-links { display: flex; gap: 2px; }
+        .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { background: #FEF0EB; color: #E85722; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #444; padding: 4px 8px; }
+        .nav-mobile { display: none; padding: 8px 20px 16px; background: white; border-top: 1px solid #F0F0F2; }
+        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #444; }
+        .nav-mobile a:hover { background: #FEF0EB; color: #E85722; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F4F5F7; min-height: 100vh; color: #333; }
+        .container { max-width: 760px; margin: 0 auto; padding: 28px 16px 60px; }
+        .info-card { background: white; border-radius: 24px; padding: 32px 28px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); }
+        .info-card h2 { font-size: 1.15rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #FFF3E0; }
+        .info-card h3 { font-size: 1rem; font-weight: 700; color: #444; margin: 20px 0 10px; }
+        .info-card p { color: #555; line-height: 2; font-size: 0.93rem; margin-bottom: 14px; }
+        .info-card ul, .info-card ol { padding-left: 20px; margin-bottom: 14px; }
+        .info-card ul li, .info-card ol li { color: #555; line-height: 2; font-size: 0.93rem; margin-bottom: 6px; }
+        .info-card strong { color: #333; }
+        .hero { background: linear-gradient(135deg, #E85722, #FF9F1C); border-radius: 24px; padding: 40px 28px; margin-bottom: 20px; color: white; }
+        .hero .tag { display: inline-block; background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-bottom: 12px; }
+        .hero h1 { font-size: 1.9rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -0.5px; line-height: 1.3; }
+        .hero p { font-size: 0.92rem; opacity: 0.85; line-height: 1.7; }
+        .highlight-box { background: #FFF9E6; border: 1px solid #FFE0B2; border-radius: 14px; padding: 16px 18px; margin: 14px 0; }
+        .highlight-box p { color: #555; font-size: 0.88rem; line-height: 1.9; margin: 0; }
+        .table-wrap { overflow-x: auto; margin: 14px 0; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        .data-table th { background: #FEF0EB; padding: 11px 14px; text-align: left; font-weight: 700; color: #555; border-bottom: 2px solid #FFD5C0; }
+        .data-table td { padding: 11px 14px; border-bottom: 1px solid #F5F5F5; color: #444; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .hl { color: #E85722; font-weight: 700; }
+        .cta-box { background: white; border-radius: 20px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); text-align: center; }
+        .cta-box p { color: #666; font-size: 0.9rem; margin-bottom: 14px; }
+        .cta-btn { display: inline-block; padding: 14px 32px; background: #E85722; color: white; border-radius: 12px; font-weight: 700; font-size: 0.95rem; text-decoration: none; }
+        .cta-btn:hover { background: #D44E1F; }
+        .faq-item { margin-bottom: 14px; border-bottom: 1px solid #F5F5F5; padding-bottom: 14px; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
+        .faq-q::before { content: "Q."; color: #E85722; font-weight: 900; flex-shrink: 0; }
+        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
+        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 6px; }
+        @media (max-width: 480px) { .hero h1 { font-size: 1.5rem; } }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html">연봉계산기</a>
+            <a href="minimum-wage.html">최저시급</a>
+            <a href="salary-table.html">실수령액표</a>
+            <a href="holiday-pay.html">주휴수당</a>
+            <a href="insurance.html">4대보험</a>
+            <a href="retirement.html">퇴직금</a>
+            <a href="unemployment.html">실업급여</a>
+            <a href="tax-guide.html">연말정산</a>
+        </div>
+        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">연봉계산기</a>
+        <a href="minimum-wage.html">최저시급 계산기</a>
+        <a href="salary-table.html">연봉별 실수령액 표</a>
+        <a href="holiday-pay.html">주휴수당 계산기</a>
+        <a href="insurance.html">4대보험 계산기</a>
+        <a href="retirement.html">퇴직금 계산기</a>
+        <a href="unemployment.html">실업급여 계산기</a>
+        <a href="tax-guide.html">연말정산 가이드</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+        <span class="tag">2026년 최신 기준</span>
+        <h1>2026년 연봉 실수령액<br>완벽 가이드</h1>
+        <p>세금과 4대보험이 얼마나 빠져나가는지, 연봉에서 실제로 손에 쥐는 금액은 얼마인지 완벽하게 정리했습니다.</p>
+    </div>
+
+    <!-- 광고 자리 1 -->
+    <div style="text-align:center; margin-bottom:20px; min-height:90px; background:#fff; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#ccc; font-size:0.8rem; box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+        <!-- 애드센스 광고 자리 -->
+    </div>
+
+    <!-- 섹션 1: 연봉과 실수령액 -->
+    <div class="info-card">
+        <h2>연봉과 실수령액, 뭐가 다른가요?</h2>
+        <p>
+            취업 준비를 하거나 연봉 협상을 할 때 가장 많이 헷갈리는 부분이 바로 '연봉'과 '실수령액'의 차이입니다. 회사가 제시하는 연봉은 <strong>세전 연봉</strong>으로, 각종 세금과 보험료를 공제하기 전의 금액입니다. 반면 실수령액은 이러한 공제 항목들을 모두 뺀 뒤 실제로 통장에 입금되는 금액을 말합니다.
+        </p>
+        <p>
+            예를 들어 연봉 4,000만 원이라는 조건으로 취업했다고 해봅시다. 단순히 4,000만 원을 12개월로 나누면 월 약 333만 원이 됩니다. 하지만 실제 통장에 찍히는 금액은 그보다 훨씬 적습니다. 국민연금, 건강보험, 장기요양보험, 고용보험 등 4대보험 보험료와 근로소득세, 지방소득세가 매달 원천징수되기 때문입니다. 실제 연봉 4,000만 원의 월 실수령액은 약 290만 원 내외로, 세전 월급보다 40만 원 이상 적게 받게 됩니다.
+        </p>
+        <p>
+            공제 항목은 크게 두 가지로 나뉩니다. 첫 번째는 <strong>4대보험료</strong>로 국민연금, 건강보험, 장기요양보험, 고용보험이 여기에 해당합니다. 두 번째는 <strong>근로소득세와 지방소득세</strong>입니다. 이 두 가지를 합산하면 월급의 10~15% 수준이 매월 공제됩니다. 연봉이 높을수록 공제율도 높아지기 때문에, 고연봉 직장인일수록 세전과 세후의 차이가 더 크게 벌어집니다.
+        </p>
+        <div class="highlight-box">
+            <p><strong>핵심 요약:</strong> 연봉(세전) = 실수령액(세후) + 4대보험료 + 근로소득세 + 지방소득세. 연봉 협상 시 회사가 제시하는 금액이 세전인지 세후인지 반드시 확인해야 합니다.</p>
+        </div>
+    </div>
+
+    <!-- 섹션 2: 4대보험 -->
+    <div class="info-card">
+        <h2>4대보험 공제 항목별 설명</h2>
+        <p>
+            4대보험은 국가가 법으로 의무 가입을 규정한 사회보험으로, 근로자와 사용자(회사)가 함께 부담합니다. 매달 월급에서 자동으로 공제되며, 나중에 실업, 질병, 노후 등 위기 상황에서 보호받을 수 있습니다.
+        </p>
+
+        <h3>국민연금 (근로자 부담: 4.5%)</h3>
+        <p>
+            국민연금은 노후 소득 보장을 위한 제도입니다. 근로자가 4.5%, 회사가 4.5%를 부담하여 총 9%가 납부됩니다. 2026년 기준 기준소득월액 상한은 <strong>617만 원</strong>으로, 월급이 617만 원을 초과하더라도 617만 원을 기준으로 보험료를 계산합니다. 하한액은 <strong>39만 원</strong>입니다. 예를 들어 월급이 300만 원이라면 국민연금으로 13만 5,000원이 공제됩니다(300만 원 × 4.5%). 만 60세가 되면 납부가 종료되고, 만 63세(출생연도에 따라 다름)부터 연금을 수령할 수 있습니다.
+        </p>
+
+        <h3>건강보험 (근로자 부담: 3.545%)</h3>
+        <p>
+            건강보험은 질병이나 부상으로 인한 의료비 부담을 줄이기 위한 보험입니다. 2026년 근로자 부담 요율은 <strong>3.545%</strong>이며, 회사도 동일하게 3.545%를 부담합니다. 월급 300만 원 기준으로는 약 10만 6,350원이 매달 공제됩니다. 건강보험에 가입하면 병원 진료비, 약값, 수술비 등을 크게 절감할 수 있으며, 직장가입자의 피부양자(부모, 배우자, 자녀 등)는 별도 보험료 없이 동일한 혜택을 받을 수 있습니다.
+        </p>
+
+        <h3>장기요양보험 (건강보험료의 12.95%)</h3>
+        <p>
+            장기요양보험은 노인성 질병이나 노령으로 인해 혼자 일상생활이 어려운 경우를 대비하는 보험입니다. 건강보험료를 기준으로 <strong>12.95%</strong>를 추가로 납부합니다. 건강보험료가 10만 원이라면 장기요양보험료는 약 1만 2,950원이 됩니다. 실제로는 건강보험과 함께 고지·납부되므로 별도로 인식하기 어렵지만, 내 보험료 내역에는 구분되어 표기됩니다.
+        </p>
+
+        <h3>고용보험 (근로자 부담: 0.9%)</h3>
+        <p>
+            고용보험은 실직했을 때 받는 실업급여, 육아휴직급여, 출산전후휴가급여 등의 재원이 됩니다. 2026년 근로자 부담 요율은 <strong>0.9%</strong>입니다. 월급 300만 원이라면 2만 7,000원이 공제됩니다. 회사는 고용 안정·직업능력 개발 명목으로 추가 부담을 지며, 근로자 부담보다 더 많은 금액을 납부합니다. 실업급여를 받으려면 고용보험에 최소 180일 이상 가입되어 있어야 합니다.
+        </p>
+
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>근로자 부담</th>
+                        <th>회사 부담</th>
+                        <th>월 200만원 기준</th>
+                        <th>월 300만원 기준</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>국민연금</td><td class="hl">4.5%</td><td>4.5%</td><td>90,000원</td><td>135,000원</td></tr>
+                    <tr><td>건강보험</td><td class="hl">3.545%</td><td>3.545%</td><td>70,900원</td><td>106,350원</td></tr>
+                    <tr><td>장기요양보험</td><td class="hl">건보료×12.95%</td><td>건보료×12.95%</td><td>약 9,180원</td><td>약 13,772원</td></tr>
+                    <tr><td>고용보험</td><td class="hl">0.9%</td><td>1.05%+α</td><td>18,000원</td><td>27,000원</td></tr>
+                    <tr><td><strong>합계</strong></td><td colspan="2"></td><td><strong>약 188,080원</strong></td><td><strong>약 282,122원</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 광고 자리 2 -->
+    <div style="text-align:center; margin-bottom:20px; min-height:90px; background:#fff; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#ccc; font-size:0.8rem; box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+        <!-- 애드센스 광고 자리 -->
+    </div>
+
+    <!-- 섹션 3: 소득세와 지방소득세 -->
+    <div class="info-card">
+        <h2>소득세와 지방소득세</h2>
+        <p>
+            4대보험료와 함께 매달 원천징수되는 것이 바로 근로소득세와 지방소득세입니다. 근로소득세는 국세청이 정한 <strong>근로소득 간이세액표</strong>에 따라 계산됩니다. 간이세액표는 월 급여 수준과 부양가족 수를 기준으로 매달 납부할 세액을 미리 정해둔 표입니다. 연말정산을 통해 1년간 납부한 세금과 실제로 내야 할 세금을 비교하여 환급받거나 추가 납부하게 됩니다.
+        </p>
+        <p>
+            지방소득세는 근로소득세의 <strong>10%</strong>에 해당하며, 근로소득세와 함께 원천징수됩니다. 예를 들어 근로소득세가 5만 원이라면 지방소득세는 5,000원이 추가로 공제됩니다. 이 두 가지 세금은 부양가족이 많을수록 적게 내고, 소득이 높을수록 더 많이 내는 누진 구조를 가집니다.
+        </p>
+        <p>
+            우리나라의 소득세는 <strong>누진세율 구조</strong>를 채택하고 있습니다. 과세표준 금액이 높아질수록 세율이 올라가는 방식입니다. 연봉이 높은 사람일수록 한계세율이 높아지기 때문에, 고연봉 직장인은 세금 공제액이 상대적으로 더 크게 느껴집니다. 다만 누진세는 전체 소득에 최고 세율을 적용하는 것이 아니라, 구간별로 나누어 각각의 세율을 적용하므로 실제 세 부담은 최고 세율보다 낮습니다.
+        </p>
+
+        <h3>2026년 근로소득세 과세표준 구간</h3>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>과세표준 (연간)</th>
+                        <th>세율</th>
+                        <th>누진공제액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1,400만 원 이하</td><td class="hl">6%</td><td>—</td></tr>
+                    <tr><td>1,400만 원 초과 ~ 5,000만 원 이하</td><td class="hl">15%</td><td>126만 원</td></tr>
+                    <tr><td>5,000만 원 초과 ~ 8,800만 원 이하</td><td class="hl">24%</td><td>576만 원</td></tr>
+                    <tr><td>8,800만 원 초과 ~ 1억 5,000만 원 이하</td><td class="hl">35%</td><td>1,544만 원</td></tr>
+                    <tr><td>1억 5,000만 원 초과 ~ 3억 원 이하</td><td class="hl">38%</td><td>1,994만 원</td></tr>
+                    <tr><td>3억 원 초과 ~ 5억 원 이하</td><td class="hl">40%</td><td>2,594만 원</td></tr>
+                    <tr><td>5억 원 초과 ~ 10억 원 이하</td><td class="hl">42%</td><td>3,594만 원</td></tr>
+                    <tr><td>10억 원 초과</td><td class="hl">45%</td><td>6,594만 원</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            과세표준은 총 급여에서 근로소득공제, 각종 소득공제를 적용한 금액입니다. 따라서 연봉 자체가 곧 과세표준은 아닙니다. 연봉이 5,000만 원이더라도 여러 공제 항목을 적용하면 실제 과세표준은 이보다 낮아집니다.
+        </p>
+    </div>
+
+    <!-- 섹션 4: 연봉 구간별 실수령액 -->
+    <div class="info-card">
+        <h2>연봉 구간별 실수령액 예시 (2026년 기준, 부양가족 1인)</h2>
+        <p>
+            아래 표는 2026년 4대보험 요율과 근로소득 간이세액표를 기준으로 부양가족 본인 1인(공제대상 가족 수 1명)인 경우의 예상 월 실수령액입니다. 식대 등 비과세 항목이 없다고 가정한 수치이며, 실제 회사마다 적용 방식에 따라 다소 차이가 날 수 있습니다.
+        </p>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>연봉 (세전)</th>
+                        <th>월 세전 급여</th>
+                        <th>4대보험 공제</th>
+                        <th>소득세+지방세</th>
+                        <th class="hl">월 실수령액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3,000만 원</td>
+                        <td>2,500,000원</td>
+                        <td>약 235,000원</td>
+                        <td>약 29,040원</td>
+                        <td class="hl">약 2,235,960원</td>
+                    </tr>
+                    <tr>
+                        <td>4,000만 원</td>
+                        <td>3,333,333원</td>
+                        <td>약 313,000원</td>
+                        <td>약 105,560원</td>
+                        <td class="hl">약 2,914,773원</td>
+                    </tr>
+                    <tr>
+                        <td>5,000만 원</td>
+                        <td>4,166,667원</td>
+                        <td>약 391,000원</td>
+                        <td>약 233,630원</td>
+                        <td class="hl">약 3,542,037원</td>
+                    </tr>
+                    <tr>
+                        <td>6,000만 원</td>
+                        <td>5,000,000원</td>
+                        <td>약 469,000원</td>
+                        <td>약 400,580원</td>
+                        <td class="hl">약 4,130,420원</td>
+                    </tr>
+                    <tr>
+                        <td>7,000만 원</td>
+                        <td>5,833,333원</td>
+                        <td>약 530,000원</td>
+                        <td>약 621,430원</td>
+                        <td class="hl">약 4,681,903원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="highlight-box">
+            <p>위 수치는 예시이며, 부양가족 수·비과세 항목·회사별 적용 기준에 따라 달라질 수 있습니다. 정확한 계산은 아래 연봉계산기를 이용해 주세요.</p>
+        </div>
+    </div>
+
+    <!-- 섹션 5: 실수령액 높이는 방법 -->
+    <div class="info-card">
+        <h2>실수령액을 높이는 방법</h2>
+        <p>
+            세금과 보험료는 법으로 정해진 만큼 내야 하지만, 합법적인 방법을 통해 공제액을 줄이고 실수령액을 높일 수 있습니다.
+        </p>
+
+        <h3>1. 비과세 항목 최대한 활용하기</h3>
+        <p>
+            근로소득 중 일부는 비과세 항목으로 처리할 수 있어 세금 및 보험료 계산의 기준이 되는 과세 소득에서 제외됩니다. 대표적인 비과세 항목으로는 <strong>식대(월 20만 원 한도)</strong>와 <strong>자가운전보조금(월 20만 원 한도)</strong>이 있습니다. 예를 들어 월급 300만 원 중 식대 20만 원이 비과세로 처리되면, 세금과 보험료는 280만 원을 기준으로 계산됩니다. 연간으로 보면 수십만 원의 세금 절감 효과가 생깁니다. 회사 인사팀에 확인하여 가능한 비과세 항목을 최대한 활용하는 것이 좋습니다.
+        </p>
+
+        <h3>2. 부양가족 등록으로 소득공제 받기</h3>
+        <p>
+            연말정산 때 부양가족으로 등록된 가족이 많을수록 소득공제 금액이 늘어나 세금 부담이 줄어듭니다. 배우자, 자녀, 부모님(만 60세 이상)을 부양가족으로 등록할 수 있으며, 기본공제 1인당 연 150만 원이 소득에서 차감됩니다. 간이세액 계산 시에도 부양가족 수에 따라 원천징수 세액이 낮아지므로, 매달 실수령액도 조금씩 늘어납니다.
+        </p>
+
+        <h3>3. 연말정산 공제 항목 적극 활용하기</h3>
+        <p>
+            연말정산은 1년에 한 번 세금을 정산하는 과정으로, 각종 지출에 대한 세액공제와 소득공제를 적용받을 수 있습니다. 신용카드·체크카드 사용액 공제(총급여의 25% 초과분), 의료비 세액공제, 교육비 세액공제, 주택청약종합저축 소득공제, 개인연금저축·IRP 세액공제 등이 대표적입니다. 특히 IRP(개인형 퇴직연금)는 연간 최대 900만 원까지 납입 금액의 13.2%~16.5%를 세액공제 받을 수 있어 절세 효과가 큽니다. 이러한 항목들을 꼼꼼히 챙기면 연말정산 환급금이 늘어나고, 결과적으로 연간 세금 부담이 줄어듭니다.
+        </p>
+    </div>
+
+    <!-- 섹션 6: 연봉 협상 팁 -->
+    <div class="info-card">
+        <h2>연봉 협상 시 꼭 확인해야 할 것들</h2>
+        <p>
+            연봉 협상에서 숫자만 보고 결정했다가 나중에 실망하는 경우가 많습니다. 협상 전 아래 사항을 반드시 확인하세요.
+        </p>
+
+        <h3>1. 제시된 연봉이 세전인지 세후인지 확인</h3>
+        <p>
+            대부분의 회사는 세전 연봉 기준으로 제시합니다. 그러나 일부 회사나 외국계 기업은 세후 기준으로 제시하기도 합니다. 반드시 세전/세후 기준을 확인하고, 같은 기준으로 비교해야 합니다. 세전 4,000만 원과 세후 4,000만 원은 전혀 다른 조건입니다.
+        </p>
+
+        <h3>2. 성과급·상여금 포함 여부 확인</h3>
+        <p>
+            연봉 제시 금액에 성과급(인센티브)이나 상여금이 포함된 경우가 있습니다. 성과급은 회사 실적이나 개인 평가에 따라 변동될 수 있으므로, 기본급 외 성과급이 포함된 연봉인지, 기본급만의 금액인지를 구분해서 확인해야 합니다. 기본급이 낮고 성과급 비중이 높은 경우에는 실제 수령액이 기대보다 낮을 수 있습니다.
+        </p>
+
+        <h3>3. 식대·교통비 별도 지급 여부 확인</h3>
+        <p>
+            연봉 외에 식대, 자가운전보조금, 통신비 등을 별도로 지급하는 회사가 있습니다. 이러한 항목들은 비과세 혜택이 있어 실수령액 증가에 유리합니다. 반면 식대가 연봉에 포함되어 있는지, 별도 지급인지에 따라 세금 부담이 달라질 수 있으니 확인이 필요합니다.
+        </p>
+
+        <h3>4. 4대보험 정상 가입 여부 확인</h3>
+        <p>
+            일부 소규모 사업장에서는 4대보험을 적용하지 않거나 일부만 가입하는 경우가 있습니다. 4대보험은 근로자의 권리이자 의무이므로, 정규직으로 채용된다면 반드시 4대보험이 정상 가입되어야 합니다. 4대보험 미가입 시 실업급여, 산재보험 등의 혜택을 받지 못할 수 있습니다.
+        </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+        <p>내 연봉의 실수령액이 궁금하다면?<br>2026년 최신 기준으로 즉시 계산해보세요.</p>
+        <a href="index.html" class="cta-btn">연봉 실수령액 계산기로 바로 확인하기</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="info-card">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">연봉과 월급은 어떻게 다른가요?</div>
+            <div class="faq-a">연봉은 1년 치 총 급여를 말하고, 월급은 연봉을 12로 나눈 한 달 치 급여입니다. 일반적으로 회사에서 제시하는 연봉은 세전 기준이며, 매달 세금과 보험료가 공제된 후 실수령액이 지급됩니다. 연봉 계약을 할 때는 세전 기준인지 세후 기준인지 반드시 확인하세요.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">부양가족이 많으면 세금이 줄어드나요?</div>
+            <div class="faq-a">네, 맞습니다. 부양가족이 많을수록 소득공제 금액이 늘어나 근로소득세 부담이 줄어듭니다. 기본공제 대상 부양가족 1인당 연 150만 원이 소득에서 차감되며, 배우자·자녀·부모님 등을 대상으로 신청할 수 있습니다. 회사 인사팀에 부양가족 현황을 정확히 등록해두면 매달 원천징수 세액도 줄어들어 실수령액이 조금씩 늘어납니다.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">연봉이 올라도 실수령액은 왜 조금밖에 안 오르나요?</div>
+            <div class="faq-a">우리나라 소득세는 누진세 구조이기 때문에 연봉이 높아질수록 세율이 높아집니다. 예를 들어 연봉이 4,000만 원에서 5,000만 원으로 1,000만 원 인상되었을 때, 추가 소득에 더 높은 세율이 적용되므로 실수령액 증가분은 1,000만 원보다 적습니다. 또한 4대보험료도 급여가 높아지면 함께 오르기 때문에, 세전 연봉 증가분 대비 실수령액 증가분은 항상 더 작습니다.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">연말정산에서 환급을 많이 받는 방법이 있나요?</div>
+            <div class="faq-a">연말정산 환급을 많이 받으려면 세액공제·소득공제 항목을 최대한 챙겨야 합니다. IRP·연금저축 납입(최대 900만 원, 13.2~16.5% 세액공제), 신용카드·체크카드 사용액 공제(총급여 25% 초과분의 15~40%), 의료비 공제(총급여 3% 초과분의 15%), 교육비 공제, 주택청약종합저축 소득공제 등이 대표적입니다. 1년 동안 지출 증빙을 꼼꼼하게 모아두고, 1월 연말정산 시즌에 홈택스(국세청)에서 간소화 서비스를 이용하면 편리합니다.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">비과세 소득은 무엇이며 어떤 항목이 해당하나요?</div>
+            <div class="faq-a">비과세 소득은 소득세법에 의해 세금을 내지 않아도 되는 소득을 말합니다. 대표적인 항목으로는 식대(월 20만 원 한도), 자가운전보조금(월 20만 원 한도), 출산·육아 수당(월 20만 원 한도), 연구보조비(연구직 종사자 월 20만 원 한도), 학자금 지원, 경조사비 일부 등이 있습니다. 비과세 소득은 4대보험료와 근로소득세 계산 기준에서도 제외되므로, 같은 연봉이라도 비과세 항목이 많을수록 실수령액이 늘어납니다.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">프리랜서(개인사업자)는 4대보험을 어떻게 내나요?</div>
+            <div class="faq-a">프리랜서나 개인사업자는 직장가입자가 아닌 지역가입자로 건강보험에 가입합니다. 지역가입자의 경우 건강보험료는 소득, 재산, 자동차 등을 기준으로 산정됩니다. 고용보험은 원칙적으로 가입 대상이 아니지만, 예술인·노무제공자 특례로 일부 적용됩니다. 국민연금은 소득에 따라 개인이 전액 납부해야 합니다(직장가입자는 회사가 절반 부담). 따라서 프리랜서의 실질 세금 및 보험료 부담은 직장인보다 오히려 더 클 수 있습니다.</div>
+        </div>
+    </div>
+
+    <!-- 광고 자리 3 -->
+    <div style="text-align:center; margin-bottom:20px; min-height:90px; background:#fff; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#ccc; font-size:0.8rem; box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+        <!-- 애드센스 광고 자리 -->
+    </div>
+
+    <div class="footer">
+        <p>
+            <a href="index.html">연봉계산기</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의하기</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </p>
+        <p style="margin-top:8px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
+    </div>
+
+</div>
+</body>
+</html>
