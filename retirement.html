@@ -135,7 +135,6 @@
         <p>월급과 근속기간을 입력하면 퇴직금을 바로 계산해드려요</p>
     </div>
 
-    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
 
     <div class="card">
         <div class="card-title">📝 정보 입력</div>
@@ -220,7 +219,6 @@
         </div>
     </div>
 
-    <div class="ad-box" id="midAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
 
     <!-- 퇴직금이란 -->
     <div class="info-card">
@@ -395,7 +393,6 @@ function calculate() {
     if (totalMonths < 12) {
         document.getElementById('warnCard').classList.add('show');
         document.getElementById('resultCard').classList.remove('show');
-        document.getElementById('midAd').style.display = 'none';
         return;
     }
 
@@ -415,7 +412,6 @@ function calculate() {
     document.getElementById('dailyResult').textContent = fmt(dailyAvg) + '원';
 
     document.getElementById('resultCard').classList.add('show');
-    document.getElementById('midAd').style.display = 'block';
 }
 
 function counter(id, target, ms = 900) {

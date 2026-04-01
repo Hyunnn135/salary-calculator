@@ -140,7 +140,6 @@
         <p>퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요</p>
     </div>
 
-    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
 
     <div class="card">
         <div class="card-title">📝 정보 입력</div>
@@ -196,7 +195,6 @@
         <div class="cheer-msg" id="cheerMsg">🌱 힘내세요! 더 좋은 기회가 기다리고 있어요.</div>
     </div>
 
-    <div class="ad-box" id="midAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
 
     <!-- 수급 조건 -->
     <div class="info-card">
@@ -367,7 +365,6 @@ function calculate() {
     document.getElementById('cheerMsg').textContent = msgs[Math.floor(Math.random() * msgs.length)];
 
     document.getElementById('resultCard').classList.add('show');
-    document.getElementById('midAd').style.display = 'block';
 }
 
 function counter(id, target, ms = 900) {

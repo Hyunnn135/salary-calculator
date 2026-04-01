@@ -304,7 +304,6 @@
     </div>
 
     <!-- 광고 (상단) -->
-    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
 
     <!-- 입력 카드 -->
     <div class="card">
@@ -395,7 +394,6 @@
     </div>
 
     <!-- 광고 (중간) -->
-    <div class="ad-box" id="midAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
 
     <!-- 연봉 인상 시뮬레이터 -->
     <div class="card comparison-card" id="comparisonCard">
@@ -422,7 +420,6 @@
     </div>
 
     <!-- 광고 (하단) -->
-    <div class="ad-box" id="botAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
 
     <div class="info-card">
         <h2>자주 묻는 질문</h2>
@@ -623,9 +620,7 @@ function calculate() {
     // 이미지 저장 버튼 표시
     document.getElementById('saveBtnWrap').classList.add('show');
 
-    // 중간 광고 & 비교 카드
-    document.getElementById('midAd').style.display = 'block';
-    document.getElementById('botAd').style.display = 'block';
+    // 비교 카드
     document.getElementById('comparisonCard').classList.add('show');
     updateComparison();
 }
