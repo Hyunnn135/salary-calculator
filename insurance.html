@@ -99,6 +99,13 @@
         .highlight-box { background: #FFF9E6; border: 1px solid #FFE0B2; border-radius: 12px; padding: 14px 16px; margin: 12px 0; }
         .highlight-box p { color: #555; font-size: 0.88rem; line-height: 1.8; margin: 0; }
 
+        /* FAQ */
+        .faq-item { margin-bottom: 14px; border-bottom: 1px solid #F5F5F5; padding-bottom: 14px; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
+        .faq-q::before { content: "Q."; color: #E85722; font-weight: 900; flex-shrink: 0; }
+        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
+
         .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
         .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 6px; }
 
@@ -308,17 +315,30 @@
     <div class="info-card">
         <h2>자주 묻는 질문</h2>
 
-        <p><strong>Q. 아르바이트생도 4대보험에 가입해야 하나요?</strong><br>
-        1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미만이면 국민연금·고용보험은 제외될 수 있습니다.</p>
-
-        <p><strong>Q. 월급이 올라도 국민연금이 안 올라가던데요?</strong><br>
-        국민연금은 월 기준소득월액 상한(617만원)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</p>
-
-        <p><strong>Q. 회사가 보험료를 안 내면 어떻게 되나요?</strong><br>
-        회사가 4대보험료를 미납하면 공단에서 강제 징수하며, 가산금이 부과됩니다. 근로자의 보험 혜택은 유지됩니다.</p>
-
-        <p><strong>Q. 프리랜서는 4대보험을 어떻게 내나요?</strong><br>
-        프리랜서(자영업자)는 국민연금과 건강보험에 지역가입자로 가입하며, 보험료를 전액 본인이 부담합니다.</p>
+        <div class="faq-item">
+            <div class="faq-q">아르바이트생도 4대보험에 가입해야 하나요?</div>
+            <div class="faq-a">1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미만이면 국민연금·고용보험은 제외될 수 있습니다.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">월급이 올라도 국민연금이 안 올라가던데요?</div>
+            <div class="faq-a">국민연금은 월 기준소득월액 상한(617만원)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다. 617만원 기준 본인 부담 상한액은 월 277,650원입니다.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">회사가 보험료를 안 내면 어떻게 되나요?</div>
+            <div class="faq-a">회사가 4대보험료를 미납하면 공단에서 강제 징수하며, 가산금이 부과됩니다. 근로자의 보험 혜택은 정상적으로 유지됩니다.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">프리랜서는 4대보험을 어떻게 내나요?</div>
+            <div class="faq-a">프리랜서(자영업자)는 국민연금과 건강보험에 지역가입자로 가입하며, 보험료를 전액 본인이 부담합니다. 고용보험은 임의가입도 가능합니다.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">장기요양보험료는 어떻게 계산되나요?</div>
+            <div class="faq-a">장기요양보험료는 건강보험료에 12.95%를 곱해서 산정됩니다. 예를 들어 건강보험료가 100,000원이라면 장기요양보험료는 약 12,950원이 됩니다. 본인과 회사가 절반씩 부담합니다.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">입사 첫 달 보험료는 어떻게 되나요?</div>
+            <div class="faq-a">입사 첫 달은 근무 일수에 따라 일할 계산될 수 있습니다. 국민연금과 건강보험은 취득일이 속한 달부터 부과되며, 자세한 내용은 회사 급여 담당자에게 확인하시는 것이 정확합니다.</div>
+        </div>
     </div>
 
     <div class="footer">

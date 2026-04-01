@@ -89,6 +89,11 @@
         .tip-box { background: #F8F9FB; border-left: 3px solid #E85722; border-radius: 0 8px 8px 0; padding: 14px 16px; margin-top: 14px; }
         .tip-box p { font-size: 0.85rem; color: #555; line-height: 1.8; margin: 0; }
 
+        .faq-item { margin-bottom: 14px; border-bottom: 1px solid #F5F5F5; padding-bottom: 14px; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
+        .faq-q::before { content: "Q."; color: #E85722; font-weight: 900; flex-shrink: 0; }
+        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
         .footer { text-align: center; padding: 24px 0 0; color: #BBB; font-size: 0.78rem; line-height: 2; }
         .footer a { color: #E85722; text-decoration: none; font-weight: 600; margin: 0 8px; }
     </style>
@@ -194,6 +199,30 @@
         <p style="margin-top:10px; color:#999; font-size:0.82rem;">
             * 실수령액은 부양가족 수(인적공제)에 따라 달라집니다. 위 필터에서 부양가족 수를 변경해 확인하세요.
         </p>
+    </div>
+
+    <div class="info-card">
+        <h2>자주 묻는 질문</h2>
+        <div class="faq-item">
+            <div class="faq-q">표의 실수령액은 어떤 기준으로 계산되나요?</div>
+            <div class="faq-a">부양가족 1인(본인), 비과세 없음 기준으로 계산된 값입니다. 부양가족이 더 있거나 비과세 항목이 있으면 실수령액이 더 높아집니다.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">실제 월급명세서와 금액이 다른 이유는?</div>
+            <div class="faq-a">비과세 항목(식대·교통비), 부양가족 수, 추가 공제 항목에 따라 차이가 납니다. 정확한 계산은 상단의 연봉 실수령액 계산기를 이용해주세요.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">연봉이 같아도 실수령액이 다를 수 있나요?</div>
+            <div class="faq-a">네. 부양가족 수, 비과세 금액, 추가 공제 여부에 따라 동일 연봉이라도 실수령액이 달라집니다. 부양가족이 많을수록 세금이 줄어 실수령액이 높아집니다.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">연봉 협상 시 세전과 세후 중 어느 기준으로 해야 하나요?</div>
+            <div class="faq-a">일반적으로 연봉 협상은 세전(4대보험·소득세 공제 전) 연봉 기준으로 합니다. 실제 받는 금액은 이 표의 '월 실수령' 컬럼을 참고하세요.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">연봉 1억 이상은 세금이 얼마나 되나요?</div>
+            <div class="faq-a">연봉 1억 기준 월 실수령은 약 640만원 수준으로, 월급(세전 833만원)의 약 77% 정도입니다. 고소득으로 갈수록 세율 구간이 높아져 공제 비율이 커집니다.</div>
+        </div>
     </div>
 
     <div class="ad-box">광고 영역</div>
