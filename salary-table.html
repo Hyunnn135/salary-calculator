@@ -154,6 +154,7 @@
                 <thead>
                     <tr>
                         <th>연봉</th>
+                        <th>월 실수령</th>
                         <th>월급(세전)</th>
                         <th>국민연금</th>
                         <th>건강보험</th>
@@ -162,7 +163,6 @@
                         <th>소득세</th>
                         <th>지방세</th>
                         <th>총 공제</th>
-                        <th>월 실수령</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
@@ -275,6 +275,7 @@ function renderTable() {
         if (isPopular) tr.className = 'highlight-row';
         tr.innerHTML = `
             <td>${(sal / 10000).toFixed(0) === String(sal / 10000) ? sal / 10000 : (sal / 10000).toFixed(1)}억${sal >= 10000 ? '' : `<span style="font-size:0.75rem;color:#999;font-weight:400;">만원</span>`}</td>
+            <td class="net-col">${fmt(r.netMonthly)}</td>
             <td>${fmt(r.monthlyGross)}</td>
             <td class="deduct-col">${fmt(r.pension)}</td>
             <td class="deduct-col">${fmt(r.health)}</td>
@@ -283,7 +284,6 @@ function renderTable() {
             <td class="deduct-col">${fmt(r.incomeTax)}</td>
             <td class="deduct-col">${fmt(r.localTax)}</td>
             <td class="deduct-col"><strong>${fmt(r.totalDeduct)}</strong></td>
-            <td class="net-col">${fmt(r.netMonthly)}</td>
         `;
         tbody.appendChild(tr);
     });

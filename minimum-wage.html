@@ -163,7 +163,7 @@
 
         <label class="input-label">시급</label>
         <div class="input-wrap">
-            <input type="number" class="salary-input" id="hourlyWage" value="10320" min="0">
+            <input type="text" class="salary-input" id="hourlyWage" value="10,320">
             <span class="input-unit">원</span>
         </div>
 
@@ -307,8 +307,14 @@ function fmt(n) {
     return Math.round(n).toLocaleString('ko-KR') + '원';
 }
 
+const hourlyWageInput = document.getElementById('hourlyWage');
+hourlyWageInput.addEventListener('input', function() {
+    const v = parseInt(this.value.replace(/[^0-9]/g, '')) || '';
+    this.value = v ? v.toLocaleString('ko-KR') : '';
+});
+
 function calculate() {
-    const wage = parseInt(document.getElementById('hourlyWage').value) || 0;
+    const wage = parseInt(document.getElementById('hourlyWage').value.replace(/[^0-9]/g, '')) || 0;
     const dailyH = parseInt(document.getElementById('dailyHours').value);
     const weeklyD = parseInt(document.getElementById('weeklyDays').value);
     const includeHoliday = document.getElementById('includeHoliday').checked;
