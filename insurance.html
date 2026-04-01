@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4대보험 계산기 2026 - 내 보험료 얼마야? | 급여계산기</title>
+    <meta name="google-site-verification" content="NA1iQwcPKxIdM6lsBboLMhz5abvQv4Cva1bh6LGtapY" />
+    <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
+    <meta name="description" content="2026년 4대보험 계산기. 월급을 입력하면 국민연금, 건강보험, 장기요양보험, 고용보험 본인 부담금을 자동으로 계산합니다.">
+    <meta name="keywords" content="4대보험계산기, 국민연금계산기, 건강보험계산기, 고용보험계산기, 4대보험료">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        .navbar { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid #E8E8EC; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+        .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; color: #E85722; letter-spacing: -0.3px; }
+        .nav-links { display: flex; gap: 2px; }
+        .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { background: #FEF0EB; color: #E85722; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #444; padding: 4px 8px; }
+        .nav-mobile { display: none; padding: 8px 20px 16px; background: white; border-top: 1px solid #F0F0F2; }
+        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #444; }
+        .nav-mobile a:hover { background: #FEF0EB; color: #E85722; }
+        .nav-mobile.open { display: block; }
+        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F4F5F7; min-height: 100vh; color: #333; }
+        .container { max-width: 760px; margin: 0 auto; padding: 28px 16px 60px; }
+
+        .header { text-align: center; padding: 36px 0 28px; }
+        .header .tag { display: inline-block; background: #FEF0EB; color: #E85722; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; }
+        .header h1 { font-size: 2rem; font-weight: 900; color: #1A1A1A; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .header p { color: #999; font-size: 0.9rem; }
+
+        .ad-box { background: white; border: 1px dashed #DDD; border-radius: 12px; padding: 18px; text-align: center; color: #BBB; font-size: 0.82rem; font-weight: 600; margin-bottom: 16px; }
+
+        .card { background: white; border-radius: 14px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+        .card-title { font-size: 0.95rem; font-weight: 700; color: #666; margin-bottom: 20px; }
+
+        .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: #555; margin-bottom: 8px; }
+        .input-wrap { position: relative; margin-bottom: 20px; }
+        .salary-input { width: 100%; padding: 15px 56px 15px 18px; font-size: 1.3rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; border: 2px solid #E0E0E0; border-radius: 14px; outline: none; color: #333; text-align: right; transition: border-color 0.2s; }
+        .salary-input:focus { border-color: #E85722; box-shadow: 0 0 0 4px rgba(232,87,34,0.10); }
+        .input-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.95rem; font-weight: 700; color: #E85722; pointer-events: none; }
+
+        .calc-btn { width: 100%; padding: 17px; background: #E85722; border: none; border-radius: 14px; font-size: 1.05rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; box-shadow: 0 6px 20px rgba(232,87,34,0.30); transition: background 0.15s, transform 0.1s; }
+        .calc-btn:hover { background: #D44E1F; transform: translateY(-2px); }
+
+        /* 결과 카드 */
+        .result-card { display: none; margin-bottom: 16px; }
+        .result-card.show { display: block; animation: fadeUp 0.4s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+        .result-summary { background: linear-gradient(135deg, #E85722, #FF9F1C); border-radius: 20px; padding: 28px 24px; margin-bottom: 12px; box-shadow: 0 8px 32px rgba(232,87,34,0.25); text-align: center; }
+        .result-summary .s-label { color: rgba(255,255,255,0.8); font-size: 0.88rem; margin-bottom: 6px; }
+        .result-summary .s-amount { color: white; font-size: 2.8rem; font-weight: 900; letter-spacing: -1px; }
+        .result-summary .s-unit { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 4px; }
+        .result-summary .s-sub { color: rgba(255,255,255,0.75); font-size: 0.82rem; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.25); }
+
+        .result-detail { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+        .detail-row { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F5F5F5; }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-right: 12px; }
+        .detail-name { flex: 1; font-size: 0.92rem; font-weight: 700; color: #333; }
+        .detail-rate { font-size: 0.78rem; color: #AAA; margin-right: 16px; }
+        .detail-amount { font-size: 1rem; font-weight: 800; color: #E85722; }
+
+        /* 비교표 */
+        .compare-card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); display: none; }
+        .compare-card.show { display: block; animation: fadeUp 0.4s ease; }
+        .compare-title { font-size: 0.9rem; font-weight: 700; color: #666; margin-bottom: 16px; }
+        .compare-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .compare-table th { background: #FEF0EB; padding: 10px 12px; text-align: center; font-weight: 700; color: #555; }
+        .compare-table th:first-child { text-align: left; }
+        .compare-table td { padding: 12px; border-bottom: 1px solid #F5F5F5; text-align: center; color: #444; }
+        .compare-table td:first-child { text-align: left; font-weight: 700; color: #333; }
+        .compare-table tr:last-child td { border-bottom: none; font-weight: 800; color: #E85722; background: #FEF9F7; }
+        .compare-table .emp { color: #E85722; font-weight: 700; }
+        .compare-table .com { color: #1976D2; font-weight: 700; }
+
+        /* 정보 카드 */
+        .info-card { background: white; border-radius: 14px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+        .info-card h2 { font-size: 1.05rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #F0F0F0; }
+        .info-card p { color: #555; line-height: 1.9; font-size: 0.92rem; margin-bottom: 12px; }
+        .info-card p:last-child { margin-bottom: 0; }
+        .info-card ul { padding-left: 18px; margin-bottom: 12px; }
+        .info-card ul li { color: #555; line-height: 1.9; font-size: 0.92rem; margin-bottom: 4px; }
+
+        .rate-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
+        .rate-table th { background: #F5F5F7; padding: 10px 14px; text-align: left; font-weight: 700; color: #555; }
+        .rate-table td { padding: 11px 14px; border-bottom: 1px solid #F5F5F5; color: #444; }
+        .rate-table tr:last-child td { border-bottom: none; }
+        .rate-table .name { font-weight: 700; color: #333; }
+        .rate-table .highlight { color: #E85722; font-weight: 700; }
+
+        .highlight-box { background: #FFF9E6; border: 1px solid #FFE0B2; border-radius: 12px; padding: 14px 16px; margin: 12px 0; }
+        .highlight-box p { color: #555; font-size: 0.88rem; line-height: 1.8; margin: 0; }
+
+        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 6px; }
+
+        @media (max-width: 480px) { .header h1 { font-size: 1.55rem; } .result-summary .s-amount { font-size: 2.2rem; } .compare-table { font-size: 0.78rem; } }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">급여계산기</a>
+        <div class="nav-links">
+            <a href="index.html">연봉계산기</a>
+            <a href="minimum-wage.html">최저시급</a>
+            <a href="salary-table.html">실수령액표</a>
+            <a href="holiday-pay.html">주휴수당</a>
+            <a href="insurance.html" class="active">4대보험</a>
+            <a href="retirement.html">퇴직금</a>
+            <a href="unemployment.html">실업급여</a>
+            <a href="tax-guide.html">연말정산</a>
+        </div>
+        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <a href="index.html">연봉계산기</a>
+        <a href="minimum-wage.html">최저시급 계산기</a>
+        <a href="salary-table.html">연봉별 실수령액 표</a>
+        <a href="holiday-pay.html">주휴수당 계산기</a>
+        <a href="insurance.html">4대보험 계산기</a>
+        <a href="retirement.html">퇴직금 계산기</a>
+        <a href="unemployment.html">실업급여 계산기</a>
+        <a href="tax-guide.html">연말정산 가이드</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="header">
+        <div class="tag">2026년 기준</div>
+        <h1>4대보험 계산기</h1>
+        <p>월급을 입력하면 국민연금·건강보험·장기요양·고용보험료를 자동 계산합니다</p>
+    </div>
+
+    <div class="ad-box">📢 광고 영역 — Google AdSense</div>
+
+    <div class="card">
+        <div class="card-title">월 급여 입력 (세전)</div>
+
+        <div class="input-wrap">
+            <input type="text" class="salary-input" id="salaryInput" placeholder="3,000,000">
+            <span class="input-unit">원</span>
+        </div>
+
+        <button class="calc-btn" onclick="calculate()">4대보험료 계산하기</button>
+    </div>
+
+    <!-- 결과 요약 -->
+    <div class="result-card" id="resultCard">
+        <div class="result-summary">
+            <div class="s-label">월 본인 부담 4대보험료 합계</div>
+            <div class="s-amount" id="totalAmount">0</div>
+            <div class="s-unit">원</div>
+            <div class="s-sub" id="resultSub"></div>
+        </div>
+
+        <div class="result-detail">
+            <div class="detail-row">
+                <div class="detail-dot" style="background:#3F51B5;"></div>
+                <div class="detail-name">국민연금</div>
+                <div class="detail-rate">4.5%</div>
+                <div class="detail-amount" id="pension">—</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-dot" style="background:#E91E63;"></div>
+                <div class="detail-name">건강보험</div>
+                <div class="detail-rate">3.545%</div>
+                <div class="detail-amount" id="health">—</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-dot" style="background:#9C27B0;"></div>
+                <div class="detail-name">장기요양보험</div>
+                <div class="detail-rate">건강보험료의 12.95%</div>
+                <div class="detail-amount" id="care">—</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-dot" style="background:#009688;"></div>
+                <div class="detail-name">고용보험</div>
+                <div class="detail-rate">0.9%</div>
+                <div class="detail-amount" id="employ">—</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 본인 vs 회사 비교 -->
+    <div class="compare-card" id="compareCard">
+        <div class="compare-title">본인 부담 vs 회사 부담 비교</div>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>항목</th>
+                    <th class="emp">본인 부담</th>
+                    <th class="com">회사 부담</th>
+                    <th>합계</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>국민연금</td>
+                    <td class="emp" id="c-pension-emp">—</td>
+                    <td class="com" id="c-pension-com">—</td>
+                    <td id="c-pension-tot">—</td>
+                </tr>
+                <tr>
+                    <td>건강보험</td>
+                    <td class="emp" id="c-health-emp">—</td>
+                    <td class="com" id="c-health-com">—</td>
+                    <td id="c-health-tot">—</td>
+                </tr>
+                <tr>
+                    <td>장기요양</td>
+                    <td class="emp" id="c-care-emp">—</td>
+                    <td class="com" id="c-care-com">—</td>
+                    <td id="c-care-tot">—</td>
+                </tr>
+                <tr>
+                    <td>고용보험</td>
+                    <td class="emp" id="c-employ-emp">—</td>
+                    <td class="com" id="c-employ-com">—</td>
+                    <td id="c-employ-tot">—</td>
+                </tr>
+                <tr>
+                    <td>합계</td>
+                    <td class="emp" id="c-total-emp">—</td>
+                    <td class="com" id="c-total-com">—</td>
+                    <td id="c-total-tot">—</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top:14px;">
+            <p>※ 고용보험 회사 부담은 사업장 규모에 따라 다릅니다. 위 표는 150인 미만 사업장(0.9%) 기준입니다.</p>
+        </div>
+    </div>
+
+    <div class="ad-box" id="midAd" style="display:none;">📢 광고 영역 — Google AdSense</div>
+
+    <!-- 4대보험이란 -->
+    <div class="info-card">
+        <h2>4대보험이란?</h2>
+        <p>
+            4대보험은 국가에서 운영하는 <strong>4가지 의무 가입 사회보험</strong>입니다.
+            근로자와 사용자(회사)가 함께 보험료를 나눠서 부담합니다.
+        </p>
+        <ul>
+            <li><strong>국민연금</strong> — 노후 소득 보장. 만 60세 이후 연금 수령</li>
+            <li><strong>건강보험</strong> — 병원 치료비 절감. 실제 의료비의 일부만 본인 부담</li>
+            <li><strong>장기요양보험</strong> — 고령·장애로 거동이 불편할 때 요양 서비스 지원</li>
+            <li><strong>고용보험</strong> — 실직 시 실업급여 수령, 육아휴직급여 등 지원</li>
+        </ul>
+    </div>
+
+    <!-- 2026년 요율표 -->
+    <div class="info-card">
+        <h2>2026년 4대보험 요율표</h2>
+
+        <table class="rate-table">
+            <thead>
+                <tr><th>항목</th><th>본인 부담</th><th>회사 부담</th><th>합계</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="name">국민연금</td>
+                    <td class="highlight">4.5%</td>
+                    <td>4.5%</td>
+                    <td>9.0%</td>
+                </tr>
+                <tr>
+                    <td class="name">건강보험</td>
+                    <td class="highlight">3.545%</td>
+                    <td>3.545%</td>
+                    <td>7.09%</td>
+                </tr>
+                <tr>
+                    <td class="name">장기요양보험</td>
+                    <td class="highlight">건강보험료의 12.95%</td>
+                    <td>건강보험료의 12.95%</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td class="name">고용보험</td>
+                    <td class="highlight">0.9%</td>
+                    <td>0.9%~1.65%</td>
+                    <td>1.8%~</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <p>💡 국민연금은 월 기준소득월액 <strong>상한 617만원</strong>까지만 적용됩니다. 월급이 617만원을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="info-card">
+        <h2>자주 묻는 질문</h2>
+
+        <p><strong>Q. 아르바이트생도 4대보험에 가입해야 하나요?</strong><br>
+        1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미만이면 국민연금·고용보험은 제외될 수 있습니다.</p>
+
+        <p><strong>Q. 월급이 올라도 국민연금이 안 올라가던데요?</strong><br>
+        국민연금은 월 기준소득월액 상한(617만원)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</p>
+
+        <p><strong>Q. 회사가 보험료를 안 내면 어떻게 되나요?</strong><br>
+        회사가 4대보험료를 미납하면 공단에서 강제 징수하며, 가산금이 부과됩니다. 근로자의 보험 혜택은 유지됩니다.</p>
+
+        <p><strong>Q. 프리랜서는 4대보험을 어떻게 내나요?</strong><br>
+        프리랜서(자영업자)는 국민연금과 건강보험에 지역가입자로 가입하며, 보험료를 전액 본인이 부담합니다.</p>
+    </div>
+
+    <div class="footer">
+        <p>
+            <a href="index.html">연봉계산기</a>
+            <a href="retirement.html">퇴직금계산기</a>
+            <a href="unemployment.html">실업급여계산기</a>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </p>
+        <p style="margin-top:8px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
+        <p style="margin-top:4px;">본 계산 결과는 참고용이며, 정확한 내용은 전문가에게 문의하세요.</p>
+    </div>
+
+</div>
+
+<script>
+function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
+function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
+
+const salaryInput = document.getElementById('salaryInput');
+salaryInput.addEventListener('input', function() {
+    const v = parseVal(this.value);
+    this.value = v ? v.toLocaleString('ko-KR') : '';
+});
+
+function calculate() {
+    const salary = parseVal(salaryInput.value);
+    if (!salary) { alert('월 급여를 입력해주세요.'); return; }
+
+    // 2026년 요율
+    const PENSION_RATE  = 0.045;   // 국민연금 4.5%
+    const HEALTH_RATE   = 0.03545; // 건강보험 3.545%
+    const CARE_RATE     = 0.1295;  // 장기요양보험 건강보험료의 12.95%
+    const EMPLOY_RATE   = 0.009;   // 고용보험 0.9%
+
+    // 국민연금 상한 617만원 적용
+    const pensionBase = Math.min(salary, 6170000);
+    const pension  = Math.round(pensionBase * PENSION_RATE);
+    const health   = Math.round(salary * HEALTH_RATE);
+    const care     = Math.round(health * CARE_RATE);
+    const employ   = Math.round(salary * EMPLOY_RATE);
+    const total    = pension + health + care + employ;
+    const netSalary = salary - total;
+
+    // 결과 표시
+    document.getElementById('totalAmount').textContent = fmt(total);
+    document.getElementById('resultSub').textContent =
+        '실수령 예상 ' + fmt(netSalary) + '원 (소득세 제외)';
+
+    document.getElementById('pension').textContent = fmt(pension) + '원';
+    document.getElementById('health').textContent  = fmt(health)  + '원';
+    document.getElementById('care').textContent    = fmt(care)    + '원';
+    document.getElementById('employ').textContent  = fmt(employ)  + '원';
+
+    // 비교표 (회사 부담 - 고용보험 회사분 0.9%)
+    const comPension = pension;
+    const comHealth  = health;
+    const comCare    = care;
+    const comEmploy  = Math.round(salary * EMPLOY_RATE);
+    const comTotal   = comPension + comHealth + comCare + comEmploy;
+    const allTotal   = total + comTotal;
+
+    const set = (id, val) => { document.getElementById(id).textContent = fmt(val) + '원'; };
+    set('c-pension-emp', pension); set('c-pension-com', comPension); set('c-pension-tot', pension + comPension);
+    set('c-health-emp',  health);  set('c-health-com',  comHealth);  set('c-health-tot',  health + comHealth);
+    set('c-care-emp',    care);    set('c-care-com',    comCare);    set('c-care-tot',    care + comCare);
+    set('c-employ-emp',  employ);  set('c-employ-com',  comEmploy);  set('c-employ-tot',  employ + comEmploy);
+    set('c-total-emp',   total);   set('c-total-com',   comTotal);   set('c-total-tot',   allTotal);
+
+    document.getElementById('resultCard').classList.add('show');
+    document.getElementById('compareCard').classList.add('show');
+    document.getElementById('midAd').style.display = 'block';
+}
+
+// 초기값
+salaryInput.value = (3000000).toLocaleString('ko-KR');
+</script>
+</body>
+</html>
