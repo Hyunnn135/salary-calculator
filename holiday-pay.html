@@ -74,8 +74,15 @@
         .warn { color: #FF8C5A !important; }
 
         /* 정보 카드 */
-        .info-card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-        .info-card h2 { font-size: 0.95rem; font-weight: 800; color: #1A1A1A; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #F0F0F0; }
+        .info-card { background: white; border-radius: 24px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); }
+        .info-card h2 { font-size: 1.05rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #FFF3E0; display: flex; align-items: center; gap: 8px; }
+
+        /* FAQ */
+        .faq-item { margin-bottom: 14px; border-bottom: 1px solid #F5F5F5; padding-bottom: 14px; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
+        .faq-q::before { content: "Q."; color: #E85722; font-weight: 900; flex-shrink: 0; }
+        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
         .info-card p { color: #555; font-size: 0.88rem; line-height: 1.9; margin-bottom: 10px; }
         .info-card p:last-child { margin-bottom: 0; }
 
