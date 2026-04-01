@@ -307,6 +307,7 @@ function renderTable() {
 
         tr.innerHTML = `
             <td>${salLabel}</td>
+            <td class="net-col">${fmt(r.netMonthly)}</td>
             <td>${fmt(r.monthlyGross)}</td>
             <td class="deduct-col">${fmt(r.pension)}</td>
             <td class="deduct-col">${fmt(r.health)}</td>
@@ -315,7 +316,6 @@ function renderTable() {
             <td class="deduct-col">${fmt(r.incomeTax)}</td>
             <td class="deduct-col">${fmt(r.localTax)}</td>
             <td class="deduct-col"><strong>${fmt(r.totalDeduct)}</strong></td>
-            <td class="net-col">${fmt(r.netMonthly)}</td>
         `;
         tbody.appendChild(tr);
     });
