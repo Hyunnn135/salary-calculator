@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Salary Calculator - After-Tax Pay Calculator | SalaryKorea</title>
+    <meta name="description" content="Calculate your take-home pay in South Korea (2026). See exact deductions for National Pension, Health Insurance, Income Tax, and more.">
+    <meta name="keywords" content="Korea salary calculator, take-home pay Korea, after-tax salary Korea, 4 major insurances, Korean income tax">
+    <meta property="og:title" content="Korean Salary Calculator - What's My Take-Home Pay?">
+    <meta property="og:description" content="Calculate your actual take-home pay after taxes and insurance deductions in South Korea.">
+    <meta property="og:type" content="website">
+    <link rel="alternate" hreflang="ko" href="https://salarykorea.site/">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
+        .form-input-wrap { position: relative; }
+        .form-input { width: 100%; padding: 14px 48px 14px 16px; font-size: 1.5rem; font-weight: 700; font-family: 'Inter', 'Noto Sans KR', sans-serif; border: 1.5px solid var(--border); border-radius: 12px; outline: none; color: var(--text-primary); text-align: right; transition: all 0.2s; background: var(--surface); letter-spacing: -0.5px; }
+        .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .form-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; font-weight: 600; color: var(--text-tertiary); pointer-events: none; }
+        .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Inter', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
+        .form-select:focus { border-color: var(--accent); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
+        .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Inter', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
+        .submit-btn:hover { background: #1D4ED8; }
+        .result-col { display: flex; flex-direction: column; gap: 24px; }
+        .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
+        .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
+        .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .result-hero-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .result-hero-amount { font-size: 2.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -2px; }
+        .result-hero-unit { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        .result-hero-msg { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12); }
+        .result-hero-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin-top: 20px; }
+        .rh-stat { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); padding: 16px 12px; text-align: center; }
+        .rh-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+        .rh-stat-val { font-size: 0.88rem; color: rgba(255,255,255,0.95); font-weight: 700; font-family: 'Inter', sans-serif; }
+        @media (max-width: 768px) { .result-hero-amount { font-size: 2.2rem; } .rh-stat-val { font-size: 0.78rem; } }
+        .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
+        .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .b-item:last-child { border-bottom: none; }
+        .b-dot { width: 6px; height: 6px; border-radius: 50%; margin-right: 12px; flex-shrink: 0; }
+        .b-info { flex: 1; }
+        .b-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+        .b-bar-wrap { background: #F3F4F6; border-radius: 3px; height: 4px; overflow: hidden; }
+        .b-bar { height: 100%; border-radius: 3px; width: 0; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .b-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-left: 12px; min-width: 90px; text-align: right; }
+        .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
+        .b-total-label { font-size: 0.88rem; font-weight: 700; }
+        .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
+        .action-row.show { display: flex; }
+        .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Inter', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .save-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .save-btn.loading { opacity: 0.5; cursor: wait; }
+        .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
+        .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .raise-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        .raise-badge { background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; }
+        .raise-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--accent-dark), var(--accent)); outline: none; cursor: pointer; margin-bottom: 6px; }
+        .raise-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .raise-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-tertiary); margin-bottom: 20px; }
+        .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .cmp-table th { background: var(--surface-alt); padding: 10px 12px; text-align: center; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
+        .cmp-table th:first-child { text-align: left; }
+        .cmp-table td { padding: 12px; border-bottom: 1px solid #F3F4F6; text-align: center; color: var(--text-primary); }
+        .cmp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); }
+        .cmp-table .green { color: #059669; font-weight: 700; }
+        .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Korean Salary Calculator",
+    "description": "Calculate your after-tax take-home pay in South Korea. See exact deductions for National Pension, Health Insurance, Income Tax, and more.",
+    "url": "https://salarykorea.site/en",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "en",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+    "provider": { "@type": "Organization", "name": "SalaryKorea", "url": "https://salarykorea.site" }
+}
+    </script>
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Salary<span>Korea</span></a>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <button class="nav-item-btn">Payroll <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="en.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>Salary Calculator</a>
+                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Minimum Wage</a>
+                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Holiday Pay</a>
+                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4 Major Insurances</a>
+                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Salary Table</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">Tax <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Income Tax</a>
+                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Gift Tax</a>
+                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Acquisition Tax</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>Tax Guide</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">Leaving Job <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Severance Pay</a>
+                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Unemployment Benefits</a>
+                </div>
+            </div>
+        </div>
+        <div class="lang-selector">
+            <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN</button>
+            <div class="lang-dropdown">
+                <a href="index.html">한국어</a>
+                <a href="en.html" class="active">English</a>
+                <a href="zh.html">中文</a>
+                <a href="ja.html">日本語</a>
+            </div>
+        </div>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Payroll</div>
+            <a href="en.html">Salary Calculator</a><a href="minimum-wage.html">Minimum Wage</a><a href="holiday-pay.html">Holiday Pay</a><a href="insurance.html">4 Major Insurances</a><a href="salary-table.html">Salary Table</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Tax</div>
+            <a href="income-tax.html">Income Tax</a><a href="gift-tax.html">Gift Tax</a><a href="acquisition-tax.html">Acquisition Tax</a><a href="tax-guide.html">Tax Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Leaving Job</div>
+            <a href="retirement.html">Severance Pay</a><a href="unemployment.html">Unemployment Benefits</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">More</div>
+            <a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="index.html">한국어</a><a href="en.html" style="color:var(--accent);font-weight:700;">English</a><a href="zh.html">中文</a><a href="ja.html">日本語</a></div>
+    </div>
+</nav>
+
+<div class="page">
+    <div class="page-header">
+        <div class="breadcrumb">Payroll</div>
+        <h1>Korean Salary Calculator</h1>
+        <p>After-tax take-home pay based on 2026 Korean tax rates</p>
+    </div>
+
+    <div class="dashboard">
+        <div>
+            <div class="card">
+                <div class="card-header"><div class="card-title">Income Information</div><div class="card-badge">2026</div></div>
+                <div class="form-group">
+                    <label class="form-label">Annual Salary (Pre-tax)</label>
+                    <div class="form-input-wrap">
+                        <input type="text" class="form-input" id="salaryInput" placeholder="35,000,000">
+                        <span class="form-unit">KRW</span>
+                    </div>
+                    <input type="range" class="form-slider" id="salarySlider" min="20000000" max="200000000" step="1000000" value="35000000">
+                    <div class="slider-labels"><span>20M</span><span>60M</span><span>100M</span><span>200M</span></div>
+                </div>
+                <div class="form-row" style="margin-bottom:20px;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Dependents</label>
+                        <select class="form-select" id="dependents">
+                            <option value="1">1 (Self only)</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5 or more</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Non-taxable Amount</label>
+                        <select class="form-select" id="nonTaxable">
+                            <option value="0">None</option><option value="100000">100,000 (Meals)</option><option value="200000">200,000</option><option value="300000">300,000</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="submit-btn" onclick="calculate()">Calculate Take-Home Pay</button>
+            </div>
+            <div class="action-row" id="saveBtnWrap">
+                <button class="save-btn" id="saveBtn" onclick="saveImage()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Save as Image
+                </button>
+            </div>
+        </div>
+
+        <div class="result-col">
+            <div id="captureArea">
+            <div class="result-hero" id="resultCard">
+                <div class="result-hero-label">Monthly Take-Home Pay</div>
+                <div class="result-hero-amount" id="monthlyResult">0</div>
+                <div class="result-hero-unit">KRW / month</div>
+                <div class="result-hero-msg" id="cheerMsg"></div>
+                <div class="result-hero-stats">
+                    <div class="rh-stat"><div class="rh-stat-label">Annual Take-Home</div><div class="rh-stat-val" id="annualResult">—</div></div>
+                    <div class="rh-stat"><div class="rh-stat-label">Effective Rate</div><div class="rh-stat-val" id="effectiveRate">—</div></div>
+                    <div class="rh-stat"><div class="rh-stat-label">Monthly Deductions</div><div class="rh-stat-val" id="totalDed">—</div></div>
+                </div>
+            </div>
+            <div class="breakdown-card" id="breakdownCard">
+                <div class="card-header"><div class="card-title">Deduction Breakdown</div></div>
+                <div id="breakdownItems"></div>
+                <div class="b-total"><span class="b-total-label">Total Monthly Deductions</span><span class="b-total-val" id="breakdownTotal">—</span></div>
+            </div>
+            </div>
+            <div class="result-placeholder" id="resultPlaceholder">Enter your salary and click calculate</div>
+        </div>
+    </div>
+
+    <div class="comparison-card" id="comparisonCard">
+        <div class="card-header"><div class="card-title">Salary Raise Simulator</div></div>
+        <div class="raise-row"><span class="raise-label">Raise Rate</span><span class="raise-badge" id="raiseBadge">+10%</span></div>
+        <input type="range" class="raise-slider" id="raiseSlider" min="5" max="50" step="5" value="10">
+        <div class="raise-range"><span>+5%</span><span>+50%</span></div>
+        <table class="cmp-table">
+            <thead><tr><th>Item</th><th>Current</th><th>After Raise</th><th>Increase</th></tr></thead>
+            <tbody id="cmpBody"></tbody>
+        </table>
+    </div>
+
+    <div class="bottom-grid">
+        <div class="info-card">
+            <h2>What is Take-Home Pay?</h2>
+            <p>Take-home pay is the amount you actually receive after deducting National Pension, Health Insurance, Employment Insurance, and income taxes from your gross salary.</p>
+            <p>Typically, take-home pay in Korea is about 75–85% of your gross annual salary.</p>
+        </div>
+        <div class="info-card">
+            <h2>FAQ</h2>
+            <div class="faq-item"><div class="faq-q">What's the take-home for a ₩50M salary?</div><div class="faq-a">For a single person, approximately ₩3.58M per month. It varies depending on dependents and non-taxable amounts.</div></div>
+            <div class="faq-item"><div class="faq-q">What is the non-taxable amount?</div><div class="faq-a">It includes meal allowances (up to ₩200,000/month) and other tax-exempt items shown on your payslip. If unsure, set it to 0.</div></div>
+            <div class="faq-item"><div class="faq-q">Why does my result differ from my actual pay?</div><div class="faq-a">This is an estimate based on the simplified tax table. Actual amounts may vary due to year-end tax settlement and company policies.</div></div>
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-bottom:24px;">
+        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-AacEdO1Ee4dxCoPy" data-ad-width="300" data-ad-height="250"></ins>
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+
+    <div class="guide-cta">
+        <p>Want to learn how salary deductions work in Korea?</p>
+        <a href="guide-salary.html">Read the Complete Salary Guide →</a>
+    </div>
+</div>
+
+<div class="coupang-banner">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>new PartnersCoupang.G({"id":977388,"template":"carousel","trackingCode":"AF3938469","width":"728","height":"90","tsource":""});</script>
+    <p class="coupang-disclosure">This post is part of Coupang Partners activities, and a commission is received accordingly.</p>
+</div>
+
+<footer class="footer">
+    <div class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a></div>
+    <div class="footer-copy">© 2026 SalaryKorea</div>
+</footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ko-KR');}
+function parseVal(s){return parseInt(String(s).replace(/[^0-9]/g,''))||0;}
+const salaryInput=document.getElementById('salaryInput'),salarySlider=document.getElementById('salarySlider'),raiseSlider=document.getElementById('raiseSlider');
+salaryInput.addEventListener('input',function(){const v=parseVal(this.value);this.value=v?v.toLocaleString('ko-KR'):'';if(v>=20000000&&v<=200000000)salarySlider.value=v;});
+salarySlider.addEventListener('input',function(){salaryInput.value=parseInt(this.value).toLocaleString('ko-KR');});
+raiseSlider.addEventListener('input',function(){document.getElementById('raiseBadge').textContent='+'+this.value+'%';updateComparison();});
+
+function incomeDeduction(s){if(s<=5e6)return s*0.7;if(s<=15e6)return 35e5+(s-5e6)*0.4;if(s<=45e6)return 75e5+(s-15e6)*0.15;if(s<=1e8)return 12e6+(s-45e6)*0.05;return 14750000;}
+function taxFromBase(t){if(t<=0)return 0;if(t<=14e6)return t*0.06;if(t<=5e7)return 84e4+(t-14e6)*0.15;if(t<=88e6)return 624e4+(t-5e7)*0.24;if(t<=15e7)return 1536e4+(t-88e6)*0.35;if(t<=3e8)return 3706e4+(t-15e7)*0.38;if(t<=5e8)return 9406e4+(t-3e8)*0.4;if(t<=1e9)return 17406e4+(t-5e8)*0.42;return 38406e4+(t-1e9)*0.45;}
+function annualIncomeTax(salary,deps,aP,aH,aE){const wi=salary-incomeDeduction(salary),pd=deps*15e5,id=aP+aH+aE,tb=Math.max(0,wi-pd-id),g=taxFromBase(tb),cl=salary<=33e6?74e4:salary<=7e7?66e4:5e5,cr=Math.min(g<=13e5?g*0.55:715e3+(g-13e5)*0.3,cl);return Math.max(0,g-cr-13e4);}
+function calcSalary(annual,deps,mnt){const m=annual/12,tx=m-mnt,p=Math.round(Math.min(tx,6370000)*0.0475),h=Math.round(tx*0.03595),lc=Math.round(h*0.1314),e=Math.round(tx*0.009),it=Math.round(annualIncomeTax(annual,deps,p*12,h*12,e*12)/12),lt=Math.round(it*0.1),td=p+h+lc+e+it+lt,th=Math.round(m-td);return{monthly:Math.round(m),takeHome:th,annual:Math.round(annual),annualTakeHome:th*12,ded:{pension:p,health:h,longCare:lc,employ:e,incomeTax:it,localTax:lt,total:td}};}
+
+function cheer(m){if(m>=1e7)return'Over ₩10M/month! Truly impressive';if(m>=7e6)return'Your career growth really shows';if(m>=5e6)return'Great work — keep it up!';if(m>=35e5)return'You deserve a pat on the back today';if(m>=25e5)return"You're doing great. The future looks bright";return'Every journey starts with a first step!';}
+function counter(id,target,ms=900){const el=document.getElementById(id),t0=performance.now();function tick(now){const p=Math.min((now-t0)/ms,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString('ko-KR');if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);}
+
+let saved=null;
+function calculate(){const annual=parseVal(salaryInput.value);if(!annual||annual<5e6){alert('Please enter a valid salary.');return;}const deps=parseInt(document.getElementById('dependents').value),nonTax=parseInt(document.getElementById('nonTaxable').value);saved=calcSalary(annual,deps,nonTax);const r=saved;document.getElementById('resultPlaceholder').style.display='none';document.getElementById('resultCard').classList.add('show');counter('monthlyResult',r.takeHome);document.getElementById('annualResult').textContent=fmt(r.annualTakeHome)+' KRW';document.getElementById('effectiveRate').textContent=((r.ded.total/r.monthly)*100).toFixed(1)+'%';document.getElementById('totalDed').textContent=fmt(r.ded.total)+' KRW';document.getElementById('cheerMsg').textContent=cheer(r.takeHome);
+const items=[{name:'National Pension',amount:r.ded.pension,color:'#2563EB'},{name:'Health Insurance',amount:r.ded.health,color:'#8B5CF6'},{name:'Long-term Care',amount:r.ded.longCare,color:'#A78BFA'},{name:'Employment Insurance',amount:r.ded.employ,color:'#F59E0B'},{name:'Income Tax',amount:r.ded.incomeTax,color:'#EF4444'},{name:'Local Income Tax',amount:r.ded.localTax,color:'#9CA3AF'}];const maxAmt=Math.max(...items.map(i=>i.amount));
+document.getElementById('breakdownItems').innerHTML=items.map(item=>'<div class="b-item"><div class="b-dot" style="background:'+item.color+';"></div><div class="b-info"><div class="b-name">'+item.name+'</div><div class="b-bar-wrap"><div class="b-bar" data-w="'+(maxAmt>0?(item.amount/maxAmt*100).toFixed(1):0)+'" style="background:'+item.color+'"></div></div></div><div class="b-amount">-'+fmt(item.amount)+' KRW</div></div>').join('');
+document.getElementById('breakdownTotal').textContent='-'+fmt(r.ded.total)+' KRW';document.getElementById('breakdownCard').classList.add('show');requestAnimationFrame(()=>requestAnimationFrame(()=>{document.querySelectorAll('.b-bar').forEach(bar=>{bar.style.width=bar.dataset.w+'%';});}));document.getElementById('saveBtnWrap').classList.add('show');document.getElementById('comparisonCard').classList.add('show');updateComparison();}
+
+function updateComparison(){if(!saved)return;const annual=parseVal(salaryInput.value),deps=parseInt(document.getElementById('dependents').value),nonTax=parseInt(document.getElementById('nonTaxable').value),rate=parseInt(raiseSlider.value)/100,newSal=Math.round(annual*(1+rate)),nr=calcSalary(newSal,deps,nonTax),r=saved;const rows=[{label:'Annual (Gross)',cur:r.annual,next:nr.annual},{label:'Monthly Take-Home',cur:r.takeHome,next:nr.takeHome},{label:'Annual Take-Home',cur:r.annualTakeHome,next:nr.annualTakeHome},{label:'Monthly Deductions',cur:r.ded.total,next:nr.ded.total}];document.getElementById('cmpBody').innerHTML=rows.map(row=>{const diff=row.next-row.cur;return'<tr><td>'+row.label+'</td><td>'+fmt(row.cur)+' KRW</td><td class="green">'+fmt(row.next)+' KRW</td><td class="accent">+'+fmt(diff)+' KRW</td></tr>';}).join('');}
+
+function saveImage(){const btn=document.getElementById('saveBtn');btn.classList.add('loading');btn.innerHTML='Saving...';html2canvas(document.getElementById('captureArea'),{backgroundColor:'#F7F8FA',scale:2,useCORS:true}).then(canvas=>{const link=document.createElement('a');link.download='salary-result.png';link.href=canvas.toDataURL('image/png');link.click();btn.classList.remove('loading');btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Save as Image';}).catch(()=>{btn.classList.remove('loading');btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Save as Image';alert('Failed to save image.');});}
+
+salaryInput.value=(35000000).toLocaleString('ko-KR');salarySlider.value=35000000;
+</script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>韩国工资计算器 - 税后实际收入 | SalaryKorea</title>
+    <meta name="description" content="2026年韩国工资税后实际收入计算器。自动计算国民年金、健康保险、所得税等扣除后的实际到手工资。">
+    <meta name="keywords" content="韩国工资计算器,税后工资,实际收入,四大保险,韩国所得税">
+    <meta property="og:title" content="韩国工资计算器 - 我的实际到手工资是多少？">
+    <meta property="og:description" content="计算在韩国扣除税款和保险后的实际到手工资。免费工资计算器。">
+    <meta property="og:type" content="website">
+    <link rel="alternate" hreflang="ko" href="https://salarykorea.site/">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body { font-family: 'Noto Sans SC', 'Inter', -apple-system, sans-serif; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
+        .form-input-wrap { position: relative; }
+        .form-input { width: 100%; padding: 14px 48px 14px 16px; font-size: 1.5rem; font-weight: 700; font-family: 'Inter', 'Noto Sans SC', sans-serif; border: 1.5px solid var(--border); border-radius: 12px; outline: none; color: var(--text-primary); text-align: right; transition: all 0.2s; background: var(--surface); letter-spacing: -0.5px; }
+        .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .form-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; font-weight: 600; color: var(--text-tertiary); pointer-events: none; }
+        .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans SC', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
+        .form-select:focus { border-color: var(--accent); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
+        .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans SC', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
+        .submit-btn:hover { background: #1D4ED8; }
+        .result-col { display: flex; flex-direction: column; gap: 24px; }
+        .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
+        .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
+        .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .result-hero-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .result-hero-amount { font-size: 2.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -2px; }
+        .result-hero-unit { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        .result-hero-msg { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12); }
+        .result-hero-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin-top: 20px; }
+        .rh-stat { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); padding: 16px 12px; text-align: center; }
+        .rh-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+        .rh-stat-val { font-size: 0.88rem; color: rgba(255,255,255,0.95); font-weight: 700; font-family: 'Inter', sans-serif; }
+        @media (max-width: 768px) { .result-hero-amount { font-size: 2.2rem; } .rh-stat-val { font-size: 0.78rem; } }
+        .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
+        .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .b-item:last-child { border-bottom: none; }
+        .b-dot { width: 6px; height: 6px; border-radius: 50%; margin-right: 12px; flex-shrink: 0; }
+        .b-info { flex: 1; }
+        .b-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+        .b-bar-wrap { background: #F3F4F6; border-radius: 3px; height: 4px; overflow: hidden; }
+        .b-bar { height: 100%; border-radius: 3px; width: 0; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .b-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-left: 12px; min-width: 90px; text-align: right; }
+        .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
+        .b-total-label { font-size: 0.88rem; font-weight: 700; }
+        .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
+        .action-row.show { display: flex; }
+        .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans SC', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .save-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .save-btn.loading { opacity: 0.5; cursor: wait; }
+        .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
+        .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .raise-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        .raise-badge { background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; }
+        .raise-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--accent-dark), var(--accent)); outline: none; cursor: pointer; margin-bottom: 6px; }
+        .raise-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .raise-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-tertiary); margin-bottom: 20px; }
+        .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .cmp-table th { background: var(--surface-alt); padding: 10px 12px; text-align: center; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
+        .cmp-table th:first-child { text-align: left; }
+        .cmp-table td { padding: 12px; border-bottom: 1px solid #F3F4F6; text-align: center; color: var(--text-primary); }
+        .cmp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); }
+        .cmp-table .green { color: #059669; font-weight: 700; }
+        .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "韩国工资计算器",
+    "description": "计算在韩国扣除税款和四大保险后的实际到手工资。2026年最新税率。",
+    "url": "https://salarykorea.site/zh",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "zh",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+    "provider": { "@type": "Organization", "name": "SalaryKorea", "url": "https://salarykorea.site" }
+}
+    </script>
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">工资<span>研究所</span></a>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <button class="nav-item-btn">工资相关 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="zh.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>工资计算器</a>
+                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>最低工资</a>
+                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>周休津贴</a>
+                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>四大保险</a>
+                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>工资表</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">税务相关 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>综合所得税</a>
+                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>赠与税</a>
+                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>取得税</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>年末结算指南</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">离职相关 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>退职金</a>
+                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>失业补贴</a>
+                </div>
+            </div>
+        </div>
+        <div class="lang-selector">
+            <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 中文</button>
+            <div class="lang-dropdown">
+                <a href="index.html">한국어</a>
+                <a href="en.html">English</a>
+                <a href="zh.html" class="active">中文</a>
+                <a href="ja.html">日本語</a>
+            </div>
+        </div>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <div class="nav-mobile-group"><div class="nav-mobile-title">工资相关</div>
+            <a href="zh.html">工资计算器</a><a href="minimum-wage.html">最低工资</a><a href="holiday-pay.html">周休津贴</a><a href="insurance.html">四大保险</a><a href="salary-table.html">工资表</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">税务相关</div>
+            <a href="income-tax.html">综合所得税</a><a href="gift-tax.html">赠与税</a><a href="acquisition-tax.html">取得税</a><a href="tax-guide.html">年末结算指南</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">离职相关</div>
+            <a href="retirement.html">退职金</a><a href="unemployment.html">失业补贴</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">其他</div>
+            <a href="about.html">关于我们</a><a href="contact.html">联系方式</a><a href="privacy.html">隐私政策</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="index.html">한국어</a><a href="en.html">English</a><a href="zh.html" style="color:var(--accent);font-weight:700;">中文</a><a href="ja.html">日本語</a></div>
+    </div>
+</nav>
+
+<div class="page">
+    <div class="page-header">
+        <div class="breadcrumb">工资相关</div>
+        <h1>韩国工资计算器</h1>
+        <p>基于2026年税率，计算扣除税款和四大保险后的实际到手工资</p>
+    </div>
+
+    <div class="dashboard">
+        <div>
+            <div class="card">
+                <div class="card-header"><div class="card-title">收入信息</div><div class="card-badge">2026年</div></div>
+                <div class="form-group">
+                    <label class="form-label">年薪（税前）</label>
+                    <div class="form-input-wrap">
+                        <input type="text" class="form-input" id="salaryInput" placeholder="35,000,000">
+                        <span class="form-unit">韩元</span>
+                    </div>
+                    <input type="range" class="form-slider" id="salarySlider" min="20000000" max="200000000" step="1000000" value="35000000">
+                    <div class="slider-labels"><span>2,000万</span><span>6,000万</span><span>1亿</span><span>2亿</span></div>
+                </div>
+                <div class="form-row" style="margin-bottom:20px;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">赡养家属人数</label>
+                        <select class="form-select" id="dependents">
+                            <option value="1">1人（仅本人）</option><option value="2">2人</option><option value="3">3人</option><option value="4">4人</option><option value="5">5人以上</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">免税金额</label>
+                        <select class="form-select" id="nonTaxable">
+                            <option value="0">无</option><option value="100000">10万（餐费）</option><option value="200000">20万</option><option value="300000">30万</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="submit-btn" onclick="calculate()">计算实际到手工资</button>
+            </div>
+            <div class="action-row" id="saveBtnWrap">
+                <button class="save-btn" id="saveBtn" onclick="saveImage()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    保存图片
+                </button>
+            </div>
+        </div>
+
+        <div class="result-col">
+            <div id="captureArea">
+            <div class="result-hero" id="resultCard">
+                <div class="result-hero-label">每月实际到手</div>
+                <div class="result-hero-amount" id="monthlyResult">0</div>
+                <div class="result-hero-unit">韩元 / 月</div>
+                <div class="result-hero-msg" id="cheerMsg"></div>
+                <div class="result-hero-stats">
+                    <div class="rh-stat"><div class="rh-stat-label">年实际到手</div><div class="rh-stat-val" id="annualResult">—</div></div>
+                    <div class="rh-stat"><div class="rh-stat-label">实际扣除率</div><div class="rh-stat-val" id="effectiveRate">—</div></div>
+                    <div class="rh-stat"><div class="rh-stat-label">每月扣除额</div><div class="rh-stat-val" id="totalDed">—</div></div>
+                </div>
+            </div>
+            <div class="breakdown-card" id="breakdownCard">
+                <div class="card-header"><div class="card-title">扣除项目明细</div></div>
+                <div id="breakdownItems"></div>
+                <div class="b-total"><span class="b-total-label">每月总扣除额</span><span class="b-total-val" id="breakdownTotal">—</span></div>
+            </div>
+            </div>
+            <div class="result-placeholder" id="resultPlaceholder">请输入年薪后点击计算按钮</div>
+        </div>
+    </div>
+
+    <div class="comparison-card" id="comparisonCard">
+        <div class="card-header"><div class="card-title">加薪模拟器</div></div>
+        <div class="raise-row"><span class="raise-label">加薪幅度</span><span class="raise-badge" id="raiseBadge">+10%</span></div>
+        <input type="range" class="raise-slider" id="raiseSlider" min="5" max="50" step="5" value="10">
+        <div class="raise-range"><span>+5%</span><span>+50%</span></div>
+        <table class="cmp-table">
+            <thead><tr><th>项目</th><th>当前</th><th>加薪后</th><th>增加额</th></tr></thead>
+            <tbody id="cmpBody"></tbody>
+        </table>
+    </div>
+
+    <div class="bottom-grid">
+        <div class="info-card">
+            <h2>什么是实际到手工资？</h2>
+            <p>实际到手工资是从税前年薪中扣除国民年金、健康保险、雇用保险等四大保险费以及所得税、地方所得税后实际收到的金额。</p>
+            <p>一般来说，实际到手工资约为税前年薪的75~85%。</p>
+        </div>
+        <div class="info-card">
+            <h2>常见问题</h2>
+            <div class="faq-item"><div class="faq-q">年薪5000万韩元的实际到手是多少？</div><div class="faq-a">以1人为基准，每月约358万韩元。根据赡养家属人数和免税金额会有所不同。</div></div>
+            <div class="faq-item"><div class="faq-q">免税金额如何设置？</div><div class="faq-a">包括餐费补贴（每月20万韩元）等在工资单上标为免税的金额。如果不确定，设为0即可。</div></div>
+            <div class="faq-item"><div class="faq-q">计算结果与实际工资不同怎么办？</div><div class="faq-a">本计算器基于简易税额表的估算值，实际金额可能因年末结算和公司规定而有所差异。</div></div>
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-bottom:24px;">
+        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-AacEdO1Ee4dxCoPy" data-ad-width="300" data-ad-height="250"></ins>
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+
+    <div class="guide-cta">
+        <p>想了解韩国工资扣除的计算原理和各扣除项目的详细说明吗？</p>
+        <a href="guide-salary.html">查看完整工资指南 →</a>
+    </div>
+</div>
+
+<div class="coupang-banner">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>new PartnersCoupang.G({"id":977388,"template":"carousel","trackingCode":"AF3938469","width":"728","height":"90","tsource":""});</script>
+    <p class="coupang-disclosure">本文为Coupang Partners活动的一部分，据此收取一定比例的佣金。</p>
+</div>
+
+<footer class="footer">
+    <div class="footer-links"><a href="about.html">关于我们</a><a href="contact.html">联系方式</a><a href="privacy.html">隐私政策</a></div>
+    <div class="footer-copy">© 2026 SalaryKorea</div>
+</footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ko-KR');}
+function parseVal(s){return parseInt(String(s).replace(/[^0-9]/g,''))||0;}
+const salaryInput=document.getElementById('salaryInput'),salarySlider=document.getElementById('salarySlider'),raiseSlider=document.getElementById('raiseSlider');
+salaryInput.addEventListener('input',function(){const v=parseVal(this.value);this.value=v?v.toLocaleString('ko-KR'):'';if(v>=20000000&&v<=200000000)salarySlider.value=v;});
+salarySlider.addEventListener('input',function(){salaryInput.value=parseInt(this.value).toLocaleString('ko-KR');});
+raiseSlider.addEventListener('input',function(){document.getElementById('raiseBadge').textContent='+'+this.value+'%';updateComparison();});
+
+function incomeDeduction(s){if(s<=5e6)return s*0.7;if(s<=15e6)return 35e5+(s-5e6)*0.4;if(s<=45e6)return 75e5+(s-15e6)*0.15;if(s<=1e8)return 12e6+(s-45e6)*0.05;return 14750000;}
+function taxFromBase(t){if(t<=0)return 0;if(t<=14e6)return t*0.06;if(t<=5e7)return 84e4+(t-14e6)*0.15;if(t<=88e6)return 624e4+(t-5e7)*0.24;if(t<=15e7)return 1536e4+(t-88e6)*0.35;if(t<=3e8)return 3706e4+(t-15e7)*0.38;if(t<=5e8)return 9406e4+(t-3e8)*0.4;if(t<=1e9)return 17406e4+(t-5e8)*0.42;return 38406e4+(t-1e9)*0.45;}
+function annualIncomeTax(salary,deps,aP,aH,aE){const wi=salary-incomeDeduction(salary),pd=deps*15e5,id=aP+aH+aE,tb=Math.max(0,wi-pd-id),g=taxFromBase(tb),cl=salary<=33e6?74e4:salary<=7e7?66e4:5e5,cr=Math.min(g<=13e5?g*0.55:715e3+(g-13e5)*0.3,cl);return Math.max(0,g-cr-13e4);}
+function calcSalary(annual,deps,mnt){const m=annual/12,tx=m-mnt,p=Math.round(Math.min(tx,6370000)*0.0475),h=Math.round(tx*0.03595),lc=Math.round(h*0.1314),e=Math.round(tx*0.009),it=Math.round(annualIncomeTax(annual,deps,p*12,h*12,e*12)/12),lt=Math.round(it*0.1),td=p+h+lc+e+it+lt,th=Math.round(m-td);return{monthly:Math.round(m),takeHome:th,annual:Math.round(annual),annualTakeHome:th*12,ded:{pension:p,health:h,longCare:lc,employ:e,incomeTax:it,localTax:lt,total:td}};}
+
+function cheer(m){if(m>=1e7)return'月收入超过1000万韩元！非常了不起';if(m>=7e6)return'这是长期积累的职业成就';if(m>=5e6)return'努力工作的你值得鼓励';if(m>=35e5)return'今天也辛苦了，给自己一个赞';if(m>=25e5)return'现在已经很棒了，未来更值得期待';return'万事开头难，一步一步向前走！';}
+function counter(id,target,ms=900){const el=document.getElementById(id),t0=performance.now();function tick(now){const p=Math.min((now-t0)/ms,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString('ko-KR');if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);}
+
+let saved=null;
+function calculate(){const annual=parseVal(salaryInput.value);if(!annual||annual<5e6){alert('请正确输入年薪。');return;}const deps=parseInt(document.getElementById('dependents').value),nonTax=parseInt(document.getElementById('nonTaxable').value);saved=calcSalary(annual,deps,nonTax);const r=saved;document.getElementById('resultPlaceholder').style.display='none';document.getElementById('resultCard').classList.add('show');counter('monthlyResult',r.takeHome);document.getElementById('annualResult').textContent=fmt(r.annualTakeHome)+'韩元';document.getElementById('effectiveRate').textContent=((r.ded.total/r.monthly)*100).toFixed(1)+'%';document.getElementById('totalDed').textContent=fmt(r.ded.total)+'韩元';document.getElementById('cheerMsg').textContent=cheer(r.takeHome);
+const items=[{name:'国民年金',amount:r.ded.pension,color:'#2563EB'},{name:'健康保险',amount:r.ded.health,color:'#8B5CF6'},{name:'长期护理保险',amount:r.ded.longCare,color:'#A78BFA'},{name:'雇用保险',amount:r.ded.employ,color:'#F59E0B'},{name:'所得税',amount:r.ded.incomeTax,color:'#EF4444'},{name:'地方所得税',amount:r.ded.localTax,color:'#9CA3AF'}];const maxAmt=Math.max(...items.map(i=>i.amount));
+document.getElementById('breakdownItems').innerHTML=items.map(item=>'<div class="b-item"><div class="b-dot" style="background:'+item.color+';"></div><div class="b-info"><div class="b-name">'+item.name+'</div><div class="b-bar-wrap"><div class="b-bar" data-w="'+(maxAmt>0?(item.amount/maxAmt*100).toFixed(1):0)+'" style="background:'+item.color+'"></div></div></div><div class="b-amount">-'+fmt(item.amount)+'韩元</div></div>').join('');
+document.getElementById('breakdownTotal').textContent='-'+fmt(r.ded.total)+'韩元';document.getElementById('breakdownCard').classList.add('show');requestAnimationFrame(()=>requestAnimationFrame(()=>{document.querySelectorAll('.b-bar').forEach(bar=>{bar.style.width=bar.dataset.w+'%';});}));document.getElementById('saveBtnWrap').classList.add('show');document.getElementById('comparisonCard').classList.add('show');updateComparison();}
+
+function updateComparison(){if(!saved)return;const annual=parseVal(salaryInput.value),deps=parseInt(document.getElementById('dependents').value),nonTax=parseInt(document.getElementById('nonTaxable').value),rate=parseInt(raiseSlider.value)/100,newSal=Math.round(annual*(1+rate)),nr=calcSalary(newSal,deps,nonTax),r=saved;const rows=[{label:'年薪（税前）',cur:r.annual,next:nr.annual},{label:'每月实际到手',cur:r.takeHome,next:nr.takeHome},{label:'年实际到手',cur:r.annualTakeHome,next:nr.annualTakeHome},{label:'每月扣除额',cur:r.ded.total,next:nr.ded.total}];document.getElementById('cmpBody').innerHTML=rows.map(row=>{const diff=row.next-row.cur;return'<tr><td>'+row.label+'</td><td>'+fmt(row.cur)+'韩元</td><td class="green">'+fmt(row.next)+'韩元</td><td class="accent">+'+fmt(diff)+'韩元</td></tr>';}).join('');}
+
+function saveImage(){const btn=document.getElementById('saveBtn');btn.classList.add('loading');btn.innerHTML='保存中...';html2canvas(document.getElementById('captureArea'),{backgroundColor:'#F7F8FA',scale:2,useCORS:true}).then(canvas=>{const link=document.createElement('a');link.download='工资计算结果.png';link.href=canvas.toDataURL('image/png');link.click();btn.classList.remove('loading');btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片';}).catch(()=>{btn.classList.remove('loading');btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片';alert('图片保存失败。');});}
+
+salaryInput.value=(35000000).toLocaleString('ko-KR');salarySlider.value=35000000;
+</script>
+</body>
+</html>

@@ -37,6 +37,17 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
 
+/* ══ 언어 선택기 ══ */
+.lang-selector { position: relative; margin-left: 8px; }
+.lang-btn { display: flex; align-items: center; gap: 4px; padding: 6px 10px; font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: 1px solid var(--border); background: var(--surface); border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; }
+.lang-btn:hover { color: var(--text-primary); border-color: var(--accent); }
+.lang-btn svg { width: 14px; height: 14px; opacity: 0.5; }
+.lang-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 140px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 4px; opacity: 0; visibility: hidden; transition: all 0.15s; z-index: 1001; }
+.lang-selector:hover .lang-dropdown { opacity: 1; visibility: visible; }
+.lang-dropdown a { display: block; padding: 8px 12px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 6px; transition: background 0.1s; }
+.lang-dropdown a:hover { background: var(--surface-alt); }
+.lang-dropdown a.active { color: var(--accent); font-weight: 700; }
+
 /* 모바일 메뉴 */
 .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
 .nav-mobile.open { display: block; }
