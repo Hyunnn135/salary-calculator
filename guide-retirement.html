@@ -133,6 +133,11 @@
         .step-list li { counter-increment: step-counter; padding: 12px 0 12px 48px; position: relative; border-bottom: 1px solid #F3F4F6; color: var(--text-secondary); line-height: 1.8; font-size: 0.88rem; }
         .step-list li:last-child { border-bottom: none; }
         .step-list li::before { content: counter(step-counter); position: absolute; left: 0; top: 12px; width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    
+        /* ══ 쿠팡 파트너스 배너 ══ */
+        .coupang-banner { max-width: 1120px; margin: 24px auto; padding: 0 32px; text-align: center; }
+        .coupang-banner iframe { max-width: 100%; }
+        .coupang-disclosure { font-size: 0.7rem; color: var(--text-tertiary); margin-top: 8px; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
 </head>
@@ -482,6 +487,16 @@
         </div>
 
     </div>
+</div>
+
+
+<!-- 쿠팡 파트너스 배너 -->
+<div class="coupang-banner">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>
+        new PartnersCoupang.G({"id":977388,"template":"carousel","trackingCode":"AF3938469","width":"728","height":"90","tsource":""});
+    </script>
+    <p class="coupang-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
 </div>
 
 <!-- 푸터 -->
