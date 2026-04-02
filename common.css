@@ -118,3 +118,104 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 /* ══ 좁은 페이지 (about, contact, privacy) ══ */
 .page-narrow .page { max-width: 800px; }
 .page-narrow .footer { max-width: 800px; }
+
+/* ══════════════════════════════════════
+   인터랙션 효과 & 모바일 UX
+   ══════════════════════════════════════ */
+
+/* ── 모바일 탭 하이라이트 제거 (자체 피드백 사용) ── */
+.submit-btn,
+.save-btn,
+.share-btn,
+.guide-cta a,
+.nav-item-btn,
+.lang-btn,
+.nav-mobile a,
+.nav-dropdown a,
+.footer-links a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ── 핵심 버튼 (계산하기): 바운스 + 글로우 ── */
+.submit-btn:not(:active) {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, background 0.2s;
+}
+.submit-btn:active {
+    transform: scale(0.93);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* ── 보조 버튼 (저장/공유/CTA): 부드러운 눌림 ── */
+.save-btn:not(:active),
+.share-btn:not(:active),
+.guide-cta a:not(:active) {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.15s, color 0.15s, background 0.15s;
+}
+.save-btn:active,
+.share-btn:active,
+.guide-cta a:active {
+    transform: scale(0.95);
+    transition: transform 0.08s ease;
+}
+
+/* ── 네비/링크: 미세한 눌림 ── */
+.nav-item-btn:active,
+.lang-btn:active,
+.nav-dropdown a:active,
+.nav-mobile a:active,
+.footer-links a:active {
+    transform: scale(0.96);
+    transition: transform 0.08s ease;
+}
+
+/* ── 모바일 UX 개선 ── */
+@media (max-width: 768px) {
+    /* 모바일 메뉴 터치 영역 확대 (44px 이상) */
+    .nav-mobile a {
+        padding: 14px 12px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* 모바일 햄버거 버튼 터치 영역 */
+    .nav-mobile-btn {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 저장/공유 버튼 터치 영역 */
+    .save-btn,
+    .share-btn {
+        min-height: 44px !important;
+        padding: 14px !important;
+    }
+
+    /* 슬라이더 손잡이 확대 */
+    .form-slider::-webkit-slider-thumb {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    .form-slider::-moz-range-thumb {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    .raise-slider::-webkit-slider-thumb {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    .raise-slider::-moz-range-thumb {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    /* 슬라이더 트랙 높이 확대 (터치 인식 개선) */
+    .form-slider,
+    .raise-slider {
+        height: 8px !important;
+    }
+}
