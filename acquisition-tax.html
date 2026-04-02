@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실업급여 계산기 - 얼마나 받을 수 있을까? | 월급연구소</title>
+    <title>취득세 계산기 - 2026년 부동산 취득세 자동계산 | 월급연구소</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="실업급여(구직급여) 계산기. 퇴직 전 월급과 고용보험 가입기간을 입력하면 예상 수급액을 바로 계산해드립니다.">
-    <meta name="keywords" content="실업급여계산기, 구직급여, 실업급여얼마, 실업급여조건, 고용보험">
-    <meta property="og:title" content="실업급여 계산기 - 얼마나 받을 수 있을까?">
-    <meta property="og:description" content="퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요.">
+    <meta name="description" content="2026년 기준 부동산 취득세 계산기. 매매가격, 주택 수, 면적을 입력하면 취득세·지방교육세·농어촌특별세를 자동 계산합니다.">
+    <meta name="keywords" content="취득세 계산기, 부동산 취득세, 취득세율, 지방교육세, 농어촌특별세">
+    <meta property="og:title" content="취득세 계산기 - 2026년 부동산 취득세 자동계산 | 월급연구소">
+    <meta property="og:description" content="매매가격, 주택 수, 면적을 입력하면 취득세·지방교육세·농어촌특별세를 자동 계산합니다.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +30,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
 
+        /* ══ 네비게이션 ══ */
         .nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
         .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
         .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
@@ -45,6 +46,8 @@
         .nav-dropdown a:hover { background: var(--surface-alt); }
         .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
         .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
+
+        /* 모바일 메뉴 */
         .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
         .nav-mobile.open { display: block; }
         .nav-mobile-group { margin-bottom: 16px; }
@@ -52,29 +55,35 @@
         .nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
         .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
         .nav-mobile a:hover { background: var(--surface-alt); }
+
         @media (max-width: 768px) {
             .nav-inner { padding: 0 20px; }
             .nav-menu { display: none; }
             .nav-mobile-btn { display: block; }
         }
 
+        /* ══ 페이지 레이아웃 ══ */
         .page { max-width: 1120px; margin: 0 auto; padding: 32px 32px 60px; }
         .page-header { text-align: center; margin-bottom: 32px; }
         .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
         .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
         .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
         .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
         @media (max-width: 768px) {
             .page { padding: 24px 16px 60px; }
+            .page-header { margin-bottom: 24px; }
             .page-header h1 { font-size: 1.4rem; }
             .dashboard { grid-template-columns: 1fr; }
         }
 
+        /* ══ 카드 ══ */
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
         .card-title { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); }
         .card-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 20px; }
 
+        /* ══ 폼 요소 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -84,70 +93,72 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        /* 슬라이더 */
+        .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
+        .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
+
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
 
+        /* ══ 결과 영역 ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
+
+        /* 메인 결과 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .result-hero-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 8px; }
         .result-hero-amount { font-size: 2.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -2px; }
         .result-hero-unit { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
-        .result-hero-msg { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12); }
         .result-hero-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin-top: 20px; }
         .rh-stat { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); padding: 16px 12px; text-align: center; }
         .rh-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
         .rh-stat-val { font-size: 0.88rem; color: rgba(255,255,255,0.95); font-weight: 700; font-family: 'Inter', sans-serif; }
+
         @media (max-width: 768px) {
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
-            .form-row { grid-template-columns: 1fr; }
         }
 
-        .action-row { display: none; gap: 10px; margin-top: 0; }
-        .action-row.show { display: flex; }
-        .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        .share-btn:hover { background: #F5DC00; }
+        /* 공제 상세 카드 */
+        .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
+        .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .b-item:last-child { border-bottom: none; }
+        .b-dot { width: 6px; height: 6px; border-radius: 50%; margin-right: 12px; flex-shrink: 0; }
+        .b-info { flex: 1; }
+        .b-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+        .b-bar-wrap { background: #F3F4F6; border-radius: 3px; height: 4px; overflow: hidden; }
+        .b-bar { height: 100%; border-radius: 3px; width: 0; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .b-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-left: 12px; min-width: 90px; text-align: right; }
+        .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
+        .b-total-label { font-size: 0.88rem; font-weight: 700; }
+        .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
 
-        /* 조건 그리드 */
-        .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
-        .cond-item { border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); background: var(--surface); }
-        .cond-item h3 { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
-        .cond-item p { font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
-        @media (max-width: 768px) { .cond-grid { grid-template-columns: 1fr; } }
-
-        /* 수급기간 테이블 */
-        .days-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
-        .days-table th { background: var(--surface-alt); padding: 10px 12px; text-align: center; font-weight: 700; color: var(--text-secondary); font-size: 0.82rem; }
-        .days-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; text-align: center; color: var(--text-primary); }
-        .days-table tr:last-child td { border-bottom: none; }
-        .days-table .period-col { text-align: left; font-weight: 600; }
-
-        .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px 16px; margin: 12px 0; }
-        .highlight-box p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; margin: 0; }
-
+        /* ══ 정보 카드 / FAQ ══ */
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
         @media (max-width: 768px) { .bottom-grid { grid-template-columns: 1fr; } }
 
-        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .info-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
         .info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
         .info-card p:last-child { margin-bottom: 0; }
-        .info-card ul { padding-left: 18px; margin-bottom: 12px; }
-        .info-card ul li { color: var(--text-secondary); line-height: 1.9; font-size: 0.88rem; margin-bottom: 4px; }
 
         .faq-item { padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
         .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
         .faq-q { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
         .faq-a { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
 
+        /* ══ 가이드 CTA ══ */
         .guide-cta { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; text-align: center; }
         .guide-cta p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
         .guide-cta a { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 0.9rem; padding: 12px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
         .guide-cta a:hover { background: #1D4ED8; }
 
+        /* ══ 푸터 ══ */
         .footer { max-width: 1120px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
         .footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
         .footer-links a:hover { color: var(--text-primary); }
@@ -155,7 +166,7 @@
         @media (max-width: 768px) {
             .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
         }
-    
+
         /* ══ 쿠팡 파트너스 배너 ══ */
         .coupang-banner { max-width: 1120px; margin: 24px auto; padding: 0 32px; text-align: center; }
         .coupang-banner iframe { max-width: 100%; }
@@ -165,6 +176,7 @@
 </head>
 <body>
 
+<!-- 네비게이션 -->
 <nav class="nav">
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
@@ -231,187 +243,139 @@
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">퇴사할 때</div>
-        <h1>실업급여 계산기</h1>
-        <p>퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요</p>
+        <div class="breadcrumb">세금 낼 때</div>
+        <h1>취득세 계산기</h1>
+        <p>2026년 기준 · 부동산 매매 시 납부할 세금 계산</p>
     </div>
 
+    <!-- 2컬럼 대시보드 -->
     <div class="dashboard">
 
+        <!-- 왼쪽: 입력 -->
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">정보 입력</div>
+                    <div class="card-title">부동산 정보 입력</div>
                     <div class="card-badge">2026년</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">퇴직 전 월 평균 급여 (세전)</label>
+                    <label class="form-label">매매 가격 (원)</label>
                     <div class="form-input-wrap">
-                        <input type="text" class="form-input" id="salaryInput" placeholder="3,000,000">
+                        <input type="text" class="form-input" id="priceInput" placeholder="500,000,000">
                         <span class="form-unit">원</span>
                     </div>
+                    <input type="range" class="form-slider" id="priceSlider" min="50000000" max="3000000000" step="10000000" value="500000000">
+                    <div class="slider-labels"><span>5,000만</span><span>10억</span><span>20억</span><span>30억</span></div>
                 </div>
 
-                <div class="form-row" style="margin-bottom:20px;">
-                    <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">나이</label>
-                        <select class="form-select" id="ageGroup">
-                            <option value="under50">50세 미만</option>
-                            <option value="over50">50세 이상</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">고용보험 가입 기간</label>
-                        <select class="form-select" id="insurancePeriod">
-                            <option value="under1">1년 미만</option>
-                            <option value="1to3">1년 이상 ~ 3년 미만</option>
-                            <option value="3to5" selected>3년 이상 ~ 5년 미만</option>
-                            <option value="5to10">5년 이상 ~ 10년 미만</option>
-                            <option value="over10">10년 이상</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">주택 수</label>
+                    <select class="form-select" id="housingCount">
+                        <option value="1" selected>1주택 (기본 세율)</option>
+                        <option value="2adj">2주택 (조정대상지역)</option>
+                        <option value="2non">2주택 (비조정지역)</option>
+                        <option value="3adj">3주택 이상 (조정대상지역)</option>
+                        <option value="3non">3주택 이상 (비조정지역)</option>
+                    </select>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">실업급여 계산하기</button>
-            </div>
+                <div class="form-group">
+                    <label class="form-label">전용면적</label>
+                    <select class="form-select" id="area">
+                        <option value="small" selected>85㎡ 이하</option>
+                        <option value="large">85㎡ 초과</option>
+                    </select>
+                </div>
 
-            <div class="action-row" id="shareBtnWrap">
-                <button class="share-btn" onclick="shareKakao()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-                    카카오톡 공유
-                </button>
+                <button class="submit-btn" onclick="calculate()">계산하기</button>
             </div>
         </div>
 
+        <!-- 오른쪽: 결과 -->
         <div class="result-col">
+
+            <!-- 결과 요약 -->
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">예상 실업급여 총액</div>
+                <div class="result-hero-label">총 납부세액</div>
                 <div class="result-hero-amount" id="totalResult">0</div>
                 <div class="result-hero-unit">원</div>
-                <div class="result-hero-msg" id="cheerMsg">힘내세요! 더 좋은 기회가 기다리고 ���어요.</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">1일 수급액</div>
-                        <div class="rh-stat-val" id="dailyResult">—</div>
+                        <div class="rh-stat-label">취득세</div>
+                        <div class="rh-stat-val" id="statAcqTax">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">수급 기간</div>
-                        <div class="rh-stat-val" id="daysResult">—</div>
+                        <div class="rh-stat-label">지방교육세</div>
+                        <div class="rh-stat-val" id="statEduTax">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">월 환산 수령액</div>
-                        <div class="rh-stat-val" id="monthlyResult">—</div>
+                        <div class="rh-stat-label">농어촌특별세</div>
+                        <div class="rh-stat-val" id="statRuralTax">—</div>
                     </div>
                 </div>
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 계산하기 버튼을 눌러주세요</div>
+            <!-- 공제 상세 -->
+            <div class="breakdown-card" id="breakdownCard">
+                <div class="card-header">
+                    <div class="card-title">취득세 산출 상세</div>
+                </div>
+                <div id="breakdownItems"></div>
+                <div class="b-total">
+                    <span class="b-total-label">총 납부세액</span>
+                    <span class="b-total-val" id="breakdownTotal">—</span>
+                </div>
+            </div>
+
+            <!-- 결과 없을 때 플레이스홀더 -->
+            <div class="result-placeholder" id="resultPlaceholder">매매 가격을 입력하고 계산하기 버튼을 눌러주세요</div>
         </div>
 
-    </div>
-
-    <!-- 수급 조건 -->
-    <div class="info-card">
-        <h2>실업급여 수급 조건</h2>
-        <p>아래 조건을 모두 충족해야 실업급여를 받을 수 있습니다.</p>
-        <div class="cond-grid">
-            <div class="cond-item">
-                <h3>고용보험 가입 기간</h3>
-                <p>퇴직일 이전 18개월 중 <strong>180일 이상</strong> 고용보험에 가입되어 있어야 합니다.</p>
-            </div>
-            <div class="cond-item">
-                <h3>비자발적 퇴직</h3>
-                <p>본인의 의지로 그만둔 경우(자발적 퇴직)에는 원칙적으로 실업급여를 받을 수 없습니다.</p>
-            </div>
-            <div class="cond-item">
-                <h3>재취업 의지</h3>
-                <p>적극적으로 재취업 활동을 하고 있어야 합니다. 실업 인정 신청을 주기적으로 해야 합니다.</p>
-            </div>
-            <div class="cond-item">
-                <h3>수급 신청</h3>
-                <p>퇴직 후 <strong>12개월 이내</strong>에 신청해야 합니다. 기간이 지나면 수급 자격이 소멸됩니다.</p>
-            </div>
-        </div>
-        <div class="highlight-box">
-            <p><strong>자발적 퇴직도 받는 경우:</strong> 임금 체불, 직장 내 괴롭힘, 통근 불가능한 거리로 사업장 이전, 임신·출산·육아, 건강 악화로 인한 퇴직 등 정당한 이직 사유가 있으면 수급 가능합니다.</p>
-        </div>
     </div>
 
     <!-- 하단 정보 영역 -->
     <div class="bottom-grid">
-        <div class="info-card" style="margin-bottom:0;">
-            <h2>소정급여일수 (수급 기간)</h2>
-            <p>나이와 고용보험 가입기간에 따라 받을 수 있는 기간이 달라집니다.</p>
-            <table class="days-table">
-                <thead>
-                    <tr>
-                        <th class="period-col">고용보험 가입기간</th>
-                        <th>50세 미만</th>
-                        <th>50세 이상</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td class="period-col">1년 미만</td><td>120일</td><td>120일</td></tr>
-                    <tr><td class="period-col">1년~3년 미만</td><td>150일</td><td>180일</td></tr>
-                    <tr><td class="period-col">3년~5년 미만</td><td>180일</td><td>210일</td></tr>
-                    <tr><td class="period-col">5년~10년 미만</td><td>210일</td><td>240일</td></tr>
-                    <tr><td class="period-col">10년 이상</td><td>240일</td><td>270일</td></tr>
-                </tbody>
-            </table>
+        <div class="info-card">
+            <h2>취득세 알아두면 좋은 점</h2>
+            <p><strong>신고·납부 기한:</strong> 부동산 잔금 지급일로부터 60일 이내에 관할 시·군·구청에 신고·납부해야 합니다. 기한을 넘기면 가산세가 부과됩니다.</p>
+            <p><strong>조정대상지역 세율:</strong> 조정대상지역 여부에 따라 다주택자의 세율이 크게 달라집니다. 2주택 조정대상지역은 8%, 3주택 이상은 12%가 적용됩니다.</p>
+            <p><strong>일시적 2주택 특례:</strong> 이사 등으로 일시적 2주택이 된 경우, 3년 이내에 기존 주택을 매도하면 1주택 기본 세율이 적용됩니다.</p>
         </div>
-
-        <div class="info-card" style="margin-bottom:0;">
-            <h2>실업급여 금액 계산 방법</h2>
-            <p>1일 실업급여(구직급여) = 퇴직 전 평균임금의 <strong>60%</strong></p>
-            <ul>
-                <li><strong>1일 상한액:</strong> 68,100원 (2026년 기준)</li>
-                <li><strong>1일 하한액:</strong> 66,048원 (2026년 최저임금 기준)</li>
-            </ul>
-            <p>월급이 아주 높거나 아주 낮더라도 위 상한·하한 범위 안에서 지급됩니다.</p>
-            <div class="highlight-box">
-                <p><strong>예시:</strong> 월 300만원, 3~5년 가입(50세 미만) → 1일 66,048원 × 180일 = <strong>약 1,189만원</strong></p>
+        <div class="info-card">
+            <h2>자주 묻는 질문</h2>
+            <div class="faq-item">
+                <div class="faq-q">취득세는 언제 내야 하나요?</div>
+                <div class="faq-a">잔금일 또는 등기일 중 빠른 날로부터 60일 이내에 신고·납부해야 합니다. 기한을 넘기면 무신고 가산세(20%)가 부과됩니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">조정대상지역이 뭔가요?</div>
+                <div class="faq-a">정부가 부동산 과열을 억제하기 위해 지정한 지역입니다. 조정대상지역에서 다주택을 취득하면 중과세율이 적용되어 세 부담이 크게 높아집니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">생애최초 주택 감면이 있나요?</div>
+                <div class="faq-a">네. 생애최초로 주택을 구입하는 경우 취득세 200만원 한도 내에서 감면을 받을 수 있습니다. 소득·가격 요건 등 세부 조건이 있으니 확인이 필요합니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">분양권도 취득세가 있나요?</div>
+                <div class="faq-a">네. 분양권 자체 거래 시점이 아니라, 잔금을 완납하고 소유권을 이전받는 시점에 취득세를 납부합니다. 주택 수 산정에도 포함됩니다.</div>
             </div>
         </div>
     </div>
 
-    <!-- FAQ -->
-    <div class="info-card">
-        <h2>자주 묻는 질문</h2>
-        <div class="faq-item">
-            <div class="faq-q">실업급여를 받으려면 조건이 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 전 18개월 중 고용보험 피보험 기간이 180일 이상이어야 하며, 본인 의사와 무관하게 퇴직(권고사직, 계약만료 등)한 경우에 해당됩니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">자발적으로 퇴사해도 실업급여를 받을 수 있나요?</div>
-            <div class="faq-a">원칙적으로 자발적 퇴사는 해당되지 않지만, 직장 내 괴롭힘·임금 미지급·근로조건 변경·통근 불가 등 불가피한 사정이 있는 경우 예외적으로 수급이 가능합니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">수급 중 아르바이트를 해도 되나요?</div>
-            <div class="faq-a">가능하지만 반드시 고용센터에 신고해야 합니다. 신고 없이 취업 또는 소득 활동을 하면 부정수급으로 처리됩니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">실업급여 수급 중 건강보험료는 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 후 지역가입자로 전환되어 건강보험료를 납부해야 합니다. 다만 피부양자 등록 조건이 되는 경우 가족의 직장보험에 포함될 수 있습니다.</div>
-        </div>
-    </div>
-
     <!-- 카카오 애드핏 -->
-    <div style="text-align:center; margin-bottom:24px;">
-        <ins class="kakao_ad_area" style="display:none;"
-        data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
-        data-ad-width="300"
-        data-ad-height="250"></ins>
+    <div class="ad-wrap" style="text-align:center; margin-bottom:24px;">
+        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-AacEdO1Ee4dxCoPy" data-ad-width="300" data-ad-height="250"></ins>
         <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
+    <!-- 가이드 CTA -->
     <div class="guide-cta">
-        <p>실업급여 신청 절차, 수급 조건, 구직활동 인정 기준까지 자세히 알고 싶다면?</p>
-        <a href="guide-unemployment.html">실업급여 신청 완전 가이드 보기 →</a>
+        <p>부동산 세금에 대해 더 알아보고 싶다면?</p>
+        <a href="tax-guide.html">연말정산 가이드 보기 →</a>
     </div>
 
 </div>
-
 
 <!-- 쿠팡 파트너스 배너 -->
 <div class="coupang-banner">
@@ -422,6 +386,7 @@
     <p class="coupang-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
 </div>
 
+<!-- 푸터 -->
 <footer class="footer">
     <div class="footer-links">
         <a href="about.html">소개</a>
@@ -432,82 +397,132 @@
 </footer>
 
 <script>
+// ── 유틸 ──
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
 
-document.getElementById('salaryInput').addEventListener('input', function() {
-    const v = parseVal(this.value);
+// ── 슬라이더 연동 ──
+var priceInput  = document.getElementById('priceInput');
+var priceSlider = document.getElementById('priceSlider');
+
+priceInput.addEventListener('input', function () {
+    var v = parseVal(this.value);
     this.value = v ? v.toLocaleString('ko-KR') : '';
+    if (v >= 50000000 && v <= 3000000000) priceSlider.value = v;
+});
+priceSlider.addEventListener('input', function () {
+    priceInput.value = parseInt(this.value).toLocaleString('ko-KR');
 });
 
-const DAYS_TABLE = {
-    under50: { under1: 120, '1to3': 150, '3to5': 180, '5to10': 210, over10: 240 },
-    over50:  { under1: 120, '1to3': 180, '3to5': 210, '5to10': 240, over10: 270 }
-};
-
-function calculate() {
-    const salary = parseVal(document.getElementById('salaryInput').value);
-    if (!salary) { alert('월 평균 급여를 입력해주세요.'); return; }
-
-    const ageGroup = document.getElementById('ageGroup').value;
-    const period   = document.getElementById('insurancePeriod').value;
-    const days     = DAYS_TABLE[ageGroup][period];
-
-    const dailyWage    = salary / 30.4;
-    const UPPER        = 68100;
-    const LOWER        = 66048;
-    const dailyBenefit = Math.max(LOWER, Math.min(UPPER, dailyWage * 0.6));
-    const total        = dailyBenefit * days;
-
-    document.getElementById('resultPlaceholder').style.display = 'none';
-
-    counter('totalResult', total);
-    document.getElementById('dailyResult').textContent   = fmt(dailyBenefit) + '원';
-    document.getElementById('daysResult').textContent    = days + '일';
-    document.getElementById('monthlyResult').textContent = fmt(dailyBenefit * 30) + '원';
-
-    const msgs = [
-        '힘내세요! 더 좋은 기회가 기다리고 있어요.',
-        '잠깐의 쉼표, 다음 챕터를 준비하는 시간이에요.',
-        '충분히 쉬고 더 좋은 직장으로 도약하세요!',
-        '지금은 힘들어도 반드시 좋은 날이 올 거예요.',
-    ];
-    document.getElementById('cheerMsg').textContent = msgs[Math.floor(Math.random() * msgs.length)];
-
-    document.getElementById('resultCard').classList.add('show');
-    document.getElementById('shareBtnWrap').classList.add('show');
-    window._shareUnemploy = fmt(total) + '원';
+// ── 취득세율 계산 ──
+function getAcquisitionTaxRate(price, housingCount) {
+    // 1주택 or 비조정 2주택
+    if (housingCount === '1' || housingCount === '2non') {
+        if (price <= 600000000) return 0.01;  // 1%
+        if (price <= 900000000) {
+            return (price / 100000000 * 2/3 - 3) / 100;  // 1~3% linear
+        }
+        return 0.03;  // 3%
+    }
+    // 2주택 조정대상지역
+    if (housingCount === '2adj') return 0.08;  // 8%
+    // 3주택+ 비조정
+    if (housingCount === '3non') return 0.08;  // 8%
+    // 3주택+ 조정대상지역
+    if (housingCount === '3adj') return 0.12;  // 12%
+    return 0.01;
 }
 
-function counter(id, target, ms = 900) {
-    const el = document.getElementById(id);
-    const t0 = performance.now();
+// ── 카운터 애니메이션 ──
+function counter(id, target, ms) {
+    ms = ms || 900;
+    var el = document.getElementById(id);
+    var t0 = performance.now();
     function tick(now) {
-        const p = Math.min((now - t0) / ms, 1);
-        const e = 1 - Math.pow(1 - p, 3);
+        var p = Math.min((now - t0) / ms, 1);
+        var e = 1 - Math.pow(1 - p, 3);
         el.textContent = Math.round(target * e).toLocaleString('ko-KR');
         if (p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
 }
 
-document.getElementById('salaryInput').value = (3000000).toLocaleString('ko-KR');
-</script>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
-<script>
-Kakao.init('051ed8019b76b2127b2da56a27b406f2');
-function shareKakao() {
-    Kakao.Share.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '내 실업급여 예상 총액은 ' + (window._shareUnemploy || '—'),
-            description: '실업급여 계산기로 예상 수급액을 확인해보세요',
-            imageUrl: 'https://salarykorea.site/og-image.png',
-            link: { mobileWebUrl: 'https://salarykorea.site/unemployment', webUrl: 'https://salarykorea.site/unemployment' }
-        },
-        buttons: [{ title: '나도 계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/unemployment', webUrl: 'https://salarykorea.site/unemployment' } }]
-    });
+// ── 메인 계산 ──
+function calculate() {
+    var price = parseVal(priceInput.value);
+    if (!price || price < 10000000) {
+        alert('매매 가격을 올바르게 입력해주세요.');
+        return;
+    }
+
+    var housingCount = document.getElementById('housingCount').value;
+    var area         = document.getElementById('area').value;
+
+    // 취득세율
+    var taxRate = getAcquisitionTaxRate(price, housingCount);
+
+    // 취득세
+    var acqTax = Math.round(price * taxRate);
+
+    // 지방교육세 (취득세의 10%)
+    var eduTax = Math.round(acqTax * 0.1);
+
+    // 농어촌특별세 (85㎡ 초과시 매매가격의 0.2%)
+    var ruralTax = (area === 'large') ? Math.round(price * 0.002) : 0;
+
+    // 총 납부세액
+    var totalTax = acqTax + eduTax + ruralTax;
+
+    // 세율 표시용
+    var ratePercent = (taxRate * 100).toFixed(1) + '%';
+
+    // 플레이스홀더 숨김
+    document.getElementById('resultPlaceholder').style.display = 'none';
+
+    // 결과 카드
+    document.getElementById('resultCard').classList.add('show');
+    counter('totalResult', totalTax);
+    document.getElementById('statAcqTax').textContent   = fmt(acqTax) + '원';
+    document.getElementById('statEduTax').textContent    = fmt(eduTax) + '원';
+    document.getElementById('statRuralTax').textContent  = fmt(ruralTax) + '원';
+
+    // 상세 내역
+    var items = [
+        { name: '매매 가격',         amount: price,     color: '#2563EB',  rate: '' },
+        { name: '취득세 (' + ratePercent + ')', amount: acqTax,    color: '#EF4444',  rate: '' },
+        { name: '지방교육세',        amount: eduTax,    color: '#F59E0B',  rate: '' },
+        { name: '농어촌특별세',      amount: ruralTax,  color: '#059669',  rate: '' },
+        { name: '총 납부세액',       amount: totalTax,  color: '#18191B',  rate: '' }
+    ];
+
+    var maxAmt = Math.max.apply(null, items.map(function(i) { return i.amount; }));
+
+    document.getElementById('breakdownItems').innerHTML = items.map(function(item) {
+        return '<div class="b-item">' +
+            '<div class="b-dot" style="background:' + item.color + ';"></div>' +
+            '<div class="b-info">' +
+                '<div class="b-name">' + item.name + '</div>' +
+                '<div class="b-bar-wrap">' +
+                    '<div class="b-bar" data-w="' + (maxAmt > 0 ? (item.amount / maxAmt * 100).toFixed(1) : 0) + '"' +
+                         ' style="background:' + item.color + '"></div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="b-amount">' + fmt(item.amount) + '원</div>' +
+        '</div>';
+    }).join('');
+
+    document.getElementById('breakdownCard').classList.add('show');
+    document.getElementById('breakdownTotal').textContent = fmt(totalTax) + '원';
+
+    // 바 애니메이션
+    setTimeout(function() {
+        var bars = document.querySelectorAll('.b-bar');
+        bars.forEach(function(bar) {
+            bar.style.width = bar.dataset.w + '%';
+        });
+    }, 50);
 }
 </script>
+
 </body>
 </html>
