@@ -3,128 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인정보처리방침 | 급여계산기</title>
+    <title>개인정보처리방침 | 월급연구소</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="급여계산기의 개인정보처리방침입니다. 쿠키, 광고 서비스 이용 등에 관한 정책을 확인하세요.">
+    <meta name="description" content="월급연구소의 개인정보처리방침입니다. 쿠키, 광고 서비스 이용 등에 관한 정책을 확인하세요.">
+    <meta name="keywords" content="월급연구소 개인정보, 개인정보처리방침, 쿠키정책, 애드센스">
+    <meta property="og:title" content="개인정보처리방침 | 월급연구소">
+    <meta property="og:description" content="월급연구소의 개인정보처리방침입니다. 쿠키, 광고 서비스 이용 등에 관한 정책을 확인하세요.">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #F7F8FA;
+            --surface: #FFFFFF;
+            --surface-alt: #F0F2F5;
+            --text-primary: #18191B;
+            --text-secondary: #6B7280;
+            --text-tertiary: #9CA3AF;
+            --border: #E5E7EB;
+            --accent: #2563EB;
+            --accent-dark: #1E40AF;
+            --accent-light: #EFF6FF;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        .navbar { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid #E8E8EC; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-        .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; color: #E85722; letter-spacing: -0.3px; }
-        .nav-links { display: flex; gap: 2px; }
-        .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { background: #FEF0EB; color: #E85722; }
-        .nav-toggle { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #444; padding: 4px 8px; }
-        .nav-mobile { display: none; padding: 8px 20px 16px; background: white; border-top: 1px solid #F0F0F2; }
-        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #444; }
-        .nav-mobile a:hover { background: #FEF0EB; color: #E85722; }
+        body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+
+        /* ══ 네비게이션 ══ */
+        .nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
+        .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
+        .nav-logo span { color: var(--accent); }
+        .nav-menu { display: flex; gap: 2px; margin-left: auto; }
+        .nav-item { position: relative; }
+        .nav-item-btn { padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 4px; }
+        .nav-item-btn:hover { color: var(--text-primary); background: var(--surface-alt); }
+        .nav-item-btn svg { width: 12px; height: 12px; opacity: 0.4; }
+        .nav-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transition: all 0.15s; }
+        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; }
+        .nav-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; transition: background 0.1s; }
+        .nav-dropdown a:hover { background: var(--surface-alt); }
+        .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+        .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
+
+        /* 모바일 메뉴 */
+        .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
         .nav-mobile.open { display: block; }
-        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+        .nav-mobile-group { margin-bottom: 16px; }
+        .nav-mobile-group:last-child { margin-bottom: 0; }
+        .nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
+        .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
+        .nav-mobile a:hover { background: var(--surface-alt); }
 
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: #F4F5F7;
-            min-height: 100vh; color: #333;
-        }
-        .container { max-width: 860px; margin: 0 auto; padding: 40px 16px 60px; }
-
-        .hero {
-            text-align: center; padding: 40px 24px 32px;
-            background: white; border-radius: 28px;
-            box-shadow: 0 4px 24px rgba(255,150,50,0.10); margin-bottom: 24px;
-        }
-        .hero h1 {
-            font-size: 1.7rem; font-weight: 900;
-            background: linear-gradient(135deg, #FF6B35, #FF9F1C);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin: 10px 0 8px;
-        }
-        .hero p { color: #888; font-size: 0.88rem; }
-
-        .card {
-            background: white; border-radius: 24px;
-            padding: 32px 28px; margin-bottom: 16px;
-            box-shadow: 0 4px 24px rgba(255,150,50,0.08);
-        }
-        .card h2 {
-            font-size: 1.05rem; font-weight: 800; color: #333;
-            margin-bottom: 16px; padding-bottom: 12px;
-            border-bottom: 2px solid #FFF3E0;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .card h3 { font-size: 0.95rem; font-weight: 700; color: #444; margin: 18px 0 8px; }
-        .card p { color: #555; line-height: 1.9; margin-bottom: 12px; font-size: 0.92rem; }
-        .card p:last-child { margin-bottom: 0; }
-        .card ul { padding-left: 20px; margin-bottom: 12px; }
-        .card ul li { color: #555; line-height: 1.9; font-size: 0.92rem; margin-bottom: 4px; }
-
-        .highlight-box {
-            background: #FFF9E6; border: 1px solid #FFE0B2;
-            border-radius: 14px; padding: 18px 20px; margin: 14px 0;
-        }
-        .highlight-box p { margin: 0; font-size: 0.9rem; color: #555; line-height: 1.8; }
-
-        .update-date {
-            text-align: right; color: #AAA; font-size: 0.8rem; margin-bottom: 20px;
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 20px; }
+            .nav-menu { display: none; }
+            .nav-mobile-btn { display: block; }
         }
 
-        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
-        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 8px; }
+        /* ══ 페이지 레이아웃 ══ */
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 32px 60px; }
+        .page-header { text-align: center; margin-bottom: 32px; }
+        .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
+        .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
+        .update-date { font-size: 0.78rem; color: var(--text-tertiary); text-align: right; margin-bottom: 20px; }
+
+        @media (max-width: 768px) {
+            .page { padding: 24px 16px 60px; }
+            .page-header { margin-bottom: 24px; }
+            .page-header h1 { font-size: 1.4rem; }
+        }
+
+        /* ══ 카드 ══ */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+        .card-title { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); }
+        .card-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 20px; }
+
+        /* ══ 정보 카드 ══ */
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .info-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .info-card h3 { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); margin: 18px 0 8px; }
+        .info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
+        .info-card p:last-child { margin-bottom: 0; }
+        .info-card ul { padding-left: 20px; margin-bottom: 12px; }
+        .info-card ul li { color: var(--text-secondary); line-height: 1.9; font-size: 0.88rem; margin-bottom: 4px; }
+        .info-card a { color: var(--accent); font-weight: 600; text-decoration: none; }
+        .info-card a:hover { text-decoration: underline; }
+
+        /* ══ 하이라이트 박스 ══ */
+        .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 12px; padding: 18px 20px; margin: 16px 0; }
+        .highlight-box p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin: 0; }
+
+        /* ══ 푸터 ══ */
+        .footer { max-width: 800px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
+        @media (max-width: 768px) {
+            .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<nav class="navbar">
+<!-- 네비게이션 -->
+<nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">급여계산기</a>
-        <div class="nav-links">
-            <a href="index.html">연봉계산기</a>
-            <a href="minimum-wage.html">최저시급</a>
-            <a href="salary-table.html">실수령액표</a>
-            <a href="holiday-pay.html">주휴수당</a>
-            <a href="insurance.html">4대보험</a>
-            <a href="retirement.html">퇴직금</a>
-            <a href="unemployment.html">실업급여</a>
-            <a href="tax-guide.html">연말정산</a>
-            <a href="income-tax.html">종합소득세</a>
+        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
+                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
+                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
+                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
+                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
+                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                </div>
+            </div>
         </div>
-        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
-        <a href="index.html">연봉계산기</a>
-        <a href="minimum-wage.html">최저시급 계산기</a>
-        <a href="salary-table.html">연봉별 실수령액 표</a>
-        <a href="holiday-pay.html">주휴수당 계산기</a>
-        <a href="insurance.html">4대보험 계산기</a>
-        <a href="retirement.html">퇴직금 계산기</a>
-        <a href="unemployment.html">실업급여 계산기</a>
-        <a href="tax-guide.html">연말정산 가이드</a>
-        <a href="income-tax.html">종합소득세 계산기</a>
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">월급 받을 때</div>
+            <a href="index.html">연봉 실수령액</a>
+            <a href="minimum-wage.html">최저시급 계산기</a>
+            <a href="holiday-pay.html">주휴수당 계산기</a>
+            <a href="insurance.html">4대보험 계산기</a>
+            <a href="salary-table.html">실수령액 표</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">세금 낼 때</div>
+            <a href="income-tax.html">종합소득세 계산기</a>
+            <a href="tax-guide.html">연말정산 가이드</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">퇴사할 때</div>
+            <a href="retirement.html">퇴직금 계산기</a>
+            <a href="unemployment.html">실업급여 계산기</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">기타</div>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
     </div>
 </nav>
 
-<div class="container">
+<div class="page">
 
-    <div class="hero">
+    <!-- 페이지 헤더 -->
+    <div class="page-header">
+        <div class="breadcrumb">홈 &gt; 개인정보</div>
         <h1>개인정보처리방침</h1>
-        <p>급여계산기는 이용자의 개인정보를 소중히 여깁니다.</p>
+        <p>월급연구소는 이용자의 개인정보를 소중히 여깁니다.</p>
     </div>
 
     <p class="update-date">최종 업데이트: 2024년 12월 1일</p>
 
     <!-- 1. 총칙 -->
-    <div class="card">
+    <div class="info-card">
         <h2>1. 총칙</h2>
         <p>
-            급여계산기(이하 "서비스")는 대한민국 직장인을 위한 무료 연봉 실수령액 계산 서비스입니다.
+            월급연구소(이하 "서비스")는 대한민국 직장인을 위한 무료 연봉 실수령액 계산 서비스입니다.
             본 개인정보처리방침은 서비스 운영 과정에서 수집·이용되는 정보의 처리 방식을 안내합니다.
         </p>
         <p>
@@ -134,7 +195,7 @@
     </div>
 
     <!-- 2. 수집하는 정보 -->
-    <div class="card">
+    <div class="info-card">
         <h2>2. 수집하는 정보</h2>
         <h3>직접 수집 정보</h3>
         <p>
@@ -153,7 +214,7 @@
 
         <div class="highlight-box">
             <p>
-                📌 <strong>쿠키란?</strong> 웹사이트가 이용자의 브라우저에 저장하는 작은 텍스트 파일입니다.
+                <strong>쿠키란?</strong> 웹사이트가 이용자의 브라우저에 저장하는 작은 텍스트 파일입니다.
                 서비스 이용 편의를 높이고 광고 효율을 분석하는 데 사용됩니다.
                 브라우저 설정에서 쿠키를 거부할 수 있으나, 일부 서비스 기능이 제한될 수 있습니다.
             </p>
@@ -161,7 +222,7 @@
     </div>
 
     <!-- 3. 구글 애드센스 및 제3자 광고 서비스 -->
-    <div class="card">
+    <div class="info-card">
         <h2>3. 구글 애드센스 및 제3자 광고 서비스</h2>
         <p>
             본 서비스는 <strong>Google AdSense</strong>를 통해 광고를 제공합니다.
@@ -188,14 +249,14 @@
 
         <div class="highlight-box">
             <p>
-                ℹ️ Google의 개인정보 처리 방식에 대한 자세한 내용은
+                Google의 개인정보 처리 방식에 대한 자세한 내용은
                 <strong>Google 개인정보처리방침(policies.google.com/privacy)</strong>에서 확인하실 수 있습니다.
             </p>
         </div>
     </div>
 
     <!-- 4. 정보의 이용 목적 -->
-    <div class="card">
+    <div class="info-card">
         <h2>4. 정보의 이용 목적</h2>
         <p>자동 수집된 정보는 아래 목적으로만 사용됩니다.</p>
         <ul>
@@ -211,18 +272,18 @@
     </div>
 
     <!-- 5. 이용자의 권리 -->
-    <div class="card">
+    <div class="info-card">
         <h2>5. 이용자의 권리</h2>
         <p>이용자는 아래 권리를 행사할 수 있습니다.</p>
         <ul>
             <li><strong>쿠키 거부:</strong> 브라우저 설정에서 쿠키 저장을 거부할 수 있습니다.</li>
             <li><strong>맞춤 광고 거부:</strong> Google 광고 설정에서 관심사 기반 광고를 비활성화할 수 있습니다.</li>
-            <li><strong>문의:</strong> 개인정보 관련 문의사항은 문의하기 페이지를 통해 연락 주시기 바랍니다.</li>
+            <li><strong>문의:</strong> 개인정보 관련 문의사항은 <a href="contact.html">문의하기</a> 페이지를 통해 연락 주시기 바랍니다.</li>
         </ul>
     </div>
 
     <!-- 6. 보안 -->
-    <div class="card">
+    <div class="info-card">
         <h2>6. 보안</h2>
         <p>
             본 서비스는 HTTPS(SSL/TLS) 암호화를 적용하여 이용자와 서버 간의
@@ -232,7 +293,7 @@
     </div>
 
     <!-- 7. 방침 변경 -->
-    <div class="card">
+    <div class="info-card">
         <h2>7. 개인정보처리방침 변경</h2>
         <p>
             법령 변경, 서비스 변경 등에 따라 본 방침이 변경될 수 있습니다.
@@ -242,7 +303,7 @@
     </div>
 
     <!-- 8. 문의 -->
-    <div class="card">
+    <div class="info-card">
         <h2>8. 개인정보 관련 문의</h2>
         <p>
             개인정보 처리와 관련된 문의, 불만 사항이 있으시면 아래로 연락해 주세요.
@@ -250,20 +311,21 @@
         </p>
         <ul>
             <li><strong>이메일:</strong> hyunnn135@gmail.com</li>
-            <li><strong>문의 페이지:</strong> <a href="contact.html" style="color:#FF6B35; font-weight:600;">문의하기</a></li>
+            <li><strong>문의 페이지:</strong> <a href="contact.html">문의하기</a></li>
         </ul>
     </div>
 
-    <div class="footer">
-        <p>
-            <a href="index.html">홈</a>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의하기</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </p>
-        <p style="margin-top: 8px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
-    </div>
-
 </div>
+
+<!-- 푸터 -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의하기</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div class="footer-copy">© 2026 월급연구소</div>
+</footer>
+
 </body>
 </html>

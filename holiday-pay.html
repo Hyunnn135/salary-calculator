@@ -7,305 +7,450 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="2026년 주휴수당 계산기입니다. 시급과 근무시간을 입력하면 주휴수당, 주급, 월급을 자동으로 계산합니다. 알바생도 쉽게 확인하세요.">
+    <meta name="keywords" content="주휴수당계산기, 주휴수당, 알바주휴수당, 주휴수당계산, 2026주휴수당">
+    <meta property="og:title" content="주휴수당 계산기 2026 - 알바 주휴수당 자동계산">
+    <meta property="og:description" content="시급과 근무시간만 입력하면 주휴수당을 바로 계산해드립니다.">
+    <meta property="og:type" content="website">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #F7F8FA;
+            --surface: #FFFFFF;
+            --surface-alt: #F0F2F5;
+            --text-primary: #18191B;
+            --text-secondary: #6B7280;
+            --text-tertiary: #9CA3AF;
+            --border: #E5E7EB;
+            --accent: #2563EB;
+            --accent-dark: #1E40AF;
+            --accent-light: #EFF6FF;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
 
-        .navbar { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid #E8E8EC; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-        .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; color: #E85722; letter-spacing: -0.3px; }
-        .nav-links { display: flex; gap: 2px; }
-        .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { background: #FEF0EB; color: #E85722; }
-        .nav-toggle { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #444; padding: 4px 8px; }
-        .nav-mobile { display: none; padding: 8px 20px 16px; background: white; border-top: 1px solid #F0F0F2; }
-        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #444; }
-        .nav-mobile a:hover { background: #FEF0EB; color: #E85722; }
+        /* ══ 네비게이션 ══ */
+        .nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
+        .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
+        .nav-logo span { color: var(--accent); }
+        .nav-menu { display: flex; gap: 2px; margin-left: auto; }
+        .nav-item { position: relative; }
+        .nav-item-btn { padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 4px; }
+        .nav-item-btn:hover { color: var(--text-primary); background: var(--surface-alt); }
+        .nav-item-btn svg { width: 12px; height: 12px; opacity: 0.4; }
+        .nav-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transition: all 0.15s; }
+        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; }
+        .nav-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; transition: background 0.1s; }
+        .nav-dropdown a:hover { background: var(--surface-alt); }
+        .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+        .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
+
+        /* 모바일 메뉴 */
+        .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
         .nav-mobile.open { display: block; }
-        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+        .nav-mobile-group { margin-bottom: 16px; }
+        .nav-mobile-group:last-child { margin-bottom: 0; }
+        .nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
+        .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
+        .nav-mobile a:hover { background: var(--surface-alt); }
 
-        body { font-family: 'Noto Sans KR', sans-serif; background: #F4F5F7; min-height: 100vh; color: #1A1A1A; }
-        .container { max-width: 760px; margin: 0 auto; padding: 28px 16px 60px; }
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 20px; }
+            .nav-menu { display: none; }
+            .nav-mobile-btn { display: block; }
+        }
 
-        .header { text-align: center; padding: 36px 0 28px; }
-        .header h1 { font-size: 2rem; font-weight: 900; color: #1A1A1A; margin-bottom: 8px; letter-spacing: -0.5px; }
-        .header p { color: #888; font-size: 0.9rem; }
-        .tag { display: inline-block; background: #FEF0EB; color: #E85722; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; }
+        /* ══ 페이지 레이아웃 ══ */
+        .page { max-width: 1120px; margin: 0 auto; padding: 32px 32px 60px; }
+        .page-header { text-align: center; margin-bottom: 32px; }
+        .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
+        .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
-        .ad-box { background: white; border: 1px dashed #DDD; border-radius: 12px; padding: 18px; text-align: center; color: #BBB; font-size: 0.82rem; font-weight: 600; margin-bottom: 16px; }
+        @media (max-width: 768px) {
+            .page { padding: 24px 16px 60px; }
+            .page-header { margin-bottom: 24px; }
+            .page-header h1 { font-size: 1.4rem; }
+            .dashboard { grid-template-columns: 1fr; }
+        }
 
-        .card { background: white; border-radius: 14px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-        .card-title { font-size: 0.92rem; font-weight: 700; color: #555; margin-bottom: 20px; }
+        /* ══ 카드 ══ */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+        .card-title { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); }
+        .card-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 20px; }
 
-        .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: #444; margin-bottom: 8px; }
-        .input-wrap { position: relative; margin-bottom: 18px; }
-        .salary-input { width: 100%; padding: 15px 52px 15px 18px; font-size: 1.3rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; border: 2px solid #E0E0E0; border-radius: 12px; outline: none; color: #333; text-align: right; transition: border-color 0.2s; }
-        .salary-input:focus { border-color: #E85722; box-shadow: 0 0 0 3px rgba(232,87,34,0.10); }
-        .input-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.95rem; font-weight: 700; color: #E85722; pointer-events: none; }
+        /* ══ 폼 요소 ══ */
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
+        .form-input-wrap { position: relative; }
+        .form-input { width: 100%; padding: 14px 48px 14px 16px; font-size: 1.5rem; font-weight: 700; font-family: 'Inter', 'Noto Sans KR', sans-serif; border: 1.5px solid var(--border); border-radius: 12px; outline: none; color: var(--text-primary); text-align: right; transition: all 0.2s; background: var(--surface); letter-spacing: -0.5px; }
+        .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .form-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; font-weight: 600; color: var(--text-tertiary); pointer-events: none; }
+        .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
+        .form-select:focus { border-color: var(--accent); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-        .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
-        .group label { display: block; font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 7px; }
-        .sel { width: 100%; padding: 12px 14px; border: 2px solid #E0E0E0; border-radius: 10px; font-size: 0.9rem; font-family: 'Noto Sans KR', sans-serif; color: #333; outline: none; background: white; transition: border-color 0.2s; }
-        .sel:focus { border-color: #E85722; }
+        /* 슬라이더 */
+        .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
+        .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
 
-        .calc-btn { width: 100%; padding: 16px; background: #E85722; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; box-shadow: 0 4px 14px rgba(232,87,34,0.25); transition: background 0.15s, transform 0.1s; }
-        .calc-btn:hover { background: #D44E1F; transform: translateY(-1px); }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
+        .submit-btn:hover { background: #1D4ED8; }
 
-        /* 결과 카드 */
-        .result-card { background: #1A1A2E; border-radius: 14px; padding: 28px 24px; margin-bottom: 16px; display: none; box-shadow: 0 6px 24px rgba(0,0,0,0.15); }
-        .result-card.show { display: block; animation: fadeUp 0.4s ease; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        /* ══ 결과 영역 ══ */
+        .result-col { display: flex; flex-direction: column; gap: 24px; }
+        .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
 
-        .result-title { color: rgba(255,255,255,0.6); font-size: 0.82rem; font-weight: 700; margin-bottom: 18px; }
-        .result-main { margin-bottom: 20px; }
-        .result-main .label { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-bottom: 4px; }
-        .result-main .amount { color: #FF8C5A; font-size: 2rem; font-weight: 900; }
-        .result-main .sub { color: rgba(255,255,255,0.5); font-size: 0.78rem; margin-top: 4px; }
+        /* 메인 결과 */
+        .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
+        .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .result-hero-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .result-hero-amount { font-size: 2.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -2px; }
+        .result-hero-unit { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        .result-hero-msg { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12); }
+        .result-hero-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin-top: 20px; }
+        .rh-stat { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); padding: 16px 12px; text-align: center; }
+        .rh-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+        .rh-stat-val { font-size: 0.88rem; color: rgba(255,255,255,0.95); font-weight: 700; font-family: 'Inter', sans-serif; }
 
-        .result-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-        .result-item { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 12px; text-align: center; }
-        .result-item .r-label { color: rgba(255,255,255,0.55); font-size: 0.75rem; margin-bottom: 5px; }
-        .result-item .r-val { color: white; font-size: 1rem; font-weight: 800; }
+        @media (max-width: 768px) {
+            .result-hero-amount { font-size: 2.2rem; }
+            .rh-stat-val { font-size: 0.78rem; }
+        }
 
-        .result-note { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 12px 14px; }
-        .result-note p { color: rgba(255,255,255,0.6); font-size: 0.8rem; line-height: 1.8; margin: 0; }
-        .warn { color: #FF8C5A !important; }
+        /* 공제 상세 카드 */
+        .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
+        .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .b-item:last-child { border-bottom: none; }
+        .b-dot { width: 6px; height: 6px; border-radius: 50%; margin-right: 12px; flex-shrink: 0; }
+        .b-info { flex: 1; }
+        .b-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+        .b-bar-wrap { background: #F3F4F6; border-radius: 3px; height: 4px; overflow: hidden; }
+        .b-bar { height: 100%; border-radius: 3px; width: 0; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .b-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-left: 12px; min-width: 90px; text-align: right; }
+        .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
+        .b-total-label { font-size: 0.88rem; font-weight: 700; }
+        .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
 
-        /* 정보 카드 */
-        .info-card { background: white; border-radius: 24px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); }
-        .info-card h2 { font-size: 1.05rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #FFF3E0; display: flex; align-items: center; gap: 8px; }
+        /* ══ 저장 / 공유 버튼 ══ */
+        .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
+        .action-row.show { display: flex; }
+        .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .save-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .save-btn.loading { opacity: 0.5; cursor: wait; }
+        .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .share-btn:hover { background: #F5DC00; }
 
-        /* FAQ */
-        .faq-item { margin-bottom: 14px; border-bottom: 1px solid #F5F5F5; padding-bottom: 14px; }
-        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
-        .faq-q::before { content: "Q."; color: #E85722; font-weight: 900; flex-shrink: 0; }
-        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
-        .info-card p { color: #555; font-size: 0.88rem; line-height: 1.9; margin-bottom: 10px; }
+        /* ══ 연봉 인상 시뮬레이터 ══ */
+        .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
+        .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .raise-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        .raise-badge { background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; }
+        .raise-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--accent-dark), var(--accent)); outline: none; cursor: pointer; margin-bottom: 6px; }
+        .raise-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .raise-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-tertiary); margin-bottom: 20px; }
+
+        .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .cmp-table th { background: var(--surface-alt); padding: 10px 12px; text-align: center; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
+        .cmp-table th:first-child { text-align: left; }
+        .cmp-table td { padding: 12px; border-bottom: 1px solid #F3F4F6; text-align: center; color: var(--text-primary); }
+        .cmp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); }
+        .cmp-table .green { color: #059669; font-weight: 700; }
+        .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
+
+        /* ══ 정보 카드 / FAQ ══ */
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        @media (max-width: 768px) { .bottom-grid { grid-template-columns: 1fr; } }
+
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .info-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
         .info-card p:last-child { margin-bottom: 0; }
 
+        .faq-item { padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+        .faq-a { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ══ 가이드 CTA ══ */
+        .guide-cta { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; text-align: center; }
+        .guide-cta p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
+        .guide-cta a { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 0.9rem; padding: 12px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
+        .guide-cta a:hover { background: #1D4ED8; }
+
+        /* ══ 푸터 ══ */
+        .footer { max-width: 1120px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
+        @media (max-width: 768px) {
+            .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
+        }
+
+        /* ══ 페이지 고유: 조건 그리드 ══ */
         .condition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
         .condition-box { border-radius: 10px; padding: 16px; border: 1.5px solid; }
-        .condition-box.fail { border-color: #FFCDD2; background: #FFF5F5; }
-        .condition-box.fail .c-title { color: #E53935; font-size: 0.85rem; font-weight: 800; margin-bottom: 6px; }
-        .condition-box.pass { border-color: #C8E6C9; background: #F5FFF5; }
-        .condition-box.pass .c-title { color: #2E7D32; font-size: 0.85rem; font-weight: 800; margin-bottom: 6px; }
-        .condition-box p { font-size: 0.82rem; color: #555; line-height: 1.7; margin: 0; }
+        .condition-box.fail { border-color: #FECACA; background: #FEF2F2; }
+        .condition-box.fail .c-title { color: #DC2626; font-size: 0.85rem; font-weight: 800; margin-bottom: 6px; }
+        .condition-box.pass { border-color: #BBF7D0; background: #F0FDF4; }
+        .condition-box.pass .c-title { color: #16A34A; font-size: 0.85rem; font-weight: 800; margin-bottom: 6px; }
+        .condition-box p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
 
-        .formula-box { background: #F8F9FB; border-left: 3px solid #E85722; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
-        .formula-box p { font-size: 0.88rem; color: #333; line-height: 1.9; margin: 0; }
+        /* 수식 박스 */
+        .formula-box { background: var(--surface-alt); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+        .formula-box p { font-size: 0.85rem; color: var(--text-primary); line-height: 1.9; margin: 0; }
 
-        .tip-box { background: #FFF8F5; border: 1px solid #FFD5C0; border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
-        .tip-box p { font-size: 0.85rem; color: #666; line-height: 1.8; margin: 0; }
-
-        .info-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
-        .info-table th { background: #F5F5F7; padding: 10px 14px; text-align: left; font-weight: 700; color: #555; border-bottom: 1px solid #E8E8EC; }
-        .info-table td { padding: 11px 14px; border-bottom: 1px solid #F2F2F4; color: #333; }
+        /* 정보 테이블 */
+        .info-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 12px; }
+        .info-table th { background: var(--surface-alt); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
+        .info-table td { padding: 12px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
         .info-table tr:last-child td { border-bottom: none; }
-        .info-table .hl { color: #E85722; font-weight: 800; }
-
-        .guide-cta { background: linear-gradient(135deg, #FFF8F0 0%, #FFF3E0 100%); border-radius: 20px; padding: 28px 24px; margin-bottom: 16px; text-align: center; border: 1px solid #FFE0B2; }
-        .guide-cta p { color: #666; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6; }
-        .guide-cta a { display: inline-block; background: linear-gradient(135deg, #FF9800, #FF6D00); color: #fff; font-weight: 700; font-size: 0.95rem; padding: 12px 28px; border-radius: 12px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
-        .guide-cta a:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(255,152,0,0.3); }
-        .share-btn { width: 100%; padding: 14px; background: #FEE500; border: none; border-radius: 12px; font-size: 0.92rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: #3C1E1E; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px; }
-        .share-btn:hover { background: #F5DC00; }
-        .share-btn-wrap { display: none; margin-bottom: 16px; }
-        .share-btn-wrap.show { display: block; }
-        .footer { text-align: center; padding: 24px 0 0; color: #BBB; font-size: 0.78rem; line-height: 2; }
-        .footer a { color: #E85722; text-decoration: none; font-weight: 600; margin: 0 8px; }
+        .info-table .hl { color: var(--accent); font-weight: 800; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<nav class="navbar">
+<!-- 네비게이션 -->
+<nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">급여계산기</a>
-        <div class="nav-links">
-            <a href="index.html">연봉계산기</a>
-            <a href="minimum-wage.html">최저시급</a>
-            <a href="salary-table.html">실수령액표</a>
-            <a href="holiday-pay.html" class="active">주휴수당</a>
-            <a href="insurance.html">4대보험</a>
-            <a href="retirement.html">퇴직금</a>
-            <a href="unemployment.html">실업급여</a>
-            <a href="tax-guide.html">연말정산</a>
-            <a href="income-tax.html">종합소득세</a>
+        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
+                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
+                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
+                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
+                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
+                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                </div>
+            </div>
         </div>
-        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
-        <a href="index.html">연봉계산기</a>
-        <a href="minimum-wage.html">최저시급 계산기</a>
-        <a href="salary-table.html">연봉별 실수령액 표</a>
-        <a href="holiday-pay.html">주휴수당 계산기</a>
-        <a href="insurance.html">4대보험 계산기</a>
-        <a href="retirement.html">퇴직금 계산기</a>
-        <a href="unemployment.html">실업급여 계산기</a>
-        <a href="tax-guide.html">연말정산 가이드</a>
-        <a href="income-tax.html">종합소득세 계산기</a>
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">월급 받을 때</div>
+            <a href="index.html">연봉 실수령액</a>
+            <a href="minimum-wage.html">최저시급 계산기</a>
+            <a href="holiday-pay.html">주휴수당 계산기</a>
+            <a href="insurance.html">4대보험 계산기</a>
+            <a href="salary-table.html">실수령액 표</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">세금 낼 때</div>
+            <a href="income-tax.html">종합소득세 계산기</a>
+            <a href="tax-guide.html">연말정산 가이드</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">퇴사할 때</div>
+            <a href="retirement.html">퇴직금 계산기</a>
+            <a href="unemployment.html">실업급여 계산기</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">기타</div>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
     </div>
 </nav>
 
-<div class="container">
+<div class="page">
 
-    <div class="header">
-        <div class="tag">2026년 최저시급 기준</div>
+    <div class="page-header">
+        <div class="breadcrumb">월급 받을 때</div>
         <h1>주휴수당 계산기</h1>
         <p>시급과 근무시간을 입력하면 주휴수당을 자동으로 계산합니다</p>
     </div>
 
+    <!-- 2컬럼 대시보드 -->
+    <div class="dashboard">
 
+        <!-- 왼쪽: 입력 -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">근무 조건 입력</div>
+                    <div class="card-badge">2026년</div>
+                </div>
 
-    <div class="card">
-        <div class="card-title">근무 조건 입력</div>
+                <div class="form-group">
+                    <label class="form-label">시급</label>
+                    <div class="form-input-wrap">
+                        <input type="number" class="form-input" id="hourlyWage" value="10320" min="0">
+                        <span class="form-unit">원</span>
+                    </div>
+                </div>
 
-        <label class="input-label">시급</label>
-        <div class="input-wrap">
-            <input type="number" class="salary-input" id="hourlyWage" value="10320" min="0">
-            <span class="input-unit">원</span>
+                <div class="form-row" style="margin-bottom:20px;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">하루 근무시간</label>
+                        <select class="form-select" id="dailyHours">
+                            <option value="3">3시간</option>
+                            <option value="4">4시간</option>
+                            <option value="5">5시간</option>
+                            <option value="6">6시간</option>
+                            <option value="7">7시간</option>
+                            <option value="8" selected>8시간</option>
+                            <option value="9">9시간</option>
+                            <option value="10">10시간</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">주 근무일수</label>
+                        <select class="form-select" id="weeklyDays">
+                            <option value="1">주 1일</option>
+                            <option value="2">주 2일</option>
+                            <option value="3">주 3일</option>
+                            <option value="4">주 4일</option>
+                            <option value="5" selected>주 5일</option>
+                            <option value="6">주 6일</option>
+                            <option value="7">주 7일</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="calculate()">계산하기</button>
+            </div>
+
+            <!-- 공유 버튼 -->
+            <div class="action-row" id="shareBtnWrap">
+                <button class="share-btn" onclick="shareKakao()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
+                    카카오톡 공유
+                </button>
+            </div>
         </div>
 
-        <div class="row2">
-            <div class="group">
-                <label>하루 근무시간</label>
-                <select class="sel" id="dailyHours">
-                    <option value="3">3시간</option>
-                    <option value="4">4시간</option>
-                    <option value="5">5시간</option>
-                    <option value="6">6시간</option>
-                    <option value="7">7시간</option>
-                    <option value="8" selected>8시간</option>
-                    <option value="9">9시간</option>
-                    <option value="10">10시간</option>
-                </select>
+        <!-- 오른쪽: 결과 -->
+        <div class="result-col">
+
+            <!-- 결과 요약 -->
+            <div class="result-hero" id="resultCard">
+                <div class="result-hero-label">주휴수당 (1주)</div>
+                <div class="result-hero-amount" id="holidayAmt">0</div>
+                <div class="result-hero-unit" id="holidaySub"></div>
+                <div class="result-hero-msg" id="resultNote"></div>
+                <div class="result-hero-stats">
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">주급 (주휴 포함)</div>
+                        <div class="rh-stat-val" id="weeklyAmt">--</div>
+                    </div>
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">월 주휴수당</div>
+                        <div class="rh-stat-val" id="monthlyHoliday">--</div>
+                    </div>
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">월급 (주휴 포함)</div>
+                        <div class="rh-stat-val" id="monthlyAmt">--</div>
+                    </div>
+                </div>
             </div>
-            <div class="group">
-                <label>주 근무일수</label>
-                <select class="sel" id="weeklyDays">
-                    <option value="1">주 1일</option>
-                    <option value="2">주 2일</option>
-                    <option value="3">주 3일</option>
-                    <option value="4">주 4일</option>
-                    <option value="5" selected>주 5일</option>
-                    <option value="6">주 6일</option>
-                    <option value="7">주 7일</option>
-                </select>
-            </div>
+
+            <!-- 결과 없을 때 플레이스홀더 -->
+            <div class="result-placeholder" id="resultPlaceholder">시급과 근무시간을 입력하고 계산하기 버튼을 눌러주세요</div>
+
         </div>
 
-        <button class="calc-btn" onclick="calculate()">계산하기</button>
     </div>
 
-    <div class="result-card" id="resultCard">
-        <div class="result-title">계산 결과</div>
-        <div class="result-main">
-            <div class="label">주휴수당 (1주)</div>
-            <div class="amount" id="holidayAmt">—</div>
-            <div class="sub" id="holidaySub"></div>
-        </div>
-        <div class="result-grid">
-            <div class="result-item">
-                <div class="r-label">주급 (주휴 포함)</div>
-                <div class="r-val" id="weeklyAmt">—</div>
+    <!-- 하단 정보 영역 -->
+    <div class="bottom-grid">
+
+        <!-- 주휴수당이란? -->
+        <div class="info-card">
+            <h2>주휴수당이란?</h2>
+            <p>주휴수당은 <strong>일주일에 15시간 이상 일하는 근로자</strong>가 소정 근무일을 모두 출근하면 받는 <strong>하루치 유급 휴일 수당</strong>입니다. 정규직, 계약직, 아르바이트 구분 없이 동일하게 적용됩니다.</p>
+            <div class="condition-grid">
+                <div class="condition-box fail">
+                    <div class="c-title">주휴수당 없음</div>
+                    <p>주 15시간 미만 근무<br>소정 근무일 결근 시</p>
+                </div>
+                <div class="condition-box pass">
+                    <div class="c-title">주휴수당 발생</div>
+                    <p>주 15시간 이상 근무<br>소정 근무일 전부 출근</p>
+                </div>
             </div>
-            <div class="result-item">
-                <div class="r-label">월 주휴수당</div>
-                <div class="r-val" id="monthlyHoliday">—</div>
-            </div>
-            <div class="result-item">
-                <div class="r-label">월급 (주휴 포함)</div>
-                <div class="r-val" id="monthlyAmt">—</div>
+            <div class="formula-box">
+                <p><strong>주휴수당 계산식</strong><br>
+                주 40시간 미만: 시급 x (주근무시간 / 40) x 8<br>
+                주 40시간 이상: 시급 x 8시간 (최대값 고정)</p>
             </div>
         </div>
-        <div class="result-note">
-            <p id="resultNote"></p>
+
+        <!-- 계산 예시 -->
+        <div class="info-card">
+            <h2>주휴수당 계산 예시</h2>
+            <table class="info-table">
+                <thead>
+                    <tr><th>근무 조건</th><th>주근무시간</th><th>주휴수당</th><th>주급 합계</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>최저시급 주 3일 6시간</td>
+                        <td>18시간</td>
+                        <td class="hl">37,152원</td>
+                        <td>222,912원</td>
+                    </tr>
+                    <tr>
+                        <td>최저시급 주 4일 8시간</td>
+                        <td>32시간</td>
+                        <td class="hl">66,048원</td>
+                        <td>396,288원</td>
+                    </tr>
+                    <tr>
+                        <td>최저시급 주 5일 8시간</td>
+                        <td>40시간</td>
+                        <td class="hl">82,560원</td>
+                        <td>495,360원</td>
+                    </tr>
+                    <tr>
+                        <td>시급 12,000원 주 5일 8시간</td>
+                        <td>40시간</td>
+                        <td class="hl">96,000원</td>
+                        <td>576,000원</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size:0.78rem; color:var(--text-tertiary); margin-top:10px;">* 2026년 최저시급 10,320원 기준</p>
         </div>
+
     </div>
 
-    <div class="share-btn-wrap" id="shareBtnWrap">
-        <button class="share-btn" onclick="shareKakao()">
-            <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카카오톡" width="24" height="24">
-            카카오톡으로 공유하기
-        </button>
-    </div>
-
-    <div class="info-card">
-        <h2>주휴수당이란?</h2>
-        <p>주휴수당은 <strong>일주일에 15시간 이상 일하는 근로자</strong>가 소정 근무일을 모두 출근하면 받는 <strong>하루치 유급 휴일 수당</strong>입니다. 정규직, 계약직, 아르바이트 구분 없이 동일하게 적용됩니다.</p>
-
-        <div class="condition-grid">
-            <div class="condition-box fail">
-                <div class="c-title">주휴수당 없음</div>
-                <p>주 15시간 미만 근무<br>소정 근무일 결근 시</p>
-            </div>
-            <div class="condition-box pass">
-                <div class="c-title">주휴수당 발생</div>
-                <p>주 15시간 이상 근무<br>소정 근무일 전부 출근</p>
-            </div>
-        </div>
-
-        <div class="formula-box">
-            <p>
-                <strong>주휴수당 계산식</strong><br>
-                주 40시간 미만: 시급 × (주근무시간 ÷ 40) × 8<br>
-                주 40시간 이상: 시급 × 8시간 (최대값 고정)
-            </p>
-        </div>
-    </div>
-
-    <div class="info-card">
-        <h2>주휴수당 계산 예시</h2>
-        <table class="info-table">
-            <thead>
-                <tr><th>근무 조건</th><th>주근무시간</th><th>주휴수당</th><th>주급 합계</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>최저시급 주 3일 6시간</td>
-                    <td>18시간</td>
-                    <td class="hl">37,152원</td>
-                    <td>222,912원</td>
-                </tr>
-                <tr>
-                    <td>최저시급 주 4일 8시간</td>
-                    <td>32시간</td>
-                    <td class="hl">66,048원</td>
-                    <td>396,288원</td>
-                </tr>
-                <tr>
-                    <td>최저시급 주 5일 8시간</td>
-                    <td>40시간</td>
-                    <td class="hl">82,560원</td>
-                    <td>495,360원</td>
-                </tr>
-                <tr>
-                    <td>시급 12,000원 주 5일 8시간</td>
-                    <td>40시간</td>
-                    <td class="hl">96,000원</td>
-                    <td>576,000원</td>
-                </tr>
-            </tbody>
-        </table>
-        <p style="font-size:0.78rem; color:#AAA; margin-top:10px;">* 2026년 최저시급 10,320원 기준</p>
-    </div>
-
-    <div class="info-card">
+    <!-- 미지급 안내 -->
+    <div class="info-card" style="margin-bottom: 24px;">
         <h2>주휴수당 미지급 시 어떻게 되나요?</h2>
         <p>사용자가 주휴수당을 지급하지 않으면 <strong>2년 이하의 징역 또는 2,000만원 이하의 벌금</strong>에 처해질 수 있습니다 (근로기준법 제110조).</p>
         <p>주휴수당을 받지 못했다면 <strong>고용노동부 고객상담센터(1350)</strong>에 신고하거나 사업장 관할 지방고용노동관서에 진정을 제기할 수 있습니다.</p>
-        <div class="tip-box">
-            <p>아르바이트 계약서에 주휴수당 포함 여부를 반드시 확인하세요. 일부 업주가 "주휴수당 포함"이라고 표기하는 경우, 그 시급이 최저시급보다 낮을 수 있습니다.</p>
-        </div>
     </div>
 
-    <div class="info-card">
+    <!-- FAQ -->
+    <div class="info-card" style="margin-bottom: 24px;">
         <h2>자주 묻는 질문</h2>
         <div class="faq-item">
             <div class="faq-q">한 주에 15시간 딱 맞춰 일하면 주휴수당이 생기나요?</div>
@@ -333,7 +478,8 @@
         </div>
     </div>
 
-    <div style="text-align:center; margin-bottom:16px;">
+    <!-- 카카오 애드핏 -->
+    <div style="text-align:center; margin-bottom:24px;">
         <ins class="kakao_ad_area" style="display:none;"
         data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
         data-ad-width="300"
@@ -341,21 +487,23 @@
         <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
+    <!-- 가이드 CTA -->
     <div class="guide-cta">
         <p>주휴수당 발생 조건, 계산 공식, 퇴직 시 정산 방법까지 알고 싶다면?</p>
         <a href="guide-holiday-pay.html">주휴수당 완벽 가이드 보기 →</a>
     </div>
 
-    <div class="footer">
-        <p>
-            <a href="index.html">홈</a>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의하기</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </p>
-        <p style="margin-top:8px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
-    </div>
 </div>
+
+<!-- 푸터 -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의하기</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div class="footer-copy">© 2026 월급연구소</div>
+</footer>
 
 <script>
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR') + '원'; }
@@ -394,7 +542,7 @@ function calculate() {
     const monthlyTotal = Math.round(weeklyTotal * 4.345);
 
     // 결과 표시
-    document.getElementById('holidayAmt').textContent = fmt(holidayPay);
+    document.getElementById('holidayAmt').textContent = Math.round(holidayPay).toLocaleString('ko-KR');
     document.getElementById('holidaySub').textContent = holidaySub;
     document.getElementById('weeklyAmt').textContent = fmt(weeklyTotal);
     document.getElementById('monthlyHoliday').textContent = fmt(monthlyHoliday);
@@ -407,18 +555,17 @@ function calculate() {
         note += ` 주휴수당 ${fmt(holidayPay)} 포함 월급 ${fmt(monthlyTotal)}.`;
     }
     if (wage < 10320) {
-        note += ' ⚠️ 입력한 시급이 2026년 최저시급(10,320원)보다 낮습니다.';
+        note += ' 입력한 시급이 2026년 최저시급(10,320원)보다 낮습니다.';
     }
 
-    const noteEl = document.getElementById('resultNote');
-    noteEl.textContent = note;
-    noteEl.className = wage < 10320 ? 'warn' : '';
+    document.getElementById('resultNote').textContent = note;
 
     const card = document.getElementById('resultCard');
     card.classList.remove('show');
     void card.offsetWidth;
     card.classList.add('show');
 
+    document.getElementById('resultPlaceholder').style.display = 'none';
     document.getElementById('shareBtnWrap').classList.add('show');
     window._shareHolidayPay = fmt(holidayPay);
 }

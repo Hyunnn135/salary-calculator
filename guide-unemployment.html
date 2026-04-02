@@ -3,247 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실업급여 신청 완전 가이드 2026 — A부터 Z까지 총정리 | 급여계산기</title>
+    <title>실업급여 신청 완전 가이드 2026 — A부터 Z까지 총정리 | 월급연구소</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="2026년 실업급여 신청 완전 가이드. 수급 자격, 신청 절차, 수급 기간과 금액, 주의사항까지 실업급여에 관한 모든 정보를 총정리했습니다.">
     <meta name="keywords" content="실업급여, 실업급여신청, 실업급여조건, 구직급여, 실업급여계산기">
+    <meta property="og:title" content="실업급여 신청 완전 가이드 2026 — A부터 Z까지 총정리">
+    <meta property="og:description" content="수급 자격, 신청 절차, 수급 기간과 금액, 주의사항까지 실업급여에 관한 모든 정보를 총정리했습니다.">
+    <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #F7F8FA;
+            --surface: #FFFFFF;
+            --surface-alt: #F0F2F5;
+            --text-primary: #18191B;
+            --text-secondary: #6B7280;
+            --text-tertiary: #9CA3AF;
+            --border: #E5E7EB;
+            --accent: #2563EB;
+            --accent-dark: #1E40AF;
+            --accent-light: #EFF6FF;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        .navbar { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid #E8E8EC; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-        .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; color: #E85722; letter-spacing: -0.3px; }
-        .nav-links { display: flex; gap: 2px; }
-        .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { background: #FEF0EB; color: #E85722; }
-        .nav-toggle { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #444; padding: 4px 8px; }
-        .nav-mobile { display: none; padding: 8px 20px 16px; background: white; border-top: 1px solid #F0F0F2; }
-        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #444; }
-        .nav-mobile a:hover { background: #FEF0EB; color: #E85722; }
+        body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+
+        /* ══ 네비게이션 ══ */
+        .nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
+        .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
+        .nav-logo span { color: var(--accent); }
+        .nav-menu { display: flex; gap: 2px; margin-left: auto; }
+        .nav-item { position: relative; }
+        .nav-item-btn { padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 4px; }
+        .nav-item-btn:hover { color: var(--text-primary); background: var(--surface-alt); }
+        .nav-item-btn svg { width: 12px; height: 12px; opacity: 0.4; }
+        .nav-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transition: all 0.15s; }
+        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; }
+        .nav-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; transition: background 0.1s; }
+        .nav-dropdown a:hover { background: var(--surface-alt); }
+        .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+        .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
+
+        /* 모바일 메뉴 */
+        .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
         .nav-mobile.open { display: block; }
-        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
-        body { font-family: 'Noto Sans KR', sans-serif; background: #F4F5F7; min-height: 100vh; color: #333; }
-        .container { max-width: 760px; margin: 0 auto; padding: 28px 16px 60px; }
-        .info-card { background: white; border-radius: 24px; padding: 32px 28px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); }
-        .info-card h2 { font-size: 1.15rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #FFF3E0; }
-        .info-card h3 { font-size: 1rem; font-weight: 700; color: #444; margin: 20px 0 10px; }
-        .info-card p { color: #555; line-height: 2; font-size: 0.93rem; margin-bottom: 14px; }
-        .info-card ul, .info-card ol { padding-left: 20px; margin-bottom: 14px; }
-        .info-card ul li, .info-card ol li { color: #555; line-height: 2; font-size: 0.93rem; margin-bottom: 6px; }
-        .info-card strong { color: #333; }
-        .hero { background: linear-gradient(135deg, #E85722, #FF9F1C); border-radius: 24px; padding: 40px 28px; margin-bottom: 20px; color: white; }
-        .hero .tag { display: inline-block; background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-bottom: 12px; }
-        .hero h1 { font-size: 1.9rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -0.5px; line-height: 1.3; }
-        .hero p { font-size: 0.92rem; opacity: 0.85; line-height: 1.7; }
-        .highlight-box { background: #FFF9E6; border: 1px solid #FFE0B2; border-radius: 14px; padding: 16px 18px; margin: 14px 0; }
-        .highlight-box p { color: #555; font-size: 0.88rem; line-height: 1.9; margin: 0; }
-        .table-wrap { overflow-x: auto; margin: 14px 0; }
-        .data-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
-        .data-table th { background: #FEF0EB; padding: 11px 14px; text-align: left; font-weight: 700; color: #555; border-bottom: 2px solid #FFD5C0; }
-        .data-table td { padding: 11px 14px; border-bottom: 1px solid #F5F5F5; color: #444; }
+        .nav-mobile-group { margin-bottom: 16px; }
+        .nav-mobile-group:last-child { margin-bottom: 0; }
+        .nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
+        .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
+        .nav-mobile a:hover { background: var(--surface-alt); }
+
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 20px; }
+            .nav-menu { display: none; }
+            .nav-mobile-btn { display: block; }
+        }
+
+        /* ══ 페이지 레이아웃 ══ */
+        .page { max-width: 1120px; margin: 0 auto; padding: 32px 32px 60px; }
+        .page-header { text-align: center; margin-bottom: 32px; }
+        .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
+        .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
+
+        @media (max-width: 768px) {
+            .page { padding: 24px 16px 60px; }
+            .page-header { margin-bottom: 24px; }
+            .page-header h1 { font-size: 1.4rem; }
+        }
+
+        /* ══ 카드 ══ */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+        .card-title { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); }
+        .card-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 20px; }
+
+        /* ══ 정보 카드 / FAQ ══ */
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .info-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
+        .info-card p:last-child { margin-bottom: 0; }
+
+        .faq-item { padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+        .faq-a { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ══ 가이드 CTA ══ */
+        .guide-cta { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; text-align: center; }
+        .guide-cta p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
+        .guide-cta a { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 0.9rem; padding: 12px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
+        .guide-cta a:hover { background: #1D4ED8; }
+
+        /* ══ 푸터 ══ */
+        .footer { max-width: 1120px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
+        @media (max-width: 768px) {
+            .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
+        }
+
+        /* ══ 가이드 아티클 스타일 ══ */
+        .guide-content { max-width: 800px; margin: 0 auto; }
+        .guide-content .info-card { margin-bottom: 24px; }
+        .guide-content .info-card h2 { font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; padding-left: 14px; border-bottom: 1px solid var(--border); border-left: 3px solid var(--accent); }
+        .guide-content .info-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 20px 0 10px; }
+        .guide-content .info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 12px; }
+        .guide-content .info-card p:last-child { margin-bottom: 0; }
+        .guide-content .info-card strong { color: var(--text-primary); }
+        .guide-content .info-card ul, .guide-content .info-card ol { padding-left: 20px; margin-bottom: 14px; }
+        .guide-content .info-card ul li, .guide-content .info-card ol li { color: var(--text-secondary); line-height: 1.8; font-size: 0.88rem; margin-bottom: 6px; }
+
+        .tip-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+        .tip-box p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.8; margin: 0; }
+        .tip-box strong { color: var(--accent-dark); }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 14px 0; }
+        .data-table th { background: var(--surface-alt); padding: 11px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 11px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-secondary); }
         .data-table tr:last-child td { border-bottom: none; }
-        .data-table .hl { color: #E85722; font-weight: 700; }
-        .cta-box { background: white; border-radius: 20px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); text-align: center; }
-        .cta-box p { color: #666; font-size: 0.9rem; margin-bottom: 14px; }
-        .cta-btn { display: inline-block; padding: 14px 32px; background: #E85722; color: white; border-radius: 12px; font-weight: 700; font-size: 0.95rem; text-decoration: none; }
-        .cta-btn:hover { background: #D44E1F; }
-        .faq-item { margin-bottom: 14px; border-bottom: 1px solid #F5F5F5; padding-bottom: 14px; }
-        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
-        .faq-q::before { content: "Q."; color: #E85722; font-weight: 900; flex-shrink: 0; }
-        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
-        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
-        .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 6px; }
-        @media (max-width: 480px) { .hero h1 { font-size: 1.5rem; } }
+        .data-table .hl { color: var(--accent); font-weight: 700; }
+        .table-wrap { overflow-x: auto; margin: 14px 0; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar">
+
+<!-- 네비게이션 -->
+<nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">급여계산기</a>
-        <div class="nav-links">
-            <a href="index.html">연봉계산기</a>
-            <a href="minimum-wage.html">최저시급</a>
-            <a href="salary-table.html">실수령액표</a>
-            <a href="holiday-pay.html">주휴수당</a>
-            <a href="insurance.html">4대보험</a>
-            <a href="retirement.html">퇴직금</a>
-            <a href="unemployment.html">실업급여</a>
-            <a href="tax-guide.html">연말정산</a>
-            <a href="income-tax.html">종합소득세</a>
+        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
+                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
+                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
+                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
+                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
+                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                </div>
+            </div>
         </div>
-        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
-        <a href="index.html">연봉계산기</a>
-        <a href="minimum-wage.html">최저시급 계산기</a>
-        <a href="salary-table.html">연봉별 실수령액 표</a>
-        <a href="holiday-pay.html">주휴수당 계산기</a>
-        <a href="insurance.html">4대보험 계산기</a>
-        <a href="retirement.html">퇴직금 계산기</a>
-        <a href="unemployment.html">실업급여 계산기</a>
-        <a href="tax-guide.html">연말정산 가이드</a>
-        <a href="income-tax.html">종합소득세 계산기</a>
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">월급 받을 때</div>
+            <a href="index.html">연봉 실수령액</a>
+            <a href="minimum-wage.html">최저시급 계산기</a>
+            <a href="holiday-pay.html">주휴수당 계산기</a>
+            <a href="insurance.html">4대보험 계산기</a>
+            <a href="salary-table.html">실수령액 표</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">세금 낼 때</div>
+            <a href="income-tax.html">종합소득세 계산기</a>
+            <a href="tax-guide.html">연말정산 가이드</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">퇴사할 때</div>
+            <a href="retirement.html">퇴직금 계산기</a>
+            <a href="unemployment.html">실업급여 계산기</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">기타</div>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
     </div>
 </nav>
 
-<div class="container">
-
-    <div class="hero">
-        <div class="tag">A부터 Z까지</div>
+<div class="page">
+    <div class="page-header">
+        <div class="breadcrumb">가이드</div>
         <h1>실업급여 신청 완전 가이드 2026</h1>
         <p>실업급여 수급 자격부터 신청 절차, 금액 계산, 주의사항까지 퇴직 후 알아야 할 모든 것을 정리했습니다.</p>
     </div>
 
-    <div class="info-card">
-        <h2>실업급여란 무엇인가?</h2>
-        <p>실업급여는 <strong>고용보험법</strong>에 따라 비자발적으로 실직한 근로자에게 재취업 활동 기간 동안 일정 금액을 지급하는 제도입니다. 흔히 "실업급여"라고 부르지만, 정확한 명칭은 <strong>구직급여</strong>입니다.</p>
-        <p>실업급여는 단순히 "일을 안 해도 돈을 받는 것"이 아닙니다. <strong>적극적으로 재취업을 위해 노력하는 사람</strong>에게 생활 안정 자금을 제공하여 더 나은 일자리를 구할 수 있도록 돕는 것이 목적입니다. 따라서 구직 활동을 하지 않으면 급여가 중단될 수 있습니다.</p>
-        <p>많은 분들이 "자발적으로 퇴사하면 실업급여를 못 받는다"고 알고 있지만, 이는 반만 맞는 이야기입니다. 정당한 사유가 있는 자발적 퇴사는 실업급여 수급이 가능합니다. 이에 대해서는 아래에서 자세히 설명하겠습니다.</p>
-    </div>
+    <div class="guide-content">
 
-    <div class="info-card">
-        <h2>실업급여 수급 자격 조건</h2>
-        <p>실업급여를 받으려면 다음 세 가지 조건을 모두 충족해야 합니다.</p>
-        <h3>조건 1: 고용보험 가입 기간 180일 이상</h3>
-        <p>퇴직일 이전 18개월 동안 고용보험 피보험 단위기간이 통산 <strong>180일 이상</strong>이어야 합니다. 여기서 180일은 실제 근무일이 아니라 유급일(주휴일 포함)을 기준으로 계산합니다. 대부분의 경우 6개월 이상 근무했다면 충족됩니다.</p>
-        <h3>조건 2: 비자발적 퇴직 (또는 정당한 사유의 자발적 퇴직)</h3>
-        <p>원칙적으로 <strong>회사 사정에 의한 퇴직</strong>(권고사직, 계약 만료, 정리해고 등)이어야 합니다. 단, 아래와 같은 사유로 자발적 퇴직한 경우에도 수급이 가능합니다.</p>
-        <ul>
-            <li><strong>임금 체불</strong> — 2개월 이상 임금을 지급받지 못한 경우</li>
-            <li><strong>직장 내 괴롭힘</strong> — 상사나 동료의 지속적인 괴롭힘이 인정되는 경우</li>
-            <li><strong>근로조건 변경</strong> — 채용 당시와 현저히 다른 근로조건이 적용된 경우</li>
-            <li><strong>통근 불가능</strong> — 회사 이전으로 왕복 3시간 이상 통근이 필요한 경우</li>
-            <li><strong>건강 악화</strong> — 업무 수행이 불가능한 건강 문제가 발생한 경우</li>
-        </ul>
-        <h3>조건 3: 재취업 의사와 능력</h3>
-        <p>적극적으로 재취업을 위한 활동을 할 의사와 능력이 있어야 합니다. 단순히 쉬고 싶어서 실업급여를 받는 것은 제도의 취지에 맞지 않습니다.</p>
-    </div>
-
-    <div class="info-card">
-        <h2>실업급여 신청 절차 단계별 정리</h2>
-        <h3>1단계: 고용보험 상실신고 확인 (퇴직 후 즉시)</h3>
-        <p>퇴직 후 회사가 고용보험 상실신고를 했는지 확인합니다. 고용보험 홈페이지(ei.go.kr)에서 조회할 수 있습니다. 회사가 신고를 하지 않은 경우 직접 고용센터에 문의하세요.</p>
-        <h3>2단계: 워크넷 구직등록 (퇴직 후 1~2일 내)</h3>
-        <p>워크넷(work.go.kr)에 접속하여 구직등록을 합니다. 이력서를 작성하고 구직 활동 희망 직종을 등록합니다. 이 과정은 온라인으로 간편하게 처리할 수 있습니다.</p>
-        <h3>3단계: 수급자격 신청 교육 이수 (온라인)</h3>
-        <p>고용보험 홈페이지에서 수급자격 신청자 온라인 교육을 이수합니다. 약 1시간 정도 소요되며, 실업급여 제도와 구직 활동 의무에 대한 내용입니다.</p>
-        <h3>4단계: 고용센터 방문 (수급자격 인정 신청)</h3>
-        <p>거주지 관할 고용센터를 방문하여 수급자격 인정을 신청합니다. 준비 서류는 <strong>신분증, 이직확인서(회사 제출), 통장 사본</strong>입니다. 접수 후 약 2주 이내에 수급자격 인정 여부가 결정됩니다.</p>
-        <h3>5단계: 실업인정 및 급여 수령 (4주마다 반복)</h3>
-        <p>수급자격이 인정되면 <strong>4주에 1회</strong> 고용센터를 방문하여 실업인정을 받아야 합니다. 이때 그동안의 구직 활동 내역을 보고하며, 인정되면 해당 기간의 실업급여가 계좌로 입금됩니다.</p>
-    </div>
-
-    <div class="info-card">
-        <h2>실업급여 금액과 수급 기간</h2>
-        <h3>일일 수급액 계산</h3>
-        <p>실업급여 일일 수급액은 <strong>이직 전 평균임금의 60%</strong>입니다. 다만 상한액과 하한액이 있어 무한정 높거나 낮지는 않습니다.</p>
-        <div class="table-wrap">
-            <table class="data-table">
-                <thead>
-                    <tr><th>구분</th><th>2026년 기준</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>일일 상한액</td><td class="hl">66,000원</td></tr>
-                    <tr><td>일일 하한액</td><td class="hl">63,104원 (최저임금 80%)</td></tr>
-                    <tr><td>월 환산 상한</td><td>약 198만 원</td></tr>
-                </tbody>
-            </table>
+        <div class="info-card">
+            <h2>실업급여란 무엇인가?</h2>
+            <p>실업급여는 <strong>고용보험법</strong>에 따라 비자발적으로 실직한 근로자에게 재취업 활동 기간 동안 일정 금액을 지급하는 제도입니다. 흔히 "실업급여"라고 부르지만, 정확한 명칭은 <strong>구직급여</strong>입니다.</p>
+            <p>실업급여는 단순히 "일을 안 해도 돈을 받는 것"이 아닙니다. <strong>적극적으로 재취업을 위해 노력하는 사람</strong>에게 생활 안정 자금을 제공하여 더 나은 일자리를 구할 수 있도록 돕는 것이 목적입니다. 따라서 구직 활동을 하지 않으면 급여가 중단될 수 있습니다.</p>
+            <p>많은 분들이 "자발적으로 퇴사하면 실업급여를 못 받는다"고 알고 있지만, 이는 반만 맞는 이야기입니다. 정당한 사유가 있는 자발적 퇴사는 실업급여 수급이 가능합니다. 이에 대해서는 아래에서 자세히 설명하겠습니다.</p>
         </div>
-        <h3>수급 기간</h3>
-        <p>실업급여를 받을 수 있는 기간은 나이와 고용보험 가입 기간에 따라 <strong>120일~270일</strong>입니다.</p>
-        <div class="table-wrap">
-            <table class="data-table">
-                <thead>
-                    <tr><th>가입기간 / 나이</th><th>1년 미만</th><th>1~3년</th><th>3~5년</th><th>5~10년</th><th>10년 이상</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>만 50세 미만</td><td>120일</td><td>150일</td><td>180일</td><td>210일</td><td>240일</td></tr>
-                    <tr><td>만 50세 이상/장애인</td><td>120일</td><td>180일</td><td>210일</td><td>240일</td><td class="hl">270일</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="highlight-box">
-            <p>실업급여 수급 기간 동안 취업하면 남은 기간의 일부를 조기재취업수당으로 받을 수 있습니다. 수급 잔여일수의 절반 이상이 남아있을 때 취업하면 남은 금액의 절반을 일시금으로 지급합니다.</p>
-        </div>
-    </div>
 
-    <div class="info-card">
-        <h2>실업급여 받는 중 지켜야 할 것들</h2>
-        <h3>구직활동 의무</h3>
-        <p>실업급여를 받는 동안 <strong>4주에 최소 2회 이상</strong> 구직 활동을 해야 합니다. 인정되는 구직 활동에는 입사 지원, 면접, 직업훈련 수강, 취업 알선 기관 방문 등이 포함됩니다.</p>
-        <h3>취업·소득 발생 시 신고</h3>
-        <p>수급 기간 중 취업하거나 소득이 발생하면 반드시 신고해야 합니다. 일용직이나 프리랜서 일도 포함됩니다. 신고 없이 소득을 얻으면 <strong>부정수급</strong>에 해당하여 받은 금액의 최대 5배를 반환해야 합니다.</p>
-        <h3>해외 출국 제한</h3>
-        <p>실업급여 수급 중 해외에 나가면 그 기간의 실업급여가 지급되지 않습니다. 부득이한 사유로 출국하는 경우 사전에 고용센터에 신고해야 합니다.</p>
-    </div>
-
-    <div class="info-card">
-        <h2>실업급여와 자주 혼동하는 제도들</h2>
-        <h3>실업급여 vs 퇴직금</h3>
-        <p>퇴직금은 1년 이상 근무한 모든 근로자에게 지급되는 일시금이며, 퇴직 사유와 관계없습니다. 실업급여는 비자발적 퇴직자에게만 지급되는 정기 급여입니다. 두 제도는 별개이므로 퇴직금을 받았더라도 실업급여를 추가로 받을 수 있습니다.</p>
-        <h3>실업급여 vs 육아휴직급여</h3>
-        <p>육아휴직급여는 재직 중 육아를 위해 휴직하는 경우에 지급됩니다. 실업급여와는 목적이 다르며, 둘 다 고용보험에서 지급하지만 동시에 받을 수는 없습니다.</p>
-    </div>
-
-    <div class="cta-box">
-        <p>내 실업급여 예상 금액이 궁금하다면?</p>
-        <a href="unemployment.html" class="cta-btn">실업급여 계산기로 바로 확인하기</a>
-    </div>
-
-    <div class="info-card">
-        <h2>자주 묻는 질문</h2>
-        <div class="faq-item">
-            <div class="faq-q">퇴사 후 얼마 안에 실업급여를 신청해야 하나요?</div>
-            <div class="faq-a">퇴직일 다음 날부터 12개월 이내에 신청해야 합니다. 12개월이 지나면 수급 자격이 상실되므로 가능한 빨리 신청하는 것이 좋습니다.</div>
+        <div class="info-card">
+            <h2>실업급여 수급 자격 조건</h2>
+            <p>실업급여를 받으려면 다음 세 가지 조건을 모두 충족해야 합니다.</p>
+            <h3>조건 1: 고용보험 가입 기간 180일 이상</h3>
+            <p>퇴직일 이전 18개월 동안 고용보험 피보험 단위기간이 통산 <strong>180일 이상</strong>이어야 합니다. 여기서 180일은 실제 근무일이 아니라 유급일(주휴일 포함)을 기준으로 계산합니다. 대부분의 경우 6개월 이상 근무했다면 충족됩니다.</p>
+            <h3>조건 2: 비자발적 퇴직 (또는 정당한 사유의 자발적 퇴직)</h3>
+            <p>원칙적으로 <strong>회사 사정에 의한 퇴직</strong>(권고사직, 계약 만료, 정리해고 등)이어야 합니다. 단, 아래와 같은 사유로 자발적 퇴직한 경우에도 수급이 가능합니다.</p>
+            <ul>
+                <li><strong>임금 체불</strong> — 2개월 이상 임금을 지급받지 못한 경우</li>
+                <li><strong>직장 내 괴롭힘</strong> — 상사나 동료의 지속적인 괴롭힘이 인정되는 경우</li>
+                <li><strong>근로조건 변경</strong> — 채용 당시와 현저히 다른 근로조건이 적용된 경우</li>
+                <li><strong>통근 불가능</strong> — 회사 이전으로 왕복 3시간 이상 통근이 필요한 경우</li>
+                <li><strong>건강 악화</strong> — 업무 수행이 불가능한 건강 문제가 발생한 경우</li>
+            </ul>
+            <h3>조건 3: 재취업 의사와 능력</h3>
+            <p>적극적으로 재취업을 위한 활동을 할 의사와 능력이 있어야 합니다. 단순히 쉬고 싶어서 실업급여를 받는 것은 제도의 취지에 맞지 않습니다.</p>
         </div>
-        <div class="faq-item">
-            <div class="faq-q">아르바이트도 실업급여를 받을 수 있나요?</div>
-            <div class="faq-a">고용보험에 가입되어 있고 180일 이상 근무한 아르바이트생도 실업급여 수급 대상입니다. 주 15시간 이상 근무하여 고용보험에 가입된 경우에 해당합니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">실업급여 받는 중에 알바를 해도 되나요?</div>
-            <div class="faq-a">가능하지만 반드시 신고해야 합니다. 월 60시간 미만 또는 3개월 미만의 단기 근로는 실업급여와 병행할 수 있습니다. 단, 소득 발생분만큼 실업급여가 감액될 수 있습니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">계약 만료로 퇴직하면 실업급여를 받을 수 있나요?</div>
-            <div class="faq-a">네. 계약 기간 만료에 따른 퇴직은 비자발적 퇴직으로 분류되어 실업급여 수급 대상입니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">실업급여를 받다가 창업해도 되나요?</div>
-            <div class="faq-a">가능합니다. 창업 준비 활동도 구직 활동으로 인정될 수 있으며, 자영업을 시작하면 남은 수급일수에 따라 조기재취업수당을 받을 수도 있습니다. 단, 사업자등록 시 반드시 고용센터에 신고해야 합니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">실업급여에도 세금이 붙나요?</div>
-            <div class="faq-a">실업급여(구직급여)는 비과세 소득입니다. 소득세가 부과되지 않으며, 건강보험료도 면제됩니다. 수령한 금액 그대로가 실수령액입니다.</div>
-        </div>
-    </div>
 
-    <div style="text-align:center; margin-bottom:16px;">
-        <ins class="kakao_ad_area" style="display:none;"
-        data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
-        data-ad-width="300"
-        data-ad-height="250"></ins>
-        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-    </div>
+        <div class="info-card">
+            <h2>실업급여 신청 절차 단계별 정리</h2>
+            <h3>1단계: 고용보험 상실신고 확인 (퇴직 후 즉시)</h3>
+            <p>퇴직 후 회사가 고용보험 상실신고를 했는지 확인합니다. 고용보험 홈페이지(ei.go.kr)에서 조회할 수 있습니다. 회사가 신고를 하지 않은 경우 직접 고용센터에 문의하세요.</p>
+            <h3>2단계: 워크넷 구직등록 (퇴직 후 1~2일 내)</h3>
+            <p>워크넷(work.go.kr)에 접속하여 구직등록을 합니다. 이력서를 작성하고 구직 활동 희망 직종을 등록합니다. 이 과정은 온라인으로 간편하게 처리할 수 있습니다.</p>
+            <h3>3단계: 수급자격 신청 교육 이수 (온라인)</h3>
+            <p>고용보험 홈페이지에서 수급자격 신청자 온라인 교육을 이수합니다. 약 1시간 정도 소요되며, 실업급여 제도와 구직 활동 의무에 대한 내용입니다.</p>
+            <h3>4단계: 고용센터 방문 (수급자격 인정 신청)</h3>
+            <p>거주지 관할 고용센터를 방문하여 수급자격 인정을 신청합니다. 준비 서류는 <strong>신분증, 이직확인서(회사 제출), 통장 사본</strong>입니다. 접수 후 약 2주 이내에 수급자격 인정 여부가 결정됩니다.</p>
+            <h3>5단계: 실업인정 및 급여 수령 (4주마다 반복)</h3>
+            <p>수급자격이 인정되면 <strong>4주에 1회</strong> 고용센터를 방문하여 실업인정을 받아야 합니다. 이때 그동안의 구직 활동 내역을 보고하며, 인정되면 해당 기간의 실업급여가 계좌로 입금됩니다.</p>
+        </div>
 
-    <div class="footer">
-        <p>
-            <a href="index.html">연봉계산기</a>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의하기</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </p>
-        <p style="margin-top:8px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
-    </div>
+        <div class="info-card">
+            <h2>실업급여 금액과 수급 기간</h2>
+            <h3>일일 수급액 계산</h3>
+            <p>실업급여 일일 수급액은 <strong>이직 전 평균임금의 60%</strong>입니다. 다만 상한액과 하한액이 있어 무한정 높거나 낮지는 않습니다.</p>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>구분</th><th>2026년 기준</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>일일 상한액</td><td class="hl">66,000원</td></tr>
+                        <tr><td>일일 하한액</td><td class="hl">63,104원 (최저임금 80%)</td></tr>
+                        <tr><td>월 환산 상한</td><td>약 198만 원</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>수급 기간</h3>
+            <p>실업급여를 받을 수 있는 기간은 나이와 고용보험 가입 기간에 따라 <strong>120일~270일</strong>입니다.</p>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>가입기간 / 나이</th><th>1년 미만</th><th>1~3년</th><th>3~5년</th><th>5~10년</th><th>10년 이상</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>만 50세 미만</td><td>120일</td><td>150일</td><td>180일</td><td>210일</td><td>240일</td></tr>
+                        <tr><td>만 50세 이상/장애인</td><td>120일</td><td>180일</td><td>210일</td><td>240일</td><td class="hl">270일</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tip-box">
+                <p>실업급여 수급 기간 동안 취업하면 남은 기간의 일부를 조기재취업수당으로 받을 수 있습니다. 수급 잔여일수의 절반 이상이 남아있을 때 취업하면 남은 금액의 절반을 일시금으로 지급합니다.</p>
+            </div>
+        </div>
 
+        <div class="info-card">
+            <h2>실업급여 받는 중 지켜야 할 것들</h2>
+            <h3>구직활동 의무</h3>
+            <p>실업급여를 받는 동안 <strong>4주에 최소 2회 이상</strong> 구직 활동을 해야 합니다. 인정되는 구직 활동에는 입사 지원, 면접, 직업훈련 수강, 취업 알선 기관 방문 등이 포함됩니다.</p>
+            <h3>취업·소득 발생 시 신고</h3>
+            <p>수급 기간 중 취업하거나 소득이 발생하면 반드시 신고해야 합니다. 일용직이나 프리랜서 일도 포함됩니다. 신고 없이 소득을 얻으면 <strong>부정수급</strong>에 해당하여 받은 금액의 최대 5배를 반환해야 합니다.</p>
+            <h3>해외 출국 제한</h3>
+            <p>실업급여 수급 중 해외에 나가면 그 기간의 실업급여가 지급되지 않습니다. 부득이한 사유로 출국하는 경우 사전에 고용센터에 신고해야 합니다.</p>
+        </div>
+
+        <div class="info-card">
+            <h2>실업급여와 자주 혼동하는 제도들</h2>
+            <h3>실업급여 vs 퇴직금</h3>
+            <p>퇴직금은 1년 이상 근무한 모든 근로자에게 지급되는 일시금이며, 퇴직 사유와 관계없습니다. 실업급여는 비자발적 퇴직자에게만 지급되는 정기 급여입니다. 두 제도는 별개이므로 퇴직금을 받았더라도 실업급여를 추가로 받을 수 있습니다.</p>
+            <h3>실업급여 vs 육아휴직급여</h3>
+            <p>육아휴직급여는 재직 중 육아를 위해 휴직하는 경우에 지급됩니다. 실업급여와는 목적이 다르며, 둘 다 고용보험에서 지급하지만 동시에 받을 수는 없습니다.</p>
+        </div>
+
+        <div class="guide-cta">
+            <p>내 실업급여 예상 금액이 궁금하다면?</p>
+            <a href="unemployment.html">실업급여 계산기로 바로 확인하기</a>
+        </div>
+
+        <div class="info-card">
+            <h2>자주 묻는 질문</h2>
+            <div class="faq-item">
+                <div class="faq-q">퇴사 후 얼마 안에 실업급여를 신청해야 하나요?</div>
+                <div class="faq-a">퇴직일 다음 날부터 12개월 이내에 신청해야 합니다. 12개월이 지나면 수급 자격이 상실되므로 가능한 빨리 신청하는 것이 좋습니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">아르바이트도 실업급여를 받을 수 있나요?</div>
+                <div class="faq-a">고용보험에 가입되어 있고 180일 이상 근무한 아르바이트생도 실업급여 수급 대상입니다. 주 15시간 이상 근무하여 고용보험에 가입된 경우에 해당합니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">실업급여 받는 중에 알바를 해도 되나요?</div>
+                <div class="faq-a">가능하지만 반드시 신고해야 합니다. 월 60시간 미만 또는 3개월 미만의 단기 근로는 실업급여와 병행할 수 있습니다. 단, 소득 발생분만큼 실업급여가 감액될 수 있습니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">계약 만료로 퇴직하면 실업급여를 받을 수 있나요?</div>
+                <div class="faq-a">네. 계약 기간 만료에 따른 퇴직은 비자발적 퇴직으로 분류되어 실업급여 수급 대상입니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">실업급여를 받다가 창업해도 되나요?</div>
+                <div class="faq-a">가능합니다. 창업 준비 활동도 구직 활동으로 인정될 수 있으며, 자영업을 시작하면 남은 수급일수에 따라 조기재취업수당을 받을 수도 있습니다. 단, 사업자등록 시 반드시 고용센터에 신고해야 합니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">실업급여에도 세금이 붙나요?</div>
+                <div class="faq-a">실업급여(구직급여)는 비과세 소득입니다. 소득세가 부과되지 않으며, 건강보험료도 면제됩니다. 수령한 금액 그대로가 실수령액입니다.</div>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin: 24px 0;">
+            <ins class="kakao_ad_area" style="display:none;"
+            data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
+            data-ad-width="300"
+            data-ad-height="250"></ins>
+            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+        </div>
+
+    </div>
 </div>
+
+<!-- 푸터 -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의하기</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div class="footer-copy">© 2026 월급연구소</div>
+</footer>
+
 </body>
 </html>

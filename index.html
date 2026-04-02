@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>연봉 실수령액 계산기 - 세후 월급 계산 | 급여계산기</title>
+    <title>연봉 실수령액 계산기 - 세후 월급 계산 | 월급연구소</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="2026년 기준 연봉 실수령액 계산기. 국민연금, 건강보험, 소득세 등 공제 후 실제 받는 월급을 정확하게 계산하세요.">
@@ -14,262 +14,186 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #F7F8FA;
+            --surface: #FFFFFF;
+            --surface-alt: #F0F2F5;
+            --text-primary: #18191B;
+            --text-secondary: #6B7280;
+            --text-tertiary: #9CA3AF;
+            --border: #E5E7EB;
+            --accent: #2563EB;
+            --accent-dark: #1E40AF;
+            --accent-light: #EFF6FF;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
 
-        /* ── Navbar ── */
-        .navbar {
-            position: sticky; top: 0; z-index: 100;
-            background: white;
-            border-bottom: 1px solid #E8E8EC;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-        }
-        .nav-inner {
-            max-width: 860px; margin: 0 auto;
-            padding: 0 20px;
-            display: flex; align-items: center; justify-content: space-between;
-            height: 56px;
-        }
-        .nav-logo { font-size: 1rem; font-weight: 900; text-decoration: none; color: #E85722; letter-spacing: -0.3px; }
-        .nav-links { display: flex; gap: 2px; }
-        .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { background: #FEF0EB; color: #E85722; }
-        .nav-toggle { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #444; padding: 4px 8px; }
-        .nav-mobile { display: none; padding: 8px 20px 16px; background: white; border-top: 1px solid #F0F0F2; }
-        .nav-mobile a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: #444; }
-        .nav-mobile a:hover { background: #FEF0EB; color: #E85722; }
+        /* ══ 네비게이션 ══ */
+        .nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
+        .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
+        .nav-logo span { color: var(--accent); }
+        .nav-menu { display: flex; gap: 2px; margin-left: auto; }
+        .nav-item { position: relative; }
+        .nav-item-btn { padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 4px; }
+        .nav-item-btn:hover { color: var(--text-primary); background: var(--surface-alt); }
+        .nav-item-btn svg { width: 12px; height: 12px; opacity: 0.4; }
+        .nav-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transition: all 0.15s; }
+        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; }
+        .nav-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; transition: background 0.1s; }
+        .nav-dropdown a:hover { background: var(--surface-alt); }
+        .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+        .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
+
+        /* 모바일 메뉴 */
+        .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
         .nav-mobile.open { display: block; }
-        @media (max-width: 620px) { .nav-links { display: none; } .nav-toggle { display: block; } }
+        .nav-mobile-group { margin-bottom: 16px; }
+        .nav-mobile-group:last-child { margin-bottom: 0; }
+        .nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
+        .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
+        .nav-mobile a:hover { background: var(--surface-alt); }
 
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: #F4F5F7;
-            min-height: 100vh;
-        }
-
-        .container { max-width: 760px; margin: 0 auto; padding: 0 16px 60px; }
-
-        /* ── Header ── */
-        .header { text-align: center; padding: 36px 0 28px; }
-        .header h1 {
-            font-size: 2rem; font-weight: 900;
-            color: #1A1A1A;
-            margin-bottom: 8px; letter-spacing: -0.5px;
-        }
-        .header p { color: #999; font-size: 0.9rem; }
-
-        /* ── Ad Placeholder ── */
-        .ad-box {
-            background: white;
-            border: 1px dashed #DDD;
-            border-radius: 12px;
-            padding: 18px;
-            text-align: center;
-            color: #BBB;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-bottom: 16px;
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 20px; }
+            .nav-menu { display: none; }
+            .nav-mobile-btn { display: block; }
         }
 
-        /* ── Card ── */
-        .card {
-            background: white;
-            border-radius: 14px;
-            padding: 28px 24px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-        }
-        .card-title {
-            font-size: 0.95rem; font-weight: 700; color: #666;
-            margin-bottom: 22px; display: flex; align-items: center; gap: 6px;
+        /* ══ 페이지 레이아웃 ══ */
+        .page { max-width: 1120px; margin: 0 auto; padding: 32px 32px 60px; }
+        .page-header { text-align: center; margin-bottom: 32px; }
+        .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
+        .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+        @media (max-width: 768px) {
+            .page { padding: 24px 16px 60px; }
+            .page-header { margin-bottom: 24px; }
+            .page-header h1 { font-size: 1.4rem; }
+            .dashboard { grid-template-columns: 1fr; }
         }
 
-        /* ── Input ── */
-        .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: #555; margin-bottom: 8px; }
-        .input-wrap { position: relative; margin-bottom: 12px; }
-        .salary-input {
-            width: 100%; padding: 16px 60px 16px 20px;
-            font-size: 1.5rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-            border: 2px solid #E0E0E0; border-radius: 12px; outline: none; color: #333;
-            text-align: right; transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .salary-input:focus { border-color: #E85722; box-shadow: 0 0 0 3px rgba(232,87,34,0.10); }
-        .input-unit {
-            position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
-            font-size: 1rem; font-weight: 700; color: #FF9F1C; pointer-events: none;
+        /* ══ 카드 ══ */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+        .card-title { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); }
+        .card-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 20px; }
+
+        /* ══ 폼 요소 ══ */
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
+        .form-input-wrap { position: relative; }
+        .form-input { width: 100%; padding: 14px 48px 14px 16px; font-size: 1.5rem; font-weight: 700; font-family: 'Inter', 'Noto Sans KR', sans-serif; border: 1.5px solid var(--border); border-radius: 12px; outline: none; color: var(--text-primary); text-align: right; transition: all 0.2s; background: var(--surface); letter-spacing: -0.5px; }
+        .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .form-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; font-weight: 600; color: var(--text-tertiary); pointer-events: none; }
+        .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
+        .form-select:focus { border-color: var(--accent); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        /* 슬라이더 */
+        .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
+        .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
+
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
+        .submit-btn:hover { background: #1D4ED8; }
+
+        /* ══ 결과 영역 ══ */
+        .result-col { display: flex; flex-direction: column; gap: 24px; }
+        .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
+
+        /* 메인 결과 */
+        .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
+        .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .result-hero-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .result-hero-amount { font-size: 2.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -2px; }
+        .result-hero-unit { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        .result-hero-msg { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12); }
+        .result-hero-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin-top: 20px; }
+        .rh-stat { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); padding: 16px 12px; text-align: center; }
+        .rh-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+        .rh-stat-val { font-size: 0.88rem; color: rgba(255,255,255,0.95); font-weight: 700; font-family: 'Inter', sans-serif; }
+
+        @media (max-width: 768px) {
+            .result-hero-amount { font-size: 2.2rem; }
+            .rh-stat-val { font-size: 0.78rem; }
         }
 
-        /* ── Slider ── */
-        .salary-slider {
-            width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px;
-            background: linear-gradient(to right, #FF6B35, #FF9F1C, #FFBF69);
-            outline: none; cursor: pointer;
-        }
-        .salary-slider::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%;
-            background: white; border: 3px solid #FF9F1C;
-            box-shadow: 0 2px 10px rgba(255,159,28,0.45); cursor: pointer;
-        }
-        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.72rem; color: #bbb; }
-
-        /* ── Options ── */
-        .options-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
-        .option-group label { display: block; font-size: 0.82rem; font-weight: 700; color: #666; margin-bottom: 6px; }
-        .option-select {
-            width: 100%; padding: 11px 14px; border: 2px solid #F0F0F0; border-radius: 12px;
-            font-size: 0.9rem; font-family: 'Noto Sans KR', sans-serif; color: #333;
-            outline: none; background: white; transition: border-color 0.2s;
-        }
-        .option-select:focus { border-color: #FF9F1C; }
-
-        /* ── Button ── */
-        .calc-btn {
-            width: 100%; padding: 17px; margin-top: 22px;
-            background: #E85722;
-            border: none; border-radius: 12px;
-            font-size: 1.05rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-            color: white; cursor: pointer;
-            box-shadow: 0 4px 14px rgba(232,87,34,0.30); transition: background 0.15s, transform 0.1s;
-        }
-        .calc-btn:hover { background: #D44E1F; transform: translateY(-1px); }
-        .calc-btn:active { transform: translateY(0); }
-        @keyframes gradMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-
-        /* ── Result Card ── */
-        .result-card {
-            background: linear-gradient(135deg, #1B5E20, #2E7D32, #43A047);
-            border-radius: 24px; padding: 32px 24px; margin-bottom: 16px;
-            text-align: center; display: none;
-            box-shadow: 0 8px 32px rgba(46,125,50,0.30);
-        }
-        .result-card.show { display: block; animation: fadeUp 0.5s ease; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-        .result-label { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-bottom: 6px; font-weight: 500; }
-        .result-main { font-size: 3.2rem; font-weight: 900; color: #fff; letter-spacing: -1.5px; }
-        .result-main-unit { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 2px; }
-        .result-row {
-            display: flex; justify-content: center; gap: 0;
-            margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);
-        }
-        .result-sub { flex: 1; padding: 0 12px; }
-        .result-sub + .result-sub { border-left: 1px solid rgba(255,255,255,0.2); }
-        .result-sub-label { color: rgba(255,255,255,0.6); font-size: 0.75rem; margin-bottom: 4px; }
-        .result-sub-val { color: white; font-size: 1rem; font-weight: 700; }
-
-        .cheer-msg {
-            background: rgba(255,255,255,0.13); border-radius: 12px;
-            padding: 12px 16px; margin-top: 16px;
-            color: rgba(255,255,255,0.92); font-size: 0.88rem; font-weight: 500;
-        }
-
-        /* ── Breakdown ── */
-        .breakdown-card { display: none; }
-        .breakdown-card.show { display: block; animation: fadeUp 0.5s ease 0.08s both; }
-
-        .b-item { display: flex; align-items: center; margin-bottom: 14px; }
-        .b-item:last-child { margin-bottom: 0; }
-        .b-icon {
-            width: 38px; height: 38px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem; margin-right: 12px; flex-shrink: 0;
-        }
+        /* 공제 상세 카드 */
+        .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
+        .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .b-item:last-child { border-bottom: none; }
+        .b-dot { width: 6px; height: 6px; border-radius: 50%; margin-right: 12px; flex-shrink: 0; }
         .b-info { flex: 1; }
-        .b-name { font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 5px; }
-        .b-bar-wrap { background: #F5F5F5; border-radius: 4px; height: 7px; overflow: hidden; }
-        .b-bar { height: 100%; border-radius: 4px; width: 0; transition: width 0.9s cubic-bezier(0.4,0,0.2,1); }
-        .b-amount { font-size: 0.88rem; font-weight: 700; color: #444; margin-left: 12px; min-width: 90px; text-align: right; }
+        .b-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+        .b-bar-wrap { background: #F3F4F6; border-radius: 3px; height: 4px; overflow: hidden; }
+        .b-bar { height: 100%; border-radius: 3px; width: 0; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .b-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-left: 12px; min-width: 90px; text-align: right; }
+        .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
+        .b-total-label { font-size: 0.88rem; font-weight: 700; }
+        .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
 
-        .b-total {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 0 0; margin-top: 16px; border-top: 2px dashed #F0F0F0;
-        }
-        .b-total-label { font-size: 0.92rem; font-weight: 700; color: #333; }
-        .b-total-val { font-size: 1rem; font-weight: 700; color: #E64A19; }
-
-        /* ── Comparison ── */
-        .comparison-card { display: none; }
-        .comparison-card.show { display: block; animation: fadeUp 0.5s ease 0.16s both; }
-
-        .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .raise-label-text { font-size: 0.85rem; font-weight: 700; color: #555; }
-        .raise-badge {
-            background: linear-gradient(135deg, #7B1FA2, #E91E63);
-            color: white; padding: 4px 14px; border-radius: 20px;
-            font-size: 0.85rem; font-weight: 700;
-        }
-        .raise-slider {
-            width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px;
-            background: linear-gradient(to right, #7B1FA2, #E91E63);
-            outline: none; cursor: pointer; margin-bottom: 6px;
-        }
-        .raise-slider::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%;
-            background: white; border: 3px solid #E91E63;
-            box-shadow: 0 2px 8px rgba(233,30,99,0.4); cursor: pointer;
-        }
-        .raise-range { display: flex; justify-content: space-between; font-size: 0.72rem; color: #bbb; margin-bottom: 20px; }
-
-        .cmp-table { width: 100%; border-collapse: collapse; }
-        .cmp-table th {
-            padding: 10px 12px; font-size: 0.8rem; font-weight: 700; color: #888;
-            background: #FAFAFA; text-align: center;
-        }
-        .cmp-table th:first-child { text-align: left; }
-        .cmp-table td {
-            padding: 13px 12px; font-size: 0.88rem; text-align: center;
-            border-bottom: 1px solid #F5F5F5; color: #444;
-        }
-        .cmp-table td:first-child { text-align: left; font-weight: 600; color: #555; }
-        .cmp-table .green { color: #2E7D32; font-weight: 700; }
-        .cmp-table .pink { color: #E91E63; font-weight: 700; font-size: 0.82rem; }
-
-        /* ── 이미지 저장 ── */
-        .save-btn-wrap { display: none; margin-bottom: 16px; }
-        .save-btn-wrap.show { display: block; }
-        .save-btn {
-            width: 100%; padding: 14px;
-            background: white; border: 2px solid #E85722; border-radius: 12px;
-            font-size: 0.92rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-            color: #E85722; cursor: pointer; transition: background 0.15s, color 0.15s;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .save-btn:hover { background: #FEF0EB; }
-        .save-btn.loading { opacity: 0.6; cursor: wait; }
-        .share-btn {
-            width: 100%; padding: 14px;
-            background: #FEE500; border: none; border-radius: 12px;
-            font-size: 0.92rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-            color: #3C1E1E; cursor: pointer; transition: background 0.15s;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
+        /* ══ 저장 / 공유 버튼 ══ */
+        .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
+        .action-row.show { display: flex; }
+        .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .save-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .save-btn.loading { opacity: 0.5; cursor: wait; }
+        .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
 
-        /* ── Info Card ── */
-        .info-card { background: white; border-radius: 24px; padding: 28px 24px; margin-bottom: 16px; box-shadow: 0 4px 24px rgba(255,150,50,0.08); }
-        .info-card h2 { font-size: 1.05rem; font-weight: 800; color: #333; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #FFF3E0; }
+        /* ══ 연봉 인상 시뮬레이터 ══ */
+        .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
+        .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .raise-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        .raise-badge { background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; }
+        .raise-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--accent-dark), var(--accent)); outline: none; cursor: pointer; margin-bottom: 6px; }
+        .raise-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .raise-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-tertiary); margin-bottom: 20px; }
 
-        /* ── FAQ ── */
-        .faq-item { margin-bottom: 14px; border-bottom: 1px solid #F5F5F5; padding-bottom: 14px; }
-        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .faq-q { font-size: 0.92rem; font-weight: 700; color: #333; margin-bottom: 6px; display: flex; gap: 8px; }
-        .faq-q::before { content: "Q."; color: #E85722; font-weight: 900; flex-shrink: 0; }
-        .faq-a { font-size: 0.88rem; color: #666; line-height: 1.8; padding-left: 24px; }
+        .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .cmp-table th { background: var(--surface-alt); padding: 10px 12px; text-align: center; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
+        .cmp-table th:first-child { text-align: left; }
+        .cmp-table td { padding: 12px; border-bottom: 1px solid #F3F4F6; text-align: center; color: var(--text-primary); }
+        .cmp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); }
+        .cmp-table .green { color: #059669; font-weight: 700; }
+        .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
 
-        /* ── Footer ── */
-        .guide-cta { background: linear-gradient(135deg, #FFF8F0 0%, #FFF3E0 100%); border-radius: 20px; padding: 28px 24px; margin-bottom: 16px; text-align: center; border: 1px solid #FFE0B2; }
-        .guide-cta p { color: #666; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6; }
-        .guide-cta a { display: inline-block; background: linear-gradient(135deg, #FF9800, #FF6D00); color: #fff; font-weight: 700; font-size: 0.95rem; padding: 12px 28px; border-radius: 12px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
-        .guide-cta a:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(255,152,0,0.3); }
-        .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
+        /* ══ 정보 카드 / FAQ ══ */
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        @media (max-width: 768px) { .bottom-grid { grid-template-columns: 1fr; } }
 
-        /* ── Responsive ── */
-        @media (max-width: 480px) {
-            .header h1 { font-size: 1.55rem; }
-            .result-main { font-size: 2.4rem; }
-            .options-row { grid-template-columns: 1fr; }
-            .result-sub-val { font-size: 0.88rem; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .info-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
+        .info-card p:last-child { margin-bottom: 0; }
+
+        .faq-item { padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+        .faq-a { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ══ 가이드 CTA ══ */
+        .guide-cta { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; text-align: center; }
+        .guide-cta p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
+        .guide-cta a { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 0.9rem; padding: 12px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
+        .guide-cta a:hover { background: #1D4ED8; }
+
+        /* ══ 푸터 ══ */
+        .footer { max-width: 1120px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
+        @media (max-width: 768px) {
+            .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
@@ -277,198 +201,221 @@
 <body>
 
 <!-- 네비게이션 -->
-<nav class="navbar">
+<nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">급여계산기</a>
-        <div class="nav-links">
-            <a href="index.html" class="active">연봉계산기</a>
-            <a href="minimum-wage.html">최저시급</a>
-            <a href="salary-table.html">실수령액표</a>
-            <a href="holiday-pay.html">주휴수당</a>
-            <a href="insurance.html">4대보험</a>
-            <a href="retirement.html">퇴직금</a>
-            <a href="unemployment.html">실업급여</a>
-            <a href="tax-guide.html">연말정산</a>
-            <a href="income-tax.html">종합소득세</a>
+        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
+                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
+                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
+                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
+                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
+                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                </div>
+            </div>
         </div>
-        <button class="nav-toggle" onclick="this.closest('.navbar').querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
-        <a href="index.html">연봉계산기</a>
-        <a href="minimum-wage.html">최저시급 계산기</a>
-        <a href="salary-table.html">연봉별 실수령액 표</a>
-        <a href="holiday-pay.html">주휴수당 계산기</a>
-        <a href="insurance.html">4대보험 계산기</a>
-        <a href="retirement.html">퇴직금 계산기</a>
-        <a href="unemployment.html">실업급여 계산기</a>
-        <a href="tax-guide.html">연말정산 가이드</a>
-        <a href="income-tax.html">종합소득세 계산기</a>
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">월급 받을 때</div>
+            <a href="index.html">연봉 실수령액</a>
+            <a href="minimum-wage.html">최저시급 계산기</a>
+            <a href="holiday-pay.html">주휴수당 계산기</a>
+            <a href="insurance.html">4대보험 계산기</a>
+            <a href="salary-table.html">실수령액 표</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">세금 낼 때</div>
+            <a href="income-tax.html">종합소득세 계산기</a>
+            <a href="tax-guide.html">연말정산 가이드</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">퇴사할 때</div>
+            <a href="retirement.html">퇴직금 계산기</a>
+            <a href="unemployment.html">실업급여 계산기</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">기타</div>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
     </div>
 </nav>
 
-<div class="container">
+<div class="page">
 
-    <!-- Header -->
-    <div class="header">
+    <div class="page-header">
+        <div class="breadcrumb">월급 받을 때</div>
         <h1>연봉 실수령액 계산기</h1>
-        <p>세금 다 떼고 실제로 얼마 받는지 확인해보세요!</p>
+        <p>2026년 기준 세금·4대보험 공제 후 실제 수령액</p>
     </div>
 
-    <!-- 광고 (상단) -->
+    <!-- 2컬럼 대시보드 -->
+    <div class="dashboard">
 
-    <!-- 입력 카드 -->
-    <div class="card">
-        <div class="card-title">📝 내 연봉 입력</div>
+        <!-- 왼쪽: 입력 -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">소득 정보 입력</div>
+                    <div class="card-badge">2026년</div>
+                </div>
 
-        <label class="input-label">연봉 (세전)</label>
-        <div class="input-wrap">
-            <input type="text" class="salary-input" id="salaryInput" placeholder="35,000,000">
-            <span class="input-unit">원</span>
-        </div>
-        <input type="range" class="salary-slider" id="salarySlider"
-            min="20000000" max="200000000" step="1000000" value="35000000">
-        <div class="slider-labels">
-            <span>2,000만원</span>
-            <span>6,000만원</span>
-            <span>1억원</span>
-            <span>2억원</span>
-        </div>
+                <div class="form-group">
+                    <label class="form-label">연봉 (세전)</label>
+                    <div class="form-input-wrap">
+                        <input type="text" class="form-input" id="salaryInput" placeholder="35,000,000">
+                        <span class="form-unit">원</span>
+                    </div>
+                    <input type="range" class="form-slider" id="salarySlider" min="20000000" max="200000000" step="1000000" value="35000000">
+                    <div class="slider-labels"><span>2,000만</span><span>6,000만</span><span>1억</span><span>2억</span></div>
+                </div>
 
-        <div class="options-row">
-            <div class="option-group">
-                <label>부양가족 수 (본인 포함)</label>
-                <select class="option-select" id="dependents">
-                    <option value="1">1명 (본인만)</option>
-                    <option value="2">2명</option>
-                    <option value="3">3명</option>
-                    <option value="4">4명</option>
-                    <option value="5">5명 이상</option>
-                </select>
+                <div class="form-row" style="margin-bottom:20px;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">부양가족 수</label>
+                        <select class="form-select" id="dependents">
+                            <option value="1">1명 (본인만)</option>
+                            <option value="2">2명</option>
+                            <option value="3">3명</option>
+                            <option value="4">4명</option>
+                            <option value="5">5명 이상</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">비과세 금액</label>
+                        <select class="form-select" id="nonTaxable">
+                            <option value="0">없음</option>
+                            <option value="100000">10만원 (식대)</option>
+                            <option value="200000">20만원</option>
+                            <option value="300000">30만원</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="calculate()">실수령액 계산하기</button>
             </div>
-            <div class="option-group">
-                <label>월 비과세 금액</label>
-                <select class="option-select" id="nonTaxable">
-                    <option value="0">없음</option>
-                    <option value="100000">10만원 (식대)</option>
-                    <option value="200000">20만원</option>
-                    <option value="300000">30만원</option>
-                </select>
+
+            <!-- 저장 / 공유 버튼 -->
+            <div class="action-row" id="saveBtnWrap">
+                <button class="save-btn" id="saveBtn" onclick="saveImage()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    이미지 저장
+                </button>
+                <button class="share-btn" onclick="shareKakao()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
+                    카카오톡 공유
+                </button>
             </div>
         </div>
 
-        <button class="calc-btn" onclick="calculate()">💡 실수령액 계산하기</button>
+        <!-- 오른쪽: 결과 -->
+        <div class="result-col">
+            <div id="captureArea">
+
+            <!-- 결과 요약 -->
+            <div class="result-hero" id="resultCard">
+                <div class="result-hero-label">월 실수령액</div>
+                <div class="result-hero-amount" id="monthlyResult">0</div>
+                <div class="result-hero-unit">원 / 월</div>
+                <div class="result-hero-msg" id="cheerMsg"></div>
+                <div class="result-hero-stats">
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">연 실수령액</div>
+                        <div class="rh-stat-val" id="annualResult">—</div>
+                    </div>
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">실효 공제율</div>
+                        <div class="rh-stat-val" id="effectiveRate">—</div>
+                    </div>
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">월 공제액</div>
+                        <div class="rh-stat-val" id="totalDed">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 공제 상세 -->
+            <div class="breakdown-card" id="breakdownCard">
+                <div class="card-header">
+                    <div class="card-title">공제 항목 상세</div>
+                </div>
+                <div id="breakdownItems"></div>
+                <div class="b-total">
+                    <span class="b-total-label">월 총 공제액</span>
+                    <span class="b-total-val" id="breakdownTotal">—</span>
+                </div>
+            </div>
+
+            </div><!-- captureArea end -->
+
+            <!-- 결과 없을 때 플레이스홀더 -->
+            <div class="result-placeholder" id="resultPlaceholder">연봉을 입력하고 계산하기 버튼을 눌러주세요</div>
+        </div>
+
     </div>
 
-    <!-- 캡처 영역 시작 -->
-    <div id="captureArea">
-
-    <!-- 결과 카드 -->
-    <div class="result-card" id="resultCard">
-        <div class="result-label">월 실수령액</div>
-        <div class="result-main" id="monthlyResult">0</div>
-        <div class="result-main-unit">원 / 월</div>
-        <div class="result-row">
-            <div class="result-sub">
-                <div class="result-sub-label">연 실수령액</div>
-                <div class="result-sub-val" id="annualResult">—</div>
-            </div>
-            <div class="result-sub">
-                <div class="result-sub-label">실효 공제율</div>
-                <div class="result-sub-val" id="effectiveRate">—</div>
-            </div>
-            <div class="result-sub">
-                <div class="result-sub-label">월 총 공제액</div>
-                <div class="result-sub-val" id="totalDed">—</div>
-            </div>
+    <!-- 연봉 인상 시뮬레이터 (풀와이드) -->
+    <div class="comparison-card" id="comparisonCard">
+        <div class="card-header">
+            <div class="card-title">연봉 인상 시뮬레이터</div>
         </div>
-        <div class="cheer-msg" id="cheerMsg">🌟 오늘도 수고하셨습니다!</div>
-    </div>
-
-    <!-- 공제 상세 카드 -->
-    <div class="card breakdown-card" id="breakdownCard">
-        <div class="card-title">📊 월 공제 항목 상세</div>
-        <div id="breakdownItems"></div>
-        <div class="b-total">
-            <span class="b-total-label">월 총 공제액</span>
-            <span class="b-total-val" id="breakdownTotal">—</span>
-        </div>
-    </div>
-
-    </div><!-- 캡처 영역 끝 -->
-
-    <!-- 이미지 저장 + 카카오 공유 버튼 -->
-    <div class="save-btn-wrap" id="saveBtnWrap">
-        <button class="save-btn" id="saveBtn" onclick="saveImage()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            결과 이미지로 저장
-        </button>
-        <div style="height:8px"></div>
-        <button class="share-btn" onclick="shareKakao()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-            카카오톡으로 공유하기
-        </button>
-    </div>
-
-    <!-- 광고 (중간) -->
-
-    <!-- 연봉 인상 시뮬레이터 -->
-    <div class="card comparison-card" id="comparisonCard">
-        <div class="card-title">📈 연봉 인상 시뮬레이터</div>
-
         <div class="raise-row">
-            <span class="raise-label-text">연봉 인상률</span>
+            <span class="raise-label">인상률</span>
             <span class="raise-badge" id="raiseBadge">+10%</span>
         </div>
         <input type="range" class="raise-slider" id="raiseSlider" min="5" max="50" step="5" value="10">
         <div class="raise-range"><span>+5%</span><span>+50%</span></div>
-
         <table class="cmp-table">
-            <thead>
-                <tr>
-                    <th>항목</th>
-                    <th>현재</th>
-                    <th>인상 후</th>
-                    <th>증가액</th>
-                </tr>
-            </thead>
+            <thead><tr><th>항목</th><th>현재</th><th>인상 후</th><th>증가액</th></tr></thead>
             <tbody id="cmpBody"></tbody>
         </table>
     </div>
 
-    <!-- 광고 (하단) -->
-
-    <div class="info-card">
-        <h2>자주 묻는 질문</h2>
-        <div class="faq-item">
-            <div class="faq-q">연봉 5000만원이면 실수령액이 얼마인가요?</div>
-            <div class="faq-a">부양가족 1인 기준으로 월 약 358만원 수준입니다. 부양가족 수와 비과세 금액에 따라 달라지므로 위 계산기에 직접 입력해서 확인해보세요.</div>
+    <!-- 하단 정보 영역 -->
+    <div class="bottom-grid">
+        <div class="info-card">
+            <h2>연봉 실수령액이란?</h2>
+            <p>세전 연봉에서 국민연금·건강보험·고용보험 등 4대보험료와 소득세·지방소득세를 공제한 후 실제로 받는 금액입니다.</p>
+            <p>일반적으로 세전 연봉의 75~85% 수준이 실수령 연봉이 됩니다.</p>
         </div>
-        <div class="faq-item">
-            <div class="faq-q">비과세 금액은 어떻게 입력하나요?</div>
-            <div class="faq-a">식대(월 20만원), 자가운전보조금(월 20만원) 등 회사에서 비과세로 지급하는 금액입니다. 급여명세서에서 확인할 수 있으며, 모르시면 0으로 두셔도 됩니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">부양가족 수가 많으면 세금이 줄어드나요?</div>
-            <div class="faq-a">네. 부양가족 1인당 인적공제가 적용되어 소득세가 줄어듭니다. 계산기에서 부양가족 수를 변경하면 실수령액 차이를 바로 확인할 수 있습니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">계산 결과가 실제 급여명세서와 다른 이유는?</div>
-            <div class="faq-a">본 계산기는 간이세액표 기준의 추정값입니다. 비과세 항목, 연말정산 공제, 회사 규정 등에 따라 실제 수령액과 차이가 생길 수 있습니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">연봉 인상 시 실수령액이 얼마나 늘어나나요?</div>
-            <div class="faq-a">연봉이 오를수록 세율 구간이 높아져 인상분의 전부가 실수령에 반영되지 않습니다. 계산기 하단의 인상 시뮬레이터에서 인상 전후를 비교해볼 수 있습니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">세전 연봉과 세후 연봉의 차이는?</div>
-            <div class="faq-a">세전 연봉은 4대보험·소득세 공제 전 금액, 세후 연봉은 공제 후 실제 수령액입니다. 일반적으로 세전 연봉의 75~85% 수준이 실수령 연봉이 됩니다.</div>
+        <div class="info-card">
+            <h2>자주 묻는 질문</h2>
+            <div class="faq-item">
+                <div class="faq-q">연봉 5000만원 실수령액은?</div>
+                <div class="faq-a">부양가족 1인 기준 월 약 358만원입니다. 부양가족 수와 비과세에 따라 달라집니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">비과세 금액은 어떻게 설정하나요?</div>
+                <div class="faq-a">식대(월 20만원) 등 급여명세서에서 비과세로 표시된 금액입니다. 모르면 0으로 두세요.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">계산 결과가 실제 급여와 다르다면?</div>
+                <div class="faq-a">간이세액표 기준 추정값이며, 연말정산·회사 규정에 따라 차이가 있을 수 있습니다.</div>
+            </div>
         </div>
     </div>
 
-    <div style="text-align:center; margin-bottom:16px;">
+    <!-- 카카오 애드핏 -->
+    <div style="text-align:center; margin-bottom:24px;">
         <ins class="kakao_ad_area" style="display:none;"
         data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
         data-ad-width="300"
@@ -476,30 +423,30 @@
         <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
+    <!-- 가이드 CTA -->
     <div class="guide-cta">
         <p>연봉 실수령액의 계산 원리, 공제 항목별 상세 설명이 궁금하다면?</p>
         <a href="guide-salary.html">연봉 실수령액 완벽 가이드 보기 →</a>
     </div>
 
-    <div class="footer">
-        <p>본 계산기는 <strong>2026년 기준</strong> 근로소득 간이세액표를 적용한 추정값입니다.</p>
-        <p>실제 공제액은 개인 상황(연말정산 등)에 따라 다를 수 있습니다.</p>
-        <div style="margin-top:16px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-            <a href="about.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">소개</a>
-            <a href="contact.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">문의하기</a>
-            <a href="privacy.html" style="color:#FFAB40; text-decoration:none; font-weight:600;">개인정보처리방침</a>
-        </div>
-        <p style="margin-top:12px;">© 2026 급여계산기 · 무료 연봉 실수령액 계산 서비스</p>
-    </div>
-
 </div>
 
+<!-- 푸터 -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의하기</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div class="footer-copy">© 2026 월급연구소</div>
+</footer>
+
 <script>
-// ── 유틸 ──────────────────────────────────────────────
+// ── 유틸 ──
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
 
-// ── 슬라이더 연동 ────────────────────────────────────
+// ── 슬라이더 연동 ──
 const salaryInput  = document.getElementById('salaryInput');
 const salarySlider = document.getElementById('salarySlider');
 const raiseSlider  = document.getElementById('raiseSlider');
@@ -517,7 +464,7 @@ raiseSlider.addEventListener('input', function () {
     updateComparison();
 });
 
-// ── 세금 계산 ─────────────────────────────────────────
+// ── 세금 계산 ──
 function incomeDeduction(s) {
     if (s <= 5000000)   return s * 0.7;
     if (s <= 15000000)  return 3500000  + (s - 5000000)  * 0.40;
@@ -544,27 +491,22 @@ function annualIncomeTax(salary, deps, aPension, aHealth, aEmploy) {
     const insuranceDed = aPension + aHealth + aEmploy;
     const taxBase      = Math.max(0, workIncome - personalDed - insuranceDed);
     const gross        = taxFromBase(taxBase);
-
     const creditLimit  = salary <= 33000000 ? 740000 : salary <= 70000000 ? 660000 : 500000;
     const credit       = Math.min(gross <= 1300000 ? gross * 0.55 : 715000 + (gross - 1300000) * 0.30, creditLimit);
-
-    return Math.max(0, gross - credit - 130000); // 표준세액공제 13만원
+    return Math.max(0, gross - credit - 130000);
 }
 
 function calcSalary(annual, deps, monthlyNonTax) {
     const monthly      = annual / 12;
     const taxable      = monthly - monthlyNonTax;
-
-    const pension      = Math.round(Math.min(taxable, 6370000) * 0.0475);  // 국민연금 4.75% (2026년, 상한 637만원)
-    const health       = Math.round(taxable * 0.03595);                    // 건강보험 3.595% (2026년)
-    const longCare     = Math.round(health  * 0.1314);                     // 장기요양 13.14% (2026년)
-    const employ       = Math.round(taxable * 0.009);                      // 고용보험 0.9%
+    const pension      = Math.round(Math.min(taxable, 6370000) * 0.0475);
+    const health       = Math.round(taxable * 0.03595);
+    const longCare     = Math.round(health  * 0.1314);
+    const employ       = Math.round(taxable * 0.009);
     const incomeTax    = Math.round(annualIncomeTax(annual, deps, pension * 12, health * 12, employ * 12) / 12);
-    const localTax     = Math.round(incomeTax * 0.1);                      // 지방소득세 10%
-
+    const localTax     = Math.round(incomeTax * 0.1);
     const totalDed     = pension + health + longCare + employ + incomeTax + localTax;
     const takeHome     = Math.round(monthly - totalDed);
-
     return {
         monthly: Math.round(monthly), takeHome,
         annual: Math.round(annual), annualTakeHome: takeHome * 12,
@@ -572,17 +514,15 @@ function calcSalary(annual, deps, monthlyNonTax) {
     };
 }
 
-// ── 동기부여 메시지 ───────────────────────────────────
 function cheer(m) {
-    if (m >= 10000000) return '🏆 월 1천만원 이상! 정말 대단해요!';
-    if (m >= 7000000)  return '🌟 꾸준히 커리어를 쌓아온 결과예요. 훌륭해요!';
-    if (m >= 5000000)  return '💪 멋져요! 열심히 일한 당신을 응원합니다!';
-    if (m >= 3500000)  return '😊 오늘도 열심히 해준 자신을 칭찬해줘요!';
-    if (m >= 2500000)  return '🌱 지금도 훌륭해요. 앞으로가 더 기대됩니다!';
-    return '🔥 시작이 반! 차근차근 올라가면 돼요!';
+    if (m >= 10000000) return '월 1천만원 이상! 정말 대단합니다';
+    if (m >= 7000000)  return '꾸준히 커리어를 쌓아온 결과입니다';
+    if (m >= 5000000)  return '열심히 일한 당신을 응원합니다';
+    if (m >= 3500000)  return '오늘도 수고한 자신을 칭찬해 주세요';
+    if (m >= 2500000)  return '지금도 훌륭합니다. 앞으로가 더 기대돼요';
+    return '시작이 반! 차근차근 올라가면 됩니다';
 }
 
-// ── 숫자 카운터 애니메이션 ────────────────────────────
 function counter(id, target, ms = 900) {
     const el = document.getElementById(id);
     const t0 = performance.now();
@@ -595,17 +535,20 @@ function counter(id, target, ms = 900) {
     requestAnimationFrame(tick);
 }
 
-// ── 메인 계산 ─────────────────────────────────────────
+// ── 메인 계산 ──
 let saved = null;
 
 function calculate() {
     const annual = parseVal(salaryInput.value);
     if (!annual || annual < 5000000) { alert('연봉을 올바르게 입력해주세요.'); return; }
 
-    const deps       = parseInt(document.getElementById('dependents').value);
-    const nonTax     = parseInt(document.getElementById('nonTaxable').value);
-    saved            = calcSalary(annual, deps, nonTax);
-    const r          = saved;
+    const deps   = parseInt(document.getElementById('dependents').value);
+    const nonTax = parseInt(document.getElementById('nonTaxable').value);
+    saved        = calcSalary(annual, deps, nonTax);
+    const r      = saved;
+
+    // 플레이스홀더 숨김
+    document.getElementById('resultPlaceholder').style.display = 'none';
 
     // 결과 카드
     document.getElementById('resultCard').classList.add('show');
@@ -617,18 +560,18 @@ function calculate() {
 
     // 공제 상세
     const items = [
-        { name: '국민연금',    amount: r.ded.pension,    icon: '🏛️', color: '#1565C0', bg: '#E3F2FD' },
-        { name: '건강보험',    amount: r.ded.health,     icon: '🏥', color: '#6A1B9A', bg: '#F3E5F5' },
-        { name: '장기요양보험', amount: r.ded.longCare,  icon: '🤝', color: '#00695C', bg: '#E0F2F1' },
-        { name: '고용보험',    amount: r.ded.employ,     icon: '💼', color: '#E65100', bg: '#FFF3E0' },
-        { name: '소득세',      amount: r.ded.incomeTax,  icon: '📋', color: '#B71C1C', bg: '#FFEBEE' },
-        { name: '지방소득세',  amount: r.ded.localTax,   icon: '🏙️', color: '#4E342E', bg: '#EFEBE9' },
+        { name: '국민연금',    amount: r.ded.pension,   color: '#2563EB' },
+        { name: '건강보험',    amount: r.ded.health,    color: '#8B5CF6' },
+        { name: '장기요양보험', amount: r.ded.longCare,  color: '#A78BFA' },
+        { name: '고용보험',    amount: r.ded.employ,    color: '#F59E0B' },
+        { name: '소득세',      amount: r.ded.incomeTax, color: '#EF4444' },
+        { name: '지방소득세',  amount: r.ded.localTax,  color: '#9CA3AF' },
     ];
     const maxAmt = Math.max(...items.map(i => i.amount));
 
     document.getElementById('breakdownItems').innerHTML = items.map(item => `
         <div class="b-item">
-            <div class="b-icon" style="background:${item.bg}">${item.icon}</div>
+            <div class="b-dot" style="background:${item.color};"></div>
             <div class="b-info">
                 <div class="b-name">${item.name}</div>
                 <div class="b-bar-wrap">
@@ -642,77 +585,58 @@ function calculate() {
     document.getElementById('breakdownTotal').textContent = '-' + fmt(r.ded.total) + '원';
     document.getElementById('breakdownCard').classList.add('show');
 
-    // 바 애니메이션 (DOM 반영 후)
     requestAnimationFrame(() => requestAnimationFrame(() => {
-        document.querySelectorAll('.b-bar').forEach(bar => {
-            bar.style.width = bar.dataset.w + '%';
-        });
+        document.querySelectorAll('.b-bar').forEach(bar => { bar.style.width = bar.dataset.w + '%'; });
     }));
 
-    // 이미지 저장 버튼 표시
     document.getElementById('saveBtnWrap').classList.add('show');
-
-    // 비교 카드
     document.getElementById('comparisonCard').classList.add('show');
     updateComparison();
 }
 
 function updateComparison() {
     if (!saved) return;
-    const annual  = parseVal(salaryInput.value);
-    const deps    = parseInt(document.getElementById('dependents').value);
-    const nonTax  = parseInt(document.getElementById('nonTaxable').value);
-    const rate    = parseInt(raiseSlider.value) / 100;
-    const newSal  = Math.round(annual * (1 + rate));
-    const nr      = calcSalary(newSal, deps, nonTax);
-    const r       = saved;
-
+    const annual = parseVal(salaryInput.value);
+    const deps   = parseInt(document.getElementById('dependents').value);
+    const nonTax = parseInt(document.getElementById('nonTaxable').value);
+    const rate   = parseInt(raiseSlider.value) / 100;
+    const newSal = Math.round(annual * (1 + rate));
+    const nr     = calcSalary(newSal, deps, nonTax);
+    const r      = saved;
     const rows = [
         { label: '연봉 (세전)',  cur: r.annual,        next: nr.annual        },
         { label: '월 실수령액',  cur: r.takeHome,      next: nr.takeHome      },
         { label: '연 실수령액',  cur: r.annualTakeHome, next: nr.annualTakeHome },
         { label: '월 공제액',    cur: r.ded.total,     next: nr.ded.total     },
     ];
-
     document.getElementById('cmpBody').innerHTML = rows.map(row => {
         const diff = row.next - row.cur;
-        return `
-            <tr>
-                <td>${row.label}</td>
-                <td>${fmt(row.cur)}원</td>
-                <td class="green">${fmt(row.next)}원</td>
-                <td class="pink">+${fmt(diff)}원</td>
-            </tr>
-        `;
+        return `<tr><td>${row.label}</td><td>${fmt(row.cur)}원</td><td class="green">${fmt(row.next)}원</td><td class="accent">+${fmt(diff)}원</td></tr>`;
     }).join('');
 }
 
-// ── 이미지 저장 ───────────────────────────────────────
+// ── 이미지 저장 ──
 function saveImage() {
     const btn = document.getElementById('saveBtn');
     btn.classList.add('loading');
     btn.innerHTML = '저장 중...';
-
-    const area = document.getElementById('captureArea');
-    html2canvas(area, {
-        backgroundColor: '#F4F5F7',
-        scale: 2,
-        useCORS: true
+    html2canvas(document.getElementById('captureArea'), {
+        backgroundColor: '#F7F8FA', scale: 2, useCORS: true
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = '급여계산결과.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
         btn.classList.remove('loading');
-        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 결과 이미지로 저장';
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 이미지 저장';
     }).catch(() => {
         btn.classList.remove('loading');
-        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 결과 이미지로 저장';
-        alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 이미지 저장';
+        alert('이미지 저장에 실패했습니다.');
     });
 }
 
-// 초기값 설정
+// 초기값
 salaryInput.value = (35000000).toLocaleString('ko-KR');
 salarySlider.value = 35000000;
 </script>
@@ -721,31 +645,20 @@ salarySlider.value = 35000000;
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"></script>
 <script>
 Kakao.init('051ed8019b76b2127b2da56a27b406f2');
-
 function shareKakao() {
     if (!saved) { alert('먼저 계산을 해주세요.'); return; }
-    const monthly = Math.round(saved.takeHome).toLocaleString('ko-KR');
-    const annual = Math.round(saved.annualTakeHome).toLocaleString('ko-KR');
-    const rate = ((saved.ded.total / saved.monthly) * 100).toFixed(1);
-
+    var monthly = Math.round(saved.takeHome).toLocaleString('ko-KR');
+    var annual = Math.round(saved.annualTakeHome).toLocaleString('ko-KR');
+    var rate = ((saved.ded.total / saved.monthly) * 100).toFixed(1);
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
             title: '내 월 실수령액은 ' + monthly + '원!',
             description: '연 실수령액 ' + annual + '원 (공제율 ' + rate + '%)\n2026년 기준 연봉 실수령액 계산기로 확인해보세요.',
             imageUrl: 'https://salarykorea.site/og-image.png',
-            link: {
-                mobileWebUrl: 'https://salarykorea.site',
-                webUrl: 'https://salarykorea.site'
-            }
+            link: { mobileWebUrl: 'https://salarykorea.site', webUrl: 'https://salarykorea.site' }
         },
-        buttons: [{
-            title: '내 실수령액 계산하기',
-            link: {
-                mobileWebUrl: 'https://salarykorea.site',
-                webUrl: 'https://salarykorea.site'
-            }
-        }]
+        buttons: [{ title: '내 실수령액 계산하기', link: { mobileWebUrl: 'https://salarykorea.site', webUrl: 'https://salarykorea.site' } }]
     });
 }
 </script>
