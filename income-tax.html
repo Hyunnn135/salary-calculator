@@ -14,75 +14,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
     <style>
-        :root {
-            --bg: #F7F8FA;
-            --surface: #FFFFFF;
-            --surface-alt: #F0F2F5;
-            --text-primary: #18191B;
-            --text-secondary: #6B7280;
-            --text-tertiary: #9CA3AF;
-            --border: #E5E7EB;
-            --accent: #2563EB;
-            --accent-dark: #1E40AF;
-            --accent-light: #EFF6FF;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
-
-        /* ══ 네비게이션 ══ */
-        .nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
-        .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
-        .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
-        .nav-logo span { color: var(--accent); }
-        .nav-menu { display: flex; gap: 2px; margin-left: auto; }
-        .nav-item { position: relative; }
-        .nav-item-btn { padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 4px; }
-        .nav-item-btn:hover { color: var(--text-primary); background: var(--surface-alt); }
-        .nav-item-btn svg { width: 12px; height: 12px; opacity: 0.4; }
-        .nav-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transition: all 0.15s; }
-        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; }
-        .nav-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; transition: background 0.1s; }
-        .nav-dropdown a:hover { background: var(--surface-alt); }
-        .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-        .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
-
-        /* 모바일 메뉴 */
-        .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
-        .nav-mobile.open { display: block; }
-        .nav-mobile-group { margin-bottom: 16px; }
-        .nav-mobile-group:last-child { margin-bottom: 0; }
-        .nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
-        .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
-        .nav-mobile a:hover { background: var(--surface-alt); }
-
-        @media (max-width: 768px) {
-            .nav-inner { padding: 0 20px; }
-            .nav-menu { display: none; }
-            .nav-mobile-btn { display: block; }
-        }
-
-        /* ══ 페이지 레이아웃 ══ */
-        .page { max-width: 1120px; margin: 0 auto; padding: 32px 32px 60px; }
-        .page-header { text-align: center; margin-bottom: 32px; }
-        .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
-        .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
-        .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
         .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-
         @media (max-width: 768px) {
-            .page { padding: 24px 16px 60px; }
-            .page-header { margin-bottom: 24px; }
-            .page-header h1 { font-size: 1.4rem; }
             .dashboard { grid-template-columns: 1fr; }
         }
-
-        /* ══ 카드 ══ */
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
-        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-        .card-title { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); }
-        .card-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 20px; }
-
         /* ══ 폼 요소 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
@@ -93,19 +30,15 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
         /* 슬라이더 */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
-
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-
         /* ══ 결과 영역 ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-
         /* 메인 결과 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
@@ -122,12 +55,10 @@
         .result-hero.pay .rh-stat { background: linear-gradient(135deg, #991B1B, #DC2626); }
         .rh-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
         .rh-stat-val { font-size: 0.88rem; color: rgba(255,255,255,0.95); font-weight: 700; font-family: 'Inter', sans-serif; }
-
         @media (max-width: 768px) {
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-
         /* 공제 상세 카드 (step breakdown) */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
@@ -141,70 +72,53 @@
         .step-amount.plus { color: var(--accent); }
         .step-amount.result-refund { color: var(--accent); font-size: 1rem; font-weight: 800; }
         .step-amount.result-pay { color: #DC2626; font-size: 1rem; font-weight: 800; }
-
         /* ══ 소득 유형 버튼 그룹 ══ */
         .type-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .type-btn { padding: 11px 8px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--surface); font-size: 0.82rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; text-align: center; }
         .type-btn:hover { border-color: var(--accent); color: var(--accent); }
         .type-btn.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 700; }
-
         /* ══ 힌트 텍스트 ══ */
         .form-hint { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 6px; line-height: 1.5; }
-
         /* ══ 저장 / 공유 버튼 ══ */
         .action-row { display: none; gap: 10px; margin-top: 0; }
         .action-row.show { display: flex; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-
         /* ══ 세율 테이블 ══ */
         .rate-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 12px 0; }
         .rate-table th { background: var(--surface-alt); padding: 10px 12px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.78rem; }
         .rate-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
         .rate-table tr:last-child td { border-bottom: none; }
         .rate-table .highlight { color: var(--accent); font-weight: 700; }
-
         /* 하이라이트 박스 */
         .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
         .highlight-box p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; margin: 0; }
-
-        /* ══ 정보 카드 / FAQ ══ */
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-        @media (max-width: 768px) { .bottom-grid { grid-template-columns: 1fr; } }
-
-        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
-        .info-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-        .info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
-        .info-card p:last-child { margin-bottom: 0; }
         .info-card ul { padding-left: 18px; margin-bottom: 10px; }
         .info-card ul li { color: var(--text-secondary); line-height: 1.8; font-size: 0.85rem; margin-bottom: 4px; }
-
-        .faq-item { padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
-        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .faq-q { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-        .faq-a { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
-
-        /* ══ 가이드 CTA ══ */
-        .guide-cta { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; text-align: center; }
-        .guide-cta p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
-        .guide-cta a { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 0.9rem; padding: 12px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
-        .guide-cta a:hover { background: #1D4ED8; }
-
-        /* ══ 푸터 ══ */
-        .footer { max-width: 1120px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
-        .footer-links a:hover { color: var(--text-primary); }
-        .footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
-        @media (max-width: 768px) {
-            .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
-        }
-    
-        /* ══ 쿠팡 파트너스 배너 ══ */
-        .coupang-banner { max-width: 1120px; margin: 24px auto; padding: 0 32px; text-align: center; }
-        .coupang-banner iframe { max-width: 100%; }
-        .coupang-disclosure { font-size: 0.7rem; color: var(--text-tertiary); margin-top: 8px; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "종합소득세 계산기",
+    "description": "종합소득세 예상 세액을 계산합니다. 사업소득, 근로소득 등 소득 유형별 세금을 확인하세요.",
+    "url": "https://salarykorea.site/income-tax",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+    },
+    "provider": {
+        "@type": "Organization",
+        "name": "월급연구소",
+        "url": "https://salarykorea.site"
+    }
+}
+    </script>
 </head>
 <body>
 

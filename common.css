@@ -1,0 +1,109 @@
+/* ══════════════════════════════════════
+   월급연구소 공통 스타일 (common.css)
+   ══════════════════════════════════════ */
+
+/* ── CSS 변수 ── */
+:root {
+    --bg: #F7F8FA;
+    --surface: #FFFFFF;
+    --surface-alt: #F0F2F5;
+    --text-primary: #18191B;
+    --text-secondary: #6B7280;
+    --text-tertiary: #9CA3AF;
+    --border: #E5E7EB;
+    --accent: #2563EB;
+    --accent-dark: #1E40AF;
+    --accent-light: #EFF6FF;
+}
+
+/* ── 리셋 & 기본 ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+
+/* ══ 네비게이션 ══ */
+.nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
+.nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
+.nav-logo span { color: var(--accent); }
+.nav-menu { display: flex; gap: 2px; margin-left: auto; }
+.nav-item { position: relative; }
+.nav-item-btn { padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 4px; }
+.nav-item-btn:hover { color: var(--text-primary); background: var(--surface-alt); }
+.nav-item-btn svg { width: 12px; height: 12px; opacity: 0.4; }
+.nav-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transition: all 0.15s; }
+.nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; }
+.nav-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; transition: background 0.1s; }
+.nav-dropdown a:hover { background: var(--surface-alt); }
+.nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
+
+/* 모바일 메뉴 */
+.nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
+.nav-mobile.open { display: block; }
+.nav-mobile-group { margin-bottom: 16px; }
+.nav-mobile-group:last-child { margin-bottom: 0; }
+.nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
+.nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
+.nav-mobile a:hover { background: var(--surface-alt); }
+
+@media (max-width: 768px) {
+    .nav-inner { padding: 0 20px; }
+    .nav-menu { display: none; }
+    .nav-mobile-btn { display: block; }
+}
+
+/* ══ 페이지 레이아웃 ══ */
+.page { max-width: 1120px; margin: 0 auto; padding: 32px 32px 60px; }
+.page-header { text-align: center; margin-bottom: 32px; }
+.page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
+.page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+.page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
+
+@media (max-width: 768px) {
+    .page { padding: 24px 16px 60px; }
+    .page-header { margin-bottom: 24px; }
+    .page-header h1 { font-size: 1.4rem; }
+}
+
+/* ══ 카드 ══ */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.card-title { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); }
+.card-badge { font-size: 0.7rem; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 10px; border-radius: 20px; }
+
+/* ══ 정보 카드 ══ */
+.info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.info-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.info-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
+.info-card p:last-child { margin-bottom: 0; }
+
+/* ══ 가이드 CTA ══ */
+.guide-cta { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; text-align: center; }
+.guide-cta p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
+.guide-cta a { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 0.9rem; padding: 12px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
+.guide-cta a:hover { background: #1D4ED8; }
+
+/* ══ FAQ 공통 ══ */
+.faq-item { padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+.faq-a { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ══ 쿠팡 파트너스 배너 ══ */
+.coupang-banner { max-width: 1120px; margin: 24px auto; padding: 0 32px; text-align: center; }
+.coupang-banner iframe { max-width: 100%; }
+.coupang-disclosure { font-size: 0.7rem; color: var(--text-tertiary); margin-top: 8px; }
+
+/* ══ 푸터 ══ */
+.footer { max-width: 1120px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
+.footer-links a:hover { color: var(--text-primary); }
+.footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
+
+@media (max-width: 768px) {
+    .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
+}
+
+/* ══ 좁은 페이지 (about, contact, privacy) ══ */
+.page-narrow .page { max-width: 800px; }
+.page-narrow .footer { max-width: 800px; }

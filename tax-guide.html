@@ -14,47 +14,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
     <style>
-        :root {
-            --bg: #F7F8FA; --surface: #FFFFFF; --surface-alt: #F0F2F5;
-            --text-primary: #18191B; --text-secondary: #6B7280; --text-tertiary: #9CA3AF;
-            --border: #E5E7EB; --accent: #2563EB; --accent-dark: #1E40AF; --accent-light: #EFF6FF;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
-
         .nav { position: sticky; top: 0; z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--border); }
-        .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; }
-        .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; }
-        .nav-logo span { color: var(--accent); }
-        .nav-menu { display: flex; gap: 2px; margin-left: auto; }
-        .nav-item { position: relative; }
-        .nav-item-btn { padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 4px; }
-        .nav-item-btn:hover { color: var(--text-primary); background: var(--surface-alt); }
-        .nav-item-btn svg { width: 12px; height: 12px; opacity: 0.4; }
-        .nav-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transition: all 0.15s; }
-        .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; }
-        .nav-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; transition: background 0.1s; }
-        .nav-dropdown a:hover { background: var(--surface-alt); }
-        .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-        .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
-        .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
-        .nav-mobile.open { display: block; }
-        .nav-mobile-group { margin-bottom: 16px; }
-        .nav-mobile-group:last-child { margin-bottom: 0; }
-        .nav-mobile-title { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px 4px; }
-        .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
-        .nav-mobile a:hover { background: var(--surface-alt); }
-        @media (max-width: 768px) { .nav-inner { padding: 0 20px; } .nav-menu { display: none; } .nav-mobile-btn { display: block; } }
-
         .page { max-width: 800px; margin: 0 auto; padding: 32px 32px 60px; }
-        .page-header { text-align: center; margin-bottom: 32px; }
-        .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
-        .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.4; }
         .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 8px; line-height: 1.7; }
         .page-header .meta { font-size: 0.75rem; color: var(--text-tertiary); margin-top: 8px; }
-        @media (max-width: 768px) { .page { padding: 24px 16px 60px; } .page-header h1 { font-size: 1.4rem; } }
-
         .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .article-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
         .article-card h3 { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); margin: 20px 0 8px; }
@@ -62,34 +27,27 @@
         .article-card p:last-child { margin-bottom: 0; }
         .article-card ul, .article-card ol { padding-left: 20px; margin-bottom: 12px; }
         .article-card ul li, .article-card ol li { color: var(--text-secondary); line-height: 1.8; font-size: 0.88rem; margin-bottom: 5px; }
-
         .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
         .compare-item { border-radius: 12px; padding: 20px; border: 1.5px solid var(--border); background: var(--surface); }
         .compare-item h3 { margin: 0 0 8px; font-size: 0.9rem; font-weight: 800; color: var(--accent); }
         .compare-item p { font-size: 0.82rem; line-height: 1.7; margin: 0 0 4px; color: var(--text-secondary); }
         .compare-item .compare-ex { font-size: 0.78rem; color: var(--text-tertiary); }
-        @media (max-width: 520px) { .compare-grid { grid-template-columns: 1fr; } }
-
         .deduction-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
         .deduction-table th { background: var(--surface-alt); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); }
         .deduction-table td { padding: 11px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); vertical-align: top; line-height: 1.7; }
         .deduction-table tr:last-child td { border-bottom: none; }
         .deduction-table .name-col { font-weight: 700; color: var(--text-primary); white-space: nowrap; }
         .deduction-table .amt-col { color: var(--accent); font-weight: 700; white-space: nowrap; }
-
         .tip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 14px 0; }
         .tip-item { background: var(--accent-light); border-radius: 12px; padding: 16px; border-left: 3px solid var(--accent); }
         .tip-item h3 { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
         .tip-item p { font-size: 0.82rem; line-height: 1.7; color: var(--text-secondary); margin: 0; }
-
         .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px 16px; margin: 14px 0; }
         .highlight-box p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin: 0; }
-
         .checklist { list-style: none; padding: 0; }
         .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F3F4F6; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
         .checklist li:last-child { border-bottom: none; }
         .checklist li::before { content: "\2610"; font-size: 1.1rem; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
-
         .timeline { list-style: none; padding: 0; position: relative; }
         .timeline::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: var(--border); }
         .timeline li { position: relative; padding: 0 0 20px 48px; }
@@ -98,29 +56,12 @@
         .timeline .t-month { font-size: 0.78rem; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
         .timeline .t-title { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
         .timeline .t-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
-
         .cta-card { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 24px; text-align: center; margin-bottom: 24px; }
         .cta-card h2 { color: white; font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; border: none; padding: 0; }
         .cta-card p { color: rgba(255,255,255,0.7); font-size: 0.88rem; margin-bottom: 16px; }
         .cta-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .cta-btn { display: inline-block; padding: 10px 22px; background: white; border-radius: 10px; font-weight: 700; font-size: 0.85rem; text-decoration: none; color: var(--accent); transition: transform 0.2s; }
         .cta-btn:hover { transform: translateY(-2px); }
-
-        .guide-cta { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 28px 24px; margin-bottom: 24px; text-align: center; }
-        .guide-cta p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
-        .guide-cta a { display: inline-block; background: var(--accent); color: white; font-weight: 700; font-size: 0.9rem; padding: 12px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
-        .guide-cta a:hover { background: #1D4ED8; }
-
-        .footer { max-width: 1120px; margin: 0 auto; padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .footer-links a { font-size: 0.75rem; color: var(--text-tertiary); text-decoration: none; margin-right: 20px; transition: color 0.15s; }
-        .footer-links a:hover { color: var(--text-primary); }
-        .footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
-        @media (max-width: 768px) { .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; } }
-    
-        /* ══ 쿠팡 파트너스 배너 ══ */
-        .coupang-banner { max-width: 1120px; margin: 24px auto; padding: 0 32px; text-align: center; }
-        .coupang-banner iframe { max-width: 100%; }
-        .coupang-disclosure { font-size: 0.7rem; color: var(--text-tertiary); margin-top: 8px; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
 </head>
