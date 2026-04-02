@@ -93,6 +93,10 @@
         .guide-cta p { color: #666; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6; }
         .guide-cta a { display: inline-block; background: linear-gradient(135deg, #FF9800, #FF6D00); color: #fff; font-weight: 700; font-size: 0.95rem; padding: 12px 28px; border-radius: 12px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
         .guide-cta a:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(255,152,0,0.3); }
+        .share-btn { width: 100%; padding: 14px; background: #FEE500; border: none; border-radius: 12px; font-size: 0.92rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: #3C1E1E; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px; }
+        .share-btn:hover { background: #F5DC00; }
+        .share-btn-wrap { display: none; margin-bottom: 16px; }
+        .share-btn-wrap.show { display: block; }
         .footer { text-align: center; padding: 24px 0 0; color: #C0C0C0; font-size: 0.78rem; line-height: 2; }
         .footer a { color: #FFAB40; text-decoration: none; font-weight: 600; margin: 0 6px; }
 
@@ -223,6 +227,12 @@
         </div>
     </div>
 
+    <div class="share-btn-wrap" id="shareBtnWrap">
+        <button class="share-btn" onclick="shareKakao()">
+            <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카카오톡" width="24" height="24">
+            카카오톡으로 공유하기
+        </button>
+    </div>
 
     <!-- 퇴직금이란 -->
     <div class="info-card">
@@ -429,6 +439,9 @@ function calculate() {
     document.getElementById('dailyResult').textContent = fmt(dailyAvg) + '원';
 
     document.getElementById('resultCard').classList.add('show');
+
+    document.getElementById('shareBtnWrap').classList.add('show');
+    window._shareRetirement = fmt(retirement) + '원';
 }
 
 function counter(id, target, ms = 900) {
@@ -445,6 +458,22 @@ function counter(id, target, ms = 900) {
 
 // 초기값
 salaryInput.value = (3000000).toLocaleString('ko-KR');
+</script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
+<script>
+Kakao.init('051ed8019b76b2127b2da56a27b406f2');
+function shareKakao() {
+    Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: '내 퇴직금은 ' + (window._shareRetirement || '—'),
+            description: '퇴직금 계산기로 예상 퇴직금을 확인해보세요',
+            imageUrl: 'https://salarykorea.site/og-image.png',
+            link: { mobileWebUrl: 'https://salarykorea.site/retirement', webUrl: 'https://salarykorea.site/retirement' }
+        },
+        buttons: [{ title: '나도 계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/retirement', webUrl: 'https://salarykorea.site/retirement' } }]
+    });
+}
 </script>
 </body>
 </html>
