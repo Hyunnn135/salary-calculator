@@ -531,8 +531,8 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .large-text .search-toggle { width: 44px; }
 .large-text .search-toggle svg { width: 20px; height: 20px; }
 .large-text .font-toggle { width: 52px; }
-.large-text .ft-small { font-size: 0.82rem; }
-.large-text .ft-big { font-size: 1.15rem; }
+.large-text .ft-small { font-size: 0.82rem; line-height: 1; }
+.large-text .ft-big { font-size: 1.15rem; line-height: 1; }
 .large-text .lang-btn { font-size: 0.9rem; padding: 0 12px; }
 .large-text .search-input { font-size: 1.2rem; }
 .large-text .search-input-wrap { padding: 22px 24px; }
@@ -550,17 +550,17 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 /* ── 글씨 크기 토글 버튼 (가가 / aA) ── */
 .font-toggle {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
     width: 44px;
     margin-left: 8px;
     color: var(--text-secondary);
     font-family: 'Noto Sans KR', 'Inter', sans-serif;
     gap: 1px;
-    padding: 0 4px;
+    padding: 0;
 }
-.ft-small { font-size: 0.72rem; font-weight: 700; }
-.ft-big { font-size: 1.05rem; font-weight: 800; }
+.ft-small { font-size: 0.7rem; font-weight: 700; line-height: 1; }
+.ft-big { font-size: 1.05rem; font-weight: 800; line-height: 1; }
 .font-toggle:hover {
     color: var(--text-primary);
     border-color: var(--accent);
