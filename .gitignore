@@ -1,4 +1,6 @@
-# 색인 관리 (GitHub 불필요)
-index-submit.py
-indexing-status.md
+# 도구 스크립트 (배포 불필요)
+tools/
 blog/
+
+# macOS
+.DS_Store
