@@ -366,29 +366,27 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 }
 
 /* ══════════════════════════════════════
-   큰 글씨 모드 (접근성)
+   큰 글씨 모드 (접근성 · UI 단순화)
    ══════════════════════════════════════ */
 
-/* ── 토글 버튼 ── */
+/* ── 토글 버튼 (돋보기 아이콘) ── */
 .font-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     margin-left: 8px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
     background: var(--surface);
     color: var(--text-secondary);
-    font-size: 0.88rem;
-    font-weight: 800;
     cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
     transition: all 0.15s;
     -webkit-tap-highlight-color: transparent;
     flex-shrink: 0;
 }
+.font-toggle svg { width: 20px; height: 20px; }
 .font-toggle:hover {
     color: var(--text-primary);
     border-color: var(--accent);
@@ -399,108 +397,216 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     background: var(--accent-light);
 }
 
-/* ── 큰 글씨 모드: 색상 강화 ── */
+/* ── 색상 강화: 흐린 글씨를 진하게 ── */
 .large-text body {
-    --text-secondary: #4B5563;
-    --text-tertiary: #6B7280;
+    --text-secondary: #374151;
+    --text-tertiary: #4B5563;
+    --border: #D1D5DB;
 }
 
-/* ── 큰 글씨 모드: 네비게이션 ── */
+/* ── 네비게이션: 더 크고 명확하게 ── */
+.large-text .nav { border-bottom: 2px solid var(--border); }
+.large-text .nav-inner { height: 62px; }
 .large-text .nav-logo { font-size: 1.45rem; }
-.large-text .nav-item-btn { font-size: 0.92rem; padding: 10px 16px; }
-.large-text .nav-dropdown a { font-size: 0.95rem; padding: 12px 14px; }
-.large-text .lang-btn { font-size: 0.88rem; }
-.large-text .lang-dropdown a { font-size: 0.92rem; }
-.large-text .nav-mobile-title { font-size: 0.82rem; }
-.large-text .nav-mobile a { font-size: 1.05rem; padding: 14px 12px; }
+.large-text .nav-item-btn { font-size: 0.95rem; padding: 10px 16px; }
+.large-text .nav-dropdown { min-width: 240px; padding: 8px; border: 2px solid var(--border); }
+.large-text .nav-dropdown a { font-size: 1.0rem; padding: 13px 14px; gap: 12px; }
+.large-text .nav-dropdown-dot { width: 8px; height: 8px; }
+.large-text .lang-btn { font-size: 0.9rem; padding: 8px 12px; }
+.large-text .lang-dropdown a { font-size: 0.95rem; padding: 10px 14px; }
+.large-text .nav-mobile-title { font-size: 0.85rem; font-weight: 800; }
+.large-text .nav-mobile a { font-size: 1.1rem; padding: 16px 14px; min-height: 50px; }
+.large-text .nav-mobile-btn { font-size: 1.5rem; min-width: 48px; min-height: 48px; }
 
-/* ── 큰 글씨 모드: 페이지 레이아웃 ── */
-.large-text .page-header .breadcrumb { font-size: 0.88rem; }
-.large-text .page-header h1 { font-size: 1.85rem; }
-.large-text .page-header p { font-size: 1.02rem; }
+/* ── 페이지 레이아웃: 더 넓은 여백 ── */
+.large-text .page { padding: 36px 32px 64px; }
+.large-text .page-header { margin-bottom: 36px; }
+.large-text .page-header .breadcrumb { font-size: 0.92rem; font-weight: 600; color: var(--text-secondary); }
+.large-text .page-header h1 { font-size: 1.9rem; }
+.large-text .page-header p { font-size: 1.06rem; margin-top: 8px; }
 
-/* ── 큰 글씨 모드: 카드 ── */
-.large-text .card-title { font-size: 0.95rem; }
-.large-text .card-badge { font-size: 0.82rem; }
-.large-text .info-card h2 { font-size: 1.18rem; }
-.large-text .info-card p { font-size: 1.02rem; line-height: 1.9; }
-
-/* ── 큰 글씨 모드: 가이드 CTA ── */
-.large-text .guide-cta p { font-size: 1.06rem; }
-.large-text .guide-cta a { font-size: 1.02rem; padding: 14px 30px; }
-
-/* ── 큰 글씨 모드: FAQ ── */
-.large-text .faq-q { font-size: 1.02rem; }
-.large-text .faq-a { font-size: 0.95rem; line-height: 1.85; }
-
-/* ── 큰 글씨 모드: 폼 요소 ── */
-.large-text .form-label { font-size: 0.92rem !important; }
-.large-text .form-input { font-size: 1.65rem !important; }
-.large-text .form-select { font-size: 1.0rem !important; }
-.large-text .form-unit { font-size: 1.0rem; }
-.large-text .submit-btn { font-size: 1.08rem !important; padding: 16px !important; }
-.large-text .save-btn,
-.large-text .share-btn { font-size: 0.95rem !important; }
-
-/* ── 큰 글씨 모드: 결과 영역 ── */
-.large-text .result-hero-label { font-size: 0.85rem; }
-.large-text .result-hero-amount { font-size: 3.0rem; }
-.large-text .result-hero-unit { font-size: 0.92rem; }
-.large-text .result-hero-msg { font-size: 0.95rem; }
-.large-text .rh-stat-val { font-size: 1.0rem; }
-.large-text .rh-stat-label { font-size: 0.78rem; }
-
-/* ── 큰 글씨 모드: 공제 내역 ── */
-.large-text .b-name { font-size: 0.98rem; }
-.large-text .b-amount { font-size: 1.0rem; }
-.large-text .b-total-label { font-size: 1.02rem; }
-.large-text .b-total-val { font-size: 1.1rem; }
-
-/* ── 큰 글씨 모드: 테이블 ── */
-.large-text .data-table,
-.large-text .cmp-table { font-size: 0.95rem !important; }
-.large-text .toggle-text { font-size: 0.95rem !important; }
-
-/* ── 큰 글씨 모드: 쿠팡/배너 ── */
-.large-text .coupang-disclosure { font-size: 0.82rem; }
-
-/* ── 큰 글씨 모드: 푸터 ── */
-.large-text .footer-links a { font-size: 0.88rem; }
-.large-text .footer-copy { font-size: 0.88rem; }
-
-/* ── 큰 글씨 모드: 슬라이더 라벨 ── */
-.large-text .slider-labels { font-size: 0.82rem; }
-
-/* ── 큰 글씨 모드: 링크 섹션 (직종별/기업별) ── */
-.large-text .link-section h3 { font-size: 1.1rem; }
-.large-text .link-section a { font-size: 0.92rem; }
-
-/* ── 큰 글씨 모드: article-card (가이드 페이지) ── */
-.large-text .article-card h2 { font-size: 1.18rem; }
-.large-text .article-card p,
-.large-text .article-card li { font-size: 1.0rem; line-height: 1.85; }
-
-/* ══ 큰 글씨 모드: 모바일 보정 ══ */
-@media (max-width: 768px) {
-    .large-text .nav-logo { font-size: 1.25rem; }
-    .large-text .nav-mobile a { font-size: 1.0rem; }
-    .large-text .page-header h1 { font-size: 1.5rem; }
-    .large-text .page-header p { font-size: 0.95rem; }
-    .large-text .info-card h2 { font-size: 1.08rem; }
-    .large-text .info-card p { font-size: 0.95rem; }
-    .large-text .faq-q { font-size: 0.95rem; }
-    .large-text .faq-a { font-size: 0.9rem; }
-    .large-text .form-input { font-size: 1.4rem !important; }
-    .large-text .result-hero-amount { font-size: 2.4rem !important; }
-    .large-text .rh-stat-val { font-size: 0.88rem !important; }
-    .large-text .data-table,
-    .large-text .cmp-table { font-size: 0.88rem !important; }
-    .large-text .b-name { font-size: 0.88rem; }
-    .large-text .b-amount { font-size: 0.92rem; }
+/* ── 카드: 두꺼운 테두리 + 넉넉한 패딩 ── */
+.large-text .card {
+    border: 2px solid var(--border) !important;
+    border-radius: 18px;
+    padding: 32px !important;
+    margin-bottom: 28px !important;
 }
+.large-text .card-header { margin-bottom: 28px !important; }
+.large-text .card-title { font-size: 1.05rem; color: var(--text-primary); }
+.large-text .card-badge { font-size: 0.85rem; padding: 5px 14px; }
+
+/* ── 정보 카드 ── */
+.large-text .info-card {
+    border: 2px solid var(--border) !important;
+    border-radius: 18px;
+    padding: 32px !important;
+}
+.large-text .info-card h2 { font-size: 1.22rem; margin-bottom: 18px; padding-bottom: 14px; }
+.large-text .info-card p { font-size: 1.06rem; line-height: 2.0; margin-bottom: 14px; }
+
+/* ── 가이드 CTA ── */
+.large-text .guide-cta {
+    border: 2px solid #BFDBFE !important;
+    border-radius: 18px;
+    padding: 32px 28px !important;
+}
+.large-text .guide-cta p { font-size: 1.1rem; margin-bottom: 18px; }
+.large-text .guide-cta a { font-size: 1.08rem; padding: 16px 32px; border-radius: 14px; }
+
+/* ── FAQ: 더 넓은 간격 ── */
+.large-text .faq-item { padding: 18px 0; border-bottom: 2px solid #F3F4F6; }
+.large-text .faq-q { font-size: 1.06rem; margin-bottom: 8px; }
+.large-text .faq-a { font-size: 1.0rem; line-height: 1.95; }
+
+/* ── 폼 요소: 큰 입력칸 + 굵은 테두리 ── */
+.large-text .form-group { margin-bottom: 24px !important; }
+.large-text .form-label { font-size: 1.0rem !important; font-weight: 700 !important; color: var(--text-primary) !important; margin-bottom: 10px !important; }
+.large-text .form-input {
+    font-size: 1.7rem !important;
+    padding: 16px 52px 16px 18px !important;
+    border-width: 2px !important;
+    border-radius: 14px !important;
+}
+.large-text .form-select {
+    font-size: 1.06rem !important;
+    padding: 14px 18px !important;
+    border-width: 2px !important;
+    border-radius: 14px !important;
+}
+.large-text .form-unit { font-size: 1.06rem; }
+.large-text .submit-btn {
+    font-size: 1.15rem !important;
+    padding: 18px !important;
+    border-radius: 14px !important;
+    margin-top: 8px;
+}
+.large-text .save-btn,
+.large-text .share-btn {
+    font-size: 1.0rem !important;
+    min-height: 50px !important;
+    border-width: 2px !important;
+    border-radius: 12px !important;
+}
+
+/* ── 결과 영역: 더 크고 선명하게 ── */
+.large-text .result-hero { padding: 36px 28px !important; border-radius: 20px !important; }
+.large-text .result-hero-label { font-size: 0.95rem; color: rgba(255,255,255,0.7); font-weight: 600; }
+.large-text .result-hero-amount { font-size: 3.2rem; }
+.large-text .result-hero-unit { font-size: 0.98rem; color: rgba(255,255,255,0.6); }
+.large-text .result-hero-msg { font-size: 1.0rem; color: rgba(255,255,255,0.8); }
+.large-text .result-hero-stats { border-radius: 14px; margin-top: 24px; }
+.large-text .rh-stat { padding: 18px 12px; }
+.large-text .rh-stat-val { font-size: 1.05rem; }
+.large-text .rh-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+
+/* ── 공제 내역: 큰 점 + 진한 텍스트 ── */
+.large-text .breakdown-card {
+    border: 2px solid var(--border) !important;
+    border-radius: 18px;
+    padding: 32px !important;
+}
+.large-text .b-item { padding: 16px 0; border-bottom: 2px solid #F3F4F6; }
+.large-text .b-dot { width: 10px !important; height: 10px !important; margin-right: 14px; }
+.large-text .b-name { font-size: 1.05rem; font-weight: 500; color: var(--text-primary); }
+.large-text .b-bar-wrap { height: 6px !important; }
+.large-text .b-amount { font-size: 1.1rem; min-width: 100px; }
+.large-text .b-total { padding: 20px 0 0; border-top: 2px solid var(--text-primary); }
+.large-text .b-total-label { font-size: 1.1rem; }
+.large-text .b-total-val { font-size: 1.2rem; }
+
+/* ── 테이블: 큰 셀 + 굵은 구분선 ── */
+.large-text .data-table,
+.large-text .cmp-table { font-size: 1.0rem !important; }
+.large-text .data-table th,
+.large-text .data-table td,
+.large-text .cmp-table th,
+.large-text .cmp-table td { padding: 14px 12px !important; }
+.large-text .toggle-row { padding: 16px 18px !important; border-radius: 14px !important; }
+.large-text .toggle-text { font-size: 1.0rem !important; }
+
+/* ── 슬라이더 ── */
+.large-text .slider-labels { font-size: 0.88rem; }
+.large-text .form-slider,
+.large-text .raise-slider { height: 10px !important; }
+.large-text .form-slider::-webkit-slider-thumb,
+.large-text .raise-slider::-webkit-slider-thumb { width: 30px !important; height: 30px !important; }
+
+/* ── 쿠팡/배너 ── */
+.large-text .coupang-disclosure { font-size: 0.88rem; }
+
+/* ── 푸터: 더 크고 명확하게 ── */
+.large-text .footer { border-top: 2px solid var(--border); padding: 28px 32px; }
+.large-text .footer-links a { font-size: 0.92rem; }
+.large-text .footer-copy { font-size: 0.92rem; }
+
+/* ── 링크 섹션 (직종별/기업별) ── */
+.large-text .link-section h3 { font-size: 1.15rem; }
+.large-text .link-section a { font-size: 1.0rem; padding: 10px 16px; }
+
+/* ── article-card (가이드 페이지) ── */
+.large-text .article-card {
+    border: 2px solid var(--border) !important;
+    border-radius: 18px;
+    padding: 32px !important;
+}
+.large-text .article-card h2 { font-size: 1.25rem; }
+.large-text .article-card p,
+.large-text .article-card li { font-size: 1.08rem; line-height: 2.0; }
+
+/* ── 비교 카드 ── */
+.large-text .comparison-card {
+    border: 2px solid var(--border) !important;
+    border-radius: 18px;
+    padding: 32px !important;
+}
+
+/* ══ 큰 글씨 모드: 모바일 (768px) ══ */
+@media (max-width: 768px) {
+    .large-text .nav-inner { height: 58px; }
+    .large-text .nav-logo { font-size: 1.25rem; }
+    .large-text .nav-mobile a { font-size: 1.05rem; padding: 14px 12px; }
+    .large-text .page { padding: 24px 18px 40px; }
+    .large-text .page-header h1 { font-size: 1.55rem; }
+    .large-text .page-header p { font-size: 0.98rem; }
+    .large-text .card { padding: 24px !important; margin-bottom: 20px !important; }
+    .large-text .info-card { padding: 24px !important; }
+    .large-text .info-card h2 { font-size: 1.12rem; }
+    .large-text .info-card p { font-size: 0.98rem; }
+    .large-text .faq-q { font-size: 1.0rem; }
+    .large-text .faq-a { font-size: 0.95rem; }
+    .large-text .form-input { font-size: 1.45rem !important; padding: 14px 44px 14px 16px !important; }
+    .large-text .form-select { font-size: 1.0rem !important; padding: 13px 16px !important; }
+    .large-text .form-label { font-size: 0.95rem !important; }
+    .large-text .submit-btn { font-size: 1.08rem !important; padding: 16px !important; }
+    .large-text .result-hero { padding: 28px 20px !important; }
+    .large-text .result-hero-amount { font-size: 2.5rem !important; }
+    .large-text .rh-stat-val { font-size: 0.92rem !important; }
+    .large-text .rh-stat-label { font-size: 0.76rem !important; }
+    .large-text .breakdown-card { padding: 24px !important; }
+    .large-text .b-name { font-size: 0.95rem; }
+    .large-text .b-amount { font-size: 1.0rem; }
+    .large-text .data-table,
+    .large-text .cmp-table { font-size: 0.92rem !important; }
+    .large-text .guide-cta { padding: 24px 18px !important; }
+    .large-text .guide-cta a { font-size: 1.02rem; padding: 14px 24px; }
+    .large-text .article-card { padding: 24px !important; }
+    .large-text .article-card p,
+    .large-text .article-card li { font-size: 1.0rem; }
+    .large-text .footer { padding: 24px 18px; }
+}
+
+/* ══ 큰 글씨 모드: 소형 모바일 (390px) ══ */
 @media (max-width: 390px) {
+    .large-text .nav-inner { height: 54px; }
     .large-text .nav-logo { font-size: 1.15rem; }
-    .large-text .page-header h1 { font-size: 1.35rem; }
-    .large-text .result-hero-amount { font-size: 1.85rem !important; }
-    .large-text .form-input { font-size: 1.25rem !important; }
+    .large-text .page { padding: 20px 14px 32px; }
+    .large-text .page-header h1 { font-size: 1.4rem; }
+    .large-text .card { padding: 20px !important; }
+    .large-text .info-card { padding: 20px !important; }
+    .large-text .result-hero { padding: 24px 16px !important; }
+    .large-text .result-hero-amount { font-size: 2.0rem !important; }
+    .large-text .form-input { font-size: 1.3rem !important; padding: 13px 40px 13px 14px !important; }
+    .large-text .breakdown-card { padding: 20px !important; }
+    .large-text .article-card { padding: 20px !important; }
 }
