@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <style>
-        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
@@ -94,7 +94,7 @@
         .cmp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); }
         .cmp-table .green { color: #059669; font-weight: 700; }
         .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
-        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
         /* ══ 페이지 고유: 최저시급 배너 ══ */
         .min-wage-banner { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 24px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
         .min-wage-banner .mw-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 500; }
@@ -177,6 +177,13 @@
                     <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
                 </div>
             </div>
+                        <div class="nav-item">
+                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
+                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
+                </div>
+            </div>
             <div class="nav-item">
                 <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
@@ -211,6 +218,11 @@
             <a href="gift-tax.html">증여세 계산기</a>
             <a href="acquisition-tax.html">취득세 계산기</a>
             <a href="tax-guide.html">연말정산 가이드</a>
+        </div>
+                <div class="nav-mobile-group">
+            <div class="nav-mobile-title">병원 갈 때</div>
+            <a href="medical-tax.html">의료비 세액공제</a>
+            <a href="silbi.html">실비보험 계산기</a>
         </div>
         <div class="nav-mobile-group">
             <div class="nav-mobile-title">퇴사할 때</div>
@@ -446,7 +458,38 @@
         <p>최저임금에 산입되는 임금 범위도 알아두면 좋습니다. 매월 1회 이상 정기적으로 지급하는 임금이 산입 대상이며, 기본급뿐 아니라 고정적으로 지급되는 각종 수당도 포함됩니다. 다만 매월 지급되더라도 소정근로에 대한 대가가 아닌 연장·야간·휴일근로수당, 연차미사용수당, 가족수당, 통근수당 등은 제외됩니다. 상여금의 경우 월 환산액의 5%를 초과하는 부분, 복리후생비(식비·교통비·숙박비 등)는 월 환산액의 1%를 초과하는 부분이 최저임금에 산입됩니다. 자신의 급여가 최저임금 이상인지 확인할 때는 이러한 산입 범위를 고려하여 정확하게 비교해야 합니다.</p>
     </div>
 
+<!-- ADSENSE-HIDE: 카카오 애드핏
+    <!-- 카카오 애드핏 -->
+    <div style="text-align:center; margin-bottom:24px;">
+        <ins class="kakao_ad_area" style="display:none;"
+        data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
+        data-ad-width="300"
+        data-ad-height="250"></ins>
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+    -->
 
+    <!-- 가이드 CTA -->
+    <div class="guide-cta">
+        <p>최저임금 인상 추이, 업종별 적용 기준, 위반 시 대처법까지 알고 싶다면?</p>
+        <a href="guide-minimum-wage.html">최저임금 완벽 가이드 보기 →</a>
+    </div>
+
+</div>
+
+
+<!-- ADSENSE-HIDE: 쿠팡 파트너스
+<!-- 쿠팡 파트너스 배너 -->
+<div class="coupang-banner">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>
+        new PartnersCoupang.G({"id":977388,"template":"carousel","trackingCode":"AF3938469","width":"728","height":"90","tsource":""});
+    </script>
+    <p class="coupang-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+</div>
+-->
+
+<!-- 푸터 -->
 <footer class="footer">
     <div class="footer-links">
         <a href="about.html">소개</a>
