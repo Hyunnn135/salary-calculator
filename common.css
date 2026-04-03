@@ -37,9 +37,23 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .nav-mobile-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-primary); padding: 4px 8px; margin-left: auto; }
 
+/* ══ 네비 우측 버튼 공통 높이 ══ */
+.search-toggle,
+.lang-btn,
+.font-toggle {
+    height: 38px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+}
+
 /* ══ 언어 선택기 ══ */
 .lang-selector { position: relative; margin-left: 8px; }
-.lang-btn { display: flex; align-items: center; gap: 4px; padding: 6px 10px; font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border: 1px solid var(--border); background: var(--surface); border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; }
+.lang-btn { display: flex; align-items: center; gap: 4px; padding: 0 10px; font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); font-family: 'Noto Sans KR', sans-serif; }
 .lang-btn:hover { color: var(--text-primary); border-color: var(--accent); }
 .lang-btn svg { width: 14px; height: 14px; opacity: 0.5; }
 .lang-dropdown { position: absolute; top: calc(100% + 4px); right: 0; min-width: 140px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); padding: 4px; opacity: 0; visibility: hidden; transition: all 0.15s; z-index: 1001; }
@@ -374,17 +388,9 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 38px;
     margin-left: 8px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
     color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s;
-    -webkit-tap-highlight-color: transparent;
-    flex-shrink: 0;
 }
 .search-toggle svg { width: 18px; height: 18px; }
 .search-toggle:hover { color: var(--text-primary); border-color: var(--accent); }
@@ -519,8 +525,15 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 }
 
 /* ── 검색: 큰 글씨 모드 ── */
-.large-text .search-toggle { width: 44px; height: 44px; }
+.large-text .search-toggle,
+.large-text .lang-btn,
+.large-text .font-toggle { height: 44px; }
+.large-text .search-toggle { width: 44px; }
 .large-text .search-toggle svg { width: 20px; height: 20px; }
+.large-text .font-toggle { width: 52px; }
+.large-text .ft-small { font-size: 0.82rem; }
+.large-text .ft-big { font-size: 1.15rem; }
+.large-text .lang-btn { font-size: 0.9rem; padding: 0 12px; }
 .large-text .search-input { font-size: 1.2rem; }
 .large-text .search-input-wrap { padding: 22px 24px; }
 .large-text .search-result { padding: 16px 14px; }
@@ -534,24 +547,20 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
    큰 글씨 모드 (접근성 · UI 단순화)
    ══════════════════════════════════════ */
 
-/* ── 토글 버튼 (돋보기 아이콘) ── */
+/* ── 글씨 크기 토글 버튼 (가가 / aA) ── */
 .font-toggle {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
     margin-left: 8px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
     color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s;
-    -webkit-tap-highlight-color: transparent;
-    flex-shrink: 0;
+    font-family: 'Noto Sans KR', 'Inter', sans-serif;
+    gap: 1px;
+    padding: 0 4px;
 }
-.font-toggle svg { width: 20px; height: 20px; }
+.ft-small { font-size: 0.72rem; font-weight: 700; }
+.ft-big { font-size: 1.05rem; font-weight: 800; }
 .font-toggle:hover {
     color: var(--text-primary);
     border-color: var(--accent);
