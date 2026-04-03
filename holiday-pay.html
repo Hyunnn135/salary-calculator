@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <style>
-        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
@@ -94,7 +94,7 @@
         .cmp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); }
         .cmp-table .green { color: #059669; font-weight: 700; }
         .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
-        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
         /* ══ 페이지 고유: 조건 그리드 ══ */
         .condition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
         .condition-box { border-radius: 10px; padding: 16px; border: 1.5px solid; }

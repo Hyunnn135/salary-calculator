@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <style>
-        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
@@ -93,7 +93,7 @@
         /* 하이라이트 박스 */
         .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
         .highlight-box p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; margin: 0; }
-        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
         .info-card ul { padding-left: 18px; margin-bottom: 10px; }
         .info-card ul li { color: var(--text-secondary); line-height: 1.8; font-size: 0.85rem; margin-bottom: 4px; }
     </style>
