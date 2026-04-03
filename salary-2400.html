@@ -139,6 +139,12 @@
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
+        <div class="nav-mobile-settings">
+            <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
+                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
+                큰 글씨 모드
+            </button>
+        </div>
         <div class="nav-mobile-group">
             <div class="nav-mobile-title">월급 받을 때</div>
             <a href="index.html">연봉 실수령액</a>
@@ -395,7 +401,8 @@
     <div class="footer-copy">© 2026 월급연구소</div>
 </footer>
 
-<script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");localStorage.setItem("largeText",document.documentElement.classList.contains("large-text")?"on":"off");}</script>
+<script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
+<script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
 </body>
 </html>
