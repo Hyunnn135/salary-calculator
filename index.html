@@ -21,6 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
+    <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
     <style>
         .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
         @media (max-width: 768px) {
@@ -177,6 +178,7 @@
                     <a href="ja.html">日本語</a>
                 </div>
             </div>
+        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드">가</button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
@@ -662,5 +664,6 @@ function shareKakao() {
     });
 }
 </script>
+<script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");localStorage.setItem("largeText",document.documentElement.classList.contains("large-text")?"on":"off");}</script>
 </body>
 </html>

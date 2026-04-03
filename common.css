@@ -364,3 +364,143 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     .nav-inner { padding: 0 12px; }
     .nav-logo { font-size: 1.05rem; }
 }
+
+/* ══════════════════════════════════════
+   큰 글씨 모드 (접근성)
+   ══════════════════════════════════════ */
+
+/* ── 토글 버튼 ── */
+.font-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-left: 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+}
+.font-toggle:hover {
+    color: var(--text-primary);
+    border-color: var(--accent);
+}
+.large-text .font-toggle {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-light);
+}
+
+/* ── 큰 글씨 모드: 색상 강화 ── */
+.large-text body {
+    --text-secondary: #4B5563;
+    --text-tertiary: #6B7280;
+}
+
+/* ── 큰 글씨 모드: 네비게이션 ── */
+.large-text .nav-logo { font-size: 1.45rem; }
+.large-text .nav-item-btn { font-size: 0.92rem; padding: 10px 16px; }
+.large-text .nav-dropdown a { font-size: 0.95rem; padding: 12px 14px; }
+.large-text .lang-btn { font-size: 0.88rem; }
+.large-text .lang-dropdown a { font-size: 0.92rem; }
+.large-text .nav-mobile-title { font-size: 0.82rem; }
+.large-text .nav-mobile a { font-size: 1.05rem; padding: 14px 12px; }
+
+/* ── 큰 글씨 모드: 페이지 레이아웃 ── */
+.large-text .page-header .breadcrumb { font-size: 0.88rem; }
+.large-text .page-header h1 { font-size: 1.85rem; }
+.large-text .page-header p { font-size: 1.02rem; }
+
+/* ── 큰 글씨 모드: 카드 ── */
+.large-text .card-title { font-size: 0.95rem; }
+.large-text .card-badge { font-size: 0.82rem; }
+.large-text .info-card h2 { font-size: 1.18rem; }
+.large-text .info-card p { font-size: 1.02rem; line-height: 1.9; }
+
+/* ── 큰 글씨 모드: 가이드 CTA ── */
+.large-text .guide-cta p { font-size: 1.06rem; }
+.large-text .guide-cta a { font-size: 1.02rem; padding: 14px 30px; }
+
+/* ── 큰 글씨 모드: FAQ ── */
+.large-text .faq-q { font-size: 1.02rem; }
+.large-text .faq-a { font-size: 0.95rem; line-height: 1.85; }
+
+/* ── 큰 글씨 모드: 폼 요소 ── */
+.large-text .form-label { font-size: 0.92rem !important; }
+.large-text .form-input { font-size: 1.65rem !important; }
+.large-text .form-select { font-size: 1.0rem !important; }
+.large-text .form-unit { font-size: 1.0rem; }
+.large-text .submit-btn { font-size: 1.08rem !important; padding: 16px !important; }
+.large-text .save-btn,
+.large-text .share-btn { font-size: 0.95rem !important; }
+
+/* ── 큰 글씨 모드: 결과 영역 ── */
+.large-text .result-hero-label { font-size: 0.85rem; }
+.large-text .result-hero-amount { font-size: 3.0rem; }
+.large-text .result-hero-unit { font-size: 0.92rem; }
+.large-text .result-hero-msg { font-size: 0.95rem; }
+.large-text .rh-stat-val { font-size: 1.0rem; }
+.large-text .rh-stat-label { font-size: 0.78rem; }
+
+/* ── 큰 글씨 모드: 공제 내역 ── */
+.large-text .b-name { font-size: 0.98rem; }
+.large-text .b-amount { font-size: 1.0rem; }
+.large-text .b-total-label { font-size: 1.02rem; }
+.large-text .b-total-val { font-size: 1.1rem; }
+
+/* ── 큰 글씨 모드: 테이블 ── */
+.large-text .data-table,
+.large-text .cmp-table { font-size: 0.95rem !important; }
+.large-text .toggle-text { font-size: 0.95rem !important; }
+
+/* ── 큰 글씨 모드: 쿠팡/배너 ── */
+.large-text .coupang-disclosure { font-size: 0.82rem; }
+
+/* ── 큰 글씨 모드: 푸터 ── */
+.large-text .footer-links a { font-size: 0.88rem; }
+.large-text .footer-copy { font-size: 0.88rem; }
+
+/* ── 큰 글씨 모드: 슬라이더 라벨 ── */
+.large-text .slider-labels { font-size: 0.82rem; }
+
+/* ── 큰 글씨 모드: 링크 섹션 (직종별/기업별) ── */
+.large-text .link-section h3 { font-size: 1.1rem; }
+.large-text .link-section a { font-size: 0.92rem; }
+
+/* ── 큰 글씨 모드: article-card (가이드 페이지) ── */
+.large-text .article-card h2 { font-size: 1.18rem; }
+.large-text .article-card p,
+.large-text .article-card li { font-size: 1.0rem; line-height: 1.85; }
+
+/* ══ 큰 글씨 모드: 모바일 보정 ══ */
+@media (max-width: 768px) {
+    .large-text .nav-logo { font-size: 1.25rem; }
+    .large-text .nav-mobile a { font-size: 1.0rem; }
+    .large-text .page-header h1 { font-size: 1.5rem; }
+    .large-text .page-header p { font-size: 0.95rem; }
+    .large-text .info-card h2 { font-size: 1.08rem; }
+    .large-text .info-card p { font-size: 0.95rem; }
+    .large-text .faq-q { font-size: 0.95rem; }
+    .large-text .faq-a { font-size: 0.9rem; }
+    .large-text .form-input { font-size: 1.4rem !important; }
+    .large-text .result-hero-amount { font-size: 2.4rem !important; }
+    .large-text .rh-stat-val { font-size: 0.88rem !important; }
+    .large-text .data-table,
+    .large-text .cmp-table { font-size: 0.88rem !important; }
+    .large-text .b-name { font-size: 0.88rem; }
+    .large-text .b-amount { font-size: 0.92rem; }
+}
+@media (max-width: 390px) {
+    .large-text .nav-logo { font-size: 1.15rem; }
+    .large-text .page-header h1 { font-size: 1.35rem; }
+    .large-text .result-hero-amount { font-size: 1.85rem !important; }
+    .large-text .form-input { font-size: 1.25rem !important; }
+}

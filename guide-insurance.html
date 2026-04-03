@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
+    <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
     <style>
         /* ══ 가이드 아티클 스타일 ══ */
         .guide-content { max-width: 800px; margin: 0 auto; }
@@ -145,6 +146,7 @@
                     <a href="ja.html">日本語</a>
                 </div>
             </div>
+        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드">가</button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
@@ -415,5 +417,6 @@
     <div class="footer-copy">© 2026 월급연구소</div>
 </footer>
 
+<script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");localStorage.setItem("largeText",document.documentElement.classList.contains("large-text")?"on":"off");}</script>
 </body>
 </html>
