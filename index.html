@@ -44,6 +44,7 @@
         .submit-btn:hover { background: #1D4ED8; }
         /* ══ 결과 영역 ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
+        #captureArea { display: none; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
         /* 메인 결과 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
@@ -486,6 +487,7 @@ function calculate() {
     const r      = saved;
 
     // 플레이스홀더 숨김
+    document.getElementById('captureArea').style.display = 'block';
     document.getElementById('resultPlaceholder').style.display = 'none';
 
     // 결과 카드
