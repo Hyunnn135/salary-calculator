@@ -57,24 +57,12 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .nav-mobile a { display: block; padding: 10px 12px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 8px; }
 .nav-mobile a:hover { background: var(--surface-alt); }
 
-@media (max-width: 768px) {
-    .nav-inner { padding: 0 20px; }
-    .nav-menu { display: none; }
-    .nav-mobile-btn { display: block; }
-}
-
 /* ══ 페이지 레이아웃 ══ */
 .page { max-width: 1120px; margin: 0 auto; padding: 32px 32px 60px; }
 .page-header { text-align: center; margin-bottom: 32px; }
 .page-header .breadcrumb { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
 .page-header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
 .page-header p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
-
-@media (max-width: 768px) {
-    .page { padding: 24px 16px 60px; }
-    .page-header { margin-bottom: 24px; }
-    .page-header h1 { font-size: 1.4rem; }
-}
 
 /* ══ 카드 ══ */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
@@ -111,16 +99,12 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .footer-links a:hover { color: var(--text-primary); }
 .footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
 
-@media (max-width: 768px) {
-    .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
-}
-
 /* ══ 좁은 페이지 (about, contact, privacy) ══ */
 .page-narrow .page { max-width: 800px; }
 .page-narrow .footer { max-width: 800px; }
 
 /* ══════════════════════════════════════
-   인터랙션 효과 & 모바일 UX
+   인터랙션 효과
    ══════════════════════════════════════ */
 
 /* ── 모바일 탭 하이라이트 제거 (자체 피드백 사용) ── */
@@ -169,33 +153,125 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     transition: transform 0.08s ease;
 }
 
-/* ── 모바일 UX 개선 ── */
+/* ══════════════════════════════════════
+   종합 모바일 최적화 (768px 이하)
+   ══════════════════════════════════════ */
 @media (max-width: 768px) {
-    /* 모바일 메뉴 터치 영역 확대 (44px 이상) */
-    .nav-mobile a {
-        padding: 14px 12px;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-    }
 
-    /* 모바일 햄버거 버튼 터치 영역 */
+    /* ── 네비게이션 ── */
+    .nav-inner { padding: 0 16px; height: 52px; }
+    .nav-logo { font-size: 1.15rem; }
+    .nav-menu { display: none; }
     .nav-mobile-btn {
-        min-width: 44px;
-        min-height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    .nav-mobile { padding: 8px 16px 16px; }
+    .nav-mobile a {
+        padding: 13px 12px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
     }
 
-    /* 저장/공유 버튼 터치 영역 */
+    /* ── 페이지 레이아웃 ── */
+    .page { padding: 20px 16px 32px; }
+    .page-header { margin-bottom: 20px; }
+    .page-header h1 { font-size: 1.3rem; }
+    .page-header p { font-size: 0.84rem; }
+
+    /* ── 카드 ── */
+    .card {
+        padding: 20px !important;
+        margin-bottom: 16px !important;
+        border-radius: 14px;
+    }
+    .card-header { margin-bottom: 16px !important; }
+
+    /* ── 정보 카드 ── */
+    .info-card {
+        padding: 20px !important;
+        border-radius: 14px;
+    }
+    .info-card h2 { font-size: 0.95rem; margin-bottom: 12px; padding-bottom: 10px; }
+    .info-card p { font-size: 0.84rem; line-height: 1.75; }
+
+    /* ── 가이드 CTA ── */
+    .guide-cta {
+        padding: 20px 16px !important;
+        margin-bottom: 16px;
+        border-radius: 14px;
+    }
+    .guide-cta p { font-size: 0.86rem; }
+    .guide-cta a { padding: 12px 24px; font-size: 0.88rem; }
+
+    /* ── FAQ ── */
+    .faq-item { padding: 12px 0; }
+    .faq-q { font-size: 0.85rem; }
+    .faq-a { font-size: 0.8rem; }
+
+    /* ── 2열/다열 → 1열 전환 ── */
+    .form-row,
+    .two-col,
+    .bottom-grid,
+    .condition-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* ── 갭 축소 ── */
+    .dashboard { gap: 16px !important; }
+    .two-col,
+    .bottom-grid,
+    .form-row,
+    .condition-grid { gap: 12px !important; }
+
+    /* ── 입력 필드 ── */
+    .form-input {
+        font-size: 1.25rem !important;
+        padding: 12px 40px 12px 14px !important;
+    }
+    .form-select {
+        padding: 11px 14px !important;
+        font-size: 0.86rem !important;
+    }
+    .form-label {
+        font-size: 0.78rem !important;
+    }
+    .form-group {
+        margin-bottom: 16px !important;
+    }
+
+    /* ── 결과 영역 ── */
+    .result-hero {
+        padding: 24px 20px !important;
+        border-radius: 14px !important;
+    }
+    .result-hero-amount {
+        font-size: 1.9rem !important;
+    }
+    .result-hero-stats {
+        padding: 12px 8px !important;
+    }
+    .rh-stat-val { font-size: 0.76rem !important; }
+    .rh-stat-label { font-size: 0.65rem !important; }
+
+    /* ── 버튼 터치 영역 ── */
+    .submit-btn {
+        padding: 14px !important;
+        font-size: 0.93rem !important;
+        min-height: 48px;
+    }
     .save-btn,
     .share-btn {
         min-height: 44px !important;
-        padding: 14px !important;
+        padding: 12px !important;
+        font-size: 0.84rem !important;
     }
 
-    /* 슬라이더 손잡이 확대 */
+    /* ── 슬라이더 ── */
     .form-slider::-webkit-slider-thumb {
         width: 28px !important;
         height: 28px !important;
@@ -212,10 +288,79 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
         width: 28px !important;
         height: 28px !important;
     }
-
-    /* 슬라이더 트랙 높이 확대 (터치 인식 개선) */
     .form-slider,
     .raise-slider {
         height: 8px !important;
     }
+
+    /* ── 테이블 ── */
+    .data-table,
+    .cmp-table {
+        font-size: 0.78rem !important;
+    }
+    .data-table th,
+    .data-table td,
+    .cmp-table th,
+    .cmp-table td {
+        padding: 9px 8px !important;
+    }
+
+    /* ── 내역 카드 (breakdown) ── */
+    .breakdown-card {
+        padding: 20px !important;
+        border-radius: 14px !important;
+    }
+    .b-label { font-size: 0.78rem !important; }
+    .b-val { font-size: 0.78rem !important; }
+
+    /* ── 비교 카드 ── */
+    .comparison-card {
+        padding: 20px !important;
+        border-radius: 14px !important;
+    }
+
+    /* ── 토글 영역 ── */
+    .toggle-row {
+        padding: 12px 14px !important;
+        border-radius: 10px !important;
+    }
+    .toggle-text { font-size: 0.83rem !important; }
+
+    /* ── 쿠팡 배너 ── */
+    .coupang-banner { padding: 0 16px; margin: 16px auto; }
+
+    /* ── 푸터 ── */
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 20px 16px;
+    }
+    .footer-links a { margin-right: 16px; }
+}
+
+/* ══ 소형 모바일 추가 최적화 (390px 이하) ══ */
+@media (max-width: 390px) {
+    .page { padding: 16px 12px 28px; }
+
+    .card { padding: 16px !important; }
+    .info-card { padding: 16px !important; }
+    .guide-cta { padding: 16px 12px !important; }
+
+    .page-header h1 { font-size: 1.2rem; }
+
+    .form-input {
+        font-size: 1.15rem !important;
+        padding: 11px 36px 11px 12px !important;
+    }
+
+    .result-hero { padding: 20px 16px !important; }
+    .result-hero-amount { font-size: 1.65rem !important; }
+    .rh-stat-val { font-size: 0.7rem !important; }
+
+    .breakdown-card,
+    .comparison-card { padding: 16px !important; }
+
+    .nav-inner { padding: 0 12px; }
+    .nav-logo { font-size: 1.05rem; }
 }
