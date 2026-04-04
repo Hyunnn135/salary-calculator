@@ -51,6 +51,18 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     flex-shrink: 0;
 }
 
+/* ══ 검색 버튼 (네비) ══ */
+.search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    margin-left: 8px;
+    color: var(--text-secondary);
+}
+.search-toggle svg { width: 18px; height: 18px; }
+.search-toggle:hover { color: var(--text-primary); border-color: var(--accent); }
+
 /* ══ 언어 선택기 ══ */
 .lang-selector { position: relative; margin-left: 8px; }
 .lang-btn { display: flex; align-items: center; gap: 4px; padding: 0 10px; font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); font-family: 'Noto Sans KR', sans-serif; }
@@ -61,6 +73,23 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .lang-dropdown a { display: block; padding: 8px 12px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none; border-radius: 6px; transition: background 0.1s; }
 .lang-dropdown a:hover { background: var(--surface-alt); }
 .lang-dropdown a.active { color: var(--accent); font-weight: 700; }
+
+/* ══ 글씨 크기 토글 버튼 (가가 / aA) ══ */
+.font-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    margin-left: 8px;
+    color: var(--text-secondary);
+    font-family: 'Noto Sans KR', 'Inter', sans-serif;
+    gap: 1px;
+    padding: 0;
+}
+.ft-small { font-size: 0.7rem; font-weight: 700; line-height: 1; }
+.ft-big { font-size: 1.05rem; font-weight: 800; line-height: 1; }
+.font-toggle:hover { color: var(--text-primary); border-color: var(--accent); }
+.large-text .font-toggle { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
 
 /* 모바일 메뉴 */
 .nav-mobile { display: none; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 24px 20px; }
@@ -449,18 +478,6 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
    검색 오버레이
    ══════════════════════════════════════ */
 
-/* ── 검색 버튼 (네비) ── */
-.search-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    margin-left: 8px;
-    color: var(--text-secondary);
-}
-.search-toggle svg { width: 18px; height: 18px; }
-.search-toggle:hover { color: var(--text-primary); border-color: var(--accent); }
-
 /* ── 오버레이 배경 ── */
 .search-overlay {
     position: fixed;
@@ -612,30 +629,6 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 /* ══════════════════════════════════════
    큰 글씨 모드 (접근성 · UI 단순화)
    ══════════════════════════════════════ */
-
-/* ── 글씨 크기 토글 버튼 (가가 / aA) ── */
-.font-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    margin-left: 8px;
-    color: var(--text-secondary);
-    font-family: 'Noto Sans KR', 'Inter', sans-serif;
-    gap: 1px;
-    padding: 0;
-}
-.ft-small { font-size: 0.7rem; font-weight: 700; line-height: 1; }
-.ft-big { font-size: 1.05rem; font-weight: 800; line-height: 1; }
-.font-toggle:hover {
-    color: var(--text-primary);
-    border-color: var(--accent);
-}
-.large-text .font-toggle {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: var(--accent-light);
-}
 
 /* ── 색상 강화: 흐린 글씨를 진하게 ── */
 .large-text body {
