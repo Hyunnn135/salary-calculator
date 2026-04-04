@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>종합소득세 계산기 2026 - 프리랜서·사업자 세금 계산 | 월급연구소</title>
+    <title>综合所得税计算器 | 工资研究所</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="2026년 종합소득세 계산기. 프리랜서, 개인사업자, 임대소득자의 종합소득세를 자동 계산합니다. 3.3% 환급 여부도 바로 확인하세요.">
-    <meta name="keywords" content="종합소득세계산기, 종합소득세, 프리랜서세금, 사업소득세, 3.3%환급, 5월세금신고">
+    <meta name="description" content="计算韩国自由职业者、个体经营者、租赁收入者的综合所得税。">
+    <meta name="keywords" content="종합소득세계산기, 종합소득세, 프리랜서세금, 营业收入세, 3.3%환급, 5월세금신고">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/income-tax">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/income-tax-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/income-tax-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/income-tax-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/income-tax">
     <meta property="og:title" content="종합소득세 계산기 - 내 세금 얼마야?">
     <meta property="og:description" content="프리랜서·사업자 종합소득세 자동 계산. 환급 여부까지 바로 확인하세요.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
     <style>
@@ -73,7 +78,7 @@
         .step-amount.plus { color: var(--accent); }
         .step-amount.result-refund { color: var(--accent); font-size: 1rem; font-weight: 800; }
         .step-amount.result-pay { color: #DC2626; font-size: 1rem; font-weight: 800; }
-        /* ══ 소득 유형 버튼 그룹 ══ */
+        /* ══ 收入类型 버튼 그룹 ══ */
         .type-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .type-btn { padding: 11px 8px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--surface); font-size: 0.82rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; text-align: center; }
         .type-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -85,7 +90,7 @@
         .action-row.show { display: flex; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 세율 테이블 ══ */
+        /* ══ 税率 테이블 ══ */
         .rate-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 12px 0; }
         .rate-table th { background: var(--surface-alt); padding: 10px 12px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.78rem; }
         .rate-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
@@ -104,7 +109,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "종합소득세 계산기",
-    "description": "종합소득세 예상 세액을 계산합니다. 사업소득, 근로소득 등 소득 유형별 세금을 확인하세요.",
+    "description": "종합소득세 예상 세액을 계산합니다. 营业收入, 근로소득 등 收入类型별 세금을 확인하세요.",
     "url": "https://salarykorea.site/income-tax",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -126,113 +131,83 @@
 <!-- 네비게이션 -->
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="zh.html">工资<span>研究所</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">工资相关 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="zh.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>年薪实收额计算</a>
+                    <a href="minimum-wage-zh.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>最低时薪计算</a>
+                    <a href="holiday-pay-zh.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>周休津贴计算</a>
+                    <a href="insurance-zh.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>四大保险计算</a>
+                    <a href="salary-table-zh.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>实收额对照表</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">税务相关 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
-                </div>
-            </div>
-                        <div class="nav-item">
-                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-                <div class="nav-dropdown">
-                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
-                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
-                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
-                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                    <a href="income-tax-zh.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>综合所得税</a>
+                    <a href="gift-tax-zh.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>赠与税计算</a>
+                    <a href="acquisition-tax-zh.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>取得税计算</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>年末结算指南</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">医疗相关 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="medical-tax-zh.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>医疗费税额扣除</a>
+                    <a href="silbi-zh.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>实费保险计算</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">离职相关 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement-zh.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>退职金计算</a>
+                    <a href="unemployment-zh.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>失业津贴计算</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="搜索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> ZH</button>
                 <div class="lang-dropdown">
-                    <a href="income-tax.html" class="active">한국어</a>
+                    <a href="income-tax.html">한국어</a>
                     <a href="income-tax-en.html">English</a>
-                    <a href="income-tax-zh.html">中文</a>
+                    <a href="income-tax-zh.html" class="active">中文</a>
                     <a href="income-tax-ja.html">日本語</a>
                 </div>
             </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+        <button class="font-toggle" onclick="toggleLargeText()" title="大字模式"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                大字模式
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-                <div class="nav-mobile-group">
-            <div class="nav-mobile-title">병원 갈 때</div>
-            <a href="medical-tax.html">의료비 세액공제</a>
-            <a href="silbi.html">실비보험 계산기</a>
-            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
-            <a href="guide-silbi.html">실비보험 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="income-tax.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="income-tax-en.html">English</a>
-            <a href="income-tax-zh.html">中文</a>
-            <a href="income-tax-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">工资相关</div>
+            <a href="zh.html">年薪实收额计算</a><a href="minimum-wage-zh.html">最低时薪计算</a><a href="holiday-pay-zh.html">周休津贴计算</a><a href="insurance-zh.html">四大保险计算</a><a href="salary-table-zh.html">实收额对照表</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">税务相关</div>
+            <a href="income-tax-zh.html">综合所得税</a><a href="gift-tax-zh.html">赠与税计算</a><a href="acquisition-tax-zh.html">取得税计算</a><a href="tax-guide.html">年末结算指南</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">医疗相关</div>
+            <a href="medical-tax-zh.html">医疗费税额扣除</a><a href="silbi-zh.html">实费保险计算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">离职相关</div>
+            <a href="retirement-zh.html">退职金计算</a><a href="unemployment-zh.html">失业津贴计算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">其他</div>
+            <a href="about.html">关于</a><a href="contact.html">联系我们</a><a href="privacy.html">隐私政策</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="income-tax.html">한국어</a><a href="income-tax-en.html">English</a><a href="income-tax-zh.html" style="color:var(--accent);font-weight:700;">中文</a><a href="income-tax-ja.html">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">세금 낼 때</div>
-        <h1>종합소득세 계산기</h1>
-        <p>프리랜서·사업자·임대소득자의 종합소득세를 자동 계산합니다</p>
+        <div class="breadcrumb">税务相关</div>
+        <h1>综合所得税计算器</h1>
+        <p>计算自由职业者·经营者·租赁收入者的综合所得税</p>
     </div>
 
     <div class="dashboard">
@@ -241,22 +216,22 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">소득 정보 입력</div>
+                    <div class="card-title">收入信息输入</div>
                     <div class="card-badge">2026년</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">소득 유형</label>
+                    <label class="form-label">收入类型</label>
                     <div class="type-btn-group">
-                        <button class="type-btn selected" onclick="selectType('freelancer', this)">프리랜서 (3.3%)</button>
-                        <button class="type-btn" onclick="selectType('business', this)">사업소득</button>
-                        <button class="type-btn" onclick="selectType('rental', this)">임대소득</button>
-                        <button class="type-btn" onclick="selectType('other', this)">기타소득</button>
+                        <button class="type-btn selected" onclick="selectType('freelancer', this)">自由职业者 (3.3%)</button>
+                        <button class="type-btn" onclick="selectType('business', this)">营业收入</button>
+                        <button class="type-btn" onclick="selectType('rental', this)">租赁收入</button>
+                        <button class="type-btn" onclick="selectType('other', this)">其他收入</button>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">연간 총 수입금액</label>
+                    <label class="form-label">年总收入额</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="incomeInput" placeholder="40,000,000">
                         <span class="form-unit">원</span>
@@ -264,7 +239,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">필요경비율</label>
+                    <label class="form-label">必要经费率</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="expenseRate" value="60" style="font-size:1.2rem;">
                         <span class="form-unit">%</span>
@@ -274,17 +249,17 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">부양가족 수 (본인 포함)</label>
+                        <label class="form-label">扶养家属数（含本人）</label>
                         <select class="form-select" id="dependents">
-                            <option value="1">1명 (본인만)</option>
-                            <option value="2">2명</option>
-                            <option value="3">3명</option>
-                            <option value="4">4명</option>
+                            <option value="1">1人（仅本人）</option>
+                            <option value="2">2人</option>
+                            <option value="3">3人</option>
+                            <option value="4">4人</option>
                             <option value="5">5명 이상</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" id="prepaidLabel">기납부세액 (3.3% 자동계산)</label>
+                        <label class="form-label" id="prepaidLabel">已缴税额（3.3%自动计算）</label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input" id="prepaidInput" style="font-size:1rem; padding:12px 48px 12px 16px;" placeholder="0">
                             <span class="form-unit">원</span>
@@ -292,7 +267,7 @@
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">종합소득세 계산하기</button>
+                <button class="submit-btn" onclick="calculate()">计算综合所得税</button>
             </div>
         </div>
 
@@ -300,34 +275,34 @@
         <div class="result-col">
 
             <div class="result-placeholder" id="resultPlaceholder">
-                소득 정보를 입력하고<br>계산하기 버튼을 눌러주세요
+                소득 정보를 입력하고<br>计算 버튼을 눌러주세요
             </div>
 
             <!-- 결과 요약 -->
             <div class="result-hero" id="resultHero">
-                <div class="result-hero-label" id="resultLabel">환급 예상</div>
+                <div class="result-hero-label" id="resultLabel">预计退税</div>
                 <div class="result-hero-amount" id="resultAmount">0</div>
                 <div class="result-hero-unit">원</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">결정세액</div>
+                        <div class="rh-stat-label">决定税额</div>
                         <div class="rh-stat-val" id="subDetermined">-</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">지방소득세</div>
+                        <div class="rh-stat-label">地方所得税</div>
                         <div class="rh-stat-val" id="subLocal">-</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">기납부세액</div>
+                        <div class="rh-stat-label">已缴税额</div>
                         <div class="rh-stat-val" id="subPrepaid">-</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 세금 계산 상세 -->
+            <!-- 税金计算详情 -->
             <div class="breakdown-card" id="detailCard">
                 <div class="card-header">
-                    <div class="card-title">세금 계산 상세</div>
+                    <div class="card-title">税金计算详情</div>
                 </div>
                 <div id="detailRows"></div>
             </div>
@@ -336,7 +311,7 @@
             <div class="action-row" id="actionRow">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-                    카카오톡으로 공유하기
+                    KakaoTalk分享
                 </button>
             </div>
 
@@ -348,37 +323,37 @@
 
         <!-- 종합소득세란 -->
         <div class="info-card">
-            <h2>종합소득세란?</h2>
+            <h2>什么是综合所得税？</h2>
             <p>
                 종합소득세는 개인이 1년간 벌어들인 <strong>모든 소득을 합산</strong>하여 부과되는 세금입니다.
                 매년 <strong>5월 1일~5월 31일</strong>에 전년도 소득에 대해 신고·납부합니다.
             </p>
             <p><strong>신고 대상자:</strong></p>
             <ul>
-                <li><strong>프리랜서</strong> -- 3.3% 원천징수된 사업소득이 있는 경우</li>
+                <li><strong>프리랜서</strong> -- 3.3% 원천징수된 营业收入이 있는 경우</li>
                 <li><strong>개인사업자</strong> -- 사업을 운영하며 소득이 발생한 경우</li>
-                <li><strong>임대소득자</strong> -- 부동산 임대수입이 있는 경우</li>
-                <li><strong>기타소득자</strong> -- 강연료, 원고료 등 기타소득이 300만원 초과</li>
+                <li><strong>租赁收入자</strong> -- 부동산 임대수입이 있는 경우</li>
+                <li><strong>其他收入자</strong> -- 강연료, 원고료 등 其他收入이 300만원 초과</li>
                 <li><strong>2곳 이상 근무자</strong> -- 두 군데 이상에서 급여를 받은 경우</li>
             </ul>
             <div class="highlight-box">
-                <p>프리랜서의 경우, 원천징수된 3.3%(소득세 3% + 지방소득세 0.3%)와 실제 세금을 비교하여 <strong>환급 또는 추가 납부</strong>가 결정됩니다.</p>
+                <p>프리랜서의 경우, 원천징수된 3.3%(소득세 3% + 地方所得税 0.3%)와 실제 세금을 비교하여 <strong>환급 또는 追加缴纳</strong>가 결정됩니다.</p>
             </div>
         </div>
 
         <!-- FAQ -->
         <div class="info-card">
-            <h2>자주 묻는 질문</h2>
+            <h2>常见问题</h2>
             <div class="faq-item">
                 <div class="faq-q">Q. 프리랜서인데 종합소득세 신고를 꼭 해야 하나요?</div>
                 <div class="faq-a">네. 3.3%가 원천징수되었더라도 5월에 종합소득세 신고를 해야 합니다. 오히려 경비를 인정받으면 이미 낸 세금보다 적게 나와서 환급받는 경우가 많습니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 3.3% 세금을 떼였는데 왜 추가로 내야 하나요?</div>
-                <div class="faq-a">3.3%는 임시로 미리 걷는 세금입니다. 실제 소득이 많거나 경비율이 낮으면 실제 세금이 3.3%보다 높아져 추가 납부가 발생할 수 있습니다.</div>
+                <div class="faq-a">3.3%는 임시로 미리 걷는 세금입니다. 실제 소득이 많거나 경비율이 낮으면 실제 세금이 3.3%보다 높아져 追加缴纳가 발생할 수 있습니다.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 필요경비율이란 무엇인가요?</div>
+                <div class="faq-q">Q. 必要经费率이란 무엇인가요?</div>
                 <div class="faq-a">소득을 얻기 위해 지출한 비용의 비율입니다. 국세청이 업종별로 정한 '단순경비율'을 적용하거나, 실제 지출한 경비를 직접 입력할 수 있습니다. 경비율이 높을수록 세금이 줄어듭니다.</div>
             </div>
             <div class="faq-item">
@@ -396,12 +371,12 @@
         </div>
     </div>
 
-    <!-- 세율표 -->
+    <!-- 税率표 -->
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>2026년 종합소득세 세율표</h2>
+        <h2>2026年综合所得税税率表</h2>
         <table class="rate-table">
             <thead>
-                <tr><th>과세표준</th><th>세율</th><th>누진공제</th></tr>
+                <tr><th>课税标准</th><th>税率</th><th>累进扣除</th></tr>
             </thead>
             <tbody>
                 <tr><td>1,400만원 이하</td><td class="highlight">6%</td><td>-</td></tr>
@@ -415,20 +390,20 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>과세표준이 높을수록 세율이 올라가는 <strong>누진세 구조</strong>입니다. 예를 들어 과세표준이 3,000만원이면, 1,400만원까지는 6%, 나머지 1,600만원에는 15%가 적용됩니다.</p>
+            <p>课税标准이 높을수록 税率이 올라가는 <strong>누진세 구조</strong>입니다. 예를 들어 课税标准이 3,000만원이면, 1,400만원까지는 6%, 나머지 1,600만원에는 15%가 적용됩니다.</p>
         </div>
     </div>
 
 
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>종합소득세 절세 가이드</h2>
-        <p>종합소득세는 개인이 1년간 벌어들인 모든 소득을 합산하여 부과하는 세금입니다. 근로소득만 있는 직장인은 연말정산으로 납세 의무가 종결되지만, 근로소득 외에 사업소득, 임대소득, 금융소득 등이 있다면 매년 5월에 종합소득세를 신고·납부해야 합니다.</p>
+        <h2>综合所得税节税指南</h2>
+        <p>종합소득세는 개인이 1년간 벌어들인 모든 소득을 합산하여 부과하는 세금입니다. 근로소득만 있는 직장인은 연말정산으로 납세 의무가 종결되지만, 근로소득 외에 营业收入, 租赁收入, 금융소득 등이 있다면 매년 5월에 종합소득세를 신고·납부해야 합니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">종합소득세 신고 대상</h3>
-        <p>종합소득세 신고 대상은 근로소득 외에 연 2,000만원을 초과하는 금융소득(이자·배당), 사업소득, 연금소득, 기타소득 등이 있는 경우입니다. 프리랜서(3.3% 원천징수 대상자), 개인사업자, 임대사업자, 유튜버·블로거 등 1인 미디어 사업자 등이 대표적인 신고 대상입니다. 신고 기간은 매년 <strong>5월 1일부터 5월 31일</strong>까지이며, 성실신고 확인 대상자는 6월 30일까지 연장됩니다.</p>
+        <p>종합소득세 신고 대상은 근로소득 외에 연 2,000만원을 초과하는 금융소득(이자·배당), 营业收入, 연금소득, 其他收入 등이 있는 경우입니다. 프리랜서(3.3% 원천징수 대상자), 개인사업자, 임대사업자, 유튜버·블로거 등 1인 미디어 사업자 등이 대표적인 신고 대상입니다. 신고 기간은 매년 <strong>5월 1일부터 5월 31일</strong>까지이며, 성실신고 확인 대상자는 6월 30일까지 연장됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">2026년 소득세율 구간</h3>
-        <p>과세표준 1,400만원 이하 6%, 1,400만~5,000만원 15%, 5,000만~8,800만원 24%, 8,800만~1억5천만원 35%, 1억5천만~3억원 38%, 3억~5억원 40%, 5억~10억원 42%, 10억원 초과 45%가 적용됩니다. 과세표준이 높을수록 세율이 올라가는 누진세 구조이므로, 모든 소득에 최고세율이 적용되는 것이 아니라 각 구간별로 해당 세율이 적용됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">2026년 소득税率 구간</h3>
+        <p>课税标准 1,400만원 이하 6%, 1,400만~5,000만원 15%, 5,000만~8,800만원 24%, 8,800만~1억5천만원 35%, 1억5천만~3억원 38%, 3억~5억원 40%, 5억~10억원 42%, 10억원 초과 45%가 적용됩니다. 课税标准이 높을수록 税率이 올라가는 누진세 구조이므로, 모든 소득에 최고税率이 적용되는 것이 아니라 각 구간별로 해당 税率이 적용됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주요 공제 항목과 절세 방법</h3>
         <p>종합소득세 절세의 핵심은 공제 항목을 최대한 활용하는 것입니다. 인적공제(본인·배우자·부양가족), 연금보험료 공제, 특별소득공제(건강보험료·주택자금), 신용카드 소득공제, 기부금 공제 등을 꼼꼼히 챙겨야 합니다. 프리랜서의 경우 경비율 적용이 중요한데, 소득 규모에 따라 간편장부와 복식부기 중 유리한 방식을 선택해야 합니다. 종합소득세 신고는 국세청 홈택스(hometax.go.kr)에서 전자 신고가 가능하며, 복잡한 경우 세무사 상담을 권장합니다.</p>
@@ -446,7 +421,7 @@
         <a href="contact.html">문의하기</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 韩国工资研究所</div>
 </footer>
 
 <script>
@@ -454,10 +429,10 @@
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
 
-// ── 소득 유형 ──
+// ── 收入类型 ──
 let currentType = 'freelancer';
 const EXPENSE_DEFAULTS = { freelancer: 60, business: 60, rental: 42.6, other: 60 };
-const TYPE_LABELS = { freelancer: '프리랜서 (3.3%)', business: '사업소득', rental: '임대소득', other: '기타소득' };
+const TYPE_LABELS = { freelancer: '自由职业者 (3.3%)', business: '营业收入', rental: '租赁收入', other: '其他收入' };
 
 function selectType(type, btn) {
     currentType = type;
@@ -467,7 +442,7 @@ function selectType(type, btn) {
     // 경비율 기본값 설정
     document.getElementById('expenseRate').value = EXPENSE_DEFAULTS[type];
 
-    // 기납부세액 자동계산 여부
+    // 已缴税额 자동계산 여부
     updatePrepaid();
     updatePrepaidLabel();
 }
@@ -475,9 +450,9 @@ function selectType(type, btn) {
 function updatePrepaidLabel() {
     const label = document.getElementById('prepaidLabel');
     if (currentType === 'freelancer') {
-        label.textContent = '기납부세액 (3.3% 자동계산)';
+        label.textContent = '已缴税额（3.3%自动计算）';
     } else {
-        label.textContent = '기납부세액 (직접 입력)';
+        label.textContent = '已缴税额（手动输入）';
     }
 }
 
@@ -522,10 +497,10 @@ let saved = null;
 
 function calculate() {
     const totalIncome = parseVal(incomeInput.value);
-    if (!totalIncome || totalIncome < 1000000) { alert('연간 총 수입금액을 올바르게 입력해주세요.'); return; }
+    if (!totalIncome || totalIncome < 1000000) { alert('年总收入额을 올바르게 입력해주세요.'); return; }
 
     const expenseRate = parseFloat(document.getElementById('expenseRate').value) / 100;
-    if (isNaN(expenseRate) || expenseRate < 0 || expenseRate > 99) { alert('필요경비율을 0~99 사이로 입력해주세요.'); return; }
+    if (isNaN(expenseRate) || expenseRate < 0 || expenseRate > 99) { alert('必要经费率을 0~99 사이로 입력해주세요.'); return; }
 
     const dependents = parseInt(document.getElementById('dependents').value);
     const prepaid = parseVal(prepaidInput.value);
@@ -539,7 +514,7 @@ function calculate() {
     // 3. 인적공제
     const personalDeduction = dependents * 1500000;
 
-    // 4. 과세표준
+    // 4. 课税标准
     const taxBase = Math.max(0, incomeAmount - personalDeduction);
 
     // 5. 산출세액
@@ -548,10 +523,10 @@ function calculate() {
     // 6. 세액공제 (표준세액공제 7만원)
     const taxCredit = 70000;
 
-    // 7. 결정세액
+    // 7. 决定税额
     const determinedTax = Math.max(0, calculatedTax - taxCredit);
 
-    // 8. 지방소득세
+    // 8. 地方所得税
     const localTax = Math.round(determinedTax * 0.1);
 
     // 9. 총 세금
@@ -571,28 +546,28 @@ function calculate() {
 
     // 환급/납부에 따른 색상
     hero.className = 'result-hero show ' + (isRefund ? 'refund' : 'pay');
-    document.getElementById('resultLabel').textContent = isRefund ? '환급 예상' : '추가 납부 예상';
+    document.getElementById('resultLabel').textContent = isRefund ? '预计退税' : '追加缴纳 예상';
     document.getElementById('resultAmount').textContent = (isRefund ? '-' : '+') + fmt(Math.abs(finalAmount));
-    document.getElementById('subDetermined').textContent = fmt(determinedTax) + '원';
-    document.getElementById('subLocal').textContent = fmt(localTax) + '원';
-    document.getElementById('subPrepaid').textContent = fmt(prepaid) + '원';
+    document.getElementById('subDetermined').textContent = fmt(determinedTax) + '韩元';
+    document.getElementById('subLocal').textContent = fmt(localTax) + '韩元';
+    document.getElementById('subPrepaid').textContent = fmt(prepaid) + '韩元';
 
     // ── 상세 내역 ──
     const finalClass = isRefund ? 'result-refund' : 'result-pay';
     const finalSign = isRefund ? '-' : '+';
 
     const steps = [
-        { icon: '1', bg: '#3B82F6', name: '총 수입금액', amount: fmt(totalIncome) + '원', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '필요경비 (' + (expenseRate * 100).toFixed(1) + '%)', amount: '-' + fmt(expenses) + '원', cls: 'minus' },
-        { icon: '=', bg: '#059669', name: '소득금액', amount: fmt(incomeAmount) + '원', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '인적공제 (' + dependents + '명 × 150만원)', amount: '-' + fmt(personalDeduction) + '원', cls: 'minus' },
-        { icon: '=', bg: '#059669', name: '과세표준', amount: fmt(taxBase) + '원', cls: '' },
-        { icon: '×', bg: '#8B5CF6', name: '산출세액 (세율 적용)', amount: fmt(calculatedTax) + '원', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '표준세액공제', amount: '-' + fmt(taxCredit) + '원', cls: 'minus' },
-        { icon: '=', bg: '#EF4444', name: '결정세액 (소득세)', amount: fmt(determinedTax) + '원', cls: '' },
-        { icon: '+', bg: '#2563EB', name: '지방소득세 (10%)', amount: '+' + fmt(localTax) + '원', cls: 'plus' },
-        { icon: '=', bg: '#EF4444', name: '총 결정세액', amount: fmt(totalTax) + '원', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '기납부세액', amount: '-' + fmt(prepaid) + '원', cls: 'minus' },
+        { icon: '1', bg: '#3B82F6', name: '총 수입금액', amount: fmt(totalIncome) + '韩元', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '필요경비 (' + (expenseRate * 100).toFixed(1) + '%)', amount: '-' + fmt(expenses) + '韩元', cls: 'minus' },
+        { icon: '=', bg: '#059669', name: '소득금액', amount: fmt(incomeAmount) + '韩元', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '인적공제 (' + dependents + '명 × 150만원)', amount: '-' + fmt(personalDeduction) + '韩元', cls: 'minus' },
+        { icon: '=', bg: '#059669', name: '课税标准', amount: fmt(taxBase) + '韩元', cls: '' },
+        { icon: '×', bg: '#8B5CF6', name: '산출세액 (税率 적용)', amount: fmt(calculatedTax) + '韩元', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '표준세액공제', amount: '-' + fmt(taxCredit) + '韩元', cls: 'minus' },
+        { icon: '=', bg: '#EF4444', name: '决定税额 (소득세)', amount: fmt(determinedTax) + '韩元', cls: '' },
+        { icon: '+', bg: '#2563EB', name: '地方所得税 (10%)', amount: '+' + fmt(localTax) + '韩元', cls: 'plus' },
+        { icon: '=', bg: '#EF4444', name: '총 决定税额', amount: fmt(totalTax) + '韩元', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '已缴税额', amount: '-' + fmt(prepaid) + '韩元', cls: 'minus' },
     ];
 
     let html = steps.map(s => `
@@ -606,7 +581,7 @@ function calculate() {
     html += `
         <div class="step-row total-row">
             <div class="step-icon" style="background:${isRefund ? '#2563EB' : '#DC2626'}">★</div>
-            <div class="step-name" style="font-weight:800; color:var(--text-primary);">${isRefund ? '환급 예상액' : '추가 납부액'}</div>
+            <div class="step-name" style="font-weight:800; color:var(--text-primary);">${isRefund ? '预计退税액' : '追加缴纳액'}</div>
             <div class="step-amount ${finalClass}">${finalSign}${fmt(Math.abs(finalAmount))}원</div>
         </div>
     `;
@@ -632,8 +607,8 @@ function shareKakao() {
     if (!window._shareTax) { alert('먼저 계산을 해주세요.'); return; }
     var d = window._shareTax;
     var title = d.isRefund
-        ? '내 종합소득세 환급 예상액은 ' + d.amount + '원!'
-        : '내 종합소득세 추가 납부액은 ' + d.amount + '원';
+        ? '내 종합소득세 预计退税액은 ' + d.amount + '원!'
+        : '내 종합소득세 追加缴纳액은 ' + d.amount + '韩元';
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {

@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 최저시급 계산기 | 시급 월급 연봉 자동계산</title>
+    <title>2026 Minimum Wage Calculator | Hourly, Monthly, Annual Pay | SalaryKorea</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="2026년 최저시급 10,320원 기준으로 일급, 주급, 월급, 연봉을 자동 계산합니다. 주휴수당 포함 여부도 선택 가능합니다.">
-    <meta name="keywords" content="최저시급계산기, 2026최저시급, 최저임금, 시급계산기, 주휴수당, 알바월급계산">
-    <meta property="og:title" content="2026 최저시급 계산기 - 시급 월급 연봉 자동계산">
-    <meta property="og:description" content="2026년 최저시급 10,320원 기준 일급·주급·월급·연봉을 바로 확인하세요.">
+    <meta name="description" content="Calculate daily, weekly, monthly and annual pay based on 2026 Korean minimum wage of 10,320 KRW.">
+    <meta name="keywords" content="최저Hourly Wage계산기, 2026최저Hourly Wage, 최저임금, Hourly Wage계산기, 주휴수당, 알바월급계산">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/minimum-wage">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/minimum-wage-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/minimum-wage-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/minimum-wage-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/minimum-wage">
+    <meta property="og:title" content="2026 최저Hourly Wage 계산기 - Hourly Wage 월급 연봉 자동계산">
+    <meta property="og:description" content="2026 최저Hourly Wage 10,320원 기준 Daily·Weekly·월급·연봉을 바로 확인하세요.">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +101,7 @@
         .cmp-table .green { color: #059669; font-weight: 700; }
         .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-        /* ══ 페이지 고유: 최저시급 배너 ══ */
+        /* ══ 페이지 고유: 최저Hourly Wage 배너 ══ */
         .min-wage-banner { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 24px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
         .min-wage-banner .mw-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 500; }
         .min-wage-banner .mw-value { font-size: 1.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -1px; margin-top: 4px; }
@@ -134,8 +139,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "2026년 최저시급 계산기",
-    "description": "2026년 최저임금 기준 시급, 월급, 연봉을 계산합니다. 주휴수당 포함 실질 시급도 확인하세요.",
+    "name": "2026 최저Hourly Wage 계산기",
+    "description": "2026 최저임금 기준 Hourly Wage, 월급, 연봉을 계산합니다. Include Weekly Holiday Pay 실질 Hourly Wage도 확인하세요.",
     "url": "https://salarykorea.site/minimum-wage",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -157,121 +162,93 @@
 <!-- 네비게이션 -->
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="en.html">Salary<span>Korea</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Payroll <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="en.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>Salary Calculator</a>
+                    <a href="minimum-wage-en.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>Minimum Wage</a>
+                    <a href="holiday-pay-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Holiday Pay</a>
+                    <a href="insurance-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Social Insurance</a>
+                    <a href="salary-table-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Salary Table</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Tax <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
-                </div>
-            </div>
-                        <div class="nav-item">
-                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-                <div class="nav-dropdown">
-                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
-                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
-                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
-                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                    <a href="income-tax-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Income Tax</a>
+                    <a href="gift-tax-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Gift Tax</a>
+                    <a href="acquisition-tax-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Acquisition Tax</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>Tax Guide</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Medical <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="medical-tax-en.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>Medical Tax Deduction</a>
+                    <a href="silbi-en.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>Insurance Calculator</a>
+                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>Medical Guide</a>
+                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>Insurance Guide</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">Leaving Job <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Severance Pay</a>
+                    <a href="unemployment-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Unemployment Benefits</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN</button>
                 <div class="lang-dropdown">
-                    <a href="minimum-wage.html" class="active">한국어</a>
-                    <a href="minimum-wage-en.html">English</a>
+                    <a href="minimum-wage.html">한국어</a>
+                    <a href="minimum-wage-en.html" class="active">English</a>
                     <a href="minimum-wage-zh.html">中文</a>
                     <a href="minimum-wage-ja.html">日本語</a>
                 </div>
             </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+        <button class="font-toggle" onclick="toggleLargeText()" title="Large Text"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                Large Text
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-                <div class="nav-mobile-group">
-            <div class="nav-mobile-title">병원 갈 때</div>
-            <a href="medical-tax.html">의료비 세액공제</a>
-            <a href="silbi.html">실비보험 계산기</a>
-            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
-            <a href="guide-silbi.html">실비보험 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="minimum-wage.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="minimum-wage-en.html">English</a>
-            <a href="minimum-wage-zh.html">中文</a>
-            <a href="minimum-wage-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Payroll</div>
+            <a href="en.html">Salary Calculator</a><a href="minimum-wage-en.html">Minimum Wage</a><a href="holiday-pay-en.html">Holiday Pay</a><a href="insurance-en.html">Social Insurance</a><a href="salary-table-en.html">Salary Table</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Tax</div>
+            <a href="income-tax-en.html">Income Tax</a><a href="gift-tax-en.html">Gift Tax</a><a href="acquisition-tax-en.html">Acquisition Tax</a><a href="tax-guide.html">Tax Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Medical</div>
+            <a href="medical-tax-en.html">Medical Tax Deduction</a><a href="silbi-en.html">Insurance Calculator</a><a href="guide-medical-tax.html">Medical Guide</a><a href="guide-silbi.html">Insurance Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Leaving Job</div>
+            <a href="retirement-en.html">Severance Pay</a><a href="unemployment-en.html">Unemployment Benefits</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">More</div>
+            <a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="minimum-wage.html">한국어</a><a href="minimum-wage-en.html" style="color:var(--accent);font-weight:700;">English</a><a href="minimum-wage-zh.html">中文</a><a href="minimum-wage-ja.html">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">월급 받을 때</div>
-        <h1>최저시급 계산기</h1>
-        <p>시급을 입력하면 일급·주급·월급·연봉을 자동 계산합니다</p>
+        <div class="breadcrumb">Payroll</div>
+        <h1>Minimum Wage Calculator</h1>
+        <p>Enter your hourly wage to calculate daily, weekly, monthly and annual pay</p>
     </div>
 
-    <!-- 2026 최저시급 배너 -->
+    <!-- 2026 최저Hourly Wage 배너 -->
     <div class="min-wage-banner">
         <div>
-            <div class="mw-label">2026년 법정 최저시급</div>
+            <div class="mw-label">2026 Legal Minimum Wage</div>
             <div class="mw-value">10,320원</div>
-            <div class="mw-sub">전년 대비 +170원 인상 (1.7%)</div>
+            <div class="mw-sub">+170 KRW increase from last year (1.7%)</div>
         </div>
     </div>
 
@@ -282,12 +259,12 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">근무 조건 입력</div>
-                    <div class="card-badge">2026년</div>
+                    <div class="card-title">Work Conditions</div>
+                    <div class="card-badge">2026</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">시급</label>
+                    <label class="form-label">Hourly Wage</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="hourlyWage" value="10,320">
                         <span class="form-unit">원</span>
@@ -296,35 +273,35 @@
 
                 <div class="form-row" style="margin-bottom:20px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">하루 근무시간</label>
+                        <label class="form-label">Daily Working Hours</label>
                         <select class="form-select" id="dailyHours">
-                            <option value="4">4시간</option>
-                            <option value="5">5시간</option>
-                            <option value="6">6시간</option>
-                            <option value="7">7시간</option>
-                            <option value="8" selected>8시간</option>
-                            <option value="9">9시간</option>
-                            <option value="10">10시간</option>
+                            <option value="4">4 hrs</option>
+                            <option value="5">5 hrs</option>
+                            <option value="6">6 hrs</option>
+                            <option value="7">7 hrs</option>
+                            <option value="8" selected>8 hrs</option>
+                            <option value="9">9 hrs</option>
+                            <option value="10">10 hrs</option>
                         </select>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">주 근무일수</label>
+                        <label class="form-label">Weekly Working Days</label>
                         <select class="form-select" id="weeklyDays">
-                            <option value="1">주 1일</option>
-                            <option value="2">주 2일</option>
-                            <option value="3">주 3일</option>
-                            <option value="4">주 4일</option>
-                            <option value="5" selected>주 5일</option>
-                            <option value="6">주 6일</option>
-                            <option value="7">주 7일</option>
+                            <option value="1">1 day/wk</option>
+                            <option value="2">2 days/wk</option>
+                            <option value="3">3 days/wk</option>
+                            <option value="4">4 days/wk</option>
+                            <option value="5" selected>5 days/wk</option>
+                            <option value="6">6 days/wk</option>
+                            <option value="7">7 days/wk</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="toggle-row">
                     <div>
-                        <div class="toggle-text">주휴수당 포함</div>
-                        <div class="toggle-sub">주 15시간 이상 근무 시 발생</div>
+                        <div class="toggle-text">Include Weekly Holiday Pay</div>
+                        <div class="toggle-sub">Applies when working 15+ hours/week</div>
                     </div>
                     <label class="toggle">
                         <input type="checkbox" id="includeHoliday" checked>
@@ -332,14 +309,14 @@
                     </label>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">계산하기</button>
+                <button class="submit-btn" onclick="calculate()">Calculate</button>
             </div>
 
             <!-- 저장 / 공유 버튼 -->
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-                    카카오톡 공유
+                    Share KakaoTalk
                 </button>
             </div>
         </div>
@@ -349,28 +326,28 @@
 
             <!-- 결과 요약 -->
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">월급 (세전)</div>
+                <div class="result-hero-label">Monthly Pay (Pre-tax)</div>
                 <div class="result-hero-amount" id="monthly">0</div>
                 <div class="result-hero-unit">원 / 월</div>
                 <div class="result-hero-msg" id="resultNote"></div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">일급</div>
+                        <div class="rh-stat-label">Daily</div>
                         <div class="rh-stat-val" id="daily">--</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">주급 <span id="holidayTag" style="font-size:0.6rem;"></span></div>
+                        <div class="rh-stat-label">Weekly <span id="holidayTag" style="font-size:0.6rem;"></span></div>
                         <div class="rh-stat-val" id="weekly">--</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">연봉 (세전)</div>
+                        <div class="rh-stat-label">Annual (Pre-tax)</div>
                         <div class="rh-stat-val" id="yearly">--</div>
                     </div>
                 </div>
             </div>
 
             <!-- 결과 없을 때 플레이스홀더 -->
-            <div class="result-placeholder" id="resultPlaceholder">시급을 입력하고 계산하기 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">Enter hourly wage and click Calculate</div>
 
         </div>
 
@@ -379,39 +356,39 @@
     <!-- 하단 정보 영역 -->
     <div class="bottom-grid">
 
-        <!-- 연도별 최저시급 변화 -->
+        <!-- Year별 최저Hourly Wage 변화 -->
         <div class="info-card">
-            <h2>최저시급 연도별 변화</h2>
+            <h2>Minimum Wage History by Year</h2>
             <table class="info-table">
                 <thead>
-                    <tr><th>연도</th><th>시급</th><th>월급 (209h)</th><th>인상률</th></tr>
+                    <tr><th>Year</th><th>Hourly Wage</th><th>Monthly (209h)</th><th>Increase</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td class="hl">2026년</td><td class="hl">10,320원</td><td class="hl">2,156,880원</td><td class="hl">+1.7%</td></tr>
-                    <tr><td>2025년</td><td>10,030원</td><td>2,096,270원</td><td>+1.7%</td></tr>
-                    <tr><td>2024년</td><td>9,860원</td><td>2,060,740원</td><td>+2.5%</td></tr>
-                    <tr><td>2023년</td><td>9,620원</td><td>2,010,580원</td><td>+5.0%</td></tr>
-                    <tr><td>2022년</td><td>9,160원</td><td>1,914,440원</td><td>+5.1%</td></tr>
+                    <tr><td class="hl">2026</td><td class="hl">10,320원</td><td class="hl">2,156,880원</td><td class="hl">+1.7%</td></tr>
+                    <tr><td>2025</td><td>10,030원</td><td>2,096,270원</td><td>+1.7%</td></tr>
+                    <tr><td>2024</td><td>9,860원</td><td>2,060,740원</td><td>+2.5%</td></tr>
+                    <tr><td>2023</td><td>9,620원</td><td>2,010,580원</td><td>+5.0%</td></tr>
+                    <tr><td>2022</td><td>9,160원</td><td>1,914,440원</td><td>+5.1%</td></tr>
                 </tbody>
             </table>
         </div>
 
         <!-- 주휴수당 안내 -->
         <div class="info-card">
-            <h2>주휴수당이란?</h2>
-            <p>일주일에 15시간 이상 일하고 결근 없이 출근하면 하루치 임금을 추가로 받을 수 있는 제도입니다. 아르바이트생도 동일하게 적용됩니다.</p>
+            <h2>What is Weekly Holiday Pay?</h2>
+            <p>일주일에 15 hrs 이상 일하고 결근 없이 출근하면 하루치 임금을 추가로 받을 수 있는 제도입니다. 아르바이트생도 동일하게 적용됩니다.</p>
             <div class="condition-grid">
                 <div class="condition-box fail">
-                    <div class="c-title">주휴수당 없음</div>
-                    <p>주 15시간 미만 근무</p>
+                    <div class="c-title">No Holiday Pay</div>
+                    <p>Working less than 15 hrs/week</p>
                 </div>
                 <div class="condition-box pass">
-                    <div class="c-title">주휴수당 발생</div>
-                    <p>주 15시간 이상 근무</p>
+                    <div class="c-title">Holiday Pay Applies</div>
+                    <p>Working 15+ hrs/week</p>
                 </div>
             </div>
             <div class="formula-box">
-                <p><strong>계산식:</strong> 시급 x (주근무시간 / 40) x 8<br>주 40시간 이상이면 시급 x 8시간 고정</p>
+                <p><strong>계산식:</strong> Hourly Wage x (주근무시간 / 40) x 8<br>주 40시간 이상이면 Hourly Wage x 8 hrs 고정</p>
             </div>
         </div>
 
@@ -419,53 +396,53 @@
 
     <!-- 최저임금 위반 안내 -->
     <div class="info-card" style="margin-bottom: 24px;">
-        <h2>최저임금 위반 시</h2>
-        <p>최저임금(10,320원)보다 낮은 시급을 지급하면 <strong>3년 이하 징역 또는 2,000만원 이하 벌금</strong>이 부과됩니다. 최저임금법은 정규직·계약직·아르바이트 모두 동일하게 적용됩니다.</p>
-        <p>수습기간 중에는 3개월간 최저임금의 <strong>90%</strong>까지 적용 가능합니다. (단, 1년 미만 근로계약 제외)</p>
+        <h2>Minimum Wage Violation</h2>
+        <p>최저임금(10,320원)보다 낮은 Hourly Wage을 지급하면 <strong>3년 이하 징역 또는 2,000만원 이하 벌금</strong>이 부과됩니다. 최저임금법은 정규직·계약직·아르바이트 모두 동일하게 적용됩니다.</p>
+        <p>수습기간 중에는 3months간 최저임금의 <strong>90%</strong>까지 적용 가능합니다. (단, 1년 미만 근로계약 제외)</p>
     </div>
 
     <!-- FAQ -->
     <div class="info-card" style="margin-bottom: 24px;">
-        <h2>자주 묻는 질문</h2>
+        <h2>FAQ</h2>
         <div class="faq-item">
-            <div class="faq-q">2026년 최저시급은 얼마인가요?</div>
-            <div class="faq-a">2026년 법정 최저시급은 시간당 10,320원입니다. 월급(209시간 기준)으로 환산하면 2,156,880원입니다.</div>
+            <div class="faq-q">2026 최저Hourly Wage은 얼마인가요?</div>
+            <div class="faq-a">2026 Legal Minimum Wage은 시간당 10,320원입니다. 월급(209 hrs 기준)으로 환산하면 2,156,880원입니다.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">최저시급보다 낮게 받고 있으면 어떻게 해야 하나요?</div>
+            <div class="faq-q">최저Hourly Wage보다 낮게 받고 있으면 어떻게 해야 하나요?</div>
             <div class="faq-a">최저임금법 위반으로 3년 이하 징역 또는 2,000만원 이하 벌금에 해당합니다. 고용노동부 고객상담센터(1350) 또는 온라인 신고센터를 통해 신고할 수 있습니다.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">수습기간에도 최저시급이 적용되나요?</div>
-            <div class="faq-a">1년 이상 근로계약을 체결한 경우 수습 3개월까지 최저시급의 90%(9,288원)를 지급할 수 있습니다. 단, 단순노무직은 수습 감액이 적용되지 않습니다.</div>
+            <div class="faq-q">수습기간에도 최저Hourly Wage이 적용되나요?</div>
+            <div class="faq-a">1년 이상 근로계약을 체결한 경우 수습 3months까지 최저Hourly Wage의 90%(9,288원)를 지급할 수 있습니다. 단, 단순노무직은 수습 감액이 적용되지 않습니다.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">주휴수당 포함 시 실질 시급은 얼마인가요?</div>
-            <div class="faq-a">주 15시간 이상 근무 시 주휴수당이 추가됩니다. 주 5일 근무 기준으로 실질 시급은 10,320원 x 1.2 = 약 12,384원 수준이 됩니다.</div>
+            <div class="faq-q">Include Weekly Holiday Pay 시 실질 Hourly Wage은 얼마인가요?</div>
+            <div class="faq-a">Working 15+ hrs/week 시 주휴수당이 추가됩니다. 5 days/wk 근무 기준으로 실질 Hourly Wage은 10,320원 x 1.2 = 약 12,384원 수준이 됩니다.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">식대나 교통비도 시급에 포함되나요?</div>
+            <div class="faq-q">식대나 교통비도 Hourly Wage에 포함되나요?</div>
             <div class="faq-a">현금으로 지급되는 식대·교통비는 최저임금 산입 여부가 정해져 있습니다. 매월 고정적으로 지급되는 식대는 일정 한도 내에서 산입됩니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">아르바이트생도 4대보험에 가입해야 하나요?</div>
-            <div class="faq-a">주 15시간 이상 근무 시 4대보험 의무 가입 대상입니다. 단기·초단시간 근로자(주 15시간 미만)는 국민연금·고용보험 적용이 제외될 수 있습니다.</div>
+            <div class="faq-a">Working 15+ hrs/week 시 4대보험 의무 가입 대상입니다. 단기·초단시간 근로자(주 15 hrs 미만)는 국민연금·고용보험 적용이 제외될 수 있습니다.</div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>2026년 최저임금 완벽 정리</h2>
-        <p>2026년 최저시급은 <strong>10,320원</strong>으로 확정되었습니다. 이는 전년도 10,150원 대비 170원(1.7%) 인상된 금액입니다. 주 40시간 근무 기준 월 환산액(209시간)은 <strong>2,156,880원</strong>이며, 연봉으로 환산하면 약 <strong>25,882,560원</strong>에 해당합니다.</p>
+        <h2>2026 Minimum Wage Complete Guide</h2>
+        <p>2026 최저Hourly Wage은 <strong>10,320원</strong>으로 확정되었습니다. 이는 전년도 10,150원 대비 170원(1.7%) 인상된 금액입니다. 주 40시간 근무 기준 월 환산액(209 hrs)은 <strong>2,156,880원</strong>이며, 연봉으로 환산하면 약 <strong>25,882,560원</strong>에 해당합니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">최저임금 적용 범위</h3>
-        <p>최저임금은 1인 이상 근로자를 사용하는 모든 사업 또는 사업장에 적용됩니다. 정규직, 계약직, 파트타임 아르바이트 등 고용 형태와 관계없이 동일하게 적용되며, 외국인 근로자에게도 마찬가지로 적용됩니다. 다만, 수습 사용 중인 근로자로서 수습 사용한 날부터 3개월 이내인 경우에는 최저임금의 90%까지 감액 적용이 가능합니다. 단, 1년 미만의 기간을 정하여 근로계약을 체결한 경우에는 수습 기간이라도 감액할 수 없습니다.</p>
+        <p>최저임금은 1인 이상 근로자를 사용하는 모든 사업 또는 사업장에 적용됩니다. 정규직, 계약직, 파트타임 아르바이트 등 고용 형태와 관계없이 동일하게 적용되며, 외국인 근로자에게도 마찬가지로 적용됩니다. 다만, 수습 사용 중인 근로자로서 수습 사용한 날부터 3months 이내인 경우에는 최저임금의 90%까지 감액 적용이 가능합니다. 단, 1년 미만의 기간을 정하여 근로계약을 체결한 경우에는 수습 기간이라도 감액할 수 없습니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">최저임금 위반 시 벌칙</h3>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Minimum Wage Violation 벌칙</h3>
         <p>최저임금법 제28조에 따라 최저임금액보다 적은 임금을 지급한 사용자는 <strong>3년 이하의 징역 또는 2,000만원 이하의 벌금</strong>에 처해질 수 있습니다. 최저임금 위반이 의심되는 경우 고용노동부(전화번호 1350)에 신고할 수 있으며, 사업장 관할 지방고용노동청에 진정서를 접수할 수도 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">최근 5년간 최저임금 인상 추이</h3>
-        <p>2022년 9,160원 → 2023년 9,620원(5.0% 인상) → 2024년 9,860원(2.5% 인상) → 2025년 10,150원(2.9% 인상) → 2026년 10,320원(1.7% 인상). 최근 몇 년간 인상률이 점차 둔화되는 추세를 보이고 있으며, 이는 경제 상황과 기업 부담 능력 등을 종합적으로 고려한 최저임금위원회의 결정에 따른 것입니다. 최저임금은 매년 8월 5일까지 고시되어 다음 해 1월 1일부터 적용됩니다.</p>
+        <p>2022 9,160원 → 2023 9,620원(5.0% 인상) → 2024 9,860원(2.5% 인상) → 2025 10,150원(2.9% 인상) → 2026 10,320원(1.7% 인상). 최근 몇 년간 Increase이 점차 둔화되는 추세를 보이고 있으며, 이는 경제 상황과 기업 부담 능력 등을 종합적으로 고려한 최저임금위원회의 결정에 따른 것입니다. 최저임금은 매년 8월 5일까지 고시되어 다음 해 1월 1일부터 적용됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">최저임금에 포함되는 임금 항목</h3>
         <p>최저임금에 산입되는 임금 범위도 알아두면 좋습니다. 매월 1회 이상 정기적으로 지급하는 임금이 산입 대상이며, 기본급뿐 아니라 고정적으로 지급되는 각종 수당도 포함됩니다. 다만 매월 지급되더라도 소정근로에 대한 대가가 아닌 연장·야간·휴일근로수당, 연차미사용수당, 가족수당, 통근수당 등은 제외됩니다. 상여금의 경우 월 환산액의 5%를 초과하는 부분, 복리후생비(식비·교통비·숙박비 등)는 월 환산액의 1%를 초과하는 부분이 최저임금에 산입됩니다. 자신의 급여가 최저임금 이상인지 확인할 때는 이러한 산입 범위를 고려하여 정확하게 비교해야 합니다.</p>
@@ -509,12 +486,12 @@
         <a href="contact.html">문의하기</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
 
 <script>
 function fmt(n) {
-    return Math.round(n).toLocaleString('ko-KR') + '원';
+    return Math.round(n).toLocaleString('ko-KR') + 'KRW';
 }
 
 const hourlyWageInput = document.getElementById('hourlyWage');
@@ -529,20 +506,20 @@ function calculate() {
     const weeklyD = parseInt(document.getElementById('weeklyDays').value);
     const includeHoliday = document.getElementById('includeHoliday').checked;
 
-    if (wage <= 0) { alert('시급을 입력해주세요.'); return; }
+    if (wage <= 0) { alert('Hourly Wage을 입력해주세요.'); return; }
 
     const weeklyH = dailyH * weeklyD;
 
-    // 일급
+    // Daily
     const daily = wage * dailyH;
 
-    // 주휴수당 (주 15시간 이상 근무 시)
+    // 주휴수당 (Working 15+ hrs/week 시)
     let holidayPay = 0;
     if (includeHoliday && weeklyH >= 15) {
         holidayPay = wage * Math.min(weeklyH / 40, 1) * 8;
     }
 
-    // 주급
+    // Weekly
     const weekly = wage * weeklyH + holidayPay;
 
     // 월급 (월 환산: 주 평균 4.345주)
@@ -561,14 +538,14 @@ function calculate() {
     tag.textContent = holidayPay > 0 ? '(주휴 포함)' : '';
 
     // 안내 메시지
-    let note = `시급 ${wage.toLocaleString()}원 × 하루 ${dailyH}시간 × 주 ${weeklyD}일 기준입니다.`;
+    let note = `Hourly Wage ${wage.toLocaleString()}원 × 하루 ${dailyH}시간 × 주 ${weeklyD}일 기준입니다.`;
     if (includeHoliday && weeklyH >= 15) {
         note += ` 주휴수당 ${fmt(holidayPay)} 포함.`;
     } else if (includeHoliday && weeklyH < 15) {
-        note += ` 주 근무시간이 15시간 미만으로 주휴수당이 발생하지 않습니다.`;
+        note += ` 주 근무시간이 15 hrs 미만으로 주휴수당이 발생하지 않습니다.`;
     }
     if (wage < 10320) {
-        note += ` 입력한 시급이 2026년 최저시급(10,320원)보다 낮습니다.`;
+        note += ` 입력한 Hourly Wage이 2026 최저Hourly Wage(10,320원)보다 낮습니다.`;
     }
     document.getElementById('resultNote').textContent = note;
 
@@ -593,7 +570,7 @@ function shareKakao() {
         objectType: 'feed',
         content: {
             title: '내 월급은 ' + (window._shareMonthly || '—'),
-            description: '2026년 최저시급 10,320원 기준 월급 계산 결과',
+            description: '2026 최저Hourly Wage 10,320원 기준 월급 계산 결과',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/minimum-wage', webUrl: 'https://salarykorea.site/minimum-wage' }
         },

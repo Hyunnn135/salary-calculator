@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>퇴직금 계산기 - 내 퇴직금 얼마야? | 월급연구소</title>
+    <title>退職金計算機 | 給与研究所</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="퇴직금 계산기. 월급과 근속기간을 입력하면 퇴직금과 세후 수령액을 바로 계산해드립니다. 2026년 기준.">
+    <meta name="description" content="月給と勤続年数から韓国の退職金を計算します。">
     <meta name="keywords" content="퇴직금계산기, 퇴직금계산, 퇴직소득세, 세후퇴직금, 퇴직금얼마">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/retirement">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/retirement-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/retirement-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/retirement-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/retirement">
     <meta property="og:title" content="퇴직금 계산기 - 내 퇴직금 얼마야?">
-    <meta property="og:description" content="월급과 근속기간을 입력하면 퇴직금과 세후 수령액을 바로 계산해드립니다.">
+    <meta property="og:description" content="월급과 근속기간을 입력하면 퇴직금과 税引後金額을 바로 계산해드립니다.">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
     <style>
@@ -135,96 +140,82 @@
 <!-- 네비게이션 -->
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="ja.html">給与<span>研究所</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">給与関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="ja.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>年俸手取り計算</a>
+                    <a href="minimum-wage-ja.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>最低時給計算</a>
+                    <a href="holiday-pay-ja.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>週休手当計算</a>
+                    <a href="insurance-ja.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>4大保険計算</a>
+                    <a href="salary-table-ja.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>手取り額一覧</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">税金関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                    <a href="income-tax-ja.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>総合所得税</a>
+                    <a href="gift-tax-ja.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>贈与税計算</a>
+                    <a href="acquisition-tax-ja.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>取得税計算</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>年末調整ガイド</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">医療関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="medical-tax-ja.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>医療費税額控除</a>
+                    <a href="silbi-ja.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>実費保険計算</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">退職関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement-ja.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>退職金計算</a>
+                    <a href="unemployment-ja.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>失業給付計算</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="検索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> JA</button>
                 <div class="lang-dropdown">
-                    <a href="retirement.html" class="active">한국어</a>
+                    <a href="retirement.html">한국어</a>
                     <a href="retirement-en.html">English</a>
                     <a href="retirement-zh.html">中文</a>
-                    <a href="retirement-ja.html">日本語</a>
+                    <a href="retirement-ja.html" class="active">日本語</a>
                 </div>
             </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+        <button class="font-toggle" onclick="toggleLargeText()" title="大きな文字"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                大きな文字
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="retirement.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="retirement-en.html">English</a>
-            <a href="retirement-zh.html">中文</a>
-            <a href="retirement-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">給与関連</div>
+            <a href="ja.html">年俸手取り計算</a><a href="minimum-wage-ja.html">最低時給計算</a><a href="holiday-pay-ja.html">週休手当計算</a><a href="insurance-ja.html">4大保険計算</a><a href="salary-table-ja.html">手取り額一覧</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">税金関連</div>
+            <a href="income-tax-ja.html">総合所得税</a><a href="gift-tax-ja.html">贈与税計算</a><a href="acquisition-tax-ja.html">取得税計算</a><a href="tax-guide.html">年末調整ガイド</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">医療関連</div>
+            <a href="medical-tax-ja.html">医療費税額控除</a><a href="silbi-ja.html">実費保険計算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">退職関連</div>
+            <a href="retirement-ja.html">退職金計算</a><a href="unemployment-ja.html">失業給付計算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">その他</div>
+            <a href="about.html">紹介</a><a href="contact.html">お問い合わせ</a><a href="privacy.html">プライバシー</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="retirement.html">한국어</a><a href="retirement-en.html">English</a><a href="retirement-zh.html">中文</a><a href="retirement-ja.html" style="color:var(--accent);font-weight:700;">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
     <div class="page-header">
-        <div class="breadcrumb">퇴사할 때</div>
-        <h1>퇴직금 계산기</h1>
-        <p>월급과 근속기간을 입력하면 퇴직금을 바로 계산해드려요</p>
+        <div class="breadcrumb">退職関連</div>
+        <h1>退職金計算機</h1>
+        <p>月給と勤続期間を入力して退職金を計算</p>
     </div>
 
     <div class="dashboard">
@@ -232,12 +223,12 @@
         <div class="input-col">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">정보 입력</div>
-                    <div class="card-badge">2026년 기준</div>
+                    <div class="card-title">情報入力</div>
+                    <div class="card-badge">2026年 기준</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">최근 3개월 월 평균 급여 (세전)</label>
+                    <label class="form-label">直近3ヶ月の平均月給（税引前）</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="3,000,000">
                         <span class="form-unit">원</span>
@@ -247,59 +238,59 @@
                 <div class="form-group">
                     <div class="form-row">
                         <div>
-                            <label class="form-label">근속 기간 — 년</label>
+                            <label class="form-label">勤続期間 — 年</label>
                             <select class="form-select" id="workYears">
-                                <option value="0">0년</option>
-                                <option value="1">1년</option>
-                                <option value="2">2년</option>
-                                <option value="3">3년</option>
-                                <option value="4">4년</option>
-                                <option value="5" selected>5년</option>
-                                <option value="6">6년</option>
-                                <option value="7">7년</option>
-                                <option value="8">8년</option>
-                                <option value="9">9년</option>
-                                <option value="10">10년</option>
-                                <option value="11">11년</option>
-                                <option value="12">12년</option>
-                                <option value="13">13년</option>
-                                <option value="14">14년</option>
-                                <option value="15">15년</option>
-                                <option value="20">20년</option>
-                                <option value="25">25년</option>
-                                <option value="30">30년</option>
+                                <option value="0">0年</option>
+                                <option value="1">1年</option>
+                                <option value="2">2年</option>
+                                <option value="3">3年</option>
+                                <option value="4">4年</option>
+                                <option value="5" selected>5年</option>
+                                <option value="6">6年</option>
+                                <option value="7">7年</option>
+                                <option value="8">8年</option>
+                                <option value="9">9年</option>
+                                <option value="10">10年</option>
+                                <option value="11">11年</option>
+                                <option value="12">12年</option>
+                                <option value="13">13年</option>
+                                <option value="14">14年</option>
+                                <option value="15">15年</option>
+                                <option value="20">20年</option>
+                                <option value="25">25年</option>
+                                <option value="30">30年</option>
                             </select>
                         </div>
                         <div>
-                            <label class="form-label">근속 기간 — 개월</label>
+                            <label class="form-label">勤続期間 — ヶ月</label>
                             <select class="form-select" id="workMonths">
-                                <option value="0">0개월</option>
-                                <option value="1">1개월</option>
-                                <option value="2">2개월</option>
-                                <option value="3">3개월</option>
-                                <option value="4">4개월</option>
-                                <option value="5">5개월</option>
-                                <option value="6">6개월</option>
-                                <option value="7">7개월</option>
-                                <option value="8">8개월</option>
-                                <option value="9">9개월</option>
-                                <option value="10">10개월</option>
-                                <option value="11">11개월</option>
+                                <option value="0">0月</option>
+                                <option value="1">1月</option>
+                                <option value="2">2月</option>
+                                <option value="3">3月</option>
+                                <option value="4">4月</option>
+                                <option value="5">5月</option>
+                                <option value="6">6月</option>
+                                <option value="7">7月</option>
+                                <option value="8">8月</option>
+                                <option value="9">9月</option>
+                                <option value="10">10月</option>
+                                <option value="11">11月</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">퇴직금 계산하기</button>
+                <button class="submit-btn" onclick="calculate()">퇴직금 計算する</button>
             </div>
         </div>
 
         <!-- 결과 영역 -->
         <div class="result-col">
-            <!-- 1년 미만 경고 -->
+            <!-- 1年 미만 경고 -->
             <div class="warn-card" id="warnCard">
-                <p>퇴직금은 1년 이상 근무한 경우에만 발생합니다. (근로기준법 제34조)<br>
-                1년 미만 근무 시 퇴직금을 받을 수 없습니다.</p>
+                <p>퇴직금은 1年 이상 근무한 경우에만 발생합니다. (근로기준법 제34조)<br>
+                1年 미만 근무 시 퇴직금을 받을 수 없습니다.</p>
             </div>
 
             <div class="result-placeholder" id="resultPlaceholder">
@@ -308,20 +299,20 @@
 
             <!-- 메인 결과 -->
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">예상 퇴직금 (세전)</div>
+                <div class="result-hero-label">予想退職金（税引前）</div>
                 <div class="result-hero-amount" id="grossResult">0</div>
                 <div class="result-hero-unit">원</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">퇴직소득세 (추정)</div>
+                        <div class="rh-stat-label">退職所得税（推定）</div>
                         <div class="rh-stat-val" id="taxResult">-</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">세후 수령액 (추정)</div>
+                        <div class="rh-stat-label">税引後金額（推定）</div>
                         <div class="rh-stat-val" id="netResult">-</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">1일 평균임금</div>
+                        <div class="rh-stat-label">1日平均賃金</div>
                         <div class="rh-stat-val" id="dailyResult">-</div>
                     </div>
                 </div>
@@ -330,12 +321,12 @@
             <!-- 상세 내역 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
-                    <div class="card-title">퇴직금 상세 내역</div>
+                    <div class="card-title">退職金の詳細</div>
                 </div>
                 <div class="b-item">
                     <div class="b-dot" style="background:#2563EB;"></div>
                     <div class="b-info">
-                        <div class="b-name">세전 퇴직금</div>
+                        <div class="b-name">税引前退職金</div>
                         <div class="b-bar-wrap"><div class="b-bar" id="barGross" style="background:#2563EB;"></div></div>
                     </div>
                     <div class="b-amount" id="bdGross">0원</div>
@@ -343,13 +334,13 @@
                 <div class="b-item">
                     <div class="b-dot" style="background:#EF4444;"></div>
                     <div class="b-info">
-                        <div class="b-name">퇴직소득세 (추정)</div>
+                        <div class="b-name">退職所得税（推定）</div>
                         <div class="b-bar-wrap"><div class="b-bar" id="barTax" style="background:#EF4444;"></div></div>
                     </div>
                     <div class="b-amount" id="bdTax">0원</div>
                 </div>
                 <div class="b-total">
-                    <div class="b-total-label">세후 수령액 (추정)</div>
+                    <div class="b-total-label">税引後金額（推定）</div>
                     <div class="b-total-val" id="bdNet">0원</div>
                 </div>
             </div>
@@ -358,11 +349,11 @@
             <div class="action-row" id="actionRow">
                 <button class="save-btn" onclick="saveImage()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    이미지 저장
+                    画像保存
                 </button>
                 <button class="share-btn" onclick="shareKakao()">
                     <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카카오톡" width="20" height="20">
-                    카카오톡 공유
+                    KakaoTalk共有
                 </button>
             </div>
         </div>
@@ -371,11 +362,11 @@
     <!-- 하단 정보 영역 -->
     <div class="bottom-grid" style="margin-top: 24px;">
         <div class="info-card">
-            <h2>퇴직금이란?</h2>
+            <h2>退職金とは？</h2>
             <p>
                 퇴직금은 근로자가 일정 기간 근무하고 퇴직할 때 사용자(회사)가 지급해야 하는 법정 급여입니다.
                 <strong>근로기준법 제34조</strong>에 따라 1주 소정근로시간이 15시간 이상인 근로자가
-                1년 이상 계속 근무한 경우, 퇴직 사유에 관계없이 반드시 받을 수 있습니다.
+                1年 이상 계속 근무한 경우, 퇴직 사유에 관계없이 반드시 받을 수 있습니다.
             </p>
             <p>
                 퇴직 후 14일 이내에 지급이 원칙이며, 이를 어기면 회사는 지연이자(연 20%)를 추가로 지급해야 합니다.
@@ -385,17 +376,17 @@
         <div class="info-card">
             <h2>퇴직금 계산 방법</h2>
             <div class="formula-box">
-                <strong>퇴직금</strong> = 1일 평균임금 x 30일 x (근속일수 / 365)<br><br>
-                <strong>1일 평균임금</strong> = 퇴직 전 3개월간 받은 임금 총액 / 해당 기간의 총 일수 (약 91일)
+                <strong>퇴직금</strong> = 1日平均賃金 x 30일 x (근속일수 / 365)<br><br>
+                <strong>1日平均賃金</strong> = 퇴직 전 3月간 받은 임금 총액 / 해당 기간의 총 일수 (약 91일)
             </div>
             <p>
-                핵심은 <strong>평균임금</strong>입니다. 퇴직 직전 3개월간의 기본급, 각종 수당, 상여금(월할 계산) 등을
+                핵심은 <strong>평균임금</strong>입니다. 퇴직 직전 3月간의 기본급, 각종 수당, 상여금(월할 계산) 등을
                 모두 합산한 금액을 해당 기간의 일수로 나눕니다.
             </p>
             <div class="highlight">
                 <p>
-                    월 평균 급여가 300만원이고 5년 근무했다면 퇴직금은 약 300만원 x 5 = <strong>약 1,500만원</strong>
-                    (1년 근무 = 약 1개월치 월급이 퇴직금으로 쌓임)
+                    월 평균 급여가 300만원이고 5年 근무했다면 퇴직금은 약 300만원 x 5 = <strong>약 1,500만원</strong>
+                    (1年 근무 = 약 1月치 월급이 퇴직금으로 쌓임)
                 </p>
             </div>
         </div>
@@ -410,7 +401,7 @@
             </p>
             <ul>
                 <li>근속연수가 길수록 퇴직소득공제가 커져 실제 세율이 낮아집니다</li>
-                <li>5년 근무자: 500만원 공제 / 10년: 1,500만원 공제 / 20년: 4,000만원 공제</li>
+                <li>5年 근무자: 500만원 공제 / 10年: 1,500만원 공제 / 20年: 4,000만원 공제</li>
                 <li>퇴직금이 적거나 근속연수가 짧으면 세금이 거의 없을 수 있습니다</li>
             </ul>
             <div class="highlight">
@@ -427,7 +418,7 @@
             </p>
             <ul>
                 <li><strong>DB형:</strong> 퇴직할 때 받을 급여가 미리 정해짐. 계산 방식은 일반 퇴직금과 동일</li>
-                <li><strong>DC형:</strong> 매년 회사가 적립하는 금액이 정해짐. 투자 성과에 따라 수령액이 달라짐</li>
+                <li><strong>DC형:</strong> 매年 회사가 적립하는 금액이 정해짐. 투자 성과에 따라 수령액이 달라짐</li>
                 <li><strong>IRP 의무 이전:</strong> 퇴직금이 300만원 초과 시 IRP(개인형 퇴직연금) 계좌로 수령 의무화</li>
             </ul>
         </div>
@@ -435,14 +426,14 @@
 
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>자주 묻는 질문</h2>
+            <h2>よくある質問</h2>
             <div class="faq-item">
                 <div class="faq-q">Q. 퇴직금은 퇴직 후 언제 받을 수 있나요?</div>
                 <div class="faq-a">근로기준법에 따라 퇴직일로부터 14일 이내에 지급해야 합니다. 지연 시 연 20%의 지연이자가 발생하며, 노동청에 신고할 수 있습니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 계약직/파트타임도 퇴직금을 받을 수 있나요?</div>
-                <div class="faq-a">고용 형태와 관계없이 1년 이상 계속 근무하고 주 평균 15시간 이상 일했다면 퇴직금을 받을 수 있습니다.</div>
+                <div class="faq-a">고용 형태와 관계없이 1年 이상 계속 근무하고 주 평균 15시간 이상 일했다면 퇴직금을 받을 수 있습니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 퇴직금을 IRP 계좌로 받아야 하나요?</div>
@@ -451,18 +442,18 @@
         </div>
 
         <div class="info-card">
-            <h2>자주 묻는 질문 (계속)</h2>
+            <h2>よくある質問 (계속)</h2>
             <div class="faq-item">
                 <div class="faq-q">Q. 퇴직금에도 세금이 붙나요?</div>
-                <div class="faq-a">퇴직소득세가 부과됩니다. 근속기간이 길수록 공제액이 커져 실제 세율은 낮아집니다. 5년 이하 근무자는 세금이 거의 없는 경우도 많습니다.</div>
+                <div class="faq-a">퇴직소득세가 부과됩니다. 근속기간이 길수록 공제액이 커져 실제 세율은 낮아집니다. 5年 이하 근무자는 세금이 거의 없는 경우도 많습니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 상여금도 퇴직금 계산에 포함되나요?</div>
-                <div class="faq-a">퇴직 전 3개월간 지급된 임금이 기준입니다. 매월 지급된 상여금은 포함되지만, 퇴직 직전에 일시적으로 지급된 특별상여는 포함되지 않을 수 있습니다.</div>
+                <div class="faq-a">퇴직 전 3月간 지급된 임금이 기준입니다. 매월 지급된 상여금은 포함되지만, 퇴직 직전에 일시적으로 지급된 특별상여는 포함되지 않을 수 있습니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 회사가 퇴직금을 안 주면 어떻게 하나요?</div>
-                <div class="faq-a">고용노동부 고객상담센터(1350) 또는 가까운 고용노동청에 진정을 제기할 수 있습니다. 퇴직금 미지급은 3년 이하 징역 또는 2,000만원 이하 벌금에 해당하는 범죄입니다.</div>
+                <div class="faq-a">고용노동부 고객상담센터(1350) 또는 가까운 고용노동청에 진정을 제기할 수 있습니다. 퇴직금 미지급은 3年 이하 징역 또는 2,000만원 이하 벌금에 해당하는 범죄입니다.</div>
             </div>
         </div>
     </div>
@@ -473,19 +464,19 @@
         <p>퇴직금은 근로자가 일정 기간 이상 근무한 후 퇴직할 때 받는 금전적 보상으로, 근로자퇴직급여보장법에 따라 보장됩니다. 퇴직금을 정확히 이해하면 퇴직 시기를 계획하거나 이직을 결정할 때 중요한 판단 기준이 됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 지급 조건</h3>
-        <p>퇴직금을 받으려면 <strong>계속 근로기간이 1년 이상</strong>이어야 하며, <strong>4주간을 평균하여 1주간 소정근로시간이 15시간 이상</strong>이어야 합니다. 정규직, 계약직, 파트타임 등 고용 형태와 관계없이 이 두 가지 조건을 충족하면 퇴직금을 받을 수 있습니다. 사용자는 근로자가 퇴직한 날로부터 14일 이내에 퇴직금을 지급해야 합니다.</p>
+        <p>퇴직금을 받으려면 <strong>계속 근로기간이 1年 이상</strong>이어야 하며, <strong>4주간을 평균하여 1주간 소정근로시간이 15시간 이상</strong>이어야 합니다. 정규직, 계약직, 파트타임 등 고용 형태와 관계없이 이 두 가지 조건을 충족하면 퇴직금을 받을 수 있습니다. 사용자는 근로자가 퇴직한 날로부터 14일 이내에 퇴직금을 지급해야 합니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 계산 방법</h3>
-        <p>퇴직금 = <strong>(1일 평균임금 &times; 30일) &times; (총 근속일수 &divide; 365)</strong>로 계산됩니다. 여기서 1일 평균임금은 퇴직 전 3개월간 지급된 임금 총액을 해당 기간의 총 일수로 나눈 금액입니다. 평균임금에 포함되는 항목은 기본급, 고정 수당, 정기적으로 지급되는 상여금 등이 있으며, 실비 변상적 급여(교통비 실비, 출장비 등), 경조사비, 일시적 상여금 등은 포함되지 않습니다.</p>
+        <p>퇴직금 = <strong>(1日平均賃金 &times; 30일) &times; (총 근속일수 &divide; 365)</strong>로 계산됩니다. 여기서 1日平均賃金은 퇴직 전 3月간 지급된 임금 총액을 해당 기간의 총 일수로 나눈 금액입니다. 평균임금에 포함되는 항목은 기본급, 고정 수당, 정기적으로 지급되는 상여금 등이 있으며, 실비 변상적 급여(교통비 실비, 출장비 등), 경조사비, 일시적 상여금 등은 포함되지 않습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 중간정산</h3>
-        <p>퇴직금 중간정산은 원칙적으로 금지되어 있지만, 법에서 정한 사유에 해당하면 가능합니다. 대표적인 사유로는 무주택자의 주택 구입, 본인 또는 부양가족의 6개월 이상 요양이 필요한 경우, 최근 5년 이내 파산선고 또는 개인회생절차 개시 결정, 임금피크제 적용 등이 있습니다.</p>
+        <p>퇴직금 중간정산은 원칙적으로 금지되어 있지만, 법에서 정한 사유에 해당하면 가능합니다. 대표적인 사유로는 무주택자의 주택 구입, 본인 또는 부양가족의 6月 이상 요양이 필요한 경우, 최근 5年 이내 파산선고 또는 개인회생절차 개시 결정, 임금피크제 적용 등이 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 세금과 IRP</h3>
         <p>퇴직금에는 퇴직소득세가 부과됩니다. 근속연수에 따른 공제와 환산급여 기준 차등과세가 적용되어, 근속연수가 길수록 세금 부담이 줄어듭니다. 퇴직금을 IRP(개인형 퇴직연금) 계좌로 이전하면 퇴직소득세 납부를 연금 수령 시점까지 이연할 수 있으며, 연금으로 수령 시 퇴직소득세의 60~70%만 부과되어 절세 효과가 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 미지급 시 대처 방법</h3>
-        <p>사용자가 퇴직 후 14일 이내에 퇴직금을 지급하지 않으면 근로기준법 위반에 해당합니다. 먼저 회사에 서면으로 지급을 요청하고, 그래도 해결되지 않는 경우 고용노동부(1350)에 상담하거나 관할 지방고용노동청에 진정서를 제출할 수 있습니다. 퇴직금 체불에 대한 지연이자는 연 20%가 적용되며, 퇴직금 청구권의 소멸시효는 3년이므로 가능한 빨리 조치를 취하는 것이 중요합니다. 회사가 도산하여 퇴직금을 받지 못한 경우에는 근로복지공단의 체불임금 대지급금 제도를 활용할 수 있으며, 최대 체불임금의 상당 부분을 지원받을 수 있습니다.</p>
+        <p>사용자가 퇴직 후 14일 이내에 퇴직금을 지급하지 않으면 근로기준법 위반에 해당합니다. 먼저 회사에 서면으로 지급을 요청하고, 그래도 해결되지 않는 경우 고용노동부(1350)에 상담하거나 관할 지방고용노동청에 진정서를 제출할 수 있습니다. 퇴직금 체불에 대한 지연이자는 연 20%가 적용되며, 퇴직금 청구권의 소멸시효는 3年이므로 가능한 빨리 조치를 취하는 것이 중요합니다. 회사가 도산하여 퇴직금을 받지 못한 경우에는 근로복지공단의 체불임금 대지급금 제도를 활용할 수 있으며, 최대 체불임금의 상당 부분을 지원받을 수 있습니다.</p>
     </div>
 
 
@@ -495,7 +486,7 @@
         <a href="contact.html">문의하기</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 韓国給与研究所</div>
 </footer>
 
 <script>
@@ -519,7 +510,7 @@ function taxFromBase(t) {
     return 94060000 + (t - 300000000) * 0.40;
 }
 
-// 근속연수공제 (2023년 개정, 2026년 현행)
+// 근속연수공제 (2023年 개정, 2026年 현행)
 function yearsDeduction(y) {
     if (y <= 5)  return y * 1000000;
     if (y <= 10) return 5000000  + (y - 5)  * 2000000;
@@ -554,7 +545,7 @@ function calculate() {
 
     if (!salary) { alert('월 평균 급여를 입력해주세요.'); return; }
 
-    // 1년 미만
+    // 1年 미만
     if (totalMonths < 12) {
         document.getElementById('warnCard').classList.add('show');
         document.getElementById('resultCard').classList.remove('show');
@@ -575,17 +566,17 @@ function calculate() {
 
     // 카운터 애니메이션
     counter('grossResult', retirement);
-    document.getElementById('taxResult').textContent   = '-' + fmt(tax) + '원';
-    document.getElementById('netResult').textContent   = fmt(net) + '원';
-    document.getElementById('dailyResult').textContent = fmt(dailyAvg) + '원';
+    document.getElementById('taxResult').textContent   = '-' + fmt(tax) + 'ウォン';
+    document.getElementById('netResult').textContent   = fmt(net) + 'ウォン';
+    document.getElementById('dailyResult').textContent = fmt(dailyAvg) + 'ウォン';
 
     document.getElementById('resultPlaceholder').style.display = 'none';
     document.getElementById('resultCard').classList.add('show');
 
     // 상세 내역
-    document.getElementById('bdGross').textContent = fmt(retirement) + '원';
-    document.getElementById('bdTax').textContent = '-' + fmt(tax) + '원';
-    document.getElementById('bdNet').textContent = fmt(net) + '원';
+    document.getElementById('bdGross').textContent = fmt(retirement) + 'ウォン';
+    document.getElementById('bdTax').textContent = '-' + fmt(tax) + 'ウォン';
+    document.getElementById('bdNet').textContent = fmt(net) + 'ウォン';
     document.getElementById('breakdownCard').classList.add('show');
 
     // 바 애니메이션
@@ -596,7 +587,7 @@ function calculate() {
     }, 100);
 
     document.getElementById('actionRow').classList.add('show');
-    window._shareRetirement = fmt(retirement) + '원';
+    window._shareRetirement = fmt(retirement) + 'ウォン';
 }
 
 function counter(id, target, ms = 900) {

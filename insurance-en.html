@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4대보험 계산기 2026 - 내 보험료 얼마야? | 월급연구소</title>
+    <title>Social Insurance Calculator (4 Major) | SalaryKorea</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="2026년 4대보험 계산기. 월급을 입력하면 국민연금, 건강보험, 장기요양보험, 고용보험 본인 부담금을 자동으로 계산합니다.">
-    <meta name="keywords" content="4대보험계산기, 국민연금계산기, 건강보험계산기, 고용보험계산기, 4대보험료">
+    <meta name="description" content="Calculate National Pension, Health Insurance, Long-term Care, and Employment Insurance based on 2026 rates.">
+    <meta name="keywords" content="4대보험계산기, National Pension계산기, Health Insurance계산기, Employment Insurance계산기, 4대보험료">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/insurance">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/insurance-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/insurance-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/insurance-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/insurance">
     <meta property="og:title" content="4대보험 계산기 2026 - 내 보험료 얼마야?">
-    <meta property="og:description" content="월급 입력하면 국민연금·건강보험·장기요양·고용보험료를 자동 계산합니다.">
+    <meta property="og:description" content="월급 입력하면 National Pension·Health Insurance·장기요양·Employment Insurance료를 자동 계산합니다.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,7 +94,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "4대보험 계산기",
-    "description": "2026년 기준 국민연금, 건강보험, 장기요양보험, 고용보험료를 계산합니다.",
+    "description": "2026년 기준 National Pension, Health Insurance, Long-term Care, Employment Insurance료를 계산합니다.",
     "url": "https://salarykorea.site/insurance",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -111,113 +116,85 @@
 <!-- 네비게이션 -->
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="en.html">Salary<span>Korea</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Payroll <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="en.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>Salary Calculator</a>
+                    <a href="minimum-wage-en.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>Minimum Wage</a>
+                    <a href="holiday-pay-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Holiday Pay</a>
+                    <a href="insurance-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Social Insurance</a>
+                    <a href="salary-table-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Salary Table</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Tax <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
-                </div>
-            </div>
-                        <div class="nav-item">
-                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-                <div class="nav-dropdown">
-                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
-                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
-                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
-                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                    <a href="income-tax-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Income Tax</a>
+                    <a href="gift-tax-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Gift Tax</a>
+                    <a href="acquisition-tax-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Acquisition Tax</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>Tax Guide</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Medical <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="medical-tax-en.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>Medical Tax Deduction</a>
+                    <a href="silbi-en.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>Insurance Calculator</a>
+                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>Medical Guide</a>
+                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>Insurance Guide</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">Leaving Job <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Severance Pay</a>
+                    <a href="unemployment-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Unemployment Benefits</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN</button>
                 <div class="lang-dropdown">
-                    <a href="insurance.html" class="active">한국어</a>
-                    <a href="insurance-en.html">English</a>
+                    <a href="insurance.html">한국어</a>
+                    <a href="insurance-en.html" class="active">English</a>
                     <a href="insurance-zh.html">中文</a>
                     <a href="insurance-ja.html">日本語</a>
                 </div>
             </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+        <button class="font-toggle" onclick="toggleLargeText()" title="Large Text"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                Large Text
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-                <div class="nav-mobile-group">
-            <div class="nav-mobile-title">병원 갈 때</div>
-            <a href="medical-tax.html">의료비 세액공제</a>
-            <a href="silbi.html">실비보험 계산기</a>
-            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
-            <a href="guide-silbi.html">실비보험 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="insurance.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="insurance-en.html">English</a>
-            <a href="insurance-zh.html">中文</a>
-            <a href="insurance-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Payroll</div>
+            <a href="en.html">Salary Calculator</a><a href="minimum-wage-en.html">Minimum Wage</a><a href="holiday-pay-en.html">Holiday Pay</a><a href="insurance-en.html">Social Insurance</a><a href="salary-table-en.html">Salary Table</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Tax</div>
+            <a href="income-tax-en.html">Income Tax</a><a href="gift-tax-en.html">Gift Tax</a><a href="acquisition-tax-en.html">Acquisition Tax</a><a href="tax-guide.html">Tax Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Medical</div>
+            <a href="medical-tax-en.html">Medical Tax Deduction</a><a href="silbi-en.html">Insurance Calculator</a><a href="guide-medical-tax.html">Medical Guide</a><a href="guide-silbi.html">Insurance Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Leaving Job</div>
+            <a href="retirement-en.html">Severance Pay</a><a href="unemployment-en.html">Unemployment Benefits</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">More</div>
+            <a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="insurance.html">한국어</a><a href="insurance-en.html" style="color:var(--accent);font-weight:700;">English</a><a href="insurance-zh.html">中文</a><a href="insurance-ja.html">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">월급 받을 때</div>
-        <h1>4대보험 계산기</h1>
-        <p>2026년 기준 국민연금·건강보험·장기요양·고용보험료 자동 계산</p>
+        <div class="breadcrumb">Payroll</div>
+        <h1>Social Insurance Calculator</h1>
+        <p>Calculate National Pension, Health, Long-term Care & Employment Insurance (2026)</p>
     </div>
 
     <!-- 2컬럼 대시보드 -->
@@ -227,26 +204,26 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">월 급여 입력</div>
+                    <div class="card-title">Monthly Salary Input</div>
                     <div class="card-badge">2026년</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">월 급여 (세전)</label>
+                    <label class="form-label">Monthly Salary (Pre-tax)</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="3,000,000">
                         <span class="form-unit">원</span>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">4대보험료 계산하기</button>
+                <button class="submit-btn" onclick="calculate()">Calculate Insurance</button>
             </div>
 
             <!-- 공유 버튼 -->
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-                    카카오톡 공유
+                    Share KakaoTalk
                 </button>
             </div>
         </div>
@@ -256,7 +233,7 @@
 
             <!-- 결과 요약 -->
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">월 본인 부담 4대보험료 합계</div>
+                <div class="result-hero-label">Total Monthly Insurance (Employee)</div>
                 <div class="result-hero-amount" id="totalAmount">0</div>
                 <div class="result-hero-unit">원</div>
                 <div class="result-hero-msg" id="resultSub"></div>
@@ -265,12 +242,12 @@
             <!-- 공제 상세 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
-                    <div class="card-title">보험 항목별 상세</div>
+                    <div class="card-title">Insurance Breakdown</div>
                 </div>
                 <div class="b-item">
                     <div class="b-dot" style="background:#2563EB;"></div>
                     <div class="b-info">
-                        <div class="b-name">국민연금</div>
+                        <div class="b-name">National Pension</div>
                         <div class="b-rate">4.5%</div>
                     </div>
                     <div class="b-amount" id="pension">—</div>
@@ -278,7 +255,7 @@
                 <div class="b-item">
                     <div class="b-dot" style="background:#8B5CF6;"></div>
                     <div class="b-info">
-                        <div class="b-name">건강보험</div>
+                        <div class="b-name">Health Insurance</div>
                         <div class="b-rate">3.545%</div>
                     </div>
                     <div class="b-amount" id="health">—</div>
@@ -286,15 +263,15 @@
                 <div class="b-item">
                     <div class="b-dot" style="background:#A78BFA;"></div>
                     <div class="b-info">
-                        <div class="b-name">장기요양보험</div>
-                        <div class="b-rate">건강보험료의 12.95%</div>
+                        <div class="b-name">Long-term Care</div>
+                        <div class="b-rate">Health Insurance료의 12.95%</div>
                     </div>
                     <div class="b-amount" id="care">—</div>
                 </div>
                 <div class="b-item">
                     <div class="b-dot" style="background:#F59E0B;"></div>
                     <div class="b-info">
-                        <div class="b-name">고용보험</div>
+                        <div class="b-name">Employment Insurance</div>
                         <div class="b-rate">0.9%</div>
                     </div>
                     <div class="b-amount" id="employ">—</div>
@@ -302,7 +279,7 @@
             </div>
 
             <!-- 결과 없을 때 플레이스홀더 -->
-            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 계산하기 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 Calculate 버튼을 눌러주세요</div>
         </div>
 
     </div>
@@ -310,26 +287,26 @@
     <!-- 본인 vs 회사 비교 -->
     <div class="compare-card" id="compareCard">
         <div class="card-header">
-            <div class="card-title">본인 부담 vs 회사 부담 비교</div>
+            <div class="card-title">Employee vs Employer 비교</div>
         </div>
         <table class="cmp-table">
             <thead>
                 <tr>
-                    <th>항목</th>
-                    <th class="emp">본인 부담</th>
-                    <th class="com">회사 부담</th>
-                    <th>합계</th>
+                    <th>Item</th>
+                    <th class="emp">Employee</th>
+                    <th class="com">Employer</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>국민연금</td>
+                    <td>National Pension</td>
                     <td class="emp" id="c-pension-emp">—</td>
                     <td class="com" id="c-pension-com">—</td>
                     <td id="c-pension-tot">—</td>
                 </tr>
                 <tr>
-                    <td>건강보험</td>
+                    <td>Health Insurance</td>
                     <td class="emp" id="c-health-emp">—</td>
                     <td class="com" id="c-health-com">—</td>
                     <td id="c-health-tot">—</td>
@@ -341,13 +318,13 @@
                     <td id="c-care-tot">—</td>
                 </tr>
                 <tr>
-                    <td>고용보험</td>
+                    <td>Employment Insurance</td>
                     <td class="emp" id="c-employ-emp">—</td>
                     <td class="com" id="c-employ-com">—</td>
                     <td id="c-employ-tot">—</td>
                 </tr>
                 <tr>
-                    <td>합계</td>
+                    <td>Total</td>
                     <td class="emp" id="c-total-emp">—</td>
                     <td class="com" id="c-total-com">—</td>
                     <td id="c-total-tot">—</td>
@@ -355,71 +332,71 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>※ 고용보험 회사 부담은 사업장 규모에 따라 다릅니다. 위 표는 150인 미만 사업장(0.9%) 기준입니다.</p>
+            <p>※ Employment Insurance Employer은 사업장 규모에 따라 다릅니다. 위 표는 150인 미만 사업장(0.9%) 기준입니다.</p>
         </div>
     </div>
 
     <!-- 하단 정보 영역 -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
-            <h2>4대보험이란?</h2>
+            <h2>What is Social Insurance?</h2>
             <p>
                 4대보험은 국가에서 운영하는 <strong>4가지 의무 가입 사회보험</strong>입니다.
                 근로자와 사용자(회사)가 함께 보험료를 나눠서 부담합니다.
             </p>
             <ul>
-                <li><strong>국민연금</strong> — 노후 소득 보장. 만 60세 이후 연금 수령</li>
-                <li><strong>건강보험</strong> — 병원 치료비 절감. 실제 의료비의 일부만 본인 부담</li>
-                <li><strong>장기요양보험</strong> — 고령·장애로 거동이 불편할 때 요양 서비스 지원</li>
-                <li><strong>고용보험</strong> — 실직 시 실업급여 수령, 육아휴직급여 등 지원</li>
+                <li><strong>National Pension</strong> — 노후 소득 보장. 만 60세 이후 연금 수령</li>
+                <li><strong>Health Insurance</strong> — 병원 치료비 절감. 실제 의료비의 일부만 Employee</li>
+                <li><strong>Long-term Care</strong> — 고령·장애로 거동이 불편할 때 요양 서비스 지원</li>
+                <li><strong>Employment Insurance</strong> — 실직 시 실업급여 수령, 육아휴직급여 등 지원</li>
             </ul>
         </div>
 
         <div class="info-card" style="margin-bottom:0;">
-            <h2>자주 묻는 질문</h2>
+            <h2>FAQ</h2>
             <div class="faq-item">
                 <div class="faq-q">아르바이트생도 4대보험에 가입해야 하나요?</div>
-                <div class="faq-a">1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미만이면 국민연금·고용보험은 제외될 수 있습니다.</div>
+                <div class="faq-a">1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미만이면 National Pension·Employment Insurance은 제외될 수 있습니다.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">월급이 올라도 국민연금이 안 올라가던데요?</div>
-                <div class="faq-a">국민연금은 월 기준소득월액 상한(617만원)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
+                <div class="faq-q">월급이 올라도 National Pension이 안 올라가던데요?</div>
+                <div class="faq-a">National Pension은 월 기준소득월액 상한(617만원)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">프리랜서는 4대보험을 어떻게 내나요?</div>
-                <div class="faq-a">프리랜서(자영업자)는 국민연금과 건강보험에 지역가입자로 가입하며, 보험료를 전액 본인이 부담합니다.</div>
+                <div class="faq-a">프리랜서(자영업자)는 National Pension과 Health Insurance에 지역가입자로 가입하며, 보험료를 전액 본인이 부담합니다.</div>
             </div>
         </div>
     </div>
 
     <!-- 2026년 요율표 -->
     <div class="info-card">
-        <h2>2026년 4대보험 요율표</h2>
+        <h2>2026 Insurance Rate Table</h2>
         <table class="rate-table">
             <thead>
-                <tr><th>항목</th><th>본인 부담</th><th>회사 부담</th><th>합계</th></tr>
+                <tr><th>Item</th><th>Employee</th><th>Employer</th><th>Total</th></tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="name">국민연금</td>
+                    <td class="name">National Pension</td>
                     <td class="highlight">4.5%</td>
                     <td>4.5%</td>
                     <td>9.0%</td>
                 </tr>
                 <tr>
-                    <td class="name">건강보험</td>
+                    <td class="name">Health Insurance</td>
                     <td class="highlight">3.545%</td>
                     <td>3.545%</td>
                     <td>7.09%</td>
                 </tr>
                 <tr>
-                    <td class="name">장기요양보험</td>
-                    <td class="highlight">건강보험료의 12.95%</td>
-                    <td>건강보험료의 12.95%</td>
+                    <td class="name">Long-term Care</td>
+                    <td class="highlight">Health Insurance료의 12.95%</td>
+                    <td>Health Insurance료의 12.95%</td>
                     <td>—</td>
                 </tr>
                 <tr>
-                    <td class="name">고용보험</td>
+                    <td class="name">Employment Insurance</td>
                     <td class="highlight">0.9%</td>
                     <td>0.9%~1.65%</td>
                     <td>1.8%~</td>
@@ -427,29 +404,29 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>국민연금은 월 기준소득월액 <strong>상한 617만원</strong>까지만 적용됩니다. 월급이 617만원을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
+            <p>National Pension은 월 기준소득월액 <strong>상한 617만원</strong>까지만 적용됩니다. 월급이 617만원을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>2026년 4대보험 상세 안내</h2>
-        <p>4대보험은 국민연금, 건강보험, 장기요양보험, 고용보험을 통칭하며, 근로자와 사업주가 공동으로 부담합니다. 매달 급여에서 자동으로 공제되는 4대보험료는 소득에 따라 달라지며, 정확한 보험료를 이해하면 급여 관리에 큰 도움이 됩니다.</p>
+        <h2>2026 Social Insurance Guide</h2>
+        <p>4대보험은 National Pension, Health Insurance, Long-term Care, Employment Insurance을 통칭하며, 근로자와 사업주가 공동으로 부담합니다. 매달 급여에서 자동으로 공제되는 4대보험료는 소득에 따라 달라지며, 정확한 보험료를 이해하면 급여 관리에 큰 도움이 됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">국민연금 (전체 9%, 근로자 4.5%)</h3>
-        <p>국민연금은 노후 소득 보장을 위한 사회보험입니다. 2026년 기준 기준소득월액 상한은 637만원, 하한은 39만원입니다. 상한을 초과하는 소득이 있어도 637만원 기준으로만 보험료가 부과됩니다. 만 18세 이상 60세 미만 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">National Pension (전체 9%, 근로자 4.5%)</h3>
+        <p>National Pension은 노후 소득 보장을 위한 사회보험입니다. 2026년 기준 기준소득월액 상한은 637만원, 하한은 39만원입니다. 상한을 초과하는 소득이 있어도 637만원 기준으로만 보험료가 부과됩니다. 만 18세 이상 60세 미만 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">건강보험 (전체 7.19%, 근로자 3.595%)</h3>
-        <p>건강보험은 질병이나 부상에 대한 의료비 부담을 줄여주는 보험입니다. 2026년 보험료율은 7.19%로 전년 대비 소폭 인상되었습니다. 소득에 비례하여 부과되며, 국민연금과 달리 상한 없이 전체 소득에 적용됩니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 건강보험 혜택을 받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Health Insurance (전체 7.19%, 근로자 3.595%)</h3>
+        <p>Health Insurance은 질병이나 부상에 대한 의료비 부담을 줄여주는 보험입니다. 2026년 보험료율은 7.19%로 전년 대비 소폭 인상되었습니다. 소득에 비례하여 부과되며, National Pension과 달리 상한 없이 전체 소득에 적용됩니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 Health Insurance 혜택을 받을 수 있습니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">장기요양보험 (건강보험료의 13.14%)</h3>
-        <p>장기요양보험은 65세 이상 고령자 또는 노인성 질환을 가진 분들에게 돌봄 서비스를 제공하기 위한 보험입니다. 건강보험료에 연동하여 부과되며, 2026년에는 건강보험료의 13.14%가 적용됩니다. 건강보험 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Long-term Care (Health Insurance료의 13.14%)</h3>
+        <p>Long-term Care은 65세 이상 고령자 또는 노인성 질환을 가진 분들에게 돌봄 서비스를 제공하기 위한 보험입니다. Health Insurance료에 연동하여 부과되며, 2026년에는 Health Insurance료의 13.14%가 적용됩니다. Health Insurance 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">고용보험 (전체 1.8%, 근로자 0.9%)</h3>
-        <p>고용보험은 실업급여, 육아휴직급여, 직업능력개발 등의 재원이 되는 보험입니다. 근로자 부담분은 0.9%이며, 사업주는 기업 규모에 따라 0.9~1.5%를 추가 부담합니다. 주 15시간 미만 근로자, 65세 이후 새로 고용된 근로자 등은 고용보험 적용이 제외될 수 있습니다. 프리랜서(3.3% 원천징수 대상자)는 직장가입이 아닌 지역가입자로 국민연금과 건강보험에 별도 가입해야 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Employment Insurance (전체 1.8%, 근로자 0.9%)</h3>
+        <p>Employment Insurance은 실업급여, 육아휴직급여, 직업능력개발 등의 재원이 되는 보험입니다. 근로자 부담분은 0.9%이며, 사업주는 기업 규모에 따라 0.9~1.5%를 추가 부담합니다. 주 15시간 미만 근로자, 65세 이후 새로 고용된 근로자 등은 Employment Insurance 적용이 제외될 수 있습니다. 프리랜서(3.3% 원천징수 대상자)는 직장가입이 아닌 지역가입자로 National Pension과 Health Insurance에 별도 가입해야 합니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">4대보험 관련 유용한 팁</h3>
-        <p>4대보험료는 매년 보수총액 신고를 통해 정산됩니다. 전년도 실제 소득이 신고 소득보다 많거나 적은 경우 보험료 차액이 추가 부과되거나 환급될 수 있습니다. 건강보험의 경우 피부양자 자격 요건이 점점 강화되고 있어, 피부양자의 소득이나 재산이 일정 기준을 초과하면 지역가입자로 전환될 수 있으니 주의해야 합니다. 4대보험 가입 여부와 보험료 내역은 4대사회보험 정보연계센터(4insure.or.kr)에서 조회할 수 있습니다.</p>
+        <p>4대보험료는 매년 보수총액 신고를 통해 정산됩니다. 전년도 실제 소득이 신고 소득보다 많거나 적은 경우 보험료 차액이 추가 부과되거나 환급될 수 있습니다. Health Insurance의 경우 피부양자 자격 요건이 점점 강화되고 있어, 피부양자의 소득이나 재산이 일정 기준을 초과하면 지역가입자로 전환될 수 있으니 주의해야 합니다. 4대보험 가입 여부와 보험료 내역은 4대사회보험 정보연계센터(4insure.or.kr)에서 조회할 수 있습니다.</p>
     </div>
 
 
@@ -459,7 +436,7 @@
         <a href="contact.html">문의하기</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
 
 <script>
@@ -477,12 +454,12 @@ function calculate() {
     if (!salary) { alert('월 급여를 입력해주세요.'); return; }
 
     // 2026년 요율
-    const PENSION_RATE  = 0.045;   // 국민연금 4.5%
-    const HEALTH_RATE   = 0.03545; // 건강보험 3.545%
-    const CARE_RATE     = 0.1295;  // 장기요양보험 건강보험료의 12.95%
-    const EMPLOY_RATE   = 0.009;   // 고용보험 0.9%
+    const PENSION_RATE  = 0.045;   // National Pension 4.5%
+    const HEALTH_RATE   = 0.03545; // Health Insurance 3.545%
+    const CARE_RATE     = 0.1295;  // Long-term Care Health Insurance료의 12.95%
+    const EMPLOY_RATE   = 0.009;   // Employment Insurance 0.9%
 
-    // 국민연금 상한 617만원 적용
+    // National Pension 상한 617만원 적용
     const pensionBase = Math.min(salary, 6170000);
     const pension  = Math.round(pensionBase * PENSION_RATE);
     const health   = Math.round(salary * HEALTH_RATE);
@@ -499,12 +476,12 @@ function calculate() {
     document.getElementById('resultSub').textContent =
         '실수령 예상 ' + fmt(netSalary) + '원 (소득세 제외)';
 
-    document.getElementById('pension').textContent = fmt(pension) + '원';
-    document.getElementById('health').textContent  = fmt(health)  + '원';
-    document.getElementById('care').textContent    = fmt(care)    + '원';
-    document.getElementById('employ').textContent  = fmt(employ)  + '원';
+    document.getElementById('pension').textContent = fmt(pension) + 'KRW';
+    document.getElementById('health').textContent  = fmt(health)  + 'KRW';
+    document.getElementById('care').textContent    = fmt(care)    + 'KRW';
+    document.getElementById('employ').textContent  = fmt(employ)  + 'KRW';
 
-    // 비교표 (회사 부담 - 고용보험 회사분 0.9%)
+    // 비교표 (Employer - Employment Insurance 회사분 0.9%)
     const comPension = pension;
     const comHealth  = health;
     const comCare    = care;
@@ -512,7 +489,7 @@ function calculate() {
     const comTotal   = comPension + comHealth + comCare + comEmploy;
     const allTotal   = total + comTotal;
 
-    const set = (id, val) => { document.getElementById(id).textContent = fmt(val) + '원'; };
+    const set = (id, val) => { document.getElementById(id).textContent = fmt(val) + 'KRW'; };
     set('c-pension-emp', pension); set('c-pension-com', comPension); set('c-pension-tot', pension + comPension);
     set('c-health-emp',  health);  set('c-health-com',  comHealth);  set('c-health-tot',  health + comHealth);
     set('c-care-emp',    care);    set('c-care-com',    comCare);    set('c-care-tot',    care + comCare);
@@ -524,7 +501,7 @@ function calculate() {
     document.getElementById('compareCard').classList.add('show');
 
     document.getElementById('shareBtnWrap').classList.add('show');
-    window._shareInsurance = fmt(total) + '원';
+    window._shareInsurance = fmt(total) + 'KRW';
 }
 
 // 초기값

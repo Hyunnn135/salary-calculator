@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실비보험 자기부담금 계산기 2026 - 세대별 보장 비교 | 월급연구소</title>
+    <title>実費保険自己負担計算機 | 給与研究所</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="실비보험 자기부담금 계산기. 1~4세대 실손보험별 본인부담금과 보험 보장액을 자동 계산합니다. 내 실비가 몇 세대인지 확인하고 보장 금액을 비교하세요.">
+    <meta name="description" content="韓国の実費保険の自己負担額を計算します。">
     <meta name="keywords" content="실비보험계산기, 실손보험자기부담금, 실비세대별비교, 실비보험보장금액, 실손보험계산">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/silbi">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/silbi-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/silbi-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/silbi-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/silbi">
     <meta property="og:title" content="실비보험 자기부담금 계산기 - 내 실비 얼마나 보장될까?">
     <meta property="og:description" content="1~4세대 실손보험 자기부담금 자동 계산. 세대별 보장 금액을 한눈에 비교하세요.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
     <style>
@@ -79,7 +84,7 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "실비보험 자기부담금 계산기",
-        "description": "1~4세대 실손보험 자기부담금과 보험 보장액을 자동 계산합니다.",
+        "description": "1~4세대 실손보험 자기부담금과 保険保障額을 자동 계산합니다.",
         "url": "https://salarykorea.site/silbi",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "All",
@@ -92,113 +97,83 @@
 
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="ja.html">給与<span>研究所</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">給与関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="ja.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>年俸手取り計算</a>
+                    <a href="minimum-wage-ja.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>最低時給計算</a>
+                    <a href="holiday-pay-ja.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>週休手当計算</a>
+                    <a href="insurance-ja.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>4大保険計算</a>
+                    <a href="salary-table-ja.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>手取り額一覧</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">税金関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                    <a href="income-tax-ja.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>総合所得税</a>
+                    <a href="gift-tax-ja.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>贈与税計算</a>
+                    <a href="acquisition-tax-ja.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>取得税計算</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>年末調整ガイド</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">医療関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
-                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
-                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
-                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                    <a href="medical-tax-ja.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>医療費税額控除</a>
+                    <a href="silbi-ja.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>実費保険計算</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">退職関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="retirement-ja.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>退職金計算</a>
+                    <a href="unemployment-ja.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>失業給付計算</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="検索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-            <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
-            <div class="lang-dropdown">
-                    <a href="silbi.html" class="active">한국어</a>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> JA</button>
+                <div class="lang-dropdown">
+                    <a href="silbi.html">한국어</a>
                     <a href="silbi-en.html">English</a>
                     <a href="silbi-zh.html">中文</a>
-                    <a href="silbi-ja.html">日本語</a>
+                    <a href="silbi-ja.html" class="active">日本語</a>
                 </div>
-        </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+            </div>
+        <button class="font-toggle" onclick="toggleLargeText()" title="大きな文字"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                大きな文字
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">병원 갈 때</div>
-            <a href="medical-tax.html">의료비 세액공제</a>
-            <a href="silbi.html">실비보험 계산기</a>
-            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
-            <a href="guide-silbi.html">실비보험 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="silbi.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="silbi-en.html">English</a>
-            <a href="silbi-zh.html">中文</a>
-            <a href="silbi-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">給与関連</div>
+            <a href="ja.html">年俸手取り計算</a><a href="minimum-wage-ja.html">最低時給計算</a><a href="holiday-pay-ja.html">週休手当計算</a><a href="insurance-ja.html">4大保険計算</a><a href="salary-table-ja.html">手取り額一覧</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">税金関連</div>
+            <a href="income-tax-ja.html">総合所得税</a><a href="gift-tax-ja.html">贈与税計算</a><a href="acquisition-tax-ja.html">取得税計算</a><a href="tax-guide.html">年末調整ガイド</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">医療関連</div>
+            <a href="medical-tax-ja.html">医療費税額控除</a><a href="silbi-ja.html">実費保険計算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">退職関連</div>
+            <a href="retirement-ja.html">退職金計算</a><a href="unemployment-ja.html">失業給付計算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">その他</div>
+            <a href="about.html">紹介</a><a href="contact.html">お問い合わせ</a><a href="privacy.html">プライバシー</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="silbi.html">한국어</a><a href="silbi-en.html">English</a><a href="silbi-zh.html">中文</a><a href="silbi-ja.html" style="color:var(--accent);font-weight:700;">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">병원 갈 때</div>
-        <h1>실비보험 자기부담금 계산기</h1>
-        <p>내 실비보험으로 병원비가 얼마나 보장되는지 계산하세요</p>
+        <div class="breadcrumb">医療関連</div>
+        <h1>実費保険自己負担計算機</h1>
+        <p>実費保険でいくら保障されるか計算</p>
     </div>
 
     <div class="dashboard">
@@ -210,7 +185,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">실비보험 세대</label>
+                    <label class="form-label">保険世代</label>
                     <select class="form-select" id="generation">
                         <option value="1">1세대 (2009.10 이전 가입)</option>
                         <option value="2">2세대 (2009.10 ~ 2017.4)</option>
@@ -224,10 +199,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">진료 유형</label>
+                    <label class="form-label">診療タイプ</label>
                     <select class="form-select" id="treatType">
-                        <option value="inpatient">입원</option>
-                        <option value="outpatient" selected>외래 (통원)</option>
+                        <option value="inpatient">入院</option>
+                        <option value="outpatient" selected>外来 (통원)</option>
                         <option value="pharmacy">약국</option>
                     </select>
                 </div>
@@ -236,14 +211,14 @@
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">급여 항목 <span class="form-label-sub">건강보험 적용</span></label>
+                        <label class="form-label">給付項目 <span class="form-label-sub">건강보험 적용</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="coveredCost" placeholder="100,000" value="100,000">
                             <span class="form-unit">원</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">비급여 항목 <span class="form-label-sub">전액 본인부담</span></label>
+                        <label class="form-label">非給付項目 <span class="form-label-sub">전액 본인부담</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="uncoveredCost" placeholder="50,000" value="50,000">
                             <span class="form-unit">원</span>
@@ -251,17 +226,17 @@
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">자기부담금 계산하기</button>
+                <button class="submit-btn" onclick="calculate()">자기부담금 計算する</button>
             </div>
 
             <div class="action-row">
                 <button class="save-btn" id="saveBtn" onclick="saveImage()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    이미지 저장
+                    画像保存
                 </button>
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-                    카카오톡 공유
+                    KakaoTalk共有
                 </button>
             </div>
         </div>
@@ -276,7 +251,7 @@
                 <div class="result-hero-msg" id="cheerMsg"></div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">보험 보장액</div>
+                        <div class="rh-stat-label">保険保障額</div>
                         <div class="rh-stat-val" id="statCoverage">—</div>
                     </div>
                     <div class="rh-stat">
@@ -307,13 +282,13 @@
 
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">진료비를 입력하고 계산하기 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">진료비를 입력하고 計算する 버튼을 눌러주세요</div>
         </div>
     </div>
 
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>실비보험 세대별 차이</h2>
+            <h2>保険世代별 차이</h2>
             <p><strong>1세대(2009년 이전):</strong> 급여 10%, 비급여 거의 전액 보장. 가장 유리하지만 보험료가 계속 올라갈 수 있습니다.</p>
             <p><strong>2세대(2009~2017):</strong> 급여 10%, 비급여 20% 자기부담. 1세대보다 보장이 줄었지만 여전히 양호합니다.</p>
             <p><strong>3세대(2017~2021):</strong> 급여 20%, 비급여 특약 분리. 비급여 자기부담이 30%로 늘어났습니다.</p>
@@ -349,7 +324,7 @@
         <a href="contact.html">문의</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 韓国給与研究所</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -371,7 +346,7 @@ document.querySelectorAll('.form-input').forEach(el => {
 document.getElementById('generation').addEventListener('change', function() {
     const helps = {
         '1': '<strong>1세대 실비:</strong> 급여 본인부담금의 10%, 비급여 거의 전액 보장. 보장 범위가 가장 넓습니다.',
-        '2': '<strong>2세대 실비:</strong> 급여 본인부담금의 10%, 비급여 20% 자기부담. 외래는 1~1.5만원 공제 후 보장.',
+        '2': '<strong>2세대 실비:</strong> 급여 본인부담금의 10%, 비급여 20% 자기부담. 外来는 1~1.5만원 공제 후 보장.',
         '3': '<strong>3세대 실비:</strong> 급여 20% 자기부담, 비급여 특약 분리 30% 자기부담. 연 5천만원 보장 한도.',
         '4': '<strong>4세대 실비:</strong> 급여 본인부담금의 20%, 비급여 30% 자기부담. 비급여 사용량에 따라 할인·할증 적용.'
     };
@@ -468,16 +443,16 @@ function calculate() {
     document.getElementById('resultCard').classList.add('show');
 
     counter('selfPay', result.totalSelf);
-    document.getElementById('statCoverage').textContent = fmt(result.coverage) + '원';
+    document.getElementById('statCoverage').textContent = fmt(result.coverage) + 'ウォン';
     document.getElementById('statRate').textContent = total > 0 ? ((result.coverage / total) * 100).toFixed(1) + '%' : '0%';
 
     const rate = total > 0 ? (result.coverage / total) * 100 : 0;
     if (rate >= 80) document.getElementById('cheerMsg').textContent = '보장률 ' + rate.toFixed(0) + '%! 든든한 실비네요';
-    else if (rate >= 60) document.getElementById('cheerMsg').textContent = '보장률 ' + rate.toFixed(0) + '%. 비급여 항목에 주의하세요';
+    else if (rate >= 60) document.getElementById('cheerMsg').textContent = '보장률 ' + rate.toFixed(0) + '%. 非給付項目에 주의하세요';
     else document.getElementById('cheerMsg').textContent = '자기부담이 좀 높네요. 실비 전환을 고려해보세요';
 
     // 세대별 비교 테이블
-    const typeLabel = { inpatient: '입원', outpatient: '외래', pharmacy: '약국' };
+    const typeLabel = { inpatient: '入院', outpatient: '外来', pharmacy: '약국' };
     const results = [1,2,3,4].map(g => calcByGen(g, type, covered, uncovered));
 
     let tbody = '';

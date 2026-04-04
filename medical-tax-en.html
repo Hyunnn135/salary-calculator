@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>의료비 세액공제 계산기 2026 - 연말정산 의료비 환급액 | 월급연구소</title>
+    <title>Medical Expense Tax Deduction Calculator | SalaryKorea</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="2026년 의료비 세액공제 계산기. 연말정산에서 병원비로 얼마나 돌려받을 수 있는지 바로 계산하세요. 난임시술비 30%, 본인 의료비 15% 공제율 자동 적용.">
-    <meta name="keywords" content="의료비세액공제, 의료비공제계산기, 연말정산의료비, 병원비환급, 난임시술비공제, 의료비공제한도">
+    <meta name="description" content="Calculate medical expense tax deduction for year-end tax adjustment in Korea (2026).">
+    <meta name="keywords" content="의료비세액공제, 의료비공제계산기, 연말정산의료비, 병원비환급, Infertility Treatment공제, 의료비공제Limit">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/medical-tax">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/medical-tax-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/medical-tax-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/medical-tax-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/medical-tax">
     <meta property="og:title" content="의료비 세액공제 계산기 - 병원비 얼마나 돌려받을까?">
     <meta property="og:description" content="연말정산 의료비 세액공제 자동 계산. 난임·미숙아 특별공제율까지 적용합니다.">
     <meta property="og:type" content="website">
@@ -90,113 +95,85 @@
 <!-- 네비게이션 (추후 업데이트) -->
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="en.html">Salary<span>Korea</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Payroll <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="en.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>Salary Calculator</a>
+                    <a href="minimum-wage-en.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>Minimum Wage</a>
+                    <a href="holiday-pay-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Holiday Pay</a>
+                    <a href="insurance-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Social Insurance</a>
+                    <a href="salary-table-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Salary Table</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Tax <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                    <a href="income-tax-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Income Tax</a>
+                    <a href="gift-tax-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Gift Tax</a>
+                    <a href="acquisition-tax-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Acquisition Tax</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>Tax Guide</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Medical <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
-                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
-                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
-                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                    <a href="medical-tax-en.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>Medical Tax Deduction</a>
+                    <a href="silbi-en.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>Insurance Calculator</a>
+                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>Medical Guide</a>
+                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>Insurance Guide</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Leaving Job <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="retirement-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Severance Pay</a>
+                    <a href="unemployment-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Unemployment Benefits</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-            <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
-            <div class="lang-dropdown">
-                    <a href="medical-tax.html" class="active">한국어</a>
-                    <a href="medical-tax-en.html">English</a>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN</button>
+                <div class="lang-dropdown">
+                    <a href="medical-tax.html">한국어</a>
+                    <a href="medical-tax-en.html" class="active">English</a>
                     <a href="medical-tax-zh.html">中文</a>
                     <a href="medical-tax-ja.html">日本語</a>
                 </div>
-        </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+            </div>
+        <button class="font-toggle" onclick="toggleLargeText()" title="Large Text"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                Large Text
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">병원 갈 때</div>
-            <a href="medical-tax.html">의료비 세액공제</a>
-            <a href="silbi.html">실비보험 계산기</a>
-            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
-            <a href="guide-silbi.html">실비보험 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="medical-tax.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="medical-tax-en.html">English</a>
-            <a href="medical-tax-zh.html">中文</a>
-            <a href="medical-tax-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Payroll</div>
+            <a href="en.html">Salary Calculator</a><a href="minimum-wage-en.html">Minimum Wage</a><a href="holiday-pay-en.html">Holiday Pay</a><a href="insurance-en.html">Social Insurance</a><a href="salary-table-en.html">Salary Table</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Tax</div>
+            <a href="income-tax-en.html">Income Tax</a><a href="gift-tax-en.html">Gift Tax</a><a href="acquisition-tax-en.html">Acquisition Tax</a><a href="tax-guide.html">Tax Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Medical</div>
+            <a href="medical-tax-en.html">Medical Tax Deduction</a><a href="silbi-en.html">Insurance Calculator</a><a href="guide-medical-tax.html">Medical Guide</a><a href="guide-silbi.html">Insurance Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Leaving Job</div>
+            <a href="retirement-en.html">Severance Pay</a><a href="unemployment-en.html">Unemployment Benefits</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">More</div>
+            <a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="medical-tax.html">한국어</a><a href="medical-tax-en.html" style="color:var(--accent);font-weight:700;">English</a><a href="medical-tax-zh.html">中文</a><a href="medical-tax-ja.html">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">병원 갈 때</div>
-        <h1>의료비 세액공제 계산기</h1>
-        <p>2026년 연말정산 기준, 병원비로 얼마나 돌려받을 수 있는지 계산하세요</p>
+        <div class="breadcrumb">Medical</div>
+        <h1>Medical Tax Deduction Calculator</h1>
+        <p>Calculate how much you can get back from medical expenses (2026)</p>
     </div>
 
     <div class="dashboard">
@@ -210,7 +187,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">총급여 (연봉)</label>
+                    <label class="form-label">Total Salary (Annual)</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="50,000,000">
                         <span class="form-unit">원</span>
@@ -223,14 +200,14 @@
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">본인 의료비 <span class="form-label-sub">한도 없음</span></label>
+                        <label class="form-label">Own Medical Expenses <span class="form-label-sub">Limit 없음</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="selfMedical" placeholder="0" value="0">
                             <span class="form-unit">원</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">65세↑ · 장애인 <span class="form-label-sub">한도 없음</span></label>
+                        <label class="form-label">65+ / Disabled <span class="form-label-sub">Limit 없음</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="seniorMedical" placeholder="0" value="0">
                             <span class="form-unit">원</span>
@@ -240,14 +217,14 @@
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">부양가족 의료비 <span class="form-label-sub">700만 한도</span></label>
+                        <label class="form-label">Dependent Medical <span class="form-label-sub">700만 Limit</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="familyMedical" placeholder="0" value="0">
                             <span class="form-unit">원</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">난임시술비 <span class="form-label-sub">30% 공제</span></label>
+                        <label class="form-label">Infertility Treatment <span class="form-label-sub">30% 공제</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="infertility" placeholder="0" value="0">
                             <span class="form-unit">원</span>
@@ -263,17 +240,17 @@
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">세액공제 계산하기</button>
+                <button class="submit-btn" onclick="calculate()">세액공제 Calculate</button>
             </div>
 
             <div class="action-row" id="saveBtnWrap">
                 <button class="save-btn" id="saveBtn" onclick="saveImage()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    이미지 저장
+                    Save Image
                 </button>
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-                    카카오톡 공유
+                    Share KakaoTalk
                 </button>
             </div>
         </div>
@@ -316,31 +293,31 @@
 
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">의료비 정보를 입력하고 계산하기 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">의료비 정보를 입력하고 Calculate 버튼을 눌러주세요</div>
         </div>
     </div>
 
     <!-- 하단 정보 -->
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>의료비 세액공제란?</h2>
+            <h2>What is Medical Tax Deduction?</h2>
             <p>근로소득자가 본인이나 부양가족을 위해 지출한 의료비 중, <strong>총급여의 3%를 초과하는 금액</strong>에 대해 세금을 돌려받을 수 있는 제도입니다.</p>
-            <p>기본 공제율은 15%이며, 난임시술비는 30%, 미숙아·선천성이상 치료비는 20%의 높은 공제율이 적용됩니다. 본인·65세 이상·장애인·중증질환자 의료비는 공제 한도가 없으나, 일반 부양가족 의료비는 연 700만원 한도가 있습니다.</p>
-            <p>실비보험으로 보전받은 금액은 의료비에서 차감해야 합니다. 보장성 보험료 세액공제(연 100만원 한도, 12%)는 별도로 받을 수 있습니다.</p>
+            <p>기본 공제율은 15%이며, Infertility Treatment는 30%, 미숙아·선천성이상 치료비는 20%의 높은 공제율이 적용됩니다. 본인·65세 이상·장애인·중증질환자 의료비는 공제 Limit가 없으나, 일반 Dependent Medical는 연 700만원 Limit가 있습니다.</p>
+            <p>실비보험으로 보전받은 금액은 의료비에서 차감해야 합니다. 보장성 보험료 세액공제(연 100만원 Limit, 12%)는 별도로 받을 수 있습니다.</p>
         </div>
         <div class="info-card">
-            <h2>자주 묻는 질문</h2>
+            <h2>FAQ</h2>
             <div class="faq-item">
                 <div class="faq-q">Q. 성형수술비도 공제받을 수 있나요?</div>
                 <div class="faq-a">A. 미용 목적 성형수술, 건강증진 의약품(보약 등)은 공제 대상이 아닙니다. 다만 치료 목적의 수술은 공제 가능합니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 안경·콘택트렌즈도 되나요?</div>
-                <div class="faq-a">A. 시력교정용 안경·콘택트렌즈 구입비는 1인당 연 50만원 한도로 공제됩니다.</div>
+                <div class="faq-a">A. 시력교정용 안경·콘택트렌즈 구입비는 1인당 연 50만원 Limit로 공제됩니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 산후조리원 비용은요?</div>
-                <div class="faq-a">A. 총급여 7천만원 이하 근로자의 산후조리원 비용은 출산 1회당 200만원 한도로 공제됩니다.</div>
+                <div class="faq-a">A. 총급여 7천만원 이하 근로자의 산후조리원 비용은 출산 1회당 200만원 Limit로 공제됩니다.</div>
             </div>
         </div>
     </div>
@@ -358,7 +335,7 @@
         <a href="contact.html">문의</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -430,8 +407,8 @@ function calculate() {
         document.getElementById('resultCard').classList.add('show');
         document.getElementById('breakdownCard').classList.add('show');
         counter('totalDeduction', 0);
-        document.getElementById('statTotal').textContent = fmt(netMedical) + '원';
-        document.getElementById('statThreshold').textContent = fmt(threshold) + '원';
+        document.getElementById('statTotal').textContent = fmt(netMedical) + 'KRW';
+        document.getElementById('statThreshold').textContent = fmt(threshold) + 'KRW';
         document.getElementById('statDeductible').textContent = '0원';
         document.getElementById('cheerMsg').textContent = '의료비가 총급여의 3%(' + fmt(threshold) + '원)를 넘지 않아 공제 대상이 없습니다';
         document.getElementById('breakdownItems').innerHTML = '';
@@ -446,7 +423,7 @@ function calculate() {
     const netInfertility = Math.round(infertility * ratio);
     let netFamily = Math.round(familyMed * ratio);
 
-    // 부양가족 700만원 한도 적용
+    // 부양가족 700만원 Limit 적용
     const familyLimit = 7000000;
     const familyCapped = Math.min(netFamily, familyLimit);
 
@@ -464,9 +441,9 @@ function calculate() {
     document.getElementById('resultCard').classList.add('show');
 
     counter('totalDeduction', totalDed);
-    document.getElementById('statTotal').textContent = fmt(netMedical) + '원';
-    document.getElementById('statThreshold').textContent = fmt(threshold) + '원';
-    document.getElementById('statDeductible').textContent = fmt(deductibleTotal) + '원';
+    document.getElementById('statTotal').textContent = fmt(netMedical) + 'KRW';
+    document.getElementById('statThreshold').textContent = fmt(threshold) + 'KRW';
+    document.getElementById('statDeductible').textContent = fmt(deductibleTotal) + 'KRW';
 
     // 응원 메시지
     if (totalDed >= 1000000) document.getElementById('cheerMsg').textContent = '💊 의료비 공제만으로 ' + fmt(totalDed) + '원 절세!';
@@ -475,10 +452,10 @@ function calculate() {
 
     // 공제 상세
     const items = [
-        { label: '본인 의료비', amount: netSelf, rate: '15%', ded: dedSelf, color: '#EC4899' },
-        { label: '65세↑ · 장애인', amount: netSenior, rate: '15%', ded: dedSenior, color: '#8B5CF6' },
-        { label: '부양가족 (일반)', amount: familyCapped, rate: '15%', ded: dedFamily, color: '#2563EB', note: netFamily > familyLimit ? ' (한도 적용)' : '' },
-        { label: '난임시술비', amount: netInfertility, rate: '30%', ded: dedInfertility, color: '#F59E0B' },
+        { label: 'Own Medical Expenses', amount: netSelf, rate: '15%', ded: dedSelf, color: '#EC4899' },
+        { label: '65+ / Disabled', amount: netSenior, rate: '15%', ded: dedSenior, color: '#8B5CF6' },
+        { label: '부양가족 (일반)', amount: familyCapped, rate: '15%', ded: dedFamily, color: '#2563EB', note: netFamily > familyLimit ? ' (Limit 적용)' : '' },
+        { label: 'Infertility Treatment', amount: netInfertility, rate: '30%', ded: dedInfertility, color: '#F59E0B' },
     ];
 
     let html = '';
@@ -505,7 +482,7 @@ function calculate() {
 
     document.getElementById('breakdownItems').innerHTML = html;
     document.getElementById('breakdownCard').classList.add('show');
-    document.getElementById('breakdownTotal').textContent = fmt(totalDed) + '원';
+    document.getElementById('breakdownTotal').textContent = fmt(totalDed) + 'KRW';
 }
 
 function shareKakao() {

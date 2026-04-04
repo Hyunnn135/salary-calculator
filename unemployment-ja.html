@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실업급여 계산기 - 얼마나 받을 수 있을까? | 월급연구소</title>
+    <title>失業給付計算機 | 給与研究所</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="실업급여(구직급여) 계산기. 퇴직 전 월급과 고용보험 가입기간을 입력하면 예상 수급액을 바로 계산해드립니다.">
+    <meta name="description" content="退職前の月給と雇用保険加入期間から失業給付を推定します。">
     <meta name="keywords" content="실업급여계산기, 구직급여, 실업급여얼마, 실업급여조건, 고용보험">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/unemployment">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/unemployment-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/unemployment-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/unemployment-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/unemployment">
     <meta property="og:title" content="실업급여 계산기 - 얼마나 받을 수 있을까?">
     <meta property="og:description" content="퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
     <style>
@@ -78,7 +83,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "실업급여 계산기",
-    "description": "나이와 근속기간에 따른 실업급여 수령액과 수령기간을 계산합니다.",
+    "description": "年齢와 근속기간에 따른 실업급여 수령액과 수령기간을 계산합니다.",
     "url": "https://salarykorea.site/unemployment",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -99,113 +104,83 @@
 
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="ja.html">給与<span>研究所</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">給与関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="ja.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>年俸手取り計算</a>
+                    <a href="minimum-wage-ja.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>最低時給計算</a>
+                    <a href="holiday-pay-ja.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>週休手当計算</a>
+                    <a href="insurance-ja.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>4大保険計算</a>
+                    <a href="salary-table-ja.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>手取り額一覧</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">税金関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
-                </div>
-            </div>
-                        <div class="nav-item">
-                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-                <div class="nav-dropdown">
-                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
-                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
-                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
-                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                    <a href="income-tax-ja.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>総合所得税</a>
+                    <a href="gift-tax-ja.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>贈与税計算</a>
+                    <a href="acquisition-tax-ja.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>取得税計算</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>年末調整ガイド</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">医療関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="medical-tax-ja.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>医療費税額控除</a>
+                    <a href="silbi-ja.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>実費保険計算</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">退職関連 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement-ja.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>退職金計算</a>
+                    <a href="unemployment-ja.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>失業給付計算</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="検索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> JA</button>
                 <div class="lang-dropdown">
-                    <a href="unemployment.html" class="active">한국어</a>
+                    <a href="unemployment.html">한국어</a>
                     <a href="unemployment-en.html">English</a>
                     <a href="unemployment-zh.html">中文</a>
-                    <a href="unemployment-ja.html">日本語</a>
+                    <a href="unemployment-ja.html" class="active">日本語</a>
                 </div>
             </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+        <button class="font-toggle" onclick="toggleLargeText()" title="大きな文字"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                大きな文字
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-                <div class="nav-mobile-group">
-            <div class="nav-mobile-title">병원 갈 때</div>
-            <a href="medical-tax.html">의료비 세액공제</a>
-            <a href="silbi.html">실비보험 계산기</a>
-            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
-            <a href="guide-silbi.html">실비보험 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="unemployment.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="unemployment-en.html">English</a>
-            <a href="unemployment-zh.html">中文</a>
-            <a href="unemployment-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">給与関連</div>
+            <a href="ja.html">年俸手取り計算</a><a href="minimum-wage-ja.html">最低時給計算</a><a href="holiday-pay-ja.html">週休手当計算</a><a href="insurance-ja.html">4大保険計算</a><a href="salary-table-ja.html">手取り額一覧</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">税金関連</div>
+            <a href="income-tax-ja.html">総合所得税</a><a href="gift-tax-ja.html">贈与税計算</a><a href="acquisition-tax-ja.html">取得税計算</a><a href="tax-guide.html">年末調整ガイド</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">医療関連</div>
+            <a href="medical-tax-ja.html">医療費税額控除</a><a href="silbi-ja.html">実費保険計算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">退職関連</div>
+            <a href="retirement-ja.html">退職金計算</a><a href="unemployment-ja.html">失業給付計算</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">その他</div>
+            <a href="about.html">紹介</a><a href="contact.html">お問い合わせ</a><a href="privacy.html">プライバシー</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="unemployment.html">한국어</a><a href="unemployment-en.html">English</a><a href="unemployment-zh.html">中文</a><a href="unemployment-ja.html" style="color:var(--accent);font-weight:700;">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">퇴사할 때</div>
-        <h1>실업급여 계산기</h1>
-        <p>퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요</p>
+        <div class="breadcrumb">退職関連</div>
+        <h1>失業給付計算機</h1>
+        <p>退職前の月給と加入期間から失業給付を推定</p>
     </div>
 
     <div class="dashboard">
@@ -213,12 +188,12 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">정보 입력</div>
+                    <div class="card-title">情報入力</div>
                     <div class="card-badge">2026년</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">퇴직 전 월 평균 급여 (세전)</label>
+                    <label class="form-label">退職前の平均月給（税引前）</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="3,000,000">
                         <span class="form-unit">원</span>
@@ -227,31 +202,31 @@
 
                 <div class="form-row" style="margin-bottom:20px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">나이</label>
+                        <label class="form-label">年齢</label>
                         <select class="form-select" id="ageGroup">
                             <option value="under50">50세 미만</option>
                             <option value="over50">50세 이상</option>
                         </select>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">고용보험 가입 기간</label>
+                        <label class="form-label">雇用保険加入期間</label>
                         <select class="form-select" id="insurancePeriod">
-                            <option value="under1">1년 미만</option>
+                            <option value="under1">1年未満</option>
                             <option value="1to3">1년 이상 ~ 3년 미만</option>
                             <option value="3to5" selected>3년 이상 ~ 5년 미만</option>
                             <option value="5to10">5년 이상 ~ 10년 미만</option>
-                            <option value="over10">10년 이상</option>
+                            <option value="over10">10年以上</option>
                         </select>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">실업급여 계산하기</button>
+                <button class="submit-btn" onclick="calculate()">실업급여 計算する</button>
             </div>
 
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
-                    카카오톡 공유
+                    KakaoTalk共有
                 </button>
             </div>
         </div>
@@ -278,7 +253,7 @@
                 </div>
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 계산하기 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 計算する 버튼을 눌러주세요</div>
         </div>
 
     </div>
@@ -289,8 +264,8 @@
         <p>아래 조건을 모두 충족해야 실업급여를 받을 수 있습니다.</p>
         <div class="cond-grid">
             <div class="cond-item">
-                <h3>고용보험 가입 기간</h3>
-                <p>퇴직일 이전 18개월 중 <strong>180일 이상</strong> 고용보험에 가입되어 있어야 합니다.</p>
+                <h3>雇用保険加入期間</h3>
+                <p>퇴직일 이전 18ヶ月 중 <strong>180일 이상</strong> 고용보험에 가입되어 있어야 합니다.</p>
             </div>
             <div class="cond-item">
                 <h3>비자발적 퇴직</h3>
@@ -302,7 +277,7 @@
             </div>
             <div class="cond-item">
                 <h3>수급 신청</h3>
-                <p>퇴직 후 <strong>12개월 이내</strong>에 신청해야 합니다. 기간이 지나면 수급 자격이 소멸됩니다.</p>
+                <p>퇴직 후 <strong>12ヶ月 이내</strong>에 신청해야 합니다. 기간이 지나면 수급 자격이 소멸됩니다.</p>
             </div>
         </div>
         <div class="highlight-box">
@@ -314,7 +289,7 @@
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
             <h2>소정급여일수 (수급 기간)</h2>
-            <p>나이와 고용보험 가입기간에 따라 받을 수 있는 기간이 달라집니다.</p>
+            <p>年齢와 고용보험 가입기간에 따라 받을 수 있는 기간이 달라집니다.</p>
             <table class="days-table">
                 <thead>
                     <tr>
@@ -324,11 +299,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="period-col">1년 미만</td><td>120일</td><td>120일</td></tr>
-                    <tr><td class="period-col">1년~3년 미만</td><td>150일</td><td>180일</td></tr>
-                    <tr><td class="period-col">3년~5년 미만</td><td>180일</td><td>210일</td></tr>
-                    <tr><td class="period-col">5년~10년 미만</td><td>210일</td><td>240일</td></tr>
-                    <tr><td class="period-col">10년 이상</td><td>240일</td><td>270일</td></tr>
+                    <tr><td class="period-col">1年未満</td><td>120일</td><td>120일</td></tr>
+                    <tr><td class="period-col">1~3年 미만</td><td>150일</td><td>180일</td></tr>
+                    <tr><td class="period-col">3~5年 미만</td><td>180일</td><td>210일</td></tr>
+                    <tr><td class="period-col">5~10年 미만</td><td>210일</td><td>240일</td></tr>
+                    <tr><td class="period-col">10年以上</td><td>240일</td><td>270일</td></tr>
                 </tbody>
             </table>
         </div>
@@ -349,10 +324,10 @@
 
     <!-- FAQ -->
     <div class="info-card">
-        <h2>자주 묻는 질문</h2>
+        <h2>よくある質問</h2>
         <div class="faq-item">
             <div class="faq-q">실업급여를 받으려면 조건이 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 전 18개월 중 고용보험 피보험 기간이 180일 이상이어야 하며, 본인 의사와 무관하게 퇴직(권고사직, 계약만료 등)한 경우에 해당됩니다.</div>
+            <div class="faq-a">퇴직 전 18ヶ月 중 고용보험 피보험 기간이 180일 이상이어야 하며, 본인 의사와 무관하게 퇴직(권고사직, 계약만료 등)한 경우에 해당됩니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">자발적으로 퇴사해도 실업급여를 받을 수 있나요?</div>
@@ -374,10 +349,10 @@
         <p>실업급여는 고용보험에 가입한 근로자가 비자발적으로 이직한 경우, 재취업 활동 기간 동안 생활 안정을 위해 지급되는 급여입니다. 정확한 수급 자격과 신청 절차를 이해하면 실직 시 빠르게 대응하여 경제적 부담을 줄일 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">수급 자격 요건</h3>
-        <p>실업급여를 받기 위해서는 두 가지 주요 조건을 충족해야 합니다. 첫째, <strong>비자발적 이직</strong>이어야 합니다. 권고사직, 계약 만료, 사업장 이전, 근로조건 위반 등이 이에 해당합니다. 둘째, 이직 전 <strong>18개월 동안 피보험 단위기간이 합산 180일 이상</strong>이어야 합니다. 자발적으로 퇴사한 경우에도 임금 체불, 최저임금 미달, 직장 내 괴롭힘·성희롱, 편도 통근시간 1.5시간 이상의 사업장 이전 등의 사유가 인정되면 수급 자격을 얻을 수 있습니다.</p>
+        <p>실업급여를 받기 위해서는 두 가지 주요 조건을 충족해야 합니다. 첫째, <strong>비자발적 이직</strong>이어야 합니다. 권고사직, 계약 만료, 사업장 이전, 근로조건 위반 등이 이에 해당합니다. 둘째, 이직 전 <strong>18ヶ月 동안 피보험 단위기간이 합산 180일 이상</strong>이어야 합니다. 자발적으로 퇴사한 경우에도 임금 체불, 최저임금 미달, 직장 내 괴롭힘·성희롱, 편도 통근시간 1.5시간 이상의 사업장 이전 등의 사유가 인정되면 수급 자격을 얻을 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">실업급여 금액과 지급 기간</h3>
-        <p>실업급여 일액은 <strong>퇴직 전 3개월 평균임금의 60%</strong>이며, 1일 상한액은 66,000원, 하한액은 최저임금의 80%입니다. 2026년 최저임금(10,320원) 기준 하한액은 일 66,048원(8시간 기준)으로 상한액과 거의 동일합니다. 소정급여일수는 연령과 고용보험 가입 기간에 따라 120일에서 최대 270일까지 차등 적용됩니다. 일반적으로 나이가 많고 가입 기간이 길수록 더 오래 받을 수 있습니다.</p>
+        <p>실업급여 일액은 <strong>퇴직 전 3ヶ月 평균임금의 60%</strong>이며, 1일 상한액은 66,000원, 하한액은 최저임금의 80%입니다. 2026년 최저임금(10,320원) 기준 하한액은 일 66,048원(8시간 기준)으로 상한액과 거의 동일합니다. 소정급여일수는 연령과 雇用保険加入期間에 따라 120일에서 최대 270일까지 차등 적용됩니다. 일반적으로 年齢가 많고 가입 기간이 길수록 더 오래 받을 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">신청 절차</h3>
         <p>실업급여 신청은 다음 단계로 진행됩니다. ① <strong>워크넷(work.go.kr) 구직등록</strong>: 이직 후 가능한 빨리 온라인으로 구직 등록합니다. ② <strong>수급자격 인정 신청</strong>: 거주지 관할 고용센터를 방문하여 수급자격 인정 신청서를 제출합니다. ③ <strong>수급자격 교육 이수</strong>: 온라인 또는 대면 교육을 이수합니다. ④ <strong>구직활동 및 실업인정</strong>: 4주마다 2회 이상의 재취업 활동을 증빙하여 실업인정을 받습니다. ⑤ <strong>급여 수령</strong>: 실업인정일로부터 약 2주 후 지정 계좌로 입금됩니다.</p>
@@ -393,7 +368,7 @@
         <a href="contact.html">문의하기</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 韓国給与研究所</div>
 </footer>
 
 <script>
@@ -427,9 +402,9 @@ function calculate() {
     document.getElementById('resultPlaceholder').style.display = 'none';
 
     counter('totalResult', total);
-    document.getElementById('dailyResult').textContent   = fmt(dailyBenefit) + '원';
+    document.getElementById('dailyResult').textContent   = fmt(dailyBenefit) + 'ウォン';
     document.getElementById('daysResult').textContent    = days + '일';
-    document.getElementById('monthlyResult').textContent = fmt(dailyBenefit * 30) + '원';
+    document.getElementById('monthlyResult').textContent = fmt(dailyBenefit * 30) + 'ウォン';
 
     const msgs = [
         '힘내세요! 더 좋은 기회가 기다리고 있어요.',
@@ -441,7 +416,7 @@ function calculate() {
 
     document.getElementById('resultCard').classList.add('show');
     document.getElementById('shareBtnWrap').classList.add('show');
-    window._shareUnemploy = fmt(total) + '원';
+    window._shareUnemploy = fmt(total) + 'ウォン';
 }
 
 function counter(id, target, ms = 900) {

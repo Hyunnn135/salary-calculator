@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>증여세 계산기 - 2026년 증여세 자동계산 | 월급연구소</title>
+    <title>Gift Tax Calculator | SalaryKorea</title>
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
-    <meta name="description" content="2026년 기준 증여세 계산기. 증여 금액과 관계를 입력하면 면제 한도, 세율, 납부할 증여세를 자동으로 계산합니다.">
-    <meta name="keywords" content="증여세계산기, 증여세, 증여면제한도, 증여세율, 증여세신고, 자녀증여">
+    <meta name="description" content="Calculate Korean gift tax based on gift amount and relationship (2026).">
+    <meta name="keywords" content="증여세계산기, 증여세, 증여Exemption Limit, 증여세율, 증여세신고, 자녀증여">
+        <link rel="alternate" hreflang="ko" href="https://salarykorea.site/gift-tax">
+    <link rel="alternate" hreflang="en" href="https://salarykorea.site/gift-tax-en">
+    <link rel="alternate" hreflang="zh" href="https://salarykorea.site/gift-tax-zh">
+    <link rel="alternate" hreflang="ja" href="https://salarykorea.site/gift-tax-ja">
+    <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/gift-tax">
     <meta property="og:title" content="증여세 계산기 - 2026년 증여세 자동계산 | 월급연구소">
-    <meta property="og:description" content="증여 금액과 관계를 입력하면 면제 한도, 세율, 납부할 증여세를 자동으로 계산합니다.">
+    <meta property="og:description" content="증여 금액과 관계를 입력하면 면제 한도, 세율, Gift Tax Payable를 자동으로 계산합니다.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,113 +104,85 @@
 <!-- 네비게이션 -->
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <a class="nav-logo" href="en.html">Salary<span>Korea</span></a>
         <div class="nav-menu">
             <div class="nav-item">
-                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Payroll <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
-                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
-                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
-                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
-                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                    <a href="en.html"><div class="nav-dropdown-dot" style="background:#3B82F6;"></div>Salary Calculator</a>
+                    <a href="minimum-wage-en.html"><div class="nav-dropdown-dot" style="background:#10B981;"></div>Minimum Wage</a>
+                    <a href="holiday-pay-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Holiday Pay</a>
+                    <a href="insurance-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Social Insurance</a>
+                    <a href="salary-table-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Salary Table</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Tax <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
-                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
-                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
-                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
-                </div>
-            </div>
-                        <div class="nav-item">
-                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-                <div class="nav-dropdown">
-                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
-                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
-                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
-                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                    <a href="income-tax-en.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>Income Tax</a>
+                    <a href="gift-tax-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Gift Tax</a>
+                    <a href="acquisition-tax-en.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>Acquisition Tax</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>Tax Guide</a>
                 </div>
             </div>
             <div class="nav-item">
-                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <button class="nav-item-btn">Medical <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
                 <div class="nav-dropdown">
-                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
-                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                    <a href="medical-tax-en.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>Medical Tax Deduction</a>
+                    <a href="silbi-en.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>Insurance Calculator</a>
+                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>Medical Guide</a>
+                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>Insurance Guide</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">Leaving Job <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement-en.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>Severance Pay</a>
+                    <a href="unemployment-en.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>Unemployment Benefits</a>
                 </div>
             </div>
         </div>
-        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="search-toggle" onclick="openSearch()" title="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
         <div class="lang-selector">
-                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN</button>
                 <div class="lang-dropdown">
-                    <a href="gift-tax.html" class="active">한국어</a>
-                    <a href="gift-tax-en.html">English</a>
+                    <a href="gift-tax.html">한국어</a>
+                    <a href="gift-tax-en.html" class="active">English</a>
                     <a href="gift-tax-zh.html">中文</a>
                     <a href="gift-tax-ja.html">日本語</a>
                 </div>
             </div>
-        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+        <button class="font-toggle" onclick="toggleLargeText()" title="Large Text"><span class="ft-small">a</span><span class="ft-big">A</span></button>
         <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
     </div>
     <div class="nav-mobile">
         <div class="nav-mobile-settings">
             <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
-                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
-                큰 글씨 모드
+                <span style="font-size:0.75rem;font-weight:700;">a</span><span style="font-size:1.1rem;font-weight:800;">A</span>
+                Large Text
             </button>
         </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">월급 받을 때</div>
-            <a href="index.html">연봉 실수령액</a>
-            <a href="minimum-wage.html">최저시급 계산기</a>
-            <a href="holiday-pay.html">주휴수당 계산기</a>
-            <a href="insurance.html">4대보험 계산기</a>
-            <a href="salary-table.html">실수령액 표</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">세금 낼 때</div>
-            <a href="income-tax.html">종합소득세 계산기</a>
-            <a href="gift-tax.html">증여세 계산기</a>
-            <a href="acquisition-tax.html">취득세 계산기</a>
-            <a href="tax-guide.html">연말정산 가이드</a>
-        </div>
-                <div class="nav-mobile-group">
-            <div class="nav-mobile-title">병원 갈 때</div>
-            <a href="medical-tax.html">의료비 세액공제</a>
-            <a href="silbi.html">실비보험 계산기</a>
-            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
-            <a href="guide-silbi.html">실비보험 가이드</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">퇴사할 때</div>
-            <a href="retirement.html">퇴직금 계산기</a>
-            <a href="unemployment.html">실업급여 계산기</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">기타</div>
-            <a href="about.html">소개</a>
-            <a href="contact.html">문의</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-        <div class="nav-mobile-group">
-            <div class="nav-mobile-title">Language</div>
-            <a href="gift-tax.html" style="color:var(--accent);font-weight:700;">한국어</a>
-            <a href="gift-tax-en.html">English</a>
-            <a href="gift-tax-zh.html">中文</a>
-            <a href="gift-tax-ja.html">日本語</a>
-        </div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Payroll</div>
+            <a href="en.html">Salary Calculator</a><a href="minimum-wage-en.html">Minimum Wage</a><a href="holiday-pay-en.html">Holiday Pay</a><a href="insurance-en.html">Social Insurance</a><a href="salary-table-en.html">Salary Table</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Tax</div>
+            <a href="income-tax-en.html">Income Tax</a><a href="gift-tax-en.html">Gift Tax</a><a href="acquisition-tax-en.html">Acquisition Tax</a><a href="tax-guide.html">Tax Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Medical</div>
+            <a href="medical-tax-en.html">Medical Tax Deduction</a><a href="silbi-en.html">Insurance Calculator</a><a href="guide-medical-tax.html">Medical Guide</a><a href="guide-silbi.html">Insurance Guide</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Leaving Job</div>
+            <a href="retirement-en.html">Severance Pay</a><a href="unemployment-en.html">Unemployment Benefits</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">More</div>
+            <a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a></div>
+        <div class="nav-mobile-group"><div class="nav-mobile-title">Language</div>
+            <a href="gift-tax.html">한국어</a><a href="gift-tax-en.html" style="color:var(--accent);font-weight:700;">English</a><a href="gift-tax-zh.html">中文</a><a href="gift-tax-ja.html">日本語</a></div>
     </div>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
-        <div class="breadcrumb">세금 낼 때</div>
-        <h1>증여세 계산기</h1>
-        <p>2026년 기준 · 증여 금액과 관계에 따른 세금 계산</p>
+        <div class="breadcrumb">Tax</div>
+        <h1>Gift Tax Calculator</h1>
+        <p>Calculate tax based on gift amount and relationship (2026)</p>
     </div>
 
     <!-- 2컬럼 대시보드 -->
@@ -220,7 +197,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">증여 금액 (원)</label>
+                    <label class="form-label">Gift Amount (KRW)</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="giftInput" placeholder="100,000,000">
                         <span class="form-unit">원</span>
@@ -230,26 +207,26 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">증여자와의 관계</label>
+                    <label class="form-label">Relationship to Donor</label>
                     <select class="form-select" id="relationship">
-                        <option value="spouse">배우자 (면제: 6억원)</option>
-                        <option value="adult_child" selected>직계존속 → 성인자녀 (면제: 5,000만원)</option>
-                        <option value="minor_child">직계존속 → 미성년자녀 (면제: 2,000만원)</option>
-                        <option value="descendant">직계비속 (면제: 5,000만원)</option>
-                        <option value="relative">기타 친족 (면제: 1,000만원)</option>
-                        <option value="other">기타 (면제: 없음)</option>
+                        <option value="spouse">Spouse (Exempt: 600M)</option>
+                        <option value="adult_child" selected>Parent → Adult Child (Exempt: 50M)</option>
+                        <option value="minor_child">Parent → Minor Child (Exempt: 20M)</option>
+                        <option value="descendant">Lineal Descendant (Exempt: 50M)</option>
+                        <option value="relative">Other Relative (Exempt: 10M)</option>
+                        <option value="other">Other (No Exemption)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">자진신고 여부</label>
+                    <label class="form-label">Voluntary Filing</label>
                     <select class="form-select" id="selfReport">
-                        <option value="yes" selected>예 (3% 공제)</option>
-                        <option value="no">아니오</option>
+                        <option value="yes" selected>Yes (3% deduction)</option>
+                        <option value="no">No</option>
                     </select>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">계산하기</button>
+                <button class="submit-btn" onclick="calculate()">Calculate</button>
             </div>
         </div>
 
@@ -258,20 +235,20 @@
 
             <!-- 결과 요약 -->
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">납부할 증여세</div>
+                <div class="result-hero-label">Gift Tax Payable</div>
                 <div class="result-hero-amount" id="taxResult">0</div>
                 <div class="result-hero-unit">원</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">과세표준</div>
+                        <div class="rh-stat-label">Taxable Base</div>
                         <div class="rh-stat-val" id="taxBase">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">적용세율</div>
+                        <div class="rh-stat-label">Applied Rate</div>
                         <div class="rh-stat-val" id="taxRate">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">면제한도</div>
+                        <div class="rh-stat-label">Exemption Limit</div>
                         <div class="rh-stat-val" id="exemptionAmt">—</div>
                     </div>
                 </div>
@@ -280,17 +257,17 @@
             <!-- 공제 상세 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
-                    <div class="card-title">증여세 산출 상세</div>
+                    <div class="card-title">Gift Tax Details</div>
                 </div>
                 <div id="breakdownItems"></div>
                 <div class="b-total">
-                    <span class="b-total-label">최종 납부세액</span>
+                    <span class="b-total-label">Final Tax Payable</span>
                     <span class="b-total-val" id="breakdownTotal">—</span>
                 </div>
             </div>
 
             <!-- 결과 없을 때 플레이스홀더 -->
-            <div class="result-placeholder" id="resultPlaceholder">증여 금액을 입력하고 계산하기 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">Enter gift amount and click Calculate</div>
         </div>
 
     </div>
@@ -298,14 +275,14 @@
     <!-- 하단 정보 영역 -->
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>증여세 알아두면 좋은 점</h2>
+            <h2>Gift Tax Key Points</h2>
             <p><strong>10년 합산 과세:</strong> 증여세는 동일인에게 10년 이내 증여한 금액을 합산하여 과세합니다. 면제 한도도 10년 기준으로 적용됩니다.</p>
             <p><strong>면제 한도 활용:</strong> 배우자는 6억원, 성인 자녀는 5,000만원까지 비과세입니다. 조기 증여를 활용하면 절세에 유리합니다.</p>
-            <p><strong>자진신고 공제:</strong> 증여일이 속한 달의 말일부터 3개월 이내에 자진신고하면 산출세액의 3%를 공제받을 수 있습니다.</p>
+            <p><strong>자진신고 공제:</strong> 증여일이 속한 달의 말일부터 3months 이내에 자진신고하면 산출세액의 3%를 공제받을 수 있습니다.</p>
             <p><strong>증여 시기:</strong> 부동산 등 시세 상승이 예상되는 자산은 일찍 증여할수록 유리합니다.</p>
         </div>
         <div class="info-card">
-            <h2>자주 묻는 질문</h2>
+            <h2>FAQ</h2>
             <div class="faq-item">
                 <div class="faq-q">부모가 성인 자녀에게 1억을 증여하면 세금은?</div>
                 <div class="faq-a">면제 한도 5,000만원을 제외한 5,000만원에 대해 10% 세율이 적용되어, 자진신고 시 약 485만원의 증여세를 납부합니다.</div>
@@ -320,27 +297,27 @@
             </div>
             <div class="faq-item">
                 <div class="faq-q">증여세 신고 기한은 언제인가요?</div>
-                <div class="faq-a">증여받은 날이 속하는 달의 말일부터 3개월 이내에 관할 세무서에 신고해야 합니다. 기한 내 신고하면 3% 세액공제를 받을 수 있습니다.</div>
+                <div class="faq-a">증여받은 날이 속하는 달의 말일부터 3months 이내에 관할 세무서에 신고해야 합니다. 기한 내 신고하면 3% 세액공제를 받을 수 있습니다.</div>
             </div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>증여세 면제한도와 절세 전략</h2>
-        <p>증여세는 타인으로부터 재산을 무상으로 받았을 때 부과되는 세금입니다. 가족 간 재산 이전 시 가장 많이 접하게 되는 세금으로, 면제한도와 세율 구조를 정확히 이해하면 합법적인 절세 계획을 세울 수 있습니다.</p>
+        <h2>Gift Tax Exemptions & Tax Saving</h2>
+        <p>증여세는 타인으로부터 재산을 무상으로 받았을 때 부과되는 세금입니다. 가족 간 재산 이전 시 가장 많이 접하게 되는 세금으로, Exemption Limit와 세율 구조를 정확히 이해하면 합법적인 절세 계획을 세울 수 있습니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여세 면제한도 (10년 합산)</h3>
-        <p>증여세 면제한도는 증여자와 수증자의 관계에 따라 다르며, <strong>10년간 합산</strong>하여 적용됩니다. 배우자로부터의 증여는 6억원, 성인 직계비속(자녀·손자녀)은 5,000만원, 미성년 직계비속은 2,000만원, 직계존속(부모·조부모)은 5,000만원, 기타 친족(6촌 이내 혈족, 4촌 이내 인척)은 1,000만원까지 면제됩니다. 이 한도를 초과하는 금액에 대해서만 증여세가 부과됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여세 Exemption Limit (10년 합산)</h3>
+        <p>증여세 Exemption Limit는 증여자와 수증자의 관계에 따라 다르며, <strong>10년간 합산</strong>하여 적용됩니다. 배우자로부터의 증여는 6억원, 성인 직계비속(자녀·손자녀)은 5,000만원, 미성년 직계비속은 2,000만원, 직계존속(부모·조부모)은 5,000만원, 기타 친족(6촌 이내 혈족, 4촌 이내 인척)은 1,000만원까지 면제됩니다. 이 한도를 초과하는 금액에 대해서만 증여세가 부과됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여세율</h3>
-        <p>증여세율은 과세표준(증여재산가액 - 면제한도)에 따라 누진적으로 적용됩니다. 1억원 이하 10%, 1억~5억원 20%, 5억~10억원 30%, 10억~30억원 40%, 30억원 초과 50%입니다. 각 구간별 누진공제액이 있어 실제 세액 계산 시 적용됩니다.</p>
+        <p>증여세율은 Taxable Base(증여재산가액 - Exemption Limit)에 따라 누진적으로 적용됩니다. 1억원 이하 10%, 1억~5억원 20%, 5억~10억원 30%, 10억~30억원 40%, 30억원 초과 50%입니다. 각 구간별 누진공제액이 있어 실제 세액 계산 시 적용됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">사전증여를 활용한 절세 전략</h3>
-        <p>10년마다 면제한도가 리셋되기 때문에, 자녀에게 일찍부터 분산 증여하면 절세 효과를 극대화할 수 있습니다. 예를 들어 자녀가 태어나자마자 2,000만원을 증여하고, 11세에 2,000만원, 21세에 5,000만원을 증여하면 총 9,000만원을 세금 없이 이전할 수 있습니다. 부담부증여(부채를 포함하여 증여하는 방식)를 활용하면 부채 부분은 양도소득세로 전환되어 증여세를 절감할 수 있는 경우도 있습니다.</p>
+        <p>10년마다 Exemption Limit가 리셋되기 때문에, 자녀에게 일찍부터 분산 증여하면 절세 효과를 극대화할 수 있습니다. 예를 들어 자녀가 태어나자마자 2,000만원을 증여하고, 11세에 2,000만원, 21세에 5,000만원을 증여하면 총 9,000만원을 세금 없이 이전할 수 있습니다. 부담부증여(부채를 포함하여 증여하는 방식)를 활용하면 부채 부분은 양도소득세로 전환되어 증여세를 절감할 수 있는 경우도 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여 신고와 주의사항</h3>
-        <p>부동산을 증여할 때는 시가 감정이 원칙이며, 아파트의 경우 실거래가가 적용됩니다. 증여받은 날이 속하는 달의 말일로부터 <strong>3개월 이내에 신고</strong>하면 신고세액공제 3%를 받을 수 있으므로, 기한 내 신고가 중요합니다. 증여세 신고는 국세청 홈택스에서 전자 신고가 가능하며, 고액 증여나 부동산 증여의 경우 세무사와 상담하는 것을 권장합니다.</p>
+        <p>부동산을 증여할 때는 시가 감정이 원칙이며, 아파트의 경우 실거래가가 적용됩니다. 증여받은 날이 속하는 달의 말일로부터 <strong>3months 이내에 신고</strong>하면 신고세액공제 3%를 받을 수 있으므로, 기한 내 신고가 중요합니다. 증여세 신고는 국세청 홈택스에서 전자 신고가 가능하며, 고액 증여나 부동산 증여의 경우 세무사와 상담하는 것을 권장합니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여 추정과 자금출처 조사</h3>
         <p>국세청은 소득에 비해 과도한 재산 취득이 확인되면 자금출처 조사를 실시할 수 있습니다. 특히 부동산을 취득하거나 고액 예금이 확인될 때, 취득 자금의 출처를 소명하지 못하면 증여로 추정하여 증여세가 부과됩니다. 부모님께 자금을 빌린 경우에도 차용증을 작성하고 이자를 지급한 기록이 있어야 대여로 인정받을 수 있으며, 무이자 또는 저리 대여 시 연 4.6% 기준으로 이자 상당액이 증여로 간주될 수 있습니다. 따라서 가족 간 금전 거래 시에는 반드시 증빙을 남기는 것이 중요합니다.</p>
@@ -353,7 +330,7 @@
         <a href="contact.html">문의하기</a>
         <a href="privacy.html">개인정보처리방침</a>
     </div>
-    <div class="footer-copy">© 2026 월급연구소</div>
+    <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
 
 <script>
@@ -374,7 +351,7 @@ giftSlider.addEventListener('input', function () {
     giftInput.value = parseInt(this.value).toLocaleString('ko-KR');
 });
 
-// ── 면제한도 ──
+// ── Exemption Limit ──
 function getExemption(rel) {
     switch (rel) {
         case 'spouse':      return 600000000;
@@ -422,10 +399,10 @@ function calculate() {
     var relationship = document.getElementById('relationship').value;
     var selfReport   = document.getElementById('selfReport').value === 'yes';
 
-    // 면제한도
+    // Exemption Limit
     var exemption = getExemption(relationship);
 
-    // 과세표준
+    // Taxable Base
     var taxBase = Math.max(0, giftAmount - exemption);
 
     // 산출세액
@@ -435,7 +412,7 @@ function calculate() {
     // 신고세액공제
     var reportCredit = selfReport ? Math.round(calcTax * 0.03) : 0;
 
-    // 최종 납부세액
+    // Final Tax Payable
     var finalTax = Math.max(0, calcTax - reportCredit);
 
     // 플레이스홀더 숨김
@@ -444,18 +421,18 @@ function calculate() {
     // 결과 카드
     document.getElementById('resultCard').classList.add('show');
     counter('taxResult', finalTax);
-    document.getElementById('taxBase').textContent    = fmt(taxBase) + '원';
+    document.getElementById('taxBase').textContent    = fmt(taxBase) + 'KRW';
     document.getElementById('taxRate').textContent     = taxInfo.rate;
-    document.getElementById('exemptionAmt').textContent = fmt(exemption) + '원';
+    document.getElementById('exemptionAmt').textContent = fmt(exemption) + 'KRW';
 
     // 상세 내역
     var items = [
         { name: '증여재산가액',     amount: giftAmount,    color: '#2563EB',  sign: '' },
-        { name: '면제한도',         amount: exemption,     color: '#059669',  sign: '-' },
-        { name: '과세표준',         amount: taxBase,       color: '#F59E0B',  sign: '' },
+        { name: 'Exemption Limit',         amount: exemption,     color: '#059669',  sign: '-' },
+        { name: 'Taxable Base',         amount: taxBase,       color: '#F59E0B',  sign: '' },
         { name: '산출세액',         amount: calcTax,       color: '#EF4444',  sign: '' },
         { name: '신고세액공제',     amount: reportCredit,  color: '#8B5CF6',  sign: '-' },
-        { name: '최종 납부세액',    amount: finalTax,      color: '#18191B',  sign: '' }
+        { name: 'Final Tax Payable',    amount: finalTax,      color: '#18191B',  sign: '' }
     ];
 
     var maxAmt = Math.max.apply(null, items.map(function(i) { return i.amount; }));
@@ -475,7 +452,7 @@ function calculate() {
     }).join('');
 
     document.getElementById('breakdownCard').classList.add('show');
-    document.getElementById('breakdownTotal').textContent = fmt(finalTax) + '원';
+    document.getElementById('breakdownTotal').textContent = fmt(finalTax) + 'KRW';
 
     // 바 애니메이션
     setTimeout(function() {
