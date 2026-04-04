@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="月給と勤続年数から韓国の退職金を計算します。">
-    <meta name="keywords" content="퇴직금계산기, 퇴직금계산, 퇴직소득세, 세후퇴직금, 퇴직금얼마">
+    <meta name="keywords" content="退職金計算機, 退職金計算, 退職所得税, 税引後退職金, 退職金いくら">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/retirement">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/retirement-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/retirement-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/retirement-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/retirement">
-    <meta property="og:title" content="퇴직금 계산기 - 내 퇴직금 얼마야?">
-    <meta property="og:description" content="월급과 근속기간을 입력하면 퇴직금과 税引後金額을 바로 계산해드립니다.">
+    <meta property="og:title" content="退職金計算機 - 私の退職金はいくら？">
+    <meta property="og:description" content="月給と勤続期間を入力すると退職金と税引後金額をすぐに計算します。">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ フォーム要素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -37,16 +37,16 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 슬라이더 */
+        /* スライダー */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 結果エリア ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* メイン結果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -62,7 +62,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 공제 상세 카드 */
+        /* 控除詳細カード */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -76,7 +76,7 @@
         .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
         .b-total-label { font-size: 0.88rem; font-weight: 700; }
         .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
-        /* ══ 저장 / 공유 버튼 ══ */
+        /* ══ 保存/共有ボタン ══ */
         .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
         .action-row.show { display: flex; }
         .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -84,7 +84,7 @@
         .save-btn.loading { opacity: 0.5; cursor: wait; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 연봉 인상 시뮬레이터 ══ */
+        /* ══ 年俸昇給シミュレーター ══ */
         .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -103,7 +103,7 @@
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
         .info-card ul { padding-left: 18px; margin-bottom: 10px; }
         .info-card ul li { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 4px; }
-        /* ══ 퇴직금 페이지 전용 ══ */
+        /* ══ 退職金ページ専用 ══ */
         .warn-card { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 16px 20px; display: none; }
         .warn-card.show { display: block; animation: fadeUp 0.4s ease; }
         .warn-card p { color: #92400E; font-size: 0.85rem; font-weight: 600; line-height: 1.7; }
@@ -117,8 +117,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "퇴직금 계산기",
-    "description": "근속기간과 평균임금을 기준으로 퇴직금을 계산합니다. 퇴직소득세도 함께 확인하세요.",
+    "name": "退職金計算機",
+    "description": "勤続年数と平均賃金を基準に退職金を計算します。退職所得税も一緒に確認できます。",
     "url": "https://salarykorea.site/retirement",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -219,12 +219,12 @@
     </div>
 
     <div class="dashboard">
-        <!-- 입력 영역 -->
+        <!-- 入力エリア -->
         <div class="input-col">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">情報入力</div>
-                    <div class="card-badge">2026年 기준</div>
+                    <div class="card-badge">2026年基準</div>
                 </div>
 
                 <div class="form-group">
@@ -281,27 +281,27 @@
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">퇴직금 計算する</button>
+                <button class="submit-btn" onclick="calculate()">退職金を計算する</button>
             </div>
         </div>
 
-        <!-- 결과 영역 -->
+        <!-- 結果エリア -->
         <div class="result-col">
-            <!-- 1年 미만 경고 -->
+            <!-- 1年未満警告 -->
             <div class="warn-card" id="warnCard">
-                <p>퇴직금은 1年 이상 근무한 경우에만 발생합니다. (근로기준법 제34조)<br>
-                1年 미만 근무 시 퇴직금을 받을 수 없습니다.</p>
+                <p>退職金は1年以上勤務した場合にのみ発生します。（勤労基準法第34条）<br>
+                1年未満勤務の場合、退職金を受け取ることができません。</p>
             </div>
 
             <div class="result-placeholder" id="resultPlaceholder">
                 情報を入力して<br>計算ボタンを押してください
             </div>
 
-            <!-- 메인 결과 -->
+            <!-- メイン結果 -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">予想退職金（税引前）</div>
                 <div class="result-hero-amount" id="grossResult">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">ウォン</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
                         <div class="rh-stat-label">退職所得税（推定）</div>
@@ -318,7 +318,7 @@
                 </div>
             </div>
 
-            <!-- 상세 내역 -->
+            <!-- 詳細内訳 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">退職金の詳細</div>
@@ -345,7 +345,7 @@
                 </div>
             </div>
 
-            <!-- 저장/공유 -->
+            <!-- 保存/共有 -->
             <div class="action-row" id="actionRow">
                 <button class="save-btn" onclick="saveImage()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -364,29 +364,29 @@
         <div class="info-card">
             <h2>退職金とは？</h2>
             <p>
-                퇴직금은 근로자가 일정 기간 근무하고 퇴직할 때 사용자(회사)가 지급해야 하는 법정 급여입니다.
-                <strong>근로기준법 제34조</strong>에 따라 1주 소정근로시간이 15시간 이상인 근로자가
-                1年 이상 계속 근무한 경우, 퇴직 사유에 관계없이 반드시 받을 수 있습니다.
+                退職金は、労働者が一定期間勤務し退職する際に使用者（会社）が支給しなければならない法定給与です。
+                <strong>勤労基準法第34条</strong>に基づき、1週間の所定労働時間が15時間以上の労働者が
+                1年以上継続して勤務した場合、退職事由に関係なく必ず受け取ることができます。
             </p>
             <p>
-                퇴직 후 14일 이내에 지급이 원칙이며, 이를 어기면 회사는 지연이자(연 20%)를 추가로 지급해야 합니다.
+                退職後14日以内の支給が原則であり、これに違反すると会社は遅延利息（年20%）を追加で支払わなければなりません。
             </p>
         </div>
 
         <div class="info-card">
-            <h2>퇴직금 계산 방법</h2>
+            <h2>退職金の計算方法</h2>
             <div class="formula-box">
-                <strong>퇴직금</strong> = 1日平均賃金 x 30일 x (근속일수 / 365)<br><br>
-                <strong>1日平均賃金</strong> = 퇴직 전 3月간 받은 임금 총액 / 해당 기간의 총 일수 (약 91일)
+                <strong>退職金</strong> = 1日平均賃金 × 30日 × (勤続日数 / 365)<br><br>
+                <strong>1日平均賃金</strong> = 退職前3ヶ月間に受けた賃金総額 / 当該期間の総日数（約91日）
             </div>
             <p>
-                핵심은 <strong>평균임금</strong>입니다. 퇴직 직전 3月간의 기본급, 각종 수당, 상여금(월할 계산) 등을
-                모두 합산한 금액을 해당 기간의 일수로 나눕니다.
+                核心は<strong>平均賃金</strong>です。退職直前3ヶ月間の基本給、各種手当、賞与金（月割計算）などを
+                すべて合算した金額を当該期間の日数で割ります。
             </p>
             <div class="highlight">
                 <p>
-                    월 평균 급여가 300万ウォン이고 5年 근무했다면 퇴직금은 약 300万ウォン x 5 = <strong>약 1,500万ウォン</strong>
-                    (1年 근무 = 약 1月치 월급이 퇴직금으로 쌓임)
+                    月平均給与が300万ウォンで5年勤務した場合、退職金は約300万ウォン × 5 = <strong>約1,500万ウォン</strong>
+                    （1年勤務 = 約1ヶ月分の月給が退職金として積み立てられる）
                 </p>
             </div>
         </div>
@@ -394,32 +394,32 @@
 
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>퇴직소득세란?</h2>
+            <h2>退職所得税とは？</h2>
             <p>
-                퇴직금에는 <strong>퇴직소득세</strong>가 부과됩니다. 일반 근로소득세와 달리 장기간 쌓인
-                소득이므로, 근속연수에 따른 공제 혜택이 큽니다.
+                退職金には<strong>退職所得税</strong>が課されます。一般の勤労所得税とは異なり、長期間にわたって蓄積された
+                所得であるため、勤続年数に応じた控除が大きくなります。
             </p>
             <ul>
-                <li>근속연수가 길수록 퇴직소득공제가 커져 실제 세율이 낮아집니다</li>
-                <li>5年 근무자: 500万ウォン 공제 / 10年: 1,500万ウォン 공제 / 20年: 4,000万ウォン 공제</li>
-                <li>퇴직금이 적거나 근속연수가 짧으면 세금이 거의 없을 수 있습니다</li>
+                <li>勤続年数が長いほど退職所得控除が大きくなり、実質税率が低くなります</li>
+                <li>5年勤務者: 500万ウォン控除 / 10年: 1,500万ウォン控除 / 20年: 4,000万ウォン控除</li>
+                <li>退職金が少ないか勤続年数が短ければ、税金がほとんどない場合もあります</li>
             </ul>
             <div class="highlight">
-                <p>본 계산기의 퇴직소득세는 <strong>추정값</strong>입니다. 정확한 세액은 퇴직 시 회사 또는
-                국세청 홈택스를 통해 확인하세요.</p>
+                <p>本計算機の退職所得税は<strong>推定値</strong>です。正確な税額は退職時に会社または
+                国税庁HomeTaxで確認してください。</p>
             </div>
         </div>
 
         <div class="info-card">
-            <h2>퇴직금 vs 퇴직연금 (IRP)</h2>
+            <h2>退職金 vs 退職年金（IRP）</h2>
             <p>
-                최근에는 퇴직금 대신 <strong>퇴직연금</strong>을 운영하는 회사가 많습니다.
-                퇴직연금은 DB형(확정급여형)과 DC형(확정기여형)으로 나뉩니다.
+                最近では退職金の代わりに<strong>退職年金</strong>を運用する会社が多くなっています。
+                退職年金はDB型（確定給付型）とDC型（確定拠出型）に分かれます。
             </p>
             <ul>
-                <li><strong>DB형:</strong> 퇴직할 때 받을 급여가 미리 정해짐. 계산 방식은 일반 퇴직금과 동일</li>
-                <li><strong>DC형:</strong> 매年 회사가 적립하는 금액이 정해짐. 투자 성과에 따라 수령액이 달라짐</li>
-                <li><strong>IRP 의무 이전:</strong> 퇴직금이 300万ウォン 초과 시 IRP(개인형 퇴직연금) 계좌로 수령 의무화</li>
+                <li><strong>DB型:</strong> 退職時に受け取る給付が事前に決まっている。計算方式は一般退職金と同じ</li>
+                <li><strong>DC型:</strong> 毎年会社が積み立てる金額が決まっている。投資成果によって受取額が変わる</li>
+                <li><strong>IRP義務移管:</strong> 退職金が300万ウォン超過時にIRP（個人型退職年金）口座での受取が義務化</li>
             </ul>
         </div>
     </div>
@@ -428,55 +428,55 @@
         <div class="info-card">
             <h2>よくある質問</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금은 퇴직 후 언제 받을 수 있나요?</div>
-                <div class="faq-a">근로기준법에 따라 퇴직일로부터 14일 이내에 지급해야 합니다. 지연 시 연 20%의 지연이자가 발생하며, 노동청에 신고할 수 있습니다.</div>
+                <div class="faq-q">Q. 退職金は退職後いつ受け取れますか？</div>
+                <div class="faq-a">勤労基準法に基づき、退職日から14日以内に支給しなければなりません。遅延時には年20%の遅延利息が発生し、労働庁に届出ることができます。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 계약직/파트타임도 퇴직금을 받을 수 있나요?</div>
-                <div class="faq-a">고용 형태와 관계없이 1年 이상 계속 근무하고 주 평균 15시간 이상 일했다면 퇴직금을 받을 수 있습니다.</div>
+                <div class="faq-q">Q. 契約社員/パートタイムでも退職金を受け取れますか？</div>
+                <div class="faq-a">雇用形態に関係なく、1年以上継続して勤務し、週平均15時間以上勤務した場合、退職金を受け取ることができます。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금을 IRP 계좌로 받아야 하나요?</div>
-                <div class="faq-a">퇴직금이 300万ウォン을 초과하면 IRP(개인형 퇴직연금) 계좌로 수령하는 것이 의무입니다. IRP로 수령 시 세금이 유예되고, 55세 이후 연금으로 받으면 세율이 낮아집니다.</div>
+                <div class="faq-q">Q. 退職金をIRP口座で受け取る必要がありますか？</div>
+                <div class="faq-a">退職金が300万ウォンを超える場合、IRP（個人型退職年金）口座での受取が義務です。IRPで受取時は税金が猶予され、55歳以降に年金として受け取ると税率が低くなります。</div>
             </div>
         </div>
 
         <div class="info-card">
-            <h2>よくある質問 (계속)</h2>
+            <h2>よくある質問（続き）</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금에도 세금이 붙나요?</div>
-                <div class="faq-a">퇴직소득세가 부과됩니다. 근속기간이 길수록 공제액이 커져 실제 세율은 낮아집니다. 5年 이하 근무자는 세금이 거의 없는 경우도 많습니다.</div>
+                <div class="faq-q">Q. 退職金にも税金がかかりますか？</div>
+                <div class="faq-a">退職所得税が課されます。勤続期間が長いほど控除額が大きくなり、実質税率が低くなります。5年以下の勤務者は税金がほとんどない場合も多いです。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 상여금도 퇴직금 계산에 포함되나요?</div>
-                <div class="faq-a">퇴직 전 3月간 지급된 임금이 기준입니다. 매월 지급된 상여금은 포함되지만, 퇴직 직전에 일시적으로 지급된 특별상여는 포함되지 않을 수 있습니다.</div>
+                <div class="faq-q">Q. 賞与金も退職金の計算に含まれますか？</div>
+                <div class="faq-a">退職前3ヶ月間に支給された賃金が基準です。毎月支給される賞与金は含まれますが、退職直前に一時的に支給された特別賞与は含まれない場合があります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 회사가 퇴직금을 안 주면 어떻게 하나요?</div>
-                <div class="faq-a">고용노동부 고객상담센터(1350) 또는 가까운 고용노동청에 진정을 제기할 수 있습니다. 퇴직금 미지급은 3年 이하 징역 또는 2,000万ウォン 이하 벌금에 해당하는 범죄입니다.</div>
+                <div class="faq-q">Q. 会社が退職金を支払わない場合はどうすればいいですか？</div>
+                <div class="faq-a">雇用労働部お客様相談センター（1350）または最寄りの雇用労働庁に陳情を申し立てることができます。退職金未払いは3年以下の懲役または2,000万ウォン以下の罰金に該当する犯罪です。</div>
             </div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>퇴직금 제도 상세 안내</h2>
-        <p>퇴직금은 근로자가 일정 기간 이상 근무한 후 퇴직할 때 받는 금전적 보상으로, 근로자퇴직급여보장법에 따라 보장됩니다. 퇴직금을 정확히 이해하면 퇴직 시기를 계획하거나 이직을 결정할 때 중요한 판단 기준이 됩니다.</p>
+        <h2>退職金制度の詳細案内</h2>
+        <p>退職金は、労働者が一定期間以上勤務した後に退職する際に受け取る金銭的補償であり、勤労者退職給付保障法に基づいて保障されます。退職金を正確に理解すれば、退職時期の計画や転職の判断に重要な基準となります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 지급 조건</h3>
-        <p>퇴직금을 받으려면 <strong>계속 근로기간이 1年 이상</strong>이어야 하며, <strong>4주간을 평균하여 1주간 소정근로시간이 15시간 이상</strong>이어야 합니다. 정규직, 계약직, 파트타임 등 고용 형태와 관계없이 이 두 가지 조건을 충족하면 퇴직금을 받을 수 있습니다. 사용자는 근로자가 퇴직한 날로부터 14일 이내에 퇴직금을 지급해야 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退職金の支給条件</h3>
+        <p>退職金を受け取るには、<strong>継続勤労期間が1年以上</strong>であり、<strong>4週間を平均して1週間の所定労働時間が15時間以上</strong>でなければなりません。正規職、契約職、パートタイムなど雇用形態に関係なく、この2つの条件を満たせば退職金を受け取ることができます。使用者は労働者が退職した日から14日以内に退職金を支給しなければなりません。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 계산 방법</h3>
-        <p>퇴직금 = <strong>(1日平均賃金 &times; 30일) &times; (총 근속일수 &divide; 365)</strong>로 계산됩니다. 여기서 1日平均賃金은 퇴직 전 3月간 지급된 임금 총액을 해당 기간의 총 일수로 나눈 금액입니다. 평균임금에 포함되는 항목은 기본급, 고정 수당, 정기적으로 지급되는 상여금 등이 있으며, 실비 변상적 급여(교통비 실비, 출장비 등), 경조사비, 일시적 상여금 등은 포함되지 않습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退職金の計算方法</h3>
+        <p>退職金 = <strong>（1日平均賃金 &times; 30日） &times; （総勤続日数 &divide; 365）</strong>で計算されます。ここで1日平均賃金は、退職前3ヶ月間に支給された賃金総額を当該期間の総日数で割った金額です。平均賃金に含まれる項目は基本給、固定手当、定期的に支給される賞与金などがあり、実費弁償的給与（交通費実費、出張費など）、慶弔費、一時的賞与金などは含まれません。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 중간정산</h3>
-        <p>퇴직금 중간정산은 원칙적으로 금지되어 있지만, 법에서 정한 사유에 해당하면 가능합니다. 대표적인 사유로는 무주택자의 주택 구입, 본인 또는 부양가족의 6月 이상 요양이 필요한 경우, 최근 5年 이내 파산선고 또는 개인회생절차 개시 결정, 임금피크제 적용 등이 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退職金の中間精算</h3>
+        <p>退職金の中間精算は原則として禁止されていますが、法律で定められた事由に該当する場合は可能です。代表的な事由としては、無住宅者の住宅購入、本人または扶養家族の6ヶ月以上の療養が必要な場合、直近5年以内の破産宣告または個人再生手続き開始決定、賃金ピーク制の適用などがあります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 세금과 IRP</h3>
-        <p>퇴직금에는 퇴직소득세가 부과됩니다. 근속연수에 따른 공제와 환산급여 기준 차등과세가 적용되어, 근속연수가 길수록 세금 부담이 줄어듭니다. 퇴직금을 IRP(개인형 퇴직연금) 계좌로 이전하면 퇴직소득세 납부를 연금 수령 시점까지 이연할 수 있으며, 연금으로 수령 시 퇴직소득세의 60~70%만 부과되어 절세 효과가 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退職金の税金とIRP</h3>
+        <p>退職金には退職所得税が課されます。勤続年数に応じた控除と換算給与基準の差等課税が適用され、勤続年数が長いほど税負担が軽減されます。退職金をIRP（個人型退職年金）口座に移管すると、退職所得税の納付を年金受給時点まで繰り延べることができ、年金として受給する場合は退職所得税の60～70%のみが課され、節税効果があります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 미지급 시 대처 방법</h3>
-        <p>사용자가 퇴직 후 14일 이내에 퇴직금을 지급하지 않으면 근로기준법 위반에 해당합니다. 먼저 회사에 서면으로 지급을 요청하고, 그래도 해결되지 않는 경우 고용노동부(1350)에 상담하거나 관할 지방고용노동청에 진정서를 제출할 수 있습니다. 퇴직금 체불에 대한 지연이자는 연 20%가 적용되며, 퇴직금 청구권의 소멸시효는 3年이므로 가능한 빨리 조치를 취하는 것이 중요합니다. 회사가 도산하여 퇴직금을 받지 못한 경우에는 근로복지공단의 체불임금 대지급금 제도를 활용할 수 있으며, 최대 체불임금의 상당 부분을 지원받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退職金未払い時の対処方法</h3>
+        <p>使用者が退職後14日以内に退職金を支給しない場合、勤労基準法違反に該当します。まず会社に書面で支給を要請し、それでも解決しない場合は雇用労働部（1350）に相談するか、管轄の地方雇用労働庁に陳情書を提出できます。退職金滞納に対する遅延利息は年20%が適用され、退職金請求権の消滅時効は3年であるため、できるだけ早く対処することが重要です。会社が倒産して退職金を受け取れない場合は、勤労福祉公団の滞納賃金立替払い制度を活用でき、滞納賃金の相当部分の支援を受けることができます。</p>
     </div>
 
 
@@ -499,7 +499,7 @@ salaryInput.addEventListener('input', function() {
     this.value = v ? v.toLocaleString('ko-KR') : '';
 });
 
-// 누진세 계산
+// 累進税計算
 function taxFromBase(t) {
     if (t <= 0) return 0;
     if (t <= 14000000)  return t * 0.06;
@@ -510,7 +510,7 @@ function taxFromBase(t) {
     return 94060000 + (t - 300000000) * 0.40;
 }
 
-// 근속연수공제 (2023年 개정, 2026年 현행)
+// 勤続年数控除（2023年改正、2026年現行）
 function yearsDeduction(y) {
     if (y <= 5)  return y * 1000000;
     if (y <= 10) return 5000000  + (y - 5)  * 2000000;
@@ -518,7 +518,7 @@ function yearsDeduction(y) {
     return 40000000 + (y - 20) * 3000000;
 }
 
-// 환산급여공제
+// 換算給与控除
 function hwansanDeduction(h) {
     if (h <= 8000000)   return h;
     if (h <= 70000000)  return 8000000  + (h - 8000000)  * 0.6;
@@ -534,7 +534,7 @@ function calcRetirementTax(retirement, totalYears) {
     const hwanDed  = hwansanDeduction(hwansan);
     const taxBase  = Math.max(0, (hwansan - hwanDed)) * y / 12;
     const grossTax = taxFromBase(taxBase);
-    return grossTax * 1.1; // 지방소득세 포함
+    return grossTax * 1.1; // 地方所得税を含む
 }
 
 function calculate() {
@@ -543,9 +543,9 @@ function calculate() {
     const months = parseInt(document.getElementById('workMonths').value);
     const totalMonths = years * 12 + months;
 
-    if (!salary) { alert('월 평균 급여를 입력해주세요.'); return; }
+    if (!salary) { alert('月平均給与を入力してください。'); return; }
 
-    // 1年 미만
+    // 1年未満
     if (totalMonths < 12) {
         document.getElementById('warnCard').classList.add('show');
         document.getElementById('resultCard').classList.remove('show');
@@ -564,7 +564,7 @@ function calculate() {
     const tax         = calcRetirementTax(retirement, totalYears);
     const net         = Math.max(0, retirement - tax);
 
-    // 카운터 애니메이션
+    // カウンターアニメーション
     counter('grossResult', retirement);
     document.getElementById('taxResult').textContent   = '-' + fmt(tax) + 'ウォン';
     document.getElementById('netResult').textContent   = fmt(net) + 'ウォン';
@@ -573,13 +573,13 @@ function calculate() {
     document.getElementById('resultPlaceholder').style.display = 'none';
     document.getElementById('resultCard').classList.add('show');
 
-    // 상세 내역
+    // 詳細内訳
     document.getElementById('bdGross').textContent = fmt(retirement) + 'ウォン';
     document.getElementById('bdTax').textContent = '-' + fmt(tax) + 'ウォン';
     document.getElementById('bdNet').textContent = fmt(net) + 'ウォン';
     document.getElementById('breakdownCard').classList.add('show');
 
-    // 바 애니메이션
+    // バーアニメーション
     const maxVal = retirement;
     setTimeout(() => {
         document.getElementById('barGross').style.width = '100%';
@@ -608,14 +608,14 @@ function saveImage() {
     const target = document.getElementById('resultCard');
     html2canvas(target, { scale: 2, backgroundColor: '#1E40AF', borderRadius: 16 }).then(canvas => {
         const link = document.createElement('a');
-        link.download = '퇴직금_계산결과.png';
+        link.download = '退職金_計算結果.png';
         link.href = canvas.toDataURL();
         link.click();
         btn.classList.remove('loading');
     }).catch(() => { btn.classList.remove('loading'); });
 }
 
-// 초기값
+// 初期値
 salaryInput.value = (3000000).toLocaleString('ko-KR');
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
@@ -625,8 +625,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 퇴직금은 ' + (window._shareRetirement || '—'),
-            description: '퇴직금 계산기로 예상 퇴직금을 확인해보세요',
+            title: '私の退職金は ' + (window._shareRetirement || '—'),
+            description: '退職金計算機で予想退職金を確認してみましょう',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/retirement', webUrl: 'https://salarykorea.site/retirement' }
         },

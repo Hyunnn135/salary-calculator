@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="韓国のフリーランス・事業者・賃貸所得者の総合所得税を自動計算します。">
-    <meta name="keywords" content="종합소득세계산기, 종합소득세, 프리랜서세금, 事業所得세, 3.3%환급, 5월세금신고">
+    <meta name="keywords" content="総合所得税計算機, 総合所得税, フリーランス税金, 事業所得税, 3.3%還付, 5月税金申告">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/income-tax">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/income-tax-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/income-tax-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/income-tax-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/income-tax">
-    <meta property="og:title" content="종합소득세 계산기 - 내 세금 얼마야?">
-    <meta property="og:description" content="프리랜서·사업자 종합소득세 자동 계산. 환급 여부까지 바로 확인하세요.">
+    <meta property="og:title" content="総合所得税計算機 - 私の税金はいくら？">
+    <meta property="og:description" content="フリーランス・事業者の総合所得税を自動計算。還付の有無までお確かめください。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ フォーム要素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -36,16 +36,16 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 슬라이더 */
+        /* スライダー */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 結果エリア ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* メイン結果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         .result-hero.refund { background: linear-gradient(135deg, #1E40AF, #3B82F6); }
@@ -65,7 +65,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 공제 상세 카드 (step breakdown) */
+        /* 控除詳細カード (step breakdown) */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .step-row { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #F3F4F6; }
@@ -78,25 +78,25 @@
         .step-amount.plus { color: var(--accent); }
         .step-amount.result-refund { color: var(--accent); font-size: 1rem; font-weight: 800; }
         .step-amount.result-pay { color: #DC2626; font-size: 1rem; font-weight: 800; }
-        /* ══ 所得種類 버튼 그룹 ══ */
+        /* ══ 所得種類ボタングループ ══ */
         .type-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .type-btn { padding: 11px 8px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--surface); font-size: 0.82rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; text-align: center; }
         .type-btn:hover { border-color: var(--accent); color: var(--accent); }
         .type-btn.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 700; }
-        /* ══ 힌트 텍스트 ══ */
+        /* ══ ヒントテキスト ══ */
         .form-hint { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 6px; line-height: 1.5; }
-        /* ══ 저장 / 공유 버튼 ══ */
+        /* ══ 保存/共有ボタン ══ */
         .action-row { display: none; gap: 10px; margin-top: 0; }
         .action-row.show { display: flex; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 税率 테이블 ══ */
+        /* ══ 税率テーブル ══ */
         .rate-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 12px 0; }
         .rate-table th { background: var(--surface-alt); padding: 10px 12px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.78rem; }
         .rate-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
         .rate-table tr:last-child td { border-bottom: none; }
         .rate-table .highlight { color: var(--accent); font-weight: 700; }
-        /* 하이라이트 박스 */
+        /* ハイライトボックス */
         .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
         .highlight-box p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; margin: 0; }
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
@@ -108,8 +108,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "종합소득세 계산기",
-    "description": "종합소득세 예상 세액을 계산합니다. 事業所得, 근로소득 등 所得種類별 세금을 확인하세요.",
+    "name": "総合所得税計算機",
+    "description": "総合所得税の予想税額を計算します。事業所得、勤労所得など所得種類別の税金を確認できます。",
     "url": "https://salarykorea.site/income-tax",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -212,7 +212,7 @@
 
     <div class="dashboard">
 
-        <!-- 입력 영역 -->
+        <!-- 入力エリア -->
         <div>
             <div class="card">
                 <div class="card-header">
@@ -244,7 +244,7 @@
                         <input type="text" class="form-input" id="expenseRate" value="60" style="font-size:1.2rem;">
                         <span class="form-unit">%</span>
                     </div>
-                    <div class="form-hint" id="expenseHint">단순경비율 기준 기본값입니다. 실제 경비가 다르면 직접 수정하세요.</div>
+                    <div class="form-hint" id="expenseHint">簡易経費率基準のデフォルト値です。実際の経費が異なる場合は直接修正してください。</div>
                 </div>
 
                 <div class="form-row">
@@ -271,18 +271,18 @@
             </div>
         </div>
 
-        <!-- 결과 영역 -->
+        <!-- 結果エリア -->
         <div class="result-col">
 
             <div class="result-placeholder" id="resultPlaceholder">
-                소득 정보를 입력하고<br>計算する 버튼을 눌러주세요
+                所得情報を入力して<br>計算ボタンを押してください
             </div>
 
             <!-- 結果サマリー -->
             <div class="result-hero" id="resultHero">
                 <div class="result-hero-label" id="resultLabel">還付予想</div>
                 <div class="result-hero-amount" id="resultAmount">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">ウォン</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
                         <div class="rh-stat-label">決定税額</div>
@@ -307,7 +307,7 @@
                 <div id="detailRows"></div>
             </div>
 
-            <!-- 카카오 공유 -->
+            <!-- カカオ共有 -->
             <div class="action-row" id="actionRow">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
@@ -321,23 +321,23 @@
     <!-- 下部情報エリア -->
     <div class="bottom-grid" style="margin-top:24px;">
 
-        <!-- 종합소득세란 -->
+        <!-- 総合所得税とは -->
         <div class="info-card">
             <h2>総合所得税とは？</h2>
             <p>
-                종합소득세는 개인이 1년간 벌어들인 <strong>모든 소득을 합산</strong>하여 부과되는 세금입니다.
-                매년 <strong>5월 1일~5월 31일</strong>에 전년도 소득에 대해 신고·납부합니다.
+                総合所得税は、個人が1年間に得た<strong>すべての所得を合算</strong>して課される税金です。
+                毎年<strong>5月1日～5月31日</strong>に前年度の所得について申告・納付します。
             </p>
-            <p><strong>신고 대상자:</strong></p>
+            <p><strong>申告対象者:</strong></p>
             <ul>
-                <li><strong>프리랜서</strong> -- 3.3% 원천징수된 事業所得이 있는 경우</li>
-                <li><strong>개인사업자</strong> -- 사업을 운영하며 소득이 발생한 경우</li>
-                <li><strong>賃貸所得자</strong> -- 부동산 임대수입이 있는 경우</li>
-                <li><strong>その他所得자</strong> -- 강연료, 원고료 등 その他所得이 300万ウォン 초과</li>
-                <li><strong>2곳 이상 근무자</strong> -- 두 군데 이상에서 급여를 받은 경우</li>
+                <li><strong>フリーランス</strong> -- 3.3%源泉徴収された事業所得がある場合</li>
+                <li><strong>個人事業主</strong> -- 事業を運営し所得が発生した場合</li>
+                <li><strong>賃貸所得者</strong> -- 不動産賃貸収入がある場合</li>
+                <li><strong>その他所得者</strong> -- 講演料、原稿料などその他所得が300万ウォン超過</li>
+                <li><strong>2ヶ所以上勤務者</strong> -- 2ヶ所以上から給与を受けた場合</li>
             </ul>
             <div class="highlight-box">
-                <p>프리랜서의 경우, 원천징수된 3.3%(소득세 3% + 地方所得税 0.3%)와 실제 세금을 비교하여 <strong>환급 또는 追加納付</strong>가 결정됩니다.</p>
+                <p>フリーランスの場合、源泉徴収された3.3%（所得税3% + 地方所得税0.3%）と実際の税金を比較して<strong>還付または追加納付</strong>が決定されます。</p>
             </div>
         </div>
 
@@ -345,33 +345,33 @@
         <div class="info-card">
             <h2>よくある質問</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 프리랜서인데 종합소득세 신고를 꼭 해야 하나요?</div>
-                <div class="faq-a">네. 3.3%가 원천징수되었더라도 5월에 종합소득세 신고를 해야 합니다. 오히려 경비를 인정받으면 이미 낸 세금보다 적게 나와서 환급받는 경우가 많습니다.</div>
+                <div class="faq-q">Q. フリーランスですが総合所得税の申告は必ず必要ですか？</div>
+                <div class="faq-a">はい。3.3%が源泉徴収されていても5月に総合所得税の申告が必要です。むしろ経費が認められると、すでに納めた税金より少なくなり還付を受けるケースが多いです。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 3.3% 세금을 떼였는데 왜 추가로 내야 하나요?</div>
-                <div class="faq-a">3.3%는 임시로 미리 걷는 세금입니다. 실제 소득이 많거나 경비율이 낮으면 실제 세금이 3.3%보다 높아져 追加納付가 발생할 수 있습니다.</div>
+                <div class="faq-q">Q. 3.3%の税金を差し引かれたのに、なぜ追加で支払う必要がありますか？</div>
+                <div class="faq-a">3.3%は一時的に予め徴収する税金です。実際の所得が多いか経費率が低い場合、実際の税金が3.3%より高くなり追加納付が発生することがあります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 必要経費率이란 무엇인가요?</div>
-                <div class="faq-a">소득을 얻기 위해 지출한 비용의 비율입니다. 국세청이 업종별로 정한 '단순경비율'을 적용하거나, 실제 지출한 경비를 직접 입력할 수 있습니다. 경비율이 높을수록 세금이 줄어듭니다.</div>
+                <div class="faq-q">Q. 必要経費率とは何ですか？</div>
+                <div class="faq-a">所得を得るために支出した費用の割合です。国税庁が業種別に定めた「簡易経費率」を適用するか、実際に支出した経費を直接入力できます。経費率が高いほど税金が減ります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 종합소득세 신고를 안 하면 어떻게 되나요?</div>
-                <div class="faq-a">무신고 가산세(납부세액의 20%)와 납부불성실 가산세가 부과됩니다. 환급 대상인데 신고하지 않으면 환급금도 돌려받지 못합니다.</div>
+                <div class="faq-q">Q. 総合所得税の申告をしないとどうなりますか？</div>
+                <div class="faq-a">無申告加算税（納付税額の20%）と納付不誠実加算税が課されます。還付対象なのに申告しなければ還付金も受け取れません。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 환급은 언제 받을 수 있나요?</div>
-                <div class="faq-a">5월에 신고하면 보통 6월~7월 중에 환급금이 계좌로 입금됩니다. 홈택스에서 간편 신고하면 더 빠르게 처리될 수 있습니다.</div>
+                <div class="faq-q">Q. 還付はいつ受け取れますか？</div>
+                <div class="faq-a">5月に申告すると通常6月～7月中に還付金が口座に入金されます。HomeTaxで簡単申告するとより早く処理される場合があります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 홈택스에서 직접 신고할 수 있나요?</div>
-                <div class="faq-a">네. 국세청 홈택스(hometax.go.kr)에서 종합소득세 신고가 가능합니다. 모두채움 신고서가 제공되는 경우 클릭 몇 번으로 간편하게 신고할 수 있습니다.</div>
+                <div class="faq-q">Q. HomeTaxで直接申告できますか？</div>
+                <div class="faq-a">はい。国税庁HomeTax（hometax.go.kr）で総合所得税の申告が可能です。すべて記入済みの申告書が提供される場合は、数回のクリックで簡単に申告できます。</div>
             </div>
         </div>
     </div>
 
-    <!-- 税率표 -->
+    <!-- 税率表 -->
     <div class="info-card" style="margin-bottom:24px;">
         <h2>2026年所得税率表</h2>
         <table class="rate-table">
@@ -379,40 +379,40 @@
                 <tr><th>課税標準</th><th>税率</th><th>累進控除</th></tr>
             </thead>
             <tbody>
-                <tr><td>1,400万ウォン 이하</td><td class="highlight">6%</td><td>-</td></tr>
+                <tr><td>1,400万ウォン以下</td><td class="highlight">6%</td><td>-</td></tr>
                 <tr><td>1,400万ウォン ~ 5,000万ウォン</td><td class="highlight">15%</td><td>126万ウォン</td></tr>
                 <tr><td>5,000万ウォン ~ 8,800万ウォン</td><td class="highlight">24%</td><td>576万ウォン</td></tr>
-                <tr><td>8,800万ウォン ~ 1.5億원</td><td class="highlight">35%</td><td>1,544万ウォン</td></tr>
-                <tr><td>1.5億원 ~ 3億원</td><td class="highlight">38%</td><td>1,994万ウォン</td></tr>
-                <tr><td>3億원 ~ 5億원</td><td class="highlight">40%</td><td>2,594万ウォン</td></tr>
-                <tr><td>5億원 ~ 10億원</td><td class="highlight">42%</td><td>3,594万ウォン</td></tr>
-                <tr><td>10億원 초과</td><td class="highlight">45%</td><td>6,594万ウォン</td></tr>
+                <tr><td>8,800万ウォン～1.5億ウォン</td><td class="highlight">35%</td><td>1,544万ウォン</td></tr>
+                <tr><td>1.5億ウォン～3億ウォン</td><td class="highlight">38%</td><td>1,994万ウォン</td></tr>
+                <tr><td>3億ウォン～5億ウォン</td><td class="highlight">40%</td><td>2,594万ウォン</td></tr>
+                <tr><td>5億ウォン～10億ウォン</td><td class="highlight">42%</td><td>3,594万ウォン</td></tr>
+                <tr><td>10億ウォン超過</td><td class="highlight">45%</td><td>6,594万ウォン</td></tr>
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>課税標準이 높을수록 税率이 올라가는 <strong>누진세 구조</strong>입니다. 예를 들어 課税標準이 3,000万ウォン이면, 1,400万ウォン까지는 6%, 나머지 1,600万ウォン에는 15%가 적용됩니다.</p>
+            <p>課税標準が高いほど税率が上がる<strong>累進税構造</strong>です。例えば課税標準が3,000万ウォンの場合、1,400万ウォンまでは6%、残りの1,600万ウォンには15%が適用されます。</p>
         </div>
     </div>
 
 
     <div class="info-card" style="margin-bottom:24px;">
         <h2>節税ガイド</h2>
-        <p>종합소득세는 개인이 1년간 벌어들인 모든 소득을 합산하여 부과하는 세금입니다. 근로소득만 있는 직장인은 연말정산으로 납세 의무가 종결되지만, 근로소득 외에 事業所得, 賃貸所得, 금융소득 등이 있다면 매년 5월에 종합소득세를 신고·납부해야 합니다.</p>
+        <p>総合所得税は、個人が1年間に得たすべての所得を合算して課す税金です。勤労所得のみの会社員は年末調整で納税義務が終了しますが、勤労所得以外に事業所得、賃貸所得、金融所得などがあれば毎年5月に総合所得税を申告・納付する必要があります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">종합소득세 신고 대상</h3>
-        <p>종합소득세 신고 대상은 근로소득 외에 연 2,000万ウォン을 초과하는 금융소득(이자·배당), 事業所得, 연금소득, その他所得 등이 있는 경우입니다. 프리랜서(3.3% 원천징수 대상자), 개인사업자, 임대사업자, 유튜버·블로거 등 1인 미디어 사업자 등이 대표적인 신고 대상입니다. 신고 기간은 매년 <strong>5월 1일부터 5월 31일</strong>까지이며, 성실신고 확인 대상자는 6월 30일까지 연장됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">総合所得税の申告対象</h3>
+        <p>総合所得税の申告対象は、勤労所得以外に年2,000万ウォンを超える金融所得（利子・配当）、事業所得、年金所得、その他所得などがある場合です。フリーランス（3.3%源泉徴収対象者）、個人事業主、賃貸事業者、YouTuber・ブロガーなど1人メディア事業者などが代表的な申告対象です。申告期間は毎年<strong>5月1日から5月31日</strong>までで、誠実申告確認対象者は6月30日まで延長されます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">2026年 소득税率 구간</h3>
-        <p>課税標準 1,400万ウォン 이하 6%, 1,400만~5,000万ウォン 15%, 5,000만~8,800万ウォン 24%, 8,800만~1億5천万ウォン 35%, 1億5천만~3億원 38%, 3億~5億원 40%, 5億~10億원 42%, 10億원 초과 45%가 적용됩니다. 課税標準이 높을수록 税率이 올라가는 누진세 구조이므로, 모든 소득에 최고税率이 적용되는 것이 아니라 각 구간별로 해당 税率이 적용됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">2026年所得税率区間</h3>
+        <p>課税標準1,400万ウォン以下6%、1,400万～5,000万ウォン15%、5,000万～8,800万ウォン24%、8,800万～1億5千万ウォン35%、1億5千万～3億ウォン38%、3億～5億ウォン40%、5億～10億ウォン42%、10億ウォン超過45%が適用されます。課税標準が高いほど税率が上がる累進税構造であるため、すべての所得に最高税率が適用されるのではなく、各区間ごとに該当税率が適用されます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주요 공제 항목과 절세 방법</h3>
-        <p>종합소득세 절세의 핵심은 공제 항목을 최대한 활용하는 것입니다. 인적공제(본인·배우자·부양가족), 연금보험료 공제, 특별소득공제(건강보험료·주택자금), 신용카드 소득공제, 기부금 공제 등을 꼼꼼히 챙겨야 합니다. 프리랜서의 경우 경비율 적용이 중요한데, 소득 규모에 따라 간편장부와 복식부기 중 유리한 방식을 선택해야 합니다. 종합소득세 신고는 국세청 홈택스(hometax.go.kr)에서 전자 신고가 가능하며, 복잡한 경우 세무사 상담을 권장합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">主な控除項目と節税方法</h3>
+        <p>総合所得税の節税の核心は、控除項目を最大限活用することです。人的控除（本人・配偶者・扶養家族）、年金保険料控除、特別所得控除（健康保険料・住宅資金）、クレジットカード所得控除、寄付金控除などを丁寧にチェックする必要があります。フリーランスの場合は経費率の適用が重要で、所得規模に応じて簡易帳簿と複式簿記のうち有利な方式を選択する必要があります。総合所得税の申告は国税庁HomeTax（hometax.go.kr）で電子申告が可能であり、複雑な場合は税理士への相談をお勧めします。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">가산세와 무신고 시 불이익</h3>
-        <p>종합소득세 신고를 기한 내에 하지 않으면 무신고 가산세(산출세액의 20%)가 부과되며, 부정 무신고의 경우 가산세가 40%까지 올라갑니다. 납부 기한을 넘기면 미납세액에 대해 하루 0.022%의 납부지연 가산세가 추가로 발생합니다. 한편, 경정청구 제도를 활용하면 과거 5년 이내에 공제를 누락하여 세금을 과다 납부한 경우 환급을 받을 수 있습니다. 특히 의료비, 교육비, 기부금 등의 공제를 빠뜨린 경우가 많으므로, 과거 신고 내역을 다시 확인해 보는 것이 좋습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">加算税と無申告時の不利益</h3>
+        <p>総合所得税の申告を期限内に行わないと、無申告加算税（算出税額の20%）が課され、不正な無申告の場合は加算税が40%まで上がります。納付期限を過ぎると、未納税額に対して1日0.022%の納付遅延加算税が追加で発生します。一方、更正請求制度を活用すれば、過去5年以内に控除を漏らして税金を過大に納付した場合、還付を受けることができます。特に医療費、教育費、寄付金などの控除を漏らすケースが多いので、過去の申告内容を改めて確認してみることをお勧めします。</p>
     </div>
 
-    <!-- 애드핏 -->
+    <!-- アドフィット -->
     
 
 <footer class="footer">
@@ -425,7 +425,7 @@
 </footer>
 
 <script>
-// ── 유틸 ──
+// ── ユーティリティ ──
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
 
@@ -439,10 +439,10 @@ function selectType(type, btn) {
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
 
-    // 경비율 기본값 설정
+    // 経費率デフォルト値設定
     document.getElementById('expenseRate').value = EXPENSE_DEFAULTS[type];
 
-    // 既納付税額 자동계산 여부
+    // 既納付税額自動計算の有無
     updatePrepaid();
     updatePrepaidLabel();
 }
@@ -464,7 +464,7 @@ function updatePrepaid() {
     }
 }
 
-// ── 입력 연동 ──
+// ── 入力連動 ──
 const incomeInput = document.getElementById('incomeInput');
 const prepaidInput = document.getElementById('prepaidInput');
 
@@ -479,7 +479,7 @@ prepaidInput.addEventListener('input', function() {
     this.value = v ? v.toLocaleString('ko-KR') : '';
 });
 
-// ── 세금 계산 ──
+// ── 税金計算 ──
 function taxFromBase(t) {
     if (t <= 0)           return 0;
     if (t <= 14000000)    return t * 0.06;
@@ -492,35 +492,35 @@ function taxFromBase(t) {
     return 384060000 + (t - 1000000000) * 0.45;
 }
 
-// ── 저장용 변수 ──
+// ── 保存用変数 ──
 let saved = null;
 
 function calculate() {
     const totalIncome = parseVal(incomeInput.value);
-    if (!totalIncome || totalIncome < 1000000) { alert('年間総収入額을 올바르게 입력해주세요.'); return; }
+    if (!totalIncome || totalIncome < 1000000) { alert('年間総収入額を正しく入力してください。'); return; }
 
     const expenseRate = parseFloat(document.getElementById('expenseRate').value) / 100;
-    if (isNaN(expenseRate) || expenseRate < 0 || expenseRate > 99) { alert('必要経費率을 0~99 사이로 입력해주세요.'); return; }
+    if (isNaN(expenseRate) || expenseRate < 0 || expenseRate > 99) { alert('必要経費率を0~99の間で入力してください。'); return; }
 
     const dependents = parseInt(document.getElementById('dependents').value);
     const prepaid = parseVal(prepaidInput.value);
 
-    // 1. 필요경비
+    // 1. 必要経費
     const expenses = Math.round(totalIncome * expenseRate);
 
-    // 2. 소득금액
+    // 2. 所得金額
     const incomeAmount = totalIncome - expenses;
 
-    // 3. 인적공제
+    // 3. 人的控除
     const personalDeduction = dependents * 1500000;
 
     // 4. 課税標準
     const taxBase = Math.max(0, incomeAmount - personalDeduction);
 
-    // 5. 산출세액
+    // 5. 算出税額
     const calculatedTax = Math.round(taxFromBase(taxBase));
 
-    // 6. 세액공제 (표준세액공제 7万ウォン)
+    // 6. 税額控除（標準税額控除7万ウォン）
     const taxCredit = 70000;
 
     // 7. 決定税額
@@ -529,44 +529,44 @@ function calculate() {
     // 8. 地方所得税
     const localTax = Math.round(determinedTax * 0.1);
 
-    // 9. 총 세금
+    // 9. 総税金
     const totalTax = determinedTax + localTax;
 
-    // 10. 최종 납부/환급 (양수=추가납부, 음수=환급)
+    // 10. 最終納付/還付（正=追加納付、負=還付）
     const finalAmount = totalTax - prepaid;
 
     saved = { totalIncome, expenses, incomeAmount, personalDeduction, taxBase, calculatedTax, taxCredit, determinedTax, localTax, totalTax, prepaid, finalAmount };
 
-    // ── 결과 표시 ──
+    // ── 結果表示 ──
     const hero = document.getElementById('resultHero');
     const isRefund = finalAmount <= 0;
 
-    // 플레이스홀더 숨기기
+    // プレースホルダー非表示
     document.getElementById('resultPlaceholder').style.display = 'none';
 
-    // 환급/납부에 따른 색상
+    // 還付/納付による色分け
     hero.className = 'result-hero show ' + (isRefund ? 'refund' : 'pay');
-    document.getElementById('resultLabel').textContent = isRefund ? '還付予想' : '追加納付 예상';
+    document.getElementById('resultLabel').textContent = isRefund ? '還付予想' : '追加納付予想';
     document.getElementById('resultAmount').textContent = (isRefund ? '-' : '+') + fmt(Math.abs(finalAmount));
     document.getElementById('subDetermined').textContent = fmt(determinedTax) + 'ウォン';
     document.getElementById('subLocal').textContent = fmt(localTax) + 'ウォン';
     document.getElementById('subPrepaid').textContent = fmt(prepaid) + 'ウォン';
 
-    // ── 상세 내역 ──
+    // ── 詳細内訳 ──
     const finalClass = isRefund ? 'result-refund' : 'result-pay';
     const finalSign = isRefund ? '-' : '+';
 
     const steps = [
-        { icon: '1', bg: '#3B82F6', name: '총 수입금액', amount: fmt(totalIncome) + 'ウォン', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '필요경비 (' + (expenseRate * 100).toFixed(1) + '%)', amount: '-' + fmt(expenses) + 'ウォン', cls: 'minus' },
-        { icon: '=', bg: '#059669', name: '소득금액', amount: fmt(incomeAmount) + 'ウォン', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '인적공제 (' + dependents + '명 × 150万ウォン)', amount: '-' + fmt(personalDeduction) + 'ウォン', cls: 'minus' },
+        { icon: '1', bg: '#3B82F6', name: '総収入金額', amount: fmt(totalIncome) + 'ウォン', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '必要経費 (' + (expenseRate * 100).toFixed(1) + '%)', amount: '-' + fmt(expenses) + 'ウォン', cls: 'minus' },
+        { icon: '=', bg: '#059669', name: '所得金額', amount: fmt(incomeAmount) + 'ウォン', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '人的控除 (' + dependents + '名 × 150万ウォン)', amount: '-' + fmt(personalDeduction) + 'ウォン', cls: 'minus' },
         { icon: '=', bg: '#059669', name: '課税標準', amount: fmt(taxBase) + 'ウォン', cls: '' },
-        { icon: '×', bg: '#8B5CF6', name: '산출세액 (税率 적용)', amount: fmt(calculatedTax) + 'ウォン', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '표준세액공제', amount: '-' + fmt(taxCredit) + 'ウォン', cls: 'minus' },
-        { icon: '=', bg: '#EF4444', name: '決定税額 (소득세)', amount: fmt(determinedTax) + 'ウォン', cls: '' },
+        { icon: '×', bg: '#8B5CF6', name: '算出税額（税率適用）', amount: fmt(calculatedTax) + 'ウォン', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '標準税額控除', amount: '-' + fmt(taxCredit) + 'ウォン', cls: 'minus' },
+        { icon: '=', bg: '#EF4444', name: '決定税額（所得税）', amount: fmt(determinedTax) + 'ウォン', cls: '' },
         { icon: '+', bg: '#2563EB', name: '地方所得税 (10%)', amount: '+' + fmt(localTax) + 'ウォン', cls: 'plus' },
-        { icon: '=', bg: '#EF4444', name: '총 決定税額', amount: fmt(totalTax) + 'ウォン', cls: '' },
+        { icon: '=', bg: '#EF4444', name: '総決定税額', amount: fmt(totalTax) + 'ウォン', cls: '' },
         { icon: '-', bg: '#F59E0B', name: '既納付税額', amount: '-' + fmt(prepaid) + 'ウォン', cls: 'minus' },
     ];
 
@@ -581,39 +581,39 @@ function calculate() {
     html += `
         <div class="step-row total-row">
             <div class="step-icon" style="background:${isRefund ? '#2563EB' : '#DC2626'}">★</div>
-            <div class="step-name" style="font-weight:800; color:var(--text-primary);">${isRefund ? '還付予想액' : '追加納付액'}</div>
-            <div class="step-amount ${finalClass}">${finalSign}${fmt(Math.abs(finalAmount))}원</div>
+            <div class="step-name" style="font-weight:800; color:var(--text-primary);">${isRefund ? '還付予想額' : '追加納付額'}</div>
+            <div class="step-amount ${finalClass}">${finalSign}${fmt(Math.abs(finalAmount))}ウォン</div>
         </div>
     `;
 
     document.getElementById('detailRows').innerHTML = html;
     document.getElementById('detailCard').classList.add('show');
 
-    // 카카오 공유 버튼 표시
+    // カカオ共有ボタン表示
     document.getElementById('actionRow').classList.add('show');
     window._shareTax = { isRefund, amount: fmt(Math.abs(finalAmount)) };
 }
 
-// 초기값 설정
+// 初期値設定
 incomeInput.value = (40000000).toLocaleString('ko-KR');
 updatePrepaid();
 </script>
 
-<!-- 카카오 SDK -->
+<!-- カカオSDK -->
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
 <script>
 Kakao.init('051ed8019b76b2127b2da56a27b406f2');
 function shareKakao() {
-    if (!window._shareTax) { alert('먼저 계산을 해주세요.'); return; }
+    if (!window._shareTax) { alert('先に計算してください。'); return; }
     var d = window._shareTax;
     var title = d.isRefund
-        ? '내 종합소득세 還付予想액은 ' + d.amount + '원!'
-        : '내 종합소득세 追加納付액은 ' + d.amount + 'ウォン';
+        ? '私の総合所得税の還付予想額は ' + d.amount + 'ウォン！'
+        : '私の総合所得税の追加納付額は ' + d.amount + 'ウォン';
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
             title: title,
-            description: '2026年 종합소득세 계산기로 환급/납부 여부를 확인해보세요.',
+            description: '2026年総合所得税計算機で還付/納付の有無を確認してみましょう。',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/income-tax', webUrl: 'https://salarykorea.site/income-tax' }
         },

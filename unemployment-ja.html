@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="退職前の月給と雇用保険加入期間から失業給付を推定します。">
-    <meta name="keywords" content="실업급여계산기, 구직급여, 실업급여얼마, 실업급여조건, 고용보험">
+    <meta name="keywords" content="失業手当計算機, 求職手当, 失業手当いくら, 失業手当条件, 雇用保険">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/unemployment">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/unemployment-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/unemployment-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/unemployment-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/unemployment">
-    <meta property="og:title" content="실업급여 계산기 - 얼마나 받을 수 있을까?">
-    <meta property="og:description" content="퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요.">
+    <meta property="og:title" content="失業手当計算機 - いくらもらえる？">
+    <meta property="og:description" content="退職前の月給と加入期間で予想受給額を確認しましょう。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,12 +60,12 @@
         .action-row.show { display: flex; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* 조건 그리드 */
+        /* 条件グリッド */
         .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
         .cond-item { border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); background: var(--surface); }
         .cond-item h3 { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
         .cond-item p { font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
-        /* 수급기간 테이블 */
+        /* 受給期間テーブル */
         .days-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
         .days-table th { background: var(--surface-alt); padding: 10px 12px; text-align: center; font-weight: 700; color: var(--text-secondary); font-size: 0.82rem; }
         .days-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; text-align: center; color: var(--text-primary); }
@@ -82,8 +82,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "실업급여 계산기",
-    "description": "年齢와 근속기간에 따른 실업급여 수령액과 수령기간을 계산합니다.",
+    "name": "失業手当計算機",
+    "description": "年齢と勤続期間に応じた失業手当の受給額と受給期間を計算します。",
     "url": "https://salarykorea.site/unemployment",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -204,23 +204,23 @@
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">年齢</label>
                         <select class="form-select" id="ageGroup">
-                            <option value="under50">50세 미만</option>
-                            <option value="over50">50세 이상</option>
+                            <option value="under50">50歳未満</option>
+                            <option value="over50">50歳以上</option>
                         </select>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">雇用保険加入期間</label>
                         <select class="form-select" id="insurancePeriod">
                             <option value="under1">1年未満</option>
-                            <option value="1to3">1년 이상 ~ 3년 미만</option>
-                            <option value="3to5" selected>3년 이상 ~ 5년 미만</option>
-                            <option value="5to10">5년 이상 ~ 10년 미만</option>
+                            <option value="1to3">1年以上～3年未満</option>
+                            <option value="3to5" selected>3年以上～5年未満</option>
+                            <option value="5to10">5年以上～10年未満</option>
                             <option value="over10">10年以上</option>
                         </select>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">실업급여 計算する</button>
+                <button class="submit-btn" onclick="calculate()">失業手当を計算する</button>
             </div>
 
             <div class="action-row" id="shareBtnWrap">
@@ -233,91 +233,91 @@
 
         <div class="result-col">
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">예상 실업급여 총액</div>
+                <div class="result-hero-label">予想失業手当総額</div>
                 <div class="result-hero-amount" id="totalResult">0</div>
-                <div class="result-hero-unit">원</div>
-                <div class="result-hero-msg" id="cheerMsg">힘내세요! 더 좋은 기회가 기다리고 있어요.</div>
+                <div class="result-hero-unit">ウォン</div>
+                <div class="result-hero-msg" id="cheerMsg">頑張ってください！もっと良い機会が待っています。</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">1일 수급액</div>
+                        <div class="rh-stat-label">1日受給額</div>
                         <div class="rh-stat-val" id="dailyResult">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">수급 기간</div>
+                        <div class="rh-stat-label">受給期間</div>
                         <div class="rh-stat-val" id="daysResult">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">월 환산 수령액</div>
+                        <div class="rh-stat-label">月換算受取額</div>
                         <div class="rh-stat-val" id="monthlyResult">—</div>
                     </div>
                 </div>
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 計算する 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">月給を入力して計算ボタンを押してください</div>
         </div>
 
     </div>
 
-    <!-- 수급 조건 -->
+    <!-- 受給条件 -->
     <div class="info-card">
-        <h2>실업급여 수급 조건</h2>
-        <p>아래 조건을 모두 충족해야 실업급여를 받을 수 있습니다.</p>
+        <h2>失業手当の受給条件</h2>
+        <p>以下の条件をすべて満たす必要があります。</p>
         <div class="cond-grid">
             <div class="cond-item">
                 <h3>雇用保険加入期間</h3>
-                <p>퇴직일 이전 18ヶ月 중 <strong>180일 이상</strong> 고용보험에 가입되어 있어야 합니다.</p>
+                <p>退職日以前18ヶ月のうち<strong>180日以上</strong>雇用保険に加入している必要があります。</p>
             </div>
             <div class="cond-item">
-                <h3>비자발적 퇴직</h3>
-                <p>본인의 의지로 그만둔 경우(자발적 퇴직)에는 원칙적으로 실업급여를 받을 수 없습니다.</p>
+                <h3>非自発的退職</h3>
+                <p>本人の意思で退職した場合（自発的退職）は原則として失業手当を受け取ることができません。</p>
             </div>
             <div class="cond-item">
-                <h3>재취업 의지</h3>
-                <p>적극적으로 재취업 활동을 하고 있어야 합니다. 실업 인정 신청을 주기적으로 해야 합니다.</p>
+                <h3>再就職の意思</h3>
+                <p>積極的に再就職活動を行っている必要があります。失業認定申請を定期的に行う必要があります。</p>
             </div>
             <div class="cond-item">
-                <h3>수급 신청</h3>
-                <p>퇴직 후 <strong>12ヶ月 이내</strong>에 신청해야 합니다. 기간이 지나면 수급 자격이 소멸됩니다.</p>
+                <h3>受給申請</h3>
+                <p>退職後<strong>12ヶ月以内</strong>に申請する必要があります。期間が過ぎると受給資格が消滅します。</p>
             </div>
         </div>
         <div class="highlight-box">
-            <p><strong>자발적 퇴직도 받는 경우:</strong> 임금 체불, 직장 내 괴롭힘, 통근 불가능한 거리로 사업장 이전, 임신·출산·육아, 건강 악화로 인한 퇴직 등 정당한 이직 사유가 있으면 수급 가능합니다.</p>
+            <p><strong>自発的退職でも受給できる場合:</strong> 賃金未払い、職場でのいじめ、通勤不可能な距離への事業場移転、妊娠・出産・育児、健康悪化による退職など正当な離職事由がある場合は受給可能です。</p>
         </div>
     </div>
 
     <!-- 下部情報エリア -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
-            <h2>소정급여일수 (수급 기간)</h2>
-            <p>年齢와 고용보험 가입기간에 따라 받을 수 있는 기간이 달라집니다.</p>
+            <h2>所定給付日数（受給期間）</h2>
+            <p>年齢と雇用保険の加入期間によって受給できる期間が異なります。</p>
             <table class="days-table">
                 <thead>
                     <tr>
-                        <th class="period-col">고용보험 가입기간</th>
-                        <th>50세 미만</th>
-                        <th>50세 이상</th>
+                        <th class="period-col">雇用保険加入期間</th>
+                        <th>50歳未満</th>
+                        <th>50歳以上</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="period-col">1年未満</td><td>120일</td><td>120일</td></tr>
-                    <tr><td class="period-col">1~3年 미만</td><td>150일</td><td>180일</td></tr>
-                    <tr><td class="period-col">3~5年 미만</td><td>180일</td><td>210일</td></tr>
-                    <tr><td class="period-col">5~10年 미만</td><td>210일</td><td>240일</td></tr>
-                    <tr><td class="period-col">10年以上</td><td>240일</td><td>270일</td></tr>
+                    <tr><td class="period-col">1年未満</td><td>120日</td><td>120日</td></tr>
+                    <tr><td class="period-col">1～3年未満</td><td>150日</td><td>180日</td></tr>
+                    <tr><td class="period-col">3～5年未満</td><td>180日</td><td>210日</td></tr>
+                    <tr><td class="period-col">5～10年未満</td><td>210日</td><td>240日</td></tr>
+                    <tr><td class="period-col">10年以上</td><td>240日</td><td>270日</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="info-card" style="margin-bottom:0;">
-            <h2>실업급여 금액 계산 방법</h2>
-            <p>1일 실업급여(구직급여) = 퇴직 전 평균임금의 <strong>60%</strong></p>
+            <h2>失業手当の金額計算方法</h2>
+            <p>1日失業手当（求職手当）= 退職前の平均賃金の<strong>60%</strong></p>
             <ul>
-                <li><strong>1일 상한액:</strong> 68,100ウォン (2026年基準)</li>
-                <li><strong>1일 하한액:</strong> 66,048ウォン (2026年 최저임금 기준)</li>
+                <li><strong>1日上限額:</strong> 68,100ウォン（2026年基準）</li>
+                <li><strong>1日下限額:</strong> 66,048ウォン（2026年最低賃金基準）</li>
             </ul>
-            <p>월급이 아주 높거나 아주 낮더라도 위 상한·하한 범위 안에서 지급됩니다.</p>
+            <p>月給が非常に高くても低くても、上記の上限・下限の範囲内で支給されます。</p>
             <div class="highlight-box">
-                <p><strong>예시:</strong> 월 300万ウォン, 3~5년 가입(50세 미만) → 1일 66,048ウォン × 180일 = <strong>약 1,189万ウォン</strong></p>
+                <p><strong>例:</strong> 月300万ウォン、3～5年加入（50歳未満） → 1日66,048ウォン × 180日 = <strong>約1,189万ウォン</strong></p>
             </div>
         </div>
     </div>
@@ -326,39 +326,39 @@
     <div class="info-card">
         <h2>よくある質問</h2>
         <div class="faq-item">
-            <div class="faq-q">실업급여를 받으려면 조건이 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 전 18ヶ月 중 고용보험 피보험 기간이 180일 이상이어야 하며, 본인 의사와 무관하게 퇴직(권고사직, 계약만료 등)한 경우에 해당됩니다.</div>
+            <div class="faq-q">失業手当を受けるための条件は何ですか？</div>
+            <div class="faq-a">退職前18ヶ月のうち雇用保険の被保険期間が180日以上であり、本人の意思と無関係に退職（勧告退職、契約満了など）した場合に該当します。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">자발적으로 퇴사해도 실업급여를 받을 수 있나요?</div>
-            <div class="faq-a">원칙적으로 자발적 퇴사는 해당되지 않지만, 직장 내 괴롭힘·임금 미지급·근로조건 변경·통근 불가 등 불가피한 사정이 있는 경우 예외적으로 수급이 가능합니다.</div>
+            <div class="faq-q">自発的に退職しても失業手当を受け取れますか？</div>
+            <div class="faq-a">原則として自発的退職は対象外ですが、職場でのいじめ・賃金未払い・勤労条件変更・通勤不可など、やむを得ない事情がある場合は例外的に受給が可能です。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">수급 중 아르바이트를 해도 되나요?</div>
-            <div class="faq-a">가능하지만 반드시 고용센터에 신고해야 합니다. 신고 없이 취업 또는 소득 활동을 하면 부정수급으로 처리됩니다.</div>
+            <div class="faq-q">受給中にアルバイトをしてもいいですか？</div>
+            <div class="faq-a">可能ですが、必ず雇用センターに届け出る必要があります。届出なしに就職や所得活動を行うと不正受給として処理されます。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">실업급여 수급 중 건강보험료는 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 후 지역가입자로 전환되어 건강보험료를 납부해야 합니다. 다만 피부양자 등록 조건이 되는 경우 가족의 직장보험에 포함될 수 있습니다.</div>
+            <div class="faq-q">失業手当受給中の健康保険料はどうなりますか？</div>
+            <div class="faq-a">退職後、地域加入者に転換され健康保険料を納付する必要があります。ただし、被扶養者の登録条件を満たす場合は家族の職場保険に含めることができます。</div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>실업급여 신청 절차와 수급 자격 상세 안내</h2>
-        <p>실업급여는 고용보험에 가입한 근로자가 비자발적으로 이직한 경우, 재취업 활동 기간 동안 생활 안정을 위해 지급되는 급여입니다. 정확한 수급 자격과 신청 절차를 이해하면 실직 시 빠르게 대응하여 경제적 부담을 줄일 수 있습니다.</p>
+        <h2>失業手当の申請手続きと受給資格の詳細案内</h2>
+        <p>失業手当は、雇用保険に加入した労働者が非自発的に離職した場合、再就職活動期間中の生活安定のために支給される給付です。正確な受給資格と申請手続きを理解すれば、失職時に迅速に対応して経済的負担を軽減できます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">수급 자격 요건</h3>
-        <p>실업급여를 받기 위해서는 두 가지 주요 조건을 충족해야 합니다. 첫째, <strong>비자발적 이직</strong>이어야 합니다. 권고사직, 계약 만료, 사업장 이전, 근로조건 위반 등이 이에 해당합니다. 둘째, 이직 전 <strong>18ヶ月 동안 피보험 단위기간이 합산 180일 이상</strong>이어야 합니다. 자발적으로 퇴사한 경우에도 임금 체불, 최저임금 미달, 직장 내 괴롭힘·성희롱, 편도 통근시간 1.5시간 이상의 사업장 이전 등의 사유가 인정되면 수급 자격을 얻을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">受給資格要件</h3>
+        <p>失業手当を受けるためには、2つの主要な条件を満たす必要があります。第一に、<strong>非自発的離職</strong>でなければなりません。勧告退職、契約満了、事業場移転、勤労条件違反などがこれに該当します。第二に、離職前の<strong>18ヶ月間に被保険単位期間が合算180日以上</strong>でなければなりません。自発的に退職した場合でも、賃金未払い、最低賃金未達、職場でのいじめ・セクハラ、片道通勤時間1.5時間以上の事業場移転などの事由が認められれば受給資格を得ることができます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">실업급여 금액과 지급 기간</h3>
-        <p>실업급여 일액은 <strong>퇴직 전 3ヶ月 평균임금의 60%</strong>이며, 1일 상한액은 66,000ウォン, 하한액은 최저임금의 80%입니다. 2026年 최저임금(10,320ウォン) 기준 하한액은 일 66,048ウォン(8시간 기준)으로 상한액과 거의 동일합니다. 소정급여일수는 연령과 雇用保険加入期間에 따라 120일에서 최대 270일까지 차등 적용됩니다. 일반적으로 年齢가 많고 가입 기간이 길수록 더 오래 받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">失業手当の金額と支給期間</h3>
+        <p>失業手当の日額は<strong>退職前3ヶ月の平均賃金の60%</strong>で、1日の上限額は66,000ウォン、下限額は最低賃金の80%です。2026年の最低賃金（10,320ウォン）基準の下限額は日額66,048ウォン（8時間基準）で上限額とほぼ同一です。所定給付日数は年齢と雇用保険加入期間に応じて120日から最大270日まで差等適用されます。一般的に年齢が高く加入期間が長いほど、より長く受給できます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">신청 절차</h3>
-        <p>실업급여 신청은 다음 단계로 진행됩니다. ① <strong>워크넷(work.go.kr) 구직등록</strong>: 이직 후 가능한 빨리 온라인으로 구직 등록합니다. ② <strong>수급자격 인정 신청</strong>: 거주지 관할 고용센터를 방문하여 수급자격 인정 신청서를 제출합니다. ③ <strong>수급자격 교육 이수</strong>: 온라인 또는 대면 교육을 이수합니다. ④ <strong>구직활동 및 실업인정</strong>: 4주마다 2회 이상의 재취업 활동을 증빙하여 실업인정을 받습니다. ⑤ <strong>급여 수령</strong>: 실업인정일로부터 약 2주 후 지정 계좌로 입금됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">申請手続き</h3>
+        <p>失業手当の申請は次の段階で進行します。① <strong>ワークネット（work.go.kr）求職登録</strong>：離職後できるだけ早くオンラインで求職登録します。② <strong>受給資格認定申請</strong>：居住地管轄の雇用センターを訪問して受給資格認定申請書を提出します。③ <strong>受給資格教育の履修</strong>：オンラインまたは対面教育を履修します。④ <strong>求職活動および失業認定</strong>：4週間ごとに2回以上の再就職活動を証明して失業認定を受けます。⑤ <strong>手当受給</strong>：失業認定日から約2週間後に指定口座に入金されます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">실업급여 수급 시 주의사항</h3>
-        <p>실업급여를 받는 동안에도 몇 가지 중요한 규칙을 지켜야 합니다. 구직활동은 4주마다 최소 2회 이상 해야 하며, 입사 지원, 면접 참여, 직업훈련 수강 등이 인정됩니다. 단순히 채용공고를 검색하는 것만으로는 인정되지 않습니다. 또한 실업급여 수급 중 취업하거나 소득이 발생하면 반드시 신고해야 하며, 부정수급 시 지급받은 금액의 최대 5배까지 반환 명령을 받을 수 있습니다. 수급 기간 중 국민연금은 임의가입으로 전환되고, 건강보험은 피부양자 등록 또는 지역가입자로 전환하여 유지해야 합니다. 실업급여와 관련된 자세한 상담은 고용보험 홈페이지(ei.go.kr) 또는 고용센터(1350)를 통해 받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">失業手当受給時の注意事項</h3>
+        <p>失業手当を受給している間も、いくつかの重要なルールを守る必要があります。求職活動は4週間ごとに最低2回以上行う必要があり、入社応募、面接参加、職業訓練受講などが認められます。単に求人広告を検索するだけでは認められません。また、失業手当の受給中に就職したり所得が発生した場合は必ず届け出る必要があり、不正受給の場合は受け取った金額の最大5倍まで返還命令を受ける可能性があります。受給期間中は国民年金が任意加入に切り替わり、健康保険は被扶養者登録または地域加入者に転換して維持する必要があります。失業手当に関する詳しい相談は雇用保険ホームページ（ei.go.kr）または雇用センター（1350）を通じて受けることができます。</p>
     </div>
 
 
@@ -387,7 +387,7 @@ const DAYS_TABLE = {
 
 function calculate() {
     const salary = parseVal(document.getElementById('salaryInput').value);
-    if (!salary) { alert('월 평균 급여를 입력해주세요.'); return; }
+    if (!salary) { alert('月平均給与を入力してください。'); return; }
 
     const ageGroup = document.getElementById('ageGroup').value;
     const period   = document.getElementById('insurancePeriod').value;
@@ -403,14 +403,14 @@ function calculate() {
 
     counter('totalResult', total);
     document.getElementById('dailyResult').textContent   = fmt(dailyBenefit) + 'ウォン';
-    document.getElementById('daysResult').textContent    = days + '일';
+    document.getElementById('daysResult').textContent    = days + '日';
     document.getElementById('monthlyResult').textContent = fmt(dailyBenefit * 30) + 'ウォン';
 
     const msgs = [
-        '힘내세요! 더 좋은 기회가 기다리고 있어요.',
-        '잠깐의 쉼표, 다음 챕터를 준비하는 시간이에요.',
-        '충분히 쉬고 더 좋은 직장으로 도약하세요!',
-        '지금은 힘들어도 반드시 좋은 날이 올 거예요.',
+        '頑張ってください！もっと良い機会が待っています。',
+        '少しの休息、次の章を準備する時間です。',
+        '十分に休んで、もっと良い職場へ飛躍してください！',
+        '今は大変でも必ず良い日が来ます。',
     ];
     document.getElementById('cheerMsg').textContent = msgs[Math.floor(Math.random() * msgs.length)];
 
@@ -440,8 +440,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 실업급여 예상 총액은 ' + (window._shareUnemploy || '—'),
-            description: '실업급여 계산기로 예상 수급액을 확인해보세요',
+            title: '私の失業手当予想総額は ' + (window._shareUnemploy || '—'),
+            description: '失業手当計算機で予想受給額を確認してみましょう',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/unemployment', webUrl: 'https://salarykorea.site/unemployment' }
         },

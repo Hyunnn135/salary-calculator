@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="2026年韓国の年俸別手取り額・控除内訳を一覧で確認できます。">
-    <meta name="keywords" content="年俸별手取り額표, 年俸手取り額, 年俸세후, 2026手取り額">
+    <meta name="keywords" content="年俸別手取り額表, 年俸手取り額, 年俸税後, 2026手取り額">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/salary-table">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/salary-table-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/salary-table-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/salary-table-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/salary-table">
-    <meta property="og:title" content="年俸별 手取り額 표 2026 - 한눈에 보기">
-    <meta property="og:description" content="年俸 2400万ウォン~1億원까지 手取り額을 한눈에 확인하세요.">
+    <meta property="og:title" content="年俸別手取り額表 2026 - 一目で確認">
+    <meta property="og:description" content="年俸2,400万ウォン～1億ウォンまでの手取り額を一目で確認できます。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,13 +22,13 @@
     <link rel="stylesheet" href="common.css">
     <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
     <style>
-        /* 필터 바 */
+        /* フィルターバー */
         .filter-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
         .filter-bar label { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
         .filter-bar select { padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.85rem; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); outline: none; background: var(--surface); transition: border-color 0.15s; }
         .filter-bar select:focus { border-color: var(--accent); }
         .filter-note { font-size: 0.75rem; color: var(--text-tertiary); }
-        /* 테이블 */
+        /* テーブル */
         .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
         table { width: 100%; border-collapse: collapse; font-size: 0.84rem; min-width: 640px; }
         thead th { background: var(--surface-alt); padding: 11px 12px; text-align: right; font-weight: 700; color: var(--text-secondary); border-bottom: 2px solid var(--border); white-space: nowrap; }
@@ -50,8 +50,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "年俸별 手取り額 표",
-    "description": "2026年基準 年俸 2,400万ウォン~2億원까지 手取り額을 한눈에 비교하는 표입니다.",
+    "name": "年俸別手取り額表",
+    "description": "2026年基準 年俸2,400万ウォン～2億ウォンまでの手取り額を一覧で比較する表です。",
     "url": "https://salarykorea.site/salary-table",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -155,17 +155,17 @@
     <div class="filter-bar">
         <label>扶養家族数</label>
         <select id="depSelect" onchange="renderTable()">
-            <option value="1">본인 1人</option>
-            <option value="2">2人 (배우자 등)</option>
+            <option value="1">本人1人</option>
+            <option value="2">2人（配偶者等）</option>
             <option value="3">3人</option>
             <option value="4">4人</option>
         </select>
-        <span class="filter-note">* 비과세 없음 기준 · 扶養家族数 변경 시 所得税 자동 재계산</span>
+        <span class="filter-note">※ 非課税なし基準 · 扶養家族数変更時に所得税自動再計算</span>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <div class="card-title">年俸별 월 手取り額 (세전 → 세후)</div>
+            <div class="card-title">年俸別月額手取り額（税前→税後）</div>
             <div class="card-badge">2026年</div>
         </div>
         <div class="table-wrap">
@@ -173,15 +173,15 @@
                 <thead>
                     <tr>
                         <th>年俸</th>
-                        <th>월 실수령</th>
-                        <th>월급(세전)</th>
+                        <th>月額手取り</th>
+                        <th>月給（税前）</th>
                         <th>国民年金</th>
                         <th>健康保険</th>
                         <th>長期療養</th>
                         <th>雇用保険</th>
                         <th>所得税</th>
-                        <th>지방세</th>
-                        <th>총 공제</th>
+                        <th>地方税</th>
+                        <th>総控除</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
@@ -192,103 +192,103 @@
     <!-- 下部情報エリア -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
-            <h2>계산 기준 안내</h2>
-            <p>위 표는 2026年基準 세율을 적용한 <strong>근사값</strong>입니다. 실제 수령액은 회사 규정, 비과세 항목, 추가 공제 여부에 따라 다를 수 있습니다.</p>
+            <h2>計算基準のご案内</h2>
+            <p>この表は2026年基準の税率を適用した<strong>近似値</strong>です。実際の受取額は会社の規定、非課税項目、追加控除の有無によって異なる場合があります。</p>
             <p>
-                <strong>적용 세율 (2026年)</strong><br>
-                国民年金 4.75% (상한 월 637万ウォン) · 健康保険 3.595% · 長期療養 健康保険료의 13.14% · 雇用保険 0.9%
+                <strong>適用税率（2026年）</strong><br>
+                国民年金4.75%（上限月637万ウォン）· 健康保険3.595% · 長期療養 健康保険料の13.14% · 雇用保険0.9%
             </p>
             <div class="tip-box">
-                <p>비과세 항목(식대, 교통비 등)이 있으면 手取り額이 더 높아집니다. 정확한 계산은 <a href="index.html">年俸 手取り額 계산기</a>를 이용하세요.</p>
+                <p>非課税項目（食費、交通費等）がある場合、手取り額はさらに高くなります。正確な計算は<a href="ja.html">年俸手取り額計算機</a>をご利用ください。</p>
             </div>
         </div>
 
         <div class="info-card" style="margin-bottom:0;">
             <h2>よくある質問</h2>
             <div class="faq-item">
-                <div class="faq-q">표의 手取り額은 어떤 기준으로 계산되나요?</div>
-                <div class="faq-a">부양가족 1인(본인), 비과세 없음 기준으로 계산된 값입니다. 부양가족이 더 있거나 비과세 항목이 있으면 手取り額이 더 높아집니다.</div>
+                <div class="faq-q">表の手取り額はどのような基準で計算されていますか？</div>
+                <div class="faq-a">扶養家族1人（本人）、非課税なし基準で計算された値です。扶養家族が多い場合や非課税項目がある場合、手取り額はさらに高くなります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">실제 월급명세서와 금액이 다른 이유는?</div>
-                <div class="faq-a">비과세 항목(식대·교통비), 扶養家族数, 추가 공제 항목에 따라 차이가 납니다.</div>
+                <div class="faq-q">実際の給与明細と金額が異なる理由は？</div>
+                <div class="faq-a">非課税項目（食費・交通費）、扶養家族数、追加控除項目によって差が生じます。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">年俸이 같아도 手取り額이 다를 수 있나요?</div>
-                <div class="faq-a">네. 扶養家族数, 비과세 금액, 추가 공제 여부에 따라 동일 年俸이라도 手取り額이 달라집니다.</div>
+                <div class="faq-q">年俸が同じでも手取り額が異なることがありますか？</div>
+                <div class="faq-a">はい。扶養家族数、非課税金額、追加控除の有無によって同一年俸でも手取り額が異なります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">年俸 1億 이상은 세금이 얼마나 되나요?</div>
-                <div class="faq-a">年俸 1億 기준 월 실수령은 약 640万ウォン 수준으로, 월급의 약 77% 정도입니다.</div>
+                <div class="faq-q">年俸1億ウォン以上の場合、税金はどのくらいですか？</div>
+                <div class="faq-a">年俸1億ウォン基準で月額手取りは約640万ウォン程度で、月給の約77%です。</div>
             </div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>年俸 구간별 手取り額 특징 분석</h2>
-        <p>年俸이 높아질수록 실수령 비율은 줄어듭니다. 이는 우리나라의 所得税 누진세 구조와 4대보험료 증가 때문입니다. 아래에서 각 年俸 구간별 특징을 살펴보면, 年俸 인상이나 이직 시 실질적인 수입 변화를 예측하는 데 도움이 됩니다.</p>
+        <h2>年俸区間別手取り額の特徴分析</h2>
+        <p>年俸が高くなるほど手取り比率は減少します。これは韓国の所得税累進課税構造と4大保険料の増加によるものです。以下で各年俸区間別の特徴を見ると、年俸昇給や転職時の実質的な収入変化を予測するのに役立ちます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸 2,400만~3,000万ウォン 구간</h3>
-        <p>이 구간에서는 공제율이 약 12~14%로 실수령 비율이 가장 높습니다. 所得税율 6% 구간에 해당하여 세금 부담이 상대적으로 적고, 4대보험료도 소득에 비례하므로 부담이 크지 않습니다. 2026年 최저임금 기준 年俸(약 2,588万ウォン)이 이 구간에 포함됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸2,400万～3,000万ウォン区間</h3>
+        <p>この区間では控除率が約12～14%で手取り比率が最も高いです。所得税率6%区間に該当し税負担が比較的少なく、4大保険料も所得に比例するため負担が大きくありません。2026年最低賃金基準の年俸（約2,588万ウォン）がこの区間に含まれます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸 3,500만~5,000万ウォン 구간</h3>
-        <p>所得税율이 6% 구간에서 15% 구간으로 넘어가는 경계 지점입니다. 공제율은 약 15~18% 수준이며, 이 구간부터 所得税 부담을 체감하기 시작합니다. 年俸 4,000万ウォン 기준 월 手取り額은 약 284万ウォン 내외로, 세전 월급(약 333万ウォン) 대비 약 85%를 수령하게 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸3,500万～5,000万ウォン区間</h3>
+        <p>所得税率が6%区間から15%区間に移行する境界地点です。控除率は約15～18%水準で、この区間から所得税の負担を実感し始めます。年俸4,000万ウォン基準の月額手取り額は約284万ウォン前後で、税前月給（約333万ウォン）対比約85%を受け取ることになります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸 6,000만~8,000万ウォン 구간</h3>
-        <p>공제율이 18~20%에 달하며, 健康保険료 부담 증가를 실질적으로 체감하는 구간입니다. 所得税율 24% 구간에 진입하게 되어 세금 부담이 뚜렷해집니다. 年俸 인상분 대비 실수령 증가분의 격차가 커지기 시작하는 구간이기도 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸6,000万～8,000万ウォン区間</h3>
+        <p>控除率が18～20%に達し、健康保険料の負担増加を実質的に体感する区間です。所得税率24%区間に進入し税負担が顕著になります。年俸昇給分に対する手取り増加分の格差が大きくなり始める区間でもあります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸 1億원 이상 구간</h3>
-        <p>所得税율 35% 이상이 적용되며, 공제율은 22~28%까지 올라갑니다. 年俸 1億원의 월 手取り額은 약 652万ウォン 내외로 세전 월급(약 833万ウォン)의 약 78%에 해당합니다. 年俸 2億원의 경우 공제율이 약 28%에 달해 실수령 비율이 더욱 낮아집니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸1億ウォン以上区間</h3>
+        <p>所得税率35%以上が適用され、控除率は22～28%まで上がります。年俸1億ウォンの月額手取り額は約652万ウォン前後で税前月給（約833万ウォン）の約78%に該当します。年俸2億ウォンの場合、控除率が約28%に達し手取り比率がさらに低くなります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">비과세 항목을 활용한 절세 전략</h3>
-        <p>年俸이 높을수록 비과세 항목의 절세 효과가 커집니다. 식대(월 20万ウォン), 자가운전보조금(월 20万ウォン), 출산·보육수당(월 20万ウォン) 등의 비과세 수당을 최대한 활용하면 과세표준이 낮아져 所得税를 절감할 수 있습니다. 年俸 협상 시에는 비과세 항목을 별도로 구성할 수 있는지 회사에 확인해 보는 것이 좋습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">非課税項目を活用した節税戦略</h3>
+        <p>年俸が高いほど非課税項目の節税効果が大きくなります。食費（月20万ウォン）、自家用車運転補助金（月20万ウォン）、出産・育児手当（月20万ウォン）などの非課税手当を最大限活用すると課税標準が下がり所得税を節減できます。年俸交渉時には非課税項目を別途設定できるか会社に確認してみることをお勧めします。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸 인상 시 手取り額 변화</h3>
-        <p>年俸이 인상되면 手取り額도 증가하지만, 인상률만큼 手取り額이 오르지는 않습니다. 예를 들어 年俸이 4,000万ウォン에서 5,000万ウォン으로 25% 인상되어도 手取り額은 약 20~22% 정도만 증가합니다. 이는 所得税 누진 구간이 올라가고, 소득에 비례하는 4대보험료도 함께 증가하기 때문입니다. 이직이나 年俸 협상 시에는 세전 年俸뿐만 아니라 手取り額 기준으로 비교하는 것이 실질적인 생활 수준 변화를 정확히 파악하는 데 도움이 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">年俸昇給時の手取り額変化</h3>
+        <p>年俸が昇給すると手取り額も増加しますが、昇給率ほど手取り額は上がりません。例えば年俸が4,000万ウォンから5,000万ウォンに25%昇給しても手取り額は約20～22%程度しか増加しません。これは所得税の累進区間が上がり、所得に比例する4大保険料も一緒に増加するためです。転職や年俸交渉時には税前年俸だけでなく手取り額基準で比較することが実質的な生活水準の変化を正確に把握するのに役立ちます。</p>
     </div>
 
-    <!-- 직종별 年俸 -->
+    <!-- 職種別年俸 -->
     <div class="card">
         <div class="card-header">
-            <div class="card-title">직종별 年俸 手取り額</div>
+            <div class="card-title">職種別年俸手取り額</div>
             <div class="card-badge">2026年</div>
         </div>
-        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">내 직업의 평균 年俸과 경력별 手取り額을 확인하세요.</p>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">自分の職業の平均年俸とキャリア別手取り額を確認してください。</p>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-            <a href="job-nurse.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">간호사</a>
-            <a href="job-teacher.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">교사</a>
-            <a href="job-police.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">경찰</a>
-            <a href="job-firefighter.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">소방관</a>
-            <a href="job-civil-servant-9.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">공무원 9급</a>
-            <a href="job-civil-servant-7.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">공무원 7급</a>
-            <a href="job-pharmacist.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">약사</a>
-            <a href="job-developer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">IT 개발자</a>
-            <a href="job-designer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">디자이너</a>
-            <a href="job-accountant.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">회계사</a>
-            <a href="job-lawyer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">변호사</a>
-            <a href="job-bank-clerk.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">은행원</a>
-            <a href="job-delivery-rider.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">배달 라이더</a>
-            <a href="job-soldier.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">직업군인</a>
+            <a href="job-nurse.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">看護師</a>
+            <a href="job-teacher.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">教師</a>
+            <a href="job-police.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">警察</a>
+            <a href="job-firefighter.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">消防士</a>
+            <a href="job-civil-servant-9.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">公務員9級</a>
+            <a href="job-civil-servant-7.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">公務員7級</a>
+            <a href="job-pharmacist.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">薬剤師</a>
+            <a href="job-developer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">ITエンジニア</a>
+            <a href="job-designer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">デザイナー</a>
+            <a href="job-accountant.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">会計士</a>
+            <a href="job-lawyer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">弁護士</a>
+            <a href="job-bank-clerk.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">銀行員</a>
+            <a href="job-delivery-rider.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">配達ライダー</a>
+            <a href="job-soldier.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">職業軍人</a>
         </div>
     </div>
 
-    <!-- 기업별 年俸 -->
+    <!-- 企業別年俸 -->
     <div class="card">
         <div class="card-header">
-            <div class="card-title">기업별 年俸 手取り額</div>
+            <div class="card-title">企業別年俸手取り額</div>
             <div class="card-badge">2026年</div>
         </div>
-        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">주요 대기업의 직급별 年俸과 手取り額을 확인하세요.</p>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">主要大企業の職級別年俸と手取り額を確認してください。</p>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-            <a href="company-samsung.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">삼성전자</a>
-            <a href="company-hyundai-motor.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">현대자동차</a>
-            <a href="company-sk-hynix.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">SK하이닉스</a>
-            <a href="company-naver.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">네이버</a>
-            <a href="company-kakao.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">카카오</a>
-            <a href="company-coupang.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">쿠팡</a>
-            <a href="company-lg-energy.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">LG에너지솔루션</a>
-            <a href="company-posco.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">포스코</a>
+            <a href="company-samsung.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">サムスン電子</a>
+            <a href="company-hyundai-motor.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">現代自動車</a>
+            <a href="company-sk-hynix.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">SKハイニックス</a>
+            <a href="company-naver.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">NAVER</a>
+            <a href="company-kakao.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Kakao</a>
+            <a href="company-coupang.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Coupang</a>
+            <a href="company-lg-energy.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">LGエネルギーソリューション</a>
+            <a href="company-posco.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">POSCO</a>
         </div>
     </div>
 
@@ -368,7 +368,7 @@ function renderTable() {
         if (isPopular) tr.className = 'highlight-row';
 
         let salLabel;
-        if (sal >= 10000) salLabel = `${sal / 10000}億원`;
+        if (sal >= 10000) salLabel = `${sal / 10000}億ウォン`;
         else salLabel = `${sal}万ウォン`;
 
         tr.innerHTML = `

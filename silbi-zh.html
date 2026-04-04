@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="计算韩国实费保险的自负额。">
-    <meta name="keywords" content="실비보험계산기, 실손보험자기부담금, 실비세대별비교, 실비보험보장금액, 실손보험계산">
+    <meta name="keywords" content="实费保险计算器, 实损保险自付额, 实费各世代对比, 实费保险保障金额, 实损保险计算">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/silbi">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/silbi-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/silbi-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/silbi-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/silbi">
-    <meta property="og:title" content="실비보험 자기부담금 계산기 - 내 실비 얼마나 보장될까?">
-    <meta property="og:description" content="1~4세대 실손보험 자기부담금 자동 계산. 세대별 보장 금액을 한눈에 비교하세요.">
+    <meta property="og:title" content="实费保险自付额计算器 - 我的实费保险能报销多少？">
+    <meta property="og:description" content="第1~4世代实损保险自付额自动计算。一目了然对比各世代保障金额。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +56,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 세대별 비교 테이블 */
+        /* 各世代对比表格 */
         .compare-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .compare-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 12px; }
@@ -83,8 +83,8 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "실비보험 자기부담금 계산기",
-        "description": "1~4세대 실손보험 자기부담금과 保险保障额을 자동 계산합니다.",
+        "name": "实费保险自付额计算器",
+        "description": "自动计算第1~4世代实损保险自付额和保险保障额。",
         "url": "https://salarykorea.site/silbi",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "All",
@@ -180,45 +180,45 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">진료 정보 입력</div>
-                    <div class="card-badge">실손보험</div>
+                    <div class="card-title">诊疗信息输入</div>
+                    <div class="card-badge">实损保险</div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">保险世代</label>
                     <select class="form-select" id="generation">
-                        <option value="1">1세대 (2009.10 이전 가입)</option>
-                        <option value="2">2세대 (2009.10 ~ 2017.4)</option>
-                        <option value="3">3세대 (2017.4 ~ 2021.7)</option>
-                        <option value="4" selected>4세대 (2021.7 이후 가입)</option>
+                        <option value="1">第1世代（2009.10之前投保）</option>
+                        <option value="2">第2世代（2009.10 ~ 2017.4）</option>
+                        <option value="3">第3世代（2017.4 ~ 2021.7）</option>
+                        <option value="4" selected>第4世代（2021.7之后投保）</option>
                     </select>
                 </div>
 
                 <div class="help-text" id="genHelp">
-                    <strong>4세대 실비:</strong> 급여 본인부담금의 20%, 비급여 30% 자기부담. 비급여 사용량에 따라 할인·할증 적용.
+                    <strong>第4世代实费：</strong>保险项目自付额的20%、非保险项目30%自付。根据非保险项目使用量适用折扣·加价。
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">诊疗类型</label>
                     <select class="form-select" id="treatType">
                         <option value="inpatient">住院</option>
-                        <option value="outpatient" selected>门诊 (통원)</option>
-                        <option value="pharmacy">약국</option>
+                        <option value="outpatient" selected>门诊 (门诊)</option>
+                        <option value="pharmacy">药房</option>
                     </select>
                 </div>
 
-                <div class="section-divider">── 진료비 ──</div>
+                <div class="section-divider">── 诊疗费 ──</div>
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">医保项目 <span class="form-label-sub">건강보험 적용</span></label>
+                        <label class="form-label">医保项目 <span class="form-label-sub">健康保险适用</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="coveredCost" placeholder="100,000" value="100,000">
                             <span class="form-unit">韩元</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">非医保项目 <span class="form-label-sub">전액 본인부담</span></label>
+                        <label class="form-label">非医保项目 <span class="form-label-sub">全额自付</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="uncoveredCost" placeholder="50,000" value="50,000">
                             <span class="form-unit">韩元</span>
@@ -226,7 +226,7 @@
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">자기부담금 计算</button>
+                <button class="submit-btn" onclick="calculate()">计算自付额</button>
             </div>
 
             <div class="action-row">
@@ -245,9 +245,9 @@
             <div id="captureArea" style="display:none;">
 
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">내 자기부담금</div>
+                <div class="result-hero-label">我的自付额</div>
                 <div class="result-hero-amount" id="selfPay">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">韩元</div>
                 <div class="result-hero-msg" id="cheerMsg"></div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
@@ -255,25 +255,25 @@
                         <div class="rh-stat-val" id="statCoverage">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">보장률</div>
+                        <div class="rh-stat-label">保障率</div>
                         <div class="rh-stat-val" id="statRate">—</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 세대별 비교 -->
+            <!-- 各世代比较 -->
             <div class="compare-card" id="compareCard">
                 <div class="card-header">
-                    <div class="card-title">세대별 자기부담금 비교</div>
+                    <div class="card-title">各世代自付额对比</div>
                 </div>
                 <table class="cmp-table">
                     <thead>
                         <tr>
-                            <th>구분</th>
-                            <th><span class="gen-badge gen-1">1세대</span></th>
-                            <th><span class="gen-badge gen-2">2세대</span></th>
-                            <th><span class="gen-badge gen-3">3세대</span></th>
-                            <th><span class="gen-badge gen-4">4세대</span></th>
+                            <th>区分</th>
+                            <th><span class="gen-badge gen-1">第1世代</span></th>
+                            <th><span class="gen-badge gen-2">第2世代</span></th>
+                            <th><span class="gen-badge gen-3">第3世代</span></th>
+                            <th><span class="gen-badge gen-4">第4世代</span></th>
                         </tr>
                     </thead>
                     <tbody id="compareBody"></tbody>
@@ -282,31 +282,31 @@
 
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">진료비를 입력하고 计算 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">请输入诊疗费后点击计算按钮</div>
         </div>
     </div>
 
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>保险世代별 차이</h2>
-            <p><strong>1세대(2009년 이전):</strong> 급여 10%, 비급여 거의 전액 보장. 가장 유리하지만 보험료가 계속 올라갈 수 있습니다.</p>
-            <p><strong>2세대(2009~2017):</strong> 급여 10%, 비급여 20% 자기부담. 1세대보다 보장이 줄었지만 여전히 양호합니다.</p>
-            <p><strong>3세대(2017~2021):</strong> 급여 20%, 비급여 특약 분리. 비급여 자기부담이 30%로 늘어났습니다.</p>
-            <p><strong>4세대(2021년 이후):</strong> 급여 20%, 비급여 30% + 비급여 관리제도(할인·할증). 보험료는 가장 저렴하나 자기부담이 큽니다.</p>
+            <h2>各保险世代差异</h2>
+            <p><strong>第1世代（2009年之前）：</strong>保险项目10%、非保险项目几乎全额保障。最优惠但保费可能持续上涨。</p>
+            <p><strong>第2世代（2009~2017）：</strong>保险项目10%、非保险项目20%自付。保障比第1世代减少但仍然不错。</p>
+            <p><strong>第3世代（2017~2021）：</strong>保险项目20%、非保险项目特约分离。非保险项目自付比例增至30%。</p>
+            <p><strong>第4世代（2021年之后）：</strong>保险项目20%、非保险项目30% + 非保险项目管理制度（折扣·加价）。保费最低但自付额较大。</p>
         </div>
         <div class="info-card">
             <h2>常见问题</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 내 실비가 몇 세대인지 어떻게 알 수 있나요?</div>
-                <div class="faq-a">A. 보험증권의 가입일을 확인하세요. 2009.10 이전=1세대, 2017.4 이전=2세대, 2021.7 이전=3세대, 이후=4세대입니다.</div>
+                <div class="faq-q">Q. 如何知道我的实费保险属于第几世代？</div>
+                <div class="faq-a">A. 请确认保险证书上的投保日。2009.10之前=第1世代，2017.4之前=第2世代，2021.7之前=第3世代，之后=第4世代。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 비급여란 무엇인가요?</div>
-                <div class="faq-a">A. 건강보험이 적용되지 않는 진료 항목입니다. 도수치료, MRI, 상급병실료, 비급여 주사 등이 대표적입니다.</div>
+                <div class="faq-q">Q. 什么是非保险项目？</div>
+                <div class="faq-a">A. 是健康保险不适用的诊疗项目。手法治疗、MRI、高级病房费、非保险注射等是典型的非保险项目。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 4세대 비급여 할인·할증이란?</div>
-                <div class="faq-a">A. 직전 1년간 비급여 사용 금액에 따라 다음 해 보험료가 할인(적게 쓰면)되거나 할증(많이 쓰면)됩니다.</div>
+                <div class="faq-q">Q. 第4世代非保险项目折扣·加价是什么？</div>
+                <div class="faq-a">A. 根据前一年非保险项目使用金额，次年保费会折扣（使用少时）或加价（使用多时）。</div>
             </div>
         </div>
     </div>
@@ -342,13 +342,13 @@ document.querySelectorAll('.form-input').forEach(el => {
     });
 });
 
-// 세대 도움말 업데이트
+// 世代说明更新
 document.getElementById('generation').addEventListener('change', function() {
     const helps = {
-        '1': '<strong>1세대 실비:</strong> 급여 본인부담금의 10%, 비급여 거의 전액 보장. 보장 범위가 가장 넓습니다.',
-        '2': '<strong>2세대 실비:</strong> 급여 본인부담금의 10%, 비급여 20% 자기부담. 门诊는 1~1.5万韩元 공제 후 보장.',
-        '3': '<strong>3세대 실비:</strong> 급여 20% 자기부담, 비급여 특약 분리 30% 자기부담. 연 5천万韩元 보장 한도.',
-        '4': '<strong>4세대 실비:</strong> 급여 본인부담금의 20%, 비급여 30% 자기부담. 비급여 사용량에 따라 할인·할증 적용.'
+        '1': '<strong>第1世代实费：</strong>保险项目自付额的10%、非保险项目几乎全额保障。保障范围最广。',
+        '2': '<strong>第2世代实费：</strong>保险项目自付额的10%、非保险项目20%自付。门诊扣除1~1.5万韩元后保障。',
+        '3': '<strong>第3世代实费：</strong>保险项目20%自付、非保险项目特约分离30%自付。年保障限额5千万韩元。',
+        '4': '<strong>第4世代实费：</strong>保险项目自付额的20%、非保险项目30%自付。根据非保险项目使用量适用折扣·加价。'
     };
     document.getElementById('genHelp').innerHTML = helps[this.value];
 });
@@ -365,7 +365,7 @@ function counter(elId, target) {
     requestAnimationFrame(step);
 }
 
-// 세대별 계산 함수
+// 各世代计算函数
 function calcByGen(gen, type, covered, uncovered) {
     let selfCovered = 0, selfUncovered = 0;
 
@@ -415,7 +415,7 @@ function calcByGen(gen, type, covered, uncovered) {
         }
     }
 
-    // 자기부담금은 실제 비용을 초과할 수 없음
+    // 自付额不能超过实际费用
     selfCovered = Math.min(selfCovered, covered);
     selfUncovered = Math.min(selfUncovered, uncovered);
 
@@ -434,7 +434,7 @@ function calculate() {
     const uncovered = parse('uncoveredCost');
     const total = covered + uncovered;
 
-    if (total <= 0) { alert('진료비를 입력해 주세요.'); return; }
+    if (total <= 0) { alert('请输入诊疗费。'); return; }
 
     const result = calcByGen(gen, type, covered, uncovered);
 
@@ -447,48 +447,48 @@ function calculate() {
     document.getElementById('statRate').textContent = total > 0 ? ((result.coverage / total) * 100).toFixed(1) + '%' : '0%';
 
     const rate = total > 0 ? (result.coverage / total) * 100 : 0;
-    if (rate >= 80) document.getElementById('cheerMsg').textContent = '보장률 ' + rate.toFixed(0) + '%! 든든한 실비네요';
-    else if (rate >= 60) document.getElementById('cheerMsg').textContent = '보장률 ' + rate.toFixed(0) + '%. 非医保项目에 주의하세요';
-    else document.getElementById('cheerMsg').textContent = '자기부담이 좀 높네요. 실비 전환을 고려해보세요';
+    if (rate >= 80) document.getElementById('cheerMsg').textContent = '保障率' + rate.toFixed(0) + '%！保障很给力';
+    else if (rate >= 60) document.getElementById('cheerMsg').textContent = '保障率' + rate.toFixed(0) + '%。请注意非保险项目';
+    else document.getElementById('cheerMsg').textContent = '自付额偏高，建议考虑转换实费保险';
 
-    // 세대별 비교 테이블
-    const typeLabel = { inpatient: '住院', outpatient: '门诊', pharmacy: '약국' };
+    // 各世代对比表格
+    const typeLabel = { inpatient: '住院', outpatient: '门诊', pharmacy: '药房' };
     const results = [1,2,3,4].map(g => calcByGen(g, type, covered, uncovered));
 
     let tbody = '';
-    // 급여 자기부담
+    // 保险项目自付额
     tbody += '<tr>';
-    tbody += '<td style="font-weight:600;text-align:left;">급여 자기부담</td>';
+    tbody += '<td style="font-weight:600;text-align:left;">保险项目自付额</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.selfCovered)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.selfCovered)}韩元</td>`;
     });
     tbody += '</tr>';
 
-    // 비급여 자기부담
+    // 非保险项目自付额
     tbody += '<tr>';
-    tbody += '<td style="font-weight:600;text-align:left;">비급여 자기부담</td>';
+    tbody += '<td style="font-weight:600;text-align:left;">非保险项目自付额</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.selfUncovered)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.selfUncovered)}韩元</td>`;
     });
     tbody += '</tr>';
 
-    // 총 자기부담
+    // 总自付额
     tbody += '<tr style="border-top:2px solid var(--text-primary);font-weight:800;">';
-    tbody += '<td style="font-weight:800;text-align:left;">총 자기부담</td>';
+    tbody += '<td style="font-weight:800;text-align:left;">总自付额</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.totalSelf)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.totalSelf)}韩元</td>`;
     });
     tbody += '</tr>';
 
-    // 보험 보장
+    // 保险保障
     tbody += '<tr>';
-    tbody += '<td style="font-weight:600;text-align:left;">보험 보장</td>';
+    tbody += '<td style="font-weight:600;text-align:left;">保险保障</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.coverage)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.coverage)}韩元</td>`;
     });
     tbody += '</tr>';
 
@@ -500,8 +500,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '실비보험 자기부담금 계산기 - 월급연구소',
-            description: '내 실비보험 보장 금액을 세대별로 비교하세요',
+            title: '实费保险自付额计算器 - 工资研究所',
+            description: '按各世代对比我的实费保险保障金额',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' }
         },
@@ -516,7 +516,7 @@ function saveImage() {
         scale: 2, backgroundColor: '#F7F8FA', useCORS: true
     }).then(canvas => {
         const a = document.createElement('a');
-        a.download = '실비보험_자기부담금_계산결과.png';
+        a.download = '实费保险_自付额_计算结果.png';
         a.href = canvas.toDataURL('image/png');
         a.click();
         btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';

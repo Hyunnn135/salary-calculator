@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="時給と勤務時間から韓国の週休手当を自動計算します。">
-    <meta name="keywords" content="주휴수당계산기, 주휴수당, 알바주휴수당, 주휴수당계산, 2026주휴수당">
+    <meta name="keywords" content="週休手当計算機, 週休手当, バイト週休手当, 週休手当計算, 2026週休手当">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/holiday-pay">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/holiday-pay-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/holiday-pay-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/holiday-pay-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/holiday-pay">
-    <meta property="og:title" content="주휴수당 계산기 2026 - 알바 주휴수당 자동계산">
-    <meta property="og:description" content="時給과 근무시간만 입력하면 주휴수당을 바로 계산해드립니다.">
+    <meta property="og:title" content="週休手当計算機 2026 - アルバイト週休手当自動計算">
+    <meta property="og:description" content="時給と勤務時間を入力するだけで週休手当を即座に計算します。">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ フォーム要素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -37,16 +37,16 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 슬라이더 */
+        /* スライダー */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 結果エリア ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* メイン結果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -62,7 +62,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 공제 상세 카드 */
+        /* 控除詳細カード */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -76,7 +76,7 @@
         .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
         .b-total-label { font-size: 0.88rem; font-weight: 700; }
         .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
-        /* ══ 저장 / 공유 버튼 ══ */
+        /* ══ 保存/共有ボタン ══ */
         .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
         .action-row.show { display: flex; }
         .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -84,7 +84,7 @@
         .save-btn.loading { opacity: 0.5; cursor: wait; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 연봉 인상 시뮬레이터 ══ */
+        /* ══ 年俸昇給シミュレーター ══ */
         .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -101,7 +101,7 @@
         .cmp-table .green { color: #059669; font-weight: 700; }
         .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
-        /* ══ 페이지 고유: 조건 그리드 ══ */
+        /* ══ ページ固有：条件グリッド ══ */
         .condition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
         .condition-box { border-radius: 10px; padding: 16px; border: 1.5px solid; }
         .condition-box.fail { border-color: #FECACA; background: #FEF2F2; }
@@ -109,10 +109,10 @@
         .condition-box.pass { border-color: #BBF7D0; background: #F0FDF4; }
         .condition-box.pass .c-title { color: #16A34A; font-size: 0.85rem; font-weight: 800; margin-bottom: 6px; }
         .condition-box p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
-        /* 수식 박스 */
+        /* 数式ボックス */
         .formula-box { background: var(--surface-alt); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
         .formula-box p { font-size: 0.85rem; color: var(--text-primary); line-height: 1.9; margin: 0; }
-        /* 정보 테이블 */
+        /* 情報テーブル */
         .info-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 12px; }
         .info-table th { background: var(--surface-alt); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
         .info-table td { padding: 12px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
@@ -124,8 +124,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "주휴수당 계산기",
-    "description": "주 근무시간에 따른 주휴수당을 계산합니다. 時給별, 근무시간별 주휴수당과 실질 時給을 확인하세요.",
+    "name": "週休手当計算機",
+    "description": "週勤務時間に基づく週休手当を計算します。時給別、勤務時間別の週休手当と実質時給を確認できます。",
     "url": "https://salarykorea.site/holiday-pay",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -276,7 +276,7 @@
                 <button class="submit-btn" onclick="calculate()">計算する</button>
             </div>
 
-            <!-- 공유 버튼 -->
+            <!-- 共有ボタン -->
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
@@ -323,115 +323,115 @@
         <!-- 週休手当とは？ -->
         <div class="info-card">
             <h2>週休手当とは？</h2>
-            <p>주휴수당은 <strong>일주일에 15時間 이상 일하는 근로자</strong>가 소정 근무일을 모두 출근하면 받는 <strong>하루치 유급 휴일 수당</strong>입니다. 정규직, 계약직, 아르바이트 구분 없이 동일하게 적용됩니다.</p>
+            <p>週休手当は、<strong>1週間に15時間以上働く労働者</strong>が所定勤務日をすべて出勤した場合に受け取る<strong>1日分の有給休日手当</strong>です。正社員、契約社員、アルバイトの区別なく同様に適用されます。</p>
             <div class="condition-grid">
                 <div class="condition-box fail">
-                    <div class="c-title">주휴수당 없음</div>
-                    <p>주 15時間 미만 근무<br>소정 근무일 결근 시</p>
+                    <div class="c-title">週休手当なし</div>
+                    <p>週15時間未満勤務<br>所定勤務日欠勤時</p>
                 </div>
                 <div class="condition-box pass">
-                    <div class="c-title">주휴수당 발생</div>
-                    <p>주 15時間 이상 근무<br>소정 근무일 전부 출근</p>
+                    <div class="c-title">週休手当発生</div>
+                    <p>週15時間以上勤務<br>所定勤務日全部出勤</p>
                 </div>
             </div>
             <div class="formula-box">
-                <p><strong>주휴수당 계산식</strong><br>
-                주 40시간 미만: 時給 x (週勤務時間 / 40) x 8<br>
-                주 40시간 이상: 時給 x 8時間 (최대값 고정)</p>
+                <p><strong>週休手当計算式</strong><br>
+                週40時間未満：時給 × (週勤務時間 / 40) × 8<br>
+                週40時間以上：時給 × 8時間（最大値固定）</p>
             </div>
         </div>
 
-        <!-- 계산 예시 -->
+        <!-- 計算例 -->
         <div class="info-card">
             <h2>週休手当の計算例</h2>
             <table class="info-table">
                 <thead>
-                    <tr><th>勤務条件</th><th>週勤務時間</th><th>주휴수당</th><th>週給合計</th></tr>
+                    <tr><th>勤務条件</th><th>週勤務時間</th><th>週休手当</th><th>週給合計</th></tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>최저時給 週3日 6時間</td>
+                        <td>最低時給 週3日 6時間</td>
                         <td>18時間</td>
                         <td class="hl">37,152ウォン</td>
                         <td>222,912ウォン</td>
                     </tr>
                     <tr>
-                        <td>최저時給 週4日 8時間</td>
-                        <td>32시간</td>
+                        <td>最低時給 週4日 8時間</td>
+                        <td>32時間</td>
                         <td class="hl">66,048ウォン</td>
                         <td>396,288ウォン</td>
                     </tr>
                     <tr>
-                        <td>최저時給 週5日 8時間</td>
-                        <td>40시간</td>
+                        <td>最低時給 週5日 8時間</td>
+                        <td>40時間</td>
                         <td class="hl">82,560ウォン</td>
                         <td>495,360ウォン</td>
                     </tr>
                     <tr>
                         <td>時給 12,000ウォン 週5日 8時間</td>
-                        <td>40시간</td>
+                        <td>40時間</td>
                         <td class="hl">96,000ウォン</td>
                         <td>576,000ウォン</td>
                     </tr>
                 </tbody>
             </table>
-            <p style="font-size:0.78rem; color:var(--text-tertiary); margin-top:10px;">* 2026年 최저時給 10,320ウォン 기준</p>
+            <p style="font-size:0.78rem; color:var(--text-tertiary); margin-top:10px;">※ 2026年最低時給10,320ウォン基準</p>
         </div>
 
     </div>
 
-    <!-- 미지급 안내 -->
+    <!-- 未払い案内 -->
     <div class="info-card" style="margin-bottom: 24px;">
-        <h2>주휴수당 미지급 시 어떻게 되나요?</h2>
-        <p>사용자가 주휴수당을 지급하지 않으면 <strong>2년 이하의 징역 또는 2,000万ウォン 이하의 벌금</strong>에 처해질 수 있습니다 (근로기준법 제110조).</p>
-        <p>주휴수당을 받지 못했다면 <strong>고용노동부 고객상담센터(1350)</strong>에 신고하거나 사업장 관할 지방고용노동관서에 진정을 제기할 수 있습니다.</p>
+        <h2>週休手当が未払いの場合はどうなりますか？</h2>
+        <p>使用者が週休手当を支払わない場合、<strong>2年以下の懲役または2,000万ウォン以下の罰金</strong>に処される可能性があります（勤労基準法第110条）。</p>
+        <p>週休手当を受け取れなかった場合、<strong>雇用労働部顧客相談センター（1350）</strong>に届け出るか、事業場管轄の地方雇用労働官署に陳情を提起できます。</p>
     </div>
 
     <!-- FAQ -->
     <div class="info-card" style="margin-bottom: 24px;">
         <h2>よくある質問</h2>
         <div class="faq-item">
-            <div class="faq-q">한 주에 15時間 딱 맞춰 일하면 주휴수당이 생기나요?</div>
-            <div class="faq-a">네, 주 15時間 이상이면 발생합니다. 15時間도 포함됩니다.</div>
+            <div class="faq-q">1週間にちょうど15時間働いた場合、週休手当は発生しますか？</div>
+            <div class="faq-a">はい、週15時間以上であれば発生します。15時間も含まれます。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">알바를 여러 곳에서 하면 합산하나요?</div>
-            <div class="faq-a">아닙니다. 사업장별로 각각 계산합니다. A편의점 10時間 + B카페 10時間이어도 각각 15時間 미만이면 주휴수당이 없습니다.</div>
+            <div class="faq-q">アルバイトを複数の場所でする場合、合算されますか？</div>
+            <div class="faq-a">いいえ。事業場ごとに各自計算します。Aコンビニ10時間＋Bカフェ10時間でもそれぞれ15時間未満なら週休手当はありません。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">수습기간에도 주휴수당이 있나요?</div>
-            <div class="faq-a">네, 수습기간에도 주 15時間 이상 근무하면 주휴수당이 발생합니다. 수습이라는 이유로 주휴수당을 안 줄 수 없습니다.</div>
+            <div class="faq-q">試用期間でも週休手当はありますか？</div>
+            <div class="faq-a">はい、試用期間でも週15時間以上勤務すれば週休手当が発生します。試用期間という理由で週休手当を支給しないことはできません。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">지각하거나 조퇴하면 주휴수당이 없어지나요?</div>
-            <div class="faq-a">지각·조퇴는 결근이 아니므로 주휴수당에 영향을 주지 않습니다. 소정 근무일에 아예 출근하지 않은 경우에만 해당 주의 주휴수당이 없어집니다.</div>
+            <div class="faq-q">遅刻や早退をすると週休手当がなくなりますか？</div>
+            <div class="faq-a">遅刻・早退は欠勤ではないため週休手当に影響しません。所定勤務日に全く出勤しなかった場合のみ、該当週の週休手当がなくなります。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">주휴수당을 안 주는 회사는 불법인가요?</div>
-            <div class="faq-a">네. 주휴수당 미지급은 근로기준법 위반으로 2년 이하 징역 또는 2,000万ウォン 이하 벌금에 해당합니다. 고용노동부(1350)에 신고할 수 있습니다.</div>
+            <div class="faq-q">週休手当を支払わない会社は違法ですか？</div>
+            <div class="faq-a">はい。週休手当未払いは勤労基準法違反で2年以下の懲役または2,000万ウォン以下の罰金に該当します。雇用労働部（1350）に届け出ることができます。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">주휴수당에도 세금이 붙나요?</div>
-            <div class="faq-a">네. 주휴수당은 임금의 일부로 급여에 포함되어 소득세 및 4대보험이 적용됩니다.</div>
+            <div class="faq-q">週休手当にも税金がかかりますか？</div>
+            <div class="faq-a">はい。週休手当は賃金の一部として給与に含まれ、所得税および4大保険が適用されます。</div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>주휴수당 지급 기준과 계산 방법 상세 안내</h2>
-        <p>주휴수당은 근로기준법 제55조에 근거한 제도로, 1주일 동안 소정근로일을 개근한 근로자에게 유급 주휴일을 부여하고 해당 일에 대한 임금을 지급하는 것을 말합니다. 쉽게 말해 일주일을 성실히 근무하면 하루치 임금을 추가로 받을 수 있는 제도입니다.</p>
+        <h2>週休手当支給基準と計算方法の詳細案内</h2>
+        <p>週休手当は勤労基準法第55条に基づく制度で、1週間の所定勤労日を皆勤した労働者に有給週休日を付与し、該当日の賃金を支給することを指します。簡単に言えば、1週間を誠実に勤務すれば1日分の賃金を追加で受け取れる制度です。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주휴수당 지급 조건</h3>
-        <p>주휴수당을 받기 위해서는 두 가지 조건을 충족해야 합니다. 첫째, <strong>1주 소정근로시간이 15時間 이상</strong>이어야 합니다. 둘째, <strong>해당 주의 소정근로일을 모두 개근</strong>해야 합니다. 여기서 주의할 점은 4주 평균으로 주 15時間 이상 근무하는 경우, 특정 주에 15時間 미만으로 일했더라도 주휴수당 지급 대상이 될 수 있다는 것입니다. 다만 일용직 근로자나 프리랜서(도급계약)는 근로계약의 성격에 따라 주휴수당 대상이 아닌 경우가 많습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">週休手当支給条件</h3>
+        <p>週休手当を受け取るためには2つの条件を満たす必要があります。第一に、<strong>1週の所定勤労時間が15時間以上</strong>でなければなりません。第二に、<strong>該当週の所定勤労日をすべて皆勤</strong>しなければなりません。ここで注意すべき点は、4週平均で週15時間以上勤務する場合、特定の週に15時間未満で働いても週休手当支給対象になり得るということです。ただし、日雇い労働者やフリーランス（請負契約）は勤労契約の性格により週休手当の対象外となる場合が多いです。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주휴수당 계산 공식</h3>
-        <p>주휴수당 계산 공식은 <strong>(1주 소정근로시간 &divide; 40) &times; 8 &times; 時給</strong>입니다. 예를 들어 주 40시간 근무하는 경우 (40&divide;40)&times;8&times;時給으로 8時間분의 時給이 주휴수당이 됩니다. 주 20시간 근무하는 아르바이트생이라면 (20&divide;40)&times;8&times;時給으로 4時間분의 時給을 주휴수당으로 받게 됩니다. 이를 통해 실질 時給을 계산하면, 주 40시간 기준 時給의 약 1.2배가 실질 時給이 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">週休手当計算公式</h3>
+        <p>週休手当計算公式は<strong>（1週の所定勤労時間 &divide; 40）&times; 8 &times; 時給</strong>です。例えば週40時間勤務する場合、(40&divide;40)&times;8&times;時給で8時間分の時給が週休手当になります。週20時間勤務するアルバイトなら(20&divide;40)&times;8&times;時給で4時間分の時給を週休手当として受け取ります。これにより実質時給を計算すると、週40時間基準の時給の約1.2倍が実質時給になります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주휴수당 미지급 시 대응 방법</h3>
-        <p>사업주가 주휴수당을 지급하지 않는 경우, 이는 근로기준법 위반에 해당합니다. 먼저 사업주에게 구두 또는 서면으로 지급을 요청하고, 그래도 해결되지 않으면 <strong>고용노동부(1350)</strong>에 상담하거나 관할 지방고용노동청에 임금체불 진정을 제기할 수 있습니다. 진정 접수 시에는 근로계약서, 출퇴근 기록, 급여명세서 등 증빙자료를 준비하면 더 원활한 처리가 가능합니다. 임금체불에 대한 소멸시효는 3년이므로, 가능한 한 빨리 조치를 취하는 것이 좋습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">週休手当未払い時の対処方法</h3>
+        <p>事業主が週休手当を支給しない場合、これは勤労基準法違反に該当します。まず事業主に口頭または書面で支給を要請し、それでも解決しない場合は<strong>雇用労働部（1350）</strong>に相談するか管轄の地方雇用労働庁に賃金未払い陳情を提起できます。陳情受付時には勤労契約書、出退勤記録、給与明細書などの証拠資料を準備するとよりスムーズな処理が可能です。賃金未払いの消滅時効は3年なので、できるだけ早く措置を取ることをお勧めします。</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">よくある質問</h3>
-        <p>퇴사 시 마지막 주의 주휴수당도 받을 수 있을까요? 퇴사일이 속한 주에 소정근로일을 모두 개근했다면 주휴수당 지급 대상입니다. 다만 퇴사일에 따라 해당 주의 소정근로일을 채우지 못했다면 지급되지 않을 수 있습니다. 또한 공휴일이나 연차 사용일은 결근으로 보지 않으므로 개근 조건에 영향을 주지 않습니다. 주휴수당은 근로자의 기본적인 권리이므로, 본인의 근로 조건을 정확히 파악하고 정당한 임금을 요구하는 것이 중요합니다.</p>
+        <p>退職時に最後の週の週休手当も受け取れるでしょうか？退職日が属する週に所定勤労日をすべて皆勤していれば週休手当の支給対象です。ただし退職日によって該当週の所定勤労日を満たせなかった場合は支給されない可能性があります。また、祝日や年次休暇使用日は欠勤とみなされないため皆勤条件に影響しません。週休手当は労働者の基本的な権利なので、自身の勤労条件を正確に把握し正当な賃金を要求することが重要です。</p>
     </div>
 
 
@@ -452,31 +452,31 @@ function calculate() {
     const dailyH = parseInt(document.getElementById('dailyHours').value);
     const weeklyD = parseInt(document.getElementById('weeklyDays').value);
 
-    if (wage <= 0) { alert('時給을 입력해주세요.'); return; }
+    if (wage <= 0) { alert('時給を入力してください。'); return; }
 
     const weeklyH = dailyH * weeklyD;
 
-    // 주휴수당 계산
+    // 週休手当計算
     let holidayPay = 0;
     let holidaySub = '';
     if (weeklyH < 15) {
         holidayPay = 0;
-        holidaySub = '주 15時間 미만 — 주휴수당 미발생';
+        holidaySub = '週15時間未満 ― 週休手当なし';
     } else {
         const ratio = Math.min(weeklyH / 40, 1);
         holidayPay = Math.round(wage * ratio * 8);
         if (weeklyH >= 40) {
-            holidaySub = `時給 ${wage.toLocaleString()}원 × 8時間 (풀타임 기준)`;
+            holidaySub = `時給 ${wage.toLocaleString()}ウォン × 8時間（フルタイム基準）`;
         } else {
-            holidaySub = `時給 ${wage.toLocaleString()}원 × (${weeklyH}h ÷ 40) × 8`;
+            holidaySub = `時給 ${wage.toLocaleString()}ウォン × (${weeklyH}h ÷ 40) × 8`;
         }
     }
 
-    // 주급 (주근무수당 + 주휴수당)
+    // 週給（週勤務手当 + 週休手当）
     const weeklyWage = wage * weeklyH;
     const weeklyTotal = weeklyWage + holidayPay;
 
-    // 월 환산 (4.345주)
+    // 月換算（4.345週）
     const monthlyHoliday = Math.round(holidayPay * 4.345);
     const monthlyTotal = Math.round(weeklyTotal * 4.345);
 
@@ -487,14 +487,14 @@ function calculate() {
     document.getElementById('monthlyHoliday').textContent = fmt(monthlyHoliday);
     document.getElementById('monthlyAmt').textContent = fmt(monthlyTotal);
 
-    let note = `하루 ${dailyH}시간 × 주 ${weeklyD}일 = 주 ${weeklyH}시간 기준입니다.`;
+    let note = `1日${dailyH}時間 × 週${weeklyD}日 = 週${weeklyH}時間基準です。`;
     if (weeklyH < 15) {
-        note += ' 주 15時間 미만으로 주휴수당이 발생하지 않습니다.';
+        note += ' 週15時間未満のため週休手当が発生しません。';
     } else {
-        note += ` 주휴수당 ${fmt(holidayPay)} 포함 월급 ${fmt(monthlyTotal)}.`;
+        note += ` 週休手当${fmt(holidayPay)}含む月給${fmt(monthlyTotal)}。`;
     }
     if (wage < 10320) {
-        note += ' 입력한 時給이 2026年 최저時給(10,320ウォン)보다 낮습니다.';
+        note += ' 入力した時給が2026年最低時給（10,320ウォン）より低いです。';
     }
 
     document.getElementById('resultNote').textContent = note;
@@ -518,8 +518,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 주휴수당은 ' + (window._shareHolidayPay || '—'),
-            description: '2026年 최저時給 기준 주휴수당 계산 결과',
+            title: '私の週休手当は ' + (window._shareHolidayPay || '—'),
+            description: '2026年最低時給基準の週休手当計算結果',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/holiday-pay', webUrl: 'https://salarykorea.site/holiday-pay' }
         },

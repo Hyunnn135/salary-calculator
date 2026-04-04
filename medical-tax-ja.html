@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="韓国の年末調整で医療費税額控除額を計算します（2026年基準）。">
-    <meta name="keywords" content="의료비세액공제, 의료비공제계산기, 연말정산의료비, 병원비환급, 不妊治療費공제, 의료비공제限度">
+    <meta name="keywords" content="医療費税額控除, 医療費控除計算機, 年末調整医療費, 病院費還付, 不妊治療費控除, 医療費控除限度">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/medical-tax">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/medical-tax-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/medical-tax-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/medical-tax-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/medical-tax">
-    <meta property="og:title" content="의료비 세액공제 계산기 - 병원비 얼마나 돌려받을까?">
-    <meta property="og:description" content="연말정산 의료비 세액공제 자동 계산. 난임·미숙아 특별공제율까지 적용합니다.">
+    <meta property="og:title" content="医療費税額控除計算機 - 病院費はいくら戻ってくる？">
+    <meta property="og:description" content="年末調整医療費税額控除自動計算。不妊・未熟児特別控除率まで適用します。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,8 +80,8 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "의료비 세액공제 계산기",
-        "description": "연말정산 의료비 세액공제 금액을 자동으로 계산합니다.",
+        "name": "医療費税額控除計算機",
+        "description": "年末調整の医療費税額控除額を自動計算します。",
         "url": "https://salarykorea.site/medical-tax",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "All",
@@ -180,7 +180,7 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">의료비 정보 입력</div>
+                    <div class="card-title">医療費情報入力</div>
                     <div class="card-badge">2026年</div>
                 </div>
 
@@ -191,21 +191,21 @@
                         <span class="form-unit">ウォン</span>
                     </div>
                     <input type="range" class="form-slider" id="salarySlider" min="20000000" max="200000000" step="1000000" value="50000000">
-                    <div class="slider-labels"><span>2,000만</span><span>6,000만</span><span>1億</span><span>2億</span></div>
+                    <div class="slider-labels"><span>2,000万</span><span>6,000万</span><span>1億</span><span>2億</span></div>
                 </div>
 
-                <div class="section-divider">── 의료비 지출 내역 ──</div>
+                <div class="section-divider">── 医療費支出内訳 ──</div>
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">本人の医療費 <span class="form-label-sub">限度 없음</span></label>
+                        <label class="form-label">本人の医療費 <span class="form-label-sub">限度なし</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="selfMedical" placeholder="0" value="0">
                             <span class="form-unit">ウォン</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">65歳↑·障害者 <span class="form-label-sub">限度 없음</span></label>
+                        <label class="form-label">65歳↑·障害者 <span class="form-label-sub">限度なし</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="seniorMedical" placeholder="0" value="0">
                             <span class="form-unit">ウォン</span>
@@ -215,14 +215,14 @@
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">扶養家族の医療費 <span class="form-label-sub">700만 限度</span></label>
+                        <label class="form-label">扶養家族の医療費 <span class="form-label-sub">700万限度</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="familyMedical" placeholder="0" value="0">
                             <span class="form-unit">ウォン</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">不妊治療費 <span class="form-label-sub">30% 공제</span></label>
+                        <label class="form-label">不妊治療費 <span class="form-label-sub">30%控除</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="infertility" placeholder="0" value="0">
                             <span class="form-unit">ウォン</span>
@@ -231,14 +231,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">실비보험 수령액 <span class="form-label-sub">의료비에서 차감</span></label>
+                    <label class="form-label">実費保険受取額 <span class="form-label-sub">医療費から差引</span></label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input form-input-sm" id="insuranceReceived" placeholder="0" value="0">
                         <span class="form-unit">ウォン</span>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">세액공제 計算する</button>
+                <button class="submit-btn" onclick="calculate()">税額控除を計算する</button>
             </div>
 
             <div class="action-row" id="saveBtnWrap">
@@ -258,21 +258,21 @@
             <div id="captureArea" style="display:none;">
 
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">예상 세액공제</div>
+                <div class="result-hero-label">予想税額控除</div>
                 <div class="result-hero-amount" id="totalDeduction">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">ウォン</div>
                 <div class="result-hero-msg" id="cheerMsg"></div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">총 의료비</div>
+                        <div class="rh-stat-label">総医療費</div>
                         <div class="rh-stat-val" id="statTotal">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">최저사용액(3%)</div>
+                        <div class="rh-stat-label">最低使用額(3%)</div>
                         <div class="rh-stat-val" id="statThreshold">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">공제대상 의료비</div>
+                        <div class="rh-stat-label">控除対象医療費</div>
                         <div class="rh-stat-val" id="statDeductible">—</div>
                     </div>
                 </div>
@@ -280,18 +280,18 @@
 
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
-                    <div class="card-title">공제 항목 상세</div>
+                    <div class="card-title">控除項目詳細</div>
                 </div>
                 <div id="breakdownItems"></div>
                 <div class="b-total">
-                    <span class="b-total-label">총 세액공제</span>
+                    <span class="b-total-label">総税額控除</span>
                     <span class="b-total-val" id="breakdownTotal">—</span>
                 </div>
             </div>
 
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">의료비 정보를 입력하고 計算する 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">医療費情報を入力して計算ボタンを押してください</div>
         </div>
     </div>
 
@@ -299,23 +299,23 @@
     <div class="bottom-grid">
         <div class="info-card">
             <h2>医療費税額控除とは？</h2>
-            <p>근로소득자가 본인이나 부양가족을 위해 지출한 의료비 중, <strong>총급여의 3%를 초과하는 금액</strong>에 대해 세금을 돌려받을 수 있는 제도입니다.</p>
-            <p>기본 공제율은 15%이며, 不妊治療費는 30%, 미숙아·선천성이상 치료비는 20%의 높은 공제율이 적용됩니다. 본인·65세 이상·장애인·중증질환자 의료비는 공제 限度가 없으나, 일반 扶養家族の医療費는 연 700万ウォン 限度가 있습니다.</p>
-            <p>실비보험으로 보전받은 금액은 의료비에서 차감해야 합니다. 보장성 보험료 세액공제(연 100万ウォン 限度, 12%)는 별도로 받을 수 있습니다.</p>
+            <p>勤労所得者が本人や扶養家族のために支出した医療費のうち、<strong>総給与の3%を超える金額</strong>に対して税金の還付を受けられる制度です。</p>
+            <p>基本控除率は15%で、不妊治療費は30%、未熟児・先天性異常治療費は20%の高い控除率が適用されます。本人・65歳以上・障害者・重症疾患者の医療費は控除限度がありませんが、一般扶養家族の医療費は年700万ウォンの限度があります。</p>
+            <p>実費保険で補填された金額は医療費から差し引く必要があります。保障性保険料税額控除（年100万ウォン限度、12%）は別途受けることができます。</p>
         </div>
         <div class="info-card">
             <h2>よくある質問</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 성형수술비도 공제받을 수 있나요?</div>
-                <div class="faq-a">A. 미용 목적 성형수술, 건강증진 의약품(보약 등)은 공제 대상이 아닙니다. 다만 치료 목적의 수술은 공제 가능합니다.</div>
+                <div class="faq-q">Q. 美容整形手術費も控除を受けられますか？</div>
+                <div class="faq-a">A. 美容目的の整形手術、健康増進医薬品（漢方薬等）は控除対象ではありません。ただし治療目的の手術は控除可能です。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 안경·콘택트렌즈도 되나요?</div>
-                <div class="faq-a">A. 시력교정용 안경·콘택트렌즈 구입비는 1인당 연 50万ウォン 限度로 공제됩니다.</div>
+                <div class="faq-q">Q. 眼鏡・コンタクトレンズも対象ですか？</div>
+                <div class="faq-a">A. 視力矯正用眼鏡・コンタクトレンズ購入費は1人当たり年50万ウォン限度で控除されます。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 산후조리원 비용은요?</div>
-                <div class="faq-a">A. 총급여 7천万ウォン 이하 근로자의 산후조리원 비용은 출산 1회당 200万ウォン 限度로 공제됩니다.</div>
+                <div class="faq-q">Q. 産後ケアセンターの費用は？</div>
+                <div class="faq-a">A. 総給与7千万ウォン以下の勤労者の産後ケアセンター費用は出産1回当たり200万ウォン限度で控除されます。</div>
             </div>
         </div>
     </div>
@@ -344,7 +344,7 @@ Kakao.init('051ed8019b76b2127b2da56a27b406f2');
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parse(id) { return parseInt(document.getElementById(id).value.replace(/[^0-9]/g,'')) || 0; }
 
-// 숫자 입력 포맷팅
+// 数字入力フォーマット
 document.querySelectorAll('.form-input').forEach(el => {
     el.addEventListener('input', function() {
         let v = this.value.replace(/[^0-9]/g, '');
@@ -352,7 +352,7 @@ document.querySelectorAll('.form-input').forEach(el => {
     });
 });
 
-// 슬라이더 연동
+// スライダー連動
 const salarySlider = document.getElementById('salarySlider');
 const salaryInput = document.getElementById('salaryInput');
 salarySlider.addEventListener('input', function() {
@@ -386,20 +386,20 @@ function calculate() {
     const infertility = parse('infertility');
     const insReceived = parse('insuranceReceived');
 
-    if (salary <= 0) { alert('총급여를 입력해 주세요.'); return; }
+    if (salary <= 0) { alert('総給与を入力してください。'); return; }
 
-    // 총 의료비 (실비 차감)
+    // 総医療費（実費差引）
     const totalMedical = selfMed + seniorMed + familyMed + infertility;
     const netMedical = Math.max(0, totalMedical - insReceived);
 
-    // 최저사용액 (총급여의 3%)
+    // 最低使用額（総給与の3%）
     const threshold = salary * 0.03;
 
-    // 공제 대상 = 총 의료비 - 최저사용액
+    // 控除対象 = 総医療費 - 最低使用額
     const deductibleTotal = Math.max(0, netMedical - threshold);
 
     if (deductibleTotal <= 0) {
-        // 공제 대상 없음
+        // 控除対象なし
         document.getElementById('captureArea').style.display = 'block';
         document.getElementById('resultPlaceholder').style.display = 'none';
         document.getElementById('resultCard').classList.add('show');
@@ -408,24 +408,24 @@ function calculate() {
         document.getElementById('statTotal').textContent = fmt(netMedical) + 'ウォン';
         document.getElementById('statThreshold').textContent = fmt(threshold) + 'ウォン';
         document.getElementById('statDeductible').textContent = '0ウォン';
-        document.getElementById('cheerMsg').textContent = '의료비가 총급여의 3%(' + fmt(threshold) + '원)를 넘지 않아 공제 대상이 없습니다';
+        document.getElementById('cheerMsg').textContent = '医療費が総給与の3%(' + fmt(threshold) + 'ウォン)を超えないため控除対象がありません';
         document.getElementById('breakdownItems').innerHTML = '';
         document.getElementById('breakdownTotal').textContent = '0ウォン';
         return;
     }
 
-    // 비율 기반 배분 (실비 차감 후 각 항목 비율)
+    // 比率ベース配分（実費差引後の各項目比率）
     const ratio = netMedical > 0 ? deductibleTotal / netMedical : 0;
-    const netSelf = Math.round(selfMed * ratio);  // 실비 비례 차감
+    const netSelf = Math.round(selfMed * ratio);  // 実費比例控除
     const netSenior = Math.round(seniorMed * ratio);
     const netInfertility = Math.round(infertility * ratio);
     let netFamily = Math.round(familyMed * ratio);
 
-    // 부양가족 700万ウォン 限度 적용
+    // 扶養家族700万ウォン限度適用
     const family限度 = 7000000;
     const familyCapped = Math.min(netFamily, family限度);
 
-    // 세액공제 계산
+    // 税額控除計算
     const dedSelf = Math.round(netSelf * 0.15);
     const dedSenior = Math.round(netSenior * 0.15);
     const dedFamily = Math.round(familyCapped * 0.15);
@@ -433,7 +433,7 @@ function calculate() {
 
     const totalDed = dedSelf + dedSenior + dedFamily + dedInfertility;
 
-    // UI 업데이트
+    // UI更新
     document.getElementById('captureArea').style.display = 'block';
     document.getElementById('resultPlaceholder').style.display = 'none';
     document.getElementById('resultCard').classList.add('show');
@@ -443,16 +443,16 @@ function calculate() {
     document.getElementById('statThreshold').textContent = fmt(threshold) + 'ウォン';
     document.getElementById('statDeductible').textContent = fmt(deductibleTotal) + 'ウォン';
 
-    // 응원 메시지
-    if (totalDed >= 1000000) document.getElementById('cheerMsg').textContent = '💊 의료비 공제만으로 ' + fmt(totalDed) + '원 절세!';
-    else if (totalDed >= 300000) document.getElementById('cheerMsg').textContent = '병원비 부담이 좀 줄었네요!';
-    else document.getElementById('cheerMsg').textContent = '조금이라도 돌려받는 게 이득!';
+    // 応援メッセージ
+    if (totalDed >= 1000000) document.getElementById('cheerMsg').textContent = '💊 医療費控除だけで' + fmt(totalDed) + 'ウォン節税！';
+    else if (totalDed >= 300000) document.getElementById('cheerMsg').textContent = '病院費の負担が少し軽くなりましたね！';
+    else document.getElementById('cheerMsg').textContent = '少しでも還付を受けるのがお得！';
 
-    // 공제 상세
+    // 控除詳細
     const items = [
         { label: '本人の医療費', amount: netSelf, rate: '15%', ded: dedSelf, color: '#EC4899' },
         { label: '65歳↑·障害者', amount: netSenior, rate: '15%', ded: dedSenior, color: '#8B5CF6' },
-        { label: '부양가족 (일반)', amount: familyCapped, rate: '15%', ded: dedFamily, color: '#2563EB', note: netFamily > family限度 ? ' (限度 적용)' : '' },
+        { label: '扶養家族（一般）', amount: familyCapped, rate: '15%', ded: dedFamily, color: '#2563EB', note: netFamily > family限度 ? ' (限度適用)' : '' },
         { label: '不妊治療費', amount: netInfertility, rate: '30%', ded: dedInfertility, color: '#F59E0B' },
     ];
 
@@ -463,18 +463,18 @@ function calculate() {
                 <div class="b-dot" style="background:${it.color};"></div>
                 <div class="b-label">${it.label}${it.note||''}</div>
                 <div class="b-rate">${it.rate}</div>
-                <div class="b-val">${fmt(it.ded)}원</div>
+                <div class="b-val">${fmt(it.ded)}ウォン</div>
             </div>`;
         }
     });
 
-    // 실비 차감 표시
+    // 実費差引表示
     if (insReceived > 0) {
         html += `<div class="b-item">
             <div class="b-dot" style="background:#EF4444;"></div>
-            <div class="b-label">실비보험 수령액 (차감)</div>
+            <div class="b-label">実費保険受取額（控除）</div>
             <div class="b-rate"></div>
-            <div class="b-val" style="color:#EF4444;">-${fmt(insReceived)}원</div>
+            <div class="b-val" style="color:#EF4444;">-${fmt(insReceived)}ウォン</div>
         </div>`;
     }
 
@@ -487,8 +487,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '의료비 세액공제 계산기 - 월급연구소',
-            description: '연말정산 의료비 공제 금액을 자동 계산하세요',
+            title: '医療費税額控除計算機 - 給与研究所',
+            description: '年末調整の医療費控除額を自動計算してください',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/medical-tax', webUrl: 'https://salarykorea.site/medical-tax' }
         },
@@ -503,7 +503,7 @@ function saveImage() {
         scale: 2, backgroundColor: '#F7F8FA', useCORS: true
     }).then(canvas => {
         const a = document.createElement('a');
-        a.download = '의료비_세액공제_계산결과.png';
+        a.download = '医療費_税額控除_計算結果.png';
         a.href = canvas.toDataURL('image/png');
         a.click();
         btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';

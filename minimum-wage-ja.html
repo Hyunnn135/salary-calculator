@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="2026年韓国の法定最低時給10,320ウォンで日給・週給・月給・年俸を自動計算します。">
-    <meta name="keywords" content="최저時給계산기, 2026최저時給, 최저임금, 時給계산기, 주휴수당, 알바월급계산">
+    <meta name="keywords" content="最低時給計算機, 2026最低時給, 最低賃金, 時給計算機, 週休手当, アルバイト月給計算">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/minimum-wage">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/minimum-wage-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/minimum-wage-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/minimum-wage-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/minimum-wage">
-    <meta property="og:title" content="2026 최저時給 계산기 - 時給 월급 연봉 자동계산">
-    <meta property="og:description" content="2026年 최저時給 10,320ウォン 기준 日給·주급·월급·연봉을 바로 확인하세요.">
+    <meta property="og:title" content="2026最低時給計算機 - 時給・月給・年俸を自動計算">
+    <meta property="og:description" content="2026年最低時給10,320ウォン基準で日給・週給・月給・年俸をすぐに確認できます。">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ フォーム要素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -37,16 +37,16 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 슬라이더 */
+        /* スライダー */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 結果エリア ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* メイン結果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -62,7 +62,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 공제 상세 카드 */
+        /* 控除詳細カード */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -76,7 +76,7 @@
         .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
         .b-total-label { font-size: 0.88rem; font-weight: 700; }
         .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
-        /* ══ 저장 / 공유 버튼 ══ */
+        /* ══ 保存/共有ボタン ══ */
         .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
         .action-row.show { display: flex; }
         .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -84,7 +84,7 @@
         .save-btn.loading { opacity: 0.5; cursor: wait; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 연봉 인상 시뮬레이터 ══ */
+        /* ══ 年俸昇給シミュレーター ══ */
         .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -101,12 +101,12 @@
         .cmp-table .green { color: #059669; font-weight: 700; }
         .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-        /* ══ 페이지 고유: 최저時給 배너 ══ */
+        /* ══ ページ固有: 最低時給バナー ══ */
         .min-wage-banner { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 24px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
         .min-wage-banner .mw-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 500; }
         .min-wage-banner .mw-value { font-size: 1.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -1px; margin-top: 4px; }
         .min-wage-banner .mw-sub { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
-        /* 토글 스위치 */
+        /* トグルスイッチ */
         .toggle-row { display: flex; align-items: center; justify-content: space-between; background: var(--accent-light); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; }
         .toggle-row .toggle-text { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
         .toggle-row .toggle-sub { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 2px; }
@@ -116,13 +116,13 @@
         .toggle-slider:before { content: ""; position: absolute; width: 20px; height: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
         input:checked + .toggle-slider { background: var(--accent); }
         input:checked + .toggle-slider:before { transform: translateX(22px); }
-        /* 정보 테이블 */
+        /* 情報テーブル */
         .info-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 12px; }
         .info-table th { background: var(--surface-alt); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
         .info-table td { padding: 12px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
         .info-table tr:last-child td { border-bottom: none; }
         .info-table .hl { color: var(--accent); font-weight: 800; }
-        /* 조건 그리드 */
+        /* 条件グリッド */
         .condition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
         .condition-box { border-radius: 10px; padding: 16px; border: 1.5px solid; }
         .condition-box.fail { border-color: #FECACA; background: #FEF2F2; }
@@ -130,7 +130,7 @@
         .condition-box.pass { border-color: #BBF7D0; background: #F0FDF4; }
         .condition-box.pass .c-title { color: #16A34A; font-size: 0.85rem; font-weight: 800; margin-bottom: 6px; }
         .condition-box p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
-        /* 수식 박스 */
+        /* 計算式ボックス */
         .formula-box { background: var(--surface-alt); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
         .formula-box p { font-size: 0.85rem; color: var(--text-primary); line-height: 1.9; margin: 0; }
     </style>
@@ -139,8 +139,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "2026年 최저時給 계산기",
-    "description": "2026年 최저임금 기준 時給, 월급, 연봉을 계산합니다. 週休手当を含む 실질 時給도 확인하세요.",
+    "name": "2026年最低時給計算機",
+    "description": "2026年の最低賃金基準で時給、月給、年俸を計算します。週休手当を含む実質時給も確認できます。",
     "url": "https://salarykorea.site/minimum-wage",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -241,7 +241,7 @@
         <p>時給を入力すると日給·週給·月給·年俸を自動計算します</p>
     </div>
 
-    <!-- 2026 최저時給 배너 -->
+    <!-- 2026最低時給バナー -->
     <div class="min-wage-banner">
         <div>
             <div class="mw-label">2026年 法定最低時給</div>
@@ -334,7 +334,7 @@
                         <div class="rh-stat-val" id="daily">--</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">주급 <span id="holidayTag" style="font-size:0.6rem;"></span></div>
+                        <div class="rh-stat-label">週給 <span id="holidayTag" style="font-size:0.6rem;"></span></div>
                         <div class="rh-stat-val" id="weekly">--</div>
                     </div>
                     <div class="rh-stat">
@@ -354,7 +354,7 @@
     <!-- 下部情報エリア -->
     <div class="bottom-grid">
 
-        <!-- 年度별 최저時給 변화 -->
+        <!-- 年度別最低時給推移 -->
         <div class="info-card">
             <h2>最低時給の推移</h2>
             <table class="info-table">
@@ -371,10 +371,10 @@
             </table>
         </div>
 
-        <!-- 주휴수당 안내 -->
+        <!-- 週休手当案内 -->
         <div class="info-card">
             <h2>週休手当とは？</h2>
-            <p>일주일에 15時間 이상 일하고 결근 없이 출근하면 하루치 임금을 추가로 받을 수 있는 제도입니다. 아르바이트생도 동일하게 적용됩니다.</p>
+            <p>1週間に15時間以上勤務し、欠勤なく出勤すれば1日分の賃金を追加で受け取れる制度です。アルバイトにも同様に適用されます。</p>
             <div class="condition-grid">
                 <div class="condition-box fail">
                     <div class="c-title">週休手当なし</div>
@@ -386,68 +386,68 @@
                 </div>
             </div>
             <div class="formula-box">
-                <p><strong>계산식:</strong> 時給 x (주근무시간 / 40) x 8<br>주 40시간 이상이면 時給 x 8時間 고정</p>
+                <p><strong>計算式:</strong> 時給 ×（週勤務時間 / 40）× 8<br>週40時間以上であれば時給 × 8時間固定</p>
             </div>
         </div>
 
     </div>
 
-    <!-- 최저임금 위반 안내 -->
+    <!-- 最低賃金違反案内 -->
     <div class="info-card" style="margin-bottom: 24px;">
         <h2>最低賃金違反の場合</h2>
-        <p>최저임금(10,320ウォン)보다 낮은 時給을 지급하면 <strong>3년 이하 징역 또는 2,000万ウォン 이하 벌금</strong>이 부과됩니다. 최저임금법은 정규직·계약직·아르바이트 모두 동일하게 적용됩니다.</p>
-        <p>수습기간 중에는 3ヶ月간 최저임금의 <strong>90%</strong>까지 적용 가능합니다. (단, 1년 미만 근로계약 제외)</p>
+        <p>最低賃金（10,320ウォン）より低い時給を支給すると<strong>3年以下の懲役または2,000万ウォン以下の罰金</strong>が科されます。最低賃金法は正規職・契約職・アルバイトすべてに同様に適用されます。</p>
+        <p>試用期間中は3ヶ月間、最低賃金の<strong>90%</strong>まで適用可能です。（ただし、1年未満の労働契約は除外）</p>
     </div>
 
     <!-- FAQ -->
     <div class="info-card" style="margin-bottom: 24px;">
         <h2>よくある質問</h2>
         <div class="faq-item">
-            <div class="faq-q">2026年 최저時給은 얼마인가요?</div>
-            <div class="faq-a">2026年 法定最低時給은 시간당 10,320ウォン입니다. 월급(209時間 기준)으로 환산하면 2,156,880ウォン입니다.</div>
+            <div class="faq-q">2026年の最低時給はいくらですか？</div>
+            <div class="faq-a">2026年の法定最低時給は時間当たり10,320ウォンです。月給（209時間基準）に換算すると2,156,880ウォンです。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">최저時給보다 낮게 받고 있으면 어떻게 해야 하나요?</div>
+            <div class="faq-q">最低時給より低く受け取っている場合はどうすればいいですか？</div>
             <div class="faq-a">最低賃金法違反で3年以下の懲役または2,000万ウォン以下の罰金に該当します。雇用労働部お客様相談センター(1350)またはオンライン申告センターを通じて申告できます。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">수습기간에도 최저時給이 적용되나요?</div>
-            <div class="faq-a">1년 이상 근로계약을 체결한 경우 수습 3ヶ月까지 최저時給의 90%(9,288ウォン)를 지급할 수 있습니다. 단, 단순노무직은 수습 감액이 적용되지 않습니다.</div>
+            <div class="faq-q">試用期間にも最低時給が適用されますか？</div>
+            <div class="faq-a">1年以上の労働契約を締結した場合、試用3ヶ月まで最低時給の90%（9,288ウォン）を支給できます。ただし、単純労務職は試用減額が適用されません。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">週休手当を含む 시 실질 時給은 얼마인가요?</div>
-            <div class="faq-a">週15時間以上勤務 시 주휴수당이 추가됩니다. 週5日 근무 기준으로 실질 時給은 10,320ウォン x 1.2 = 약 12,384ウォン 수준이 됩니다.</div>
+            <div class="faq-q">週休手当を含む場合の実質時給はいくらですか？</div>
+            <div class="faq-a">週15時間以上勤務の場合、週休手当が追加されます。週5日勤務基準で実質時給は10,320ウォン × 1.2 = 約12,384ウォン水準となります。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">식대나 교통비도 時給에 포함되나요?</div>
+            <div class="faq-q">食費や交通費も時給に含まれますか？</div>
             <div class="faq-a">現金で支給される食費・交通費は最低賃金への算入可否が定められています。毎月固定的に支給される食費は一定の限度内で算入されます。</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">アルバイトも4大保険に加入する必要がありますか？</div>
-            <div class="faq-a">週15時間以上勤務 시 4대보험 의무 가입 대상입니다. 단기·초단시간 근로자(주 15時間 미만)는 국민연금·고용보험 적용이 제외될 수 있습니다.</div>
+            <div class="faq-a">週15時間以上勤務の場合、四大保険の義務加入対象です。短期・超短時間労働者（週15時間未満）は国民年金・雇用保険の適用が除外される場合があります。</div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>2026年最低賃金の完全ガイド</h2>
-        <p>2026年 최저時給은 <strong>10,320ウォン</strong>으로 확정되었습니다. 이는 전년도 10,150ウォン 대비 170ウォン(1.7%) 인상된 금액입니다. 주 40시간 근무 기준 월 환산액(209時間)은 <strong>2,156,880ウォン</strong>이며, 연봉으로 환산하면 약 <strong>25,882,560ウォン</strong>에 해당합니다.</p>
+        <p>2026年の最低時給は<strong>10,320ウォン</strong>に確定されました。これは前年度の10,150ウォンに比べ170ウォン（1.7%）引き上げられた金額です。週40時間勤務基準の月換算額（209時間）は<strong>2,156,880ウォン</strong>であり、年俸に換算すると約<strong>25,882,560ウォン</strong>に該当します。</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低賃金の適用範囲</h3>
-        <p>최저임금은 1인 이상 근로자를 사용하는 모든 사업 또는 사업장에 적용됩니다. 정규직, 계약직, 파트타임 아르바이트 등 고용 형태와 관계없이 동일하게 적용되며, 외국인 근로자에게도 마찬가지로 적용됩니다. 다만, 수습 사용 중인 근로자로서 수습 사용한 날부터 3ヶ月 이내인 경우에는 최저임금의 90%까지 감액 적용이 가능합니다. 단, 1년 미만의 기간을 정하여 근로계약을 체결한 경우에는 수습 기간이라도 감액할 수 없습니다.</p>
+        <p>最低賃金は1人以上の労働者を使用するすべての事業または事業場に適用されます。正規職、契約職、パートタイムアルバイトなど雇用形態に関係なく同様に適用され、外国人労働者にも同様に適用されます。ただし、試用中の労働者として試用開始日から3ヶ月以内の場合は最低賃金の90%まで減額適用が可能です。ただし、1年未満の期間を定めて労働契約を締結した場合は試用期間でも減額できません。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低賃金違反の場合 벌칙</h3>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低賃金違反の場合の罰則</h3>
         <p>最低賃金法第28条により、最低賃金未満の賃金を支払った使用者は<strong>3年以下の懲役または2,000万ウォン以下の罰金</strong>に処される可能性があります。最低賃金違反が疑われる場合は雇用労働部(電話1350)に申告でき、事業場管轄の地方雇用労働庁に陳情書を提出することもできます。</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">過去5年間の最低賃金引上げ推移</h3>
-        <p>2022年 9,160ウォン → 2023年 9,620ウォン(5.0% 인상) → 2024年 9,860ウォン(2.5% 인상) → 2025年 10,150ウォン(2.9% 인상) → 2026年 10,320ウォン(1.7% 인상). 최근 몇 년간 引上率이 점차 둔화되는 추세를 보이고 있으며, 이는 경제 상황과 기업 부담 능력 등을 종합적으로 고려한 최저임금위원회의 결정에 따른 것입니다. 최저임금은 매년 8월 5일까지 고시되어 다음 해 1월 1일부터 적용됩니다.</p>
+        <p>2022年9,160ウォン → 2023年9,620ウォン（5.0%引上げ） → 2024年9,860ウォン（2.5%引上げ） → 2025年10,150ウォン（2.9%引上げ） → 2026年10,320ウォン（1.7%引上げ）。ここ数年間、引上率が徐々に鈍化する傾向を見せており、これは経済状況と企業の負担能力などを総合的に考慮した最低賃金委員会の決定に基づくものです。最低賃金は毎年8月5日までに告示され、翌年1月1日から適用されます。</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低賃金に含まれる賃金項目</h3>
         <p>最低賃金に算入される賃金の範囲も知っておくと良いでしょう。毎月1回以上定期的に支給する賃金が算入対象で、基本給だけでなく固定的に支給される各種手当も含まれます。ただし毎月支給されても、所定労働の対価でない残業・夜間・休日手当、年次未使用手当、家族手当、通勤手当などは除外されます。賞与は月換算額の5%超過分、福利厚生費(食費・交通費・宿泊費など)は月換算額の1%超過分が最低賃金に算入されます。自分の給与が最低賃金以上か確認する際は、これらの算入範囲を考慮して正確に比較する必要があります。</p>
     </div>
 
-<!-- ADSENSE-HIDE: 카카오 애드핏
-    <!-- 카카오 애드핏 -->
+<!-- ADSENSE-HIDE: カカオアドフィット
+    <!-- カカオアドフィット -->
     <div style="text-align:center; margin-bottom:24px;">
         <ins class="kakao_ad_area" style="display:none;"
         data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
@@ -466,14 +466,14 @@
 </div>
 
 
-<!-- ADSENSE-HIDE: 쿠팡 파트너스
-<!-- 쿠팡 파트너스 배너 -->
+<!-- ADSENSE-HIDE: クーパンパートナーズ
+<!-- クーパンパートナーズバナー -->
 <div class="coupang-banner">
     <script src="https://ads-partners.coupang.com/g.js"></script>
     <script>
         new PartnersCoupang.G({"id":977388,"template":"carousel","trackingCode":"AF3938469","width":"728","height":"90","tsource":""});
     </script>
-    <p class="coupang-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+    <p class="coupang-disclosure">この投稿はクーパンパートナーズの活動の一環であり、これに基づき一定額の手数料を受け取ります。</p>
 </div>
 -->
 
@@ -504,26 +504,26 @@ function calculate() {
     const weeklyD = parseInt(document.getElementById('weeklyDays').value);
     const includeHoliday = document.getElementById('includeHoliday').checked;
 
-    if (wage <= 0) { alert('時給을 입력해주세요.'); return; }
+    if (wage <= 0) { alert('時給を入力してください。'); return; }
 
     const weeklyH = dailyH * weeklyD;
 
     // 日給
     const daily = wage * dailyH;
 
-    // 주휴수당 (週15時間以上勤務 시)
+    // 週休手当（週15時間以上勤務時）
     let holidayPay = 0;
     if (includeHoliday && weeklyH >= 15) {
         holidayPay = wage * Math.min(weeklyH / 40, 1) * 8;
     }
 
-    // 주급
+    // 週給
     const weekly = wage * weeklyH + holidayPay;
 
-    // 월급 (월 환산: 주 평균 4.345주)
+    // 月給（月換算: 週平均4.345週）
     const monthly = weekly * 4.345;
 
-    // 연봉
+    // 年俸
     const yearly = monthly * 12;
 
     // 結果表示
@@ -536,14 +536,14 @@ function calculate() {
     tag.textContent = holidayPay > 0 ? '(週休含む)' : '';
 
     // 案内メッセージ
-    let note = `時給 ${wage.toLocaleString()}원 × 하루 ${dailyH}시간 × 주 ${weeklyD}일 기준입니다.`;
+    let note = `時給${wage.toLocaleString()}ウォン × 1日${dailyH}時間 × 週${weeklyD}日基準です。`;
     if (includeHoliday && weeklyH >= 15) {
         note += ` 週休手当${fmt(holidayPay)}含む。`;
     } else if (includeHoliday && weeklyH < 15) {
-        note += ` 주 근무시간이 15時間 미만으로 주휴수당이 발생하지 않습니다.`;
+        note += ` 週勤務時間が15時間未満のため週休手当が発生しません。`;
     }
     if (wage < 10320) {
-        note += ` 입력한 時給이 2026年 최저時給(10,320ウォン)보다 낮습니다.`;
+        note += ` 入力した時給が2026年最低時給（10,320ウォン）より低いです。`;
     }
     document.getElementById('resultNote').textContent = note;
 
@@ -568,7 +568,7 @@ function shareKakao() {
         objectType: 'feed',
         content: {
             title: '私の月給：' + (window._shareMonthly || '—'),
-            description: '2026年 최저時給 10,320ウォン 기준 월급 계산 결과',
+            description: '2026年最低時給10,320ウォン基準の月給計算結果',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/minimum-wage', webUrl: 'https://salarykorea.site/minimum-wage' }
         },

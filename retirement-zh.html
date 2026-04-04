@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="根据月薪和工作年限计算韩国退职金。">
-    <meta name="keywords" content="퇴직금계산기, 퇴직금계산, 퇴직소득세, 세후퇴직금, 퇴직금얼마">
+    <meta name="keywords" content="退职金计算器, 退职金计算, 退职所得税, 税后退职金, 退职金多少">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/retirement">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/retirement-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/retirement-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/retirement-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/retirement">
-    <meta property="og:title" content="퇴직금 계산기 - 내 퇴직금 얼마야?">
-    <meta property="og:description" content="월급과 근속기간을 입력하면 퇴직금과 税后金额을 바로 계산해드립니다.">
+    <meta property="og:title" content="退职金计算器 - 我的退职金是多少？">
+    <meta property="og:description" content="输入月薪和工作年限，立即计算退职金和税后金额。">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ 表单元素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -37,16 +37,16 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 슬라이더 */
+        /* 滑块 */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 结果区域 ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* 主要结果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -62,7 +62,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 공제 상세 카드 */
+        /* 扣除明细卡片 */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -76,7 +76,7 @@
         .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
         .b-total-label { font-size: 0.88rem; font-weight: 700; }
         .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
-        /* ══ 저장 / 공유 버튼 ══ */
+        /* ══ 保存/分享按钮 ══ */
         .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
         .action-row.show { display: flex; }
         .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -84,7 +84,7 @@
         .save-btn.loading { opacity: 0.5; cursor: wait; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 연봉 인상 시뮬레이터 ══ */
+        /* ══ 年薪加薪模拟器 ══ */
         .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -103,7 +103,7 @@
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
         .info-card ul { padding-left: 18px; margin-bottom: 10px; }
         .info-card ul li { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 4px; }
-        /* ══ 퇴직금 페이지 전용 ══ */
+        /* ══ 退职金页面专用 ══ */
         .warn-card { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 16px 20px; display: none; }
         .warn-card.show { display: block; animation: fadeUp 0.4s ease; }
         .warn-card p { color: #92400E; font-size: 0.85rem; font-weight: 600; line-height: 1.7; }
@@ -117,8 +117,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "퇴직금 계산기",
-    "description": "근속기간과 평균임금을 기준으로 퇴직금을 계산합니다. 퇴직소득세도 함께 확인하세요.",
+    "name": "退职金计算器",
+    "description": "根据工作年限和平均工资计算退职金。还可确认退职所得税。",
     "url": "https://salarykorea.site/retirement",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -219,12 +219,12 @@
     </div>
 
     <div class="dashboard">
-        <!-- 입력 영역 -->
+        <!-- 输入区域 -->
         <div class="input-col">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">信息输入</div>
-                    <div class="card-badge">2026年 기준</div>
+                    <div class="card-badge">2026年标准</div>
                 </div>
 
                 <div class="form-group">
@@ -281,27 +281,27 @@
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">퇴직금 计算</button>
+                <button class="submit-btn" onclick="calculate()">计算退职金</button>
             </div>
         </div>
 
-        <!-- 결과 영역 -->
+        <!-- 结果区域 -->
         <div class="result-col">
-            <!-- 1年 미만 경고 -->
+            <!-- 不满1年警告 -->
             <div class="warn-card" id="warnCard">
-                <p>퇴직금은 1年 이상 근무한 경우에만 발생합니다. (근로기준법 제34조)<br>
-                1年 미만 근무 시 퇴직금을 받을 수 없습니다.</p>
+                <p>退职金仅在工作满1年以上时产生。（劳动基准法第34条）<br>
+                工作不满1年无法获得退职金。</p>
             </div>
 
             <div class="result-placeholder" id="resultPlaceholder">
                 请输入信息<br>然后点击计算
             </div>
 
-            <!-- 메인 결과 -->
+            <!-- 主要结果 -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">预计退职金（税前）</div>
                 <div class="result-hero-amount" id="grossResult">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">韩元</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
                         <div class="rh-stat-label">退职所得税（预估）</div>
@@ -318,7 +318,7 @@
                 </div>
             </div>
 
-            <!-- 상세 내역 -->
+            <!-- 详细明细 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">退职金明细</div>
@@ -345,7 +345,7 @@
                 </div>
             </div>
 
-            <!-- 저장/공유 -->
+            <!-- 保存/分享 -->
             <div class="action-row" id="actionRow">
                 <button class="save-btn" onclick="saveImage()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -364,29 +364,29 @@
         <div class="info-card">
             <h2>什么是退职金？</h2>
             <p>
-                퇴직금은 근로자가 일정 기간 근무하고 퇴직할 때 사용자(회사)가 지급해야 하는 법정 급여입니다.
-                <strong>근로기준법 제34조</strong>에 따라 1주 소정근로시간이 15시간 이상인 근로자가
-                1年 이상 계속 근무한 경우, 퇴직 사유에 관계없이 반드시 받을 수 있습니다.
+                退职金是劳动者在一定期间工作后离职时，雇主（公司）必须支付的法定工资。
+                根据<strong>劳动基准法第34条</strong>，每周约定工作时间达15小时以上的劳动者
+                连续工作满1年以上时，无论离职原因均可获得。
             </p>
             <p>
-                퇴직 후 14일 이내에 지급이 원칙이며, 이를 어기면 회사는 지연이자(연 20%)를 추가로 지급해야 합니다.
+                原则上应在离职后14天内支付，违反时公司须额外支付延迟利息（年20%）。
             </p>
         </div>
 
         <div class="info-card">
-            <h2>퇴직금 계산 방법</h2>
+            <h2>退职金计算方法</h2>
             <div class="formula-box">
-                <strong>퇴직금</strong> = 日平均工资 x 30일 x (근속일수 / 365)<br><br>
-                <strong>日平均工资</strong> = 퇴직 전 3月간 받은 임금 총액 / 해당 기간의 총 일수 (약 91일)
+                <strong>退职金</strong> = 日平均工资 × 30天 × (工作天数 / 365)<br><br>
+                <strong>日平均工资</strong> = 离职前3个月工资总额 / 该期间总天数（约91天）
             </div>
             <p>
-                핵심은 <strong>평균임금</strong>입니다. 퇴직 직전 3月간의 기본급, 각종 수당, 상여금(월할 계산) 등을
-                모두 합산한 금액을 해당 기간의 일수로 나눕니다.
+                关键是<strong>平均工资</strong>。将离职前3个月的基本工资、各种津贴、奖金（按月折算）等
+                全部合算后除以该期间的天数。
             </p>
             <div class="highlight">
                 <p>
-                    월 평균 급여가 300万韩元이고 5年 근무했다면 퇴직금은 약 300万韩元 x 5 = <strong>약 1,500万韩元</strong>
-                    (1年 근무 = 약 1月치 월급이 퇴직금으로 쌓임)
+                    如果月平均工资为300万韩元且工作5年，则退职金约为300万韩元 × 5 = <strong>约1,500万韩元</strong>
+                    （工作1年 ≈ 约1个月工资累积为退职金）
                 </p>
             </div>
         </div>
@@ -394,32 +394,32 @@
 
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>퇴직소득세란?</h2>
+            <h2>什么是退职所得税？</h2>
             <p>
-                퇴직금에는 <strong>퇴직소득세</strong>가 부과됩니다. 일반 근로소득세와 달리 장기간 쌓인
-                소득이므로, 근속연수에 따른 공제 혜택이 큽니다.
+                退职金需缴纳<strong>退职所得税</strong>。与一般工资所得税不同，由于是长期积累的
+                收入，根据工作年限的扣除优惠较大。
             </p>
             <ul>
-                <li>근속연수가 길수록 퇴직소득공제가 커져 실제 세율이 낮아집니다</li>
-                <li>5年 근무자: 500万韩元 공제 / 10年: 1,500万韩元 공제 / 20年: 4,000万韩元 공제</li>
-                <li>퇴직금이 적거나 근속연수가 짧으면 세금이 거의 없을 수 있습니다</li>
+                <li>工作年限越长，退职所得扣除越大，实际税率越低</li>
+                <li>工作5年：500万韩元扣除 / 10年：1,500万韩元扣除 / 20年：4,000万韩元扣除</li>
+                <li>退职金较少或工作年限较短时，税金可能几乎为零</li>
             </ul>
             <div class="highlight">
-                <p>본 계산기의 퇴직소득세는 <strong>추정값</strong>입니다. 정확한 세액은 퇴직 시 회사 또는
-                국세청 홈택스를 통해 확인하세요.</p>
+                <p>本计算器的退职所得税为<strong>估算值</strong>。准确税额请在离职时通过公司或
+                国税厅HomeTax确认。</p>
             </div>
         </div>
 
         <div class="info-card">
-            <h2>퇴직금 vs 퇴직연금 (IRP)</h2>
+            <h2>退职金 vs 退职年金 (IRP)</h2>
             <p>
-                최근에는 퇴직금 대신 <strong>퇴직연금</strong>을 운영하는 회사가 많습니다.
-                퇴직연금은 DB형(확정급여형)과 DC형(확정기여형)으로 나뉩니다.
+                近年来许多公司运营<strong>退职年金</strong>代替退职金。
+                退职年金分为DB型（确定给付型）和DC型（确定缴费型）。
             </p>
             <ul>
-                <li><strong>DB형:</strong> 퇴직할 때 받을 급여가 미리 정해짐. 계산 방식은 일반 퇴직금과 동일</li>
-                <li><strong>DC형:</strong> 매年 회사가 적립하는 금액이 정해짐. 투자 성과에 따라 수령액이 달라짐</li>
-                <li><strong>IRP 의무 이전:</strong> 퇴직금이 300万韩元 초과 시 IRP(개인형 퇴직연금) 계좌로 수령 의무화</li>
+                <li><strong>DB型：</strong>离职时领取的金额预先确定。计算方式与一般退职金相同</li>
+                <li><strong>DC型：</strong>每年公司积累的金额确定。根据投资业绩领取金额不同</li>
+                <li><strong>IRP强制转入：</strong>退职金超过300万韩元时，须通过IRP（个人退职年金）账户领取</li>
             </ul>
         </div>
     </div>
@@ -428,55 +428,55 @@
         <div class="info-card">
             <h2>常见问题</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금은 퇴직 후 언제 받을 수 있나요?</div>
-                <div class="faq-a">근로기준법에 따라 퇴직일로부터 14일 이내에 지급해야 합니다. 지연 시 연 20%의 지연이자가 발생하며, 노동청에 신고할 수 있습니다.</div>
+                <div class="faq-q">Q. 退职金离职后什么时候能收到？</div>
+                <div class="faq-a">根据劳动基准法，须在离职日起14天内支付。延迟时产生年20%的延迟利息，可向劳动厅举报。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 계약직/파트타임도 퇴직금을 받을 수 있나요?</div>
-                <div class="faq-a">고용 형태와 관계없이 1年 이상 계속 근무하고 주 평균 15시간 이상 일했다면 퇴직금을 받을 수 있습니다.</div>
+                <div class="faq-q">Q. 合同工/兼职也能获得退职金吗？</div>
+                <div class="faq-a">与雇佣形式无关，只要连续工作1年以上且每周平均工作15小时以上即可获得退职金。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금을 IRP 계좌로 받아야 하나요?</div>
-                <div class="faq-a">퇴직금이 300万韩元을 초과하면 IRP(개인형 퇴직연금) 계좌로 수령하는 것이 의무입니다. IRP로 수령 시 세금이 유예되고, 55세 이후 연금으로 받으면 세율이 낮아집니다.</div>
+                <div class="faq-q">Q. 退职金必须通过IRP账户领取吗？</div>
+                <div class="faq-a">退职金超过300万韩元时，须通过IRP（个人退职年金）账户领取。通过IRP领取时税金可延期，55岁后以年金形式领取时税率降低。</div>
             </div>
         </div>
 
         <div class="info-card">
-            <h2>常见问题 (계속)</h2>
+            <h2>常见问题（续）</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금에도 세금이 붙나요?</div>
-                <div class="faq-a">퇴직소득세가 부과됩니다. 근속기간이 길수록 공제액이 커져 실제 세율은 낮아집니다. 5年 이하 근무자는 세금이 거의 없는 경우도 많습니다.</div>
+                <div class="faq-q">Q. 退职金也要缴税吗？</div>
+                <div class="faq-a">需缴纳退职所得税。工作年限越长扣除额越大，实际税率越低。工作5年以下的人税金几乎为零的情况也很多。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 상여금도 퇴직금 계산에 포함되나요?</div>
-                <div class="faq-a">퇴직 전 3月간 지급된 임금이 기준입니다. 매월 지급된 상여금은 포함되지만, 퇴직 직전에 일시적으로 지급된 특별상여는 포함되지 않을 수 있습니다.</div>
+                <div class="faq-q">Q. 奖金也包含在退职金计算中吗？</div>
+                <div class="faq-a">以离职前3个月支付的工资为基准。每月支付的奖金包含在内，但离职前临时支付的特别奖金可能不包含。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 회사가 퇴직금을 안 주면 어떻게 하나요?</div>
-                <div class="faq-a">고용노동부 고객상담센터(1350) 또는 가까운 고용노동청에 진정을 제기할 수 있습니다. 퇴직금 미지급은 3年 이하 징역 또는 2,000万韩元 이하 벌금에 해당하는 범죄입니다.</div>
+                <div class="faq-q">Q. 公司不支付退职金怎么办？</div>
+                <div class="faq-a">可向雇佣劳动部客户咨询中心（1350）或最近的雇佣劳动厅提出申诉。不支付退职金属犯罪行为，可处3年以下有期徒刑或2,000万韩元以下罚款。</div>
             </div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>퇴직금 제도 상세 안내</h2>
-        <p>퇴직금은 근로자가 일정 기간 이상 근무한 후 퇴직할 때 받는 금전적 보상으로, 근로자퇴직급여보장법에 따라 보장됩니다. 퇴직금을 정확히 이해하면 퇴직 시기를 계획하거나 이직을 결정할 때 중요한 판단 기준이 됩니다.</p>
+        <h2>退职金制度详细说明</h2>
+        <p>退职金是劳动者工作满一定期间后离职时获得的经济补偿，根据劳动者退职工资保障法予以保障。准确了解退职金，在规划离职时间或决定跳槽时可作为重要判断依据。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 지급 조건</h3>
-        <p>퇴직금을 받으려면 <strong>계속 근로기간이 1年 이상</strong>이어야 하며, <strong>4주간을 평균하여 1주간 소정근로시간이 15시간 이상</strong>이어야 합니다. 정규직, 계약직, 파트타임 등 고용 형태와 관계없이 이 두 가지 조건을 충족하면 퇴직금을 받을 수 있습니다. 사용자는 근로자가 퇴직한 날로부터 14일 이내에 퇴직금을 지급해야 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退职金支付条件</h3>
+        <p>领取退职金须<strong>连续工作期间满1年以上</strong>，且<strong>4周平均每周约定工作时间达15小时以上</strong>。无论正式工、合同工、兼职等雇佣形式，满足这两个条件即可领取退职金。雇主须在劳动者离职之日起14天内支付退职金。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 계산 방법</h3>
-        <p>퇴직금 = <strong>(日平均工资 &times; 30일) &times; (총 근속일수 &divide; 365)</strong>로 계산됩니다. 여기서 日平均工资은 퇴직 전 3月간 지급된 임금 총액을 해당 기간의 총 일수로 나눈 금액입니다. 평균임금에 포함되는 항목은 기본급, 고정 수당, 정기적으로 지급되는 상여금 등이 있으며, 실비 변상적 급여(교통비 실비, 출장비 등), 경조사비, 일시적 상여금 등은 포함되지 않습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退职金计算方法</h3>
+        <p>退职金 = <strong>（日平均工资 &times; 30天）&times;（总工作天数 &divide; 365）</strong>。其中日平均工资是离职前3个月支付的工资总额除以该期间总天数。平均工资包含的项目有基本工资、固定津贴、定期发放的奖金等，实报实销性工资（交通费实报、出差费等）、礼金、临时奖金等不包含在内。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 중간정산</h3>
-        <p>퇴직금 중간정산은 원칙적으로 금지되어 있지만, 법에서 정한 사유에 해당하면 가능합니다. 대표적인 사유로는 무주택자의 주택 구입, 본인 또는 부양가족의 6月 이상 요양이 필요한 경우, 최근 5年 이내 파산선고 또는 개인회생절차 개시 결정, 임금피크제 적용 등이 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退职金中途结算</h3>
+        <p>退职金中途结算原则上被禁止，但符合法定事由时可以进行。代表性事由包括无房者购房、本人或赡养家属需6个月以上疗养、近5年内宣告破产或个人再生程序启动、适用工资峰值制等。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 세금과 IRP</h3>
-        <p>퇴직금에는 퇴직소득세가 부과됩니다. 근속연수에 따른 공제와 환산급여 기준 차등과세가 적용되어, 근속연수가 길수록 세금 부담이 줄어듭니다. 퇴직금을 IRP(개인형 퇴직연금) 계좌로 이전하면 퇴직소득세 납부를 연금 수령 시점까지 이연할 수 있으며, 연금으로 수령 시 퇴직소득세의 60~70%만 부과되어 절세 효과가 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退职金税金与IRP</h3>
+        <p>退职金需缴纳退职所得税。根据工作年限的扣除和换算工资差等课税，工作年限越长税负越轻。将退职金转入IRP（个人退职年金）账户，可将退职所得税的缴纳延期至领取年金时，且以年金形式领取时仅征收退职所得税的60~70%，具有节税效果。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 미지급 시 대처 방법</h3>
-        <p>사용자가 퇴직 후 14일 이내에 퇴직금을 지급하지 않으면 근로기준법 위반에 해당합니다. 먼저 회사에 서면으로 지급을 요청하고, 그래도 해결되지 않는 경우 고용노동부(1350)에 상담하거나 관할 지방고용노동청에 진정서를 제출할 수 있습니다. 퇴직금 체불에 대한 지연이자는 연 20%가 적용되며, 퇴직금 청구권의 소멸시효는 3年이므로 가능한 빨리 조치를 취하는 것이 중요합니다. 회사가 도산하여 퇴직금을 받지 못한 경우에는 근로복지공단의 체불임금 대지급금 제도를 활용할 수 있으며, 최대 체불임금의 상당 부분을 지원받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">退职金未支付时的应对方法</h3>
+        <p>雇主在离职后14天内未支付退职金属违反劳动基准法。首先以书面方式向公司要求支付，仍未解决时可向雇佣劳动部（1350）咨询或向管辖地方雇佣劳动厅提交申诉书。退职金拖欠的延迟利息为年20%，退职金请求权的消灭时效为3年，因此尽快采取措施非常重要。公司破产导致无法收到退职金时，可利用劳动福利公团的欠薪代付金制度，最高可获得相当部分的欠薪支援。</p>
     </div>
 
 
@@ -499,7 +499,7 @@ salaryInput.addEventListener('input', function() {
     this.value = v ? v.toLocaleString('ko-KR') : '';
 });
 
-// 누진세 계산
+// 累进税计算
 function taxFromBase(t) {
     if (t <= 0) return 0;
     if (t <= 14000000)  return t * 0.06;
@@ -510,7 +510,7 @@ function taxFromBase(t) {
     return 94060000 + (t - 300000000) * 0.40;
 }
 
-// 근속연수공제 (2023年 개정, 2026年 현행)
+// 工作年限扣除（2023年修订，2026年现行）
 function yearsDeduction(y) {
     if (y <= 5)  return y * 1000000;
     if (y <= 10) return 5000000  + (y - 5)  * 2000000;
@@ -518,7 +518,7 @@ function yearsDeduction(y) {
     return 40000000 + (y - 20) * 3000000;
 }
 
-// 환산급여공제
+// 换算工资扣除
 function hwansanDeduction(h) {
     if (h <= 8000000)   return h;
     if (h <= 70000000)  return 8000000  + (h - 8000000)  * 0.6;
@@ -534,7 +534,7 @@ function calcRetirementTax(retirement, totalYears) {
     const hwanDed  = hwansanDeduction(hwansan);
     const taxBase  = Math.max(0, (hwansan - hwanDed)) * y / 12;
     const grossTax = taxFromBase(taxBase);
-    return grossTax * 1.1; // 지방소득세 포함
+    return grossTax * 1.1; // 含地方所得税
 }
 
 function calculate() {
@@ -543,9 +543,9 @@ function calculate() {
     const months = parseInt(document.getElementById('workMonths').value);
     const totalMonths = years * 12 + months;
 
-    if (!salary) { alert('월 평균 급여를 입력해주세요.'); return; }
+    if (!salary) { alert('请输入月平均工资。'); return; }
 
-    // 1年 미만
+    // 不满1年
     if (totalMonths < 12) {
         document.getElementById('warnCard').classList.add('show');
         document.getElementById('resultCard').classList.remove('show');
@@ -564,7 +564,7 @@ function calculate() {
     const tax         = calcRetirementTax(retirement, totalYears);
     const net         = Math.max(0, retirement - tax);
 
-    // 카운터 애니메이션
+    // 计数动画
     counter('grossResult', retirement);
     document.getElementById('taxResult').textContent   = '-' + fmt(tax) + '韩元';
     document.getElementById('netResult').textContent   = fmt(net) + '韩元';
@@ -573,13 +573,13 @@ function calculate() {
     document.getElementById('resultPlaceholder').style.display = 'none';
     document.getElementById('resultCard').classList.add('show');
 
-    // 상세 내역
+    // 详细明细
     document.getElementById('bdGross').textContent = fmt(retirement) + '韩元';
     document.getElementById('bdTax').textContent = '-' + fmt(tax) + '韩元';
     document.getElementById('bdNet').textContent = fmt(net) + '韩元';
     document.getElementById('breakdownCard').classList.add('show');
 
-    // 바 애니메이션
+    // 进度条动画
     const maxVal = retirement;
     setTimeout(() => {
         document.getElementById('barGross').style.width = '100%';
@@ -608,14 +608,14 @@ function saveImage() {
     const target = document.getElementById('resultCard');
     html2canvas(target, { scale: 2, backgroundColor: '#1E40AF', borderRadius: 16 }).then(canvas => {
         const link = document.createElement('a');
-        link.download = '퇴직금_계산결과.png';
+        link.download = '退职金_计算结果.png';
         link.href = canvas.toDataURL();
         link.click();
         btn.classList.remove('loading');
     }).catch(() => { btn.classList.remove('loading'); });
 }
 
-// 초기값
+// 初始值
 salaryInput.value = (3000000).toLocaleString('ko-KR');
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
@@ -625,8 +625,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 퇴직금은 ' + (window._shareRetirement || '—'),
-            description: '퇴직금 계산기로 예상 퇴직금을 확인해보세요',
+            title: '我的退职金是 ' + (window._shareRetirement || '—'),
+            description: '用退职金计算器查看预估退职金',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/retirement', webUrl: 'https://salarykorea.site/retirement' }
         },

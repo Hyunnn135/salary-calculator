@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="2026年基準で韓国の国民年金・健康保険・長期療養・雇用保険を自動計算します。">
-    <meta name="keywords" content="4대보험계산기, 国民年金계산기, 健康保険계산기, 雇用保険계산기, 4대보험료">
+    <meta name="keywords" content="四大保険計算機, 国民年金計算機, 健康保険計算機, 雇用保険計算機, 四大保険料">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/insurance">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/insurance-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/insurance-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/insurance-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/insurance">
-    <meta property="og:title" content="4대보험 계산기 2026 - 내 보험료 얼마야?">
-    <meta property="og:description" content="월급 입력하면 国民年金·健康保険·장기요양·雇用保険료를 자동 계산합니다.">
+    <meta property="og:title" content="四大保険計算機 2026 - 私の保険料はいくら？">
+    <meta property="og:description" content="月給を入力すると国民年金・健康保険・長期療養・雇用保険料を自動計算します。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ フォーム要素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -35,7 +35,7 @@
         .form-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; font-weight: 600; color: var(--text-tertiary); pointer-events: none; }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 結果エリア ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
@@ -48,7 +48,7 @@
         @media (max-width: 768px) {
             .result-hero-amount { font-size: 2.2rem; }
         }
-        /* 공제 상세 카드 */
+        /* 控除詳細カード */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -58,7 +58,7 @@
         .b-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
         .b-rate { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 2px; }
         .b-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-left: 12px; min-width: 90px; text-align: right; }
-        /* 비교표 카드 */
+        /* 比較表カード */
         .compare-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .compare-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -69,15 +69,15 @@
         .cmp-table .emp { color: var(--accent); font-weight: 700; }
         .cmp-table .com { color: #059669; font-weight: 700; }
         .cmp-table tr:last-child td { border-bottom: none; font-weight: 800; background: var(--accent-light); }
-        /* 저장/공유 버튼 */
+        /* 保存/共有ボタン */
         .action-row { display: none; gap: 10px; margin-top: 0; }
         .action-row.show { display: flex; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* 하이라이트 박스 */
+        /* ハイライトボックス */
         .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
         .highlight-box p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; margin: 0; }
-        /* 요율표 */
+        /* 料率表 */
         .rate-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
         .rate-table th { background: var(--surface-alt); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); }
         .rate-table td { padding: 11px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
@@ -93,8 +93,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "4대보험 계산기",
-    "description": "2026年基準 国民年金, 健康保険, 長期療養保険, 雇用保険료를 계산합니다.",
+    "name": "四大保険計算機",
+    "description": "2026年基準で国民年金、健康保険、長期療養保険、雇用保険料を計算します。",
     "url": "https://salarykorea.site/insurance",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -217,7 +217,7 @@
                 <button class="submit-btn" onclick="calculate()">保険料を計算</button>
             </div>
 
-            <!-- 공유 버튼 -->
+            <!-- 共有ボタン -->
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
@@ -233,11 +233,11 @@
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">月額本人負担4大保険料合計</div>
                 <div class="result-hero-amount" id="totalAmount">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">ウォン</div>
                 <div class="result-hero-msg" id="resultSub"></div>
             </div>
 
-            <!-- 공제 상세 -->
+            <!-- 控除詳細 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">保険項目別詳細</div>
@@ -262,7 +262,7 @@
                     <div class="b-dot" style="background:#A78BFA;"></div>
                     <div class="b-info">
                         <div class="b-name">長期療養保険</div>
-                        <div class="b-rate">健康保険료의 12.95%</div>
+                        <div class="b-rate">健康保険料の12.95%</div>
                     </div>
                     <div class="b-amount" id="care">—</div>
                 </div>
@@ -277,15 +277,15 @@
             </div>
 
             <!-- 結果プレースホルダー -->
-            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 計算する 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">月給を入力して計算ボタンを押してください</div>
         </div>
 
     </div>
 
-    <!-- 본인 vs 회사 비교 -->
+    <!-- 本人 vs 会社 比較 -->
     <div class="compare-card" id="compareCard">
         <div class="card-header">
-            <div class="card-title">本人 vs 会社 비교</div>
+            <div class="card-title">本人 vs 会社 比較</div>
         </div>
         <table class="cmp-table">
             <thead>
@@ -310,7 +310,7 @@
                     <td id="c-health-tot">—</td>
                 </tr>
                 <tr>
-                    <td>장기요양</td>
+                    <td>長期療養</td>
                     <td class="emp" id="c-care-emp">—</td>
                     <td class="com" id="c-care-com">—</td>
                     <td id="c-care-tot">—</td>
@@ -330,7 +330,7 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>※ 雇用保険 会社은 사업장 규모에 따라 다릅니다. 위 표는 150인 미만 사업장(0.9%) 기준입니다.</p>
+            <p>※ 雇用保険の会社負担分は事業場の規模によって異なります。上記の表は150人未満の事業場（0.9%）基準です。</p>
         </div>
     </div>
 
@@ -339,35 +339,35 @@
         <div class="info-card" style="margin-bottom:0;">
             <h2>4大保険とは？</h2>
             <p>
-                4대보험은 국가에서 운영하는 <strong>4가지 의무 가입 사회보험</strong>입니다.
-                근로자와 사용자(회사)가 함께 보험료를 나눠서 부담합니다.
+                四大保険は国が運営する<strong>4つの義務加入社会保険</strong>です。
+                労働者と使用者（会社）が共に保険料を分担します。
             </p>
             <ul>
-                <li><strong>国民年金</strong> — 노후 소득 보장. 만 60세 이후 연금 수령</li>
-                <li><strong>健康保険</strong> — 병원 치료비 절감. 실제 의료비의 일부만 本人</li>
-                <li><strong>長期療養保険</strong> — 고령·장애로 거동이 불편할 때 요양 서비스 지원</li>
-                <li><strong>雇用保険</strong> — 실직 시 실업급여 수령, 육아휴직급여 등 지원</li>
+                <li><strong>国民年金</strong> — 老後の所得保障。満60歳以降に年金受給</li>
+                <li><strong>健康保険</strong> — 病院治療費の軽減。実際の医療費の一部のみ本人負担</li>
+                <li><strong>長期療養保険</strong> — 高齢・障害で行動が不自由な時に療養サービスを支援</li>
+                <li><strong>雇用保険</strong> — 失職時に失業手当を受給、育児休暇手当などを支援</li>
             </ul>
         </div>
 
         <div class="info-card" style="margin-bottom:0;">
             <h2>よくある質問</h2>
             <div class="faq-item">
-                <div class="faq-q">아르바이트생도 4대보험에 가입해야 하나요?</div>
-                <div class="faq-a">1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미만이면 国民年金·雇用保険은 제외될 수 있습니다.</div>
+                <div class="faq-q">アルバイトも四大保険に加入する必要がありますか？</div>
+                <div class="faq-a">1週間の所定労働時間が15時間以上であれば四大保険の義務加入対象です。15時間未満であれば国民年金・雇用保険は除外される場合があります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">월급이 올라도 国民年金이 안 올라가던데요?</div>
-                <div class="faq-a">国民年金은 월 기준소득월액 상한(617万ウォン)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
+                <div class="faq-q">月給が上がっても国民年金が上がらないのですが？</div>
+                <div class="faq-a">国民年金は月の基準所得月額の上限（617万ウォン）があるため、これを超える給与には追加保険料が発生しません。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">프리랜서는 4대보험을 어떻게 내나요?</div>
-                <div class="faq-a">프리랜서(자영업자)는 国民年金과 健康保険에 지역가입자로 가입하며, 보험료를 전액 본인이 부담합니다.</div>
+                <div class="faq-q">フリーランスは四大保険をどのように納めますか？</div>
+                <div class="faq-a">フリーランス（自営業者）は国民年金と健康保険に地域加入者として加入し、保険料を全額本人が負担します。</div>
             </div>
         </div>
     </div>
 
-    <!-- 2026年 요율표 -->
+    <!-- 2026年料率表 -->
     <div class="info-card">
         <h2>2026年保険料率表</h2>
         <table class="rate-table">
@@ -389,8 +389,8 @@
                 </tr>
                 <tr>
                     <td class="name">長期療養保険</td>
-                    <td class="highlight">健康保険료의 12.95%</td>
-                    <td>健康保険료의 12.95%</td>
+                    <td class="highlight">健康保険料の12.95%</td>
+                    <td>健康保険料の12.95%</td>
                     <td>—</td>
                 </tr>
                 <tr>
@@ -402,29 +402,29 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>国民年金은 월 기준소득월액 <strong>상한 617万ウォン</strong>까지만 적용됩니다. 월급이 617万ウォン을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
+            <p>国民年金は月の基準所得月額<strong>上限617万ウォン</strong>までのみ適用されます。月給が617万ウォンを超えても保険料はそれ以上増えません。</p>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>2026年4大保険詳細ガイド</h2>
-        <p>4대보험은 国民年金, 健康保険, 長期療養保険, 雇用保険을 통칭하며, 근로자와 사업주가 공동으로 부담합니다. 매달 급여에서 자동으로 공제되는 4대보험료는 소득에 따라 달라지며, 정확한 보험료를 이해하면 급여 관리에 큰 도움이 됩니다.</p>
+        <p>四大保険は国民年金、健康保険、長期療養保険、雇用保険の総称であり、労働者と事業主が共同で負担します。毎月の給与から自動的に控除される四大保険料は所得によって異なり、正確な保険料を理解すれば給与管理に大きな助けになります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">国民年金 (전체 9%, 근로자 4.5%)</h3>
-        <p>国民年金은 노후 소득 보장을 위한 사회보험입니다. 2026年基準 기준소득월액 상한은 637万ウォン, 하한은 39万ウォン입니다. 상한을 초과하는 소득이 있어도 637万ウォン 기준으로만 보험료가 부과됩니다. 만 18세 이상 60세 미만 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">国民年金（全体9%、労働者4.5%）</h3>
+        <p>国民年金は老後の所得保障のための社会保険です。2026年基準で基準所得月額の上限は637万ウォン、下限は39万ウォンです。上限を超える所得があっても637万ウォン基準でのみ保険料が課されます。満18歳以上60歳未満の労働者が加入対象であり、65歳から年金を受給できます。納付した保険料は、今後の老齢年金、障害年金、遺族年金の財源となります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">健康保険 (전체 7.19%, 근로자 3.595%)</h3>
-        <p>健康保険은 질병이나 부상에 대한 의료비 부담을 줄여주는 보험입니다. 2026年 보험료율은 7.19%로 전년 대비 소폭 인상되었습니다. 소득에 비례하여 부과되며, 国民年金과 달리 상한 없이 전체 소득에 적용됩니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 健康保険 혜택을 받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">健康保険（全体7.19%、労働者3.595%）</h3>
+        <p>健康保険は疾病や負傷に対する医療費の負担を軽減する保険です。2026年の保険料率は7.19%で前年比わずかに引き上げられました。所得に比例して課され、国民年金とは異なり上限なく全所得に適用されます。職場加入者の被扶養者（配偶者、両親など）は追加保険料の負担なく健康保険の恩恵を受けることができます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">長期療養保険 (健康保険료의 13.14%)</h3>
-        <p>長期療養保険은 65세 이상 고령자 또는 노인성 질환을 가진 분들에게 돌봄 서비스를 제공하기 위한 보험입니다. 健康保険료에 연동하여 부과되며, 2026年에는 健康保険료의 13.14%가 적용됩니다. 健康保険 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">長期療養保険（健康保険料の13.14%）</h3>
+        <p>長期療養保険は65歳以上の高齢者または老人性疾患をお持ちの方にケアサービスを提供するための保険です。健康保険料に連動して課され、2026年には健康保険料の13.14%が適用されます。健康保険加入者であれば別途の加入手続きなく自動的に課されます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">雇用保険 (전체 1.8%, 근로자 0.9%)</h3>
-        <p>雇用保険은 실업급여, 육아휴직급여, 직업능력개발 등의 재원이 되는 보험입니다. 근로자 부담분은 0.9%이며, 사업주는 기업 규모에 따라 0.9~1.5%를 추가 부담합니다. 주 15시간 미만 근로자, 65세 이후 새로 고용된 근로자 등은 雇用保険 적용이 제외될 수 있습니다. 프리랜서(3.3% 원천징수 대상자)는 직장가입이 아닌 지역가입자로 国民年金과 健康保険에 별도 가입해야 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">雇用保険（全体1.8%、労働者0.9%）</h3>
+        <p>雇用保険は失業手当、育児休暇手当、職業能力開発などの財源となる保険です。労働者の負担分は0.9%で、事業主は企業規模に応じて0.9～1.5%を追加負担します。週15時間未満の労働者、65歳以降に新たに雇用された労働者などは雇用保険の適用が除外される場合があります。フリーランス（3.3%源泉徴収対象者）は職場加入ではなく地域加入者として国民年金と健康保険に別途加入する必要があります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">4대보험 관련 유용한 팁</h3>
-        <p>4대보험료는 매년 보수총액 신고를 통해 정산됩니다. 전년도 실제 소득이 신고 소득보다 많거나 적은 경우 보험료 차액이 추가 부과되거나 환급될 수 있습니다. 健康保険의 경우 피부양자 자격 요건이 점점 강화되고 있어, 피부양자의 소득이나 재산이 일정 기준을 초과하면 지역가입자로 전환될 수 있으니 주의해야 합니다. 4대보험 가입 여부와 보험료 내역은 4대사회보험 정보연계센터(4insure.or.kr)에서 조회할 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">四大保険に関する有用なヒント</h3>
+        <p>四大保険料は毎年の報酬総額申告を通じて精算されます。前年度の実際の所得が申告所得より多いまたは少ない場合、保険料の差額が追加課されるか還付される場合があります。健康保険の場合、被扶養者の資格要件がますます厳格化されており、被扶養者の所得や資産が一定基準を超えると地域加入者に転換される場合があるので注意が必要です。四大保険の加入有無と保険料の内訳は四大社会保険情報連携センター（4insure.or.kr）で照会できます。</p>
     </div>
 
 
@@ -449,15 +449,15 @@ salaryInput.addEventListener('input', function() {
 
 function calculate() {
     const salary = parseVal(salaryInput.value);
-    if (!salary) { alert('월 급여를 입력해주세요.'); return; }
+    if (!salary) { alert('月給を入力してください。'); return; }
 
-    // 2026年 요율
+    // 2026年料率
     const PENSION_RATE  = 0.045;   // 国民年金 4.5%
     const HEALTH_RATE   = 0.03545; // 健康保険 3.545%
-    const CARE_RATE     = 0.1295;  // 長期療養保険 健康保険료의 12.95%
+    const CARE_RATE     = 0.1295;  // 長期療養保険 健康保険料の12.95%
     const EMPLOY_RATE   = 0.009;   // 雇用保険 0.9%
 
-    // 国民年金 상한 617万ウォン 적용
+    // 国民年金上限617万ウォン適用
     const pensionBase = Math.min(salary, 6170000);
     const pension  = Math.round(pensionBase * PENSION_RATE);
     const health   = Math.round(salary * HEALTH_RATE);
@@ -466,20 +466,20 @@ function calculate() {
     const total    = pension + health + care + employ;
     const netSalary = salary - total;
 
-    // 플레이스홀더 숨김
+    // プレースホルダー非表示
     document.getElementById('resultPlaceholder').style.display = 'none';
 
     // 結果表示
     document.getElementById('totalAmount').textContent = fmt(total);
     document.getElementById('resultSub').textContent =
-        '실수령 예상 ' + fmt(netSalary) + '원 (소득세 제외)';
+        '実受取予想 ' + fmt(netSalary) + 'ウォン（所得税除く）';
 
     document.getElementById('pension').textContent = fmt(pension) + 'ウォン';
     document.getElementById('health').textContent  = fmt(health)  + 'ウォン';
     document.getElementById('care').textContent    = fmt(care)    + 'ウォン';
     document.getElementById('employ').textContent  = fmt(employ)  + 'ウォン';
 
-    // 비교표 (会社 - 雇用保険 회사분 0.9%)
+    // 比較表（会社 - 雇用保険会社負担0.9%）
     const comPension = pension;
     const comHealth  = health;
     const comCare    = care;
@@ -502,7 +502,7 @@ function calculate() {
     window._shareInsurance = fmt(total) + 'ウォン';
 }
 
-// 초기값
+// 初期値
 salaryInput.value = (3000000).toLocaleString('ko-KR');
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
@@ -512,8 +512,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 4대보험료는 월 ' + (window._shareInsurance || '—'),
-            description: '2026年基準 4대보험 계산 결과',
+            title: '私の四大保険料は月 ' + (window._shareInsurance || '—'),
+            description: '2026年基準四大保険の計算結果',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/insurance', webUrl: 'https://salarykorea.site/insurance' }
         },

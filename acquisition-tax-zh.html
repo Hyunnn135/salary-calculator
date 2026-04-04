@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="根据房价和住房数计算韩国不动产取得税（2026年标准）。">
-    <meta name="keywords" content="取得税 계산기, 부동산 取得税, 取得税율, 地方教育税, 农渔村特别税">
+    <meta name="keywords" content="取得税计算器, 不动产取得税, 取得税率, 地方教育税, 农渔村特别税">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/acquisition-tax">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/acquisition-tax-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/acquisition-tax-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/acquisition-tax-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/acquisition-tax">
-    <meta property="og:title" content="取得税 계산기 - 2026年 부동산 取得税 자동계산 | 월급연구소">
-    <meta property="og:description" content="매매가격, 住房数, 면적을 입력하면 取得税·地方教育税·农渔村特别税를 자동 계산합니다.">
+    <meta property="og:title" content="取得税计算器 - 2026年不动产取得税自动计算 | 工资研究所">
+    <meta property="og:description" content="输入买卖价格、住房数、面积，自动计算取得税·地方教育税·农渔村特别税。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
         
         
 
-        /* ══ 폼 요소 ══ */
+        /* ══ 表单元素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -48,7 +48,7 @@
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-        /* 슬라이더 */
+        /* 滑块 */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
@@ -56,11 +56,11 @@
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
 
-        /* ══ 결과 영역 ══ */
+        /* ══ 结果区域 ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
 
-        /* 메인 결과 */
+        /* 主结果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -77,7 +77,7 @@
             .rh-stat-val { font-size: 0.78rem; }
         }
 
-        /* 공제 상세 카드 */
+        /* 扣除明细卡片 */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -189,7 +189,7 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">부동산 정보 입력</div>
+                    <div class="card-title">不动产信息输入</div>
                     <div class="card-badge">2026年</div>
                 </div>
 
@@ -200,17 +200,17 @@
                         <span class="form-unit">韩元</span>
                     </div>
                     <input type="range" class="form-slider" id="priceSlider" min="50000000" max="3000000000" step="10000000" value="500000000">
-                    <div class="slider-labels"><span>5,000만</span><span>10亿</span><span>20亿</span><span>30亿</span></div>
+                    <div class="slider-labels"><span>5,000万</span><span>10亿</span><span>20亿</span><span>30亿</span></div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">住房数</label>
                     <select class="form-select" id="housingCount">
-                        <option value="1" selected>1套 (기본 세율)</option>
-                        <option value="2adj">2주택 (조정대상지역)</option>
-                        <option value="2non">2주택 (비조정지역)</option>
-                        <option value="3adj">3주택 이상 (조정대상지역)</option>
-                        <option value="3non">3주택 이상 (비조정지역)</option>
+                        <option value="1" selected>1套（基本税率）</option>
+                        <option value="2adj">2套住房（调控区）</option>
+                        <option value="2non">2套住房（非调控区）</option>
+                        <option value="3adj">3套以上住房（调控区）</option>
+                        <option value="3non">3套以上住房（非调控区）</option>
                     </select>
                 </div>
 
@@ -233,7 +233,7 @@
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">总缴纳税额</div>
                 <div class="result-hero-amount" id="totalResult">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">韩元</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
                         <div class="rh-stat-label">取得税</div>
@@ -250,7 +250,7 @@
                 </div>
             </div>
 
-            <!-- 공제 상세 -->
+            <!-- 扣除明细 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">取得税计算详情</div>
@@ -272,27 +272,27 @@
     <div class="bottom-grid">
         <div class="info-card">
             <h2>取得税须知</h2>
-            <p><strong>신고·납부 기한:</strong> 부동산 잔금 지급일로부터 60일 이내에 관할 시·군·구청에 신고·납부해야 합니다. 기한을 넘기면 가산세가 부과됩니다.</p>
-            <p><strong>조정대상지역 세율:</strong> 조정대상지역 여부에 따라 다주택자의 세율이 크게 달라집니다. 2주택 조정대상지역은 8%, 3주택 이상은 12%가 적용됩니다.</p>
-            <p><strong>일시적 2주택 특례:</strong> 이사 등으로 일시적 2주택이 된 경우, 3년 이내에 기존 주택을 매도하면 1套 기본 세율이 적용됩니다.</p>
+            <p><strong>申报·缴纳期限：</strong>须在不动产尾款支付之日起60日内向管辖市·郡·区厅申报·缴纳。逾期将被加收滞纳金。</p>
+            <p><strong>调控区税率：</strong>根据是否属于调控区，多套住房持有者的税率会有很大差异。调控区2套住房适用8%，3套以上适用12%。</p>
+            <p><strong>临时2套住房特例：</strong>因搬家等原因临时拥有2套住房时，在3年内出售原有住房可适用1套住房基本税率。</p>
         </div>
         <div class="info-card">
             <h2>常见问题</h2>
             <div class="faq-item">
-                <div class="faq-q">取得税는 언제 내야 하나요?</div>
-                <div class="faq-a">잔금일 또는 등기일 중 빠른 날로부터 60일 이내에 신고·납부해야 합니다. 기한을 넘기면 무신고 가산세(20%)가 부과됩니다.</div>
+                <div class="faq-q">取得税何时缴纳？</div>
+                <div class="faq-a">须在尾款支付日或登记日（以较早者为准）起60日内申报·缴纳。逾期将加收未申报滞纳金（20%）。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">조정대상지역이 뭔가요?</div>
-                <div class="faq-a">정부가 부동산 과열을 亿제하기 위해 지정한 지역입니다. 조정대상지역에서 다주택을 취득하면 중과세율이 적용되어 세 부담이 크게 높아집니다.</div>
+                <div class="faq-q">什么是调控区？</div>
+                <div class="faq-a">调控区是政府为抑制房地产过热而指定的区域。在调控区购入多套住房将适用重课税率，税负会大幅增加。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">생애최초 주택 감면이 있나요?</div>
-                <div class="faq-a">네. 생애최초로 주택을 구입하는 경우 取得税 200万韩元 한도 내에서 감면을 받을 수 있습니다. 소득·가격 요건 등 세부 조건이 있으니 확인이 필요합니다.</div>
+                <div class="faq-q">有首次购房减免吗？</div>
+                <div class="faq-a">有的。首次购房时可在取得税200万韩元限额内享受减免。具体条件包括收入·价格要求等需要确认。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">분양권도 取得税가 있나요?</div>
-                <div class="faq-a">네. 분양권 자체 거래 시점이 아니라, 잔금을 완납하고 소유권을 이전받는 시점에 取得税를 납부합니다. 住房数 산정에도 포함됩니다.</div>
+                <div class="faq-q">购房预售权也有取得税吗？</div>
+                <div class="faq-a">有的。取得税不是在预售权交易时缴纳，而是在全额支付尾款并过户时缴纳。也计入住房数量。</div>
             </div>
         </div>
     </div>
@@ -300,19 +300,19 @@
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>税率与减免优惠总整理</h2>
-        <p>取得税는 부동산, 차량 등의 자산을 취득할 때 부과되는 지방세입니다. 특히 주택을 매매할 때 가장 큰 비중을 차지하는 부대비용 중 하나로, 취득가액에 따라 수백万韩元에서 수천万韩元까지 발생할 수 있어 사전에 정확한 계산이 필수입니다.</p>
+        <p>取得税是在获取不动产、车辆等资产时征收的地方税。尤其是住房买卖时最大的附带费用之一，根据取得价额可能产生数百万至数千万韩元，因此提前精确计算必不可少。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주택 取得税율</h3>
-        <p>주택 매매 시 取得税율은 취득가액에 따라 차등 적용됩니다. 6亿원 이하는 1%, 6亿~9亿원은 구간별로 1~3%가 차등 적용(취득가액에 따라 세율이 점진적으로 증가), 9亿원 초과는 3%입니다. 다주택자의 경우 중과세가 적용되어 조정대상지역 2주택은 8%, 3주택 이상은 12%의 세율이 부과됩니다. 법인이 주택을 취득하는 경우에는 12% 단일 세율이 적용됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">住房取得税率</h3>
+        <p>住房买卖时取得税率根据取得价额差异适用。6亿韩元以下为1%，6亿~9亿韩元按区间差异适用1~3%（取得价额越高税率逐步递增），9亿韩元以上为3%。多套住房持有者适用重课税，调控区2套住房为8%，3套以上为12%。法人购入住房则适用12%单一税率。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">取得税 감면 혜택</h3>
-        <p><strong>생애최초 주택 구입</strong> 시에는 실거래가 12亿원 이하 주택에 대해 최대 200万韩元 한도로 取得税 감면을 받을 수 있습니다. <strong>신혼부부</strong>의 경우 혼인신고일로부터 5년 이내에 주택을 취득하면 수도권 4亿원, 비수도권 3亿원 이하 주택에 대해 감면 혜택이 적용됩니다. 이 외에도 농어촌 주택, 장애인용 주택 등에 대한 다양한 감면 규정이 있으므로, 해당 여부를 꼼꼼히 확인하는 것이 좋습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">取得税减免优惠</h3>
+        <p><strong>首次购房</strong>时，实际成交价12亿韩元以下的住房可享受最高200万韩元限额的取得税减免。<strong>新婚夫妇</strong>自婚姻登记之日起5年内购入住房，首都圈4亿韩元、非首都圈3亿韩元以下的住房可享受减免优惠。此外还有农渔村住房、残疾人住房等多种减免规定，建议仔细确认是否符合条件。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">납부 기한과 부가세</h3>
-        <p>取得税는 취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 <strong>60일 이내</strong>에 신고·납부해야 합니다. 기한을 넘기면 가산세가 부과되므로 주의가 필요합니다. 또한 取得税 외에도 农渔村特别税(取得税의 10%)와 地方教育税(取得税의 10~20%)가 추가로 부과되므로, 실제 부담액은 取得税 단독 금액보다 높습니다. 取得税 신고와 납부는 <strong>위택스(wetax.go.kr)</strong>에서 온라인으로 처리할 수 있어 편리합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">缴纳期限和附加税</h3>
+        <p>取得税须在取得日（尾款支付日或登记日中较早者）起<strong>60日内</strong>申报·缴纳。逾期将被加收滞纳金，需格外注意。此外，除取得税外还需缴纳农渔村特别税（取得税的10%）和地方教育税（取得税的10~20%），因此实际负担额高于取得税单项金额。取得税的申报和缴纳可通过<strong>韩国地方税网上缴纳系统（wetax.go.kr）</strong>在线办理，十分便捷。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주택 외 부동산 및 차량 取得税</h3>
-        <p>주택 외의 부동산(상가, 오피스텔, 토지 등)은 일반적으로 4%의 取得税율이 적용됩니다. 오피스텔의 경우 주거용으로 사용하더라도 건축물대장상 업무시설이면 4%가 적용되므로 주의해야 합니다. 차량의 경우 비영업용 승용차는 7%, 영업용·경차·화물차는 4%의 取得税가 부과됩니다. 장애인이나 국가유공자 등은 차량 取得税 면제 혜택이 있으며, 경차(배기량 1,000cc 이하)는 取得税가 면제됩니다(취득가액 4,000万韩元 이하 조건). 부동산 취득 시에는 取得税 외에 법무사 비용, 중개수수료 등 부대비용도 함께 고려하여 총 비용을 산정하는 것이 현명합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">住房以外的不动产及车辆取得税</h3>
+        <p>住房以外的不动产（商铺、officel公寓、土地等）一般适用4%的取得税率。officel公寓即使用于居住，如果建筑登记簿上为办公设施则适用4%，需要注意。车辆方面，非营业用轿车为7%，营业用·微型车·货车为4%。残疾人和国家功臣等可享受车辆取得税免税优惠，微型车（排量1,000cc以下）免征取得税（取得价额4,000万韩元以下条件）。购入不动产时，除取得税外还应考虑司法代书人费用、中介手续费等附带费用来计算总成本。</p>
     </div>
 
 
@@ -326,11 +326,11 @@
 </footer>
 
 <script>
-// ── 유틸 ──
+// ── 工具函数 ──
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
 
-// ── 슬라이더 연동 ──
+// ── 滑块联动 ──
 var priceInput  = document.getElementById('priceInput');
 var priceSlider = document.getElementById('priceSlider');
 
@@ -343,9 +343,9 @@ priceSlider.addEventListener('input', function () {
     priceInput.value = parseInt(this.value).toLocaleString('ko-KR');
 });
 
-// ── 取得税율 계산 ──
+// ── 取得税率计算 ──
 function getAcquisitionTaxRate(price, housingCount) {
-    // 1套 or 비조정 2주택
+    // 1套或非调控区2套住房
     if (housingCount === '1' || housingCount === '2non') {
         if (price <= 600000000) return 0.01;  // 1%
         if (price <= 900000000) {
@@ -353,16 +353,16 @@ function getAcquisitionTaxRate(price, housingCount) {
         }
         return 0.03;  // 3%
     }
-    // 2주택 조정대상지역
+    // 2套住房调控区
     if (housingCount === '2adj') return 0.08;  // 8%
-    // 3주택+ 비조정
+    // 3套以上非调控区
     if (housingCount === '3non') return 0.08;  // 8%
-    // 3주택+ 조정대상지역
+    // 3套以上调控区
     if (housingCount === '3adj') return 0.12;  // 12%
     return 0.01;
 }
 
-// ── 카운터 애니메이션 ──
+// ── 计数器动画 ──
 function counter(id, target, ms) {
     ms = ms || 900;
     var el = document.getElementById(id);
@@ -376,48 +376,48 @@ function counter(id, target, ms) {
     requestAnimationFrame(tick);
 }
 
-// ── 메인 계산 ──
+// ── 主计算 ──
 function calculate() {
     var price = parseVal(priceInput.value);
     if (!price || price < 10000000) {
-        alert('매매 가격을 올바르게 입력해주세요.');
+        alert('请正确输入买卖价格。');
         return;
     }
 
     var housingCount = document.getElementById('housingCount').value;
     var area         = document.getElementById('area').value;
 
-    // 取得税율
+    // 取得税率
     var taxRate = getAcquisitionTaxRate(price, housingCount);
 
     // 取得税
     var acqTax = Math.round(price * taxRate);
 
-    // 地方教育税 (取得税의 10%)
+    // 地方教育税（取得税的10%）
     var eduTax = Math.round(acqTax * 0.1);
 
-    // 农渔村特别税 (85㎡以上시 매매가격의 0.2%)
+    // 农渔村特别税（85㎡以上时卖买价格的0.2%）
     var ruralTax = (area === 'large') ? Math.round(price * 0.002) : 0;
 
     // 总缴纳税额
     var totalTax = acqTax + eduTax + ruralTax;
 
-    // 세율 표시용
+    // 税率显示用
     var ratePercent = (taxRate * 100).toFixed(1) + '%';
 
-    // 플레이스홀더 숨김
+    // 隐藏占位符
     document.getElementById('resultPlaceholder').style.display = 'none';
 
-    // 결과 카드
+    // 结果卡片
     document.getElementById('resultCard').classList.add('show');
     counter('totalResult', totalTax);
     document.getElementById('statAcqTax').textContent   = fmt(acqTax) + '韩元';
     document.getElementById('statEduTax').textContent    = fmt(eduTax) + '韩元';
     document.getElementById('statRuralTax').textContent  = fmt(ruralTax) + '韩元';
 
-    // 상세 내역
+    // 明细内容
     var items = [
-        { name: '매매 가격',         amount: price,     color: '#2563EB',  rate: '' },
+        { name: '买卖价格',         amount: price,     color: '#2563EB',  rate: '' },
         { name: '取得税 (' + ratePercent + ')', amount: acqTax,    color: '#EF4444',  rate: '' },
         { name: '地方教育税',        amount: eduTax,    color: '#F59E0B',  rate: '' },
         { name: '农渔村特别税',      amount: ruralTax,  color: '#059669',  rate: '' },
@@ -436,14 +436,14 @@ function calculate() {
                          ' style="background:' + item.color + '"></div>' +
                 '</div>' +
             '</div>' +
-            '<div class="b-amount">' + fmt(item.amount) + '원</div>' +
+            '<div class="b-amount">' + fmt(item.amount) + '韩元</div>' +
         '</div>';
     }).join('');
 
     document.getElementById('breakdownCard').classList.add('show');
     document.getElementById('breakdownTotal').textContent = fmt(totalTax) + '韩元';
 
-    // 바 애니메이션
+    // 柱状动画
     setTimeout(function() {
         var bars = document.querySelectorAll('.b-bar');
         bars.forEach(function(bar) {

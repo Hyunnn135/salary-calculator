@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="根据2026年韩国法定最低时薪10,320韩元，自动计算日薪、周薪、月薪和年薪。">
-    <meta name="keywords" content="최저时薪계산기, 2026최저时薪, 최저임금, 时薪계산기, 주휴수당, 알바월급계산">
+    <meta name="keywords" content="最低时薪计算器, 2026最低时薪, 最低工资, 时薪计算器, 周休津贴, 兼职月薪计算">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/minimum-wage">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/minimum-wage-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/minimum-wage-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/minimum-wage-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/minimum-wage">
-    <meta property="og:title" content="2026 최저时薪 계산기 - 时薪 월급 연봉 자동계산">
-    <meta property="og:description" content="2026年 최저时薪 10,320韩元 기준 日薪·周薪·월급·연봉을 바로 확인하세요.">
+    <meta property="og:title" content="2026最低时薪计算器 - 时薪月薪年薪自动计算">
+    <meta property="og:description" content="按2026年最低时薪10,320韩元标准立即查看日薪·周薪·月薪·年薪。">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ 表单元素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -37,16 +37,16 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 슬라이더 */
+        /* 滑块 */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 结果区域 ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* 主要结果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -62,7 +62,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 공제 상세 카드 */
+        /* 扣除明细卡片 */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -76,7 +76,7 @@
         .b-total { display: flex; justify-content: space-between; padding: 16px 0 0; margin-top: 4px; border-top: 1px solid var(--text-primary); }
         .b-total-label { font-size: 0.88rem; font-weight: 700; }
         .b-total-val { font-size: 0.95rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
-        /* ══ 저장 / 공유 버튼 ══ */
+        /* ══ 保存/分享按钮 ══ */
         .action-row { display: none; gap: 10px; margin-top: 0; margin-bottom: 24px; }
         .action-row.show { display: flex; }
         .save-btn { flex: 1; padding: 12px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -84,7 +84,7 @@
         .save-btn.loading { opacity: 0.5; cursor: wait; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 연봉 인상 시뮬레이터 ══ */
+        /* ══ 年薪加薪模拟器 ══ */
         .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -101,12 +101,12 @@
         .cmp-table .green { color: #059669; font-weight: 700; }
         .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-        /* ══ 페이지 고유: 최저时薪 배너 ══ */
+        /* ══ 页面专属：最低时薪横幅 ══ */
         .min-wage-banner { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 24px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
         .min-wage-banner .mw-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 500; }
         .min-wage-banner .mw-value { font-size: 1.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -1px; margin-top: 4px; }
         .min-wage-banner .mw-sub { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
-        /* 토글 스위치 */
+        /* 切换开关 */
         .toggle-row { display: flex; align-items: center; justify-content: space-between; background: var(--accent-light); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; }
         .toggle-row .toggle-text { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
         .toggle-row .toggle-sub { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 2px; }
@@ -116,13 +116,13 @@
         .toggle-slider:before { content: ""; position: absolute; width: 20px; height: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
         input:checked + .toggle-slider { background: var(--accent); }
         input:checked + .toggle-slider:before { transform: translateX(22px); }
-        /* 정보 테이블 */
+        /* 信息表格 */
         .info-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 12px; }
         .info-table th { background: var(--surface-alt); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.8rem; }
         .info-table td { padding: 12px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
         .info-table tr:last-child td { border-bottom: none; }
         .info-table .hl { color: var(--accent); font-weight: 800; }
-        /* 조건 그리드 */
+        /* 条件网格 */
         .condition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
         .condition-box { border-radius: 10px; padding: 16px; border: 1.5px solid; }
         .condition-box.fail { border-color: #FECACA; background: #FEF2F2; }
@@ -130,7 +130,7 @@
         .condition-box.pass { border-color: #BBF7D0; background: #F0FDF4; }
         .condition-box.pass .c-title { color: #16A34A; font-size: 0.85rem; font-weight: 800; margin-bottom: 6px; }
         .condition-box p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
-        /* 수식 박스 */
+        /* 公式框 */
         .formula-box { background: var(--surface-alt); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
         .formula-box p { font-size: 0.85rem; color: var(--text-primary); line-height: 1.9; margin: 0; }
     </style>
@@ -139,8 +139,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "2026年 최저时薪 계산기",
-    "description": "2026年 최저임금 기준 时薪, 월급, 연봉을 계산합니다. 包含周休津贴 실질 时薪도 확인하세요.",
+    "name": "2026年最低时薪计算器",
+    "description": "按2026年最低工资标准计算时薪、月薪、年薪。还可确认含周休津贴的实际时薪。",
     "url": "https://salarykorea.site/minimum-wage",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -241,7 +241,7 @@
         <p>输入时薪，自动计算日薪·周薪·月薪·年薪</p>
     </div>
 
-    <!-- 2026 최저时薪 배너 -->
+    <!-- 2026最低时薪横幅 -->
     <div class="min-wage-banner">
         <div>
             <div class="mw-label">2026年法定最低时薪</div>
@@ -354,7 +354,7 @@
     <!-- 底部信息区域 -->
     <div class="bottom-grid">
 
-        <!-- 年度별 최저时薪 변화 -->
+        <!-- 历年最低时薪变化 -->
         <div class="info-card">
             <h2>最低时薪历年变化</h2>
             <table class="info-table">
@@ -371,10 +371,10 @@
             </table>
         </div>
 
-        <!-- 주휴수당 안내 -->
+        <!-- 周休津贴说明 -->
         <div class="info-card">
             <h2>什么是周休津贴？</h2>
-            <p>일주일에 15小时 이상 일하고 결근 없이 출근하면 하루치 임금을 추가로 받을 수 있는 제도입니다. 아르바이트생도 동일하게 적용됩니다.</p>
+            <p>每周工作15小时以上且无缺勤时可额外获得一天工资的制度。兼职同样适用。</p>
             <div class="condition-grid">
                 <div class="condition-box fail">
                     <div class="c-title">无周休津贴</div>
@@ -386,68 +386,68 @@
                 </div>
             </div>
             <div class="formula-box">
-                <p><strong>계산식:</strong> 时薪 x (주근무시간 / 40) x 8<br>주 40시간 이상이면 时薪 x 8小时 고정</p>
+                <p><strong>计算公式：</strong>时薪 ×（每周工作时间 / 40）× 8<br>每周40小时以上则固定为 时薪 × 8小时</p>
             </div>
         </div>
 
     </div>
 
-    <!-- 최저임금 위반 안내 -->
+    <!-- 违反最低工资说明 -->
     <div class="info-card" style="margin-bottom: 24px;">
         <h2>违反最低工资时</h2>
-        <p>최저임금(10,320韩元)보다 낮은 时薪을 지급하면 <strong>3년 이하 징역 또는 2,000万韩元 이하 벌금</strong>이 부과됩니다. 최저임금법은 정규직·계약직·아르바이트 모두 동일하게 적용됩니다.</p>
-        <p>수습기간 중에는 3个月간 최저임금의 <strong>90%</strong>까지 적용 가능합니다. (단, 1년 미만 근로계약 제외)</p>
+        <p>支付低于最低工资（10,320韩元）的时薪时，将处以<strong>3年以下有期徒刑或2,000万韩元以下罚款</strong>。最低工资法对正式工·合同工·兼职均同等适用。</p>
+        <p>试用期间可适用最低工资的<strong>90%</strong>，最长3个月。（但1年以下劳动合同除外）</p>
     </div>
 
     <!-- FAQ -->
     <div class="info-card" style="margin-bottom: 24px;">
         <h2>常见问题</h2>
         <div class="faq-item">
-            <div class="faq-q">2026年 최저时薪은 얼마인가요?</div>
-            <div class="faq-a">2026年法定最低时薪은 시간당 10,320韩元입니다. 월급(209小时 기준)으로 환산하면 2,156,880韩元입니다.</div>
+            <div class="faq-q">2026年最低时薪是多少？</div>
+            <div class="faq-a">2026年法定最低时薪为每小时10,320韩元。换算为月薪（209小时标准）为2,156,880韩元。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">최저时薪보다 낮게 받고 있으면 어떻게 해야 하나요?</div>
+            <div class="faq-q">如果收到的时薪低于最低时薪该怎么办？</div>
             <div class="faq-a">违反最低工资法，可面临3年以下有期徒刑或2,000万韩元以下罚款。可通过雇佣劳动部客户咨询中心(1350)或在线举报中心进行举报。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">수습기간에도 최저时薪이 적용되나요?</div>
-            <div class="faq-a">1년 이상 근로계약을 체결한 경우 수습 3个月까지 최저时薪의 90%(9,288韩元)를 지급할 수 있습니다. 단, 단순노무직은 수습 감액이 적용되지 않습니다.</div>
+            <div class="faq-q">试用期也适用最低时薪吗？</div>
+            <div class="faq-a">签订1年以上劳动合同时，试用期最多3个月可支付最低时薪的90%（9,288韩元）。但简单劳务岗位不适用试用期减额。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">包含周休津贴 시 실질 时薪은 얼마인가요?</div>
-            <div class="faq-a">每周工作15小时以上 시 주휴수당이 추가됩니다. 每周5天 근무 기준으로 실질 时薪은 10,320韩元 x 1.2 = 약 12,384韩元 수준이 됩니다.</div>
+            <div class="faq-q">含周休津贴时实际时薪是多少？</div>
+            <div class="faq-a">每周工作15小时以上时加上周休津贴。按每周5天工作标准，实际时薪约为10,320韩元 × 1.2 = 约12,384韩元。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">식대나 교통비도 时薪에 포함되나요?</div>
+            <div class="faq-q">餐费和交通费也包含在时薪中吗？</div>
             <div class="faq-a">以现金支付的餐费和交通费有关于是否计入最低工资的规定。每月固定支付的餐费在一定限额内计入。</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">兼职也需要加入四大保险吗？</div>
-            <div class="faq-a">每周工作15小时以上 시 4대보험 의무 가입 대상입니다. 단기·초단시간 근로자(주 15小时 미만)는 국민연금·고용보험 적용이 제외될 수 있습니다.</div>
+            <div class="faq-a">每周工作15小时以上为四大保险义务参保对象。短期·超短工时劳动者（每周不满15小时）可能被排除在国民年金·雇佣保险适用范围外。</div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>2026年最低工资完整指南</h2>
-        <p>2026年 최저时薪은 <strong>10,320韩元</strong>으로 확정되었습니다. 이는 전년도 10,150韩元 대비 170韩元(1.7%) 인상된 금액입니다. 주 40시간 근무 기준 월 환산액(209小时)은 <strong>2,156,880韩元</strong>이며, 연봉으로 환산하면 약 <strong>25,882,560韩元</strong>에 해당합니다.</p>
+        <p>2026年最低时薪确定为<strong>10,320韩元</strong>。这比上一年度10,150韩元上涨170韩元（1.7%）。按每周40小时工作标准月换算额（209小时）为<strong>2,156,880韩元</strong>，换算为年薪约为<strong>25,882,560韩元</strong>。</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低工资适用范围</h3>
-        <p>최저임금은 1인 이상 근로자를 사용하는 모든 사업 또는 사업장에 적용됩니다. 정규직, 계약직, 파트타임 아르바이트 등 고용 형태와 관계없이 동일하게 적용되며, 외국인 근로자에게도 마찬가지로 적용됩니다. 다만, 수습 사용 중인 근로자로서 수습 사용한 날부터 3个月 이내인 경우에는 최저임금의 90%까지 감액 적용이 가능합니다. 단, 1년 미만의 기간을 정하여 근로계약을 체결한 경우에는 수습 기간이라도 감액할 수 없습니다.</p>
+        <p>最低工资适用于使用1名以上劳动者的所有事业或事业场所。无论正式工、合同工、兼职等雇佣形式均同等适用，外国劳动者同样适用。但试用中的劳动者在试用开始之日起3个月以内时可减额适用至最低工资的90%。但签订不满1年期劳动合同时即使在试用期也不能减额。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">违反最低工资时 벌칙</h3>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">违反最低工资时的处罚</h3>
         <p>根据最低工资法第28条，支付低于最低工资的雇主可面临<strong>3年以下有期徒刑或2,000万韩元以下罚款</strong>。如怀疑违反最低工资，可向雇佣劳动部(电话1350)举报，也可向管辖地方雇佣劳动厅提交申诉。</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">近5年最低工资上调趋势</h3>
-        <p>2022年 9,160韩元 → 2023年 9,620韩元(5.0% 인상) → 2024年 9,860韩元(2.5% 인상) → 2025年 10,150韩元(2.9% 인상) → 2026年 10,320韩元(1.7% 인상). 최근 몇 년간 涨幅이 점차 둔화되는 추세를 보이고 있으며, 이는 경제 상황과 기업 부담 능력 등을 종합적으로 고려한 최저임금위원회의 결정에 따른 것입니다. 최저임금은 매년 8월 5일까지 고시되어 다음 해 1월 1일부터 적용됩니다.</p>
+        <p>2022年9,160韩元 → 2023年9,620韩元（上涨5.0%）→ 2024年9,860韩元（上涨2.5%）→ 2025年10,150韩元（上涨2.9%）→ 2026年10,320韩元（上涨1.7%）。近年来涨幅呈逐渐放缓趋势，这是最低工资委员会综合考虑经济状况和企业承受能力等做出的决定。最低工资每年8月5日前公布，从次年1月1日起适用。</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">计入最低工资的工资项目</h3>
         <p>了解计入最低工资的工资范围也很重要。每月至少支付1次的定期工资为计入对象，不仅包括基本工资，还包括固定支付的各种津贴。但即使每月支付，加班费·夜班费·节假日加班费、未使用年假补贴、家属津贴、通勤津贴等不属于约定劳动对价的项目除外。奖金中超过月换算额5%的部分、福利费(餐费·交通费·住宿费等)超过月换算额1%的部分计入最低工资。确认自己的工资是否达到最低工资时，需考虑这些计入范围进行准确比较。</p>
     </div>
 
-<!-- ADSENSE-HIDE: 카카오 애드핏
-    <!-- 카카오 애드핏 -->
+<!-- ADSENSE-HIDE: Kakao AdFit
+    <!-- Kakao AdFit -->
     <div style="text-align:center; margin-bottom:24px;">
         <ins class="kakao_ad_area" style="display:none;"
         data-ad-unit="DAN-AacEdO1Ee4dxCoPy"
@@ -466,14 +466,14 @@
 </div>
 
 
-<!-- ADSENSE-HIDE: 쿠팡 파트너스
-<!-- 쿠팡 파트너스 배너 -->
+<!-- ADSENSE-HIDE: Coupang Partners
+<!-- Coupang Partners Banner -->
 <div class="coupang-banner">
     <script src="https://ads-partners.coupang.com/g.js"></script>
     <script>
         new PartnersCoupang.G({"id":977388,"template":"carousel","trackingCode":"AF3938469","width":"728","height":"90","tsource":""});
     </script>
-    <p class="coupang-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+    <p class="coupang-disclosure">此帖子是Coupang Partners活动的一部分，根据此活动获得一定金额的佣金。</p>
 </div>
 -->
 
@@ -504,14 +504,14 @@ function calculate() {
     const weeklyD = parseInt(document.getElementById('weeklyDays').value);
     const includeHoliday = document.getElementById('includeHoliday').checked;
 
-    if (wage <= 0) { alert('时薪을 입력해주세요.'); return; }
+    if (wage <= 0) { alert('请输入时薪。'); return; }
 
     const weeklyH = dailyH * weeklyD;
 
     // 日薪
     const daily = wage * dailyH;
 
-    // 주휴수당 (每周工作15小时以上 시)
+    // 周休津贴（每周工作15小时以上时）
     let holidayPay = 0;
     if (includeHoliday && weeklyH >= 15) {
         holidayPay = wage * Math.min(weeklyH / 40, 1) * 8;
@@ -520,10 +520,10 @@ function calculate() {
     // 周薪
     const weekly = wage * weeklyH + holidayPay;
 
-    // 월급 (월 환산: 주 평균 4.345주)
+    // 月薪（月换算：每周平均4.345周）
     const monthly = weekly * 4.345;
 
-    // 연봉
+    // 年薪
     const yearly = monthly * 12;
 
     // 显示结果
@@ -536,14 +536,14 @@ function calculate() {
     tag.textContent = holidayPay > 0 ? '(含周休)' : '';
 
     // 提示信息
-    let note = `时薪 ${wage.toLocaleString()}원 × 하루 ${dailyH}시간 × 주 ${weeklyD}일 기준입니다.`;
+    let note = `时薪 ${wage.toLocaleString()}韩元 × 每天 ${dailyH}小时 × 每周 ${weeklyD}天标准。`;
     if (includeHoliday && weeklyH >= 15) {
         note += ` 含周休津贴${fmt(holidayPay)}。`;
     } else if (includeHoliday && weeklyH < 15) {
-        note += ` 주 근무시간이 15小时 미만으로 주휴수당이 발생하지 않습니다.`;
+        note += ` 每周工作时间不满15小时，不产生周休津贴。`;
     }
     if (wage < 10320) {
-        note += ` 입력한 时薪이 2026年 최저时薪(10,320韩元)보다 낮습니다.`;
+        note += ` 输入的时薪低于2026年最低时薪（10,320韩元）。`;
     }
     document.getElementById('resultNote').textContent = note;
 
@@ -568,7 +568,7 @@ function shareKakao() {
         objectType: 'feed',
         content: {
             title: '我的月薪：' + (window._shareMonthly || '—'),
-            description: '2026年 최저时薪 10,320韩元 기준 월급 계산 결과',
+            description: '2026年最低时薪10,320韩元标准月薪计算结果',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/minimum-wage', webUrl: 'https://salarykorea.site/minimum-wage' }
         },

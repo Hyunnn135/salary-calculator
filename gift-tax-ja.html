@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="贈与額と関係に基づいて韓国の贈与税を計算します（2026年基準）。">
-    <meta name="keywords" content="증여세계산기, 증여세, 증여免除限度, 증여세율, 증여세신고, 자녀증여">
+    <meta name="keywords" content="贈与税計算機, 贈与税, 贈与免除限度, 贈与税率, 贈与税届出, 子女贈与">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/gift-tax">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/gift-tax-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/gift-tax-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/gift-tax-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/gift-tax">
-    <meta property="og:title" content="증여세 계산기 - 2026年 증여세 자동계산 | 월급연구소">
-    <meta property="og:description" content="증여 금액과 관계를 입력하면 면제 한도, 세율, 納付贈与税를 자동으로 계산합니다.">
+    <meta property="og:title" content="贈与税計算機 - 2026年贈与税自動計算 | 給与研究所">
+    <meta property="og:description" content="贈与額と関係を入力すると免除限度、税率、納付贈与税を自動計算します。">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ フォーム要素 ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -36,16 +36,16 @@
         .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 슬라이더 */
+        /* スライダー */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ 結果エリア ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* メイン結果 */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -60,7 +60,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 공제 상세 카드 */
+        /* 控除詳細カード */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -81,8 +81,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "증여세 계산기",
-    "description": "증여 금액과 관계에 따른 증여세를 계산합니다. 면제 한도와 누진세율을 확인하세요.",
+    "name": "贈与税計算機",
+    "description": "贈与額と関係に基づく贈与税を計算します。免除限度と累進税率を確認してください。",
     "url": "https://salarykorea.site/gift-tax",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -190,7 +190,7 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">증여 정보 입력</div>
+                    <div class="card-title">贈与情報入力</div>
                     <div class="card-badge">2026年</div>
                 </div>
 
@@ -201,7 +201,7 @@
                         <span class="form-unit">ウォン</span>
                     </div>
                     <input type="range" class="form-slider" id="giftSlider" min="10000000" max="5000000000" step="10000000" value="100000000">
-                    <div class="slider-labels"><span>1,000만</span><span>10億</span><span>30億</span><span>50億</span></div>
+                    <div class="slider-labels"><span>1,000万</span><span>10億</span><span>30億</span><span>50億</span></div>
                 </div>
 
                 <div class="form-group">
@@ -235,7 +235,7 @@
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">納付贈与税</div>
                 <div class="result-hero-amount" id="taxResult">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">ウォン</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
                         <div class="rh-stat-label">課税標準</div>
@@ -252,7 +252,7 @@
                 </div>
             </div>
 
-            <!-- 공제 상세 -->
+            <!-- 控除詳細 -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">贈与税計算詳細</div>
@@ -274,28 +274,28 @@
     <div class="bottom-grid">
         <div class="info-card">
             <h2>贈与税のポイント</h2>
-            <p><strong>10년 합산 과세:</strong> 증여세는 동일인에게 10년 이내 증여한 금액을 합산하여 과세합니다. 면제 한도도 10년 기준으로 적용됩니다.</p>
-            <p><strong>면제 한도 활용:</strong> 배우자는 6億원, 성인 자녀는 5,000万ウォン까지 비과세입니다. 조기 증여를 활용하면 절세에 유리합니다.</p>
-            <p><strong>자진신고 공제:</strong> 증여일이 속한 달의 말일부터 3ヶ月 이내에 자진신고하면 산출세액의 3%를 공제받을 수 있습니다.</p>
-            <p><strong>증여 시기:</strong> 부동산 등 시세 상승이 예상되는 자산은 일찍 증여할수록 유리합니다.</p>
+            <p><strong>10年合算課税：</strong>贈与税は同一人に10年以内に贈与した金額を合算して課税します。免除限度も10年基準で適用されます。</p>
+            <p><strong>免除限度活用：</strong>配偶者は6億ウォン、成人子女は5,000万ウォンまで非課税です。早期贈与を活用すると節税に有利です。</p>
+            <p><strong>自主申告控除：</strong>贈与日が属する月の末日から3ヶ月以内に自主申告すると算出税額の3%が控除されます。</p>
+            <p><strong>贈与時期：</strong>不動産など時価上昇が予想される資産は早く贈与するほど有利です。</p>
         </div>
         <div class="info-card">
-            <h2>자주 묻는 질문</h2>
+            <h2>よくある質問</h2>
             <div class="faq-item">
-                <div class="faq-q">부모가 성인 자녀에게 1億을 증여하면 세금은?</div>
-                <div class="faq-a">면제 한도 5,000万ウォン을 제외한 5,000万ウォン에 대해 10% 세율이 적용되어, 자진신고 시 약 485万ウォン의 증여세를 납부합니다.</div>
+                <div class="faq-q">親が成人子女に1億ウォンを贈与した場合の税金は？</div>
+                <div class="faq-a">免除限度5,000万ウォンを除いた5,000万ウォンに対して10%の税率が適用され、自主申告時に約485万ウォンの贈与税を納付します。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">증여세 면제 한도는 몇 년 기준인가요?</div>
-                <div class="faq-a">면제 한도는 동일인 기준 10년간 합산입니다. 예를 들어 5년 전에 3,000万ウォン을 받았다면, 이번에는 2,000万ウォン까지만 비과세입니다.</div>
+                <div class="faq-q">贈与税の免除限度は何年基準ですか？</div>
+                <div class="faq-a">免除限度は同一人基準10年間合算です。例えば5年前に3,000万ウォンを受け取った場合、今回は2,000万ウォンまでのみ非課税です。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">현금 증여도 신고해야 하나요?</div>
-                <div class="faq-a">네. 현금, 부동산, 주식 등 모든 재산의 증여는 면제 한도를 초과하면 신고·납부 의무가 있습니다.</div>
+                <div class="faq-q">現金贈与も届け出る必要がありますか？</div>
+                <div class="faq-a">はい。現金、不動産、株式などすべての財産の贈与は免除限度を超えると届出・納付義務があります。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">증여세 신고 기한은 언제인가요?</div>
-                <div class="faq-a">증여받은 날이 속하는 달의 말일부터 3ヶ月 이내에 관할 세무서에 신고해야 합니다. 기한 내 신고하면 3% 세액공제를 받을 수 있습니다.</div>
+                <div class="faq-q">贈与税の届出期限はいつですか？</div>
+                <div class="faq-a">贈与を受けた日が属する月の末日から3ヶ月以内に管轄税務署に届け出なければなりません。期限内に届け出ると3%の税額控除を受けることができます。</div>
             </div>
         </div>
     </div>
@@ -303,22 +303,22 @@
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>贈与税の免除限度と節税戦略</h2>
-        <p>증여세는 타인으로부터 재산을 무상으로 받았을 때 부과되는 세금입니다. 가족 간 재산 이전 시 가장 많이 접하게 되는 세금으로, 免除限度와 세율 구조를 정확히 이해하면 합법적인 절세 계획을 세울 수 있습니다.</p>
+        <p>贈与税は他人から財産を無償で受け取った際に課される税金です。家族間の財産移転時に最も多く接する税金で、免除限度と税率構造を正確に理解すれば合法的な節税計画を立てることができます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여세 免除限度 (10년 합산)</h3>
-        <p>증여세 免除限度는 증여자와 수증자의 관계에 따라 다르며, <strong>10년간 합산</strong>하여 적용됩니다. 배우자로부터의 증여는 6億원, 성인 직계비속(자녀·손자녀)은 5,000万ウォン, 미성년 직계비속은 2,000万ウォン, 직계존속(부모·조부모)은 5,000万ウォン, 기타 친족(6촌 이내 혈족, 4촌 이내 인척)은 1,000万ウォン까지 면제됩니다. 이 한도를 초과하는 금액에 대해서만 증여세가 부과됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">贈与税免除限度（10年合算）</h3>
+        <p>贈与税の免除限度は贈与者と受贈者の関係に応じて異なり、<strong>10年間合算</strong>して適用されます。配偶者からの贈与は6億ウォン、成人直系卑属（子女・孫）は5,000万ウォン、未成年直系卑属は2,000万ウォン、直系尊属（父母・祖父母）は5,000万ウォン、その他親族（6親等以内の血族、4親等以内の姻族）は1,000万ウォンまで免除されます。この限度を超える金額に対してのみ贈与税が課されます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여세율</h3>
-        <p>증여세율은 課税標準(증여재산가액 - 免除限度)에 따라 누진적으로 적용됩니다. 1億원 이하 10%, 1億~5億원 20%, 5億~10億원 30%, 10億~30億원 40%, 30億원 초과 50%입니다. 각 구간별 누진공제액이 있어 실제 세액 계산 시 적용됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">贈与税率</h3>
+        <p>贈与税率は課税標準（贈与財産価額 - 免除限度）に応じて累進的に適用されます。1億ウォン以下10%、1億～5億ウォン20%、5億～10億ウォン30%、10億～30億ウォン40%、30億ウォン超過50%です。各区間別の累進控除額があり、実際の税額計算時に適用されます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">사전증여를 활용한 절세 전략</h3>
-        <p>10년마다 免除限度가 리셋되기 때문에, 자녀에게 일찍부터 분산 증여하면 절세 효과를 극대화할 수 있습니다. 예를 들어 자녀가 태어나자마자 2,000万ウォン을 증여하고, 11세에 2,000万ウォン, 21세에 5,000万ウォン을 증여하면 총 9,000万ウォン을 세금 없이 이전할 수 있습니다. 부담부증여(부채를 포함하여 증여하는 방식)를 활용하면 부채 부분은 양도소득세로 전환되어 증여세를 절감할 수 있는 경우도 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">事前贈与を活用した節税戦略</h3>
+        <p>10年ごとに免除限度がリセットされるため、子女に早くから分散贈与すれば節税効果を最大化できます。例えば子女が生まれてすぐに2,000万ウォンを贈与し、11歳に2,000万ウォン、21歳に5,000万ウォンを贈与すれば、合計9,000万ウォンを無税で移転できます。負担付贈与（債務を含めて贈与する方式）を活用すると債務部分は譲渡所得税に転換され贈与税を節減できる場合もあります。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여 신고와 주의사항</h3>
-        <p>부동산을 증여할 때는 시가 감정이 원칙이며, 아파트의 경우 실거래가가 적용됩니다. 증여받은 날이 속하는 달의 말일로부터 <strong>3ヶ月 이내에 신고</strong>하면 신고세액공제 3%를 받을 수 있으므로, 기한 내 신고가 중요합니다. 증여세 신고는 국세청 홈택스에서 전자 신고가 가능하며, 고액 증여나 부동산 증여의 경우 세무사와 상담하는 것을 권장합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">贈与届出と注意事項</h3>
+        <p>不動産を贈与する際は時価鑑定が原則で、マンションの場合は実取引価格が適用されます。贈与を受けた日が属する月の末日から<strong>3ヶ月以内に届出</strong>すれば届出税額控除3%を受けられるため、期限内の届出が重要です。贈与税の届出は国税庁ホームタックスで電子届出が可能で、高額贈与や不動産贈与の場合は税理士に相談することをお勧めします。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">증여 추정과 자금출처 조사</h3>
-        <p>국세청은 소득에 비해 과도한 재산 취득이 확인되면 자금출처 조사를 실시할 수 있습니다. 특히 부동산을 취득하거나 고액 예금이 확인될 때, 취득 자금의 출처를 소명하지 못하면 증여로 추정하여 증여세가 부과됩니다. 부모님께 자금을 빌린 경우에도 차용증을 작성하고 이자를 지급한 기록이 있어야 대여로 인정받을 수 있으며, 무이자 또는 저리 대여 시 연 4.6% 기준으로 이자 상당액이 증여로 간주될 수 있습니다. 따라서 가족 간 금전 거래 시에는 반드시 증빙을 남기는 것이 중요합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">贈与推定と資金出処調査</h3>
+        <p>国税庁は所得に比べて過度な財産取得が確認されると資金出処調査を実施することがあります。特に不動産を取得したり高額預金が確認された場合、取得資金の出処を疎明できないと贈与と推定され贈与税が課されます。両親から資金を借りた場合でも借用証を作成し利子を支払った記録がなければ貸与と認められず、無利子または低利貸与時は年4.6%基準で利子相当額が贈与とみなされる場合があります。したがって家族間の金銭取引時には必ず証拠を残すことが重要です。</p>
     </div>
 
 
@@ -332,11 +332,11 @@
 </footer>
 
 <script>
-// ── 유틸 ──
+// ── ユーティリティ ──
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
 
-// ── 슬라이더 연동 ──
+// ── スライダー連動 ──
 const giftInput  = document.getElementById('giftInput');
 const giftSlider = document.getElementById('giftSlider');
 
@@ -362,7 +362,7 @@ function getExemption(rel) {
     }
 }
 
-// ── 세율 계산 ──
+// ── 税率計算 ──
 function calcGiftTax(taxBase) {
     if (taxBase <= 0) return { tax: 0, rate: '0%', deduction: 0 };
     if (taxBase <= 100000000)   return { tax: taxBase * 0.10, rate: '10%', deduction: 0 };
@@ -372,7 +372,7 @@ function calcGiftTax(taxBase) {
     return { tax: taxBase * 0.50 - 460000000, rate: '50%', deduction: 460000000 };
 }
 
-// ── 카운터 애니메이션 ──
+// ── カウンターアニメーション ──
 function counter(id, target, ms) {
     ms = ms || 900;
     var el = document.getElementById(id);
@@ -386,11 +386,11 @@ function counter(id, target, ms) {
     requestAnimationFrame(tick);
 }
 
-// ── 메인 계산 ──
+// ── メイン計算 ──
 function calculate() {
     var giftAmount = parseVal(giftInput.value);
     if (!giftAmount || giftAmount < 1000000) {
-        alert('증여 금액을 올바르게 입력해주세요.');
+        alert('贈与額を正しく入力してください。');
         return;
     }
 
@@ -403,33 +403,33 @@ function calculate() {
     // 課税標準
     var taxBase = Math.max(0, giftAmount - exemption);
 
-    // 산출세액
+    // 算出税額
     var taxInfo = calcGiftTax(taxBase);
     var calcTax = Math.max(0, taxInfo.tax);
 
-    // 신고세액공제
+    // 届出税額控除
     var reportCredit = selfReport ? Math.round(calcTax * 0.03) : 0;
 
     // 最終納付税額
     var finalTax = Math.max(0, calcTax - reportCredit);
 
-    // 플레이스홀더 숨김
+    // プレースホルダー非表示
     document.getElementById('resultPlaceholder').style.display = 'none';
 
-    // 결과 카드
+    // 結果カード
     document.getElementById('resultCard').classList.add('show');
     counter('taxResult', finalTax);
     document.getElementById('taxBase').textContent    = fmt(taxBase) + 'ウォン';
     document.getElementById('taxRate').textContent     = taxInfo.rate;
     document.getElementById('exemptionAmt').textContent = fmt(exemption) + 'ウォン';
 
-    // 상세 내역
+    // 詳細内訳
     var items = [
-        { name: '증여재산가액',     amount: giftAmount,    color: '#2563EB',  sign: '' },
+        { name: '贈与財産価額',     amount: giftAmount,    color: '#2563EB',  sign: '' },
         { name: '免除限度',         amount: exemption,     color: '#059669',  sign: '-' },
         { name: '課税標準',         amount: taxBase,       color: '#F59E0B',  sign: '' },
-        { name: '산출세액',         amount: calcTax,       color: '#EF4444',  sign: '' },
-        { name: '신고세액공제',     amount: reportCredit,  color: '#8B5CF6',  sign: '-' },
+        { name: '算出税額',         amount: calcTax,       color: '#EF4444',  sign: '' },
+        { name: '届出税額控除',     amount: reportCredit,  color: '#8B5CF6',  sign: '-' },
         { name: '最終納付税額',    amount: finalTax,      color: '#18191B',  sign: '' }
     ];
 
@@ -445,14 +445,14 @@ function calculate() {
                          ' style="background:' + item.color + '"></div>' +
                 '</div>' +
             '</div>' +
-            '<div class="b-amount">' + (item.sign ? item.sign : '') + fmt(item.amount) + '원</div>' +
+            '<div class="b-amount">' + (item.sign ? item.sign : '') + fmt(item.amount) + 'ウォン</div>' +
         '</div>';
     }).join('');
 
     document.getElementById('breakdownCard').classList.add('show');
     document.getElementById('breakdownTotal').textContent = fmt(finalTax) + 'ウォン';
 
-    // 바 애니메이션
+    // バーアニメーション
     setTimeout(function() {
         var bars = document.querySelectorAll('.b-bar');
         bars.forEach(function(bar) {
