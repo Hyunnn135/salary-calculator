@@ -13,8 +13,8 @@
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/salary-table-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/salary-table-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/salary-table">
-    <meta property="og:title" content="Annual별 Take-home 표 2026 - 한눈에 보기">
-    <meta property="og:description" content="Annual 2400만원~1억원까지 Take-home을 한눈에 확인하세요.">
+    <meta property="og:title" content="Annual별 Take-home 표 2026 - Overview">
+    <meta property="og:description" content="Annual 24000K KRW~100M원까지 Take-home을 한눈에 확인하세요.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +51,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Annual별 Take-home 표",
-    "description": "2026년 기준 Annual 2,400만원~2억원까지 Take-home을 한눈에 비교하는 표입니다.",
+    "description": "2026 Standard Annual 2,4000K KRW~200M원까지 Take-home을 한눈에 비교하는 표입니다.",
     "url": "https://salarykorea.site/salary-table",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -62,7 +62,7 @@
     },
     "provider": {
         "@type": "Organization",
-        "name": "월급연구소",
+        "name": "SalaryKorea",
         "url": "https://salarykorea.site"
     }
 }
@@ -70,7 +70,7 @@
 </head>
 <body>
 
-<!-- 네비게이션 -->
+<!-- Navigation -->
 <nav class="nav">
     <div class="nav-inner">
         <a class="nav-logo" href="en.html">Salary<span>Korea</span></a>
@@ -158,17 +158,17 @@
         <label>Dependents</label>
         <select id="depSelect" onchange="renderTable()">
             <option value="1">본인 1</option>
-            <option value="2">2 (배우자 등)</option>
+            <option value="2">2 (Spouse, etc.)</option>
             <option value="3">3</option>
             <option value="4">4</option>
         </select>
-        <span class="filter-note">* 비과세 없음 기준 · Dependents 변경 시 Income Tax 자동 재계산</span>
+        <span class="filter-note">* Based on zero tax-free allowance · Income tax auto-recalculates when dependents change</span>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Annual별 월 Take-home (세전 → 세후)</div>
-            <div class="card-badge">2026년</div>
+            <div class="card-title">Annual별 월 Take-home (Pre-tax → After-tax)</div>
+            <div class="card-badge">2026</div>
         </div>
         <div class="table-wrap">
             <table>
@@ -176,7 +176,7 @@
                     <tr>
                         <th>Annual</th>
                         <th>월 실수령</th>
-                        <th>월급(세전)</th>
+                        <th>Monthly (pre-tax)</th>
                         <th>National Pension</th>
                         <th>Health Insurance</th>
                         <th>Long-term Care</th>
@@ -191,87 +191,87 @@
         </div>
     </div>
 
-    <!-- 하단 정보 영역 -->
+    <!-- Bottom Info Section -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
-            <h2>계산 기준 안내</h2>
-            <p>위 표는 2026년 기준 세율을 적용한 <strong>근사값</strong>입니다. 실제 수령액은 회사 규정, 비과세 항목, 추가 공제 여부에 따라 다를 수 있습니다.</p>
+            <h2>Calculation Standards</h2>
+            <p>위 This table uses 2026 standard tax rates for <strong>근사값</strong>. Actual amounts may vary based on company policies, tax-free items, and additional deductions.</p>
             <p>
-                <strong>적용 세율 (2026년)</strong><br>
-                National Pension 4.75% (상한 월 637만원) · Health Insurance 3.595% · Long-term Care Health Insurance료의 13.14% · Employment Insurance 0.9%
+                <strong>Applied Tax Rates (2026)</strong><br>
+                National Pension 4.75% (상한 월 6370K KRW) · Health Insurance 3.595% · Long-term Care Health Insurance료의 13.14% · Employment Insurance 0.9%
             </p>
             <div class="tip-box">
-                <p>비과세 항목(식대, 교통비 등)이 있으면 Take-home이 더 높아집니다. 정확한 계산은 <a href="index.html">Annual Take-home 계산기</a>를 이용하세요.</p>
+                <p>Tax-free items (meals, transportation, etc.) increase take-home pay. For precise calculations, use <a href="index.html">Annual Take-home 계산기</a>를  the calculator.</p>
             </div>
         </div>
 
         <div class="info-card" style="margin-bottom:0;">
             <h2>FAQ</h2>
             <div class="faq-item">
-                <div class="faq-q">표의 Take-home은 어떤 기준으로 계산되나요?</div>
-                <div class="faq-a">부양가족 1인(본인), 비과세 없음 기준으로 계산된 값입니다. 부양가족이 더 있거나 비과세 항목이 있으면 Take-home이 더 높아집니다.</div>
+                <div class="faq-q">What standards are used to calculate the take-home pay in the table?</div>
+                <div class="faq-a">Calculated based on 1 dependent (self) with no tax-free allowances. More dependents or tax-free items will result in higher take-home pay.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">실제 월급명세서와 금액이 다른 이유는?</div>
-                <div class="faq-a">비과세 항목(식대·교통비), Dependents, 추가 공제 항목에 따라 차이가 납니다.</div>
+                <div class="faq-q">Why is the amount different from my actual pay stub?</div>
+                <div class="faq-a">Differences arise from tax-free items (meal/transport allowances), number of dependents, and additional deductions.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Annual이 같아도 Take-home이 다를 수 있나요?</div>
-                <div class="faq-a">네. Dependents, 비과세 금액, 추가 공제 여부에 따라 동일 Annual이라도 Take-home이 달라집니다.</div>
+                <div class="faq-q">Can take-home pay differ for the same annual salary?</div>
+                <div class="faq-a">네. Dependents, 비과세 금액, 추가 공제 여부에 따라 동일 salary라도 take-home pay 달라집니다.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Annual 1억 이상은 세금이 얼마나 되나요?</div>
-                <div class="faq-a">Annual 1억 기준 월 실수령은 약 640만원 수준으로, 월급의 약 77% 정도입니다.</div>
+                <div class="faq-q">Annual 100M 이상은 세금이 얼마나 되나요?</div>
+                <div class="faq-a">Annual 100M 기준 월 실수령은 약 6400K KRW 수준으로, 월급의 약 77% 정도입니다.</div>
             </div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>Annual 구간별 Take-home 특징 분석</h2>
-        <p>Annual이 높아질수록 실수령 비율은 줄어듭니다. 이는 우리나라의 Income Tax 누진세 구조와 4대보험료 증가 때문입니다. 아래에서 각 Annual 구간별 특징을 살펴보면, Annual 인상이나 이직 시 실질적인 수입 변화를 예측하는 데 도움이 됩니다.</p>
+        <h2>Annual Take-Home Pay Analysis by Salary Range</h2>
+        <p>As salary increases, the take-home ratio decreases. This is due to Korea's progressive income tax structure and increasing social insurance premiums. The analysis below helps predict actual income changes when receiving a raise or changing jobs.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 2,400만~3,000만원 구간</h3>
-        <p>이 구간에서는 공제율이 약 12~14%로 실수령 비율이 가장 높습니다. Income Tax율 6% 구간에 해당하여 세금 부담이 상대적으로 적고, 4대보험료도 소득에 비례하므로 부담이 크지 않습니다. 2026년 최저임금 기준 Annual(약 2,588만원)이 이 구간에 포함됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 2,4000K~3,0000K KRW 구간</h3>
+        <p>This range has the highest take-home ratio with deductions of about 12-14%. The 6% income tax bracket applies, keeping tax burden relatively low. Social insurance premiums are also proportional to income. The 2026 minimum wage준 Annual(약 2,5880K KRW)이 이 구간에 포함됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 3,500만~5,000만원 구간</h3>
-        <p>Income Tax율이 6% 구간에서 15% 구간으로 넘어가는 경계 지점입니다. 공제율은 약 15~18% 수준이며, 이 구간부터 Income Tax 부담을 체감하기 시작합니다. Annual 4,000만원 기준 월 Take-home은 약 284만원 내외로, 세전 월급(약 333만원) 대비 약 85%를 수령하게 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 3,5000K~5,0000K KRW 구간</h3>
+        <p>Income Tax율이 6% 구간에서 15% 구간으로 넘어가는 경계 지점입니다. 공제율은 약 15~18% 수준이며, 이 구간부터 Income Tax 부담을 체감하기 시작합니다. Annual 4,0000K KRW 기준 월 Take-home은 약 2840K KRW 내외로, 세전 월급(약 3330K KRW) 대비 약 85%를 수령하게 됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 6,000만~8,000만원 구간</h3>
-        <p>공제율이 18~20%에 달하며, Health Insurance료 부담 증가를 실질적으로 체감하는 구간입니다. Income Tax율 24% 구간에 진입하게 되어 세금 부담이 뚜렷해집니다. Annual 인상분 대비 실수령 증가분의 격차가 커지기 시작하는 구간이기도 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 6,0000K~8,0000K KRW 구간</h3>
+        <p>Deductions reach 18-20%, and this is where Health Insurance premium increases become truly felt. The 24% income tax bracket applies, making tax burden significant. The take-home increase relative to salary raises령 증가분의 격차가 커지기 시작하는 구간이기도 합니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 1억원 이상 구간</h3>
-        <p>Income Tax율 35% 이상이 적용되며, 공제율은 22~28%까지 올라갑니다. Annual 1억원의 월 Take-home은 약 652만원 내외로 세전 월급(약 833만원)의 약 78%에 해당합니다. Annual 2억원의 경우 공제율이 약 28%에 달해 실수령 비율이 더욱 낮아집니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 100M원 이상 구간</h3>
+        <p>Income Tax율 35% 이상이 적용되며, 공제율은 22~28%까지 올라갑니다. Annual 100M원의 월 Take-home은 약 6520K KRW 내외로 세전 월급(약 8330K KRW)의 약 78%에 해당합니다. Annual 200M원의 경우 공제율이 약 28%에 달해 실수령 비율이 더욱 낮아집니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">비과세 항목을 활용한 절세 전략</h3>
-        <p>Annual이 높을수록 비과세 항목의 절세 효과가 커집니다. 식대(월 20만원), 자가운전보조금(월 20만원), 출산·보육수당(월 20만원) 등의 비과세 수당을 최대한 활용하면 과세표준이 낮아져 Income Tax를 절감할 수 있습니다. Annual 협상 시에는 비과세 항목을 별도로 구성할 수 있는지 회사에 확인해 보는 것이 좋습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Tax Reduction Strategies Using Tax-Free Items</h3>
+        <p>salary 높을수록 비과세 항목의 절세 효과가 커집니다. 식대(월 200K KRW), 자가운전보조금(월 200K KRW), 출산·보육수당(월 200K KRW) 등의 비과세 수당을 최대한 활용하면 과세표준이 낮아져 Income Tax를 절감할 수 있습니다. Annual 협상 시에는 비과세 항목을 별도로 구성할 수 있는지 회사에 확인해 보는 것이 좋습니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Annual 인상 시 Take-home 변화</h3>
-        <p>Annual이 인상되면 Take-home도 증가하지만, 인상률만큼 Take-home이 오르지는 않습니다. 예를 들어 Annual이 4,000만원에서 5,000만원으로 25% 인상되어도 Take-home은 약 20~22% 정도만 증가합니다. 이는 Income Tax 누진 구간이 올라가고, 소득에 비례하는 4대보험료도 함께 증가하기 때문입니다. 이직이나 Annual 협상 시에는 세전 Annual뿐만 아니라 Take-home 기준으로 비교하는 것이 실질적인 생활 수준 변화를 정확히 파악하는 데 도움이 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Take-Home Changes When Salary Increases</h3>
+        <p>salary 인상되면 Take-home도 증가하지0K, 인상률0K큼 take-home pay 오르지는 않습니다. 예를 들어 salary 4,0000K KRW에서 5,0000K KRW으로 25% 인상되어도 Take-home은 약 20~22% 정도0K 증가합니다. 이는 Income Tax 누진 구간이 올라가고, 소득에 비례하는 4대보험료도 함께 증가하기 때문입니다. 이직이나 Annual 협상 시에는 세전 Annual뿐0K 아니라 Take-home 기준으로 비교하는 것이 실질적인 생활 수준 변화를 정확히 파악하는 데 도움이 됩니다.</p>
     </div>
 
     <!-- 직종별 Annual -->
     <div class="card">
         <div class="card-header">
             <div class="card-title">직종별 Annual Take-home</div>
-            <div class="card-badge">2026년</div>
+            <div class="card-badge">2026</div>
         </div>
-        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">내 직업의 평균 Annual과 경력별 Take-home을 확인하세요.</p>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">내 Check average salary and take-home pay by career for each occupation.</p>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
             <a href="job-nurse.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">간호사</a>
             <a href="job-teacher.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">교사</a>
             <a href="job-police.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">경찰</a>
             <a href="job-firefighter.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">소방관</a>
-            <a href="job-civil-servant-9.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">공무원 9급</a>
-            <a href="job-civil-servant-7.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">공무원 7급</a>
+            <a href="job-civil-servant-9.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Civil Servant Lv.9</a>
+            <a href="job-civil-servant-7.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Civil Servant Lv.7</a>
             <a href="job-pharmacist.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">약사</a>
             <a href="job-developer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">IT 개발자</a>
-            <a href="job-designer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">디자이너</a>
+            <a href="job-designer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Designer</a>
             <a href="job-accountant.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">회계사</a>
             <a href="job-lawyer.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">변호사</a>
             <a href="job-bank-clerk.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">은행원</a>
-            <a href="job-delivery-rider.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">배달 라이더</a>
-            <a href="job-soldier.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">직업군인</a>
+            <a href="job-delivery-rider.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Delivery Rider</a>
+            <a href="job-soldier.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Military</a>
         </div>
     </div>
 
@@ -279,17 +279,17 @@
     <div class="card">
         <div class="card-header">
             <div class="card-title">기업별 Annual Take-home</div>
-            <div class="card-badge">2026년</div>
+            <div class="card-badge">2026</div>
         </div>
-        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">주요 대기업의 직급별 Annual과 Take-home을 확인하세요.</p>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Check salary and take-home pay by position at major corporations.</p>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-            <a href="company-samsung.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">삼성전자</a>
-            <a href="company-hyundai-motor.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">현대자동차</a>
-            <a href="company-sk-hynix.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">SK하이닉스</a>
+            <a href="company-samsung.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Samsung</a>
+            <a href="company-hyundai-motor.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">Hyundai Motor</a>
+            <a href="company-sk-hynix.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">SKSK Hynix</a>
             <a href="company-naver.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">네이버</a>
             <a href="company-kakao.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">카카오</a>
             <a href="company-coupang.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">쿠팡</a>
-            <a href="company-lg-energy.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">LG에너지솔루션</a>
+            <a href="company-lg-energy.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">LGLG Energy Solution</a>
             <a href="company-posco.html" style="padding:10px 16px; background:var(--surface-alt); border:1px solid var(--border); border-radius:10px; font-size:0.84rem; font-weight:600; color:var(--text-primary); text-decoration:none; transition:all 0.15s;">포스코</a>
         </div>
     </div>
@@ -297,9 +297,9 @@
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의하기</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
@@ -370,8 +370,8 @@ function renderTable() {
         if (isPopular) tr.className = 'highlight-row';
 
         let salLabel;
-        if (sal >= 10000) salLabel = `${sal / 10000}억원`;
-        else salLabel = `${sal}만원`;
+        if (sal >= 10000) salLabel = `${sal / 10000}00M원`;
+        else salLabel = `${sal}0K KRW`;
 
         tr.innerHTML = `
             <td>${salLabel}</td>

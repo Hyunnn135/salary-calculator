@@ -94,7 +94,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "4대보험 계산기",
-    "description": "2026년 기준 国民年金, 健康保险, 长期疗养保险, 雇佣保险료를 계산합니다.",
+    "description": "2026年标准 国民年金, 健康保险, 长期疗养保险, 雇佣保险료를 계산합니다.",
     "url": "https://salarykorea.site/insurance",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -105,7 +105,7 @@
     },
     "provider": {
         "@type": "Organization",
-        "name": "월급연구소",
+        "name": "韩国工资研究所",
         "url": "https://salarykorea.site"
     }
 }
@@ -113,7 +113,7 @@
 </head>
 <body>
 
-<!-- 네비게이션 -->
+<!-- 导航 -->
 <nav class="nav">
     <div class="nav-inner">
         <a class="nav-logo" href="zh.html">工资<span>研究所</span></a>
@@ -195,22 +195,22 @@
         <p>2026年标准 国民年金·健康保险·长期疗养·雇佣保险自动计算</p>
     </div>
 
-    <!-- 2컬럼 대시보드 -->
+    <!-- 双栏仪表板 -->
     <div class="dashboard">
 
-        <!-- 왼쪽: 입력 -->
+        <!-- 左侧：输入 -->
         <div>
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">月薪输入</div>
-                    <div class="card-badge">2026년</div>
+                    <div class="card-badge">2026年</div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">月薪 (税前)</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="3,000,000">
-                        <span class="form-unit">원</span>
+                        <span class="form-unit">韩元</span>
                     </div>
                 </div>
 
@@ -226,10 +226,10 @@
             </div>
         </div>
 
-        <!-- 오른쪽: 결과 -->
+        <!-- 右侧：结果 -->
         <div class="result-col">
 
-            <!-- 결과 요약 -->
+            <!-- 结果摘要 -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">月个人缴纳四大保险合计</div>
                 <div class="result-hero-amount" id="totalAmount">0</div>
@@ -276,7 +276,7 @@
                 </div>
             </div>
 
-            <!-- 결과 없을 때 플레이스홀더 -->
+            <!-- 结果占位符 -->
             <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 计算 버튼을 눌러주세요</div>
         </div>
 
@@ -334,7 +334,7 @@
         </div>
     </div>
 
-    <!-- 하단 정보 영역 -->
+    <!-- 底部信息区域 -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
             <h2>什么是四大保险？</h2>
@@ -358,7 +358,7 @@
             </div>
             <div class="faq-item">
                 <div class="faq-q">월급이 올라도 国民年金이 안 올라가던데요?</div>
-                <div class="faq-a">国民年金은 월 기준소득월액 상한(617만원)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
+                <div class="faq-a">国民年金은 월 기준소득월액 상한(617万韩元)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">프리랜서는 4대보험을 어떻게 내나요?</div>
@@ -367,7 +367,7 @@
         </div>
     </div>
 
-    <!-- 2026년 요율표 -->
+    <!-- 2026年 요율표 -->
     <div class="info-card">
         <h2>2026年保险费率表</h2>
         <table class="rate-table">
@@ -402,7 +402,7 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>国民年金은 월 기준소득월액 <strong>상한 617만원</strong>까지만 적용됩니다. 월급이 617만원을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
+            <p>国民年金은 월 기준소득월액 <strong>상한 617万韩元</strong>까지만 적용됩니다. 월급이 617万韩元을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
         </div>
     </div>
 
@@ -412,13 +412,13 @@
         <p>4대보험은 国民年金, 健康保险, 长期疗养保险, 雇佣保险을 통칭하며, 근로자와 사업주가 공동으로 부담합니다. 매달 급여에서 자동으로 공제되는 4대보험료는 소득에 따라 달라지며, 정확한 보험료를 이해하면 급여 관리에 큰 도움이 됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">国民年金 (전체 9%, 근로자 4.5%)</h3>
-        <p>国民年金은 노후 소득 보장을 위한 사회보험입니다. 2026년 기준 기준소득월액 상한은 637만원, 하한은 39만원입니다. 상한을 초과하는 소득이 있어도 637만원 기준으로만 보험료가 부과됩니다. 만 18세 이상 60세 미만 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
+        <p>国民年金은 노후 소득 보장을 위한 사회보험입니다. 2026年标准 기준소득월액 상한은 637万韩元, 하한은 39万韩元입니다. 상한을 초과하는 소득이 있어도 637万韩元 기준으로만 보험료가 부과됩니다. 만 18세 이상 60세 미만 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">健康保险 (전체 7.19%, 근로자 3.595%)</h3>
-        <p>健康保险은 질병이나 부상에 대한 의료비 부담을 줄여주는 보험입니다. 2026년 보험료율은 7.19%로 전년 대비 소폭 인상되었습니다. 소득에 비례하여 부과되며, 国民年金과 달리 상한 없이 전체 소득에 적용됩니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 健康保险 혜택을 받을 수 있습니다.</p>
+        <p>健康保险은 질병이나 부상에 대한 의료비 부담을 줄여주는 보험입니다. 2026年 보험료율은 7.19%로 전년 대비 소폭 인상되었습니다. 소득에 비례하여 부과되며, 国民年金과 달리 상한 없이 전체 소득에 적용됩니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 健康保险 혜택을 받을 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">长期疗养保险 (健康保险료의 13.14%)</h3>
-        <p>长期疗养保险은 65세 이상 고령자 또는 노인성 질환을 가진 분들에게 돌봄 서비스를 제공하기 위한 보험입니다. 健康保险료에 연동하여 부과되며, 2026년에는 健康保险료의 13.14%가 적용됩니다. 健康保险 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
+        <p>长期疗养保险은 65세 이상 고령자 또는 노인성 질환을 가진 분들에게 돌봄 서비스를 제공하기 위한 보험입니다. 健康保险료에 연동하여 부과되며, 2026年에는 健康保险료의 13.14%가 적용됩니다. 健康保险 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">雇佣保险 (전체 1.8%, 근로자 0.9%)</h3>
         <p>雇佣保险은 실업급여, 육아휴직급여, 직업능력개발 등의 재원이 되는 보험입니다. 근로자 부담분은 0.9%이며, 사업주는 기업 규모에 따라 0.9~1.5%를 추가 부담합니다. 주 15시간 미만 근로자, 65세 이후 새로 고용된 근로자 등은 雇佣保险 적용이 제외될 수 있습니다. 프리랜서(3.3% 원천징수 대상자)는 직장가입이 아닌 지역가입자로 国民年金과 健康保险에 별도 가입해야 합니다.</p>
@@ -430,9 +430,9 @@
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의하기</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">关于</a>
+        <a href="contact.html">联系我们</a>
+        <a href="privacy.html">隐私政策</a>
     </div>
     <div class="footer-copy">© 2026 韩国工资研究所</div>
 </footer>
@@ -451,13 +451,13 @@ function calculate() {
     const salary = parseVal(salaryInput.value);
     if (!salary) { alert('월 급여를 입력해주세요.'); return; }
 
-    // 2026년 요율
+    // 2026年 요율
     const PENSION_RATE  = 0.045;   // 国民年金 4.5%
     const HEALTH_RATE   = 0.03545; // 健康保险 3.545%
     const CARE_RATE     = 0.1295;  // 长期疗养保险 健康保险료의 12.95%
     const EMPLOY_RATE   = 0.009;   // 雇佣保险 0.9%
 
-    // 国民年金 상한 617만원 적용
+    // 国民年金 상한 617万韩元 적용
     const pensionBase = Math.min(salary, 6170000);
     const pension  = Math.round(pensionBase * PENSION_RATE);
     const health   = Math.round(salary * HEALTH_RATE);
@@ -469,7 +469,7 @@ function calculate() {
     // 플레이스홀더 숨김
     document.getElementById('resultPlaceholder').style.display = 'none';
 
-    // 결과 표시
+    // 显示结果
     document.getElementById('totalAmount').textContent = fmt(total);
     document.getElementById('resultSub').textContent =
         '실수령 예상 ' + fmt(netSalary) + '원 (소득세 제외)';
@@ -513,11 +513,11 @@ function shareKakao() {
         objectType: 'feed',
         content: {
             title: '내 4대보험료는 월 ' + (window._shareInsurance || '—'),
-            description: '2026년 기준 4대보험 계산 결과',
+            description: '2026年标准 4대보험 계산 결과',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/insurance', webUrl: 'https://salarykorea.site/insurance' }
         },
-        buttons: [{ title: '나도 계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/insurance', webUrl: 'https://salarykorea.site/insurance' } }]
+        buttons: [{ title: '我也来计算', link: { mobileWebUrl: 'https://salarykorea.site/insurance', webUrl: 'https://salarykorea.site/insurance' } }]
     });
 }
 </script>

@@ -92,7 +92,7 @@
 </head>
 <body>
 
-<!-- 네비게이션 (추후 업데이트) -->
+<!-- 导航 -->
 <nav class="nav">
     <div class="nav-inner">
         <a class="nav-logo" href="zh.html">工资<span>研究所</span></a>
@@ -176,22 +176,22 @@
 
     <div class="dashboard">
 
-        <!-- 왼쪽: 입력 -->
+        <!-- 左侧：输入 -->
         <div>
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">의료비 정보 입력</div>
-                    <div class="card-badge">2026년</div>
+                    <div class="card-badge">2026年</div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">总薪资（年薪）</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="50,000,000">
-                        <span class="form-unit">원</span>
+                        <span class="form-unit">韩元</span>
                     </div>
                     <input type="range" class="form-slider" id="salarySlider" min="20000000" max="200000000" step="1000000" value="50000000">
-                    <div class="slider-labels"><span>2,000만</span><span>6,000만</span><span>1억</span><span>2억</span></div>
+                    <div class="slider-labels"><span>2,000만</span><span>6,000만</span><span>1亿</span><span>2亿</span></div>
                 </div>
 
                 <div class="section-divider">── 의료비 지출 내역 ──</div>
@@ -201,14 +201,14 @@
                         <label class="form-label">本人医疗费 <span class="form-label-sub">限额 없음</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="selfMedical" placeholder="0" value="0">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">韩元</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">65岁↑·残疾人 <span class="form-label-sub">限额 없음</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="seniorMedical" placeholder="0" value="0">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">韩元</span>
                         </div>
                     </div>
                 </div>
@@ -218,14 +218,14 @@
                         <label class="form-label">扶养家属医疗费 <span class="form-label-sub">700만 限额</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="familyMedical" placeholder="0" value="0">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">韩元</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">不孕治疗费 <span class="form-label-sub">30% 공제</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="infertility" placeholder="0" value="0">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">韩元</span>
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                     <label class="form-label">실비보험 수령액 <span class="form-label-sub">의료비에서 차감</span></label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input form-input-sm" id="insuranceReceived" placeholder="0" value="0">
-                        <span class="form-unit">원</span>
+                        <span class="form-unit">韩元</span>
                     </div>
                 </div>
 
@@ -253,7 +253,7 @@
             </div>
         </div>
 
-        <!-- 오른쪽: 결과 -->
+        <!-- 右侧：结果 -->
         <div class="result-col">
             <div id="captureArea" style="display:none;">
 
@@ -295,13 +295,13 @@
         </div>
     </div>
 
-    <!-- 하단 정보 -->
+    <!-- 底部信息 -->
     <div class="bottom-grid">
         <div class="info-card">
             <h2>什么是医疗费税额扣除？</h2>
             <p>근로소득자가 본인이나 부양가족을 위해 지출한 의료비 중, <strong>총급여의 3%를 초과하는 금액</strong>에 대해 세금을 돌려받을 수 있는 제도입니다.</p>
-            <p>기본 공제율은 15%이며, 不孕治疗费는 30%, 미숙아·선천성이상 치료비는 20%의 높은 공제율이 적용됩니다. 본인·65세 이상·장애인·중증질환자 의료비는 공제 限额가 없으나, 일반 扶养家属医疗费는 연 700만원 限额가 있습니다.</p>
-            <p>실비보험으로 보전받은 금액은 의료비에서 차감해야 합니다. 보장성 보험료 세액공제(연 100만원 限额, 12%)는 별도로 받을 수 있습니다.</p>
+            <p>기본 공제율은 15%이며, 不孕治疗费는 30%, 미숙아·선천성이상 치료비는 20%의 높은 공제율이 적용됩니다. 본인·65세 이상·장애인·중증질환자 의료비는 공제 限额가 없으나, 일반 扶养家属医疗费는 연 700万韩元 限额가 있습니다.</p>
+            <p>실비보험으로 보전받은 금액은 의료비에서 차감해야 합니다. 보장성 보험료 세액공제(연 100万韩元 限额, 12%)는 별도로 받을 수 있습니다.</p>
         </div>
         <div class="info-card">
             <h2>常见问题</h2>
@@ -311,27 +311,27 @@
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 안경·콘택트렌즈도 되나요?</div>
-                <div class="faq-a">A. 시력교정용 안경·콘택트렌즈 구입비는 1인당 연 50만원 限额로 공제됩니다.</div>
+                <div class="faq-a">A. 시력교정용 안경·콘택트렌즈 구입비는 1인당 연 50万韩元 限额로 공제됩니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. 산후조리원 비용은요?</div>
-                <div class="faq-a">A. 총급여 7천만원 이하 근로자의 산후조리원 비용은 출산 1회당 200만원 限额로 공제됩니다.</div>
+                <div class="faq-a">A. 총급여 7천万韩元 이하 근로자의 산후조리원 비용은 출산 1회당 200万韩元 限额로 공제됩니다.</div>
             </div>
         </div>
     </div>
 
     <div class="guide-cta">
-        <p>연말정산 전체 과정이 궁금하시다면?</p>
-        <a href="guide-tax.html">연말정산 가이드 보기 →</a>
+        <p>想了解年末结算的全过程？</p>
+        <a href="guide-tax.html">查看年末结算指南 →</a>
     </div>
 
 </div>
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">关于</a>
+        <a href="contact.html">联系</a>
+        <a href="privacy.html">隐私政策</a>
     </div>
     <div class="footer-copy">© 2026 韩国工资研究所</div>
 </footer>
@@ -407,10 +407,10 @@ function calculate() {
         counter('totalDeduction', 0);
         document.getElementById('statTotal').textContent = fmt(netMedical) + '韩元';
         document.getElementById('statThreshold').textContent = fmt(threshold) + '韩元';
-        document.getElementById('statDeductible').textContent = '0원';
+        document.getElementById('statDeductible').textContent = '0韩元';
         document.getElementById('cheerMsg').textContent = '의료비가 총급여의 3%(' + fmt(threshold) + '원)를 넘지 않아 공제 대상이 없습니다';
         document.getElementById('breakdownItems').innerHTML = '';
-        document.getElementById('breakdownTotal').textContent = '0원';
+        document.getElementById('breakdownTotal').textContent = '0韩元';
         return;
     }
 
@@ -421,9 +421,9 @@ function calculate() {
     const netInfertility = Math.round(infertility * ratio);
     let netFamily = Math.round(familyMed * ratio);
 
-    // 부양가족 700만원 限额 적용
-    const familyLimit = 7000000;
-    const familyCapped = Math.min(netFamily, familyLimit);
+    // 부양가족 700万韩元 限额 적용
+    const family限额 = 7000000;
+    const familyCapped = Math.min(netFamily, family限额);
 
     // 세액공제 계산
     const dedSelf = Math.round(netSelf * 0.15);
@@ -452,7 +452,7 @@ function calculate() {
     const items = [
         { label: '本人医疗费', amount: netSelf, rate: '15%', ded: dedSelf, color: '#EC4899' },
         { label: '65岁↑·残疾人', amount: netSenior, rate: '15%', ded: dedSenior, color: '#8B5CF6' },
-        { label: '부양가족 (일반)', amount: familyCapped, rate: '15%', ded: dedFamily, color: '#2563EB', note: netFamily > familyLimit ? ' (限额 적용)' : '' },
+        { label: '부양가족 (일반)', amount: familyCapped, rate: '15%', ded: dedFamily, color: '#2563EB', note: netFamily > family限额 ? ' (限额 적용)' : '' },
         { label: '不孕治疗费', amount: netInfertility, rate: '30%', ded: dedInfertility, color: '#F59E0B' },
     ];
 
@@ -492,7 +492,7 @@ function shareKakao() {
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/medical-tax', webUrl: 'https://salarykorea.site/medical-tax' }
         },
-        buttons: [{ title: '계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/medical-tax', webUrl: 'https://salarykorea.site/medical-tax' } }]
+        buttons: [{ title: '立即计算', link: { mobileWebUrl: 'https://salarykorea.site/medical-tax', webUrl: 'https://salarykorea.site/medical-tax' } }]
     });
 }
 

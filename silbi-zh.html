@@ -214,14 +214,14 @@
                         <label class="form-label">医保项目 <span class="form-label-sub">건강보험 적용</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="coveredCost" placeholder="100,000" value="100,000">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">韩元</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">非医保项目 <span class="form-label-sub">전액 본인부담</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="uncoveredCost" placeholder="50,000" value="50,000">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">韩元</span>
                         </div>
                     </div>
                 </div>
@@ -312,17 +312,17 @@
     </div>
 
     <div class="guide-cta">
-        <p>의료비로 연말정산에서 세금 환급받고 싶다면?</p>
-        <a href="medical-tax.html">의료비 세액공제 계산기 →</a>
+        <p>想通过医疗费获得退税？</p>
+        <a href="medical-tax.html">医疗费税额扣除计算器 →</a>
     </div>
 
 </div>
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">关于</a>
+        <a href="contact.html">联系</a>
+        <a href="privacy.html">隐私政策</a>
     </div>
     <div class="footer-copy">© 2026 韩国工资研究所</div>
 </footer>
@@ -346,8 +346,8 @@ document.querySelectorAll('.form-input').forEach(el => {
 document.getElementById('generation').addEventListener('change', function() {
     const helps = {
         '1': '<strong>1세대 실비:</strong> 급여 본인부담금의 10%, 비급여 거의 전액 보장. 보장 범위가 가장 넓습니다.',
-        '2': '<strong>2세대 실비:</strong> 급여 본인부담금의 10%, 비급여 20% 자기부담. 门诊는 1~1.5만원 공제 후 보장.',
-        '3': '<strong>3세대 실비:</strong> 급여 20% 자기부담, 비급여 특약 분리 30% 자기부담. 연 5천만원 보장 한도.',
+        '2': '<strong>2세대 실비:</strong> 급여 본인부담금의 10%, 비급여 20% 자기부담. 门诊는 1~1.5万韩元 공제 후 보장.',
+        '3': '<strong>3세대 실비:</strong> 급여 20% 자기부담, 비급여 특약 분리 30% 자기부담. 연 5천万韩元 보장 한도.',
         '4': '<strong>4세대 실비:</strong> 급여 본인부담금의 20%, 비급여 30% 자기부담. 비급여 사용량에 따라 할인·할증 적용.'
     };
     document.getElementById('genHelp').innerHTML = helps[this.value];
@@ -505,7 +505,7 @@ function shareKakao() {
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' }
         },
-        buttons: [{ title: '계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' } }]
+        buttons: [{ title: '立即计算', link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' } }]
     });
 }
 

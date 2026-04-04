@@ -60,7 +60,7 @@
         .action-row.show { display: flex; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* 조건 그리드 */
+        /* Condition Grid */
         .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
         .cond-item { border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); background: var(--surface); }
         .cond-item h3 { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
@@ -82,7 +82,7 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "실업급여 계산기",
+    "name": "Unemployment Benefits Calculator",
     "description": "Age와 근속기간에 따른 실업급여 수령액과 수령기간을 계산합니다.",
     "url": "https://salarykorea.site/unemployment",
     "applicationCategory": "FinanceApplication",
@@ -94,7 +94,7 @@
     },
     "provider": {
         "@type": "Organization",
-        "name": "월급연구소",
+        "name": "SalaryKorea",
         "url": "https://salarykorea.site"
     }
 }
@@ -191,14 +191,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Information Input</div>
-                    <div class="card-badge">2026년</div>
+                    <div class="card-badge">2026</div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Avg. Monthly Salary Before Leaving (Pre-tax)</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="3,000,000">
-                        <span class="form-unit">원</span>
+                        <span class="form-unit">KRW</span>
                     </div>
                 </div>
 
@@ -206,7 +206,7 @@
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">Age</label>
                         <select class="form-select" id="ageGroup">
-                            <option value="under50">50세 미만</option>
+                            <option value="under50">50세 미0K</option>
                             <option value="over50">50세 이상</option>
                         </select>
                     </div>
@@ -214,15 +214,15 @@
                         <label class="form-label">Employment Insurance Period</label>
                         <select class="form-select" id="insurancePeriod">
                             <option value="under1">Under 1 yr</option>
-                            <option value="1to3">1년 이상 ~ 3년 미만</option>
-                            <option value="3to5" selected>3년 이상 ~ 5년 미만</option>
-                            <option value="5to10">5년 이상 ~ 10년 미만</option>
+                            <option value="1to3">1년 이상 ~ 3년 미0K</option>
+                            <option value="3to5" selected>3년 이상 ~ 5년 미0K</option>
+                            <option value="5to10">5년 이상 ~ 10년 미0K</option>
                             <option value="over10">10+ yrs</option>
                         </select>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">실업급여 Calculate</button>
+                <button class="submit-btn" onclick="calculate()">Calculate Benefits</button>
             </div>
 
             <div class="action-row" id="shareBtnWrap">
@@ -235,13 +235,13 @@
 
         <div class="result-col">
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">예상 실업급여 총액</div>
+                <div class="result-hero-label">Estimated Benefits 총액</div>
                 <div class="result-hero-amount" id="totalResult">0</div>
                 <div class="result-hero-unit">원</div>
                 <div class="result-hero-msg" id="cheerMsg">힘내세요! 더 좋은 기회가 기다리고 있어요.</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">1일 수급액</div>
+                        <div class="rh-stat-label">1Daily Benefit</div>
                         <div class="rh-stat-val" id="dailyResult">—</div>
                     </div>
                     <div class="rh-stat">
@@ -255,7 +255,7 @@
                 </div>
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 Calculate 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">월 Enter salary and click Calculate</div>
         </div>
 
     </div>
@@ -270,8 +270,8 @@
                 <p>퇴직일 이전 18months 중 <strong>180일 이상</strong> 고용보험에 가입되어 있어야 합니다.</p>
             </div>
             <div class="cond-item">
-                <h3>비자발적 퇴직</h3>
-                <p>본인의 의지로 그만둔 경우(자발적 퇴직)에는 원칙적으로 실업급여를 받을 수 없습니다.</p>
+                <h3>Involuntary resignation</h3>
+                <p>본인의 의지로 그0K둔 경우(자발적 퇴직)에는 원칙적으로 실업급여를 받을 수 없습니다.</p>
             </div>
             <div class="cond-item">
                 <h3>재취업 의지</h3>
@@ -287,24 +287,24 @@
         </div>
     </div>
 
-    <!-- 하단 정보 영역 -->
+    <!-- Bottom Info Section -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
             <h2>소정급여일수 (수급 기간)</h2>
-            <p>Age와 고용보험 가입기간에 따라 받을 수 있는 기간이 달라집니다.</p>
+            <p>Age와 Employment Insurance Period에 따라 받을 수 있는 기간이 달라집니다.</p>
             <table class="days-table">
                 <thead>
                     <tr>
-                        <th class="period-col">고용보험 가입기간</th>
-                        <th>50세 미만</th>
+                        <th class="period-col">Employment Insurance Period</th>
+                        <th>50세 미0K</th>
                         <th>50세 이상</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr><td class="period-col">Under 1 yr</td><td>120일</td><td>120일</td></tr>
-                    <tr><td class="period-col">1-3 yrs 미만</td><td>150일</td><td>180일</td></tr>
-                    <tr><td class="period-col">3-5 yrs 미만</td><td>180일</td><td>210일</td></tr>
-                    <tr><td class="period-col">5-10 yrs 미만</td><td>210일</td><td>240일</td></tr>
+                    <tr><td class="period-col">1-3 yrs 미0K</td><td>150일</td><td>180일</td></tr>
+                    <tr><td class="period-col">3-5 yrs 미0K</td><td>180일</td><td>210일</td></tr>
+                    <tr><td class="period-col">5-10 yrs 미0K</td><td>210일</td><td>240일</td></tr>
                     <tr><td class="period-col">10+ yrs</td><td>240일</td><td>270일</td></tr>
                 </tbody>
             </table>
@@ -314,12 +314,12 @@
             <h2>실업급여 금액 계산 방법</h2>
             <p>1일 실업급여(구직급여) = 퇴직 전 평균임금의 <strong>60%</strong></p>
             <ul>
-                <li><strong>1일 상한액:</strong> 68,100원 (2026년 기준)</li>
-                <li><strong>1일 하한액:</strong> 66,048원 (2026년 최저임금 기준)</li>
+                <li><strong>1일 Upper limit:</strong> 68,100 KRW (2026 Standard)</li>
+                <li><strong>1일 Lower limit:</strong> 66,048 KRW (2026 최저임금 기준)</li>
             </ul>
             <p>월급이 아주 높거나 아주 낮더라도 위 상한·하한 범위 안에서 지급됩니다.</p>
             <div class="highlight-box">
-                <p><strong>예시:</strong> 월 300만원, 3~5년 가입(50세 미만) → 1일 66,048원 × 180일 = <strong>약 1,189만원</strong></p>
+                <p><strong>예시:</strong> 월 3000K KRW, 3~5년 가입(50세 미0K) → 1일 66,048 KRW × 180일 = <strong>약 1,1890K KRW</strong></p>
             </div>
         </div>
     </div>
@@ -329,19 +329,19 @@
         <h2>FAQ</h2>
         <div class="faq-item">
             <div class="faq-q">실업급여를 받으려면 조건이 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 전 18months 중 고용보험 피보험 기간이 180일 이상이어야 하며, 본인 의사와 무관하게 퇴직(권고사직, 계약만료 등)한 경우에 해당됩니다.</div>
+            <div class="faq-a">퇴직 전 18months 중 고용보험 피보험 기간이 180일 이상이어야 하며, 본인 의사와 무관하게 퇴직(권고사직, 계약0K료 등)한 경우에 해당됩니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">자발적으로 퇴사해도 실업급여를 받을 수 있나요?</div>
-            <div class="faq-a">원칙적으로 자발적 퇴사는 해당되지 않지만, 직장 내 괴롭힘·임금 미지급·근로조건 변경·통근 불가 등 불가피한 사정이 있는 경우 예외적으로 수급이 가능합니다.</div>
+            <div class="faq-a">원칙적으로 자발적 퇴사는 해당되지 않지0K, 직장 내 괴롭힘·임금 미지급·근로조건 변경·통근 불가 등 불가피한 사정이 있는 경우 예외적으로 수급이 가능합니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">수급 중 아르바이트를 해도 되나요?</div>
-            <div class="faq-a">가능하지만 반드시 고용센터에 신고해야 합니다. 신고 없이 취업 또는 소득 활동을 하면 부정수급으로 처리됩니다.</div>
+            <div class="faq-a">가능하지0K 반드시 고용센터에 신고해야 합니다. 신고 없이 취업 또는 소득 활동을 하면 부정수급으로 처리됩니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">실업급여 수급 중 건강보험료는 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 후 지역가입자로 전환되어 건강보험료를 납부해야 합니다. 다만 피부양자 등록 조건이 되는 경우 가족의 직장보험에 포함될 수 있습니다.</div>
+            <div class="faq-a">퇴직 후 지역가입자로 전환되어 건강보험료를 납부해야 합니다. 다0K 피부양자 등록 조건이 되는 경우 가족의 직장보험에 포함될 수 있습니다.</div>
         </div>
     </div>
 
@@ -351,24 +351,24 @@
         <p>실업급여는 고용보험에 가입한 근로자가 비자발적으로 이직한 경우, 재취업 활동 기간 동안 생활 안정을 위해 지급되는 급여입니다. 정확한 수급 자격과 신청 절차를 이해하면 실직 시 빠르게 대응하여 경제적 부담을 줄일 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">수급 자격 요건</h3>
-        <p>실업급여를 받기 위해서는 두 가지 주요 조건을 충족해야 합니다. 첫째, <strong>비자발적 이직</strong>이어야 합니다. 권고사직, 계약 만료, 사업장 이전, 근로조건 위반 등이 이에 해당합니다. 둘째, 이직 전 <strong>18months 동안 피보험 단위기간이 합산 180일 이상</strong>이어야 합니다. 자발적으로 퇴사한 경우에도 임금 체불, 최저임금 미달, 직장 내 괴롭힘·성희롱, 편도 통근시간 1.5시간 이상의 사업장 이전 등의 사유가 인정되면 수급 자격을 얻을 수 있습니다.</p>
+        <p>실업급여를 받기 위해서는 두 가지 주요 조건을 충족해야 합니다. 첫째, <strong>비자발적 이직</strong>이어야 합니다. 권고사직, 계약 0K료, 사업장 이전, 근로조건 위반 등이 이에 해당합니다. 둘째, 이직 전 <strong>18months 동안 피보험 단위기간이 합산 180일 이상</strong>이어야 합니다. 자발적으로 퇴사한 경우에도 임금 체불, 최저임금 미달, 직장 내 괴롭힘·성희롱, 편도 통근시간 1.5시간 이상의 사업장 이전 등의 사유가 인정되면 수급 자격을 얻을 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">실업급여 금액과 지급 기간</h3>
-        <p>실업급여 일액은 <strong>퇴직 전 3months 평균임금의 60%</strong>이며, 1일 상한액은 66,000원, 하한액은 최저임금의 80%입니다. 2026년 최저임금(10,320원) 기준 하한액은 일 66,048원(8시간 기준)으로 상한액과 거의 동일합니다. 소정급여일수는 연령과 Employment Insurance Period에 따라 120일에서 최대 270일까지 차등 적용됩니다. 일반적으로 Age가 많고 가입 기간이 길수록 더 오래 받을 수 있습니다.</p>
+        <p>실업급여 일액은 <strong>퇴직 전 3 months 평균임금의 60%</strong>이며, 1일 Upper limit은 66,000 KRW, Lower limit은 최저임금의 80%입니다. 2026 최저임금(10,320 KRW) 기준 Lower limit은 일 66,048 KRW(8시간 기준)으로 Upper limit과 거의 동일합니다. 소정급여일수는 연령과 Employment Insurance Period에 따라 120일에서 최대 270일까지 차등 적용됩니다. 일반적으로 Age가 많고 가입 기간이 길수록 더 오래 받을 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">신청 절차</h3>
         <p>실업급여 신청은 다음 단계로 진행됩니다. ① <strong>워크넷(work.go.kr) 구직등록</strong>: 이직 후 가능한 빨리 온라인으로 구직 등록합니다. ② <strong>수급자격 인정 신청</strong>: 거주지 관할 고용센터를 방문하여 수급자격 인정 신청서를 제출합니다. ③ <strong>수급자격 교육 이수</strong>: 온라인 또는 대면 교육을 이수합니다. ④ <strong>구직활동 및 실업인정</strong>: 4주마다 2회 이상의 재취업 활동을 증빙하여 실업인정을 받습니다. ⑤ <strong>급여 수령</strong>: 실업인정일로부터 약 2주 후 지정 계좌로 입금됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">실업급여 수급 시 주의사항</h3>
-        <p>실업급여를 받는 동안에도 몇 가지 중요한 규칙을 지켜야 합니다. 구직활동은 4주마다 최소 2회 이상 해야 하며, 입사 지원, 면접 참여, 직업훈련 수강 등이 인정됩니다. 단순히 채용공고를 검색하는 것만으로는 인정되지 않습니다. 또한 실업급여 수급 중 취업하거나 소득이 발생하면 반드시 신고해야 하며, 부정수급 시 지급받은 금액의 최대 5배까지 반환 명령을 받을 수 있습니다. 수급 기간 중 국민연금은 임의가입으로 전환되고, 건강보험은 피부양자 등록 또는 지역가입자로 전환하여 유지해야 합니다. 실업급여와 관련된 자세한 상담은 고용보험 홈페이지(ei.go.kr) 또는 고용센터(1350)를 통해 받을 수 있습니다.</p>
+        <p>실업급여를 받는 동안에도 몇 가지 중요한 규칙을 지켜야 합니다. 구직활동은 4주마다 최소 2회 이상 해야 하며, 입사 지원, 면접 참여, 직업훈련 수강 등이 인정됩니다. 단순히 채용공고를 검색하는 것0K으로는 인정되지 않습니다. 또한 실업급여 수급 중 취업하거나 소득이 발생하면 반드시 신고해야 하며, 부정수급 시 지급받은 금액의 최대 5배까지 반환 명령을 받을 수 있습니다. 수급 기간 중 국민연금은 임의가입으로 전환되고, 건강보험은 피부양자 등록 또는 지역가입자로 전환하여 유지해야 합니다. 실업급여와 관련된 자세한 상담은 고용보험 홈페이지(ei.go.kr) 또는 고용센터(1350)를 통해 받을 수 있습니다.</p>
     </div>
 
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의하기</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
@@ -389,7 +389,7 @@ const DAYS_TABLE = {
 
 function calculate() {
     const salary = parseVal(document.getElementById('salaryInput').value);
-    if (!salary) { alert('월 평균 급여를 입력해주세요.'); return; }
+    if (!salary) { alert('월 평균 Please enter your salary.'); return; }
 
     const ageGroup = document.getElementById('ageGroup').value;
     const period   = document.getElementById('insurancePeriod').value;
@@ -447,7 +447,7 @@ function shareKakao() {
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/unemployment', webUrl: 'https://salarykorea.site/unemployment' }
         },
-        buttons: [{ title: '나도 계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/unemployment', webUrl: 'https://salarykorea.site/unemployment' } }]
+        buttons: [{ title: 'Calculate Mine', link: { mobileWebUrl: 'https://salarykorea.site/unemployment', webUrl: 'https://salarykorea.site/unemployment' } }]
     });
 }
 </script>

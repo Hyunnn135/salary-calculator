@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="Calculate your out-of-pocket costs with Korean private health insurance.">
-    <meta name="keywords" content="실비보험계산기, 실손보험자기부담금, 실비세대별비교, 실비보험보장금액, 실손보험계산">
+    <meta name="keywords" content="private health insurance calculator, co-payment calculator, insurance generation comparison, coverage amount">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/silbi">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/silbi-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/silbi-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/silbi-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/silbi">
-    <meta property="og:title" content="실비보험 자기부담금 계산기 - 내 실비 얼마나 보장될까?">
-    <meta property="og:description" content="1~4세대 실손보험 자기부담금 자동 계산. 세대별 보장 금액을 한눈에 비교하세요.">
+    <meta property="og:title" content="Private Insurance Co-payment Calculator - How Much Am I Covered?">
+    <meta property="og:description" content="Auto-calculate co-payments for Gen 1-4 private insurance. Compare coverage by generation at a glance.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +56,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* 세대별 비교 테이블 */
+        /* Comparison by Generation 테이블 */
         .compare-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .compare-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 12px; }
@@ -83,8 +83,8 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "실비보험 자기부담금 계산기",
-        "description": "1~4세대 실손보험 자기부담금과 Insurance Coverage을 자동 계산합니다.",
+        "name": "Private Insurance Co-payment Calculator",
+        "description": "Automatically calculate co-payments and coverage for Gen 1-4 private health insurance.",
         "url": "https://salarykorea.site/silbi",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "All",
@@ -182,53 +182,53 @@
         <div>
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">진료 정보 입력</div>
-                    <div class="card-badge">실손보험</div>
+                    <div class="card-title">Enter Treatment Information</div>
+                    <div class="card-badge">Private Insurance</div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Insurance Generation</label>
                     <select class="form-select" id="generation">
-                        <option value="1">1세대 (2009.10 이전 가입)</option>
-                        <option value="2">2세대 (2009.10 ~ 2017.4)</option>
-                        <option value="3">3세대 (2017.4 ~ 2021.7)</option>
-                        <option value="4" selected>4세대 (2021.7 이후 가입)</option>
+                        <option value="1">Gen 1 (Enrolled before Oct 2009)</option>
+                        <option value="2">Gen 2 (Oct 2009 ~ Apr 2017)</option>
+                        <option value="3">Gen 3 (Apr 2017 ~ Jul 2021)</option>
+                        <option value="4" selected>Gen 4 (After Jul 2021)</option>
                     </select>
                 </div>
 
                 <div class="help-text" id="genHelp">
-                    <strong>4세대 실비:</strong> 급여 본인부담금의 20%, 비급여 30% 자기부담. 비급여 사용량에 따라 할인·할증 적용.
+                    <strong>Gen 4 실비:</strong> 급여 20% co-pay for covered, 30% for non-covered. Discount/surcharge based on non-covered usage.
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Treatment Type</label>
                     <select class="form-select" id="treatType">
                         <option value="inpatient">Inpatient</option>
-                        <option value="outpatient" selected>Outpatient (통원)</option>
-                        <option value="pharmacy">약국</option>
+                        <option value="outpatient" selected>Outpatient (Outpatient)</option>
+                        <option value="pharmacy">Pharmacy</option>
                     </select>
                 </div>
 
-                <div class="section-divider">── 진료비 ──</div>
+                <div class="section-divider">── Treatment Costs ──</div>
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">Covered Items <span class="form-label-sub">건강보험 적용</span></label>
+                        <label class="form-label">Covered Items <span class="form-label-sub">Covered by National Health Insurance</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="coveredCost" placeholder="100,000" value="100,000">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">KRW</span>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">Non-covered Items <span class="form-label-sub">전액 본인부담</span></label>
+                        <label class="form-label">Non-covered Items <span class="form-label-sub">Full Self-Pay (Non-covered)</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="uncoveredCost" placeholder="50,000" value="50,000">
-                            <span class="form-unit">원</span>
+                            <span class="form-unit">KRW</span>
                         </div>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="calculate()">자기부담금 Calculate</button>
+                <button class="submit-btn" onclick="calculate()">Calculate Co-payment</button>
             </div>
 
             <div class="action-row">
@@ -247,7 +247,7 @@
             <div id="captureArea" style="display:none;">
 
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">내 자기부담금</div>
+                <div class="result-hero-label">My Co-payment</div>
                 <div class="result-hero-amount" id="selfPay">0</div>
                 <div class="result-hero-unit">원</div>
                 <div class="result-hero-msg" id="cheerMsg"></div>
@@ -257,25 +257,25 @@
                         <div class="rh-stat-val" id="statCoverage">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">보장률</div>
+                        <div class="rh-stat-label">Coverage Rate</div>
                         <div class="rh-stat-val" id="statRate">—</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 세대별 비교 -->
+            <!-- Comparison by Generation -->
             <div class="compare-card" id="compareCard">
                 <div class="card-header">
-                    <div class="card-title">세대별 자기부담금 비교</div>
+                    <div class="card-title">Co-payment Comparison by Generation</div>
                 </div>
                 <table class="cmp-table">
                     <thead>
                         <tr>
-                            <th>구분</th>
-                            <th><span class="gen-badge gen-1">1세대</span></th>
-                            <th><span class="gen-badge gen-2">2세대</span></th>
-                            <th><span class="gen-badge gen-3">3세대</span></th>
-                            <th><span class="gen-badge gen-4">4세대</span></th>
+                            <th>Category</th>
+                            <th><span class="gen-badge gen-1">Gen 1</span></th>
+                            <th><span class="gen-badge gen-2">Gen 2</span></th>
+                            <th><span class="gen-badge gen-3">Gen 3</span></th>
+                            <th><span class="gen-badge gen-4">Gen 4</span></th>
                         </tr>
                     </thead>
                     <tbody id="compareBody"></tbody>
@@ -284,47 +284,47 @@
 
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">진료비를 입력하고 Calculate 버튼을 눌러주세요</div>
+            <div class="result-placeholder" id="resultPlaceholder">Enter treatment costs and click Calculate</div>
         </div>
     </div>
 
     <div class="bottom-grid">
         <div class="info-card">
             <h2>Insurance Generation별 차이</h2>
-            <p><strong>1세대(2009년 이전):</strong> 급여 10%, 비급여 거의 전액 보장. 가장 유리하지만 보험료가 계속 올라갈 수 있습니다.</p>
-            <p><strong>2세대(2009~2017):</strong> 급여 10%, 비급여 20% 자기부담. 1세대보다 보장이 줄었지만 여전히 양호합니다.</p>
-            <p><strong>3세대(2017~2021):</strong> 급여 20%, 비급여 특약 분리. 비급여 자기부담이 30%로 늘어났습니다.</p>
-            <p><strong>4세대(2021년 이후):</strong> 급여 20%, 비급여 30% + 비급여 관리제도(할인·할증). 보험료는 가장 저렴하나 자기부담이 큽니다.</p>
+            <p><strong>Gen 1(2009년 이전):</strong> 급여 10%, Nearly full coverage for non-covered items. Most favorable but premiums may keep rising.</p>
+            <p><strong>Gen 2(2009~2017):</strong> 급여 10%, 비급여 20% 자기부담. Gen 1보다 보장이 줄었지0K 여전히 양호합니다.</p>
+            <p><strong>Gen 3(2017~2021):</strong> 급여 20%, 비급여 특약 분리. 비Covered Co-pay이 30%로 늘어났습니다.</p>
+            <p><strong>Gen 4(2021년 이후):</strong> 급여 20%, 30% non-covered + usage management system (discount/surcharge). Lowest premiums but highest co-pay.</p>
         </div>
         <div class="info-card">
             <h2>FAQ</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 내 실비가 몇 세대인지 어떻게 알 수 있나요?</div>
-                <div class="faq-a">A. 보험증권의 가입일을 확인하세요. 2009.10 이전=1세대, 2017.4 이전=2세대, 2021.7 이전=3세대, 이후=4세대입니다.</div>
+                <div class="faq-q">Q. How can I find out what generation my insurance is?</div>
+                <div class="faq-a">A. Check your policy enrollment date. Before Oct 2009 = Gen 1, before Apr 2017 = Gen 2, before Jul 2021 = Gen 3, after = Gen 4.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 비급여란 무엇인가요?</div>
-                <div class="faq-a">A. 건강보험이 적용되지 않는 진료 항목입니다. 도수치료, MRI, 상급병실료, 비급여 주사 등이 대표적입니다.</div>
+                <div class="faq-q">Q. What are non-covered treatments?</div>
+                <div class="faq-a">A. Medical services not covered by National Health Insurance. Common examples include manual therapy, MRI, premium ward fees, and non-covered injections.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 4세대 비급여 할인·할증이란?</div>
-                <div class="faq-a">A. 직전 1년간 비급여 사용 금액에 따라 다음 해 보험료가 할인(적게 쓰면)되거나 할증(많이 쓰면)됩니다.</div>
+                <div class="faq-q">Q. Gen 4 discount/surcharge system?</div>
+                <div class="faq-a">A. Based on your non-covered expenses over the past year, next year's premiums are discounted (low usage) or surcharged (high usage).</div>
             </div>
         </div>
     </div>
 
     <div class="guide-cta">
-        <p>의료비로 연말정산에서 세금 환급받고 싶다면?</p>
-        <a href="medical-tax.html">의료비 세액공제 계산기 →</a>
+        <p>Want to get a tax refund for medical expenses?</p>
+        <a href="medical-tax.html">Medical Tax Deduction Calculator →</a>
     </div>
 
 </div>
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
@@ -344,13 +344,13 @@ document.querySelectorAll('.form-input').forEach(el => {
     });
 });
 
-// 세대 도움말 업데이트
+// 세대 Help text update
 document.getElementById('generation').addEventListener('change', function() {
     const helps = {
-        '1': '<strong>1세대 실비:</strong> 급여 본인부담금의 10%, 비급여 거의 전액 보장. 보장 범위가 가장 넓습니다.',
-        '2': '<strong>2세대 실비:</strong> 급여 본인부담금의 10%, 비급여 20% 자기부담. Outpatient는 1~1.5만원 공제 후 보장.',
-        '3': '<strong>3세대 실비:</strong> 급여 20% 자기부담, 비급여 특약 분리 30% 자기부담. 연 5천만원 보장 한도.',
-        '4': '<strong>4세대 실비:</strong> 급여 본인부담금의 20%, 비급여 30% 자기부담. 비급여 사용량에 따라 할인·할증 적용.'
+        '1': '<strong>Gen 1 실비:</strong> 급여 본인부담금의 10%, 비급여 거의 전액 보장. 보장 범위가 가장 넓습니다.',
+        '2': '<strong>Gen 2 실비:</strong> 급여 10% covered co-pay, 20% non-covered. Outpatient has 1~1.50K KRW 공제 후 보장.',
+        '3': '<strong>Gen 3 실비:</strong> 급여 20% 자기부담, 비급여 특약 분리 30% 자기부담. 연 5천0K KRW 보장 한도.',
+        '4': '<strong>Gen 4 실비:</strong> 급여 20% co-pay for covered, 30% for non-covered. Discount/surcharge based on non-covered usage.'
     };
     document.getElementById('genHelp').innerHTML = helps[this.value];
 });
@@ -367,7 +367,7 @@ function counter(elId, target) {
     requestAnimationFrame(step);
 }
 
-// 세대별 계산 함수
+// Calculate by generation 함수
 function calcByGen(gen, type, covered, uncovered) {
     let selfCovered = 0, selfUncovered = 0;
 
@@ -417,7 +417,7 @@ function calcByGen(gen, type, covered, uncovered) {
         }
     }
 
-    // 자기부담금은 실제 비용을 초과할 수 없음
+    // Co-payment cannot exceed actual costs할 수 없음
     selfCovered = Math.min(selfCovered, covered);
     selfUncovered = Math.min(selfUncovered, uncovered);
 
@@ -436,7 +436,7 @@ function calculate() {
     const uncovered = parse('uncoveredCost');
     const total = covered + uncovered;
 
-    if (total <= 0) { alert('진료비를 입력해 주세요.'); return; }
+    if (total <= 0) { alert('Please enter your treatment costs.'); return; }
 
     const result = calcByGen(gen, type, covered, uncovered);
 
@@ -449,45 +449,45 @@ function calculate() {
     document.getElementById('statRate').textContent = total > 0 ? ((result.coverage / total) * 100).toFixed(1) + '%' : '0%';
 
     const rate = total > 0 ? (result.coverage / total) * 100 : 0;
-    if (rate >= 80) document.getElementById('cheerMsg').textContent = '보장률 ' + rate.toFixed(0) + '%! 든든한 실비네요';
-    else if (rate >= 60) document.getElementById('cheerMsg').textContent = '보장률 ' + rate.toFixed(0) + '%. Non-covered Items에 주의하세요';
-    else document.getElementById('cheerMsg').textContent = '자기부담이 좀 높네요. 실비 전환을 고려해보세요';
+    if (rate >= 80) document.getElementById('cheerMsg').textContent = 'Coverage Rate ' + rate.toFixed(0) + '%! Your insurance coverage is strong!';
+    else if (rate >= 60) document.getElementById('cheerMsg').textContent = 'Coverage Rate ' + rate.toFixed(0) + '%. Non-covered Items. Watch out for non-covered items';
+    else document.getElementById('cheerMsg').textContent = 'Co-payment is quite high. Consider switching your insurance plan';
 
-    // 세대별 비교 테이블
-    const typeLabel = { inpatient: 'Inpatient', outpatient: 'Outpatient', pharmacy: '약국' };
+    // Comparison by Generation 테이블
+    const typeLabel = { inpatient: 'Inpatient', outpatient: 'Outpatient', pharmacy: 'Pharmacy' };
     const results = [1,2,3,4].map(g => calcByGen(g, type, covered, uncovered));
 
     let tbody = '';
-    // 급여 자기부담
+    // Covered Co-pay
     tbody += '<tr>';
-    tbody += '<td style="font-weight:600;text-align:left;">급여 자기부담</td>';
+    tbody += '<td style="font-weight:600;text-align:left;">Covered Co-pay</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
         tbody += `<td${cls}>${fmt(r.selfCovered)}원</td>`;
     });
     tbody += '</tr>';
 
-    // 비급여 자기부담
+    // 비Covered Co-pay
     tbody += '<tr>';
-    tbody += '<td style="font-weight:600;text-align:left;">비급여 자기부담</td>';
+    tbody += '<td style="font-weight:600;text-align:left;">비Covered Co-pay</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
         tbody += `<td${cls}>${fmt(r.selfUncovered)}원</td>`;
     });
     tbody += '</tr>';
 
-    // 총 자기부담
+    // Total Co-pay
     tbody += '<tr style="border-top:2px solid var(--text-primary);font-weight:800;">';
-    tbody += '<td style="font-weight:800;text-align:left;">총 자기부담</td>';
+    tbody += '<td style="font-weight:800;text-align:left;">Total Co-pay</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
         tbody += `<td${cls}>${fmt(r.totalSelf)}원</td>`;
     });
     tbody += '</tr>';
 
-    // 보험 보장
+    // Insurance Coverage
     tbody += '<tr>';
-    tbody += '<td style="font-weight:600;text-align:left;">보험 보장</td>';
+    tbody += '<td style="font-weight:600;text-align:left;">Insurance Coverage</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
         tbody += `<td${cls}>${fmt(r.coverage)}원</td>`;
@@ -502,12 +502,12 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '실비보험 자기부담금 계산기 - 월급연구소',
-            description: '내 실비보험 보장 금액을 세대별로 비교하세요',
+            title: 'Private Insurance Calculator - SalaryKorea',
+            description: '내 실비Insurance Coverage Compare amounts by generation',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' }
         },
-        buttons: [{ title: '계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' } }]
+        buttons: [{ title: 'Calculate', link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' } }]
     });
 }
 
@@ -518,7 +518,7 @@ function saveImage() {
         scale: 2, backgroundColor: '#F7F8FA', useCORS: true
     }).then(canvas => {
         const a = document.createElement('a');
-        a.download = '실비보험_자기부담금_계산결과.png';
+        a.download = 'private_insurance_result.png';
         a.href = canvas.toDataURL('image/png');
         a.click();
         btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';

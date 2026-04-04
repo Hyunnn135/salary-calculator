@@ -13,7 +13,7 @@
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/acquisition-tax-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/acquisition-tax-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/acquisition-tax">
-    <meta property="og:title" content="Acquisition Tax 계산기 - 2026년 부동산 Acquisition Tax 자동계산 | 월급연구소">
+    <meta property="og:title" content="Acquisition Tax 계산기 - 2026 부동산 Acquisition Tax 자동계산 | 월급연구소">
     <meta property="og:description" content="매매가격, Number of Houses, 면적을 입력하면 Acquisition Tax·Local Education Tax·Rural Special Tax를 자동 계산합니다.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@
         
         
 
-        /* ══ 폼 요소 ══ */
+        /* ══ Form Elements ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -48,7 +48,7 @@
         .form-select:focus { border-color: var(--accent); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-        /* 슬라이더 */
+        /* Slider */
         .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
         .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
         .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
@@ -56,7 +56,7 @@
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
 
-        /* ══ 결과 영역 ══ */
+        /* ══ Result Area ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
 
@@ -77,7 +77,7 @@
             .rh-stat-val { font-size: 0.78rem; }
         }
 
-        /* 공제 상세 카드 */
+        /* Deduction Detail Card */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -100,7 +100,7 @@
 </head>
 <body>
 
-<!-- 네비게이션 -->
+<!-- Navigation -->
 <nav class="nav">
     <div class="nav-inner">
         <a class="nav-logo" href="en.html">Salary<span>Korea</span></a>
@@ -184,35 +184,35 @@
         <p>Calculate tax on real estate purchase (2026)</p>
     </div>
 
-    <!-- 2컬럼 대시보드 -->
+    <!-- 2-Column Dashboard -->
     <div class="dashboard">
 
-        <!-- 왼쪽: 입력 -->
+        <!-- Left: Input -->
         <div>
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">부동산 정보 입력</div>
-                    <div class="card-badge">2026년</div>
+                    <div class="card-badge">2026</div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Purchase Price (KRW)</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="priceInput" placeholder="500,000,000">
-                        <span class="form-unit">원</span>
+                        <span class="form-unit">KRW</span>
                     </div>
                     <input type="range" class="form-slider" id="priceSlider" min="50000000" max="3000000000" step="10000000" value="500000000">
-                    <div class="slider-labels"><span>5,000만</span><span>10억</span><span>20억</span><span>30억</span></div>
+                    <div class="slider-labels"><span>5,0000K</span><span>1000M</span><span>2000M</span><span>3000M</span></div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Number of Houses</label>
                     <select class="form-select" id="housingCount">
                         <option value="1" selected>1 House (기본 세율)</option>
-                        <option value="2adj">2주택 (조정대상지역)</option>
-                        <option value="2non">2주택 (비조정지역)</option>
-                        <option value="3adj">3주택 이상 (조정대상지역)</option>
-                        <option value="3non">3주택 이상 (비조정지역)</option>
+                        <option value="2adj">2Housing (Regulated Area)</option>
+                        <option value="2non">2Housing (비조정지역)</option>
+                        <option value="3adj">3Housing 이상 (Regulated Area)</option>
+                        <option value="3non">3Housing 이상 (비조정지역)</option>
                     </select>
                 </div>
 
@@ -228,10 +228,10 @@
             </div>
         </div>
 
-        <!-- 오른쪽: 결과 -->
+        <!-- Right: Results -->
         <div class="result-col">
 
-            <!-- 결과 요약 -->
+            <!-- Result Summary -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">Total Tax Payable</div>
                 <div class="result-hero-amount" id="totalResult">0</div>
@@ -264,19 +264,19 @@
                 </div>
             </div>
 
-            <!-- 결과 없을 때 플레이스홀더 -->
+            <!-- Result Placeholder -->
             <div class="result-placeholder" id="resultPlaceholder">Enter purchase price and click Calculate</div>
         </div>
 
     </div>
 
-    <!-- 하단 정보 영역 -->
+    <!-- Bottom Info Section -->
     <div class="bottom-grid">
         <div class="info-card">
             <h2>Acquisition Tax Key Points</h2>
             <p><strong>신고·납부 기한:</strong> 부동산 잔금 지급일로부터 60일 이내에 관할 시·군·구청에 신고·납부해야 합니다. 기한을 넘기면 가산세가 부과됩니다.</p>
-            <p><strong>조정대상지역 세율:</strong> 조정대상지역 여부에 따라 다주택자의 세율이 크게 달라집니다. 2주택 조정대상지역은 8%, 3주택 이상은 12%가 적용됩니다.</p>
-            <p><strong>일시적 2주택 특례:</strong> 이사 등으로 일시적 2주택이 된 경우, 3년 이내에 기존 주택을 매도하면 1 House 기본 세율이 적용됩니다.</p>
+            <p><strong>Regulated Area 세율:</strong> Regulated Area 여부에 따라 다Housing자의 세율이 크게 달라집니다. 2Housing Regulated Area은 8%, 3Housing 이상은 12%가 적용됩니다.</p>
+            <p><strong>일시적 2Housing 특례:</strong> 이사 등으로 일시적 2Housing이 된 경우, 3년 이내에 기존 Housing을 매도하면 1 House 기본 세율이 적용됩니다.</p>
         </div>
         <div class="info-card">
             <h2>FAQ</h2>
@@ -285,12 +285,12 @@
                 <div class="faq-a">잔금일 또는 등기일 중 빠른 날로부터 60일 이내에 신고·납부해야 합니다. 기한을 넘기면 무신고 가산세(20%)가 부과됩니다.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">조정대상지역이 뭔가요?</div>
-                <div class="faq-a">정부가 부동산 과열을 억제하기 위해 지정한 지역입니다. 조정대상지역에서 다주택을 취득하면 중과세율이 적용되어 세 부담이 크게 높아집니다.</div>
+                <div class="faq-q">Regulated Area이 뭔가요?</div>
+                <div class="faq-a">정부가 부동산 과열을 00M제하기 위해 지정한 지역입니다. Regulated Area에서 다Housing을 취득하면 중과세율이 적용되어 세 부담이 크게 높아집니다.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">생애최초 주택 감면이 있나요?</div>
-                <div class="faq-a">네. 생애최초로 주택을 구입하는 경우 Acquisition Tax 200만원 한도 내에서 감면을 받을 수 있습니다. 소득·가격 요건 등 세부 조건이 있으니 확인이 필요합니다.</div>
+                <div class="faq-q">생애최초 Housing 감면이 있나요?</div>
+                <div class="faq-a">네. 생애최초로 Housing을 구입하는 경우 Acquisition Tax 2000K KRW 한도 내에서 감면을 받을 수 있습니다. 소득·가격 요건 등 세부 조건이 있으니 확인이 필요합니다.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">분양권도 Acquisition Tax가 있나요?</div>
@@ -302,37 +302,37 @@
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>Tax Rates & Reduction Benefits</h2>
-        <p>Acquisition Tax는 부동산, 차량 등의 자산을 취득할 때 부과되는 지방세입니다. 특히 주택을 매매할 때 가장 큰 비중을 차지하는 부대비용 중 하나로, 취득가액에 따라 수백만원에서 수천만원까지 발생할 수 있어 사전에 정확한 계산이 필수입니다.</p>
+        <p>Acquisition Tax는 부동산, 차량 등의 자산을 취득할 때 부과되는 지방세입니다. 특히 Housing을 매매할 때 가장 큰 비중을 차지하는 부대비용 중 하나로, Acquisition Price에 따라 수백0K KRW에서 수천0K KRW까지 발생할 수 있어 사전에 정확한 계산이 필수입니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주택 Acquisition Tax율</h3>
-        <p>주택 매매 시 Acquisition Tax율은 취득가액에 따라 차등 적용됩니다. 6억원 이하는 1%, 6억~9억원은 구간별로 1~3%가 차등 적용(취득가액에 따라 세율이 점진적으로 증가), 9억원 초과는 3%입니다. 다주택자의 경우 중과세가 적용되어 조정대상지역 2주택은 8%, 3주택 이상은 12%의 세율이 부과됩니다. 법인이 주택을 취득하는 경우에는 12% 단일 세율이 적용됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Housing Acquisition Tax율</h3>
+        <p>Housing 매매 시 Acquisition Tax율은 Acquisition Price에 따라 차등 적용됩니다. 600M원 이하는 1%, 600M~900M원은 구간별로 1~3%가 차등 적용(Acquisition Price에 따라 세율이 점진적으로 증가), 900M원 초과는 3%입니다. 다Housing자의 경우 중과세가 적용되어 Regulated Area 2Housing은 8%, 3Housing 이상은 12%의 세율이 부과됩니다. 법인이 Housing을 취득하는 경우에는 12% 단일 세율이 적용됩니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Acquisition Tax 감면 혜택</h3>
-        <p><strong>생애최초 주택 구입</strong> 시에는 실거래가 12억원 이하 주택에 대해 최대 200만원 한도로 Acquisition Tax 감면을 받을 수 있습니다. <strong>신혼부부</strong>의 경우 혼인신고일로부터 5년 이내에 주택을 취득하면 수도권 4억원, 비수도권 3억원 이하 주택에 대해 감면 혜택이 적용됩니다. 이 외에도 농어촌 주택, 장애인용 주택 등에 대한 다양한 감면 규정이 있으므로, 해당 여부를 꼼꼼히 확인하는 것이 좋습니다.</p>
+        <p><strong>생애최초 Housing 구입</strong> 시에는 실거래가 1200M원 이하 Housing에 대해 최대 2000K KRW 한도로 Acquisition Tax 감면을 받을 수 있습니다. <strong>신혼부부</strong>의 경우 혼인신고일로부터 5년 이내에 Housing을 취득하면 수도권 400M원, 비수도권 300M원 이하 Housing에 대해 감면 혜택이 적용됩니다. 이 외에도 농어촌 Housing, 장애인용 Housing 등에 대한 다양한 감면 규정이 있으므로, 해당 여부를 꼼꼼히 확인하는 것이 좋습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">납부 기한과 부가세</h3>
         <p>Acquisition Tax는 취득일(잔금 지급일 또는 등기일 중 빠른 날)로부터 <strong>60일 이내</strong>에 신고·납부해야 합니다. 기한을 넘기면 가산세가 부과되므로 주의가 필요합니다. 또한 Acquisition Tax 외에도 Rural Special Tax(Acquisition Tax의 10%)와 Local Education Tax(Acquisition Tax의 10~20%)가 추가로 부과되므로, 실제 부담액은 Acquisition Tax 단독 금액보다 높습니다. Acquisition Tax 신고와 납부는 <strong>위택스(wetax.go.kr)</strong>에서 온라인으로 처리할 수 있어 편리합니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">주택 외 부동산 및 차량 Acquisition Tax</h3>
-        <p>주택 외의 부동산(상가, 오피스텔, 토지 등)은 일반적으로 4%의 Acquisition Tax율이 적용됩니다. 오피스텔의 경우 주거용으로 사용하더라도 건축물대장상 업무시설이면 4%가 적용되므로 주의해야 합니다. 차량의 경우 비영업용 승용차는 7%, 영업용·경차·화물차는 4%의 Acquisition Tax가 부과됩니다. 장애인이나 국가유공자 등은 차량 Acquisition Tax 면제 혜택이 있으며, 경차(배기량 1,000cc 이하)는 Acquisition Tax가 면제됩니다(취득가액 4,000만원 이하 조건). 부동산 취득 시에는 Acquisition Tax 외에 법무사 비용, 중개수수료 등 부대비용도 함께 고려하여 총 비용을 산정하는 것이 현명합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Housing 외 부동산 및 차량 Acquisition Tax</h3>
+        <p>Housing 외의 부동산(상가, 오피스텔, Land 등)은 일반적으로 4%의 Acquisition Tax율이 적용됩니다. 오피스텔의 경우 주거용으로 사용하더라도 건축물대장상 업무시설이면 4%가 적용되므로 주의해야 합니다. 차량의 경우 비영업용 승용차는 7%, 영업용·경차·화물차는 4%의 Acquisition Tax가 부과됩니다. 장애인이나 국가유공자 등은 차량 Acquisition Tax 면제 혜택이 있으며, 경차(배기량 1,000cc 이하)는 Acquisition Tax가 면제됩니다(Acquisition Price 4,0000K KRW 이하 조건). 부동산 취득 시에는 Acquisition Tax 외에 법무사 비용, 중개수수료 등 부대비용도 함께 고려하여 총 비용을 산정하는 것이 현명합니다.</p>
     </div>
 
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의하기</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
 
 <script>
-// ── 유틸 ──
+// ── Utilities ──
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
 
-// ── 슬라이더 연동 ──
+// ── Slider sync ──
 var priceInput  = document.getElementById('priceInput');
 var priceSlider = document.getElementById('priceSlider');
 
@@ -347,7 +347,7 @@ priceSlider.addEventListener('input', function () {
 
 // ── Acquisition Tax율 계산 ──
 function getAcquisitionTaxRate(price, housingCount) {
-    // 1 House or 비조정 2주택
+    // 1 House or 비조정 2Housing
     if (housingCount === '1' || housingCount === '2non') {
         if (price <= 600000000) return 0.01;  // 1%
         if (price <= 900000000) {
@@ -355,16 +355,16 @@ function getAcquisitionTaxRate(price, housingCount) {
         }
         return 0.03;  // 3%
     }
-    // 2주택 조정대상지역
+    // 2Housing Regulated Area
     if (housingCount === '2adj') return 0.08;  // 8%
-    // 3주택+ 비조정
+    // 3Housing+ 비조정
     if (housingCount === '3non') return 0.08;  // 8%
-    // 3주택+ 조정대상지역
+    // 3Housing+ Regulated Area
     if (housingCount === '3adj') return 0.12;  // 12%
     return 0.01;
 }
 
-// ── 카운터 애니메이션 ──
+// ── Counter animation ──
 function counter(id, target, ms) {
     ms = ms || 900;
     var el = document.getElementById(id);
@@ -378,11 +378,11 @@ function counter(id, target, ms) {
     requestAnimationFrame(tick);
 }
 
-// ── 메인 계산 ──
+// ── Main calculation ──
 function calculate() {
     var price = parseVal(priceInput.value);
     if (!price || price < 10000000) {
-        alert('매매 가격을 올바르게 입력해주세요.');
+        alert('매매 가격을 올바르게 Please enter a value.');
         return;
     }
 
@@ -407,17 +407,17 @@ function calculate() {
     // 세율 표시용
     var ratePercent = (taxRate * 100).toFixed(1) + '%';
 
-    // 플레이스홀더 숨김
+    // Hide placeholder
     document.getElementById('resultPlaceholder').style.display = 'none';
 
-    // 결과 카드
+    // Result card
     document.getElementById('resultCard').classList.add('show');
     counter('totalResult', totalTax);
     document.getElementById('statAcqTax').textContent   = fmt(acqTax) + 'KRW';
     document.getElementById('statEduTax').textContent    = fmt(eduTax) + 'KRW';
     document.getElementById('statRuralTax').textContent  = fmt(ruralTax) + 'KRW';
 
-    // 상세 내역
+    // Details
     var items = [
         { name: '매매 가격',         amount: price,     color: '#2563EB',  rate: '' },
         { name: 'Acquisition Tax (' + ratePercent + ')', amount: acqTax,    color: '#EF4444',  rate: '' },
@@ -445,7 +445,7 @@ function calculate() {
     document.getElementById('breakdownCard').classList.add('show');
     document.getElementById('breakdownTotal').textContent = fmt(totalTax) + 'KRW';
 
-    // 바 애니메이션
+    // Bar animation
     setTimeout(function() {
         var bars = document.querySelectorAll('.b-bar');
         bars.forEach(function(bar) {

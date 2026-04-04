@@ -14,7 +14,7 @@
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/minimum-wage-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/minimum-wage">
     <meta property="og:title" content="2026 최저時給 계산기 - 時給 월급 연봉 자동계산">
-    <meta property="og:description" content="2026年 최저時給 10,320원 기준 日給·주급·월급·연봉을 바로 확인하세요.">
+    <meta property="og:description" content="2026年 최저時給 10,320ウォン 기준 日給·주급·월급·연봉을 바로 확인하세요.">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,7 +151,7 @@
     },
     "provider": {
         "@type": "Organization",
-        "name": "월급연구소",
+        "name": "韓国給与研究所",
         "url": "https://salarykorea.site"
     }
 }
@@ -159,7 +159,7 @@
 </head>
 <body>
 
-<!-- 네비게이션 -->
+<!-- ナビゲーション -->
 <nav class="nav">
     <div class="nav-inner">
         <a class="nav-logo" href="ja.html">給与<span>研究所</span></a>
@@ -245,15 +245,15 @@
     <div class="min-wage-banner">
         <div>
             <div class="mw-label">2026年 法定最低時給</div>
-            <div class="mw-value">10,320원</div>
+            <div class="mw-value">10,320ウォン</div>
             <div class="mw-sub">前年比+170ウォン引上げ (1.7%)</div>
         </div>
     </div>
 
-    <!-- 2컬럼 대시보드 -->
+    <!-- 2カラムダッシュボード -->
     <div class="dashboard">
 
-        <!-- 왼쪽: 입력 -->
+        <!-- 左側：入力 -->
         <div>
             <div class="card">
                 <div class="card-header">
@@ -265,7 +265,7 @@
                     <label class="form-label">時給</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="hourlyWage" value="10,320">
-                        <span class="form-unit">원</span>
+                        <span class="form-unit">ウォン</span>
                     </div>
                 </div>
 
@@ -310,7 +310,7 @@
                 <button class="submit-btn" onclick="calculate()">計算する</button>
             </div>
 
-            <!-- 저장 / 공유 버튼 -->
+            <!-- 保存/共有ボタン -->
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
@@ -319,14 +319,14 @@
             </div>
         </div>
 
-        <!-- 오른쪽: 결과 -->
+        <!-- 右側：結果 -->
         <div class="result-col">
 
-            <!-- 결과 요약 -->
+            <!-- 結果サマリー -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">月給 (税引前)</div>
                 <div class="result-hero-amount" id="monthly">0</div>
-                <div class="result-hero-unit">원 / 월</div>
+                <div class="result-hero-unit">ウォン/月</div>
                 <div class="result-hero-msg" id="resultNote"></div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
@@ -344,14 +344,14 @@
                 </div>
             </div>
 
-            <!-- 결과 없을 때 플레이스홀더 -->
+            <!-- 結果プレースホルダー -->
             <div class="result-placeholder" id="resultPlaceholder">時給を入力して計算ボタンを押してください</div>
 
         </div>
 
     </div>
 
-    <!-- 하단 정보 영역 -->
+    <!-- 下部情報エリア -->
     <div class="bottom-grid">
 
         <!-- 年度별 최저時給 변화 -->
@@ -362,11 +362,11 @@
                     <tr><th>年度</th><th>時給</th><th>月給 (209h)</th><th>引上率</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td class="hl">2026年</td><td class="hl">10,320원</td><td class="hl">2,156,880원</td><td class="hl">+1.7%</td></tr>
-                    <tr><td>2025年</td><td>10,030원</td><td>2,096,270원</td><td>+1.7%</td></tr>
-                    <tr><td>2024年</td><td>9,860원</td><td>2,060,740원</td><td>+2.5%</td></tr>
-                    <tr><td>2023年</td><td>9,620원</td><td>2,010,580원</td><td>+5.0%</td></tr>
-                    <tr><td>2022年</td><td>9,160원</td><td>1,914,440원</td><td>+5.1%</td></tr>
+                    <tr><td class="hl">2026年</td><td class="hl">10,320ウォン</td><td class="hl">2,156,880ウォン</td><td class="hl">+1.7%</td></tr>
+                    <tr><td>2025年</td><td>10,030ウォン</td><td>2,096,270ウォン</td><td>+1.7%</td></tr>
+                    <tr><td>2024年</td><td>9,860ウォン</td><td>2,060,740ウォン</td><td>+2.5%</td></tr>
+                    <tr><td>2023年</td><td>9,620ウォン</td><td>2,010,580ウォン</td><td>+5.0%</td></tr>
+                    <tr><td>2022年</td><td>9,160ウォン</td><td>1,914,440ウォン</td><td>+5.1%</td></tr>
                 </tbody>
             </table>
         </div>
@@ -395,7 +395,7 @@
     <!-- 최저임금 위반 안내 -->
     <div class="info-card" style="margin-bottom: 24px;">
         <h2>最低賃金違反の場合</h2>
-        <p>최저임금(10,320원)보다 낮은 時給을 지급하면 <strong>3년 이하 징역 또는 2,000만원 이하 벌금</strong>이 부과됩니다. 최저임금법은 정규직·계약직·아르바이트 모두 동일하게 적용됩니다.</p>
+        <p>최저임금(10,320ウォン)보다 낮은 時給을 지급하면 <strong>3년 이하 징역 또는 2,000万ウォン 이하 벌금</strong>이 부과됩니다. 최저임금법은 정규직·계약직·아르바이트 모두 동일하게 적용됩니다.</p>
         <p>수습기간 중에는 3ヶ月간 최저임금의 <strong>90%</strong>까지 적용 가능합니다. (단, 1년 미만 근로계약 제외)</p>
     </div>
 
@@ -404,26 +404,26 @@
         <h2>よくある質問</h2>
         <div class="faq-item">
             <div class="faq-q">2026年 최저時給은 얼마인가요?</div>
-            <div class="faq-a">2026年 法定最低時給은 시간당 10,320원입니다. 월급(209時間 기준)으로 환산하면 2,156,880원입니다.</div>
+            <div class="faq-a">2026年 法定最低時給은 시간당 10,320ウォン입니다. 월급(209時間 기준)으로 환산하면 2,156,880ウォン입니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">최저時給보다 낮게 받고 있으면 어떻게 해야 하나요?</div>
-            <div class="faq-a">최저임금법 위반으로 3년 이하 징역 또는 2,000만원 이하 벌금에 해당합니다. 고용노동부 고객상담센터(1350) 또는 온라인 신고센터를 통해 신고할 수 있습니다.</div>
+            <div class="faq-a">最低賃金法違反で3年以下の懲役または2,000万ウォン以下の罰金に該当します。雇用労働部お客様相談センター(1350)またはオンライン申告センターを通じて申告できます。</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">수습기간에도 최저時給이 적용되나요?</div>
-            <div class="faq-a">1년 이상 근로계약을 체결한 경우 수습 3ヶ月까지 최저時給의 90%(9,288원)를 지급할 수 있습니다. 단, 단순노무직은 수습 감액이 적용되지 않습니다.</div>
+            <div class="faq-a">1년 이상 근로계약을 체결한 경우 수습 3ヶ月까지 최저時給의 90%(9,288ウォン)를 지급할 수 있습니다. 단, 단순노무직은 수습 감액이 적용되지 않습니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">週休手当を含む 시 실질 時給은 얼마인가요?</div>
-            <div class="faq-a">週15時間以上勤務 시 주휴수당이 추가됩니다. 週5日 근무 기준으로 실질 時給은 10,320원 x 1.2 = 약 12,384원 수준이 됩니다.</div>
+            <div class="faq-a">週15時間以上勤務 시 주휴수당이 추가됩니다. 週5日 근무 기준으로 실질 時給은 10,320ウォン x 1.2 = 약 12,384ウォン 수준이 됩니다.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">식대나 교통비도 時給에 포함되나요?</div>
-            <div class="faq-a">현금으로 지급되는 식대·교통비는 최저임금 산입 여부가 정해져 있습니다. 매월 고정적으로 지급되는 식대는 일정 한도 내에서 산입됩니다.</div>
+            <div class="faq-a">現金で支給される食費・交通費は最低賃金への算入可否が定められています。毎月固定的に支給される食費は一定の限度内で算入されます。</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">아르바이트생도 4대보험에 가입해야 하나요?</div>
+            <div class="faq-q">アルバイトも4大保険に加入する必要がありますか？</div>
             <div class="faq-a">週15時間以上勤務 시 4대보험 의무 가입 대상입니다. 단기·초단시간 근로자(주 15時間 미만)는 국민연금·고용보험 적용이 제외될 수 있습니다.</div>
         </div>
     </div>
@@ -431,19 +431,19 @@
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>2026年最低賃金の完全ガイド</h2>
-        <p>2026年 최저時給은 <strong>10,320원</strong>으로 확정되었습니다. 이는 전년도 10,150원 대비 170원(1.7%) 인상된 금액입니다. 주 40시간 근무 기준 월 환산액(209時間)은 <strong>2,156,880원</strong>이며, 연봉으로 환산하면 약 <strong>25,882,560원</strong>에 해당합니다.</p>
+        <p>2026年 최저時給은 <strong>10,320ウォン</strong>으로 확정되었습니다. 이는 전년도 10,150ウォン 대비 170ウォン(1.7%) 인상된 금액입니다. 주 40시간 근무 기준 월 환산액(209時間)은 <strong>2,156,880ウォン</strong>이며, 연봉으로 환산하면 약 <strong>25,882,560ウォン</strong>에 해당합니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">최저임금 적용 범위</h3>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低賃金の適用範囲</h3>
         <p>최저임금은 1인 이상 근로자를 사용하는 모든 사업 또는 사업장에 적용됩니다. 정규직, 계약직, 파트타임 아르바이트 등 고용 형태와 관계없이 동일하게 적용되며, 외국인 근로자에게도 마찬가지로 적용됩니다. 다만, 수습 사용 중인 근로자로서 수습 사용한 날부터 3ヶ月 이내인 경우에는 최저임금의 90%까지 감액 적용이 가능합니다. 단, 1년 미만의 기간을 정하여 근로계약을 체결한 경우에는 수습 기간이라도 감액할 수 없습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低賃金違反の場合 벌칙</h3>
-        <p>최저임금법 제28조에 따라 최저임금액보다 적은 임금을 지급한 사용자는 <strong>3년 이하의 징역 또는 2,000만원 이하의 벌금</strong>에 처해질 수 있습니다. 최저임금 위반이 의심되는 경우 고용노동부(전화번호 1350)에 신고할 수 있으며, 사업장 관할 지방고용노동청에 진정서를 접수할 수도 있습니다.</p>
+        <p>最低賃金法第28条により、最低賃金未満の賃金を支払った使用者は<strong>3年以下の懲役または2,000万ウォン以下の罰金</strong>に処される可能性があります。最低賃金違反が疑われる場合は雇用労働部(電話1350)に申告でき、事業場管轄の地方雇用労働庁に陳情書を提出することもできます。</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">최근 5년간 최저임금 인상 추이</h3>
-        <p>2022年 9,160원 → 2023年 9,620원(5.0% 인상) → 2024年 9,860원(2.5% 인상) → 2025年 10,150원(2.9% 인상) → 2026年 10,320원(1.7% 인상). 최근 몇 년간 引上率이 점차 둔화되는 추세를 보이고 있으며, 이는 경제 상황과 기업 부담 능력 등을 종합적으로 고려한 최저임금위원회의 결정에 따른 것입니다. 최저임금은 매년 8월 5일까지 고시되어 다음 해 1월 1일부터 적용됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">過去5年間の最低賃金引上げ推移</h3>
+        <p>2022年 9,160ウォン → 2023年 9,620ウォン(5.0% 인상) → 2024年 9,860ウォン(2.5% 인상) → 2025年 10,150ウォン(2.9% 인상) → 2026年 10,320ウォン(1.7% 인상). 최근 몇 년간 引上率이 점차 둔화되는 추세를 보이고 있으며, 이는 경제 상황과 기업 부담 능력 등을 종합적으로 고려한 최저임금위원회의 결정에 따른 것입니다. 최저임금은 매년 8월 5일까지 고시되어 다음 해 1월 1일부터 적용됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">최저임금에 포함되는 임금 항목</h3>
-        <p>최저임금에 산입되는 임금 범위도 알아두면 좋습니다. 매월 1회 이상 정기적으로 지급하는 임금이 산입 대상이며, 기본급뿐 아니라 고정적으로 지급되는 각종 수당도 포함됩니다. 다만 매월 지급되더라도 소정근로에 대한 대가가 아닌 연장·야간·휴일근로수당, 연차미사용수당, 가족수당, 통근수당 등은 제외됩니다. 상여금의 경우 월 환산액의 5%를 초과하는 부분, 복리후생비(식비·교통비·숙박비 등)는 월 환산액의 1%를 초과하는 부분이 최저임금에 산입됩니다. 자신의 급여가 최저임금 이상인지 확인할 때는 이러한 산입 범위를 고려하여 정확하게 비교해야 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">最低賃金に含まれる賃金項目</h3>
+        <p>最低賃金に算入される賃金の範囲も知っておくと良いでしょう。毎月1回以上定期的に支給する賃金が算入対象で、基本給だけでなく固定的に支給される各種手当も含まれます。ただし毎月支給されても、所定労働の対価でない残業・夜間・休日手当、年次未使用手当、家族手当、通勤手当などは除外されます。賞与は月換算額の5%超過分、福利厚生費(食費・交通費・宿泊費など)は月換算額の1%超過分が最低賃金に算入されます。自分の給与が最低賃金以上か確認する際は、これらの算入範囲を考慮して正確に比較する必要があります。</p>
     </div>
 
 <!-- ADSENSE-HIDE: 카카오 애드핏
@@ -457,10 +457,10 @@
     </div>
     -->
 
-    <!-- 가이드 CTA -->
+    <!-- ガイドCTA -->
     <div class="guide-cta">
-        <p>최저임금 인상 추이, 업종별 적용 기준, 위반 시 대처법까지 알고 싶다면?</p>
-        <a href="guide-minimum-wage.html">최저임금 완벽 가이드 보기 →</a>
+        <p>最低賃金の推移、業種別基準、違反時の対処法を知りたいなら？</p>
+        <a href="guide-minimum-wage.html">最低賃金ガイドを見る →</a>
     </div>
 
 </div>
@@ -477,12 +477,12 @@
 </div>
 -->
 
-<!-- 푸터 -->
+<!-- フッター -->
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의하기</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">紹介</a>
+        <a href="contact.html">お問合せ</a>
+        <a href="privacy.html">プライバシー</a>
     </div>
     <div class="footer-copy">© 2026 韓国給与研究所</div>
 </footer>
@@ -526,24 +526,24 @@ function calculate() {
     // 연봉
     const yearly = monthly * 12;
 
-    // 결과 표시
+    // 結果表示
     document.getElementById('daily').textContent = fmt(daily);
     document.getElementById('weekly').textContent = fmt(weekly);
     document.getElementById('monthly').textContent = Math.round(monthly).toLocaleString('ko-KR');
     document.getElementById('yearly').textContent = fmt(yearly);
 
     const tag = document.getElementById('holidayTag');
-    tag.textContent = holidayPay > 0 ? '(주휴 포함)' : '';
+    tag.textContent = holidayPay > 0 ? '(週休含む)' : '';
 
-    // 안내 메시지
+    // 案内メッセージ
     let note = `時給 ${wage.toLocaleString()}원 × 하루 ${dailyH}시간 × 주 ${weeklyD}일 기준입니다.`;
     if (includeHoliday && weeklyH >= 15) {
-        note += ` 주휴수당 ${fmt(holidayPay)} 포함.`;
+        note += ` 週休手当${fmt(holidayPay)}含む。`;
     } else if (includeHoliday && weeklyH < 15) {
         note += ` 주 근무시간이 15時間 미만으로 주휴수당이 발생하지 않습니다.`;
     }
     if (wage < 10320) {
-        note += ` 입력한 時給이 2026年 최저時給(10,320원)보다 낮습니다.`;
+        note += ` 입력한 時給이 2026年 최저時給(10,320ウォン)보다 낮습니다.`;
     }
     document.getElementById('resultNote').textContent = note;
 
@@ -557,7 +557,7 @@ function calculate() {
     window._shareMonthly = fmt(monthly);
 }
 
-// 페이지 로드 시 자동 계산
+// ページロード時に自動計算
 window.onload = function() { calculate(); };
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
@@ -567,12 +567,12 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 월급은 ' + (window._shareMonthly || '—'),
-            description: '2026年 최저時給 10,320원 기준 월급 계산 결과',
+            title: '私の月給：' + (window._shareMonthly || '—'),
+            description: '2026年 최저時給 10,320ウォン 기준 월급 계산 결과',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/minimum-wage', webUrl: 'https://salarykorea.site/minimum-wage' }
         },
-        buttons: [{ title: '나도 계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/minimum-wage', webUrl: 'https://salarykorea.site/minimum-wage' } }]
+        buttons: [{ title: '計算してみる', link: { mobileWebUrl: 'https://salarykorea.site/minimum-wage', webUrl: 'https://salarykorea.site/minimum-wage' } }]
     });
 }
 </script>

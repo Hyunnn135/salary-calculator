@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="Calculate National Pension, Health Insurance, Long-term Care, and Employment Insurance based on 2026 rates.">
-    <meta name="keywords" content="4대보험계산기, National Pension계산기, Health Insurance계산기, Employment Insurance계산기, 4대보험료">
+    <meta name="keywords" content="social insurance calculator Korea, national pension, health insurance, employment insurance, 4 major insurance">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/insurance">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/insurance-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/insurance-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/insurance-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/insurance">
-    <meta property="og:title" content="4대보험 계산기 2026 - 내 보험료 얼마야?">
-    <meta property="og:description" content="월급 입력하면 National Pension·Health Insurance·장기요양·Employment Insurance료를 자동 계산합니다.">
+    <meta property="og:title" content="Social Insurance Calculator 2026 - How Much Are My Premiums?">
+    <meta property="og:description" content="Enter your monthly salary to automatically calculate National Pension, Health Insurance, Long-term Care, and Employment Insurance.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
         @media (max-width: 768px) {
             .dashboard { grid-template-columns: 1fr; }
         }
-        /* ══ 폼 요소 ══ */
+        /* ══ Form Elements ══ */
         .form-group { margin-bottom: 20px; }
         .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
         .form-input-wrap { position: relative; }
@@ -35,7 +35,7 @@
         .form-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; font-weight: 600; color: var(--text-tertiary); pointer-events: none; }
         .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
         .submit-btn:hover { background: #1D4ED8; }
-        /* ══ 결과 영역 ══ */
+        /* ══ Result Area ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
@@ -48,7 +48,7 @@
         @media (max-width: 768px) {
             .result-hero-amount { font-size: 2.2rem; }
         }
-        /* 공제 상세 카드 */
+        /* Deduction Detail Card */
         .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .b-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
@@ -93,8 +93,8 @@
 {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "4대보험 계산기",
-    "description": "2026년 기준 National Pension, Health Insurance, Long-term Care, Employment Insurance료를 계산합니다.",
+    "name": "Social Insurance Calculator (4 Major)",
+    "description": "2026 Standard National Pension, Health Insurance, Long-term Care, Employment Insurance료를 계산합니다.",
     "url": "https://salarykorea.site/insurance",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -105,7 +105,7 @@
     },
     "provider": {
         "@type": "Organization",
-        "name": "월급연구소",
+        "name": "SalaryKorea",
         "url": "https://salarykorea.site"
     }
 }
@@ -113,7 +113,7 @@
 </head>
 <body>
 
-<!-- 네비게이션 -->
+<!-- Navigation -->
 <nav class="nav">
     <div class="nav-inner">
         <a class="nav-logo" href="en.html">Salary<span>Korea</span></a>
@@ -197,22 +197,22 @@
         <p>Calculate National Pension, Health, Long-term Care & Employment Insurance (2026)</p>
     </div>
 
-    <!-- 2컬럼 대시보드 -->
+    <!-- 2-Column Dashboard -->
     <div class="dashboard">
 
-        <!-- 왼쪽: 입력 -->
+        <!-- Left: Input -->
         <div>
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Monthly Salary Input</div>
-                    <div class="card-badge">2026년</div>
+                    <div class="card-badge">2026</div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Monthly Salary (Pre-tax)</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="salaryInput" placeholder="3,000,000">
-                        <span class="form-unit">원</span>
+                        <span class="form-unit">KRW</span>
                     </div>
                 </div>
 
@@ -228,10 +228,10 @@
             </div>
         </div>
 
-        <!-- 오른쪽: 결과 -->
+        <!-- Right: Results -->
         <div class="result-col">
 
-            <!-- 결과 요약 -->
+            <!-- Result Summary -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">Total Monthly Insurance (Employee)</div>
                 <div class="result-hero-amount" id="totalAmount">0</div>
@@ -278,13 +278,13 @@
                 </div>
             </div>
 
-            <!-- 결과 없을 때 플레이스홀더 -->
-            <div class="result-placeholder" id="resultPlaceholder">월 급여를 입력하고 Calculate 버튼을 눌러주세요</div>
+            <!-- Result Placeholder -->
+            <div class="result-placeholder" id="resultPlaceholder">월 Enter your salary and click Calculate</div>
         </div>
 
     </div>
 
-    <!-- 본인 vs 회사 비교 -->
+    <!-- Employee vs. Employer Comparison -->
     <div class="compare-card" id="compareCard">
         <div class="card-header">
             <div class="card-title">Employee vs Employer 비교</div>
@@ -312,7 +312,7 @@
                     <td id="c-health-tot">—</td>
                 </tr>
                 <tr>
-                    <td>장기요양</td>
+                    <td>Long-term Care</td>
                     <td class="emp" id="c-care-emp">—</td>
                     <td class="com" id="c-care-com">—</td>
                     <td id="c-care-tot">—</td>
@@ -332,21 +332,21 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>※ Employment Insurance Employer은 사업장 규모에 따라 다릅니다. 위 표는 150인 미만 사업장(0.9%) 기준입니다.</p>
+            <p>※ Employment Insurance Employer은 사업장 규모에 따라 다릅니다. 위 표는 150인 미0K 사업장(0.9%) 기준입니다.</p>
         </div>
     </div>
 
-    <!-- 하단 정보 영역 -->
+    <!-- Bottom Info Section -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
             <h2>What is Social Insurance?</h2>
             <p>
-                4대보험은 국가에서 운영하는 <strong>4가지 의무 가입 사회보험</strong>입니다.
-                근로자와 사용자(회사)가 함께 보험료를 나눠서 부담합니다.
+                The 4 major insurance programs are <strong>4 mandatory public insurance systems</strong> in Korea.
+                Workers and employers share the premium costs.
             </p>
             <ul>
-                <li><strong>National Pension</strong> — 노후 소득 보장. 만 60세 이후 연금 수령</li>
-                <li><strong>Health Insurance</strong> — 병원 치료비 절감. 실제 의료비의 일부만 Employee</li>
+                <li><strong>National Pension</strong> — 노후 소득 보장. 0K 60세 이후 연금 수령</li>
+                <li><strong>Health Insurance</strong> — 병원 치료비 절감. 실제 의료비의 일부0K Employee</li>
                 <li><strong>Long-term Care</strong> — 고령·장애로 거동이 불편할 때 요양 서비스 지원</li>
                 <li><strong>Employment Insurance</strong> — 실직 시 실업급여 수령, 육아휴직급여 등 지원</li>
             </ul>
@@ -355,21 +355,21 @@
         <div class="info-card" style="margin-bottom:0;">
             <h2>FAQ</h2>
             <div class="faq-item">
-                <div class="faq-q">아르바이트생도 4대보험에 가입해야 하나요?</div>
-                <div class="faq-a">1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미만이면 National Pension·Employment Insurance은 제외될 수 있습니다.</div>
+                <div class="faq-q">Do part-time workers need to enroll in social insurance?</div>
+                <div class="faq-a">1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미0K이면 National Pension·Employment Insurance은 제외될 수 있습니다.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">월급이 올라도 National Pension이 안 올라가던데요?</div>
-                <div class="faq-a">National Pension은 월 기준소득월액 상한(617만원)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
+                <div class="faq-q">Why doesn't my pension premium increase even when my salary goes up?</div>
+                <div class="faq-a">National Pension은 월 기준소득월액 상한(6170K KRW)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">프리랜서는 4대보험을 어떻게 내나요?</div>
-                <div class="faq-a">프리랜서(자영업자)는 National Pension과 Health Insurance에 지역가입자로 가입하며, 보험료를 전액 본인이 부담합니다.</div>
+                <div class="faq-q">How do freelancers pay social insurance?</div>
+                <div class="faq-a">Freelancers (self-employed) enroll as individual subscribers for National Pension and Health Insurance, paying the full premium themselves.</div>
             </div>
         </div>
     </div>
 
-    <!-- 2026년 요율표 -->
+    <!-- 2026 요율표 -->
     <div class="info-card">
         <h2>2026 Insurance Rate Table</h2>
         <table class="rate-table">
@@ -404,37 +404,37 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>National Pension은 월 기준소득월액 <strong>상한 617만원</strong>까지만 적용됩니다. 월급이 617만원을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
+            <p>National Pension은 월 기준소득월액 <strong>상한 6170K KRW</strong>까지0K 적용됩니다. 월급이 6170K KRW을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>2026 Social Insurance Guide</h2>
-        <p>4대보험은 National Pension, Health Insurance, Long-term Care, Employment Insurance을 통칭하며, 근로자와 사업주가 공동으로 부담합니다. 매달 급여에서 자동으로 공제되는 4대보험료는 소득에 따라 달라지며, 정확한 보험료를 이해하면 급여 관리에 큰 도움이 됩니다.</p>
+        <p>The 4 major insurance programs — National Pension, Health Insurance, Long-term Care, and Employment Insurance — are jointly funded by workers and employers. They are automatically 공제되는 4대보험료는 소득에 따라 달라지며, 정확한 보험료를 이해하면 급여 관리에 큰 도움이 됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">National Pension (전체 9%, 근로자 4.5%)</h3>
-        <p>National Pension은 노후 소득 보장을 위한 사회보험입니다. 2026년 기준 기준소득월액 상한은 637만원, 하한은 39만원입니다. 상한을 초과하는 소득이 있어도 637만원 기준으로만 보험료가 부과됩니다. 만 18세 이상 60세 미만 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">National Pension (Total 9%, worker 4.5%)</h3>
+        <p>National Pension은 노후 소득 보장을 위한 사회보험입니다. 2026 Standard 기준소득월액 상한은 6370K KRW, 하한은 390K KRW입니다. 상한을 초과하는 소득이 있어도 6370K KRW 기준으로0K 보험료가 부과됩니다. 0K 18세 이상 60세 미0K 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Health Insurance (전체 7.19%, 근로자 3.595%)</h3>
-        <p>Health Insurance은 질병이나 부상에 대한 의료비 부담을 줄여주는 보험입니다. 2026년 보험료율은 7.19%로 전년 대비 소폭 인상되었습니다. 소득에 비례하여 부과되며, National Pension과 달리 상한 없이 전체 소득에 적용됩니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 Health Insurance 혜택을 받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Health Insurance (Total 7.19%, worker 3.595%)</h3>
+        <p>Health Insurance은 Insurance that reduces medical cost burden for illness or injury. The 2026 rate is 7.19%, slightly increased from the previous year. Premiums are proportional to income, and unlike National Pension, there is no income cap니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 Health Insurance 혜택을 받을 수 있습니다.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Long-term Care (Health Insurance료의 13.14%)</h3>
-        <p>Long-term Care은 65세 이상 고령자 또는 노인성 질환을 가진 분들에게 돌봄 서비스를 제공하기 위한 보험입니다. Health Insurance료에 연동하여 부과되며, 2026년에는 Health Insurance료의 13.14%가 적용됩니다. Health Insurance 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
+        <p>Long-term Care은 65세 Insurance providing care services for elderly individuals aged 65+ or those with geriatric diseases. Premiums are linked to Health Insurance and set at 13.14% of Health Insurance premiums in 2026. Health Insurance 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Employment Insurance (전체 1.8%, 근로자 0.9%)</h3>
-        <p>Employment Insurance은 실업급여, 육아휴직급여, 직업능력개발 등의 재원이 되는 보험입니다. 근로자 부담분은 0.9%이며, 사업주는 기업 규모에 따라 0.9~1.5%를 추가 부담합니다. 주 15시간 미만 근로자, 65세 이후 새로 고용된 근로자 등은 Employment Insurance 적용이 제외될 수 있습니다. 프리랜서(3.3% 원천징수 대상자)는 직장가입이 아닌 지역가입자로 National Pension과 Health Insurance에 별도 가입해야 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Employment Insurance (Total 1.8%, worker 0.9%)</h3>
+        <p>Employment Insurance은 실업급여, 육아휴직급여, 직업능력개발 등의 재원이 되는 보험입니다. 근로자 부담분은 0.9%이며, 사업주는 기업 규모에 따라 0.9~1.5%를 추가 부담합니다. 주 15시간 미0K 근로자, 65세 이후 새로 고용된 근로자 등은 Employment Insurance 적용이 제외될 수 있습니다. 프리랜서(3.3% 원천징수 대상자)는 직장가입이 아닌 지역가입자로 National Pension과 Health Insurance에 별도 가입해야 합니다.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">4대보험 관련 유용한 팁</h3>
-        <p>4대보험료는 매년 보수총액 신고를 통해 정산됩니다. 전년도 실제 소득이 신고 소득보다 많거나 적은 경우 보험료 차액이 추가 부과되거나 환급될 수 있습니다. Health Insurance의 경우 피부양자 자격 요건이 점점 강화되고 있어, 피부양자의 소득이나 재산이 일정 기준을 초과하면 지역가입자로 전환될 수 있으니 주의해야 합니다. 4대보험 가입 여부와 보험료 내역은 4대사회보험 정보연계센터(4insure.or.kr)에서 조회할 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Useful Tips About Social Insurance</h3>
+        <p>Social insurance premiums are settled annually through total compensation reporting. If actual income differs from reported income, premium differences may be additionally charged or refunded. For Health Insurance, dependent qualification requirements are gradually점 강화되고 있어, 피부양자의 소득이나 재산이 일정 기준을 초과하면 지역가입자로 전환될 수 있으니 주의해야 합니다. 4대보험 가입 여부와 보험료 내역은 4대사회보험 정보연계센터(4insure.or.kr)에서 조회할 수 있습니다.</p>
     </div>
 
 
 <footer class="footer">
     <div class="footer-links">
-        <a href="about.html">소개</a>
-        <a href="contact.html">문의하기</a>
-        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 SalaryKorea</div>
 </footer>
@@ -451,15 +451,15 @@ salaryInput.addEventListener('input', function() {
 
 function calculate() {
     const salary = parseVal(salaryInput.value);
-    if (!salary) { alert('월 급여를 입력해주세요.'); return; }
+    if (!salary) { alert('월 Please enter your salary.'); return; }
 
-    // 2026년 요율
+    // 2026 rates
     const PENSION_RATE  = 0.045;   // National Pension 4.5%
     const HEALTH_RATE   = 0.03545; // Health Insurance 3.545%
     const CARE_RATE     = 0.1295;  // Long-term Care Health Insurance료의 12.95%
     const EMPLOY_RATE   = 0.009;   // Employment Insurance 0.9%
 
-    // National Pension 상한 617만원 적용
+    // National Pension 상한 6170K KRW 적용
     const pensionBase = Math.min(salary, 6170000);
     const pension  = Math.round(pensionBase * PENSION_RATE);
     const health   = Math.round(salary * HEALTH_RATE);
@@ -468,13 +468,13 @@ function calculate() {
     const total    = pension + health + care + employ;
     const netSalary = salary - total;
 
-    // 플레이스홀더 숨김
+    // Hide placeholder
     document.getElementById('resultPlaceholder').style.display = 'none';
 
-    // 결과 표시
+    // Display results
     document.getElementById('totalAmount').textContent = fmt(total);
     document.getElementById('resultSub').textContent =
-        '실수령 예상 ' + fmt(netSalary) + '원 (소득세 제외)';
+        '실수령 예상 ' + fmt(netSalary) + ' KRW (소득세 제외)';
 
     document.getElementById('pension').textContent = fmt(pension) + 'KRW';
     document.getElementById('health').textContent  = fmt(health)  + 'KRW';
@@ -514,12 +514,12 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 4대보험료는 월 ' + (window._shareInsurance || '—'),
-            description: '2026년 기준 4대보험 계산 결과',
+            title: 'My social insurance: ' + (window._shareInsurance || '—'),
+            description: '2026 Social Insurance Calculation Result',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/insurance', webUrl: 'https://salarykorea.site/insurance' }
         },
-        buttons: [{ title: '나도 계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/insurance', webUrl: 'https://salarykorea.site/insurance' } }]
+        buttons: [{ title: 'Calculate Mine', link: { mobileWebUrl: 'https://salarykorea.site/insurance', webUrl: 'https://salarykorea.site/insurance' } }]
     });
 }
 </script>
