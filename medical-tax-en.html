@@ -193,7 +193,7 @@
                         <span class="form-unit">KRW</span>
                     </div>
                     <input type="range" class="form-slider" id="salarySlider" min="20000000" max="200000000" step="1000000" value="50000000">
-                    <div class="slider-labels"><span>2,0000K</span><span>6,0000K</span><span>100M</span><span>200M</span></div>
+                    <div class="slider-labels"><span>20M</span><span>60M</span><span>100M</span><span>200M</span></div>
                 </div>
 
                 <div class="section-divider">── Medical Expense Details ──</div>
@@ -217,7 +217,7 @@
 
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group" style="margin-bottom:0;">
-                        <label class="form-label">Dependent Medical <span class="form-label-sub">7000K Limit</span></label>
+                        <label class="form-label">Dependent Medical <span class="form-label-sub">7M KRW Limit</span></label>
                         <div class="form-input-wrap">
                             <input type="text" class="form-input form-input-sm" id="familyMedical" placeholder="0" value="0">
                             <span class="form-unit">KRW</span>
@@ -262,7 +262,7 @@
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">Estimated Tax Deduction</div>
                 <div class="result-hero-amount" id="totalDeduction">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">KRW</div>
                 <div class="result-hero-msg" id="cheerMsg"></div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
@@ -301,23 +301,23 @@
     <div class="bottom-grid">
         <div class="info-card">
             <h2>What is Medical Tax Deduction?</h2>
-            <p>근로소득자가 본인이나 부양가족을 위해 지출한 의료비 중, <strong>총급여의 3%를 초과하는 금액</strong>에 대해 세금을 돌려받을 수 있는 제도입니다.</p>
-            <p>The basic rate is 15%, infertility treatment gets 30%, and premature/congenital treatment gets 20%. 본인·65세 이상·장애인·중증질환자 의료비는 공제 Limit가 없으나, 일반 Dependent Medical는 연 7000K KRW Limit가 있습니다.</p>
-            <p>실비보험으로 보전받은 금액은 Deducted from medical expenses해야 합니다. 보장성 보험료 세액공제(연 1000K KRW Limit, 12%)는 별도로 받을 수 있습니다.</p>
+            <p>This is a system where salaried workers can receive a tax refund on medical expenses paid for themselves or their dependents that <strong>exceed 3% of total salary</strong>.</p>
+            <p>The basic deduction rate is 15%, infertility treatment gets 30%, and premature/congenital treatment gets 20%. Medical expenses for yourself, those 65+, disabled, or severely ill have no deduction limit, but general dependent medical expenses are capped at 7 million KRW per year.</p>
+            <p>Amounts reimbursed through private health insurance must be deducted from medical expenses. The insurance premium tax deduction (up to 1 million KRW per year, 12%) can be claimed separately.</p>
         </div>
         <div class="info-card">
             <h2>FAQ</h2>
             <div class="faq-item">
                 <div class="faq-q">Q. Can I deduct cosmetic surgery costs?</div>
-                <div class="faq-a">A. 미용 목적 성형수술, 건강증진 의약품(보약 등)은 공제 대상이 아닙니다. 다0K 치료 목적의 수술은 공제 가능합니다.</div>
+                <div class="faq-a">A. Cosmetic surgery and health supplements (herbal medicine, etc.) are not deductible. However, surgery for treatment purposes is deductible.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. Are glasses and contact lenses deductible?</div>
-                <div class="faq-a">A. Vision-correcting glasses/contacts are deductible up to 500,000 KRW per person Limit로 공제됩니다.</div>
+                <div class="faq-a">A. Vision-correcting glasses and contact lenses are deductible up to 500,000 KRW per person.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Q. What about postnatal care center costs?</div>
-                <div class="faq-a">A. Total salary 70M KRW0K KRW 이하 근로자의 산후조리원 비용은 출산 1회당 2000K KRW Limit로 공제됩니다.</div>
+                <div class="faq-a">A. Workers with a total salary of 70 million KRW or less can deduct postnatal care center costs up to 2 million KRW per childbirth.</div>
             </div>
         </div>
     </div>
@@ -390,14 +390,14 @@ function calculate() {
 
     if (salary <= 0) { alert('Please enter your total salary.'); return; }
 
-    // Total Medical Expenses (실비 차감)
+    // Total Medical Expenses (after insurance deduction)
     const totalMedical = selfMed + seniorMed + familyMed + infertility;
     const netMedical = Math.max(0, totalMedical - insReceived);
 
     // Minimum threshold (3% of salary)
     const threshold = salary * 0.03;
 
-    // 공제 대상 = Total Medical Expenses - 최저사용액
+    // Deductible = Total Medical Expenses - minimum threshold
     const deductibleTotal = Math.max(0, netMedical - threshold);
 
     if (deductibleTotal <= 0) {
@@ -410,15 +410,15 @@ function calculate() {
         document.getElementById('statTotal').textContent = fmt(netMedical) + 'KRW';
         document.getElementById('statThreshold').textContent = fmt(threshold) + 'KRW';
         document.getElementById('statDeductible').textContent = '0 KRW';
-        document.getElementById('cheerMsg').textContent = 'Medical expenses do not exceed 3% of salary (' + fmt(threshold) + '원)를 넘지 않아 공제 대상이 없습니다';
+        document.getElementById('cheerMsg').textContent = 'Medical expenses do not exceed the 3% salary threshold (' + fmt(threshold) + ' KRW), so there is no deductible amount';
         document.getElementById('breakdownItems').innerHTML = '';
         document.getElementById('breakdownTotal').textContent = '0 KRW';
         return;
     }
 
-    // 비율 기반 배분 (실비 차감 후 각 항목 비율)
+    // Proportional distribution (ratio of each item after insurance deduction)
     const ratio = netMedical > 0 ? deductibleTotal / netMedical : 0;
-    const netSelf = Math.round(selfMed * ratio);  // 실비 비례 차감
+    const netSelf = Math.round(selfMed * ratio);  // proportional insurance deduction
     const netSenior = Math.round(seniorMed * ratio);
     const netInfertility = Math.round(infertility * ratio);
     let netFamily = Math.round(familyMed * ratio);
@@ -446,7 +446,7 @@ function calculate() {
     document.getElementById('statDeductible').textContent = fmt(deductibleTotal) + 'KRW';
 
     // Message
-    if (totalDed >= 1000000) document.getElementById('cheerMsg').textContent = '💊 의료비 공제0K으로 ' + fmt(totalDed) + ' KRW  in taxes!';
+    if (totalDed >= 1000000) document.getElementById('cheerMsg').textContent = '💊 You can save ' + fmt(totalDed) + ' KRW in taxes through medical deductions!';
     else if (totalDed >= 300000) document.getElementById('cheerMsg').textContent = 'Hospital costs are a bit lighter!';
     else document.getElementById('cheerMsg').textContent = 'Every bit of refund helps!';
 
@@ -465,7 +465,7 @@ function calculate() {
                 <div class="b-dot" style="background:${it.color};"></div>
                 <div class="b-label">${it.label}${it.note||''}</div>
                 <div class="b-rate">${it.rate}</div>
-                <div class="b-val">${fmt(it.ded)}원</div>
+                <div class="b-val">${fmt(it.ded)} KRW</div>
             </div>`;
         }
     });
@@ -474,9 +474,9 @@ function calculate() {
     if (insReceived > 0) {
         html += `<div class="b-item">
             <div class="b-dot" style="background:#EF4444;"></div>
-            <div class="b-label">Private Insurance Received (차감)</div>
+            <div class="b-label">Private Insurance Received (deducted)</div>
             <div class="b-rate"></div>
-            <div class="b-val" style="color:#EF4444;">-${fmt(insReceived)}원</div>
+            <div class="b-val" style="color:#EF4444;">-${fmt(insReceived)} KRW</div>
         </div>`;
     }
 

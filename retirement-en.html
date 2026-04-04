@@ -46,7 +46,7 @@
         /* ══ Result Area ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* Main Result */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -84,7 +84,7 @@
         .save-btn.loading { opacity: 0.5; cursor: wait; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 연봉 인상 시뮬레이터 ══ */
+        /* ══ Salary Raise Simulator ══ */
         .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -103,7 +103,7 @@
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
         .info-card ul { padding-left: 18px; margin-bottom: 10px; }
         .info-card ul li { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.8; margin-bottom: 4px; }
-        /* ══ 퇴직금 페이지 전용 ══ */
+        /* ══ Severance Pay Page Only ══ */
         .warn-card { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 16px 20px; display: none; }
         .warn-card.show { display: block; animation: fadeUp 0.4s ease; }
         .warn-card p { color: #92400E; font-size: 0.85rem; font-weight: 600; line-height: 1.7; }
@@ -118,7 +118,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Severance Pay Calculator",
-    "description": "근속기간과 평균임금을 기준으로 퇴직금을 계산합니다. Retirement Income Tax도 함께 확인하세요.",
+    "description": "Calculate severance pay based on years of service and average wage. Also check your estimated Retirement Income Tax.",
     "url": "https://salarykorea.site/retirement",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -221,12 +221,12 @@
     </div>
 
     <div class="dashboard">
-        <!-- 입력 영역 -->
+        <!-- Input Area -->
         <div class="input-col">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Information Input</div>
-                    <div class="card-badge">2026years 기준</div>
+                    <div class="card-badge">2026 Standard</div>
                 </div>
 
                 <div class="form-group">
@@ -246,17 +246,17 @@
                                 <option value="1">1 yr</option>
                                 <option value="2">2 yrs</option>
                                 <option value="3">3 yrs</option>
-                                <option value="4">4years</option>
+                                <option value="4">4 yrs</option>
                                 <option value="5" selected>5 yrs</option>
-                                <option value="6">6years</option>
-                                <option value="7">7years</option>
-                                <option value="8">8years</option>
-                                <option value="9">9years</option>
+                                <option value="6">6 yrs</option>
+                                <option value="7">7 yrs</option>
+                                <option value="8">8 yrs</option>
+                                <option value="9">9 yrs</option>
                                 <option value="10">10 yrs</option>
                                 <option value="11">11 yr</option>
                                 <option value="12">12 yrs</option>
                                 <option value="13">13 yrs</option>
-                                <option value="14">14years</option>
+                                <option value="14">14 yrs</option>
                                 <option value="15">15 yrs</option>
                                 <option value="20">20 yrs</option>
                                 <option value="25">25 yrs</option>
@@ -287,23 +287,23 @@
             </div>
         </div>
 
-        <!-- 결과 영역 -->
+        <!-- Result Area -->
         <div class="result-col">
-            <!-- 1 yr 미0K 경고 -->
+            <!-- Under 1 year warning -->
             <div class="warn-card" id="warnCard">
-                <p>퇴직금은 1 yr 이상 근무한 경우에0K 발생합니다. (근로기준법 제34조)<br>
-                1 yr 미0K 근무 시 퇴직금을 받을 수 없습니다.</p>
+                <p>Severance pay is only generated when you have worked for 1 year or more (Labor Standards Act, Article 34).<br>
+                You cannot receive severance pay if you have worked for less than 1 year.</p>
             </div>
 
             <div class="result-placeholder" id="resultPlaceholder">
                 Enter information<br>and click Calculate
             </div>
 
-            <!-- 메인 결과 -->
+            <!-- Main Result -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">Expected Severance Pay (Pre-tax)</div>
                 <div class="result-hero-amount" id="grossResult">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">KRW</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
                         <div class="rh-stat-label">Retirement Tax (Est.)</div>
@@ -320,7 +320,7 @@
                 </div>
             </div>
 
-            <!-- 상세 내역 -->
+            <!-- Breakdown Details -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">Severance Pay Details</div>
@@ -347,7 +347,7 @@
                 </div>
             </div>
 
-            <!-- 저장/공유 -->
+            <!-- Save/Share -->
             <div class="action-row" id="actionRow">
                 <button class="save-btn" onclick="saveImage()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -366,29 +366,29 @@
         <div class="info-card">
             <h2>What is Severance Pay?</h2>
             <p>
-                퇴직금은 근로자가 일정 기간 근무하고 퇴직할 때 사용자(회사)가 지급해야 하는 법정 급여입니다.
-                <strong>근로기준법 제34조</strong>에 따라 1주 소정근로시간이 15시간 이상인 근로자가
-                1 yr 이상 계속 근무한 경우, 퇴직 사유에 관계없이 반드시 받을 수 있습니다.
+                Severance pay is a legally mandated payment that employers must provide to workers upon leaving the company after a certain period of service.
+                Under <strong>Article 34 of the Labor Standards Act</strong>, any worker who has worked at least 15 hours per week
+                and has been continuously employed for 1 year or more is entitled to severance pay, regardless of the reason for leaving.
             </p>
             <p>
-                퇴직 후 14일 이내에 지급이 원칙이며, 이를 어기면 회사는 지연이자(연 20%)를 추가로 지급해야 합니다.
+                In principle, severance pay must be paid within 14 days after leaving the company. If this is violated, the employer must pay additional late interest (20% per year).
             </p>
         </div>
 
         <div class="info-card">
-            <h2>퇴직금 계산 방법</h2>
+            <h2>How to Calculate Severance Pay</h2>
             <div class="formula-box">
-                <strong>퇴직금</strong> = Daily Average Wage x 30일 x (Service Days / 365)<br><br>
-                <strong>Daily Average Wage</strong> = 퇴직 전 3 mo간 받은 임금 총액 / 해당 기간의 총 일수 (약 91일)
+                <strong>Severance Pay</strong> = Daily Average Wage x 30 days x (Service Days / 365)<br><br>
+                <strong>Daily Average Wage</strong> = Total wages received during the 3 months before leaving / Total number of days in that period (approx. 91 days)
             </div>
             <p>
-                핵심은 <strong>평균임금</strong>입니다. 퇴직 직전 3 mo간의 기본급, 각종 수당, 상여금( month할 계산) 등을
-                모두 합산한 금액을 해당 기간의 일수로 나눕니다.
+                The key factor is the <strong>average wage</strong>. It is calculated by adding up the base salary, various allowances, and bonuses (prorated monthly) from the 3 months immediately before leaving,
+                then dividing by the number of days in that period.
             </p>
             <div class="highlight">
                 <p>
-                     month 평균 급여가 3000K KRW이고 5 yrs 근무했다면 퇴직금은 약 3000K KRW x 5 = <strong>약 1,5000K KRW</strong>
-                    (1 yr 근무 = 약 1 mo치  month급이 퇴직금으로 쌓임)
+                    If your monthly average salary is 3 million KRW and you worked for 5 years, your severance pay is approximately 3 million KRW x 5 = <strong>approx. 15 million KRW</strong>
+                    (1 year of work = approximately 1 month's salary accumulated as severance)
                 </p>
             </div>
         </div>
@@ -396,32 +396,31 @@
 
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>Retirement Income Tax란?</h2>
+            <h2>What is Retirement Income Tax?</h2>
             <p>
-                퇴직금에는 <strong>Retirement Income Tax</strong>가 부과됩니다. 일반 근로소득세와 달리 장기간 쌓인
-                소득이므로, Years of Service에 따른 공제 혜택이 큽니다.
+                Severance pay is subject to <strong>Retirement Income Tax</strong>. Unlike regular earned income tax, since it is income accumulated over a long period,
+                deduction benefits based on Years of Service are significant.
             </p>
             <ul>
-                <li>Years of Service가 길수록 퇴직소득공제가 커져 실제 세율이 낮아집니다</li>
-                <li>5 yrs 근무자: 5000K KRW 공제 / 10 yrs: 1,5000K KRW 공제 / 20 yrs: 4,0000K KRW 공제</li>
-                <li>퇴직금이 적거나 Years of Service가 짧으면 세금이 거의 없을 수 있습니다</li>
+                <li>The longer your Years of Service, the larger the retirement income deduction, resulting in a lower effective tax rate</li>
+                <li>5 years of service: 5 million KRW deduction / 10 years: 15 million KRW deduction / 20 years: 40 million KRW deduction</li>
+                <li>If the severance pay is small or the Years of Service is short, there may be almost no tax</li>
             </ul>
             <div class="highlight">
-                <p>본 계산기의 Retirement Income Tax는 <strong>추정값</strong>입니다. 정확한 세액은 퇴직 시 회사 또는
-                국세청 홈택스를 통해 확인하세요.</p>
+                <p>The Retirement Income Tax in this calculator is an <strong>estimate</strong>. Please confirm the exact tax amount with your employer or through the National Tax Service (Hometax) when you leave your job.</p>
             </div>
         </div>
 
         <div class="info-card">
-            <h2>퇴직금 vs 퇴직연금 (IRP)</h2>
+            <h2>Severance Pay vs Retirement Pension (IRP)</h2>
             <p>
-                최근에는 퇴직금 대신 <strong>퇴직연금</strong>을 운영하는 회사가 많습니다.
-                퇴직연금은 DB형(확정급여형)과 DC형(확정기여형)으로 나뉩니다.
+                Recently, many companies operate a <strong>retirement pension</strong> system instead of lump-sum severance pay.
+                Retirement pensions are divided into DB (Defined Benefit) and DC (Defined Contribution) types.
             </p>
             <ul>
-                <li><strong>DB형:</strong> 퇴직할 때 받을 급여가 미리 정해짐. 계산 방식은 일반 퇴직금과 동일</li>
-                <li><strong>DC형:</strong> 매years 회사가 적립하는 금액이 정해짐. 투자 성과에 따라 수령액이 달라짐</li>
-                <li><strong>IRP 의무 이전:</strong> 퇴직금이 3000K KRW 초과 시 IRP(개인형 퇴직연금) 계좌로 수령 의무화</li>
+                <li><strong>DB type:</strong> The benefit amount at retirement is predetermined. The calculation method is the same as regular severance pay</li>
+                <li><strong>DC type:</strong> The amount the company contributes each year is fixed. The payout varies depending on investment performance</li>
+                <li><strong>Mandatory IRP transfer:</strong> If severance pay exceeds 3 million KRW, it must be received through an IRP (Individual Retirement Pension) account</li>
             </ul>
         </div>
     </div>
@@ -430,55 +429,55 @@
         <div class="info-card">
             <h2>FAQ</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금은 퇴직 후 언제 받을 수 있나요?</div>
-                <div class="faq-a">근로기준법에 따라 퇴직일로부터 14일 이내에 지급해야 합니다. 지연 시 연 20%의 지연이자가 발생하며, 노동청에 신고할 수 있습니다.</div>
+                <div class="faq-q">Q. When can I receive severance pay after leaving?</div>
+                <div class="faq-a">Under the Labor Standards Act, it must be paid within 14 days of the date of leaving. In case of delay, late interest of 20% per year is incurred, and you can report it to the Labor Office.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 계약직/파트타임도 퇴직금을 받을 수 있나요?</div>
-                <div class="faq-a">고용 형태와 관계없이 1 yr 이상 계속 근무하고 주 평균 15시간 이상 일했다면 퇴직금을 받을 수 있습니다.</div>
+                <div class="faq-q">Q. Can contract workers or part-timers receive severance pay?</div>
+                <div class="faq-a">Regardless of employment type, if you have worked continuously for 1 year or more and averaged at least 15 hours per week, you are entitled to severance pay.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금을 IRP 계좌로 받아야 하나요?</div>
-                <div class="faq-a">퇴직금이 3000K KRW을 초과하면 IRP(개인형 퇴직연금) 계좌로 수령하는 것이 의무입니다. IRP로 수령 시 세금이 유예되고, 55세 이후 연금으로 받으면 세율이 낮아집니다.</div>
+                <div class="faq-q">Q. Do I have to receive severance pay through an IRP account?</div>
+                <div class="faq-a">If severance pay exceeds 3 million KRW, it is mandatory to receive it through an IRP (Individual Retirement Pension) account. When received via IRP, tax payment is deferred, and if received as a pension after age 55, the tax rate is reduced.</div>
             </div>
         </div>
 
         <div class="info-card">
-            <h2>FAQ (계속)</h2>
+            <h2>FAQ (Continued)</h2>
             <div class="faq-item">
-                <div class="faq-q">Q. 퇴직금에도 세금이 붙나요?</div>
-                <div class="faq-a">Retirement Income Tax가 부과됩니다. 근속기간이 길수록 공제액이 커져 실제 세율은 낮아집니다. 5 yrs 이하 근무자는 세금이 거의 없는 경우도 많습니다.</div>
+                <div class="faq-q">Q. Is severance pay taxed?</div>
+                <div class="faq-a">Retirement Income Tax is applied. The longer your service period, the larger the deduction amount, resulting in a lower effective tax rate. Workers with 5 years or less of service often pay almost no tax.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 상여금도 퇴직금 계산에 포함되나요?</div>
-                <div class="faq-a">퇴직 전 3 mo간 지급된 임금이 기준입니다. 매 month 지급된 상여금은 포함되지0K, 퇴직 직전에 일시적으로 지급된 특별상여는 포함되지 않을 수 있습니다.</div>
+                <div class="faq-q">Q. Are bonuses included in the severance pay calculation?</div>
+                <div class="faq-a">The basis is wages paid during the 3 months before leaving. Regularly paid monthly bonuses are included, but special bonuses paid as a one-time payment just before leaving may not be included.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Q. 회사가 퇴직금을 안 주면 어떻게 하나요?</div>
-                <div class="faq-a">고용노동부 고객상담센터(1350) 또는 가까운 고용노동청에 진정을 제기할 수 있습니다. 퇴직금 미지급은 3 yrs 이하 징역 또는 20 million KRW 이하 벌금에 해당하는 범죄입니다.</div>
+                <div class="faq-q">Q. What should I do if the company does not pay severance?</div>
+                <div class="faq-a">You can file a complaint with the Ministry of Employment and Labor customer center (1350) or the nearest Regional Employment and Labor Office. Non-payment of severance is a criminal offense punishable by up to 3 years in prison or a fine of up to 20 million KRW.</div>
             </div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>퇴직금 제도 상세 안내</h2>
-        <p>퇴직금은 근로자가 일정 기간 이상 근무한 후 퇴직할 때 받는 금전적 보상으로, 근로자퇴직급여보장법에 따라 보장됩니다. 퇴직금을 정확히 이해하면 퇴직 시기를 계획하거나 이직을 결정할 때 중요한 판단 기준이 됩니다.</p>
+        <h2>Detailed Guide to the Severance Pay System</h2>
+        <p>Severance pay is a financial compensation received when a worker leaves after working for a certain period, guaranteed under the Employee Retirement Benefit Security Act. Understanding severance pay accurately can be an important factor when planning when to leave a job or deciding on a career change.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 지급 조건</h3>
-        <p>퇴직금을 받으려면 <strong>계속 근로기간이 1 yr 이상</strong>이어야 하며, <strong>4주간을 평균하여 1주간 소정근로시간이 15시간 이상</strong>이어야 합니다. 정규직, 계약직, 파트타임 등 고용 형태와 관계없이 이 두 가지 조건을 충족하면 퇴직금을 받을 수 있습니다. 사용자는 근로자가 퇴직한 날로부터 14일 이내에 퇴직금을 지급해야 합니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Severance Pay Eligibility</h3>
+        <p>To receive severance pay, you must have <strong>continuous employment of 1 year or more</strong>, and <strong>average at least 15 scheduled working hours per week over a 4-week period</strong>. Regardless of employment type — full-time, contract, or part-time — you are eligible for severance pay if you meet these two conditions. The employer must pay severance within 14 days of the worker's last day.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 계산 방법</h3>
-        <p>퇴직금 = <strong>(Daily Average Wage &times; 30일) &times; (총 Service Days &divide; 365)</strong>로 계산됩니다. 여기서 Daily Average Wage은 퇴직 전 3 mo간 지급된 임금 총액을 해당 기간의 총 일수로 나눈 금액입니다. 평균임금에 포함되는 항목은 기본급, 고정 수당, 정기적으로 지급되는 상여금 등이 있으며, 실비 변상적 급여(교통비 실비, 출장비 등), 경조사비, 일시적 상여금 등은 포함되지 않습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">How to Calculate Severance Pay</h3>
+        <p>Severance Pay = <strong>(Daily Average Wage &times; 30 days) &times; (Total Service Days &divide; 365)</strong>. The Daily Average Wage is calculated by dividing the total wages paid during the 3 months before leaving by the total number of days in that period. Items included in the average wage are base salary, fixed allowances, and regularly paid bonuses. Expense reimbursements (actual transportation costs, business trip expenses, etc.), congratulatory/condolence payments, and one-time bonuses are not included.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 중간정산</h3>
-        <p>퇴직금 중간정산은 원칙적으로 금지되어 있지0K, 법에서 정한 사유에 해당하면 가능합니다. 대표적인 사유로는 무주택자의 주택 구입, 본인 또는 부양가족의 6 mo 이상 요양이 필요한 경우, 최근 5 yrs 이내 파산선고 또는 개인회생절차 개시 결정, 임금피크제 적용 등이 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Interim Severance Settlement</h3>
+        <p>Interim severance settlement is prohibited in principle, but it is allowed if there are legally specified reasons. Major reasons include home purchase by a homeless person, cases where the worker or a dependent needs medical treatment for 6 months or more, bankruptcy declaration or personal rehabilitation proceedings within the past 5 years, and application of the salary peak system.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 세금과 IRP</h3>
-        <p>퇴직금에는 Retirement Income Tax가 부과됩니다. Years of Service에 따른 공제와 환산급여 기준 차등과세가 적용되어, Years of Service가 길수록 세금 부담이 줄어듭니다. 퇴직금을 IRP(개인형 퇴직연금) 계좌로 이전하면 Retirement Income Tax 납부를 연금 수령 시점까지 이연할 수 있으며, 연금으로 수령 시 Retirement Income Tax의 60~70%0K 부과되어 절세 효과가 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Severance Pay Tax and IRP</h3>
+        <p>Severance pay is subject to Retirement Income Tax. Deductions based on Years of Service and differential taxation based on converted salary are applied, so the longer the Years of Service, the lower the tax burden. If severance pay is transferred to an IRP (Individual Retirement Pension) account, Retirement Income Tax payment can be deferred until pension withdrawal, and when received as a pension, only 60-70% of the Retirement Income Tax is charged, providing a tax-saving benefit.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">퇴직금 미지급 시 대처 방법</h3>
-        <p>사용자가 퇴직 후 14일 이내에 퇴직금을 지급하지 않으면 근로기준법 위반에 해당합니다. 먼저 회사에 서면으로 지급을 요청하고, 그래도 해결되지 않는 경우 고용노동부(1350)에 상담하거나 관할 지방고용노동청에 진정서를 제출할 수 있습니다. 퇴직금 체불에 대한 지연이자는 연 20%가 적용되며, 퇴직금 청구권의 소멸시효는 3 yrs이므로 가능한 빨리 조치를 취하는 것이 중요합니다. 회사가 도산하여 퇴직금을 받지 못한 경우에는 근로복지공단의 체불임금 대지급금 제도를 활용할 수 있으며, 최대 체불임금의 상당 부분을 지원받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">What to Do If Severance Pay Is Not Paid</h3>
+        <p>If the employer does not pay severance within 14 days after the employee leaves, it constitutes a violation of the Labor Standards Act. First, request payment from the company in writing, and if the issue is not resolved, you can consult with the Ministry of Employment and Labor (1350) or file a complaint with the regional Employment and Labor Office. Late interest on unpaid severance is 20% per year, and the statute of limitations for severance claims is 3 years, so it is important to take action as soon as possible. If the company goes bankrupt and you cannot receive severance pay, you can use the Korea Workers' Compensation & Welfare Service's unpaid wage payment system, and you can receive support for a significant portion of the unpaid wages.</p>
     </div>
 
 
@@ -501,7 +500,7 @@ salaryInput.addEventListener('input', function() {
     this.value = v ? v.toLocaleString('ko-KR') : '';
 });
 
-// 누진세 계산
+// Progressive tax calculation
 function taxFromBase(t) {
     if (t <= 0) return 0;
     if (t <= 14000000)  return t * 0.06;
@@ -512,7 +511,7 @@ function taxFromBase(t) {
     return 94060000 + (t - 300000000) * 0.40;
 }
 
-// Years of Service공제 (2023 yrs 개정, 2026years 현행)
+// Years of Service deduction (revised 2023, current 2026)
 function yearsDeduction(y) {
     if (y <= 5)  return y * 1000000;
     if (y <= 10) return 5000000  + (y - 5)  * 2000000;
@@ -520,7 +519,7 @@ function yearsDeduction(y) {
     return 40000000 + (y - 20) * 3000000;
 }
 
-// 환산급여공제
+// Converted salary deduction
 function hwansanDeduction(h) {
     if (h <= 8000000)   return h;
     if (h <= 70000000)  return 8000000  + (h - 8000000)  * 0.6;
@@ -536,7 +535,7 @@ function calcRetirementTax(retirement, totalYears) {
     const hwanDed  = hwansanDeduction(hwansan);
     const taxBase  = Math.max(0, (hwansan - hwanDed)) * y / 12;
     const grossTax = taxFromBase(taxBase);
-    return grossTax * 1.1; // 지방소득세 포함
+    return grossTax * 1.1; // Including local income tax
 }
 
 function calculate() {
@@ -545,9 +544,9 @@ function calculate() {
     const months = parseInt(document.getElementById('workMonths').value);
     const totalMonths = years * 12 + months;
 
-    if (!salary) { alert(' month 평균 Please enter your salary.'); return; }
+    if (!salary) { alert('Please enter your average monthly salary.'); return; }
 
-    // 1 yr 미0K
+    // Under 1 year
     if (totalMonths < 12) {
         document.getElementById('warnCard').classList.add('show');
         document.getElementById('resultCard').classList.remove('show');
@@ -617,7 +616,7 @@ function saveImage() {
     }).catch(() => { btn.classList.remove('loading'); });
 }
 
-// 초기값
+// Initial value
 salaryInput.value = (3000000).toLocaleString('ko-KR');
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
@@ -627,8 +626,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 퇴직금은 ' + (window._shareRetirement || '—'),
-            description: '퇴직금 계산기로 Estimated Severance Pay을 확인해보세요',
+            title: 'My severance pay is ' + (window._shareRetirement || '—'),
+            description: 'Check your estimated severance pay with our calculator',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/retirement', webUrl: 'https://salarykorea.site/retirement' }
         },

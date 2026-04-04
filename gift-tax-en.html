@@ -14,7 +14,7 @@
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/gift-tax-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/gift-tax">
     <meta property="og:title" content="Gift Tax Calculator - 2026 Auto Calculation | SalaryKorea">
-    <meta property="og:description" content="Gift Amount과 관계를 입력하면 Exemption Limit, 세율, Gift Tax Payable를 자동으로 계산합니다.">
+    <meta property="og:description" content="Enter gift amount and relationship to automatically calculate exemption limit, tax rate, and gift tax payable.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +45,7 @@
         /* ══ Result Area ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* Main Result */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -82,7 +82,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Gift Tax Calculator",
-    "description": "Gift Amount과 관계에 따른 증여세를 계산합니다. Exemption Limit와 누진세율을 확인하세요.",
+    "description": "Calculate Korean gift tax based on gift amount and relationship. Check exemption limits and progressive tax rates.",
     "url": "https://salarykorea.site/gift-tax",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -203,7 +203,7 @@
                         <span class="form-unit">KRW</span>
                     </div>
                     <input type="range" class="form-slider" id="giftSlider" min="10000000" max="5000000000" step="10000000" value="100000000">
-                    <div class="slider-labels"><span>1,0000K</span><span>1000M</span><span>3000M</span><span>5000M</span></div>
+                    <div class="slider-labels"><span>10M</span><span>1B</span><span>3B</span><span>5B</span></div>
                 </div>
 
                 <div class="form-group">
@@ -237,7 +237,7 @@
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">Gift Tax Payable</div>
                 <div class="result-hero-amount" id="taxResult">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">KRW</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
                         <div class="rh-stat-label">Taxable Base</div>
@@ -254,7 +254,7 @@
                 </div>
             </div>
 
-            <!-- 공제 상세 -->
+            <!-- Deduction Details -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">Gift Tax Details</div>
@@ -276,28 +276,28 @@
     <div class="bottom-grid">
         <div class="info-card">
             <h2>Gift Tax Key Points</h2>
-            <p><strong>10-Year Cumulative Taxation:</strong> Gift tax is assessed on cumulative gifts to the same person within 10 years. Exemption Limit도 10년 기준으로 적용됩니다.</p>
-            <p><strong>Exemption Limit 활용:</strong> Spouse는 600M원, Adult Children는 5,0000K KRW까지 비과세입니다. Early gifting can maximize tax savings.</p>
-            <p><strong>Voluntary Filing Discount:</strong> 증여일이 속한 달의 말일부터 3 months 이내에 자진신고하면 Calculated Tax의 3%를 공제받을 수 있습니다.</p>
+            <p><strong>10-Year Cumulative Taxation:</strong> Gift tax is assessed on cumulative gifts to the same person within 10 years. Exemption limits are also applied on a 10-year basis.</p>
+            <p><strong>Using Exemption Limits:</strong> Gifts to a spouse are tax-free up to 600 million KRW, and to adult children up to 50 million KRW. Early gifting can maximize tax savings.</p>
+            <p><strong>Voluntary Filing Discount:</strong> If you file within 3 months from the end of the month in which the gift was made, you can receive a 3% deduction on the calculated tax.</p>
             <p><strong>Timing of Gifts:</strong> For assets expected to appreciate like real estate, earlier gifting is more advantageous.</p>
         </div>
         <div class="info-card">
             <h2>FAQ</h2>
             <div class="faq-item">
-                <div class="faq-q">부모가 Adult Children에게 100M을 증여하면 세금은?</div>
-                <div class="faq-a">Exemption Limit 5,0000K KRW을 제외한 5,0000K KRW에 대해 10% 세율이 적용되어, 자진신고 시 약 4850K KRW의 증여세를 납부합니다.</div>
+                <div class="faq-q">How much tax if parents gift 100 million KRW to an adult child?</div>
+                <div class="faq-a">After deducting the 50 million KRW exemption, the remaining 50 million KRW is taxed at 10%. With voluntary filing, you would pay approximately 4.85 million KRW in gift tax.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q">증여세 Exemption Limit는 몇 년 기준인가요?</div>
-                <div class="faq-a">Exemption Limit는 동일인 기준 10년간 합산입니다. 예를 들어 5년 전에 3,0000K KRW을 받았다면, 이번에는 20 million KRW까지0K 비과세입니다.</div>
+                <div class="faq-q">How many years does the gift tax exemption limit cover?</div>
+                <div class="faq-a">The exemption limit is cumulative over 10 years per person. For example, if you received 30 million KRW 5 years ago, only 20 million KRW remains tax-free this time.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Do I need to report cash gifts?</div>
-                <div class="faq-a">네. 현금, 부동산, 주식 등 모든 재산의 증여는 Exemption Limit를 초과하면 신고·납부 의무가 있습니다.</div>
+                <div class="faq-a">Yes. All gifts of property — including cash, real estate, and stocks — must be reported and taxed if they exceed the exemption limit.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">When is the gift tax filing deadline?</div>
-                <div class="faq-a">증여받은 날이 속하는 달의 말일부터 3 months 이내에 관할 세무서에 신고해야 합니다. 기한 내 신고하면 3% 세액공제를 받을 수 있습니다.</div>
+                <div class="faq-a">You must file at the competent tax office within 3 months from the end of the month in which the gift was received. Filing on time qualifies you for a 3% tax deduction.</div>
             </div>
         </div>
     </div>
@@ -305,22 +305,22 @@
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>Gift Tax Exemptions & Tax Saving</h2>
-        <p>Gift tax is a tax imposed when receiving property from others for free. 가족 간 재산 이전 시 가장 많이 접하게 되는 세금으로, Understanding exemption limits and tax rate structures enables legal tax planning.</p>
+        <p>Gift tax is a tax imposed when receiving property from others for free. It is the most commonly encountered tax when transferring assets between family members. Understanding exemption limits and tax rate structures enables legal tax planning.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Gift Tax Exemption Limits (10-Year Cumulative)</h3>
-        <p>증여세 Exemption Limit는 증여자와 수증자의 관계에 따라 다르며, <strong>10년간 합산</strong>하여 적용됩니다. Spouse로부터의 증여는 600M원, 성인 직계비속(자녀·손자녀)은 5,0000K KRW, 미성년 직계비속은 20 million KRW, Direct Ascendant(부모·조부모)은 5,0000K KRW, Other Relatives(6촌 이내 혈족, 4촌 이내 인척)은 1,0000K KRW까지 면제됩니다. 이 한도를 초과하는 금액에 대해서0K 증여세가 부과됩니다.</p>
+        <p>Gift tax exemption limits vary by the relationship between donor and recipient, and are applied <strong>cumulatively over 10 years</strong>. Gifts from a spouse are exempt up to 600 million KRW; from parents to adult children (or grandchildren) up to 50 million KRW; to minor children up to 20 million KRW; from direct ascendants (parents/grandparents) up to 50 million KRW; and from other relatives (blood relatives within 6th degree, in-laws within 4th degree) up to 10 million KRW. Gift tax is imposed on amounts exceeding these limits.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Gift Tax Rates</h3>
-        <p>Gift Tax Rates은 Taxable Base(Gift Property Value - Exemption Limit)에 따라 누진적으로 적용됩니다. 100M원 이하 10%, 100M~500M원 20%, 500M~1000M원 30%, 1000M~3000M원 40%, 3000M원 초과 50%입니다. 각 구간별 누진공제액이 있어 실제 세액 계산 시 적용됩니다.</p>
+        <p>Gift tax rates are applied progressively based on the taxable base (gift property value minus exemption limit). The rates are: up to 100 million KRW at 10%, 100–500 million KRW at 20%, 500 million–1 billion KRW at 30%, 1–3 billion KRW at 40%, and over 3 billion KRW at 50%. Each bracket has a progressive deduction amount applied when calculating the actual tax.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Tax Saving Strategies Through Early Gifting</h3>
-        <p>10년마다 Exemption Limit가 리셋되기 때문에, 자녀에게 일찍부터 분산 증여하면 절세 효과를 극대화할 수 있습니다. 예를 들어 자녀가 태어나자마자 20 million KRW을 증여하고, 11세에 20 million KRW, 21세에 5,0000K KRW을 증여하면 총 9,0000K KRW을 세금 없이 이전할 수 있습니다. 부담부증여(부채를 포함하여 증여하는 방식)를 활용하면 부채 부분은 양도소득세로 전환되어 증여세를 절감할 수 있는 경우도 있습니다.</p>
+        <p>Since exemption limits reset every 10 years, spreading gifts to children over time can maximize tax savings. For example, gifting 20 million KRW at birth, another 20 million KRW at age 11, and 50 million KRW at age 21 allows transferring a total of 90 million KRW tax-free. Using debt-inclusive gifts (where liabilities are included in the gift) can convert the debt portion to capital gains tax, potentially reducing overall gift tax.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Filing Gift Tax and Precautions</h3>
-        <p>부동산을 증여할 때는 시가 감정이 원칙이며, 아파트의 경우 실거래가가 적용됩니다. 증여받은 날이 속하는 달의 말일로부터 <strong>3 months 이내에 신고</strong>하면 Filing Discount 3%를 받을 수 있으므로, 기한 내 신고가 중요합니다. 증여세 신고는 국세청 홈택스에서 전자 신고가 가능하며, 고액 증여나 부동산 증여의 경우 세무사와 상담하는 것을 권장합니다.</p>
+        <p>When gifting real estate, market value appraisal is the principle, and actual transaction prices apply for apartments. <strong>Filing within 3 months</strong> from the end of the month of the gift qualifies you for a 3% filing discount, making timely filing important. Gift tax returns can be filed electronically through the National Tax Service (Hometax). For high-value or real estate gifts, consulting a tax professional is recommended.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Gift Presumption and Fund Source Investigation</h3>
-        <p>국세청은 소득에 비해 과도한 재산 취득이 확인되면 자금출처 조사를 실시할 수 있습니다. 특히 부동산을 취득하거나 고액 예금이 확인될 때, 취득 자금의 출처를 소명하지 못하면 증여로 추정하여 증여세가 부과됩니다. 부모님께 자금을 빌린 경우에도 차용증을 작성하고 이자를 지급한 기록이 있어야 대여로 인정받을 수 있으며, 무이자 또는 저리 대여 시 연 4.6% 기준으로 이자 상당액이 증여로 간주될 수 있습니다. 따라서 가족 간 금전 거래 시에는 반드시 증빙을 남기는 것이 중요합니다.</p>
+        <p>The National Tax Service may investigate the source of funds when property acquisitions seem excessive relative to income. Especially when purchasing real estate or large deposits, failure to prove the source of funds may result in the amount being presumed as a gift and taxed accordingly. Even when borrowing from parents, a written loan agreement and interest payment records are needed for it to be recognized as a loan. Interest-free or below-market loans may be treated as gifts based on a 4.6% annual interest standard. Therefore, it is essential to keep proper documentation for all monetary transactions between family members.</p>
     </div>
 
 
@@ -392,7 +392,7 @@ function counter(id, target, ms) {
 function calculate() {
     var giftAmount = parseVal(giftInput.value);
     if (!giftAmount || giftAmount < 1000000) {
-        alert('Gift Amount을 올바르게 Please enter a value.');
+        alert('Please enter a valid gift amount.');
         return;
     }
 
@@ -447,7 +447,7 @@ function calculate() {
                          ' style="background:' + item.color + '"></div>' +
                 '</div>' +
             '</div>' +
-            '<div class="b-amount">' + (item.sign ? item.sign : '') + fmt(item.amount) + '원</div>' +
+            '<div class="b-amount">' + (item.sign ? item.sign : '') + fmt(item.amount) + ' KRW</div>' +
         '</div>';
     }).join('');
 

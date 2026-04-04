@@ -58,7 +58,7 @@
         .b-name { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
         .b-rate { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 2px; }
         .b-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-left: 12px; min-width: 90px; text-align: right; }
-        /* 비교표 카드 */
+        /* Comparison Table Card */
         .compare-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .compare-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -69,15 +69,15 @@
         .cmp-table .emp { color: var(--accent); font-weight: 700; }
         .cmp-table .com { color: #059669; font-weight: 700; }
         .cmp-table tr:last-child td { border-bottom: none; font-weight: 800; background: var(--accent-light); }
-        /* 저장/공유 버튼 */
+        /* Save/Share Buttons */
         .action-row { display: none; gap: 10px; margin-top: 0; }
         .action-row.show { display: flex; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* 하이라이트 박스 */
+        /* Highlight Box */
         .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
         .highlight-box p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; margin: 0; }
-        /* 요율표 */
+        /* Rate Table */
         .rate-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
         .rate-table th { background: var(--surface-alt); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--text-secondary); }
         .rate-table td { padding: 11px 14px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
@@ -94,7 +94,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Social Insurance Calculator (4 Major)",
-    "description": "2026 Standard National Pension, Health Insurance, Long-term Care, Employment Insurance료를 계산합니다.",
+    "description": "Calculate 2026 National Pension, Health Insurance, Long-term Care, and Employment Insurance premiums.",
     "url": "https://salarykorea.site/insurance",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -219,7 +219,7 @@
                 <button class="submit-btn" onclick="calculate()">Calculate Insurance</button>
             </div>
 
-            <!-- 공유 버튼 -->
+            <!-- Share Button -->
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
@@ -235,11 +235,11 @@
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">Total Monthly Insurance (Employee)</div>
                 <div class="result-hero-amount" id="totalAmount">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">KRW</div>
                 <div class="result-hero-msg" id="resultSub"></div>
             </div>
 
-            <!-- 공제 상세 -->
+            <!-- Deduction Details -->
             <div class="breakdown-card" id="breakdownCard">
                 <div class="card-header">
                     <div class="card-title">Insurance Breakdown</div>
@@ -264,7 +264,7 @@
                     <div class="b-dot" style="background:#A78BFA;"></div>
                     <div class="b-info">
                         <div class="b-name">Long-term Care</div>
-                        <div class="b-rate">Health Insurance료의 12.95%</div>
+                        <div class="b-rate">12.95% of Health Insurance</div>
                     </div>
                     <div class="b-amount" id="care">—</div>
                 </div>
@@ -279,7 +279,7 @@
             </div>
 
             <!-- Result Placeholder -->
-            <div class="result-placeholder" id="resultPlaceholder">월 Enter your salary and click Calculate</div>
+            <div class="result-placeholder" id="resultPlaceholder">Enter your monthly salary and click Calculate</div>
         </div>
 
     </div>
@@ -287,7 +287,7 @@
     <!-- Employee vs. Employer Comparison -->
     <div class="compare-card" id="compareCard">
         <div class="card-header">
-            <div class="card-title">Employee vs Employer 비교</div>
+            <div class="card-title">Employee vs Employer Comparison</div>
         </div>
         <table class="cmp-table">
             <thead>
@@ -332,7 +332,7 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>※ Employment Insurance Employer은 사업장 규모에 따라 다릅니다. 위 표는 150인 미0K 사업장(0.9%) 기준입니다.</p>
+            <p>※ Employer employment insurance rates vary by company size. The above table is based on companies with under 150 employees (0.9%).</p>
         </div>
     </div>
 
@@ -345,10 +345,10 @@
                 Workers and employers share the premium costs.
             </p>
             <ul>
-                <li><strong>National Pension</strong> — 노후 소득 보장. 0K 60세 이후 연금 수령</li>
-                <li><strong>Health Insurance</strong> — 병원 치료비 절감. 실제 의료비의 일부0K Employee</li>
-                <li><strong>Long-term Care</strong> — 고령·장애로 거동이 불편할 때 요양 서비스 지원</li>
-                <li><strong>Employment Insurance</strong> — 실직 시 실업급여 수령, 육아휴직급여 등 지원</li>
+                <li><strong>National Pension</strong> — Secures retirement income. Pension payments begin after age 60</li>
+                <li><strong>Health Insurance</strong> — Reduces hospital costs. Employees pay only a portion of actual medical expenses</li>
+                <li><strong>Long-term Care</strong> — Provides care services for elderly or disabled individuals with limited mobility</li>
+                <li><strong>Employment Insurance</strong> — Provides unemployment benefits, parental leave pay, and other support</li>
             </ul>
         </div>
 
@@ -356,11 +356,11 @@
             <h2>FAQ</h2>
             <div class="faq-item">
                 <div class="faq-q">Do part-time workers need to enroll in social insurance?</div>
-                <div class="faq-a">1주 소정근로시간이 15시간 이상이면 4대보험 의무 가입 대상입니다. 15시간 미0K이면 National Pension·Employment Insurance은 제외될 수 있습니다.</div>
+                <div class="faq-a">If the prescribed weekly working hours are 15 or more, enrollment in all 4 insurance programs is mandatory. If under 15 hours, National Pension and Employment Insurance may be excluded.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Why doesn't my pension premium increase even when my salary goes up?</div>
-                <div class="faq-a">National Pension은 월 기준소득월액 상한(6170K KRW)이 있어서, 이를 초과하는 급여에는 추가 보험료가 붙지 않습니다.</div>
+                <div class="faq-a">National Pension has a monthly standard income cap (6.17 million KRW). Premiums are not charged on salary exceeding this cap.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q">How do freelancers pay social insurance?</div>
@@ -369,7 +369,7 @@
         </div>
     </div>
 
-    <!-- 2026 요율표 -->
+    <!-- 2026 Rate Table -->
     <div class="info-card">
         <h2>2026 Insurance Rate Table</h2>
         <table class="rate-table">
@@ -391,8 +391,8 @@
                 </tr>
                 <tr>
                     <td class="name">Long-term Care</td>
-                    <td class="highlight">Health Insurance료의 12.95%</td>
-                    <td>Health Insurance료의 12.95%</td>
+                    <td class="highlight">12.95% of Health Insurance</td>
+                    <td>12.95% of Health Insurance</td>
                     <td>—</td>
                 </tr>
                 <tr>
@@ -404,29 +404,29 @@
             </tbody>
         </table>
         <div class="highlight-box">
-            <p>National Pension은 월 기준소득월액 <strong>상한 6170K KRW</strong>까지0K 적용됩니다. 월급이 6170K KRW을 초과해도 보험료는 더 이상 늘어나지 않습니다.</p>
+            <p>National Pension premiums apply up to a monthly standard income <strong>cap of 6.17 million KRW</strong>. Even if your salary exceeds 6.17 million KRW, premiums do not increase further.</p>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
         <h2>2026 Social Insurance Guide</h2>
-        <p>The 4 major insurance programs — National Pension, Health Insurance, Long-term Care, and Employment Insurance — are jointly funded by workers and employers. They are automatically 공제되는 4대보험료는 소득에 따라 달라지며, 정확한 보험료를 이해하면 급여 관리에 큰 도움이 됩니다.</p>
+        <p>The 4 major insurance programs — National Pension, Health Insurance, Long-term Care, and Employment Insurance — are jointly funded by workers and employers. Premiums are automatically deducted and vary based on income. Understanding your exact premium amounts can greatly help with salary management.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">National Pension (Total 9%, worker 4.5%)</h3>
-        <p>National Pension은 노후 소득 보장을 위한 사회보험입니다. 2026 Standard 기준소득월액 상한은 6370K KRW, 하한은 390K KRW입니다. 상한을 초과하는 소득이 있어도 6370K KRW 기준으로0K 보험료가 부과됩니다. 0K 18세 이상 60세 미0K 근로자가 가입 대상이며, 65세부터 연금을 수급할 수 있습니다. 납부한 보험료는 향후 노령연금, 장애연금, 유족연금의 재원이 됩니다.</p>
+        <p>National Pension is a social insurance program for retirement income security. The 2026 standard monthly income cap is 6.37 million KRW, and the floor is 390,000 KRW. Even if income exceeds the cap, premiums are calculated based on 6.37 million KRW only. Workers aged 18 to under 60 are eligible for enrollment, and pension benefits can be received from age 65. Premiums paid fund old-age pensions, disability pensions, and survivor pensions.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Health Insurance (Total 7.19%, worker 3.595%)</h3>
-        <p>Health Insurance은 Insurance that reduces medical cost burden for illness or injury. The 2026 rate is 7.19%, slightly increased from the previous year. Premiums are proportional to income, and unlike National Pension, there is no income cap니다. 직장가입자의 피부양자(배우자, 부모 등)는 추가 보험료 부담 없이 Health Insurance 혜택을 받을 수 있습니다.</p>
+        <p>Health Insurance reduces the medical cost burden for illness or injury. The 2026 rate is 7.19%, slightly increased from the previous year. Premiums are proportional to income, and unlike National Pension, there is no income cap. Dependents of workplace subscribers (spouse, parents, etc.) can receive health insurance benefits without paying additional premiums.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Long-term Care (Health Insurance료의 13.14%)</h3>
-        <p>Long-term Care은 65세 Insurance providing care services for elderly individuals aged 65+ or those with geriatric diseases. Premiums are linked to Health Insurance and set at 13.14% of Health Insurance premiums in 2026. Health Insurance 가입자라면 별도 가입 절차 없이 자동으로 부과됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Long-term Care (13.14% of Health Insurance Premium)</h3>
+        <p>Long-term Care Insurance provides care services for individuals aged 65 or older, or those with geriatric diseases. Premiums are linked to Health Insurance and set at 13.14% of Health Insurance premiums in 2026. If you are a Health Insurance subscriber, premiums are automatically charged without a separate enrollment process.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Employment Insurance (Total 1.8%, worker 0.9%)</h3>
-        <p>Employment Insurance은 실업급여, 육아휴직급여, 직업능력개발 등의 재원이 되는 보험입니다. 근로자 부담분은 0.9%이며, 사업주는 기업 규모에 따라 0.9~1.5%를 추가 부담합니다. 주 15시간 미0K 근로자, 65세 이후 새로 고용된 근로자 등은 Employment Insurance 적용이 제외될 수 있습니다. 프리랜서(3.3% 원천징수 대상자)는 직장가입이 아닌 지역가입자로 National Pension과 Health Insurance에 별도 가입해야 합니다.</p>
+        <p>Employment Insurance funds unemployment benefits, parental leave pay, and vocational training. The employee contribution is 0.9%, while employers pay an additional 0.9% to 1.5% depending on company size. Workers with under 15 hours per week, and workers newly hired after age 65, may be excluded from Employment Insurance. Freelancers (subject to 3.3% withholding) must separately enroll in National Pension and Health Insurance as individual subscribers rather than workplace subscribers.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Useful Tips About Social Insurance</h3>
-        <p>Social insurance premiums are settled annually through total compensation reporting. If actual income differs from reported income, premium differences may be additionally charged or refunded. For Health Insurance, dependent qualification requirements are gradually점 강화되고 있어, 피부양자의 소득이나 재산이 일정 기준을 초과하면 지역가입자로 전환될 수 있으니 주의해야 합니다. 4대보험 가입 여부와 보험료 내역은 4대사회보험 정보연계센터(4insure.or.kr)에서 조회할 수 있습니다.</p>
+        <p>Social insurance premiums are settled annually through total compensation reporting. If actual income differs from reported income, premium differences may be additionally charged or refunded. For Health Insurance, dependent qualification requirements are being gradually tightened. If a dependent's income or assets exceed certain thresholds, they may be reclassified as individual subscribers, so caution is needed. You can check your social insurance enrollment status and premium details at the Social Insurance Information Center (4insure.or.kr).</p>
     </div>
 
 
@@ -451,15 +451,15 @@ salaryInput.addEventListener('input', function() {
 
 function calculate() {
     const salary = parseVal(salaryInput.value);
-    if (!salary) { alert('월 Please enter your salary.'); return; }
+    if (!salary) { alert('Please enter your monthly salary.'); return; }
 
     // 2026 rates
     const PENSION_RATE  = 0.045;   // National Pension 4.5%
     const HEALTH_RATE   = 0.03545; // Health Insurance 3.545%
-    const CARE_RATE     = 0.1295;  // Long-term Care Health Insurance료의 12.95%
+    const CARE_RATE     = 0.1295;  // Long-term Care 12.95% of Health Insurance
     const EMPLOY_RATE   = 0.009;   // Employment Insurance 0.9%
 
-    // National Pension 상한 6170K KRW 적용
+    // Apply National Pension cap of 6.17 million KRW
     const pensionBase = Math.min(salary, 6170000);
     const pension  = Math.round(pensionBase * PENSION_RATE);
     const health   = Math.round(salary * HEALTH_RATE);
@@ -474,14 +474,14 @@ function calculate() {
     // Display results
     document.getElementById('totalAmount').textContent = fmt(total);
     document.getElementById('resultSub').textContent =
-        '실수령 예상 ' + fmt(netSalary) + ' KRW (소득세 제외)';
+        'Estimated take-home: ' + fmt(netSalary) + ' KRW (before income tax)';
 
     document.getElementById('pension').textContent = fmt(pension) + 'KRW';
     document.getElementById('health').textContent  = fmt(health)  + 'KRW';
     document.getElementById('care').textContent    = fmt(care)    + 'KRW';
     document.getElementById('employ').textContent  = fmt(employ)  + 'KRW';
 
-    // 비교표 (Employer - Employment Insurance 회사분 0.9%)
+    // Comparison table (Employer - Employment Insurance company share 0.9%)
     const comPension = pension;
     const comHealth  = health;
     const comCare    = care;
@@ -504,7 +504,7 @@ function calculate() {
     window._shareInsurance = fmt(total) + 'KRW';
 }
 
-// 초기값
+// Initial value
 salaryInput.value = (3000000).toLocaleString('ko-KR');
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>

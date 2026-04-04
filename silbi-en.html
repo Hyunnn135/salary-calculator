@@ -56,7 +56,7 @@
             .result-hero-amount { font-size: 2.2rem; }
             .rh-stat-val { font-size: 0.78rem; }
         }
-        /* Comparison by Generation 테이블 */
+        /* Comparison by Generation Table */
         .compare-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
         .compare-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
         .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 12px; }
@@ -197,7 +197,7 @@
                 </div>
 
                 <div class="help-text" id="genHelp">
-                    <strong>Gen 4 실비:</strong> 급여 20% co-pay for covered, 30% for non-covered. Discount/surcharge based on non-covered usage.
+                    <strong>Gen 4 Insurance:</strong> 20% co-pay for covered items, 30% for non-covered items. Discount/surcharge based on non-covered usage.
                 </div>
 
                 <div class="form-group">
@@ -249,7 +249,7 @@
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label">My Co-payment</div>
                 <div class="result-hero-amount" id="selfPay">0</div>
-                <div class="result-hero-unit">원</div>
+                <div class="result-hero-unit">KRW</div>
                 <div class="result-hero-msg" id="cheerMsg"></div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
@@ -290,11 +290,11 @@
 
     <div class="bottom-grid">
         <div class="info-card">
-            <h2>Insurance Generation별 차이</h2>
-            <p><strong>Gen 1(2009년 이전):</strong> 급여 10%, Nearly full coverage for non-covered items. Most favorable but premiums may keep rising.</p>
-            <p><strong>Gen 2(2009~2017):</strong> 급여 10%, 비급여 20% 자기부담. Gen 1보다 보장이 줄었지0K 여전히 양호합니다.</p>
-            <p><strong>Gen 3(2017~2021):</strong> 급여 20%, 비급여 특약 분리. 비Covered Co-pay이 30%로 늘어났습니다.</p>
-            <p><strong>Gen 4(2021년 이후):</strong> 급여 20%, 30% non-covered + usage management system (discount/surcharge). Lowest premiums but highest co-pay.</p>
+            <h2>Differences by Insurance Generation</h2>
+            <p><strong>Gen 1 (Before 2009):</strong> 10% co-pay for covered items, nearly full coverage for non-covered items. Most favorable but premiums may keep rising.</p>
+            <p><strong>Gen 2 (2009~2017):</strong> 10% co-pay for covered items, 20% for non-covered. Less coverage than Gen 1 but still favorable.</p>
+            <p><strong>Gen 3 (2017~2021):</strong> 20% co-pay for covered items, non-covered items separated as special riders. Non-covered co-pay increased to 30%.</p>
+            <p><strong>Gen 4 (After 2021):</strong> 20% co-pay for covered, 30% for non-covered + usage management system (discount/surcharge). Lowest premiums but highest co-pay.</p>
         </div>
         <div class="info-card">
             <h2>FAQ</h2>
@@ -344,13 +344,13 @@ document.querySelectorAll('.form-input').forEach(el => {
     });
 });
 
-// 세대 Help text update
+// Generation help text update
 document.getElementById('generation').addEventListener('change', function() {
     const helps = {
-        '1': '<strong>Gen 1 실비:</strong> 급여 본인부담금의 10%, 비급여 거의 전액 보장. 보장 범위가 가장 넓습니다.',
-        '2': '<strong>Gen 2 실비:</strong> 급여 10% covered co-pay, 20% non-covered. Outpatient has 1~1.50K KRW 공제 후 보장.',
-        '3': '<strong>Gen 3 실비:</strong> 급여 20% 자기부담, 비급여 특약 분리 30% 자기부담. 연 5천0K KRW 보장 한도.',
-        '4': '<strong>Gen 4 실비:</strong> 급여 20% co-pay for covered, 30% for non-covered. Discount/surcharge based on non-covered usage.'
+        '1': '<strong>Gen 1 Insurance:</strong> 10% co-pay for covered items, nearly full coverage for non-covered. Widest coverage among all generations.',
+        '2': '<strong>Gen 2 Insurance:</strong> 10% co-pay for covered, 20% for non-covered. Outpatient coverage after 10,000~15,000 KRW deductible.',
+        '3': '<strong>Gen 3 Insurance:</strong> 20% co-pay for covered, non-covered separated as special rider with 30% co-pay. Annual coverage limit of 50 million KRW.',
+        '4': '<strong>Gen 4 Insurance:</strong> 20% co-pay for covered items, 30% for non-covered items. Discount/surcharge based on non-covered usage.'
     };
     document.getElementById('genHelp').innerHTML = helps[this.value];
 });
@@ -367,7 +367,7 @@ function counter(elId, target) {
     requestAnimationFrame(step);
 }
 
-// Calculate by generation 함수
+// Calculate by generation function
 function calcByGen(gen, type, covered, uncovered) {
     let selfCovered = 0, selfUncovered = 0;
 
@@ -417,7 +417,7 @@ function calcByGen(gen, type, covered, uncovered) {
         }
     }
 
-    // Co-payment cannot exceed actual costs할 수 없음
+    // Co-payment cannot exceed actual costs
     selfCovered = Math.min(selfCovered, covered);
     selfUncovered = Math.min(selfUncovered, uncovered);
 
@@ -453,7 +453,7 @@ function calculate() {
     else if (rate >= 60) document.getElementById('cheerMsg').textContent = 'Coverage Rate ' + rate.toFixed(0) + '%. Non-covered Items. Watch out for non-covered items';
     else document.getElementById('cheerMsg').textContent = 'Co-payment is quite high. Consider switching your insurance plan';
 
-    // Comparison by Generation 테이블
+    // Comparison by Generation table
     const typeLabel = { inpatient: 'Inpatient', outpatient: 'Outpatient', pharmacy: 'Pharmacy' };
     const results = [1,2,3,4].map(g => calcByGen(g, type, covered, uncovered));
 
@@ -463,16 +463,16 @@ function calculate() {
     tbody += '<td style="font-weight:600;text-align:left;">Covered Co-pay</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.selfCovered)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.selfCovered)} KRW</td>`;
     });
     tbody += '</tr>';
 
-    // 비Covered Co-pay
+    // Non-covered Co-pay
     tbody += '<tr>';
-    tbody += '<td style="font-weight:600;text-align:left;">비Covered Co-pay</td>';
+    tbody += '<td style="font-weight:600;text-align:left;">Non-covered Co-pay</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.selfUncovered)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.selfUncovered)} KRW</td>`;
     });
     tbody += '</tr>';
 
@@ -481,7 +481,7 @@ function calculate() {
     tbody += '<td style="font-weight:800;text-align:left;">Total Co-pay</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.totalSelf)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.totalSelf)} KRW</td>`;
     });
     tbody += '</tr>';
 
@@ -490,7 +490,7 @@ function calculate() {
     tbody += '<td style="font-weight:600;text-align:left;">Insurance Coverage</td>';
     results.forEach((r, i) => {
         const cls = (i + 1 === gen) ? ' class="highlight"' : '';
-        tbody += `<td${cls}>${fmt(r.coverage)}원</td>`;
+        tbody += `<td${cls}>${fmt(r.coverage)} KRW</td>`;
     });
     tbody += '</tr>';
 
@@ -503,7 +503,7 @@ function shareKakao() {
         objectType: 'feed',
         content: {
             title: 'Private Insurance Calculator - SalaryKorea',
-            description: '내 실비Insurance Coverage Compare amounts by generation',
+            description: 'Compare private insurance coverage amounts by generation',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/silbi', webUrl: 'https://salarykorea.site/silbi' }
         },

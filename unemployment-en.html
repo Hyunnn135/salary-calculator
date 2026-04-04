@@ -7,14 +7,14 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="Estimate unemployment insurance benefits based on salary and employment period.">
-    <meta name="keywords" content="실업급여계산기, 구직급여, 실업급여얼마, 실업급여조건, 고용보험">
+    <meta name="keywords" content="unemployment benefits calculator Korea, job seeker allowance, unemployment insurance, employment insurance, jobless benefits">
         <link rel="alternate" hreflang="ko" href="https://salarykorea.site/unemployment">
     <link rel="alternate" hreflang="en" href="https://salarykorea.site/unemployment-en">
     <link rel="alternate" hreflang="zh" href="https://salarykorea.site/unemployment-zh">
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/unemployment-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/unemployment">
-    <meta property="og:title" content="실업급여 계산기 - 얼마나 받을 수 있을까?">
-    <meta property="og:description" content="퇴직 전 월급과 가입기간으로 예상 수급액을 확인하세요.">
+    <meta property="og:title" content="Unemployment Benefits Calculator - How Much Can You Get?">
+    <meta property="og:description" content="Check your estimated benefits based on your salary and insurance period before leaving your job.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +65,7 @@
         .cond-item { border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); background: var(--surface); }
         .cond-item h3 { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
         .cond-item p { font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
-        /* 수급기간 테이블 */
+        /* Benefit Period Table */
         .days-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
         .days-table th { background: var(--surface-alt); padding: 10px 12px; text-align: center; font-weight: 700; color: var(--text-secondary); font-size: 0.82rem; }
         .days-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; text-align: center; color: var(--text-primary); }
@@ -83,7 +83,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Unemployment Benefits Calculator",
-    "description": "Age와 근속기간에 따른 실업급여 수령액과 수령기간을 계산합니다.",
+    "description": "Calculate unemployment benefit amounts and benefit periods based on age and years of service.",
     "url": "https://salarykorea.site/unemployment",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -206,17 +206,17 @@
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">Age</label>
                         <select class="form-select" id="ageGroup">
-                            <option value="under50">50세 미0K</option>
-                            <option value="over50">50세 이상</option>
+                            <option value="under50">Under 50</option>
+                            <option value="over50">50 or older</option>
                         </select>
                     </div>
                     <div class="form-group" style="margin-bottom:0;">
                         <label class="form-label">Employment Insurance Period</label>
                         <select class="form-select" id="insurancePeriod">
                             <option value="under1">Under 1 yr</option>
-                            <option value="1to3">1년 이상 ~ 3년 미0K</option>
-                            <option value="3to5" selected>3년 이상 ~ 5년 미0K</option>
-                            <option value="5to10">5년 이상 ~ 10년 미0K</option>
+                            <option value="1to3">1 yr - under 3 yrs</option>
+                            <option value="3to5" selected>3 yrs - under 5 yrs</option>
+                            <option value="5to10">5 yrs - under 10 yrs</option>
                             <option value="over10">10+ yrs</option>
                         </select>
                     </div>
@@ -235,91 +235,91 @@
 
         <div class="result-col">
             <div class="result-hero" id="resultCard">
-                <div class="result-hero-label">Estimated Benefits 총액</div>
+                <div class="result-hero-label">Estimated Total Benefits</div>
                 <div class="result-hero-amount" id="totalResult">0</div>
-                <div class="result-hero-unit">원</div>
-                <div class="result-hero-msg" id="cheerMsg">힘내세요! 더 좋은 기회가 기다리고 있어요.</div>
+                <div class="result-hero-unit">KRW</div>
+                <div class="result-hero-msg" id="cheerMsg">Stay strong! Better opportunities are waiting for you.</div>
                 <div class="result-hero-stats">
                     <div class="rh-stat">
-                        <div class="rh-stat-label">1Daily Benefit</div>
+                        <div class="rh-stat-label">Daily Benefit</div>
                         <div class="rh-stat-val" id="dailyResult">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">수급 기간</div>
+                        <div class="rh-stat-label">Benefit Period</div>
                         <div class="rh-stat-val" id="daysResult">—</div>
                     </div>
                     <div class="rh-stat">
-                        <div class="rh-stat-label">월 환산 수령액</div>
+                        <div class="rh-stat-label">Monthly Equivalent</div>
                         <div class="rh-stat-val" id="monthlyResult">—</div>
                     </div>
                 </div>
             </div>
 
-            <div class="result-placeholder" id="resultPlaceholder">월 Enter salary and click Calculate</div>
+            <div class="result-placeholder" id="resultPlaceholder">Enter salary and click Calculate</div>
         </div>
 
     </div>
 
-    <!-- 수급 조건 -->
+    <!-- Eligibility Conditions -->
     <div class="info-card">
-        <h2>실업급여 수급 조건</h2>
-        <p>아래 조건을 모두 충족해야 실업급여를 받을 수 있습니다.</p>
+        <h2>Eligibility Requirements for Unemployment Benefits</h2>
+        <p>You must meet all of the following conditions to receive unemployment benefits.</p>
         <div class="cond-grid">
             <div class="cond-item">
                 <h3>Employment Insurance Period</h3>
-                <p>퇴직일 이전 18months 중 <strong>180일 이상</strong> 고용보험에 가입되어 있어야 합니다.</p>
+                <p>You must have been enrolled in employment insurance for <strong>at least 180 days</strong> within the 18 months before your last day of work.</p>
             </div>
             <div class="cond-item">
                 <h3>Involuntary resignation</h3>
-                <p>본인의 의지로 그0K둔 경우(자발적 퇴직)에는 원칙적으로 실업급여를 받을 수 없습니다.</p>
+                <p>In principle, you cannot receive unemployment benefits if you quit voluntarily.</p>
             </div>
             <div class="cond-item">
-                <h3>재취업 의지</h3>
-                <p>적극적으로 재취업 활동을 하고 있어야 합니다. 실업 인정 신청을 주기적으로 해야 합니다.</p>
+                <h3>Willingness to Re-employ</h3>
+                <p>You must be actively seeking re-employment. You need to periodically apply for unemployment certification.</p>
             </div>
             <div class="cond-item">
-                <h3>수급 신청</h3>
-                <p>퇴직 후 <strong>12months 이내</strong>에 신청해야 합니다. 기간이 지나면 수급 자격이 소멸됩니다.</p>
+                <h3>Application Filing</h3>
+                <p>You must apply <strong>within 12 months</strong> after leaving your job. If the period expires, your eligibility will be forfeited.</p>
             </div>
         </div>
         <div class="highlight-box">
-            <p><strong>자발적 퇴직도 받는 경우:</strong> 임금 체불, 직장 내 괴롭힘, 통근 불가능한 거리로 사업장 이전, 임신·출산·육아, 건강 악화로 인한 퇴직 등 정당한 이직 사유가 있으면 수급 가능합니다.</p>
+            <p><strong>Cases where voluntary resignation qualifies:</strong> Unpaid wages, workplace harassment, relocation of workplace to an unreachable distance, pregnancy/childbirth/childcare, health deterioration, and other justifiable reasons for leaving may make you eligible.</p>
         </div>
     </div>
 
     <!-- Bottom Info Section -->
     <div class="bottom-grid">
         <div class="info-card" style="margin-bottom:0;">
-            <h2>소정급여일수 (수급 기간)</h2>
-            <p>Age와 Employment Insurance Period에 따라 받을 수 있는 기간이 달라집니다.</p>
+            <h2>Prescribed Benefit Days (Benefit Period)</h2>
+            <p>The benefit period varies depending on your age and employment insurance period.</p>
             <table class="days-table">
                 <thead>
                     <tr>
                         <th class="period-col">Employment Insurance Period</th>
-                        <th>50세 미0K</th>
-                        <th>50세 이상</th>
+                        <th>Under 50</th>
+                        <th>50 or older</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="period-col">Under 1 yr</td><td>120일</td><td>120일</td></tr>
-                    <tr><td class="period-col">1-3 yrs 미0K</td><td>150일</td><td>180일</td></tr>
-                    <tr><td class="period-col">3-5 yrs 미0K</td><td>180일</td><td>210일</td></tr>
-                    <tr><td class="period-col">5-10 yrs 미0K</td><td>210일</td><td>240일</td></tr>
-                    <tr><td class="period-col">10+ yrs</td><td>240일</td><td>270일</td></tr>
+                    <tr><td class="period-col">Under 1 yr</td><td>120 days</td><td>120 days</td></tr>
+                    <tr><td class="period-col">1-3 yrs</td><td>150 days</td><td>180 days</td></tr>
+                    <tr><td class="period-col">3-5 yrs</td><td>180 days</td><td>210 days</td></tr>
+                    <tr><td class="period-col">5-10 yrs</td><td>210 days</td><td>240 days</td></tr>
+                    <tr><td class="period-col">10+ yrs</td><td>240 days</td><td>270 days</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="info-card" style="margin-bottom:0;">
-            <h2>실업급여 금액 계산 방법</h2>
-            <p>1일 실업급여(구직급여) = 퇴직 전 평균임금의 <strong>60%</strong></p>
+            <h2>How to Calculate Benefit Amounts</h2>
+            <p>Daily unemployment benefit (job-seeking allowance) = <strong>60%</strong> of pre-departure average wage</p>
             <ul>
-                <li><strong>1일 Upper limit:</strong> 68,100 KRW (2026 Standard)</li>
-                <li><strong>1일 Lower limit:</strong> 66,048 KRW (2026 최저임금 기준)</li>
+                <li><strong>Daily upper limit:</strong> 68,100 KRW (2026 standard)</li>
+                <li><strong>Daily lower limit:</strong> 66,048 KRW (based on 2026 minimum wage)</li>
             </ul>
-            <p>월급이 아주 높거나 아주 낮더라도 위 상한·하한 범위 안에서 지급됩니다.</p>
+            <p>Regardless of how high or low your salary is, benefits are paid within the upper and lower limits above.</p>
             <div class="highlight-box">
-                <p><strong>예시:</strong> 월 3000K KRW, 3~5년 가입(50세 미0K) → 1일 66,048 KRW × 180일 = <strong>약 1,1890K KRW</strong></p>
+                <p><strong>Example:</strong> Monthly salary 3 million KRW, 3-5 years insured (under 50) → daily 66,048 KRW × 180 days = <strong>approx. 11.89 million KRW</strong></p>
             </div>
         </div>
     </div>
@@ -328,39 +328,39 @@
     <div class="info-card">
         <h2>FAQ</h2>
         <div class="faq-item">
-            <div class="faq-q">실업급여를 받으려면 조건이 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 전 18months 중 고용보험 피보험 기간이 180일 이상이어야 하며, 본인 의사와 무관하게 퇴직(권고사직, 계약0K료 등)한 경우에 해당됩니다.</div>
+            <div class="faq-q">What are the conditions to receive unemployment benefits?</div>
+            <div class="faq-a">You must have at least 180 days of employment insurance coverage within the 18 months before leaving, and the departure must be involuntary (recommended resignation, contract expiration, etc.).</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">자발적으로 퇴사해도 실업급여를 받을 수 있나요?</div>
-            <div class="faq-a">원칙적으로 자발적 퇴사는 해당되지 않지0K, 직장 내 괴롭힘·임금 미지급·근로조건 변경·통근 불가 등 불가피한 사정이 있는 경우 예외적으로 수급이 가능합니다.</div>
+            <div class="faq-q">Can I receive unemployment benefits even if I resigned voluntarily?</div>
+            <div class="faq-a">In principle, voluntary resignation does not qualify. However, if there are unavoidable circumstances such as workplace harassment, unpaid wages, changes in working conditions, or inability to commute, you may exceptionally qualify for benefits.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">수급 중 아르바이트를 해도 되나요?</div>
-            <div class="faq-a">가능하지0K 반드시 고용센터에 신고해야 합니다. 신고 없이 취업 또는 소득 활동을 하면 부정수급으로 처리됩니다.</div>
+            <div class="faq-q">Can I do part-time work while receiving benefits?</div>
+            <div class="faq-a">Yes, but you must report it to the Employment Center. If you work or earn income without reporting, it will be treated as fraudulent receipt of benefits.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q">실업급여 수급 중 건강보험료는 어떻게 되나요?</div>
-            <div class="faq-a">퇴직 후 지역가입자로 전환되어 건강보험료를 납부해야 합니다. 다0K 피부양자 등록 조건이 되는 경우 가족의 직장보험에 포함될 수 있습니다.</div>
+            <div class="faq-q">What happens to health insurance premiums while receiving benefits?</div>
+            <div class="faq-a">After leaving your job, you will be converted to a regional subscriber and must pay health insurance premiums. However, if you meet the dependent registration requirements, you can be included in a family member's workplace insurance.</div>
         </div>
     </div>
 
     
     <div class="info-card" style="margin-bottom:24px;">
-        <h2>실업급여 신청 절차와 수급 자격 상세 안내</h2>
-        <p>실업급여는 고용보험에 가입한 근로자가 비자발적으로 이직한 경우, 재취업 활동 기간 동안 생활 안정을 위해 지급되는 급여입니다. 정확한 수급 자격과 신청 절차를 이해하면 실직 시 빠르게 대응하여 경제적 부담을 줄일 수 있습니다.</p>
+        <h2>Detailed Guide to Unemployment Benefits Application and Eligibility</h2>
+        <p>Unemployment benefits are payments provided to workers enrolled in employment insurance who involuntarily leave their jobs, to support financial stability during the period of job-seeking activities. Understanding the exact eligibility requirements and application process helps you respond quickly to job loss and reduce financial burden.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">수급 자격 요건</h3>
-        <p>실업급여를 받기 위해서는 두 가지 주요 조건을 충족해야 합니다. 첫째, <strong>비자발적 이직</strong>이어야 합니다. 권고사직, 계약 0K료, 사업장 이전, 근로조건 위반 등이 이에 해당합니다. 둘째, 이직 전 <strong>18months 동안 피보험 단위기간이 합산 180일 이상</strong>이어야 합니다. 자발적으로 퇴사한 경우에도 임금 체불, 최저임금 미달, 직장 내 괴롭힘·성희롱, 편도 통근시간 1.5시간 이상의 사업장 이전 등의 사유가 인정되면 수급 자격을 얻을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Eligibility Requirements</h3>
+        <p>Two main conditions must be met to receive unemployment benefits. First, the separation must be <strong>involuntary</strong>. This includes recommended resignation, contract expiration, workplace relocation, and violation of working conditions. Second, you must have <strong>at least 180 total days of insured employment within the 18 months</strong> before leaving. Even if you resigned voluntarily, you may qualify if there are recognized reasons such as unpaid wages, wages below minimum wage, workplace harassment or sexual harassment, or workplace relocation requiring a one-way commute of 1.5 hours or more.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">실업급여 금액과 지급 기간</h3>
-        <p>실업급여 일액은 <strong>퇴직 전 3 months 평균임금의 60%</strong>이며, 1일 Upper limit은 66,000 KRW, Lower limit은 최저임금의 80%입니다. 2026 최저임금(10,320 KRW) 기준 Lower limit은 일 66,048 KRW(8시간 기준)으로 Upper limit과 거의 동일합니다. 소정급여일수는 연령과 Employment Insurance Period에 따라 120일에서 최대 270일까지 차등 적용됩니다. 일반적으로 Age가 많고 가입 기간이 길수록 더 오래 받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Benefit Amount and Payment Period</h3>
+        <p>The daily benefit amount is <strong>60% of the average wage for the 3 months before leaving</strong>, with a daily upper limit of 66,000 KRW and a lower limit of 80% of the minimum wage. Based on the 2026 minimum wage (10,320 KRW), the lower limit is 66,048 KRW per day (based on 8 hours), which is nearly the same as the upper limit. The prescribed benefit days vary from 120 to a maximum of 270 days depending on age and employment insurance period. Generally, the older you are and the longer your insurance period, the longer you can receive benefits.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">신청 절차</h3>
-        <p>실업급여 신청은 다음 단계로 진행됩니다. ① <strong>워크넷(work.go.kr) 구직등록</strong>: 이직 후 가능한 빨리 온라인으로 구직 등록합니다. ② <strong>수급자격 인정 신청</strong>: 거주지 관할 고용센터를 방문하여 수급자격 인정 신청서를 제출합니다. ③ <strong>수급자격 교육 이수</strong>: 온라인 또는 대면 교육을 이수합니다. ④ <strong>구직활동 및 실업인정</strong>: 4주마다 2회 이상의 재취업 활동을 증빙하여 실업인정을 받습니다. ⑤ <strong>급여 수령</strong>: 실업인정일로부터 약 2주 후 지정 계좌로 입금됩니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Application Process</h3>
+        <p>The unemployment benefits application follows these steps: (1) <strong>Register on WorkNet (work.go.kr)</strong>: Register for job seeking online as soon as possible after leaving. (2) <strong>Apply for eligibility certification</strong>: Visit the Employment Center in your jurisdiction and submit the eligibility certification application. (3) <strong>Complete eligibility training</strong>: Complete online or in-person training. (4) <strong>Job-seeking activities and unemployment certification</strong>: Provide proof of at least 2 re-employment activities every 4 weeks to receive unemployment certification. (5) <strong>Receive benefits</strong>: Payment is deposited into the designated account approximately 2 weeks after the unemployment certification date.</p>
 
-        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">실업급여 수급 시 주의사항</h3>
-        <p>실업급여를 받는 동안에도 몇 가지 중요한 규칙을 지켜야 합니다. 구직활동은 4주마다 최소 2회 이상 해야 하며, 입사 지원, 면접 참여, 직업훈련 수강 등이 인정됩니다. 단순히 채용공고를 검색하는 것0K으로는 인정되지 않습니다. 또한 실업급여 수급 중 취업하거나 소득이 발생하면 반드시 신고해야 하며, 부정수급 시 지급받은 금액의 최대 5배까지 반환 명령을 받을 수 있습니다. 수급 기간 중 국민연금은 임의가입으로 전환되고, 건강보험은 피부양자 등록 또는 지역가입자로 전환하여 유지해야 합니다. 실업급여와 관련된 자세한 상담은 고용보험 홈페이지(ei.go.kr) 또는 고용센터(1350)를 통해 받을 수 있습니다.</p>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Important Notes While Receiving Benefits</h3>
+        <p>Even while receiving unemployment benefits, you must follow several important rules. You must engage in job-seeking activities at least twice every 4 weeks, including job applications, interview participation, and vocational training. Simply browsing job postings alone does not qualify. Additionally, if you get a job or earn income while receiving benefits, you must report it, and in cases of fraudulent receipt, you may be ordered to return up to 5 times the amount received. During the benefit period, National Pension is converted to voluntary enrollment, and health insurance must be maintained by registering as a dependent or converting to a regional subscriber. For detailed consultation on unemployment benefits, contact the Employment Insurance website (ei.go.kr) or the Employment Center (1350).</p>
     </div>
 
 
@@ -389,7 +389,7 @@ const DAYS_TABLE = {
 
 function calculate() {
     const salary = parseVal(document.getElementById('salaryInput').value);
-    if (!salary) { alert('월 평균 Please enter your salary.'); return; }
+    if (!salary) { alert('Please enter your average monthly salary.'); return; }
 
     const ageGroup = document.getElementById('ageGroup').value;
     const period   = document.getElementById('insurancePeriod').value;
@@ -409,10 +409,10 @@ function calculate() {
     document.getElementById('monthlyResult').textContent = fmt(dailyBenefit * 30) + 'KRW';
 
     const msgs = [
-        '힘내세요! 더 좋은 기회가 기다리고 있어요.',
-        '잠깐의 쉼표, 다음 챕터를 준비하는 시간이에요.',
-        '충분히 쉬고 더 좋은 직장으로 도약하세요!',
-        '지금은 힘들어도 반드시 좋은 날이 올 거예요.',
+        'Stay strong! Better opportunities are waiting for you.',
+        'A brief pause — time to prepare for the next chapter.',
+        'Rest well and leap to a better workplace!',
+        'Even if it\'s tough now, better days will surely come.',
     ];
     document.getElementById('cheerMsg').textContent = msgs[Math.floor(Math.random() * msgs.length)];
 
@@ -442,8 +442,8 @@ function shareKakao() {
     Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: '내 실업급여 예상 총액은 ' + (window._shareUnemploy || '—'),
-            description: '실업급여 계산기로 예상 수급액을 확인해보세요',
+            title: 'My estimated total unemployment benefits: ' + (window._shareUnemploy || '—'),
+            description: 'Check your estimated unemployment benefits with our calculator',
             imageUrl: 'https://salarykorea.site/og-image.png',
             link: { mobileWebUrl: 'https://salarykorea.site/unemployment', webUrl: 'https://salarykorea.site/unemployment' }
         },

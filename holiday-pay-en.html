@@ -14,7 +14,7 @@
     <link rel="alternate" hreflang="ja" href="https://salarykorea.site/holiday-pay-ja">
     <link rel="alternate" hreflang="x-default" href="https://salarykorea.site/holiday-pay">
     <meta property="og:title" content="Weekly Holiday Pay Calculator 2026 - Auto Calculate">
-    <meta property="og:description" content="Hourly Wage과 근무시간0K 입력하면 주휴수당을 바로 계산해드립니다.">
+    <meta property="og:description" content="Enter your hourly wage and working hours to instantly calculate weekly holiday pay.">
     <meta property="og:type" content="website">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +46,7 @@
         /* ══ Result Area ══ */
         .result-col { display: flex; flex-direction: column; gap: 24px; }
         .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
-        /* 메인 결과 */
+        /* Main result */
         .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
         .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -84,7 +84,7 @@
         .save-btn.loading { opacity: 0.5; cursor: wait; }
         .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .share-btn:hover { background: #F5DC00; }
-        /* ══ 연봉 인상 시뮬레이터 ══ */
+        /* ══ Salary Raise Simulator ══ */
         .comparison-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
         .comparison-card.show { display: block; animation: fadeUp 0.4s ease 0.16s both; }
         .raise-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -101,7 +101,7 @@
         .cmp-table .green { color: #059669; font-weight: 700; }
         .cmp-table .accent { color: var(--accent); font-weight: 700; font-size: 0.82rem; }
         .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
-        /* ══ 페이지 고유: 조건 그리드 ══ */
+        /* ══ Page-specific: Condition Grid ══ */
         .condition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
         .condition-box { border-radius: 10px; padding: 16px; border: 1.5px solid; }
         .condition-box.fail { border-color: #FECACA; background: #FEF2F2; }
@@ -125,7 +125,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Weekly Holiday Pay Calculator",
-    "description": "주 근무시간에 따른 주휴수당을 계산합니다. Hourly Wage별, 근무시간별 주휴수당과 실질 hourly wage 확인하세요.",
+    "description": "Calculate weekly holiday pay based on your working hours. Check holiday pay by hourly wage, working hours, and effective hourly wage.",
     "url": "https://salarykorea.site/holiday-pay",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "All",
@@ -278,7 +278,7 @@
                 <button class="submit-btn" onclick="calculate()">Calculate</button>
             </div>
 
-            <!-- 공유 버튼 -->
+            <!-- Share buttons -->
             <div class="action-row" id="shareBtnWrap">
                 <button class="share-btn" onclick="shareKakao()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1F"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
@@ -329,7 +329,7 @@
             <div class="condition-grid">
                 <div class="condition-box fail">
                     <div class="c-title">No Holiday Pay</div>
-                    <p>주 15 hrs 미0K 근무<br>소정 근무일 결근 시</p>
+                    <p>Working under 15 hrs/week<br>Absent on a scheduled work day</p>
                 </div>
                 <div class="condition-box pass">
                     <div class="c-title">Holiday Pay Applies</div>
@@ -338,12 +338,12 @@
             </div>
             <div class="formula-box">
                 <p><strong>Holiday Pay Formula</strong><br>
-                주 40 hrs 미0K: Hourly Wage x (Weekly Hours / 40) x 8<br>
+                Under 40 hrs/week: Hourly Wage × (Weekly Hours / 40) × 8<br>
                 40+ hrs/week: Hourly Wage × 8 hrs (max cap)</p>
             </div>
         </div>
 
-        <!-- 계산 예시 -->
+        <!-- Calculation examples -->
         <div class="info-card">
             <h2>Holiday Pay Examples</h2>
             <table class="info-table">
@@ -382,10 +382,10 @@
 
     </div>
 
-    <!-- 미지급 안내 -->
+    <!-- Non-payment notice -->
     <div class="info-card" style="margin-bottom: 24px;">
         <h2>What Happens if Holiday Pay is Not Paid?</h2>
-        <p>사용자가 주휴수당을 지급하지 않으면 <strong>2년 이하의 징역 또는 20 million KRW 이하의 벌금</strong>에 처해질 수 있습니다 (근로기준법 제110조).</p>
+        <p>If an employer fails to pay weekly holiday pay, they may face <strong>up to 2 years imprisonment or a fine of up to 20 million KRW</strong> (Article 110 of the Labor Standards Act).</p>
         <p>If you haven't received holiday pay, you can report it to the <strong>Ministry of Employment and Labor hotline (1350)</strong> or file a complaint at your local labor office.</p>
     </div>
 
@@ -398,7 +398,7 @@
         </div>
         <div class="faq-item">
             <div class="faq-q">Are hours combined if I work at multiple places?</div>
-            <div class="faq-a">아닙니다. 사업장별로 각각 계산합니다. A편의점 10 hrs + B카페 10 hrs이어도 각각 15 hrs 미0K이면 주휴수당이 없습니다.</div>
+            <div class="faq-a">No. Hours are calculated separately for each workplace. Even if you work 10 hrs at Store A + 10 hrs at Cafe B, if each is under 15 hrs, there is no holiday pay for either.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">Is holiday pay given during probation?</div>
@@ -406,11 +406,11 @@
         </div>
         <div class="faq-item">
             <div class="faq-q">Does being late or leaving early affect holiday pay?</div>
-            <div class="faq-a">지각·조퇴는 결근이 아니므로 주휴수당에 영향을 주지 않습니다. 소정 근무일에 아예 출근하지 않은 경우에0K 해당 주의 주휴수당이 없어집니다.</div>
+            <div class="faq-a">Being late or leaving early is not considered an absence, so it does not affect holiday pay. Only when you are completely absent on a scheduled work day will that week's holiday pay be forfeited.</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">Is it illegal for a company not to pay holiday pay?</div>
-            <div class="faq-a">네. 주휴수당 미지급은 근로기준법 위반으로 2년 이하 징역 또는 20 million KRW 이하 벌금에 해당합니다. 고용노동부(1350)에 신고할 수 있습니다.</div>
+            <div class="faq-a">Yes. Failure to pay holiday pay violates the Labor Standards Act, punishable by up to 2 years imprisonment or a fine of up to 20 million KRW. You can report it to the Ministry of Employment and Labor (1350).</div>
         </div>
         <div class="faq-item">
             <div class="faq-q">Is holiday pay taxed?</div>
@@ -424,16 +424,16 @@
         <p>Weekly holiday pay is based on Article 55 of the Labor Standards Act, which requires employers to grant a paid weekly holiday to workers with perfect attendance during their scheduled work week. Simply put, if you work faithfully for a week, you receive an extra day's pay.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Eligibility Requirements</h3>
-        <p>주휴수당을 받기 위해서는 두 가지 조건을 충족해야 합니다. 첫째, <strong>1주 소정근로시간이 15 hrs 이상</strong>이어야 합니다. 둘째, <strong>해당 주의 소정근로일을 모두 개근</strong>해야 합니다. 여기서 주의할 점은 4주 평균으로 주 15 hrs 이상 근무하는 경우, 특정 주에 15 hrs 미0K으로 일했더라도 주휴수당 지급 대상이 될 수 있다는 것입니다. 다0K 일용직 근로자나 프리랜서(도급계약)는 근로계약의 성격에 따라 주휴수당 대상이 아닌 경우가 많습니다.</p>
+        <p>To receive holiday pay, two conditions must be met. First, <strong>scheduled weekly working hours must be 15 hours or more</strong>. Second, <strong>you must have perfect attendance for all scheduled work days that week</strong>. An important note: if you average 15+ hours per week over a 4-week period, you may still be eligible for holiday pay even if a specific week falls under 15 hours. However, daily workers and freelancers (contract workers) are often not eligible for holiday pay depending on the nature of their employment contract.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Calculation Formula</h3>
-        <p>주휴수당 계산 공식은 <strong>(1주 소정근로시간 &divide; 40) &times; 8 &times; Hourly Wage</strong>입니다. 예를 들어 주 40 hrs 근무하는 경우 (40&divide;40)&times;8&times;Hourly Wage으로 8 hrs분의 hourly wage 주휴수당이 됩니다. 주 20시간 근무하는 아르바이트생이라면 (20&divide;40)&times;8&times;Hourly Wage으로 4 hrs분의 hourly wage 주휴수당으로 받게 됩니다. 이를 통해 실질 hourly wage 계산하면, 주 40 hrs 기준 Hourly Wage의 약 1.2배가 실질 hourly wage 됩니다.</p>
+        <p>The holiday pay formula is <strong>(Weekly Scheduled Hours &divide; 40) &times; 8 &times; Hourly Wage</strong>. For example, if you work 40 hrs/week, the calculation is (40&divide;40)&times;8&times;Hourly Wage, resulting in 8 hours' worth of wages as holiday pay. For a part-time worker working 20 hours/week, the calculation is (20&divide;40)&times;8&times;Hourly Wage, resulting in 4 hours' worth of wages. When you factor in holiday pay, the effective hourly wage for a 40-hour work week becomes approximately 1.2 times the base hourly wage.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">What to Do If Holiday Pay Is Not Paid</h3>
         <p>If an employer fails to pay holiday pay, this violates the Labor Standards Act. First request payment verbally or in writing. If unresolved, contact the <strong>Ministry of Employment and Labor (1350)</strong> or file a wage complaint at your local labor office. Having your employment contract, attendance records, and pay stubs ready will help speed up the process. The statute of limitations for unpaid wages is 3 years, so act as soon as possible.</p>
 
         <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">Additional FAQ</h3>
-        <p>퇴사 시 마지막 주의 주휴수당도 받을 수 있을까요? 퇴사일이 속한 주에 소정근로일을 모두 개근했다면 주휴수당 지급 대상입니다. 다0K 퇴사일에 따라 해당 주의 소정근로일을 채우지 못했다면 지급되지 않을 수 있습니다. 또한 공휴일이나 연차 사용일은 결근으로 보지 않으므로 개근 조건에 영향을 주지 않습니다. 주휴수당은 근로자의 기본적인 권리이므로, 본인의 근로 조건을 정확히 파악하고 정당한 임금을 요구하는 것이 중요합니다.</p>
+        <p>Can you receive holiday pay for your last week when resigning? If you had perfect attendance for all scheduled work days in the week of your resignation, you are eligible for holiday pay. However, depending on your resignation date, if you did not complete all scheduled work days that week, it may not be paid. Also, public holidays and annual leave days are not considered absences, so they do not affect the perfect attendance requirement. Holiday pay is a fundamental right of workers, so it is important to understand your working conditions and request fair wages.</p>
     </div>
 
 
@@ -454,7 +454,7 @@ function calculate() {
     const dailyH = parseInt(document.getElementById('dailyHours').value);
     const weeklyD = parseInt(document.getElementById('weeklyDays').value);
 
-    if (wage <= 0) { alert('hourly wage Please enter a value.'); return; }
+    if (wage <= 0) { alert('Please enter an hourly wage.'); return; }
 
     const weeklyH = dailyH * weeklyD;
 
@@ -463,7 +463,7 @@ function calculate() {
     let holidaySub = '';
     if (weeklyH < 15) {
         holidayPay = 0;
-        holidaySub = '주 15 hrs 미0K — 주휴수당 미발생';
+        holidaySub = 'Under 15 hrs/week — no holiday pay applies';
     } else {
         const ratio = Math.min(weeklyH / 40, 1);
         holidayPay = Math.round(wage * ratio * 8);
@@ -474,11 +474,11 @@ function calculate() {
         }
     }
 
-    // 주급 (주근무수당 + 주휴수당)
+    // Weekly pay (work pay + holiday pay)
     const weeklyWage = wage * weeklyH;
     const weeklyTotal = weeklyWage + holidayPay;
 
-    // 월 환산 (4.345주)
+    // Monthly conversion (4.345 weeks)
     const monthlyHoliday = Math.round(holidayPay * 4.345);
     const monthlyTotal = Math.round(weeklyTotal * 4.345);
 
@@ -489,14 +489,14 @@ function calculate() {
     document.getElementById('monthlyHoliday').textContent = fmt(monthlyHoliday);
     document.getElementById('monthlyAmt').textContent = fmt(monthlyTotal);
 
-    let note = `하루 ${dailyH}시간 × 주 ${weeklyD}일 = 주 ${weeklyH}시간 기준입니다.`;
+    let note = `Based on ${dailyH} hrs/day × ${weeklyD} days/week = ${weeklyH} hrs/week.`;
     if (weeklyH < 15) {
-        note += ' 주 15 hrs 미0K으로 주휴수당이 발생하지 않습니다.';
+        note += ' Under 15 hrs/week, so no holiday pay applies.';
     } else {
-        note += ` Monthly pay including holiday pay ${fmt(holidayPay)} ${fmt(monthlyTotal)}.`;
+        note += ` Weekly holiday pay is ${fmt(holidayPay)}, monthly total is ${fmt(monthlyTotal)}.`;
     }
     if (wage < 10320) {
-        note += ' 입력한 hourly wage 2026 최저Hourly Wage(10,320 KRW)보다 낮습니다.';
+        note += ' The entered hourly wage is below the 2026 minimum wage (10,320 KRW).';
     }
 
     document.getElementById('resultNote').textContent = note;
