@@ -200,20 +200,35 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
    ══════════════════════════════════════ */
 @media (max-width: 768px) {
 
-    /* ── 네비게이션: 로고 + 검색 + 햄버거만 표시 ── */
-    .nav-inner { padding: 0 16px; height: 52px; }
-    .nav-logo { font-size: 1.15rem; }
+    /* ── 네비게이션: 로고(왼) + 검색·언어·글씨·햄버거(오른) ── */
+    .nav-inner { padding: 0 12px; height: 52px; }
+    .nav-logo { font-size: 1.1rem; }
     .nav-menu { display: none; }
-    .lang-selector { display: none; }
-    .font-toggle { display: none; }
-    .search-toggle { margin-left: auto; }
+    .search-toggle {
+        margin-left: auto;
+        width: 36px; height: 36px;
+    }
+    .search-toggle svg { width: 16px; height: 16px; }
+    .lang-selector { margin-left: 6px; }
+    .lang-btn {
+        height: 36px;
+        font-size: 0.72rem;
+        padding: 0 8px;
+        gap: 3px;
+    }
+    .lang-btn svg { width: 14px; height: 14px; }
+    .font-toggle {
+        width: 36px; height: 36px;
+        margin-left: 6px;
+    }
     .nav-mobile-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        min-width: 44px;
-        min-height: 44px;
+        min-width: 40px;
+        min-height: 40px;
         margin-left: 4px;
+        font-size: 1.2rem;
     }
 
     /* ── 모바일 메뉴: 깔끔한 풀 패널 ── */
@@ -412,8 +427,13 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 
 /* ══ 소형 모바일 추가 최적화 (390px 이하) ══ */
 @media (max-width: 390px) {
-    .nav-inner { padding: 0 12px; }
-    .nav-logo { font-size: 1.05rem; }
+    .nav-inner { padding: 0 10px; }
+    .nav-logo { font-size: 1.0rem; }
+    .search-toggle { width: 34px; height: 34px; }
+    .lang-btn { height: 34px; font-size: 0.68rem; padding: 0 6px; }
+    .font-toggle { width: 34px; height: 34px; }
+    .nav-mobile-btn { min-width: 36px; min-height: 36px; }
+    .search-toggle, .lang-selector, .font-toggle { margin-left: 4px; }
 
     .page { padding: 20px 14px 32px; }
     .page-header h1 { font-size: 1.25rem; }
