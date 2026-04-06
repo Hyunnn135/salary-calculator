@@ -7,7 +7,7 @@
     <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
     <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
     <meta name="description" content="2026년 종합소득세 계산기. 프리랜서, 개인사업자, 임대소득자의 종합소득세를 자동 계산합니다. 3.3% 환급 여부도 바로 확인하세요.">
-    <meta name="keywords" content="종합소득세계산기, 종합소득세, 프리랜서세금, 사업소득세, 3.3%환급, 5월세금신고">
+    <meta name="keywords" content="종합소득세계산기, 종합소득세, 프리랜서세금, 사업소득세, 3.3%환급, 5월세금신고, 업종별경비율, 간편장부, 기준경비율, 단순경비율">
     <meta property="og:title" content="종합소득세 계산기 - 내 세금 얼마야?">
     <meta property="og:description" content="프리랜서·사업자 종합소득세 자동 계산. 환급 여부까지 바로 확인하세요.">
     <meta property="og:type" content="website">
@@ -266,6 +266,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label">업종 선택 (경비율 자동 적용)</label>
+                    <select class="form-select" id="industrySelect" onchange="selectIndustry()">
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">필요경비율</label>
                     <div class="form-input-wrap">
                         <input type="text" class="form-input" id="expenseRate" value="60" style="font-size:1.2rem;">
@@ -291,6 +297,20 @@
                             <input type="text" class="form-input" id="prepaidInput" style="font-size:1rem; padding:12px 48px 12px 16px;" placeholder="0">
                             <span class="form-unit">원</span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">세액감면 (해당 시 체크)</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <label style="display:flex; align-items:center; gap:10px; padding:10px 14px; border:1.5px solid var(--border); border-radius:10px; cursor:pointer; font-size:0.82rem; font-weight:500; color:var(--text-secondary);">
+                            <input type="checkbox" id="smeRelief" style="width:18px; height:18px; accent-color:var(--accent);">
+                            중소기업 특별세액감면 (산출세액의 10%)
+                        </label>
+                        <label style="display:flex; align-items:center; gap:10px; padding:10px 14px; border:1.5px solid var(--border); border-radius:10px; cursor:pointer; font-size:0.82rem; font-weight:500; color:var(--text-secondary);">
+                            <input type="checkbox" id="sinceReporting" style="width:18px; height:18px; accent-color:var(--accent);">
+                            성실신고 세액공제 (120만원 한도)
+                        </label>
                     </div>
                 </div>
 
@@ -332,6 +352,14 @@
                     <div class="card-title">세금 계산 상세</div>
                 </div>
                 <div id="detailRows"></div>
+            </div>
+
+            <!-- 기장의무 안내 -->
+            <div class="breakdown-card" id="bookkeepingCard">
+                <div class="card-header">
+                    <div class="card-title">기장의무 안내</div>
+                </div>
+                <div id="bookkeepingContent"></div>
             </div>
 
             <!-- 카카오 공유 -->
@@ -452,6 +480,35 @@
 </footer>
 
 <script>
+// ── 업종별 경비율 데이터 ──
+const INDUSTRY_DATA = [
+    { name: '직접 입력', code: '', simple: 0, standard: 0, threshold: 0 },
+    { name: '프리랜서 일반', code: '940909', simple: 60.0, standard: 12.5, threshold: 24000000 },
+    { name: '소프트웨어 개발/IT', code: '722000', simple: 64.1, standard: 12.5, threshold: 24000000 },
+    { name: '유튜버/크리에이터', code: '940306', simple: 64.1, standard: 10.7, threshold: 24000000 },
+    { name: '디자인 서비스', code: '749002', simple: 61.1, standard: 12.0, threshold: 24000000 },
+    { name: '번역/통역', code: '749500', simple: 60.7, standard: 12.5, threshold: 24000000 },
+    { name: '작가/원고 집필', code: '940100', simple: 72.9, standard: 13.2, threshold: 24000000 },
+    { name: '학원 강사/교육', code: '809003', simple: 60.9, standard: 17.4, threshold: 24000000 },
+    { name: '과외 교습', code: '809006', simple: 51.9, standard: 17.4, threshold: 24000000 },
+    { name: '음악/공연/예술', code: '921505', simple: 58.4, standard: 11.8, threshold: 24000000 },
+    { name: '보험설계사', code: '641201', simple: 51.4, standard: 24.8, threshold: 24000000 },
+    { name: '부동산 중개', code: '702002', simple: 56.2, standard: 20.5, threshold: 24000000 },
+    { name: '대리운전', code: '749913', simple: 74.2, standard: 19.3, threshold: 24000000 },
+    { name: '의원 (의료)', code: '851100', simple: 73.0, standard: 15.9, threshold: 24000000 },
+    { name: '부동산 임대 (주거)', code: '701102', simple: 42.6, standard: 18.4, threshold: 24000000 },
+    { name: '부동산 임대 (상업)', code: '701103', simple: 38.2, standard: 15.7, threshold: 24000000 },
+    { name: '도소매업', code: '523999', simple: 89.7, standard: 11.0, threshold: 60000000 },
+    { name: '음식점업', code: '552101', simple: 89.7, standard: 8.0, threshold: 36000000 },
+    { name: '카페/제과점', code: '552002', simple: 87.8, standard: 10.0, threshold: 36000000 },
+    { name: '숙박업', code: '551001', simple: 86.7, standard: 18.2, threshold: 36000000 },
+    { name: '건설업 (하도급)', code: '452100', simple: 85.1, standard: 11.2, threshold: 36000000 },
+    { name: '운수업 (택배/화물)', code: '602400', simple: 82.4, standard: 12.5, threshold: 36000000 },
+    { name: '택시 운전', code: '602101', simple: 73.3, standard: 15.6, threshold: 36000000 },
+    { name: '미용/네일아트', code: '930301', simple: 86.4, standard: 16.7, threshold: 36000000 },
+    { name: '약국', code: '523021', simple: 89.2, standard: 7.2, threshold: 60000000 },
+];
+
 // ── 유틸 ──
 function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
 function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
@@ -461,13 +518,62 @@ let currentType = 'freelancer';
 const EXPENSE_DEFAULTS = { freelancer: 60, business: 60, rental: 42.6, other: 60 };
 const TYPE_LABELS = { freelancer: '프리랜서 (3.3%)', business: '사업소득', rental: '임대소득', other: '기타소득' };
 
+// ── 업종 드롭다운 초기화 ──
+const industrySelect = document.getElementById('industrySelect');
+INDUSTRY_DATA.forEach(function(ind, i) {
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = ind.code ? ind.name + ' (' + ind.code + ')' : ind.name;
+    industrySelect.appendChild(opt);
+});
+
+function selectIndustry() {
+    var idx = parseInt(industrySelect.value);
+    var ind = INDUSTRY_DATA[idx];
+    var expenseInput = document.getElementById('expenseRate');
+    var hint = document.getElementById('expenseHint');
+
+    if (!ind || !ind.code) {
+        expenseInput.readOnly = false;
+        expenseInput.style.opacity = '1';
+        hint.textContent = '단순경비율 기준 기본값입니다. 실제 경비가 다르면 직접 수정하세요.';
+        return;
+    }
+
+    var income = parseVal(incomeInput.value);
+    var rate, rateType;
+
+    if (income > 0 && income >= ind.threshold) {
+        rate = ind.standard;
+        rateType = '기준경비율';
+    } else {
+        rate = ind.simple;
+        rateType = '단순경비율';
+    }
+
+    expenseInput.value = rate;
+    expenseInput.readOnly = true;
+    expenseInput.style.opacity = '0.8';
+    hint.innerHTML = '<strong>' + ind.name + '</strong> ' + rateType + ' ' + rate + '% 적용' +
+        ' (수입 ' + fmt(ind.threshold) + '원 ' + (income >= ind.threshold ? '이상 → 기준경비율' : '미만 → 단순경비율') + ')' +
+        '<br><span style="color:var(--text-tertiary);">* 참고용이며, 정확한 경비율은 국세청 홈택스에서 확인하세요.</span>';
+
+    if (currentType === 'freelancer') updatePrepaid();
+}
+
 function selectType(type, btn) {
     currentType = type;
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
 
+    // 업종 선택 초기화
+    industrySelect.value = '0';
+    document.getElementById('expenseRate').readOnly = false;
+    document.getElementById('expenseRate').style.opacity = '1';
+
     // 경비율 기본값 설정
     document.getElementById('expenseRate').value = EXPENSE_DEFAULTS[type];
+    document.getElementById('expenseHint').textContent = '단순경비율 기준 기본값입니다. 실제 경비가 다르면 직접 수정하세요.';
 
     // 기납부세액 자동계산 여부
     updatePrepaid();
@@ -499,6 +605,8 @@ incomeInput.addEventListener('input', function() {
     const v = parseVal(this.value);
     this.value = v ? v.toLocaleString('ko-KR') : '';
     if (currentType === 'freelancer') updatePrepaid();
+    // 업종 선택 시 수입금액 변경에 따라 경비율 재판단
+    if (parseInt(industrySelect.value) > 0) selectIndustry();
 });
 
 prepaidInput.addEventListener('input', function() {
@@ -531,6 +639,8 @@ function calculate() {
 
     const dependents = parseInt(document.getElementById('dependents').value);
     const prepaid = parseVal(prepaidInput.value);
+    const smeRelief = document.getElementById('smeRelief').checked;
+    const sinceReporting = document.getElementById('sinceReporting').checked;
 
     // 1. 필요경비
     const expenses = Math.round(totalIncome * expenseRate);
@@ -547,8 +657,19 @@ function calculate() {
     // 5. 산출세액
     const calculatedTax = Math.round(taxFromBase(taxBase));
 
-    // 6. 세액공제 (표준세액공제 7만원)
-    const taxCredit = 70000;
+    // 6. 세액공제
+    let taxCredit = 70000; // 표준세액공제
+    let smeReliefAmount = 0;
+    let sinceAmount = 0;
+
+    if (smeRelief) {
+        smeReliefAmount = Math.round(calculatedTax * 0.1);
+        taxCredit += smeReliefAmount;
+    }
+    if (sinceReporting) {
+        sinceAmount = Math.min(1200000, Math.round(calculatedTax * 0.05));
+        taxCredit += sinceAmount;
+    }
 
     // 7. 결정세액
     const determinedTax = Math.max(0, calculatedTax - taxCredit);
@@ -559,19 +680,16 @@ function calculate() {
     // 9. 총 세금
     const totalTax = determinedTax + localTax;
 
-    // 10. 최종 납부/환급 (양수=추가납부, 음수=환급)
+    // 10. 최종 납부/환급
     const finalAmount = totalTax - prepaid;
 
-    saved = { totalIncome, expenses, incomeAmount, personalDeduction, taxBase, calculatedTax, taxCredit, determinedTax, localTax, totalTax, prepaid, finalAmount };
+    saved = { totalIncome, expenses, incomeAmount, personalDeduction, taxBase, calculatedTax, taxCredit, determinedTax, localTax, totalTax, prepaid, finalAmount, smeReliefAmount, sinceAmount };
 
     // ── 결과 표시 ──
     const hero = document.getElementById('resultHero');
     const isRefund = finalAmount <= 0;
 
-    // 플레이스홀더 숨기기
     document.getElementById('resultPlaceholder').style.display = 'none';
-
-    // 환급/납부에 따른 색상
     hero.className = 'result-hero show ' + (isRefund ? 'refund' : 'pay');
     document.getElementById('resultLabel').textContent = isRefund ? '환급 예상' : '추가 납부 예상';
     document.getElementById('resultAmount').textContent = (isRefund ? '-' : '+') + fmt(Math.abs(finalAmount));
@@ -587,15 +705,25 @@ function calculate() {
         { icon: '1', bg: '#3B82F6', name: '총 수입금액', amount: fmt(totalIncome) + '원', cls: '' },
         { icon: '-', bg: '#F59E0B', name: '필요경비 (' + (expenseRate * 100).toFixed(1) + '%)', amount: '-' + fmt(expenses) + '원', cls: 'minus' },
         { icon: '=', bg: '#059669', name: '소득금액', amount: fmt(incomeAmount) + '원', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '인적공제 (' + dependents + '명 × 150만원)', amount: '-' + fmt(personalDeduction) + '원', cls: 'minus' },
+        { icon: '-', bg: '#F59E0B', name: '인적공제 (' + dependents + '명 x 150만원)', amount: '-' + fmt(personalDeduction) + '원', cls: 'minus' },
         { icon: '=', bg: '#059669', name: '과세표준', amount: fmt(taxBase) + '원', cls: '' },
-        { icon: '×', bg: '#8B5CF6', name: '산출세액 (세율 적용)', amount: fmt(calculatedTax) + '원', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '표준세액공제', amount: '-' + fmt(taxCredit) + '원', cls: 'minus' },
+        { icon: 'x', bg: '#8B5CF6', name: '산출세액 (세율 적용)', amount: fmt(calculatedTax) + '원', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '표준세액공제', amount: '-70,000원', cls: 'minus' },
+    ];
+
+    if (smeRelief) {
+        steps.push({ icon: '-', bg: '#059669', name: '중소기업 특별세액감면 (10%)', amount: '-' + fmt(smeReliefAmount) + '원', cls: 'minus' });
+    }
+    if (sinceReporting) {
+        steps.push({ icon: '-', bg: '#059669', name: '성실신고 세액공제', amount: '-' + fmt(sinceAmount) + '원', cls: 'minus' });
+    }
+
+    steps.push(
         { icon: '=', bg: '#EF4444', name: '결정세액 (소득세)', amount: fmt(determinedTax) + '원', cls: '' },
         { icon: '+', bg: '#2563EB', name: '지방소득세 (10%)', amount: '+' + fmt(localTax) + '원', cls: 'plus' },
         { icon: '=', bg: '#EF4444', name: '총 결정세액', amount: fmt(totalTax) + '원', cls: '' },
-        { icon: '-', bg: '#F59E0B', name: '기납부세액', amount: '-' + fmt(prepaid) + '원', cls: 'minus' },
-    ];
+        { icon: '-', bg: '#F59E0B', name: '기납부세액', amount: '-' + fmt(prepaid) + '원', cls: 'minus' }
+    );
 
     let html = steps.map(s => `
         <div class="step-row">
@@ -616,9 +744,45 @@ function calculate() {
     document.getElementById('detailRows').innerHTML = html;
     document.getElementById('detailCard').classList.add('show');
 
+    // 기장의무 안내
+    showBookkeeping(totalIncome);
+
     // 카카오 공유 버튼 표시
     document.getElementById('actionRow').classList.add('show');
     window._shareTax = { isRefund, amount: fmt(Math.abs(finalAmount)) };
+}
+
+function showBookkeeping(income) {
+    var card = document.getElementById('bookkeepingCard');
+    var content = document.getElementById('bookkeepingContent');
+    var duty, desc, color;
+
+    if (income < 75000000) {
+        duty = '간편장부 대상';
+        desc = '수입금액 7,500만원 미만으로 간편장부 대상자입니다. 간편장부로 기장하면 기장세액공제(산출세액의 20%, 100만원 한도)도 받을 수 있습니다.';
+        color = '#059669';
+    } else if (income < 500000000) {
+        duty = '복식부기 의무';
+        desc = '수입금액 7,500만원 이상으로 복식부기 의무 대상자입니다. 장부를 기장하지 않으면 무기장 가산세(산출세액의 20%)가 부과됩니다. 세무사 상담을 권장합니다.';
+        color = '#2563EB';
+    } else {
+        duty = '성실신고 확인 대상';
+        desc = '수입금액 5억원 이상으로 성실신고 확인 대상자입니다. 세무사의 성실신고 확인서를 첨부해야 하며, 신고기한이 6월 30일까지 연장됩니다.';
+        color = '#DC2626';
+    }
+
+    content.innerHTML =
+        '<div style="display:flex; align-items:flex-start; gap:14px; padding:12px 0;">' +
+            '<div style="width:32px; height:32px; border-radius:8px; background:' + color + '; color:white; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:900; flex-shrink:0;">!</div>' +
+            '<div>' +
+                '<div style="font-size:0.9rem; font-weight:700; color:' + color + '; margin-bottom:6px;">' + duty + '</div>' +
+                '<div style="font-size:0.82rem; color:var(--text-secondary); line-height:1.7;">' + desc + '</div>' +
+            '</div>' +
+        '</div>' +
+        '<div style="font-size:0.72rem; color:var(--text-tertiary); margin-top:8px; padding-top:8px; border-top:1px solid var(--border);">' +
+            '* 서비스업/인적용역 기준이며, 업종에 따라 기준금액이 다를 수 있습니다. 정확한 판단은 국세청 홈택스에서 확인하세요.' +
+        '</div>';
+    card.classList.add('show');
 }
 
 // 초기값 설정
