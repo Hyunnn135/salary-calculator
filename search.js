@@ -1,12 +1,50 @@
 /* ══════════════════════════════════════
-   월급연구소 - 사이트 내 검색
+   월급연구소 - 사이트 내 검색 (다국어 지원)
    ══════════════════════════════════════ */
 
 (function() {
     'use strict';
 
-    /* ── 페이지 인덱스 ── */
-    var PAGES = [
+    /* ── 현재 언어 감지 ── */
+    var lang = (document.documentElement.lang || 'ko').toLowerCase().replace('-hans', '');
+    // 'ko', 'en', 'zh', 'ja' 중 하나
+
+    /* ── 언어별 UI 텍스트 ── */
+    var UI = {
+        ko: {
+            placeholder: '페이지 검색 (예: 퇴직금, 삼성, 간호사...)',
+            hint: '계산기, 가이드, 연봉, 직종, 기업명 등<br>원하는 키워드를 입력하세요',
+            hintShortcut: ' 로 언제든 검색',
+            noResult: '검색 결과가 없습니다',
+            more: '건 더 있습니다'
+        },
+        en: {
+            placeholder: 'Search pages (e.g. retirement, salary, insurance...)',
+            hint: 'Search for calculators by keyword<br>e.g. salary, tax, insurance, minimum wage',
+            hintShortcut: ' to search anytime',
+            noResult: 'No results found',
+            more: ' more results'
+        },
+        zh: {
+            placeholder: '搜索页面（例：退休金、工资、保险...）',
+            hint: '输入关键词搜索计算器<br>例：工资、税金、保险、最低工资',
+            hintShortcut: ' 随时搜索',
+            noResult: '未找到结果',
+            more: ' 个更多结果'
+        },
+        ja: {
+            placeholder: 'ページ検索（例：退職金、給料、保険...）',
+            hint: 'キーワードで計算機を検索<br>例：給料、税金、保険、最低賃金',
+            hintShortcut: ' でいつでも検索',
+            noResult: '検索結果がありません',
+            more: ' 件の追加結果'
+        }
+    };
+
+    var ui = UI[lang] || UI.ko;
+
+    /* ── 페이지 인덱스 (한국어) ── */
+    var PAGES_KO = [
         // 계산기
         { t: '연봉 실수령액 계산기', u: 'index.html', c: '계산기', color: '#2563EB', k: '연봉 실수령액 월급 세후 세금 4대보험 공제 급여 연봉계산기 월급계산기' },
         { t: '최저시급 계산기', u: 'minimum-wage.html', c: '계산기', color: '#F59E0B', k: '최저시급 최저임금 알바 시급 주급 월급 아르바이트 2026' },
@@ -84,11 +122,75 @@
         { t: '문의하기', u: 'contact.html', c: '기타', color: '#9CA3AF', k: '문의 연락 contact 이메일' },
         { t: '개인정보처리방침', u: 'privacy.html', c: '기타', color: '#9CA3AF', k: '개인정보 처리방침 privacy 정책' },
 
-        // 다국어
+        // 다국어 전환
         { t: 'English (영어)', u: 'en.html', c: '언어', color: '#2563EB', k: 'english 영어 영문' },
         { t: '中文 (중국어)', u: 'zh.html', c: '언어', color: '#EF4444', k: '중국어 중문 chinese' },
         { t: '日本語 (일본어)', u: 'ja.html', c: '언어', color: '#EC4899', k: '일본어 일문 japanese' }
     ];
+
+    /* ── 페이지 인덱스 (English) ── */
+    var PAGES_EN = [
+        { t: 'Salary Calculator', u: 'en.html', c: 'Calculator', color: '#2563EB', k: 'salary take-home pay after tax net income calculator' },
+        { t: 'Minimum Wage Calculator', u: 'minimum-wage-en.html', c: 'Calculator', color: '#F59E0B', k: 'minimum wage hourly pay part-time 2026' },
+        { t: 'Salary Comparison Table', u: 'salary-table-en.html', c: 'Calculator', color: '#EF4444', k: 'salary table comparison chart net pay' },
+        { t: 'Holiday Pay Calculator', u: 'holiday-pay-en.html', c: 'Calculator', color: '#059669', k: 'holiday pay weekly holiday allowance' },
+        { t: 'Insurance Calculator', u: 'insurance-en.html', c: 'Calculator', color: '#8B5CF6', k: 'insurance pension health employment national 4 major' },
+        { t: 'Income Tax Calculator', u: 'income-tax-en.html', c: 'Calculator', color: '#F59E0B', k: 'income tax comprehensive freelancer tax rate' },
+        { t: 'Gift Tax Calculator', u: 'gift-tax-en.html', c: 'Calculator', color: '#059669', k: 'gift tax donation family inheritance' },
+        { t: 'Acquisition Tax Calculator', u: 'acquisition-tax-en.html', c: 'Calculator', color: '#EF4444', k: 'acquisition tax property house apartment real estate' },
+        { t: 'Retirement Pay Calculator', u: 'retirement-en.html', c: 'Calculator', color: '#059669', k: 'retirement severance pay resign tenure' },
+        { t: 'Unemployment Benefits Calculator', u: 'unemployment-en.html', c: 'Calculator', color: '#8B5CF6', k: 'unemployment benefits jobseeker allowance' },
+        { t: 'Medical Tax Deduction Calculator', u: 'medical-tax-en.html', c: 'Calculator', color: '#EC4899', k: 'medical tax deduction hospital healthcare' },
+        { t: 'Health Insurance Calculator', u: 'silbi-en.html', c: 'Calculator', color: '#06B6D4', k: 'health insurance reimbursement hospital copay' },
+        // 언어 전환
+        { t: '한국어 (Korean)', u: 'index.html', c: 'Language', color: '#059669', k: 'korean 한국어' },
+        { t: '中文 (Chinese)', u: 'zh.html', c: 'Language', color: '#EF4444', k: 'chinese 中文' },
+        { t: '日本語 (Japanese)', u: 'ja.html', c: 'Language', color: '#EC4899', k: 'japanese 日本語' }
+    ];
+
+    /* ── 페이지 인덱스 (中文) ── */
+    var PAGES_ZH = [
+        { t: '工资计算器', u: 'zh.html', c: '计算器', color: '#2563EB', k: '工资 税后 实际收入 年薪 月薪 计算' },
+        { t: '最低工资计算器', u: 'minimum-wage-zh.html', c: '计算器', color: '#F59E0B', k: '最低工资 时薪 兼职 打工 2026' },
+        { t: '年薪对比表', u: 'salary-table-zh.html', c: '计算器', color: '#EF4444', k: '年薪 对比 比较 税后 收入表' },
+        { t: '周休津贴计算器', u: 'holiday-pay-zh.html', c: '计算器', color: '#059669', k: '周休津贴 假日 补贴' },
+        { t: '四大保险计算器', u: 'insurance-zh.html', c: '计算器', color: '#8B5CF6', k: '四大保险 国民年金 健康保险 雇佣保险' },
+        { t: '综合所得税计算器', u: 'income-tax-zh.html', c: '计算器', color: '#F59E0B', k: '综合所得税 所得税 税金 自由职业' },
+        { t: '赠与税计算器', u: 'gift-tax-zh.html', c: '计算器', color: '#059669', k: '赠与税 赠与 家族 遗产' },
+        { t: '取得税计算器', u: 'acquisition-tax-zh.html', c: '计算器', color: '#EF4444', k: '取得税 房产 公寓 房屋 不动产' },
+        { t: '退休金计算器', u: 'retirement-zh.html', c: '计算器', color: '#059669', k: '退休金 退职金 离职 工龄' },
+        { t: '失业补助计算器', u: 'unemployment-zh.html', c: '计算器', color: '#8B5CF6', k: '失业补助 失业金 求职 补贴' },
+        { t: '医疗费税额扣除计算器', u: 'medical-tax-zh.html', c: '计算器', color: '#EC4899', k: '医疗费 税额扣除 医院 医疗' },
+        { t: '实费保险计算器', u: 'silbi-zh.html', c: '计算器', color: '#06B6D4', k: '实费保险 实损保险 保险 医院费' },
+        // 语言切换
+        { t: '한국어（韩语）', u: 'index.html', c: '语言', color: '#059669', k: 'korean 韩语 한국어' },
+        { t: 'English（英语）', u: 'en.html', c: '语言', color: '#2563EB', k: 'english 英语' },
+        { t: '日本語（日语）', u: 'ja.html', c: '语言', color: '#EC4899', k: 'japanese 日语 日本語' }
+    ];
+
+    /* ── 페이지 인덱스 (日本語) ── */
+    var PAGES_JA = [
+        { t: '給料計算機', u: 'ja.html', c: '計算機', color: '#2563EB', k: '給料 手取り 年収 月給 税引後 計算' },
+        { t: '最低賃金計算機', u: 'minimum-wage-ja.html', c: '計算機', color: '#F59E0B', k: '最低賃金 時給 アルバイト パート 2026' },
+        { t: '年収別手取り比較表', u: 'salary-table-ja.html', c: '計算機', color: '#EF4444', k: '年収 比較 一覧 手取り表' },
+        { t: '週休手当計算機', u: 'holiday-pay-ja.html', c: '計算機', color: '#059669', k: '週休手当 休日 手当' },
+        { t: '四大保険計算機', u: 'insurance-ja.html', c: '計算機', color: '#8B5CF6', k: '四大保険 国民年金 健康保険 雇用保険' },
+        { t: '総合所得税計算機', u: 'income-tax-ja.html', c: '計算機', color: '#F59E0B', k: '総合所得税 所得税 税金 フリーランス' },
+        { t: '贈与税計算機', u: 'gift-tax-ja.html', c: '計算機', color: '#059669', k: '贈与税 贈与 家族 相続' },
+        { t: '取得税計算機', u: 'acquisition-tax-ja.html', c: '計算機', color: '#EF4444', k: '取得税 不動産 マンション 住宅' },
+        { t: '退職金計算機', u: 'retirement-ja.html', c: '計算機', color: '#059669', k: '退職金 退職 離職 勤続年数' },
+        { t: '失業給付計算機', u: 'unemployment-ja.html', c: '計算機', color: '#8B5CF6', k: '失業給付 失業手当 求職 給付金' },
+        { t: '医療費税額控除計算機', u: 'medical-tax-ja.html', c: '計算機', color: '#EC4899', k: '医療費 税額控除 病院 医療' },
+        { t: '実費保険計算機', u: 'silbi-ja.html', c: '計算機', color: '#06B6D4', k: '実費保険 実損保険 保険 病院費' },
+        // 言語切替
+        { t: '한국어（韓国語）', u: 'index.html', c: '言語', color: '#059669', k: 'korean 韓国語 한국어' },
+        { t: 'English（英語）', u: 'en.html', c: '言語', color: '#2563EB', k: 'english 英語' },
+        { t: '中文（中国語）', u: 'zh.html', c: '言語', color: '#EF4444', k: 'chinese 中国語 中文' }
+    ];
+
+    /* ── 현재 언어에 맞는 인덱스 선택 ── */
+    var PAGES_MAP = { ko: PAGES_KO, en: PAGES_EN, zh: PAGES_ZH, ja: PAGES_JA };
+    var PAGES = PAGES_MAP[lang] || PAGES_KO;
 
     /* ── 오버레이 DOM 생성 ── */
     var overlay, input, results;
@@ -100,7 +202,7 @@
             '<div class="search-box">' +
                 '<div class="search-input-wrap">' +
                     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>' +
-                    '<input class="search-input" type="text" placeholder="페이지 검색 (예: 퇴직금, 삼성, 간호사...)" autocomplete="off">' +
+                    '<input class="search-input" type="text" placeholder="' + ui.placeholder + '" autocomplete="off">' +
                 '</div>' +
                 '<div class="search-results"></div>' +
             '</div>';
@@ -143,8 +245,8 @@
         var shortcut = isMac ? '<span class="search-kbd">⌘</span><span class="search-kbd">K</span>' : '<span class="search-kbd">Ctrl</span><span class="search-kbd">K</span>';
         results.innerHTML =
             '<div class="search-hint">' +
-                '계산기, 가이드, 연봉, 직종, 기업명 등<br>원하는 키워드를 입력하세요' +
-                '<br><br><span style="font-size:0.75rem">' + shortcut + ' 로 언제든 검색</span>' +
+                ui.hint +
+                '<br><br><span style="font-size:0.75rem">' + shortcut + ui.hintShortcut + '</span>' +
             '</div>';
     }
 
@@ -197,7 +299,7 @@
         scored.sort(function(a, b) { return b.score - a.score; });
 
         if (scored.length === 0) {
-            results.innerHTML = '<div class="search-no-result">검색 결과가 없습니다</div>';
+            results.innerHTML = '<div class="search-no-result">' + ui.noResult + '</div>';
             return;
         }
 
@@ -222,7 +324,7 @@
         }
 
         if (scored.length > MAX) {
-            html += '<div class="search-hint" style="padding:12px 20px;font-size:0.78rem;">외 ' + (scored.length - MAX) + '건 더 있습니다</div>';
+            html += '<div class="search-hint" style="padding:12px 20px;font-size:0.78rem;">' + (scored.length - MAX) + ui.more + '</div>';
         }
 
         results.innerHTML = html;
