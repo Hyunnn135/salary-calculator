@@ -367,10 +367,136 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     }
     .result-hero-unit { font-size: 0.8rem; }
     .result-hero-msg { font-size: 0.84rem; }
-    .result-hero-stats { margin-top: 16px; }
+    .result-hero-stats {
+        margin-top: 16px;
+        grid-template-columns: 1fr 1fr 1fr !important;
+    }
     .rh-stat { padding: 14px 10px; }
     .rh-stat-val { font-size: 0.82rem !important; }
     .rh-stat-label { font-size: 0.68rem !important; }
+
+    /* ── 시뮬레이터 모바일 대응 (모든 페이지 변형 커버) ── */
+    .sim-row,
+    .sim-controls,
+    .sim-inputs {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        grid-template-columns: 1fr !important;
+    }
+    .sim-field,
+    .sim-input-group {
+        min-width: 0 !important;
+        width: 100% !important;
+        flex: none !important;
+    }
+    .sim-results {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+    .sim-result-card,
+    .sim-result {
+        padding: 12px !important;
+    }
+    .sim-result-card .sim-r-label,
+    .sim-result .sim-r-label { font-size: 0.73rem !important; }
+    .sim-result-card .sim-r-value,
+    .sim-result .sim-r-value { font-size: 1.0rem !important; }
+    .sim-box { border-radius: 12px !important; }
+
+    /* ── 모든 슬라이더 터치 최적화 ── */
+    .sim-field input[type=range],
+    .sim-input-group input[type=range],
+    .sim-controls input[type=range],
+    input.sim-slider,
+    input.sim-input[type=range] {
+        height: 8px !important;
+        -webkit-appearance: none;
+        width: 100% !important;
+    }
+    .sim-field input[type=range]::-webkit-slider-thumb,
+    .sim-input-group input[type=range]::-webkit-slider-thumb,
+    .sim-controls input[type=range]::-webkit-slider-thumb,
+    input.sim-slider::-webkit-slider-thumb,
+    input.sim-input[type=range]::-webkit-slider-thumb {
+        width: 28px !important; height: 28px !important;
+    }
+    .sim-field input[type=range]::-moz-range-thumb,
+    .sim-input-group input[type=range]::-moz-range-thumb,
+    .sim-controls input[type=range]::-moz-range-thumb,
+    input.sim-slider::-moz-range-thumb,
+    input.sim-input[type=range]::-moz-range-thumb {
+        width: 28px !important; height: 28px !important;
+    }
+
+    /* ── 시뮬레이터 세부 클래스 모바일 (모든 변형) ── */
+    .sim-label,
+    .sim-control-label,
+    .sim-input-label { font-size: 0.8rem !important; }
+    .sim-val,
+    .sim-value { font-size: 0.85rem !important; }
+    .sim-select { width: 100% !important; font-size: 0.88rem !important; padding: 10px 12px !important; }
+    .sim-result-label,
+    .sim-res-label,
+    .sim-result-item-label { font-size: 0.73rem !important; }
+    .sim-result-value,
+    .sim-result-amount,
+    .sim-result-amt,
+    .sim-res-val,
+    .sim-result-val,
+    .sim-result-item-value { font-size: 1.0rem !important; }
+    .sim-result-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+    .sim-result-item,
+    .sim-res-item { padding: 10px !important; }
+    .sim-result-row { flex-wrap: wrap !important; gap: 8px !important; }
+    .sim-result-sub { font-size: 0.72rem !important; }
+    .sim-header { font-size: 0.9rem !important; }
+    .sim-highlight { font-weight: 700 !important; }
+
+    /* ── 급여명세서 탭 모바일 (모든 변형) ── */
+    .payslip-tabs,
+    .payslip-tab-buttons,
+    .payslip-tab-nav,
+    .payslip-nav {
+        display: flex !important;
+        gap: 3px !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap !important;
+        padding-bottom: 4px;
+    }
+    .payslip-tab,
+    .payslip-tab-btn {
+        padding: 7px 12px !important;
+        font-size: 0.78rem !important;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* ── 급여명세서 본문 모바일 (모든 변형) ── */
+    .payslip-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .payslip-table table { font-size: 0.8rem !important; }
+    .payslip-section-title { font-size: 0.82rem !important; padding: 8px 0 !important; }
+    .payslip-total,
+    .payslip-final { font-size: 0.88rem !important; padding: 10px 0 !important; }
+    .payslip-row { padding: 6px 0 !important; }
+    .payslip-label,
+    .payslip-item-label { font-size: 0.8rem !important; }
+    .payslip-value,
+    .payslip-val,
+    .payslip-item-value { font-size: 0.82rem !important; }
+    .payslip-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
+    .payslip-item { padding: 8px !important; }
+    .payslip-tab-content { padding: 12px 0 !important; }
+
+    /* ── 테이블 모바일 대응 ── */
+    .data-table td,
+    .data-table th { word-break: keep-all; overflow-wrap: break-word; }
+    .data-table td span { word-break: keep-all; }
+    [style*="overflow-x"] { -webkit-overflow-scrolling: touch; }
+
+    /* ── 네비게이션 드롭다운 ── */
+    .nav-dropdown { min-width: 180px; }
 
     /* ── 버튼 터치 영역 (48px 이상) ── */
     .submit-btn {
@@ -449,7 +575,7 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     .nav-inner { padding: 0 10px; }
     .nav-logo { font-size: 1.0rem; }
     .search-toggle { width: 34px; height: 34px; }
-    .nav-mobile-btn { min-width: 38px; min-height: 38px; }
+    .nav-mobile-btn { min-width: 44px; min-height: 44px; }
 
     .page { padding: 20px 14px 32px; }
     .page-header h1 { font-size: 1.25rem; }
@@ -466,12 +592,48 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 
     .result-hero { padding: 24px 18px !important; }
     .result-hero-amount { font-size: 1.8rem !important; }
-    .rh-stat-val { font-size: 0.76rem !important; }
+    .result-hero-stats { grid-template-columns: 1fr !important; gap: 1px !important; }
+    .rh-stat { padding: 10px 14px !important; text-align: left !important; }
+    .rh-stat-val { font-size: 0.82rem !important; }
+    .rh-stat-label { font-size: 0.68rem !important; }
 
     .breakdown-card,
     .comparison-card { padding: 18px !important; }
 
     .nav-mobile-settings { padding: 14px 16px; gap: 8px; }
+
+    /* ── 시뮬레이터 초소형 ── */
+    .sim-results,
+    .sim-result-grid { grid-template-columns: 1fr !important; gap: 6px !important; }
+    .sim-result-card .sim-r-value,
+    .sim-result .sim-r-value,
+    .sim-result-value,
+    .sim-result-amount,
+    .sim-result-amt,
+    .sim-res-val,
+    .sim-result-val { font-size: 0.92rem !important; }
+    .sim-box { padding: 16px !important; }
+    .sim-row,
+    .sim-controls,
+    .sim-inputs { gap: 10px !important; }
+    .sim-select { padding: 8px 10px !important; font-size: 0.85rem !important; }
+
+    /* ── 급여명세서 초소형 ── */
+    .payslip-grid { gap: 6px !important; }
+    .payslip-item { padding: 6px !important; }
+    .payslip-label, .payslip-item-label { font-size: 0.76rem !important; }
+    .payslip-value, .payslip-val, .payslip-item-value { font-size: 0.78rem !important; }
+
+    /* ── 급여명세서 탭 초소형 ── */
+    .payslip-tab { padding: 6px 10px !important; font-size: 0.75rem !important; }
+
+    /* ── 테이블 초소형 ── */
+    .data-table,
+    .cmp-table { font-size: 0.78rem !important; }
+    .data-table th,
+    .data-table td,
+    .cmp-table th,
+    .cmp-table td { padding: 8px 6px !important; }
 }
 
 /* ══════════════════════════════════════
