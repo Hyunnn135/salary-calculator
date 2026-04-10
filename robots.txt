@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://salary-calculator.hyunnn135.workers.dev/sitemap.xml
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+Sitemap: https://salarykorea.site/sitemap.xml
