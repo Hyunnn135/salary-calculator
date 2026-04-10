@@ -822,6 +822,6 @@ document.addEventListener('DOMContentLoaded', function() {
     showPayslip(1);
 });
 </script>
-    <script>(function(){function c(){document.querySelectorAll(".ad-wrap").forEach(function(w){var i=w.querySelector("ins.adsbygoogle");if(\!i){w.classList.add("ad-empty");return}var s=i.getAttribute("data-ad-status");if(s==="unfilled"){w.classList.add("ad-empty");return}if(\!s&&i.offsetHeight<10){w.classList.add("ad-empty")}})}setTimeout(c,3000);setTimeout(c,8000)})();</script>
+    <script>(function(){function c(){document.querySelectorAll(".ad-wrap").forEach(function(w){var i=w.querySelector("ins.adsbygoogle");if(\!i){w.classList.add("ad-empty");return}var s=i.getAttribute("data-ad-status");if(s==="unfilled"){w.classList.add("ad-empty");return}if(\!s&&i.querySelector("iframe")&&\!i.querySelector("ins")){w.classList.add("ad-empty")}})}setTimeout(c,4000);setTimeout(c,10000)})();</script>
 </body>
 </html>
