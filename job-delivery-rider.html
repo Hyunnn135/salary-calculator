@@ -885,7 +885,23 @@ function switchTab(tabName) {
     event.target.classList.add('active');
 }
 </script>
-
-    <script>(function(){function c(){document.querySelectorAll(".ad-wrap").forEach(function(w){var i=w.querySelector("ins.adsbygoogle");if(\!i){w.classList.add("ad-empty");return}var s=i.getAttribute("data-ad-status");if(s==="unfilled"){w.classList.add("ad-empty");return}if(\!s&&i.querySelector("iframe")&&\!i.querySelector("ins")){w.classList.add("ad-empty")}})}setTimeout(c,4000);setTimeout(c,10000)})();</script>
+    <script>
+    (function(){
+        function checkAds(){
+            var wraps = document.querySelectorAll(".ad-wrap");
+            for(var j=0; j<wraps.length; j++){
+                var w = wraps[j];
+                var ins = w.querySelector("ins.adsbygoogle");
+                if(\!ins){ w.classList.add("ad-empty"); continue; }
+                var st = ins.getAttribute("data-ad-status");
+                if(st === "filled") continue;
+                if(st === "unfilled"){ w.classList.add("ad-empty"); continue; }
+                if(\!ins.querySelector("iframe")){ w.classList.add("ad-empty"); }
+            }
+        }
+        setTimeout(checkAds, 4000);
+        setTimeout(checkAds, 10000);
+    })();
+    </script>
 </body>
 </html>
