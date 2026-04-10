@@ -2,6 +2,23 @@
    월급연구소 공통 스타일 (common.css)
    ══════════════════════════════════════ */
 
+/* ── 광고 슬롯: 빈 광고 자동 축소 ── */
+.ad-wrap {
+    text-align: center;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin 0.3s ease, opacity 0.3s ease;
+}
+.ad-wrap.ad-empty {
+    max-height: 0 !important;
+    margin-bottom: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+}
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
+
 /* ── CSS 변수 ── */
 :root {
     --bg: #F7F8FA;
