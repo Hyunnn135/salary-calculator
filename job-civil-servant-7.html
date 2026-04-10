@@ -51,6 +51,46 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+        .sim-box-title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+        .sim-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .sim-input-group { display: flex; flex-direction: column; }
+        .sim-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+        .sim-input, .sim-select { padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); }
+        .sim-input:focus, .sim-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .sim-result { background: linear-gradient(135deg, var(--accent-light), rgba(59, 130, 246, 0.05)); border-left: 4px solid var(--accent); padding: 16px; border-radius: 8px; margin-top: 16px; }
+        .sim-result-item { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.85rem; }
+        .sim-result-label { color: var(--text-secondary); font-weight: 600; }
+        .sim-result-value { color: var(--text-primary); font-weight: 700; font-family: 'Inter', sans-serif; }
+        .payslip-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .payslip-tab { padding: 10px 16px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.82rem; font-weight: 600; background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+        .payslip-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .payslip-tab:hover { border-color: var(--accent); }
+        .payslip-content { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+        .payslip-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+        .payslip-row:last-child { border-bottom: none; }
+        .payslip-label { color: var(--text-secondary); font-weight: 600; }
+        .payslip-value { color: var(--text-primary); font-weight: 700; font-family: 'Inter', sans-serif; text-align: right; }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 12px; }
+        .comparison-table th { background: var(--surface-alt); padding: 12px; text-align: left; font-weight: 700; color: var(--text-secondary); border-bottom: 2px solid var(--border); }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid var(--border); color: var(--text-primary); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-highlight { background: rgba(37, 99, 235, 0.05); font-weight: 700; color: var(--accent); }
+        .pension-info { background: var(--surface-alt); padding: 16px; border-radius: 8px; margin-bottom: 12px; font-size: 0.85rem; }
+        .pension-item { margin-bottom: 12px; }
+        .pension-item:last-child { margin-bottom: 0; }
+        .pension-item-label { font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .pension-item-desc { color: var(--text-secondary); font-size: 0.8rem; line-height: 1.4; }
+        .promotion-timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px; }
+        .promotion-step { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+        .promotion-level { font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+        .promotion-years { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
+        .promotion-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; }
+        @media (max-width: 768px) {
+            .sim-controls { grid-template-columns: 1fr; }
+            .payslip-tabs { flex-direction: column; }
+            .promotion-timeline { grid-template-columns: 1fr; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -363,6 +403,219 @@
         </div>
     </div>
 
+    <!-- 호봉별 급여 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">호봉별 급여 시뮬레이터</div>
+            <div class="card-badge">2026년 기준</div>
+        </div>
+        <div class="sim-box">
+            <div class="sim-controls">
+                <div class="sim-input-group">
+                    <label class="sim-label">호봉 선택</label>
+                    <input type="range" id="simHobon" class="sim-input" min="1" max="32" value="7" style="height:6px;">
+                    <span style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;" id="simHobonDisplay">7호봉</span>
+                </div>
+                <div class="sim-input-group">
+                    <label class="sim-label">직렬 선택</label>
+                    <select id="simJiryeol" class="sim-select">
+                        <option value="admin">행정</option>
+                        <option value="tax">세무</option>
+                        <option value="customs">관세</option>
+                        <option value="foreign">외교</option>
+                        <option value="it">전산</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sim-result">
+                <div class="sim-result-item">
+                    <span class="sim-result-label">기본급</span>
+                    <span class="sim-result-value" id="simBaseSalary">2,200,000원</span>
+                </div>
+                <div class="sim-result-item">
+                    <span class="sim-result-label">정근수당</span>
+                    <span class="sim-result-value" id="simRegularAllowance">550,000원</span>
+                </div>
+                <div class="sim-result-item">
+                    <span class="sim-result-label">수당합계</span>
+                    <span class="sim-result-value" id="simTotalAllowance">769,500원</span>
+                </div>
+                <div class="sim-result-item" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 12px; margin-top: 12px;">
+                    <span class="sim-result-label" style="font-size:0.9rem;">세전 월급</span>
+                    <span class="sim-result-value" style="font-size:1rem; color:var(--accent);" id="simGrossSalary">2,969,500원</span>
+                </div>
+                <div class="sim-result-item">
+                    <span class="sim-result-label">월 공제액</span>
+                    <span class="sim-result-value" id="simDeduction">-338,500원</span>
+                </div>
+                <div class="sim-result-item">
+                    <span class="sim-result-label" style="font-size:0.9rem; font-weight:800;">실수령액</span>
+                    <span class="sim-result-value" style="font-size:1rem; color:var(--accent); font-weight:800;" id="simNetSalary">2,631,000원</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad slot -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="7542254283" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 임용경로별 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">임용경로별 연봉 비교</div>
+            <div class="card-badge">7급 신규임용</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>임용경로</th>
+                        <th>배치기관</th>
+                        <th>초임연봉</th>
+                        <th>3년차 실수령</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight:700;">공개채용 (행시)</td>
+                        <td>중앙부처/지자체</td>
+                        <td>3,000만원</td>
+                        <td class="comparison-highlight">31.5M</td>
+                        <td>부처 경쟁 심함</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:700;">지역인재 7급</td>
+                        <td>지자체 우선배치</td>
+                        <td>3,000만원</td>
+                        <td class="comparison-highlight">31.5M</td>
+                        <td>지역 의무근무 5년</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:700;">외교관 후보자</td>
+                        <td>외교부 전용</td>
+                        <td>3,200만원</td>
+                        <td class="comparison-highlight">33.8M</td>
+                        <td>해외수당 별도, 언어능력 우대</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:700;">기술직 7급</td>
+                        <td>중앙부처/지자체</td>
+                        <td>3,100만원</td>
+                        <td class="comparison-highlight">32.2M</td>
+                        <td>정보보안, 토목, 기계 등</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:700;">민간경력 채용</td>
+                        <td>중앙부처</td>
+                        <td>3,300만원</td>
+                        <td class="comparison-highlight">34.5M</td>
+                        <td>경력 5년 이상, 경력 인정 가능</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 호봉별 급여명세서 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">호봉별 급여명세서</div>
+            <div class="card-badge">2026년 행정직 기준</div>
+        </div>
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" onclick="showPayslip(1)">1호봉</button>
+            <button class="payslip-tab" onclick="showPayslip(7)">7호봉</button>
+            <button class="payslip-tab" onclick="showPayslip(15)">15호봉</button>
+            <button class="payslip-tab" onclick="showPayslip(25)">25호봉</button>
+            <button class="payslip-tab" onclick="showPayslip(32)">32호봉</button>
+        </div>
+        <div id="payslipContent" class="payslip-content">
+            <!-- Content will be dynamically loaded -->
+        </div>
+    </div>
+
+    <!-- Ad slot -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 비과세/절세 및 공무원연금 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">비과세 수당 및 공무원연금</div>
+        </div>
+        <div class="pension-info">
+            <div class="pension-item">
+                <div class="pension-item-label">식사비 (월 100,000원 한도)</div>
+                <div class="pension-item-desc">공무원이 받는 식사비는 월 100,000원까지 비과세입니다. 실제 수당이 적으면 실제 금액만 비과세 처리됩니다.</div>
+            </div>
+            <div class="pension-item">
+                <div class="pension-item-label">교통비 (실비 한도)</div>
+                <div class="pension-item-desc">직장과 주소지 간 교통비는 실비 기준으로 비과세 처리됩니다. 영수증 기반으로 월 한도 없이 인정됩니다.</div>
+            </div>
+            <div class="pension-item">
+                <div class="pension-item-label">국민연금 (9%)</div>
+                <div class="pension-item-desc">공무원은 국민연금 대신 공무원연금에 가입합니다. 근로자 부담금 9%를 통해 퇴직금과 연금을 지급받습니다. 기여금은 소득공제됩니다.</div>
+            </div>
+            <div class="pension-item">
+                <div class="pension-item-label">공무원연금 소개</div>
+                <div class="pension-item-desc">20년 근무 후 퇴직 시, 퇴직금과 월 연금을 받습니다. 예상 월 연금: 기본급 × 호봉별 계수 × 20년 / 600개월</div>
+            </div>
+            <div class="pension-item">
+                <div class="pension-item-label">의료비 세액공제</div>
+                <div class="pension-item-desc">총급여 3% 초과 의료비는 15% 세액공제를 받을 수 있습니다. 본인 및 부양가족의 의료비를 합산할 수 있습니다.</div>
+            </div>
+            <div class="pension-item">
+                <div class="pension-item-label">교육비 세액공제</div>
+                <div class="pension-item-desc">자녀 교육비(학비, 학원비 등)는 1명당 연 300만원까지 15% 세액공제를 받을 수 있습니다.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 승진체계 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">공무원 7급 승진체계</div>
+        </div>
+        <div class="promotion-timeline">
+            <div class="promotion-step">
+                <div class="promotion-level">7급</div>
+                <div class="promotion-years">0년 (신규)</div>
+                <div class="promotion-desc">공개채용 또는 특별채용으로 임용. 행정실무 기본 담당</div>
+            </div>
+            <div class="promotion-step">
+                <div class="promotion-level">6급</div>
+                <div class="promotion-years">약 6~8년</div>
+                <div class="promotion-desc">근무평정 우수자부터 승진. 팀장급 역할</div>
+            </div>
+            <div class="promotion-step">
+                <div class="promotion-level">5급</div>
+                <div class="promotion-years">약 15~20년</div>
+                <div class="promotion-desc">5급 승진시험 합격 필수. 부과장급 역할</div>
+            </div>
+            <div class="promotion-step">
+                <div class="promotion-level">4급</div>
+                <div class="promotion-years">약 20년 이상</div>
+                <div class="promotion-desc">부이사관급. 과장급 역할. 임용 기회 제한적</div>
+            </div>
+        </div>
+        <div style="background:var(--surface-alt); padding:16px; border-radius:8px; margin-top:16px; font-size:0.85rem; line-height:1.6;">
+            <p style="margin:0 0 8px;"><strong>5급 승진시험:</strong> 7급에서 6급으로 2년 이상 근무 후 응시 가능합니다. 행정법, 행정학, 재정학, 경제학 등 필기시험과 면접시험이 있습니다.</p>
+            <p style="margin:0;"><strong>근무평정:</strong> 연 2회 평정(상반기, 하반기)으로 승진 기회를 결정합니다. 5등급 이상이어야 정년까지 근무 가능합니다.</p>
+        </div>
+    </div>
+
+    <!-- Ad slot -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="9876543210" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 연봉별 상세 -->
     <div class="card">
         <div class="card-header">
@@ -390,5 +643,182 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 7급 공무원 급여 데이터 (2026년 기준)
+const salary2026 = {
+    hobon: {
+        1: { admin: 1970000, tax: 1990000, customs: 1985000, foreign: 2050000, it: 2020000 },
+        5: { admin: 2200000, tax: 2230000, customs: 2215000, foreign: 2300000, it: 2260000 },
+        7: { admin: 2400000, tax: 2440000, customs: 2420000, foreign: 2520000, it: 2480000 },
+        10: { admin: 2620000, tax: 2670000, customs: 2645000, foreign: 2770000, it: 2710000 },
+        15: { admin: 3050000, tax: 3120000, customs: 3080000, foreign: 3250000, it: 3180000 },
+        20: { admin: 3400000, tax: 3480000, customs: 3435000, foreign: 3640000, it: 3540000 },
+        25: { admin: 3700000, tax: 3790000, customs: 3740000, foreign: 3990000, it: 3880000 },
+        32: { admin: 4100000, tax: 4200000, customs: 4140000, foreign: 4420000, it: 4300000 }
+    },
+    allowance: {
+        1: { regular: 0.15, direc_bonus: 195000, holiday: 450000 },
+        5: { regular: 0.25, direc_bonus: 195000, holiday: 450000 },
+        7: { regular: 0.30, direc_bonus: 195000, holiday: 450000 },
+        10: { regular: 0.35, direc_bonus: 195000, holiday: 450000 },
+        15: { regular: 0.40, direc_bonus: 195000, holiday: 450000 },
+        20: { regular: 0.45, direc_bonus: 195000, holiday: 450000 },
+        25: { regular: 0.48, direc_bonus: 195000, holiday: 450000 },
+        32: { regular: 0.50, direc_bonus: 195000, holiday: 450000 }
+    }
+};
+
+const payslipData = {
+    1: { base: 1970000, hobon: '1호봉 (신규)' },
+    7: { base: 2400000, hobon: '7호봉 (7년차)' },
+    15: { base: 3050000, hobon: '15호봉 (15년차)' },
+    25: { base: 3700000, hobon: '25호봉 (25년차)' },
+    32: { base: 4100000, hobon: '32호봉 (최고호봉)' }
+};
+
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function updateSimulator() {
+    const hobon = document.getElementById('simHobon').value;
+    const jiryeol = document.getElementById('simJiryeol').value;
+
+    // 호봉 표시 업데이트
+    document.getElementById('simHobonDisplay').textContent = hobon + '호봉';
+
+    // 기본급
+    const hobonKey = Object.keys(salary2026.hobon).reduce((a, b) => {
+        return Math.abs(b - hobon) < Math.abs(a - hobon) ? b : a;
+    });
+
+    const baseSalary = salary2026.hobon[hobonKey][jiryeol];
+    const allowanceRate = salary2026.allowance[hobonKey].regular;
+    const directBonus = salary2026.allowance[hobonKey].direc_bonus;
+
+    // 계산
+    const regularAllowance = Math.floor(baseSalary * allowanceRate);
+    const totalAllowance = regularAllowance + directBonus + 225000; // 225000 = 가족수당 등
+    const grossSalary = Math.floor((baseSalary + totalAllowance) / 12);
+
+    // 공제 (대략 11~12%)
+    const deductionRate = 0.112;
+    const deduction = Math.floor(grossSalary * deductionRate);
+    const netSalary = grossSalary - deduction;
+
+    // 화면 업데이트
+    document.getElementById('simBaseSalary').textContent = formatNumber(baseSalary) + '원';
+    document.getElementById('simRegularAllowance').textContent = formatNumber(regularAllowance) + '원';
+    document.getElementById('simTotalAllowance').textContent = formatNumber(totalAllowance) + '원';
+    document.getElementById('simGrossSalary').textContent = formatNumber(grossSalary) + '원';
+    document.getElementById('simDeduction').textContent = '-' + formatNumber(deduction) + '원';
+    document.getElementById('simNetSalary').textContent = formatNumber(netSalary) + '원';
+}
+
+function showPayslip(hobon) {
+    // 탭 활성화 업데이트
+    document.querySelectorAll('.payslip-tab').forEach((tab, idx) => {
+        const hobonVal = [1, 7, 15, 25, 32][idx];
+        if (hobonVal === hobon) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+
+    const data = payslipData[hobon];
+    const baseSalary = data.base;
+    const monthlyBase = Math.floor(baseSalary / 12);
+
+    // 수당 계산
+    const allowanceRate = hobon <= 7 ? 0.30 : hobon <= 15 ? 0.40 : hobon <= 25 ? 0.48 : 0.50;
+    const regularAllowance = Math.floor(monthlyBase * allowanceRate);
+    const directBonus = 195000;
+    const familyAllowance = Math.floor(baseSalary / 12 * 0.05);
+
+    const totalDeduction = baseSalary * 0.112; // 공제율 약 11.2%
+    const monthlyDeduction = Math.floor(totalDeduction / 12);
+
+    const grossMonthly = monthlyBase + regularAllowance + directBonus + familyAllowance;
+    const netMonthly = grossMonthly - monthlyDeduction;
+
+    const html = `
+        <div class="payslip-row">
+            <span class="payslip-label">호봉</span>
+            <span class="payslip-value">${data.hobon}</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">연봉</span>
+            <span class="payslip-value">${formatNumber(baseSalary)}원</span>
+        </div>
+        <div style="padding:12px 0; margin:8px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+            <div style="font-weight:700; color:var(--text-secondary); margin-bottom:8px; font-size:0.8rem;">월급 명세</div>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">기본급</span>
+            <span class="payslip-value">${formatNumber(monthlyBase)}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">정근수당 (${Math.floor(allowanceRate*100)}%)</span>
+            <span class="payslip-value">${formatNumber(regularAllowance)}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">직급보조비</span>
+            <span class="payslip-value">${formatNumber(directBonus)}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">가족수당</span>
+            <span class="payslip-value">${formatNumber(familyAllowance)}원</span>
+        </div>
+        <div style="padding:12px 0; margin:8px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+            <div class="payslip-row">
+                <span class="payslip-label" style="font-weight:800;">세전 월급</span>
+                <span class="payslip-value" style="font-weight:800; color:var(--accent);">${formatNumber(grossMonthly)}원</span>
+            </div>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">국민연금 (9%)</span>
+            <span class="payslip-value" style="color:#2563EB;">-${formatNumber(Math.floor(monthlyBase * 0.09))}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">건강보험</span>
+            <span class="payslip-value" style="color:#8B5CF6;">-${formatNumber(Math.floor(grossMonthly * 0.035))}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">장기요양보험</span>
+            <span class="payslip-value" style="color:#A78BFA;">-${formatNumber(Math.floor(grossMonthly * 0.004))}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">고용보험</span>
+            <span class="payslip-value" style="color:#F59E0B;">-${formatNumber(Math.floor(grossMonthly * 0.009))}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">소득세</span>
+            <span class="payslip-value" style="color:#EF4444;">-${formatNumber(Math.floor(monthlyDeduction * 0.55))}원</span>
+        </div>
+        <div class="payslip-row">
+            <span class="payslip-label">지방소득세</span>
+            <span class="payslip-value" style="color:#9CA3AF;">-${formatNumber(Math.floor(monthlyDeduction * 0.05))}원</span>
+        </div>
+        <div style="padding:12px 0; margin:8px 0; border-top:2px solid var(--text-primary);">
+            <div class="payslip-row">
+                <span class="payslip-label" style="font-weight:800; font-size:0.9rem;">실수령액</span>
+                <span class="payslip-value" style="font-weight:800; font-size:0.9rem; color:var(--accent);">${formatNumber(netMonthly)}원</span>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('payslipContent').innerHTML = html;
+}
+
+// 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('simHobon').addEventListener('input', updateSimulator);
+    document.getElementById('simJiryeol').addEventListener('change', updateSimulator);
+    updateSimulator();
+    showPayslip(1);
+});
+</script>
 </body>
 </html>

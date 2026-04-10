@@ -51,6 +51,29 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface-alt); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .sim-row { display: flex; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+        .sim-field { flex: 1; min-width: 200px; }
+        .sim-field label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+        .sim-field input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+        .sim-field .sim-val { font-size: 0.9rem; font-weight: 700; color: var(--accent); text-align: right; display: block; margin-top: 4px; }
+        .sim-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 16px; }
+        .sim-result-card { background: white; border-radius: 10px; padding: 16px; text-align: center; border: 1px solid #E5E7EB; }
+        .sim-result-card .sim-r-label { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .sim-result-card .sim-r-value { font-size: 1.1rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .payslip-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+        .payslip-tab { padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid #E5E7EB; background: white; color: var(--text-secondary); transition: all 0.15s; }
+        .payslip-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
+        .payslip-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .payslip-table tr { border-bottom: 1px solid #F3F4F6; }
+        .payslip-table td { padding: 10px 12px; }
+        .payslip-table td:first-child { font-weight: 600; color: var(--text-secondary); width: 60%; }
+        .payslip-table td:last-child { text-align: right; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .payslip-section-title { background: var(--surface-alt); font-weight: 700; color: var(--text-secondary); }
+        .payslip-total { background: #F9FAFB; font-weight: 700; }
+        .payslip-total td:last-child { color: var(--accent); }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -208,6 +231,59 @@
         </div>
     </div>
 
+    <!-- 호봉제 급여 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">호봉제 급여 시뮬레이터</div>
+            <div class="card-badge">2026년 기준</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">현재 호봉과 보직 여부를 선택하면 예상 월 실수령액을 실시간으로 계산할 수 있습니다.</p>
+
+        <div class="sim-box">
+            <div class="sim-row">
+                <div class="sim-field">
+                    <label for="simHobong">호봉 선택 (1~40호봉)</label>
+                    <input type="range" id="simHobong" min="1" max="40" value="11" step="1">
+                    <span class="sim-val" id="simHobongVal">11호봉</span>
+                </div>
+                <div class="sim-field">
+                    <label for="simBozhik">보직수당 여부</label>
+                    <input type="checkbox" id="simBozhik" style="width:18px; height:18px; cursor:pointer;">
+                    <span class="sim-val" id="simBozhikVal">미해당</span>
+                </div>
+            </div>
+
+            <div class="sim-results">
+                <div class="sim-result-card">
+                    <div class="sim-r-label">기본급</div>
+                    <div class="sim-r-value" id="simBaseSalary">2,200,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">교직수당</div>
+                    <div class="sim-r-value" id="simTeacherAllowance">250,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">담임수당</div>
+                    <div class="sim-r-value" id="simHeadteacherAllowance">130,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">정근수당</div>
+                    <div class="sim-r-value" id="simLongServiceAllowance">0원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">보직수당</div>
+                    <div class="sim-r-value" id="simPositionAllowance">0원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">예상 월 실수령액</div>
+                    <div class="sim-r-value" id="simTakeHome">2,400,000원</div>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 1호봉 기본급 약 1,670,000원 | 11호봉(5년차) 약 2,200,000원 | 21호봉(15년차) 약 3,100,000원 | 31호봉(25년차) 약 3,900,000원 | 40호봉 약 4,400,000원 | 교직수당 25만원, 담임수당 13만원은 모든 교사 기본 지급 | 정근수당 0~50% (4급 기본급 기준)</p>
+    </div>
+
     <!-- 2컬럼: 공제 상세 + 정보 -->
     <div class="two-col">
         <div class="card" style="margin-bottom:0;">
@@ -289,6 +365,380 @@
     <p>교사는 명절 성과급, 정근수당 등으로 실제 연간 수입이 봉급표보다 15~20% 높습니다.</p>
     <p>정확한 금액은 <a href="index.html" style="color:var(--accent); font-weight:700; text-decoration:none;">연봉 실수령액 계산기</a>에서 직접 계산해보세요.</p>
 </div>
+    </div>
+
+    <!-- Ad slot after simulator -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 학교 유형별 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">학교 유형별 연봉 및 실수령액 비교</div>
+            <div class="card-badge">경력 5년차(11호봉) 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>학교 유형</th>
+                        <th>경력 5년 기본급</th>
+                        <th>수당합계</th>
+                        <th>월 실수령액</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>초등학교 교사</b></td>
+                        <td>2,200,000원</td>
+                        <td>390,000원</td>
+                        <td class="accent">2,500,000원</td>
+                        <td style="font-size:0.78rem;">담임 필수, 보직수당 가능</td>
+                    </tr>
+                    <tr>
+                        <td><b>중학교 교사</b></td>
+                        <td>2,200,000원</td>
+                        <td>390,000원</td>
+                        <td class="accent">2,500,000원</td>
+                        <td style="font-size:0.78rem;">담임 또는 전담 선택</td>
+                    </tr>
+                    <tr>
+                        <td><b>고등학교 교사</b></td>
+                        <td>2,200,000원</td>
+                        <td>390,000원</td>
+                        <td class="accent">2,500,000원</td>
+                        <td style="font-size:0.78rem;">담임 또는 보직교사 역할</td>
+                    </tr>
+                    <tr>
+                        <td><b>특수학교 교사</b></td>
+                        <td>2,200,000원</td>
+                        <td>490,000원</td>
+                        <td class="accent">2,580,000원</td>
+                        <td style="font-size:0.78rem;">특수교육수당 10만원 추가</td>
+                    </tr>
+                    <tr>
+                        <td><b>사립학교 교사</b></td>
+                        <td>2,000,000원</td>
+                        <td>350,000원</td>
+                        <td class="accent">2,300,000원</td>
+                        <td style="font-size:0.78rem;">공무원 봉급표 준용, 변동 가능</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 교사별 차이점</b>: 초중고 공립교사는 공무원 봉급표 동일 적용. 특수학교 교사는 장애학생 담당 특수교육수당 10만원 추가. 사립학교는 법인에 따라 기본급 1,800~2,400만원으로 변동 가능하며 승진 시스템도 공립과 다름.
+        </div>
+    </div>
+
+    <!-- Ad slot after school type comparison -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 호봉별 급여명세서 상세 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">호봉별 급여명세서 상세 분석</div>
+            <div class="card-badge">2026년 기준</div>
+        </div>
+
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" data-year="1">신규(1호봉)</button>
+            <button class="payslip-tab" data-year="5">5년차(11호봉)</button>
+            <button class="payslip-tab" data-year="10">10년차(21호봉)</button>
+            <button class="payslip-tab" data-year="20">20년차(31호봉)</button>
+            <button class="payslip-tab" data-year="30">30년차(40호봉)</button>
+        </div>
+
+        <!-- 신규 (1호봉) -->
+        <div class="payslip-content active" data-year="1">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>1,670,000원</td></tr>
+                <tr><td>교직수당</td><td>250,000원</td></tr>
+                <tr><td>담임수당</td><td>130,000원</td></tr>
+                <tr><td>정근수당 (0%)</td><td>0원</td></tr>
+                <tr><td><span style="color:#059669;">명절수당 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>2,250,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-150,300원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-59,800원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,000원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-13,400원</td></tr>
+                <tr><td>소득세</td><td>-84,500원</td></tr>
+                <tr><td>지방소득세</td><td>-8,450원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-318,450원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>1,931,550원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 5년차 (11호봉) -->
+        <div class="payslip-content" data-year="5">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,200,000원</td></tr>
+                <tr><td>교직수당</td><td>250,000원</td></tr>
+                <tr><td>담임수당</td><td>130,000원</td></tr>
+                <tr><td>정근수당 (25%)</td><td>550,000원</td></tr>
+                <tr><td><span style="color:#059669;">명절수당 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>3,330,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-198,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-78,000원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,640원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-17,760원</td></tr>
+                <tr><td>소득세</td><td>-149,300원</td></tr>
+                <tr><td>지방소득세</td><td>-14,930원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-460,630원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>2,869,370원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 10년차 (21호봉) -->
+        <div class="payslip-content" data-year="10">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>3,100,000원</td></tr>
+                <tr><td>교직수당</td><td>250,000원</td></tr>
+                <tr><td>담임수당</td><td>130,000원</td></tr>
+                <tr><td>정근수당 (40%)</td><td>1,240,000원</td></tr>
+                <tr><td><span style="color:#059669;">명절수당 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>4,920,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-279,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-109,900원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,720원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-24,960원</td></tr>
+                <tr><td>소득세</td><td>-259,600원</td></tr>
+                <tr><td>지방소득세</td><td>-25,960원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-703,140원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>4,216,860원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 20년차 (31호봉) -->
+        <div class="payslip-content" data-year="20">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>3,900,000원</td></tr>
+                <tr><td>교직수당</td><td>250,000원</td></tr>
+                <tr><td>담임수당</td><td>130,000원</td></tr>
+                <tr><td>정근수당 (50%)</td><td>1,950,000원</td></tr>
+                <tr><td><span style="color:#059669;">명절수당 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>6,430,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-351,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-138,260원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-4,680원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-31,440원</td></tr>
+                <tr><td>소득세</td><td>-363,800원</td></tr>
+                <tr><td>지방소득세</td><td>-36,380원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-925,560원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>5,504,440원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 30년차 (40호봉) -->
+        <div class="payslip-content" data-year="30">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>4,400,000원</td></tr>
+                <tr><td>교직수당</td><td>250,000원</td></tr>
+                <tr><td>담임수당</td><td>130,000원</td></tr>
+                <tr><td>정근수당 (50%)</td><td>2,200,000원</td></tr>
+                <tr><td><span style="color:#059669;">명절수당 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>7,180,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-396,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-155,880원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-5,280원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-35,520원</td></tr>
+                <tr><td>소득세</td><td>-415,800원</td></tr>
+                <tr><td>지방소득세</td><td>-41,580원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-1,050,060원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>6,129,940원</b></td></tr>
+            </table>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 교직수당(25만원)과 담임수당(13만원)은 모든 담임교사 기본 지급 | 정근수당은 근속년수에 따라 증가(4급 기본급 기준) | 명절수당·복지포인트는 비과세 또는 별도 지급 | 실제 금액은 학교·지역·직급에 따라 변동</p>
+    </div>
+
+    <!-- Ad slot after payslip -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 교사 비과세 항목 및 절세 전략 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">교사 비과세 항목 및 절세 전략</div>
+            <div class="card-badge">연말정산 절세 팁</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">교사는 공무원으로 분류되어 비과세 항목과 연금, 세액공제 혜택이 풍부합니다.</p>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>월 한도</th>
+                        <th>연간 절세 효과</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>교원 연구비</b></td>
+                        <td>월 20만원</td>
+                        <td class="accent">약 360만원</td>
+                        <td style="font-size:0.78rem;">비과세 (4대보험 미적용)</td>
+                    </tr>
+                    <tr>
+                        <td><b>식대</b></td>
+                        <td>월 20만원</td>
+                        <td class="accent">약 36만원</td>
+                        <td style="font-size:0.78rem;">비과세 (학교 미급식 시)</td>
+                    </tr>
+                    <tr>
+                        <td><b>교직원공제회</b></td>
+                        <td>월 최대 10%</td>
+                        <td class="accent">약 120~150만원</td>
+                        <td style="font-size:0.78rem;">저축+대출혜택, 연금 선택 가능</td>
+                    </tr>
+                    <tr>
+                        <td><b>교육비 세액공제</b></td>
+                        <td>자녀 연간 무제한</td>
+                        <td class="accent">약 50~100만원</td>
+                        <td style="font-size:0.78rem;">자녀 교육비 15% 세액공제</td>
+                    </tr>
+                    <tr>
+                        <td><b>기여금납부 소득공제</b></td>
+                        <td>연금 한도 내</td>
+                        <td class="accent">약 200만원</td>
+                        <td style="font-size:0.78rem;">개인연금·연금저축 소득공제</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 현직자 절세 팁</b>: 교원 연구비 20만원을 반드시 신청하세요 (비과세). 교직원공제회 월 납입 시 연금 옵션 선택 시 개인연금 효과. 자녀 교육비(유치원~대학원)는 연말정산에서 15% 세액공제되므로 영수증 보관 필수.
+        </div>
+    </div>
+
+    <!-- Ad slot after tax-exempt section -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 교사 승진 및 수당 체계 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">교사 승진 경로 및 보직 수당 체계</div>
+            <div class="card-badge">공무원 직급 시스템</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">교사의 승진은 평교사 → 부장교사 → 교감 → 교장 순서로 진행되며, 각 직급별로 보직수당과 책임수당이 다릅니다.</p>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>직급</th>
+                        <th>호봉 범위</th>
+                        <th>기본급 예시</th>
+                        <th>보직수당</th>
+                        <th>진출 조건</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>평교사</b></td>
+                        <td>1~40호봉</td>
+                        <td>1,670만~4,400만원</td>
+                        <td>0~70만원</td>
+                        <td style="font-size:0.78rem;">신규임용 시작</td>
+                    </tr>
+                    <tr>
+                        <td><b>부장교사</b></td>
+                        <td>20~40호봉</td>
+                        <td>3,100만~4,400만원</td>
+                        <td class="accent">70~100만원</td>
+                        <td style="font-size:0.78rem;">20호봉 이상, 근속 5년</td>
+                    </tr>
+                    <tr>
+                        <td><b>교감</b></td>
+                        <td>1급 정년 등급</td>
+                        <td>약 5,800만~6,500만원</td>
+                        <td class="accent">150~180만원</td>
+                        <td style="font-size:0.78rem;">부장교사 3년 이상, 시험 합격</td>
+                    </tr>
+                    <tr>
+                        <td><b>교장</b></td>
+                        <td>특급 정년 등급</td>
+                        <td>약 6,500만~7,500만원</td>
+                        <td class="accent">200~250만원</td>
+                        <td style="font-size:0.78rem;">교감 경력, 교장공개선발</td>
+                    </tr>
+                    <tr>
+                        <td><b>수석교사</b></td>
+                        <td>전문가 등급</td>
+                        <td>약 4,800만~5,500만원</td>
+                        <td class="accent">100~130만원</td>
+                        <td style="font-size:0.78rem;">평교사 전문성 인정 경로</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="font-size:0.88rem; font-weight:700; margin:20px 0 12px; color:var(--text-primary);">교사 정년 및 퇴직 정보</h4>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>설명</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>정년</b></td>
+                        <td>62세 (2030년 이후 63세로 상향 검토)</td>
+                        <td style="font-size:0.78rem;">교육공무원법 제32조</td>
+                    </tr>
+                    <tr>
+                        <td><b>퇴직금</b></td>
+                        <td>평균 임금 × (근속년수 × 30일)</td>
+                        <td style="font-size:0.78rem;">약 3,000~5,000만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>연금</b></td>
+                        <td>교직원 공제회 적립 + 공무원연금</td>
+                        <td style="font-size:0.78rem;">월 실수령액의 10~15%</td>
+                    </tr>
+                    <tr>
+                        <td><b>명예퇴직</b></td>
+                        <td>55세 이상, 경력 20년 이상</td>
+                        <td style="font-size:0.78rem;">할증금 지급 (퇴직금 +20%)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 승진 전략</b>: 교감·교장 진출은 선택. 평교사 또는 수석교사로 남아 연구·교육에 집중하는 경로도 증가. 부장교사는 보직수당으로 월 실수령액이 100만원 이상 증가하므로 경력 초반부터 준비 필요.
+        </div>
+    </div>
+
+    <!-- Ad slot after promotion section -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- 경력/직급별 비교 -->
@@ -390,5 +840,98 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 호봉제 급여 시뮬레이터
+(function() {
+    const hobongInput = document.getElementById('simHobong');
+    const bozhikInput = document.getElementById('simBozhik');
+    const hobongVal = document.getElementById('simHobongVal');
+    const bozhikVal = document.getElementById('simBozhikVal');
+    const baseSalaryVal = document.getElementById('simBaseSalary');
+    const teacherAllowanceVal = document.getElementById('simTeacherAllowance');
+    const headteacherAllowanceVal = document.getElementById('simHeadteacherAllowance');
+    const longServiceAllowanceVal = document.getElementById('simLongServiceAllowance');
+    const positionAllowanceVal = document.getElementById('simPositionAllowance');
+    const takeHomeVal = document.getElementById('simTakeHome');
+
+    const hobongData = {
+        1: 1670000, 5: 1980000, 11: 2200000, 15: 2500000,
+        21: 3100000, 25: 3400000, 31: 3900000, 35: 4150000, 40: 4400000
+    };
+
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('ko-KR') + '원';
+    }
+
+    function interpolateBaseSalary(hobong) {
+        const keys = Object.keys(hobongData).map(Number).sort((a, b) => a - b);
+        if (hobongData[hobong]) return hobongData[hobong];
+
+        for (let i = 0; i < keys.length - 1; i++) {
+            if (hobong > keys[i] && hobong < keys[i + 1]) {
+                const ratio = (hobong - keys[i]) / (keys[i + 1] - keys[i]);
+                return Math.round(hobongData[keys[i]] + (hobongData[keys[i + 1]] - hobongData[keys[i]]) * ratio);
+            }
+        }
+        return hobongData[40];
+    }
+
+    function updateSimulator() {
+        const hobong = parseInt(hobongInput.value);
+        const hasBozhik = bozhikInput.checked;
+
+        const baseSalary = interpolateBaseSalary(hobong);
+        const teacherAllowance = 250000;
+        const headteacherAllowance = 130000;
+
+        let longServiceAllowance = 0;
+        if (hobong >= 5) longServiceAllowance = Math.round(baseSalary * 0.10);
+        if (hobong >= 10) longServiceAllowance = Math.round(baseSalary * 0.20);
+        if (hobong >= 15) longServiceAllowance = Math.round(baseSalary * 0.30);
+        if (hobong >= 20) longServiceAllowance = Math.round(baseSalary * 0.40);
+        if (hobong >= 25) longServiceAllowance = Math.round(baseSalary * 0.50);
+
+        const positionAllowance = hasBozhik ? 700000 : 0;
+
+        const monthlyPreTax = (baseSalary + teacherAllowance + headteacherAllowance + longServiceAllowance + positionAllowance) / 1;
+        const deductionRate = 0.12 + (baseSalary / 10000000);
+        const takeHome = monthlyPreTax * (1 - Math.min(deductionRate, 0.18));
+
+        hobongVal.textContent = hobong + '호봉';
+        bozhikVal.textContent = hasBozhik ? '보직수당 포함' : '미해당';
+        baseSalaryVal.textContent = formatCurrency(baseSalary);
+        teacherAllowanceVal.textContent = formatCurrency(teacherAllowance);
+        headteacherAllowanceVal.textContent = formatCurrency(headteacherAllowance);
+        longServiceAllowanceVal.textContent = formatCurrency(longServiceAllowance);
+        positionAllowanceVal.textContent = formatCurrency(positionAllowance);
+        takeHomeVal.textContent = formatCurrency(takeHome);
+    }
+
+    hobongInput.addEventListener('input', updateSimulator);
+    bozhikInput.addEventListener('change', updateSimulator);
+
+    updateSimulator();
+})();
+
+// 급여명세서 탭 기능
+(function() {
+    const tabs = document.querySelectorAll('.payslip-tab');
+    const contents = document.querySelectorAll('.payslip-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const year = this.getAttribute('data-year');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            this.classList.add('active');
+            document.querySelector(`.payslip-content[data-year="${year}"]`).classList.add('active');
+        });
+    });
+})();
+</script>
+
 </body>
 </html>

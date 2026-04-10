@@ -51,6 +51,38 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface-alt); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .sim-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .sim-field { display: flex; flex-direction: column; }
+        .sim-field label { font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; }
+        .sim-field input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; -webkit-appearance: none; }
+        .sim-field input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+        .sim-field input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; border: none; }
+        .sim-field select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.88rem; color: var(--text-primary); background: white; }
+        .sim-val { font-size: 0.88rem; font-weight: 700; color: var(--accent); margin-top: 4px; }
+        .sim-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+        .sim-result-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 12px; text-align: center; }
+        .sim-r-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; }
+        .sim-r-value { font-size: 1.1rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        @media (max-width: 768px) {
+            .sim-row { grid-template-columns: 1fr; }
+            .sim-results { grid-template-columns: repeat(2, 1fr); }
+        }
+        .payslip-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+        .payslip-tab { padding: 10px 16px; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+        .payslip-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .payslip-tab:hover { border-color: var(--accent); }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
+        .payslip-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 16px; }
+        .payslip-table tr { border-bottom: 1px solid var(--border); }
+        .payslip-table td { padding: 12px; }
+        .payslip-table td:first-child { width: 50%; color: var(--text-secondary); font-weight: 500; }
+        .payslip-table td:last-child { text-align: right; color: var(--text-primary); font-weight: 600; font-family: 'Inter', sans-serif; }
+        .payslip-section-title { background: var(--surface-alt); font-weight: 700; color: var(--text-primary); }
+        .payslip-total { border-top: 2px solid var(--text-primary); border-bottom: 2px solid var(--text-primary); font-weight: 700; }
+        .payslip-final { background: var(--accent-light); border-top: 2px solid var(--accent); font-weight: 800; }
+        .payslip-final td:last-child { color: var(--accent); font-size: 1rem; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -213,96 +245,153 @@
         <div class="card" style="margin-bottom:0;">
             <div class="card-header">
                 <div class="card-title">공제 항목 상세</div>
-                <div class="card-badge">경장 (4년차) 기준</div>
+                <div class="card-badge">경장 (5년차) 기준</div>
             </div>
-            
+
                     <div class="b-item">
                         <div class="b-dot" style="background:#2563EB;"></div>
                         <div class="b-info">
-                            <div class="b-name">국민연금</div>
+                            <div class="b-name">공무원연금</div>
                             <div class="b-bar-wrap">
                                 <div class="b-bar" style="background:#2563EB; width:100.0%;"></div>
                             </div>
                         </div>
-                        <div class="b-amount">-131,250원</div>
+                        <div class="b-amount">-158,400원</div>
                     </div>
                     <div class="b-item">
                         <div class="b-dot" style="background:#8B5CF6;"></div>
                         <div class="b-info">
                             <div class="b-name">건강보험</div>
                             <div class="b-bar-wrap">
-                                <div class="b-bar" style="background:#8B5CF6; width:78.8%;"></div>
+                                <div class="b-bar" style="background:#8B5CF6; width:72.5%;"></div>
                             </div>
                         </div>
-                        <div class="b-amount">-103,395원</div>
+                        <div class="b-amount">-124,200원</div>
                     </div>
                     <div class="b-item">
                         <div class="b-dot" style="background:#A78BFA;"></div>
                         <div class="b-info">
                             <div class="b-name">장기요양보험</div>
                             <div class="b-bar-wrap">
-                                <div class="b-bar" style="background:#A78BFA; width:10.2%;"></div>
+                                <div class="b-bar" style="background:#A78BFA; width:9.8%;"></div>
                             </div>
                         </div>
-                        <div class="b-amount">-13,389원</div>
+                        <div class="b-amount">-14,580원</div>
                     </div>
                     <div class="b-item">
                         <div class="b-dot" style="background:#F59E0B;"></div>
                         <div class="b-info">
                             <div class="b-name">고용보험</div>
                             <div class="b-bar-wrap">
-                                <div class="b-bar" style="background:#F59E0B; width:20.0%;"></div>
+                                <div class="b-bar" style="background:#F59E0B; width:18.5%;"></div>
                             </div>
                         </div>
-                        <div class="b-amount">-26,249원</div>
+                        <div class="b-amount">-31,680원</div>
                     </div>
                     <div class="b-item">
                         <div class="b-dot" style="background:#EF4444;"></div>
                         <div class="b-info">
                             <div class="b-name">소득세</div>
                             <div class="b-bar-wrap">
-                                <div class="b-bar" style="background:#EF4444; width:39.5%;"></div>
+                                <div class="b-bar" style="background:#EF4444; width:42.8%;"></div>
                             </div>
                         </div>
-                        <div class="b-amount">-51,788원</div>
+                        <div class="b-amount">-71,640원</div>
                     </div>
                     <div class="b-item">
                         <div class="b-dot" style="background:#9CA3AF;"></div>
                         <div class="b-info">
                             <div class="b-name">지방소득세</div>
                             <div class="b-bar-wrap">
-                                <div class="b-bar" style="background:#9CA3AF; width:3.9%;"></div>
+                                <div class="b-bar" style="background:#9CA3AF; width:4.3%;"></div>
                             </div>
                         </div>
-                        <div class="b-amount">-5,178원</div>
+                        <div class="b-amount">-7,164원</div>
                     </div>
             <div class="b-total">
                 <div class="b-total-label">공제합계</div>
-                <div class="b-total-val">-331,249원</div>
+                <div class="b-total-val">-407,664원</div>
             </div>
         </div>
 
         <div class="info-card">
     <h2>경찰 연봉 상세 분석</h2>
-    <p>경찰은 일반 공무원 대비 약 11% 높은 공안직 봉급을 적용받습니다. 야간근무수당, 위험근무수당, 초과근무수당 등이 기본급에 추가됩니다. 특히 형사·교통 등 현장 부서는 초과근무수당이 상당합니다.</p>
+    <p>경찰은 일반 공무원 대비 약 7% 높은 공안직 봉급을 적용받습니다. 위험근무수당, 야간근무수당, 특수지근무수당, 교통비 등 다양한 수당이 기본급에 추가됩니다. 특히 지구대·파출소 현장 근무는 야간수당과 위험수당이 상당합니다.</p>
     <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">알아두면 좋은 팁</h3>
-    <p>경찰 초과근무수당은 월 최대 57시간까지 인정되며, 이를 포함하면 실제 월 수령액은 기본급 대비 30~50% 높아질 수 있습니다.</p>
+    <p>경찰은 국민연금이 아닌 <b>공무원연금</b>에 가입되며, 급여는 공무원 봉급표를 따릅니다. 야간근무수당과 위험근무수당은 비과세 항목이 포함되어 있어 세후 실수령액이 상대적으로 높은 편입니다.</p>
     <p>정확한 금액은 <a href="index.html" style="color:var(--accent); font-weight:700; text-decoration:none;">연봉 실수령액 계산기</a>에서 직접 계산해보세요.</p>
 </div>
+    </div>
+
+    <!-- 경찰 계급별 급여 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">경찰 계급별 급여 시뮬레이터</div>
+            <div class="card-badge">2026 공무원 봉급표 기준</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">계급과 근속연수를 선택하면 기본급, 각종 수당, 예상 월 실수령액을 실시간으로 계산할 수 있습니다.</p>
+
+        <div class="sim-box">
+            <div class="sim-row">
+                <div class="sim-field">
+                    <label for="policeRank">계급 선택</label>
+                    <select id="policeRank">
+                        <option value="순경">순경 (1호봉: 1,770,000원)</option>
+                        <option value="경장" selected>경장 (5년차: 2,200,000원)</option>
+                        <option value="경사">경사 (10년차: 2,900,000원)</option>
+                        <option value="경위">경위 (15년차: 3,500,000원)</option>
+                        <option value="경감">경감 (20년차: 4,100,000원)</option>
+                    </select>
+                </div>
+                <div class="sim-field">
+                    <label for="policeYears">근속연수</label>
+                    <input type="range" id="policeYears" min="1" max="30" value="5" step="1">
+                    <span class="sim-val" id="policeYearsVal">5년</span>
+                </div>
+            </div>
+
+            <div class="sim-results">
+                <div class="sim-result-card">
+                    <div class="sim-r-label">기본급</div>
+                    <div class="sim-r-value" id="policeBaseSalary">2,200,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">위험근무수당</div>
+                    <div class="sim-r-value" id="policeHazardPay">60,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">월 수당 합계</div>
+                    <div class="sim-r-value" id="policeAllowance">600,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">예상 월 실수령액</div>
+                    <div class="sim-r-value" id="policeNetIncome">2,470,000원</div>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 수당: 정근수당(0~50%), 위험근무수당 6만원, 야간근무수당, 특수지근무수당, 교통비 등 포함 | 실수령액은 공무원연금·건강보험·소득세 반영한 근사치</p>
+    </div>
+
+    <!-- Ad slot after simulator -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- 경력/직급별 비교 -->
     <div class="card">
         <div class="card-header">
-            <div class="card-title">경력별 연봉 실수령액 비교</div>
+            <div class="card-title">계급별 연봉 실수령액 비교</div>
             <div class="card-badge">2026년</div>
         </div>
         <div style="overflow-x:auto;">
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>경력</th>
-                        <th>연봉</th>
+                        <th>계급</th>
+                        <th>근속연수</th>
+                        <th>기본급</th>
                         <th>세전 월급</th>
                         <th>월 공제액</th>
                         <th>월 실수령액</th>
@@ -310,43 +399,587 @@
                 </thead>
                 <tbody>
                         <tr>
-                            <td>순경 (신임)</td>
-                            <td>3,000만원</td>
-                            <td>2,500,000원</td>
-                            <td>270,063원</td>
-                            <td class="accent">2,229,937원</td>
+                            <td>순경</td>
+                            <td>신임</td>
+                            <td>1,770,000원</td>
+                            <td>2,400,000원</td>
+                            <td>270,000원</td>
+                            <td class="accent">2,130,000원</td>
                         </tr>
                         <tr>
-                            <td>경장 (4년차)</td>
-                            <td>3,500만원</td>
-                            <td>2,916,666원</td>
-                            <td>331,249원</td>
-                            <td class="accent">2,585,417원</td>
+                            <td>경장</td>
+                            <td>5년차</td>
+                            <td>2,200,000원</td>
+                            <td>2,870,000원</td>
+                            <td>330,000원</td>
+                            <td class="accent">2,540,000원</td>
                         </tr>
                         <tr>
-                            <td>경사 (8년차)</td>
-                            <td>4,200만원</td>
+                            <td>경사</td>
+                            <td>10년차</td>
+                            <td>2,900,000원</td>
+                            <td>3,600,000원</td>
+                            <td>440,000원</td>
+                            <td class="accent">3,160,000원</td>
+                        </tr>
+                        <tr>
+                            <td>경위</td>
+                            <td>15년차</td>
                             <td>3,500,000원</td>
-                            <td>421,739원</td>
-                            <td class="accent">3,078,261원</td>
+                            <td>4,250,000원</td>
+                            <td>560,000원</td>
+                            <td class="accent">3,690,000원</td>
                         </tr>
                         <tr>
-                            <td>경위 (15년차)</td>
-                            <td>5,200만원</td>
-                            <td>4,333,333원</td>
-                            <td>558,334원</td>
-                            <td class="accent">3,774,999원</td>
-                        </tr>
-                        <tr>
-                            <td>경감 (20년차)</td>
-                            <td>6,500만원</td>
-                            <td>5,416,666원</td>
-                            <td>747,750원</td>
-                            <td class="accent">4,668,916원</td>
+                            <td>경감</td>
+                            <td>20년차</td>
+                            <td>4,100,000원</td>
+                            <td>4,900,000원</td>
+                            <td>700,000원</td>
+                            <td class="accent">4,200,000원</td>
                         </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <!-- Ad slot after rank comparison -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 경찰 근무형태별 실수령 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">경찰 근무형태별 실수령액 비교</div>
+            <div class="card-badge">경장 5년차 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>근무형태</th>
+                        <th>주요 배치</th>
+                        <th>기본급</th>
+                        <th>주요 수당</th>
+                        <th>월 실수령액</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>지구대/파출소</b></td>
+                        <td>순찰, 신고 대응</td>
+                        <td>2,200,000원</td>
+                        <td>야간수당(+120K), 위험수당(+60K)</td>
+                        <td class="accent">2,850,000원</td>
+                        <td>3교대 근무, 야간수당 월 최대 300만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>수사과/형사과</b></td>
+                        <td>사건 조사</td>
+                        <td>2,200,000원</td>
+                        <td>초과근무(+150K), 특수수당(+80K)</td>
+                        <td class="accent">2,920,000원</td>
+                        <td>주간+초과근무, 월 초과근무 57시간 인정</td>
+                    </tr>
+                    <tr>
+                        <td><b>교통경찰</b></td>
+                        <td>교통단속, 사고처리</td>
+                        <td>2,200,000원</td>
+                        <td>교통수당(+100K), 정근수당(+80K)</td>
+                        <td class="accent">2,720,000원</td>
+                        <td>2교대 주간 근무, 야간 없음</td>
+                    </tr>
+                    <tr>
+                        <td><b>경비경찰/기동대</b></td>
+                        <td>시위 경비, 보안</td>
+                        <td>2,200,000원</td>
+                        <td>위험수당(+100K), 특수수당(+100K)</td>
+                        <td class="accent">2,980,000원</td>
+                        <td>위험 근무 추가 수당, 신체활동 높음</td>
+                    </tr>
+                    <tr>
+                        <td><b>사이버수사대</b></td>
+                        <td>디지털 범죄 수사</td>
+                        <td>2,200,000원</td>
+                        <td>전문수당(+120K), 초과근무(+100K)</td>
+                        <td class="accent">2,800,000원</td>
+                        <td>전문기술직 수당, 주간 근무 중심</td>
+                    </tr>
+                    <tr>
+                        <td><b>과학수사대</b></td>
+                        <td>현장 증거 채증</td>
+                        <td>2,200,000원</td>
+                        <td>전문수당(+120K), 초과근무(+80K)</td>
+                        <td class="accent">2,770,000원</td>
+                        <td>특수기술 수당, 변동근무 적음</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>현장 근무와 사무 근무의 차이</b>: 지구대/파출소는 야간수당으로 월 300만원까지 추가 수령 가능하고, 형사과는 초과근무로 월 250만원 이상 가능합니다. 반면 교통경찰은 야간 근무가 적어 상대적으로 실수령액이 낮습니다.
+        </div>
+    </div>
+
+    <!-- Ad slot after duty type -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 계급별 급여명세서 상세 (탭) -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">계급별 급여명세서 상세 분석</div>
+            <div class="card-badge">공무원 봉급표 기준</div>
+        </div>
+
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" data-rank="순경">순경(신임)</button>
+            <button class="payslip-tab" data-rank="경장">경장(5년차)</button>
+            <button class="payslip-tab" data-rank="경사">경사(10년차)</button>
+            <button class="payslip-tab" data-rank="경위">경위(15년차)</button>
+            <button class="payslip-tab" data-rank="경감">경감(20년차)</button>
+        </div>
+
+        <!-- 순경(신임) -->
+        <div class="payslip-content active" data-rank="순경">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>1,770,000원</td></tr>
+                <tr><td>정근수당 (20%)</td><td>354,000원</td></tr>
+                <tr><td>위험근무수당</td><td>60,000원</td></tr>
+                <tr><td>야간근무수당</td><td>150,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>2,634,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-159,300원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-59,424원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,000원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-14,160원</td></tr>
+                <tr><td>소득세</td><td>-29,000원</td></tr>
+                <tr><td>지방소득세</td><td>-2,900원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-266,784원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>2,367,216원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 경장(5년차) -->
+        <div class="payslip-content" data-rank="경장">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,200,000원</td></tr>
+                <tr><td>정근수당 (30%)</td><td>660,000원</td></tr>
+                <tr><td>위험근무수당</td><td>60,000원</td></tr>
+                <tr><td>야간근무수당</td><td>150,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>3,370,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-198,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-78,000원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,600원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-17,600원</td></tr>
+                <tr><td>소득세</td><td>-44,000원</td></tr>
+                <tr><td>지방소득세</td><td>-4,400원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-344,600원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>3,025,400원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 경사(10년차) -->
+        <div class="payslip-content" data-rank="경사">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,900,000원</td></tr>
+                <tr><td>정근수당 (40%)</td><td>1,160,000원</td></tr>
+                <tr><td>위험근무수당</td><td>60,000원</td></tr>
+                <tr><td>야간근무수당</td><td>200,000원</td></tr>
+                <tr><td>직책보조비</td><td>100,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>4,720,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-261,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-102,800원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,480원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-23,200원</td></tr>
+                <tr><td>소득세</td><td>-68,000원</td></tr>
+                <tr><td>지방소득세</td><td>-6,800원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-465,280원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>4,254,720원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 경위(15년차) -->
+        <div class="payslip-content" data-rank="경위">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>3,500,000원</td></tr>
+                <tr><td>정근수당 (50%)</td><td>1,750,000원</td></tr>
+                <tr><td>위험근무수당</td><td>60,000원</td></tr>
+                <tr><td>야간근무수당</td><td>200,000원</td></tr>
+                <tr><td>직책보조비</td><td>200,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>5,710,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-315,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-124,075원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-4,248원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-28,000원</td></tr>
+                <tr><td>소득세</td><td>-85,650원</td></tr>
+                <tr><td>지방소득세</td><td>-8,565원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-565,538원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>5,144,462원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 경감(20년차) -->
+        <div class="payslip-content" data-rank="경감">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>4,100,000원</td></tr>
+                <tr><td>정근수당 (50%)</td><td>2,050,000원</td></tr>
+                <tr><td>위험근무수당</td><td>60,000원</td></tr>
+                <tr><td>야간근무수당</td><td>150,000원</td></tr>
+                <tr><td>직책보조비</td><td>300,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>6,860,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-369,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-145,345원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-4,944원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-32,800원</td></tr>
+                <tr><td>소득세</td><td>-123,480원</td></tr>
+                <tr><td>지방소득세</td><td>-12,348원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-687,917원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>6,172,083원</b></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ad slot after payslip -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 경찰 비과세 항목 및 절세 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">경찰 비과세 항목 및 절세 전략</div>
+            <div class="card-badge">공무원연금 vs 국민연금</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">경찰은 공무원연금 가입자로서 일반 직장인과 다른 비과세 항목과 절세 전략을 적용할 수 있습니다.</p>
+
+        <div style="margin-bottom:20px; overflow-x:auto;">
+            <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:12px;">경찰 비과세 항목 상세</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>비과세 항목</th>
+                        <th>한도</th>
+                        <th>조건</th>
+                        <th>월 절세 효과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>식대</td>
+                        <td>월 20만원</td>
+                        <td>현물 식사 미제공 시</td>
+                        <td class="accent">약 2~3만원</td>
+                    </tr>
+                    <tr>
+                        <td>자가운전보조금 (교통비)</td>
+                        <td>월 20만원</td>
+                        <td>본인 차량 업무 이용 시</td>
+                        <td class="accent">약 2~3만원</td>
+                    </tr>
+                    <tr>
+                        <td>위험근무수당 일부</td>
+                        <td>월 6만원</td>
+                        <td>보안직군 배치 시</td>
+                        <td class="accent">약 0.8~1만원</td>
+                    </tr>
+                    <tr>
+                        <td>야간근무수당 일부</td>
+                        <td>월 한도 내</td>
+                        <td>야간 교대근무 시</td>
+                        <td class="accent">약 3~5만원</td>
+                    </tr>
+                    <tr>
+                        <td>특수지근무수당</td>
+                        <td>기본급 10%</td>
+                        <td>도서/벽지 근무 시</td>
+                        <td class="accent">약 5~10만원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-bottom:20px; overflow-x:auto;">
+            <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:12px;">공무원연금 vs 국민연금</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>공무원연금 (경찰)</th>
+                        <th>국민연금 (일반직장인)</th>
+                        <th>차이</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>보험료</b></td>
+                        <td>급여 9% (근로자 부담)</td>
+                        <td>급여 9% (근로자 부담)</td>
+                        <td>동일</td>
+                    </tr>
+                    <tr>
+                        <td><b>지급 시기</b></td>
+                        <td>60세 또는 근속 20년 이상</td>
+                        <td>62세 (또는 조기 60세)</td>
+                        <td>공무원연금이 2년 빠름</td>
+                    </tr>
+                    <tr>
+                        <td><b>급여 수준</b></td>
+                        <td>최종 3년 평균 × 1.9% × 근속년수</td>
+                        <td>가입자 전체 평균 × 기여율</td>
+                        <td>공무원연금이 일반적으로 30% 높음</td>
+                    </tr>
+                    <tr>
+                        <td><b>유족연금</b></td>
+                        <td>배우자: 50%, 자녀: 25%</td>
+                        <td>배우자: 30%, 자녀: 15%</td>
+                        <td>공무원연금이 우대</td>
+                    </tr>
+                    <tr>
+                        <td><b>장애연금</b></td>
+                        <td>기여도 50~100%</td>
+                        <td>기여도 60~100%</td>
+                        <td>공무원연금이 우대</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:20px; overflow-x:auto;">
+            <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:12px;">연봉 구간별 비과세 절세 효과 비교</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>계급 (근속년수)</th>
+                        <th>비과세 0원</th>
+                        <th>비과세 20만원</th>
+                        <th>비과세 40만원</th>
+                        <th>절세 효과 (월)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>순경 (신임)</td>
+                        <td>2,330,000원</td>
+                        <td>2,348,000원</td>
+                        <td>2,366,000원</td>
+                        <td class="accent">36,000원</td>
+                    </tr>
+                    <tr>
+                        <td>경장 (5년차)</td>
+                        <td>3,010,000원</td>
+                        <td>3,028,000원</td>
+                        <td>3,046,000원</td>
+                        <td class="accent">36,000원</td>
+                    </tr>
+                    <tr>
+                        <td>경사 (10년차)</td>
+                        <td>4,225,000원</td>
+                        <td>4,245,000원</td>
+                        <td>4,265,000원</td>
+                        <td class="accent">40,000원</td>
+                    </tr>
+                    <tr>
+                        <td>경위 (15년차)</td>
+                        <td>5,100,000원</td>
+                        <td>5,122,000원</td>
+                        <td>5,144,000원</td>
+                        <td class="accent">44,000원</td>
+                    </tr>
+                    <tr>
+                        <td>경감 (20년차)</td>
+                        <td>6,140,000원</td>
+                        <td>6,164,000원</td>
+                        <td>6,188,000원</td>
+                        <td class="accent">48,000원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>현직 경찰의 절세 팁</b>: 전보·배치 시 특수지근무수당(도서·벽지 + 5~10% 비과세) 배치를 먼저 고려하세요. 같은 기본급에도 연 600만원 이상 절세할 수 있습니다. 또한 월급명세서에서 "식대 20만원 + 교통비 20만원"이 비과세로 명시되었는지 확인하세요. 명시되지 않으면 입사 시 요청해야 합니다.
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>공무원연금 수령 전략</b>: 만 60세에 정년 퇴직 후 연금 수령까지 약 3~5개월 소요됩니다. 이 기간의 생활비를 미리 준비하세요. 또한 경찰의 야간 근무로 인한 유해직종 가산금(+5%)은 연금 계산 시 기초가 되므로, 근속 기간 중 현장 근무 기록을 잘 보관하세요.
+        </div>
+    </div>
+
+    <!-- Ad slot after tax-exempt -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 경찰 승진 체계 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">경찰 승진 체계 및 계급별 수당</div>
+            <div class="card-badge">경찰청 인사 기준</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">경찰의 승진은 순경 → 경장 → 경사 → 경위 → 경감 → 경정 → 총경 → 경무관으로 진행됩니다. 각 계급별 승진 소요연수와 수당을 정리했습니다.</p>
+
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>계급</th>
+                        <th>평균 승진 소요연수</th>
+                        <th>기본급 대비</th>
+                        <th>직책보조비</th>
+                        <th>주요 배치</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>순경</b></td>
+                        <td>신임</td>
+                        <td>기준(100%)</td>
+                        <td>없음</td>
+                        <td>지구대, 파출소</td>
+                        <td>경찰 최하위 계급, 1호봉 1,770,000원</td>
+                    </tr>
+                    <tr>
+                        <td><b>경장</b></td>
+                        <td>4~5년</td>
+                        <td>125%</td>
+                        <td>없음</td>
+                        <td>순찰팀, 파출소</td>
+                        <td>순경에서 첫 승진, 가장 많은 인원</td>
+                    </tr>
+                    <tr>
+                        <td><b>경사</b></td>
+                        <td>8~10년</td>
+                        <td>165%</td>
+                        <td>없음</td>
+                        <td>팀장, 수사 초급</td>
+                        <td>팀 리더십 역할, 초급 감시 업무</td>
+                    </tr>
+                    <tr>
+                        <td><b>경위</b></td>
+                        <td>15~17년</td>
+                        <td>200%</td>
+                        <td>100,000원</td>
+                        <td>과장급, 중급 수사</td>
+                        <td>부서 과장 역할, 정년까지 약 15년</td>
+                    </tr>
+                    <tr>
+                        <td><b>경감</b></td>
+                        <td>20~22년</td>
+                        <td>235%</td>
+                        <td>300,000원</td>
+                        <td>부장급, 서장급 보직</td>
+                        <td>경찰서 부장, 부서 총괄 역할</td>
+                    </tr>
+                    <tr>
+                        <td><b>경정</b></td>
+                        <td>25년+</td>
+                        <td>280%</td>
+                        <td>500,000원</td>
+                        <td>서장급</td>
+                        <td>경찰서 서장, 대외 대표 역할</td>
+                    </tr>
+                    <tr>
+                        <td><b>총경</b></td>
+                        <td>28년+</td>
+                        <td>350%</td>
+                        <td>800,000원</td>
+                        <td>지청장, 본청 국장급</td>
+                        <td>지역 경찰 총책임, 최고위 승진 과정</td>
+                    </tr>
+                    <tr>
+                        <td><b>경무관</b></td>
+                        <td>30년+</td>
+                        <td>400%</td>
+                        <td>1,000,000원</td>
+                        <td>경찰청 실장급</td>
+                        <td>경찰청 최고위, 매우 소수 임용</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:20px; overflow-x:auto;">
+            <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:12px;">경찰 특채 경로 (승진 시간 단축)</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>특채 경로</th>
+                        <th>입직 계급</th>
+                        <th>학력/자격 요건</th>
+                        <th>소요 기간</th>
+                        <th>월급(예상)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>경찰대 졸업</b></td>
+                        <td>경위 (3년차)</td>
+                        <td>대학 4년 재학 + 경찰대 졸업</td>
+                        <td>약 12년 (정년까지)</td>
+                        <td>약 3,000,000원 (초기)</td>
+                    </tr>
+                    <tr>
+                        <td><b>간부후보생</b></td>
+                        <td>경사 (1년차)</td>
+                        <td>학사 학위 + 공채 시험</td>
+                        <td>약 16년 (정년까지)</td>
+                        <td>약 2,600,000원 (초기)</td>
+                    </tr>
+                    <tr>
+                        <td><b>경찰행정직 승격</b></td>
+                        <td>경장 (1년차)</td>
+                        <td>경찰청 근무 3년 이상 + 시험</td>
+                        <td>약 18년 (정년까지)</td>
+                        <td>약 2,200,000원 (초기)</td>
+                    </tr>
+                    <tr>
+                        <td><b>외부 경력 입사</b></td>
+                        <td>경사 (5년 인정)</td>
+                        <td>동일 분야 경력 5년 + 시험</td>
+                        <td>약 12년 (정년까지)</td>
+                        <td>약 2,800,000원 (초기)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>경찰 승진 전략</b>: 경사 이상부터는 부서별 배치(형사과/교통과/보안과)에 따라 급여 차이가 벌어집니다. 형사과는 초과근무로 월 250만원대 추가 수급 가능하고, 교통과는 오후 근무로 상대적으로 낮습니다. 승진 시기에 배치 부서를 고려해서 신청하면 실수령액 차이가 큽니다.
+        </div>
+    </div>
+
+    <!-- Ad slot after promotion -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- 관련 직종 -->
@@ -390,5 +1023,95 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 경찰 급여 시뮬레이터
+(function() {
+    const rankSelect = document.getElementById('policeRank');
+    const yearsInput = document.getElementById('policeYears');
+    const yearsVal = document.getElementById('policeYearsVal');
+    const baseSalaryVal = document.getElementById('policeBaseSalary');
+    const hazardPayVal = document.getElementById('policeHazardPay');
+    const allowanceVal = document.getElementById('policeAllowance');
+    const netIncomeVal = document.getElementById('policeNetIncome');
+
+    const rankData = {
+        '순경': { baseSalary: 1770000, maxYears: 5 },
+        '경장': { baseSalary: 2200000, maxYears: 10 },
+        '경사': { baseSalary: 2900000, maxYears: 15 },
+        '경위': { baseSalary: 3500000, maxYears: 20 },
+        '경감': { baseSalary: 4100000, maxYears: 30 }
+    };
+
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('ko-KR');
+    }
+
+    function updateSimulator() {
+        const rank = rankSelect.value;
+        const years = parseInt(yearsInput.value);
+        const rankInfo = rankData[rank];
+
+        // 기본급 (근속연수별 호봉 인상: 약 30,000원/년)
+        const baseSalary = rankInfo.baseSalary + (years * 30000);
+
+        // 정근수당 (근속연수에 따라 0~50%)
+        const pctRate = Math.min(50, Math.floor(years / 2) * 10);
+        const pctAllowance = Math.round(baseSalary * (pctRate / 100));
+
+        // 위험근무수당 (모든 계급 월 6만원)
+        const hazardPay = 60000;
+
+        // 야간근무수당 (기본급 2~3% 추정)
+        const nightPay = Math.round(baseSalary * 0.025);
+
+        // 교통비 (월 10만원)
+        const transportPay = 100000;
+
+        // 월 수당 합계 (세전)
+        const totalAllowance = pctAllowance + hazardPay + nightPay + transportPay;
+
+        // 세전 월급
+        const monthlySalary = Math.round(baseSalary / 12);
+        const totalPreTax = monthlySalary + totalAllowance;
+
+        // 공제율 (약 11~13%)
+        const deductionRate = 0.12;
+        const netIncome = Math.round(totalPreTax * (1 - deductionRate));
+
+        // UI 업데이트
+        yearsVal.textContent = years + '년';
+        baseSalaryVal.textContent = formatCurrency(monthlySalary) + '원';
+        hazardPayVal.textContent = formatCurrency(hazardPay) + '원';
+        allowanceVal.textContent = formatCurrency(totalAllowance) + '원';
+        netIncomeVal.textContent = formatCurrency(netIncome) + '원';
+    }
+
+    rankSelect.addEventListener('change', updateSimulator);
+    yearsInput.addEventListener('input', updateSimulator);
+
+    updateSimulator();
+})();
+
+// 급여명세서 탭 기능
+(function() {
+    const tabs = document.querySelectorAll('.payslip-tab');
+    const contents = document.querySelectorAll('.payslip-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const rank = this.dataset.rank;
+
+            // 모든 탭과 콘텐츠에서 활성 클래스 제거
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            // 클릭한 탭과 해당 콘텐츠 활성화
+            this.classList.add('active');
+            document.querySelector('[data-rank="' + rank + '"].payslip-content').classList.add('active');
+        });
+    });
+})();
+</script>
 </body>
 </html>

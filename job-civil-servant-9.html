@@ -51,6 +51,35 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface-alt); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .sim-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
+        .sim-field { display: flex; flex-direction: column; gap: 8px; }
+        .sim-field label { font-weight: 600; font-size: 0.88rem; color: var(--text-primary); }
+        .sim-field select, .sim-field input { padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; }
+        .sim-field input[type="range"] { padding: 0; cursor: pointer; }
+        .sim-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+        .sim-result-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+        .sim-r-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; }
+        .sim-r-value { font-size: 1.1rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        @media (max-width: 768px) {
+            .sim-row { grid-template-columns: 1fr; }
+            .sim-results { grid-template-columns: repeat(2, 1fr); }
+        }
+        .payslip-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+        .payslip-tab { padding: 10px 16px; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+        .payslip-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .payslip-tab:hover { border-color: var(--accent); }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
+        .payslip-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 16px; }
+        .payslip-table tr { border-bottom: 1px solid var(--border); }
+        .payslip-table td { padding: 12px; }
+        .payslip-table td:first-child { width: 50%; color: var(--text-secondary); font-weight: 500; }
+        .payslip-table td:last-child { text-align: right; color: var(--text-primary); font-weight: 600; font-family: 'Inter', sans-serif; }
+        .payslip-section-title { background: var(--surface-alt); font-weight: 700; color: var(--text-primary); }
+        .payslip-total { border-top: 2px solid var(--text-primary); border-bottom: 2px solid var(--text-primary); font-weight: 700; }
+        .payslip-final { background: var(--accent-light); border-top: 2px solid var(--accent); font-weight: 800; }
+        .payslip-final td:last-child { color: var(--accent); font-size: 1rem; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -208,6 +237,55 @@
         </div>
     </div>
 
+    <!-- 호봉별 급여 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">호봉별 급여 시뮬레이터</div>
+            <div class="card-badge">직종 및 경력 선택</div>
+        </div>
+        <div class="sim-box">
+            <div class="sim-row">
+                <div class="sim-field">
+                    <label for="civilJobType">직종 선택</label>
+                    <select id="civilJobType">
+                        <option value="일반행정">일반행정 (1호봉: 1,774,000원)</option>
+                        <option value="세무">세무 (1호봉: 1,774,000원)</option>
+                        <option value="전산">전산 (1호봉: 1,774,000원)</option>
+                        <option value="사회복지">사회복지 (1호봉: 1,774,000원)</option>
+                    </select>
+                </div>
+                <div class="sim-field">
+                    <label for="civilHobone">호봉: <span class="sim-val" id="civilHoboneVal">5호봉</span></label>
+                    <input type="range" id="civilHobone" min="1" max="32" value="5" step="1">
+                </div>
+            </div>
+            <div class="sim-results">
+                <div class="sim-result-card">
+                    <div class="sim-r-label">기본급</div>
+                    <div class="sim-r-value" id="civilBaseSalary">1,938,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">정근수당</div>
+                    <div class="sim-r-value" id="civilPctAllowance">97,000원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">월 수당 합계</div>
+                    <div class="sim-r-value" id="civilTotalAllowance">378,666원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">예상 월 실수령액</div>
+                    <div class="sim-r-value" id="civilNetIncome">2,156,409원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad slot after simulator -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 2컬럼: 공제 상세 + 정보 -->
     <div class="two-col">
         <div class="card" style="margin-bottom:0;">
@@ -215,11 +293,11 @@
                 <div class="card-title">공제 항목 상세</div>
                 <div class="card-badge">5호봉 (5년차) 기준</div>
             </div>
-            
+
                     <div class="b-item">
                         <div class="b-dot" style="background:#2563EB;"></div>
                         <div class="b-info">
-                            <div class="b-name">국민연금</div>
+                            <div class="b-name">공무원연금</div>
                             <div class="b-bar-wrap">
                                 <div class="b-bar" style="background:#2563EB; width:100.0%;"></div>
                             </div>
@@ -286,7 +364,7 @@
     <h2>공무원 9급 연봉 상세 분석</h2>
     <p>9급 공무원은 가장 낮은 직급이지만, 매년 호봉 승급으로 꾸준히 급여가 올라갑니다. 정근수당(근속 연수에 따라 월봉의 0~50%), 가족수당, 직급보조비 등이 추가됩니다. 5년 이상 근무 시 연봉 상승 폭이 눈에 띄게 커집니다.</p>
     <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">알아두면 좋은 팁</h3>
-    <p>공무원 연금(기여금 9%)은 4대보험 국민연금 대신 납부하며, 퇴직 후 연금 수령이 가능합니다. 9급 20년 근속 시 월 100만원 이상의 연금을 받을 수 있습니다.</p>
+    <p>공무원연금(기여금 9%)은 4대보험 국민연금 대신 납부하며, 퇴직 후 연금 수령이 가능합니다. 9급 20년 근속 시 월 100만원 이상의 연금을 받을 수 있습니다.</p>
     <p>정확한 금액은 <a href="index.html" style="color:var(--accent); font-weight:700; text-decoration:none;">연봉 실수령액 계산기</a>에서 직접 계산해보세요.</p>
 </div>
     </div>
@@ -311,10 +389,10 @@
                 <tbody>
                         <tr>
                             <td>1호봉 (신규)</td>
-                            <td>2,500만원</td>
-                            <td>2,083,333원</td>
-                            <td>221,048원</td>
-                            <td class="accent">1,862,285원</td>
+                            <td>2,128만원</td>
+                            <td>1,773,333원</td>
+                            <td>186,849원</td>
+                            <td class="accent">1,586,484원</td>
                         </tr>
                         <tr>
                             <td>5호봉 (5년차)</td>
@@ -344,9 +422,382 @@
                             <td>461,425원</td>
                             <td class="accent">3,288,575원</td>
                         </tr>
+                        <tr>
+                            <td>25호봉 (25년차)</td>
+                            <td>4,850만원</td>
+                            <td>4,041,666원</td>
+                            <td>510,649원</td>
+                            <td class="accent">3,531,017원</td>
+                        </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <!-- Ad slot after comparison -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 근무부처별 실수령 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">근무부처별 실수령 비교</div>
+            <div class="card-badge">9급 기준, 기본급 제외 수당</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">같은 9급이어도 근무부처에 따라 특수수당 및 실수령액이 달라집니다. 아래는 5호봉(5년차) 기준입니다.</p>
+
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>부처유형</th>
+                        <th>대표기관</th>
+                        <th>기본급외 수당</th>
+                        <th>월 실수령액</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>중앙부처</b></td>
+                        <td>행안부, 기재부</td>
+                        <td>약 390,000원</td>
+                        <td class="accent">2,156,409원</td>
+                        <td>특근수당, 야간수당 많음</td>
+                    </tr>
+                    <tr>
+                        <td><b>지자체</b></td>
+                        <td>시청, 구청</td>
+                        <td>약 370,000원</td>
+                        <td class="accent">2,130,000원</td>
+                        <td>평균 수준, 지역수당 추가</td>
+                    </tr>
+                    <tr>
+                        <td><b>교육청</b></td>
+                        <td>교육청 행정직</td>
+                        <td>약 340,000원</td>
+                        <td class="accent">2,085,000원</td>
+                        <td>상대적으로 낮은 수당</td>
+                    </tr>
+                    <tr>
+                        <td><b>검찰/법원</b></td>
+                        <td>대검, 지검</td>
+                        <td>약 420,000원</td>
+                        <td class="accent">2,195,000원</td>
+                        <td>특수수당 추가, 선택근무</td>
+                    </tr>
+                    <tr>
+                        <td><b>경찰행정</b></td>
+                        <td>경찰청 행정직</td>
+                        <td>약 380,000원</td>
+                        <td class="accent">2,145,000원</td>
+                        <td>위험지역근무 가산금 가능</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>부처별 선택 전략</b>: 중앙부처(행안부, 기재부)는 특근수당이 풍부해 월 250만원대 추가수급 가능합니다. 지자체는 안정적이지만 수당이 적은 편입니다. 장기근무를 계획한다면 연금 누적액을 고려하여 선택하세요.
+        </div>
+    </div>
+
+    <!-- Ad slot after department comparison -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 호봉별 급여명세서 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">호봉별 급여명세서 상세 분석</div>
+            <div class="card-badge">공무원 봉급표 기준 (일반행정)</div>
+        </div>
+
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" data-rank="신규">신규(1호봉)</button>
+            <button class="payslip-tab" data-rank="3년차">3년차(5호봉)</button>
+            <button class="payslip-tab" data-rank="7년차">7년차(10호봉)</button>
+            <button class="payslip-tab" data-rank="15년차">15년차(20호봉)</button>
+            <button class="payslip-tab" data-rank="25년차">25년차(32호봉)</button>
+        </div>
+
+        <!-- 신규(1호봉) -->
+        <div class="payslip-content active" data-rank="신규">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>1,774,000원</td></tr>
+                <tr><td>직급보조비</td><td>175,000원</td></tr>
+                <tr><td>정근수당 (0%)</td><td>0원</td></tr>
+                <tr><td>가족수당</td><td>50,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>2,299,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-159,660원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-59,460원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,030원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-14,192원</td></tr>
+                <tr><td>소득세</td><td>-24,500원</td></tr>
+                <tr><td>지방소득세</td><td>-2,450원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-262,292원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>2,036,708원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 3년차(5호봉) -->
+        <div class="payslip-content" data-rank="3년차">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,300,000원</td></tr>
+                <tr><td>직급보조비</td><td>175,000원</td></tr>
+                <tr><td>정근수당 (20%)</td><td>460,000원</td></tr>
+                <tr><td>가족수당</td><td>50,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>3,285,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-207,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-73,485원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,490원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-18,400원</td></tr>
+                <tr><td>소득세</td><td>-38,220원</td></tr>
+                <tr><td>지방소득세</td><td>-3,822원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-343,417원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>2,941,583원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 7년차(10호봉) -->
+        <div class="payslip-content" data-rank="7년차">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,750,000원</td></tr>
+                <tr><td>직급보조비</td><td>175,000원</td></tr>
+                <tr><td>정근수당 (40%)</td><td>1,100,000원</td></tr>
+                <tr><td>가족수당</td><td>50,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>4,375,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-247,500원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-88,415원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,000원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-22,000원</td></tr>
+                <tr><td>소득세</td><td>-56,875원</td></tr>
+                <tr><td>지방소득세</td><td>-5,688원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-423,478원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>3,951,522원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 15년차(20호봉) -->
+        <div class="payslip-content" data-rank="15년차">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>3,200,000원</td></tr>
+                <tr><td>직급보조비</td><td>175,000원</td></tr>
+                <tr><td>정근수당 (50%)</td><td>1,600,000원</td></tr>
+                <tr><td>가족수당</td><td>100,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>5,375,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-288,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-112,640원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,825원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-25,600원</td></tr>
+                <tr><td>소득세</td><td>-76,500원</td></tr>
+                <tr><td>지방소득세</td><td>-7,650원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-514,215원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>4,860,785원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 25년차(32호봉) -->
+        <div class="payslip-content" data-rank="25년차">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>3,650,000원</td></tr>
+                <tr><td>직급보조비</td><td>175,000원</td></tr>
+                <tr><td>정근수당 (50%)</td><td>1,825,000원</td></tr>
+                <tr><td>가족수당</td><td>150,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>5,800,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>공무원연금 (9%)</td><td>-328,500원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-127,360원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-4,320원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-29,200원</td></tr>
+                <tr><td>소득세</td><td>-92,800원</td></tr>
+                <tr><td>지방소득세</td><td>-9,280원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-591,460원</td></tr>
+                <tr class="payslip-final"><td><b>예상 월 실수령액</b></td><td><b>5,208,540원</b></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ad slot after payslip -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 비과세 및 절세 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">공무원 9급 비과세 수당 및 절세 전략</div>
+            <div class="card-badge">2026년</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">공무원은 민간기업과 달리 특정 수당이 비과세되며, 공무원연금이 국민연금을 대체합니다.</p>
+
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:0.85rem;">
+            <b>비과세 수당 정리</b><br>
+            • 식대: 월 20만원 비과세<br>
+            • 교통비: 월 10만원 비과세<br>
+            • 직급보조비: 월 17.5만원 (일부 비과세)<br>
+            • 명절수당: 기본급의 60% (2회)<br>
+            • 가족수당: 자녀 1명 당 월 5~10만원
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:0.85rem;">
+            <b>공무원연금 이해하기</b><br>
+            • 기여금: 기준소득월액의 9% (직접 납부)<br>
+            • 퇴직 후: 20년 이상 근속 시 월 100만원대 연금 수령<br>
+            • 국민연금 미가입: 이중 납부 없음<br>
+            • 연금 가치: 민간기업 퇴직금보다 약 2배 유리
+        </div>
+
+        <div style="background:#F3E8FF;border-left:4px solid #8B5CF6;padding:14px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:0.85rem;">
+            <b>9급 vs 민간기업 실수령액 비교</b><br>
+            • 9급 5호봉 실수령액: 월 215만원<br>
+            • 동일 연봉 민간기업: 월 200만원<br>
+            • 차이: 공무원연금 + 비과세 수당 + 고용안정성<br>
+            • 20년 후: 연금 가치 포함 시 총 이득 약 2억원
+        </div>
+    </div>
+
+    <!-- Ad slot after tax exempt -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 승진 및 임용 체계 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">9급 공무원 승진 및 임용 체계</div>
+            <div class="card-badge">인사관리규칙 기준</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">9급에서 8급, 7급으로 승진하는 경로와 소요연수를 정리했습니다.</p>
+
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>승진 경로</th>
+                        <th>평균 소요연수</th>
+                        <th>필수 조건</th>
+                        <th>가산점 기준</th>
+                        <th>예상 월급</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>9급 공채 입사</b></td>
+                        <td>신규</td>
+                        <td>대졸 이상</td>
+                        <td>-</td>
+                        <td>약 178만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>9급 → 8급</b></td>
+                        <td>약 4~5년</td>
+                        <td>실적평정 2회 이상</td>
+                        <td>자격증(+3점), 근무평정우수(+5점)</td>
+                        <td>약 210만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>8급 → 7급</b></td>
+                        <td>약 5~7년</td>
+                        <td>승진후보자 교육 이수</td>
+                        <td>외국어 능력(+5점), MBA(+8점)</td>
+                        <td>약 250만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>7급 → 6급</b></td>
+                        <td>약 8~10년</td>
+                        <td>고급 교육 이수</td>
+                        <td>논문 발표(+5점), 언론활동(+3점)</td>
+                        <td>약 290만원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:20px; overflow-x:auto;">
+            <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:12px;">9급 공채 vs 경채 vs 전환특채 비교</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>입사 경로</th>
+                        <th>학력 요건</th>
+                        <th>경력 요건</th>
+                        <th>초봉</th>
+                        <th>승진 속도</th>
+                        <th>장점 / 단점</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>공개채용 (공채)</b></td>
+                        <td>대졸 이상</td>
+                        <td>제한 없음</td>
+                        <td>1,774,000원</td>
+                        <td>일반적</td>
+                        <td>가장 많은 선발 / 경쟁 심함</td>
+                    </tr>
+                    <tr>
+                        <td><b>경력채용 (경채)</b></td>
+                        <td>대졸 이상</td>
+                        <td>동일/유사직무 3년+</td>
+                        <td>2,000,000원~</td>
+                        <td>빠름</td>
+                        <td>경력 인정 / 경험자 우대</td>
+                    </tr>
+                    <tr>
+                        <td><b>전환특채</b></td>
+                        <td>고졸 이상</td>
+                        <td>관련 직무 5년+</td>
+                        <td>1,900,000원~</td>
+                        <td>중간</td>
+                        <td>경력 인정 / 선발 인원 제한</td>
+                    </tr>
+                    <tr>
+                        <td><b>장애인 특채</b></td>
+                        <td>대졸 이상</td>
+                        <td>제한 없음</td>
+                        <td>1,774,000원</td>
+                        <td>일반적</td>
+                        <td>장애인 우대 / 별도 전형</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>9급 공무원 승진 전략</b>: 9급은 기본급보다 수당이 적어 상대적으로 연봉 대비 실수령액이 낮은 편입니다. 빠른 승진을 목표한다면 영어, 한자, 관련 자격증 취득으로 가산점을 확보하고, 근무평정에서 우수 등급을 받아야 합니다. 특히 서울 본청 근무 후 지방 전보로 발령 대기 후 빠른 시간에 승진할 수 있습니다.
+        </div>
+    </div>
+
+    <!-- Ad slot after promotion -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- 관련 직종 -->
@@ -390,5 +841,128 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 9급 공무원 급여 시뮬레이터
+(function() {
+    const jobTypeSelect = document.getElementById('civilJobType');
+    const hoboneInput = document.getElementById('civilHobone');
+    const hoboneVal = document.getElementById('civilHoboneVal');
+    const baseSalaryVal = document.getElementById('civilBaseSalary');
+    const pctAllowanceVal = document.getElementById('civilPctAllowance');
+    const totalAllowanceVal = document.getElementById('civilTotalAllowance');
+    const netIncomeVal = document.getElementById('civilNetIncome');
+
+    const jobData = {
+        '일반행정': { baseSalary: 1774000, maxYears: 32 },
+        '세무': { baseSalary: 1774000, maxYears: 32 },
+        '전산': { baseSalary: 1774000, maxYears: 32 },
+        '사회복지': { baseSalary: 1774000, maxYears: 32 }
+    };
+
+    // 호봉별 기본급 증가 테이블
+    const hoboneScale = [
+        1774000, 1809000, 1844000, 1879000, 1914000, // 1-5
+        1949000, 1984000, 2019000, 2054000, 2089000, // 6-10
+        2124000, 2159000, 2194000, 2229000, 2264000, // 11-15
+        2299000, 2334000, 2369000, 2404000, 2439000, // 16-20
+        2474000, 2509000, 2544000, 2579000, 2614000, // 21-25
+        2649000, 2684000, 2719000, 2754000, 2789000, // 26-30
+        2824000, 2859000 // 31-32
+    ];
+
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('ko-KR');
+    }
+
+    function updateSimulator() {
+        const hobone = parseInt(hoboneInput.value);
+        const jobType = jobTypeSelect.value;
+
+        // 호봉별 기본급
+        const baseSalary = hoboneScale[hobone - 1];
+
+        // 정근수당 (호봉이 올라갈수록 증가, 최대 50%)
+        const pctRate = Math.min(50, Math.floor((hobone - 1) / 2) * 10);
+        const pctAllowance = Math.round(baseSalary * (pctRate / 100));
+
+        // 직급보조비 (고정 17.5만원)
+        const jobSupplementary = 175000;
+
+        // 가족수당 (호봉 20호봉 이상 10만원, 이하 5만원)
+        const familyAllowance = hobone >= 20 ? 100000 : 50000;
+
+        // 명절수당 (기본급의 60%, 연 2회이므로 월평균)
+        const holidayAllowance = Math.round(baseSalary * 0.6 * 2 / 12);
+
+        // 월 수당 합계 (비과세 제외)
+        const totalAllowance = pctAllowance + jobSupplementary + familyAllowance + holidayAllowance;
+
+        // 비과세 수당
+        const foodAllowance = 200000; // 식대
+        const transportAllowance = 100000; // 교통비
+
+        // 세전 월급
+        const monthlySalary = Math.round(baseSalary / 12);
+        const totalPreTax = monthlySalary + totalAllowance + foodAllowance + transportAllowance;
+
+        // 공제 계산
+        const pensionRate = 0.09;
+        const healthInsuranceRate = 0.03545;
+        const longTermCareRate = 0.0012;
+        const employmentInsuranceRate = 0.008;
+
+        // 기준소득 (공무원연금)
+        const pensionBase = Math.round(baseSalary / 12 + totalAllowance);
+        const pension = Math.round(pensionBase * pensionRate);
+        const healthInsurance = Math.round(totalPreTax * healthInsuranceRate);
+        const longTermCare = Math.round(totalPreTax * longTermCareRate);
+        const employmentInsurance = Math.round(totalPreTax * employmentInsuranceRate);
+
+        // 소득세 (단순 계산)
+        const taxableIncome = totalPreTax - pension - healthInsurance - longTermCare - employmentInsurance;
+        const incomeTax = Math.round(taxableIncome * 0.08);
+        const localTax = Math.round(incomeTax * 0.1);
+
+        // 총 공제
+        const totalDeduction = pension + healthInsurance + longTermCare + employmentInsurance + incomeTax + localTax;
+
+        // 실수령액
+        const netIncome = Math.round(totalPreTax - totalDeduction);
+
+        // UI 업데이트
+        hoboneVal.textContent = hobone + '호봉';
+        baseSalaryVal.textContent = formatCurrency(monthlySalary) + '원';
+        pctAllowanceVal.textContent = formatCurrency(pctAllowance) + '원';
+        totalAllowanceVal.textContent = formatCurrency(totalAllowance + foodAllowance + transportAllowance) + '원';
+        netIncomeVal.textContent = formatCurrency(netIncome) + '원';
+    }
+
+    jobTypeSelect.addEventListener('change', updateSimulator);
+    hoboneInput.addEventListener('input', updateSimulator);
+
+    updateSimulator();
+})();
+
+// 급여명세서 탭 기능
+(function() {
+    const tabs = document.querySelectorAll('.payslip-tab');
+    const contents = document.querySelectorAll('.payslip-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const rank = this.dataset.rank;
+
+            // 모든 탭과 콘텐츠에서 활성 클래스 제거
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            // 클릭한 탭과 해당 콘텐츠 활성화
+            this.classList.add('active');
+            document.querySelector('[data-rank="' + rank + '"].payslip-content').classList.add('active');
+        });
+    });
+})();
+</script>
 </body>
 </html>

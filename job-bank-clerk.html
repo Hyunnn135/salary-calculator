@@ -51,6 +51,42 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+
+        /* Simulator Styles */
+        .sim-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .sim-header { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+        .sim-row { display: grid; grid-template-columns: 150px 1fr; gap: 16px; margin-bottom: 16px; align-items: center; }
+        .sim-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        .sim-input { width: 100%; max-width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; background: var(--surface); color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .sim-slider { width: 100%; max-width: 100%; }
+        .sim-result { background: linear-gradient(135deg, #F0F9FF, #E0F2FE); border-left: 4px solid var(--accent); padding: 16px; border-radius: 8px; margin-top: 20px; }
+        .sim-result-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sim-result-value { font-size: 1.8rem; font-weight: 900; color: var(--accent); font-family: 'Inter', sans-serif; margin-top: 4px; }
+        .sim-result-sub { font-size: 0.8rem; color: var(--text-secondary); margin-top: 8px; }
+
+        /* Payslip Tabs */
+        .payslip-tabs { margin-bottom: 24px; }
+        .payslip-tab-nav { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+        .payslip-tab-btn { padding: 10px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: transparent; border: none; border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.15s; }
+        .payslip-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .payslip-tab-btn:hover { color: var(--text-primary); }
+        .payslip-tab-content { display: none; }
+        .payslip-tab-content.active { display: block; }
+
+        /* Career Path */
+        .career-path { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 16px; }
+        .career-step { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; transition: all 0.15s; }
+        .career-step:hover { background: linear-gradient(135deg, #F0F9FF, #E0F2FE); border-color: var(--accent); }
+        .career-step-title { font-size: 0.75rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .career-step-name { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .career-step-year { font-size: 0.8rem; color: var(--text-secondary); }
+
+        @media (max-width: 768px) {
+            .sim-row { grid-template-columns: 1fr; gap: 8px; }
+            .payslip-tab-nav { gap: 4px; }
+            .payslip-tab-btn { padding: 8px 12px; font-size: 0.75rem; }
+            .career-path { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -185,6 +221,55 @@
         <div class="breadcrumb">홈 &gt; 직종별 연봉</div>
         <h1>은행원 연봉 실수령액</h1>
         <p>2026년 기준 · 은행원 경력별 연봉과 실수령액</p>
+    </div>
+
+    <!-- 은행원 연봉 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">은행원 연봉 시뮬레이터</div>
+            <div class="card-badge">경력 · 은행 유형별</div>
+        </div>
+        <div class="sim-box">
+            <div class="sim-header">당신의 연봉을 계산해보세요</div>
+
+            <div class="sim-row">
+                <label class="sim-label">경력 (년)</label>
+                <div>
+                    <input type="range" id="simCareer" class="sim-slider" min="0" max="20" value="5" step="1">
+                    <div style="margin-top: 6px; font-size: 0.9rem; font-weight: 700; color: var(--accent); font-family: 'Inter', sans-serif;">
+                        <span id="simCareerVal">5</span>년
+                    </div>
+                </div>
+            </div>
+
+            <div class="sim-row">
+                <label class="sim-label">은행 유형</label>
+                <select id="simBankType" class="sim-input" style="max-width: 100%;">
+                    <option value="major">시중은행 (KB/신한/하나/우리)</option>
+                    <option value="regional">지방은행</option>
+                    <option value="special">특수은행 (산업/수출입)</option>
+                    <option value="savings">저축은행</option>
+                    <option value="securities">증권사/자산운용</option>
+                </select>
+            </div>
+
+            <div class="sim-result">
+                <div class="sim-result-label">예상 연봉</div>
+                <div class="sim-result-value"><span id="simSalary">5,500</span>만원</div>
+                <div class="sim-result-sub">
+                    월 세전: <strong id="simMonthly">458</strong>만원 |
+                    월 실수령: <strong id="simTakehome">398</strong>만원
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 광고 슬롯 1 -->
+    <div class="ad-wrap" style="margin-bottom:24px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <!-- 메인 결과 -->
@@ -349,6 +434,475 @@
         </div>
     </div>
 
+    <!-- 은행 유형별 비교표 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">은행 유형별 연봉 비교</div>
+            <div class="card-badge">신입~20년차</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>은행 유형</th>
+                        <th>대표기관</th>
+                        <th>신입연봉</th>
+                        <th>5년차</th>
+                        <th>10년차</th>
+                        <th>특징</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>시중은행</td>
+                        <td>KB, 신한, 하나, 우리</td>
+                        <td>4,500만원</td>
+                        <td>6,000만원</td>
+                        <td>8,500만원</td>
+                        <td>최고 안정성, 성과급 포함 8000+</td>
+                    </tr>
+                    <tr>
+                        <td>지방은행</td>
+                        <td>부산, 대구, 경남, 광주</td>
+                        <td>4,050만원</td>
+                        <td>5,400만원</td>
+                        <td>7,650만원</td>
+                        <td>시중은행 대비 10% 낮음</td>
+                    </tr>
+                    <tr>
+                        <td>특수은행</td>
+                        <td>산업, 수출입, 기업, 농협</td>
+                        <td>4,300만원</td>
+                        <td>5,700만원</td>
+                        <td>8,000만원</td>
+                        <td>전문직 경로 지향</td>
+                    </tr>
+                    <tr>
+                        <td>저축은행</td>
+                        <td>OK저축, 하나금융, 캐피탈</td>
+                        <td>3,500만원</td>
+                        <td>4,500만원</td>
+                        <td>6,000만원</td>
+                        <td>연봉 낮으나 성과급 중시</td>
+                    </tr>
+                    <tr>
+                        <td>증권사/자산운용</td>
+                        <td>삼성, 메리츠, NH투자</td>
+                        <td>5,000만원</td>
+                        <td>7,500만원</td>
+                        <td>10,000만원+</td>
+                        <td>성과급 높음, 변동성 큼</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 직급별 급여명세서 (Tabbed) -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">직급별 급여명세서</div>
+            <div class="card-badge">월급 기준</div>
+        </div>
+        <div class="payslip-tabs">
+            <div class="payslip-tab-nav">
+                <button class="payslip-tab-btn active" onclick="switchPayslipTab(event, 'new')">신입행원</button>
+                <button class="payslip-tab-btn" onclick="switchPayslipTab(event, 'officer')">대리 (4~6년)</button>
+                <button class="payslip-tab-btn" onclick="switchPayslipTab(event, 'manager')">과장 (7~10년)</button>
+                <button class="payslip-tab-btn" onclick="switchPayslipTab(event, 'deputy')">차장 (11~15년)</button>
+                <button class="payslip-tab-btn" onclick="switchPayslipTab(event, 'director')">부장 (16~20년)</button>
+            </div>
+
+            <div id="new" class="payslip-tab-content active">
+                <div style="overflow-x:auto;">
+                    <table class="data-table" style="font-size: 0.82rem;">
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">기본급</td>
+                            <td>2,250,000</td>
+                            <td style="text-align:left;">국민연금</td>
+                            <td>-112,500</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">직급보조금</td>
+                            <td>500,000</td>
+                            <td style="text-align:left;">건강보험</td>
+                            <td>-92,400</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">근속수당</td>
+                            <td>200,000</td>
+                            <td style="text-align:left;">장기요양</td>
+                            <td>-11,800</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">고정상여</td>
+                            <td>300,000</td>
+                            <td style="text-align:left;">고용보험</td>
+                            <td>-23,625</td>
+                        </tr>
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>세전급여</strong></td>
+                            <td><strong>3,750,000</strong></td>
+                            <td style="text-align:left;"><strong>소득세</strong></td>
+                            <td><strong>-77,300</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">-</td>
+                            <td>-</td>
+                            <td style="text-align:left;">지방소득세</td>
+                            <td>-7,730</td>
+                        </tr>
+                        <tr style="background:linear-gradient(135deg,#F0F9FF,#E0F2FE);">
+                            <td style="text-align:left;"><strong>월 실수령액</strong></td>
+                            <td colspan="3"><strong style="font-size:1.1rem;color:var(--accent);">3,288,575원</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="officer" class="payslip-tab-content">
+                <div style="overflow-x:auto;">
+                    <table class="data-table" style="font-size: 0.82rem;">
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">기본급</td>
+                            <td>2,750,000</td>
+                            <td style="text-align:left;">국민연금</td>
+                            <td>-206,249</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">직급보조금</td>
+                            <td>800,000</td>
+                            <td style="text-align:left;">건강보험</td>
+                            <td>-162,479</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">근속수당</td>
+                            <td>400,000</td>
+                            <td style="text-align:left;">장기요양</td>
+                            <td>-21,041</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">고정상여</td>
+                            <td>633,333</td>
+                            <td style="text-align:left;">고용보험</td>
+                            <td>-41,249</td>
+                        </tr>
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>세전급여</strong></td>
+                            <td><strong>4,583,333</strong></td>
+                            <td style="text-align:left;"><strong>소득세</strong></td>
+                            <td><strong>-154,761</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">-</td>
+                            <td>-</td>
+                            <td style="text-align:left;">지방소득세</td>
+                            <td>-15,476</td>
+                        </tr>
+                        <tr style="background:linear-gradient(135deg,#F0F9FF,#E0F2FE);">
+                            <td style="text-align:left;"><strong>월 실수령액</strong></td>
+                            <td colspan="3"><strong style="font-size:1.1rem;color:var(--accent);">3,982,078원</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="manager" class="payslip-tab-content">
+                <div style="overflow-x:auto;">
+                    <table class="data-table" style="font-size: 0.82rem;">
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">기본급</td>
+                            <td>3,500,000</td>
+                            <td style="text-align:left;">국민연금</td>
+                            <td>-262,499</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">직급보조금</td>
+                            <td>1,200,000</td>
+                            <td style="text-align:left;">건강보험</td>
+                            <td>-206,850</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">근속수당</td>
+                            <td>600,000</td>
+                            <td style="text-align:left;">장기요양</td>
+                            <td>-26,506</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">고정상여</td>
+                            <td>933,333</td>
+                            <td style="text-align:left;">고용보험</td>
+                            <td>-52,500</td>
+                        </tr>
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>세전급여</strong></td>
+                            <td><strong>5,833,333</strong></td>
+                            <td style="text-align:left;"><strong>소득세</strong></td>
+                            <td><strong>-231,333</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">-</td>
+                            <td>-</td>
+                            <td style="text-align:left;">지방소득세</td>
+                            <td>-23,133</td>
+                        </tr>
+                        <tr style="background:linear-gradient(135deg,#F0F9FF,#E0F2FE);">
+                            <td style="text-align:left;"><strong>월 실수령액</strong></td>
+                            <td colspan="3"><strong style="font-size:1.1rem;color:var(--accent);">5,010,624원</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="deputy" class="payslip-tab-content">
+                <div style="overflow-x:auto;">
+                    <table class="data-table" style="font-size: 0.82rem;">
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">기본급</td>
+                            <td>4,250,000</td>
+                            <td style="text-align:left;">국민연금</td>
+                            <td>-318,749</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">직급보조금</td>
+                            <td>1,500,000</td>
+                            <td style="text-align:left;">건강보험</td>
+                            <td>-251,408</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">근속수당</td>
+                            <td>800,000</td>
+                            <td style="text-align:left;">장기요양</td>
+                            <td>-32,139</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">고정상여</td>
+                            <td>533,333</td>
+                            <td style="text-align:left;">고용보험</td>
+                            <td>-63,749</td>
+                        </tr>
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>세전급여</strong></td>
+                            <td><strong>7,083,333</strong></td>
+                            <td style="text-align:left;"><strong>소득세</strong></td>
+                            <td><strong>-310,466</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">-</td>
+                            <td>-</td>
+                            <td style="text-align:left;">지방소득세</td>
+                            <td>-31,047</td>
+                        </tr>
+                        <tr style="background:linear-gradient(135deg,#F0F9FF,#E0F2FE);">
+                            <td style="text-align:left;"><strong>월 실수령액</strong></td>
+                            <td colspan="3"><strong style="font-size:1.1rem;color:var(--accent);">6,024,574원</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="director" class="payslip-tab-content">
+                <div style="overflow-x:auto;">
+                    <table class="data-table" style="font-size: 0.82rem;">
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                            <td style="text-align:left;"><strong>항목</strong></td>
+                            <td><strong>금액</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">기본급</td>
+                            <td>5,000,000</td>
+                            <td style="text-align:left;">국민연금</td>
+                            <td>-375,000</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">직급보조금</td>
+                            <td>2,000,000</td>
+                            <td style="text-align:left;">건강보험</td>
+                            <td>-296,050</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">근속수당</td>
+                            <td>1,000,000</td>
+                            <td style="text-align:left;">장기요양</td>
+                            <td>-37,893</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">고정상여</td>
+                            <td>333,333</td>
+                            <td style="text-align:left;">고용보험</td>
+                            <td>-74,999</td>
+                        </tr>
+                        <tr style="background:var(--surface-alt);">
+                            <td style="text-align:left;"><strong>세전급여</strong></td>
+                            <td><strong>8,333,333</strong></td>
+                            <td style="text-align:left;"><strong>소득세</strong></td>
+                            <td><strong>-409,166</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">-</td>
+                            <td>-</td>
+                            <td style="text-align:left;">지방소득세</td>
+                            <td>-40,917</td>
+                        </tr>
+                        <tr style="background:linear-gradient(135deg,#F0F9FF,#E0F2FE);">
+                            <td style="text-align:left;"><strong>월 실수령액</strong></td>
+                            <td colspan="3"><strong style="font-size:1.1rem;color:var(--accent);">7,016,931원</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 성과급/인센티브 구조 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">은행원 성과급 및 인센티브 구조</div>
+            <div class="card-badge">실제 수입 계산</div>
+        </div>
+        <div class="two-col">
+            <div>
+                <h3 style="font-size:0.9rem;font-weight:700;color:var(--text-primary);margin-bottom:12px;">성과급 체계</h3>
+                <div class="b-item">
+                    <div class="b-dot" style="background:#2563EB;"></div>
+                    <div class="b-info">
+                        <div class="b-name">기본성과급</div>
+                        <div style="font-size:0.8rem;color:var(--text-secondary);">기본급의 200~300%</div>
+                    </div>
+                </div>
+                <div class="b-item">
+                    <div class="b-dot" style="background:#8B5CF6;"></div>
+                    <div class="b-info">
+                        <div class="b-name">영업성과급</div>
+                        <div style="font-size:0.8rem;color:var(--text-secondary);">예적금/대출 실적 연동</div>
+                    </div>
+                </div>
+                <div class="b-item">
+                    <div class="b-dot" style="background:#F59E0B;"></div>
+                    <div class="b-info">
+                        <div class="b-name">부서성과금</div>
+                        <div style="font-size:0.8rem;color:var(--text-secondary);">팀 달성도 기반</div>
+                    </div>
+                </div>
+                <div class="b-item">
+                    <div class="b-dot" style="background:#059669;"></div>
+                    <div class="b-info">
+                        <div class="b-name">상여금</div>
+                        <div style="font-size:0.8rem;color:var(--text-secondary);">2회 (여름/겨울) 4~6개월</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="font-size:0.9rem;font-weight:700;color:var(--text-primary);margin-bottom:12px;">절세 팁</h3>
+                <div style="background:var(--surface-alt);padding:12px;border-radius:8px;margin-bottom:12px;">
+                    <div style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;">
+                        <strong style="color:var(--text-primary);">비과세 혜택</strong><br>
+                        • 자녀교육비 100만원/자녀<br>
+                        • 의료비 월 100만원<br>
+                        • 기숙사제공 (월 50만원 한도)<br>
+                        • 명절비/생활비보조 연 300만원<br><br>
+                        <strong style="color:var(--text-primary);">공제 활용</strong><br>
+                        • 주택담보대출이자<br>
+                        • 기부금공제 (개인 기부 한도)<br>
+                        • 연금저축 납입액 (연 400만원)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 커리어패스 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">은행원 커리어 패스</div>
+            <div class="card-badge">직급별 경로</div>
+        </div>
+        <h3 style="font-size:0.9rem;font-weight:700;color:var(--text-primary);margin:16px 0 12px;">일반 행원 경로</h3>
+        <div class="career-path">
+            <div class="career-step">
+                <div class="career-step-title">1단계</div>
+                <div class="career-step-name">신입행원</div>
+                <div class="career-step-year">0~2년</div>
+            </div>
+            <div class="career-step" style="position:relative;">
+                <div style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--border);font-weight:700;">→</div>
+                <div class="career-step-title">2단계</div>
+                <div class="career-step-name">주임</div>
+                <div class="career-step-year">2~3년</div>
+            </div>
+            <div class="career-step" style="position:relative;">
+                <div style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--border);font-weight:700;">→</div>
+                <div class="career-step-title">3단계</div>
+                <div class="career-step-name">대리</div>
+                <div class="career-step-year">4~6년</div>
+            </div>
+            <div class="career-step" style="position:relative;">
+                <div style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--border);font-weight:700;">→</div>
+                <div class="career-step-title">4단계</div>
+                <div class="career-step-name">과장</div>
+                <div class="career-step-year">7~10년</div>
+            </div>
+            <div class="career-step" style="position:relative;">
+                <div style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--border);font-weight:700;">→</div>
+                <div class="career-step-title">5단계</div>
+                <div class="career-step-name">차장</div>
+                <div class="career-step-year">11~15년</div>
+            </div>
+            <div class="career-step">
+                <div class="career-step-title">6단계</div>
+                <div class="career-step-name">부장</div>
+                <div class="career-step-year">16~20년</div>
+            </div>
+        </div>
+        <h3 style="font-size:0.9rem;font-weight:700;color:var(--text-primary);margin:20px 0 12px;">전문직 경로 (PB/RM)</h3>
+        <div style="background:var(--surface-alt);padding:16px;border-radius:8px;margin-bottom:16px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:0.85rem;line-height:1.6;">
+                <div>
+                    <strong style="color:var(--text-primary);">PB (Private Banker)</strong><br>
+                    고객자산 관리 전문<br>
+                    • 의뢰액 3억원+ 담당<br>
+                    • 수익성과급 중심<br>
+                    • 연봉 1.5~2배 높음<br>
+                    • 이직 가능성 높음
+                </div>
+                <div>
+                    <strong style="color:var(--text-primary);">RM (Relationship Manager)</strong><br>
+                    기업거래 담당<br>
+                    • 대출/예금 영업 중심<br>
+                    • 규모별 수수료<br>
+                    • 대출 리스크 관리<br>
+                    • 안정적 수입
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 관련 직종 -->
     <div class="card">
         <div class="card-header">
@@ -378,6 +932,14 @@
         </div>
     </div>
 
+    <!-- 광고 슬롯 2 -->
+    <div class="ad-wrap" style="margin-bottom:24px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="9876543210" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
 <footer class="footer">
     <div class="footer-links">
         <a href="about.html">소개</a>
@@ -390,5 +952,64 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<!-- 은행원 연봉 시뮬레이터 JS -->
+<script>
+  const bankData = {
+    major: { 0: 4500, 5: 6000, 10: 8500, 15: 12000, 20: 15000 },
+    regional: { 0: 4050, 5: 5400, 10: 7650, 15: 10800, 20: 13500 },
+    special: { 0: 4300, 5: 5700, 10: 8000, 15: 11400, 20: 13500 },
+    savings: { 0: 3500, 5: 4500, 10: 6000, 15: 8000, 20: 10000 },
+    securities: { 0: 5000, 5: 7500, 10: 10000, 15: 13000, 20: 16000 }
+  };
+
+  function interpolateSalary(type, career) {
+    const data = bankData[type];
+    const years = Object.keys(data).map(Number).sort((a,b)=>a-b);
+    if (career <= years[0]) return data[years[0]];
+    if (career >= years[years.length-1]) return data[years[years.length-1]];
+
+    let lower = years[0], upper = years[1];
+    for (let i = 0; i < years.length - 1; i++) {
+      if (career >= years[i] && career <= years[i+1]) {
+        lower = years[i];
+        upper = years[i+1];
+        break;
+      }
+    }
+
+    const ratio = (career - lower) / (upper - lower);
+    return Math.round(data[lower] + (data[upper] - data[lower]) * ratio);
+  }
+
+  function updateSimulator() {
+    const career = parseInt(document.getElementById('simCareer').value);
+    const bankType = document.getElementById('simBankType').value;
+    const salary = interpolateSalary(bankType, career);
+    const monthly = Math.round(salary * 1000000 / 12);
+    const deduction = Math.round(monthly * 0.131);
+    const takehome = monthly - deduction;
+
+    document.getElementById('simCareerVal').textContent = career;
+    document.getElementById('simSalary').textContent = (salary / 10).toFixed(0);
+    document.getElementById('simMonthly').textContent = (monthly / 1000000).toFixed(2);
+    document.getElementById('simTakehome').textContent = (takehome / 1000000).toFixed(2);
+  }
+
+  document.getElementById('simCareer').addEventListener('input', updateSimulator);
+  document.getElementById('simBankType').addEventListener('change', updateSimulator);
+  updateSimulator();
+
+  function switchPayslipTab(e, tabId) {
+    const contents = document.querySelectorAll('.payslip-tab-content');
+    contents.forEach(c => c.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+
+    const btns = document.querySelectorAll('.payslip-tab-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+  }
+</script>
+
 </body>
 </html>

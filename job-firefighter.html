@@ -51,6 +51,14 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { padding: 20px; background: var(--surface-alt); border-radius: 12px; }
+        .payslip-tabs { display: flex; flex-direction: column; }
+        .payslip-tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; flex-wrap: wrap; }
+        .payslip-tab-btn { padding: 8px 14px; font-size: 0.85rem; font-weight: 600; border: 1px solid #E5E7EB; border-radius: 6px; background: white; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .payslip-tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .payslip-tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -349,6 +357,437 @@
         </div>
     </div>
 
+    <!-- 계급별 급여 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">계급별 급여 시뮬레이터</div>
+            <div class="card-badge">2026년 기준</div>
+        </div>
+        <div class="sim-box">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">계급 선택</label>
+                    <select id="simRank" onchange="updateSimulator()" style="width:100%; padding:10px 12px; border:1px solid #E5E7EB; border-radius:6px; font-size:0.9rem; font-weight:500;">
+                        <option value="소방사">소방사</option>
+                        <option value="소방교" selected>소방교</option>
+                        <option value="소방장">소방장</option>
+                        <option value="소방위">소방위</option>
+                        <option value="소방경">소방경</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">근속연수</label>
+                    <input type="number" id="simYears" value="5" min="1" max="30" onchange="updateSimulator()" style="width:100%; padding:10px 12px; border:1px solid #E5E7EB; border-radius:6px; font-size:0.9rem; font-weight:500;">
+                </div>
+            </div>
+            <div id="simResults" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div style="background:#F9FAFB; padding:12px; border-radius:8px;">
+                    <div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">기본급</div>
+                    <div id="simBaseSalary" style="font-size:1.1rem; font-weight:700; color:var(--accent); font-family:'Inter';">2,200,000</div>
+                </div>
+                <div style="background:#F9FAFB; padding:12px; border-radius:8px;">
+                    <div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">위험근무수당</div>
+                    <div id="simDanger" style="font-size:1.1rem; font-weight:700; color:var(--text-secondary); font-family:'Inter';">600,000</div>
+                </div>
+                <div style="background:#F9FAFB; padding:12px; border-radius:8px;">
+                    <div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">수당합계</div>
+                    <div id="simTotalAllowance" style="font-size:1.1rem; font-weight:700; color:#8B5CF6; font-family:'Inter';">700,000</div>
+                </div>
+                <div style="background:#F0F9FF; padding:12px; border-radius:8px; border:1px solid #BEE3F8;">
+                    <div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">월 실수령액 (추정)</div>
+                    <div id="simTakeHome" style="font-size:1.1rem; font-weight:700; color:var(--accent); font-family:'Inter';">2,400,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 근무형태별 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">근무형태별 급여 비교</div>
+            <div class="card-badge">소방교 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>근무형태</th>
+                        <th>배치</th>
+                        <th>기본급</th>
+                        <th>추가수당</th>
+                        <th>월 실수령</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>화재진압대</td>
+                        <td>24시간 교대</td>
+                        <td>2,200,000</td>
+                        <td>600,000+</td>
+                        <td class="accent">2,656,510</td>
+                        <td>위험수당, 출동수당</td>
+                    </tr>
+                    <tr>
+                        <td>구급대</td>
+                        <td>24시간 교대</td>
+                        <td>2,200,000</td>
+                        <td>550,000+</td>
+                        <td class="accent">2,600,000</td>
+                        <td>구급출동수당(건당)</td>
+                    </tr>
+                    <tr>
+                        <td>구조대</td>
+                        <td>24시간 교대</td>
+                        <td>2,200,000</td>
+                        <td>650,000+</td>
+                        <td class="accent">2,680,000</td>
+                        <td>특수구조수당</td>
+                    </tr>
+                    <tr>
+                        <td>119상황실</td>
+                        <td>주/야간 교대</td>
+                        <td>2,200,000</td>
+                        <td>400,000</td>
+                        <td class="accent">2,450,000</td>
+                        <td>야간근무 인정</td>
+                    </tr>
+                    <tr>
+                        <td>행정/예방</td>
+                        <td>주간 08:00-18:00</td>
+                        <td>2,200,000</td>
+                        <td>350,000</td>
+                        <td class="accent">2,380,000</td>
+                        <td>초과근무수당</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="0000000001" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 계급별 급여명세서 (Tabbed) -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">계급별 급여명세서</div>
+        </div>
+        <div class="payslip-tabs">
+            <div class="payslip-tab-buttons">
+                <button class="payslip-tab-btn active" onclick="switchPayslip('소방사')">소방사</button>
+                <button class="payslip-tab-btn" onclick="switchPayslip('소방교')">소방교</button>
+                <button class="payslip-tab-btn" onclick="switchPayslip('소방장')">소방장</button>
+                <button class="payslip-tab-btn" onclick="switchPayslip('소방위')">소방위</button>
+                <button class="payslip-tab-btn" onclick="switchPayslip('소방경')">소방경</button>
+            </div>
+
+            <div id="payslip-소방사" class="payslip-content active">
+                <table style="width:100%; font-size:0.85rem;">
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">기본급</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">1,770,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">정근수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">88,500원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">위험근무수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">600,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">화재진압수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">100,000원</td>
+                    </tr>
+                    <tr style="border-bottom:2px solid var(--text-primary); background:#F9FAFB;">
+                        <td style="padding:10px; font-weight:700; color:var(--text-primary);">세전급여</td>
+                        <td style="padding:10px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">2,558,500원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">국민연금</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-115,138원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">건강보험</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-83,650원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">소득세</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-45,300원</td>
+                    </tr>
+                    <tr style="background:#F0F9FF; border:1px solid #BEE3F8;">
+                        <td style="padding:12px; font-weight:700; color:var(--text-primary);">월 실수령액</td>
+                        <td style="padding:12px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">2,229,937원</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="payslip-소방교" class="payslip-content active">
+                <table style="width:100%; font-size:0.85rem;">
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">기본급</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">2,200,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">정근수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">110,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">위험근무수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">600,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">화재진압수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">100,000원</td>
+                    </tr>
+                    <tr style="border-bottom:2px solid var(--text-primary); background:#F9FAFB;">
+                        <td style="padding:10px; font-weight:700; color:var(--text-primary);">세전급여</td>
+                        <td style="padding:10px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">3,010,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">국민연금</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-135,450원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">건강보험</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-106,350원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">소득세</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-61,300원</td>
+                    </tr>
+                    <tr style="background:#F0F9FF; border:1px solid #BEE3F8;">
+                        <td style="padding:12px; font-weight:700; color:var(--text-primary);">월 실수령액</td>
+                        <td style="padding:12px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">2,656,510원</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="payslip-소방장" class="payslip-content">
+                <table style="width:100%; font-size:0.85rem;">
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">기본급</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">2,900,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">정근수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">145,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">위험근무수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">600,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">화재진압수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">130,000원</td>
+                    </tr>
+                    <tr style="border-bottom:2px solid var(--text-primary); background:#F9FAFB;">
+                        <td style="padding:10px; font-weight:700; color:var(--text-primary);">세전급여</td>
+                        <td style="padding:10px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">3,775,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">국민연금</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-170,175원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">건강보험</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-132,625원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">소득세</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-80,700원</td>
+                    </tr>
+                    <tr style="background:#F0F9FF; border:1px solid #BEE3F8;">
+                        <td style="padding:12px; font-weight:700; color:var(--text-primary);">월 실수령액</td>
+                        <td style="padding:12px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">3,348,365원</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="payslip-소방위" class="payslip-content">
+                <table style="width:100%; font-size:0.85rem;">
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">기본급</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">3,500,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">정근수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">175,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">위험근무수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">600,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">화재진압수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">130,000원</td>
+                    </tr>
+                    <tr style="border-bottom:2px solid var(--text-primary); background:#F9FAFB;">
+                        <td style="padding:10px; font-weight:700; color:var(--text-primary);">세전급여</td>
+                        <td style="padding:10px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">4,405,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">국민연금</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-198,225원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">건강보험</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-154,175원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">소득세</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-105,400円</td>
+                    </tr>
+                    <tr style="background:#F0F9FF; border:1px solid #BEE3F8;">
+                        <td style="padding:12px; font-weight:700; color:var(--text-primary);">월 실수령액</td>
+                        <td style="padding:12px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">3,974,999원</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="payslip-소방경" class="payslip-content">
+                <table style="width:100%; font-size:0.85rem;">
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">기본급</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">4,100,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">정근수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">205,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">위험근무수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">600,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">화재진압수당</td>
+                        <td style="padding:10px; text-align:right; color:var(--text-primary);">150,000원</td>
+                    </tr>
+                    <tr style="border-bottom:2px solid var(--text-primary); background:#F9FAFB;">
+                        <td style="padding:10px; font-weight:700; color:var(--text-primary);">세전급여</td>
+                        <td style="padding:10px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">5,055,000원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">국민연금</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-227,475원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">건강보험</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-177,925원</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #E5E7EB;">
+                        <td style="padding:10px; font-weight:600; color:var(--text-secondary);">소득세</td>
+                        <td style="padding:10px; text-align:right; color:#EF4444;">-128,900원</td>
+                    </tr>
+                    <tr style="background:#F0F9FF; border:1px solid #BEE3F8;">
+                        <td style="padding:12px; font-weight:700; color:var(--text-primary);">월 실수령액</td>
+                        <td style="padding:12px; text-align:right; font-weight:700; color:var(--accent); font-size:1rem;">4,463,892원</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="0000000002" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 비과세/절세 안내 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">소방관 비과세 및 절세 안내</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="background:#FEF3C7; border-left:4px solid #F59E0B; padding:16px; border-radius:8px;">
+                <h3 style="font-size:0.9rem; font-weight:700; color:#D97706; margin:0 0 8px 0;">위험근무수당 비과세</h3>
+                <p style="font-size:0.85rem; color:#78350F; margin:0;">위험근무수당 6만원은 전액 비과세 대상입니다. 과세 대상이 아니므로 세금 부담 없이 완전히 실수령됩니다.</p>
+            </div>
+            <div style="background:#DBEAFE; border-left:4px solid #3B82F6; padding:16px; border-radius:8px;">
+                <h3 style="font-size:0.9rem; font-weight:700; color:#1D4ED8; margin:0 0 8px 0;">화재/구조 출동수당</h3>
+                <p style="font-size:0.85rem; color:#1E3A8A; margin:0;">출동건당 지급되는 특수수당은 비과세 혹은 저율 과세입니다. 해당 월의 출동 실적에 따라 달라집니다.</p>
+            </div>
+            <div style="background:#E0E7FF; border-left:4px solid #6366F1; padding:16px; border-radius:8px;">
+                <h3 style="font-size:0.9rem; font-weight:700; color:#4F46E5; margin:0 0 8px 0;">공무원연금 가입</h3>
+                <p style="font-size:0.85rem; color:#312E81; margin:0;">소방공무원은 공무원연금 적용 대상으로, 국민연금보다 수급률이 높습니다. 연금액 계산 시 공무원연금법을 적용합니다.</p>
+            </div>
+            <div style="background:#F0FDF4; border-left:4px solid #16A34A; padding:16px; border-radius:8px;">
+                <h3 style="font-size:0.9rem; font-weight:700; color:#15803D; margin:0 0 8px 0;">정근수당 활용</h3>
+                <p style="font-size:0.85rem; color:#15803D; margin:0;">정근수당(무결근 수당)은 최대 50%까지 가산되어 기본급 외 추가 수당이 됩니다. 근속이 길수록 우대받습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 승진체계 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">소방관 승진 체계</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#2563EB; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">1단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방사</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">초임 · 신입 단계</div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#3B82F6; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">2단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방교 (승진 요건: 경력 3년)</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">최초 승진 · 가장 많은 인원</div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#06B6D4; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">3단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방장 (승진 요건: 경력 8년)</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">중간 관리직</div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#8B5CF6; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">4단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방위 (승진 요건: 경력 13년)</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">지역대 중심 지휘자</div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#EC4899; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">5단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방경 (승진 요건: 경력 18년)</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">대 이상 지휘자</div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#F59E0B; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">6단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방정 (승진 요건: 경력 23년)</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">본부급 이상</div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#10B981; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">7단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방준감 (과장급)</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">본부 과장급 지휘자</div>
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="background:#EF4444; color:white; font-weight:700; font-size:0.85rem; padding:6px 12px; border-radius:6px; min-width:70px; text-align:center;">8단계</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">소방감 (국장급)</div>
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">최고위직</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 관련 직종 -->
     <div class="card">
         <div class="card-header">
@@ -390,5 +829,55 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<!-- 급여 시뮬레이터 스크립트 -->
+<script>
+const rankData = {
+    '소방사': { baseSalary: 1770000, hoboSalary: 177000, allowance: 600000 },
+    '소방교': { baseSalary: 2200000, hoboSalary: 220000, allowance: 600000 },
+    '소방장': { baseSalary: 2900000, hoboSalary: 290000, allowance: 600000 },
+    '소방위': { baseSalary: 3500000, hoboSalary: 350000, allowance: 600000 },
+    '소방경': { baseSalary: 4100000, hoboSalary: 410000, allowance: 600000 }
+};
+
+function updateSimulator() {
+    const rank = document.getElementById('simRank').value;
+    const years = parseInt(document.getElementById('simYears').value) || 1;
+    const data = rankData[rank];
+
+    const baseSalary = data.baseSalary;
+    const dangerAllowance = 600000;
+    const loyaltyBonus = Math.floor(baseSalary * 0.05 * (years / 10));
+    const totalAllowance = dangerAllowance + loyaltyBonus + 100000;
+    const grossIncome = baseSalary + totalAllowance;
+
+    const pension = Math.floor(grossIncome * 0.045);
+    const health = Math.floor(grossIncome * 0.035);
+    const employment = Math.floor(grossIncome * 0.0085);
+    const incomeTax = Math.floor((grossIncome - pension - health - employment) * 0.06);
+    const totalDeduction = pension + health + employment + incomeTax;
+    const takeHome = grossIncome - totalDeduction;
+
+    document.getElementById('simBaseSalary').textContent = baseSalary.toLocaleString('ko-KR') + '원';
+    document.getElementById('simDanger').textContent = dangerAllowance.toLocaleString('ko-KR') + '원';
+    document.getElementById('simTotalAllowance').textContent = totalAllowance.toLocaleString('ko-KR') + '원';
+    document.getElementById('simTakeHome').textContent = takeHome.toLocaleString('ko-KR') + '원';
+}
+
+function switchPayslip(rank) {
+    const tabs = document.querySelectorAll('.payslip-content');
+    const btns = document.querySelectorAll('.payslip-tab-btn');
+
+    tabs.forEach(t => t.classList.remove('active'));
+    btns.forEach(b => b.classList.remove('active'));
+
+    document.getElementById('payslip-' + rank).classList.add('active');
+    event.target.classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateSimulator();
+});
+</script>
 </body>
 </html>

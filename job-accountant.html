@@ -51,6 +51,39 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface-alt); padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .sim-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .sim-field { display: flex; flex-direction: column; }
+        .sim-label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+        .sim-input, .sim-select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; color: var(--text-primary); background: white; font-family: 'Noto Sans KR', sans-serif; }
+        .sim-select { cursor: pointer; }
+        .sim-input:focus, .sim-select:focus { outline: none; border-color: var(--accent); }
+        .sim-result { background: white; padding: 16px; border-radius: 8px; margin-top: 16px; border-left: 4px solid var(--accent); }
+        .sim-result-label { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .sim-result-amount { font-size: 1.6rem; font-weight: 900; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .payslip-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 24px; overflow-x: auto; }
+        .payslip-tab { padding: 12px 16px; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); background: transparent; border: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; white-space: nowrap; }
+        .payslip-tab:hover { color: var(--accent); }
+        .payslip-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
+        .payslip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .payslip-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F3F4F6; }
+        .payslip-item:last-child { border-bottom: none; }
+        .payslip-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
+        .payslip-value { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .comparison-item { padding: 16px; background: var(--surface-alt); border-radius: 8px; margin-bottom: 12px; }
+        .comparison-title { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .comparison-desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px; }
+        .comparison-salary { font-size: 0.85rem; font-weight: 700; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .careerpath-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .careerpath-num { font-size: 1.4rem; font-weight: 900; color: var(--accent); min-width: 40px; }
+        .careerpath-content h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin: 0 0 6px 0; }
+        .careerpath-content p { font-size: 0.82rem; color: var(--text-secondary); margin: 0; }
+        @media (max-width: 768px) {
+            .sim-row { grid-template-columns: 1fr; }
+            .payslip-grid { grid-template-columns: 1fr; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -187,6 +220,52 @@
         <p>2026년 기준 · 회계사 경력별 연봉과 실수령액</p>
     </div>
 
+    <!-- 회계사 연봉 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">회계사 연봉 시뮬레이터</div>
+            <div class="card-badge">경력별 맞춤 계산</div>
+        </div>
+        <div class="sim-box">
+            <div class="sim-row">
+                <div class="sim-field">
+                    <label class="sim-label">경력 (년)</label>
+                    <input type="range" id="careerYear" class="sim-input" min="0" max="15" value="3" style="padding:8px 12px; cursor:pointer;">
+                    <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px; text-align:center;" id="careerDisplay">3년</div>
+                </div>
+                <div class="sim-field">
+                    <label class="sim-label">근무 유형</label>
+                    <select id="firmType" class="sim-select">
+                        <option value="big4">Big4 회계법인</option>
+                        <option value="small">중소 회계법인</option>
+                        <option value="corporate">기업 내 감사팀</option>
+                        <option value="finance">금융기관</option>
+                    </select>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:20px;">
+                <div class="sim-result">
+                    <div class="sim-result-label">예상 연봉</div>
+                    <div class="sim-result-amount" id="simSalary" style="font-size:1.4rem;">5,500만원</div>
+                </div>
+                <div class="sim-result">
+                    <div class="sim-result-label">월 세전</div>
+                    <div class="sim-result-amount" id="simPreTax" style="font-size:1.2rem;">4,583,333원</div>
+                </div>
+                <div class="sim-result">
+                    <div class="sim-result-label">월 실수령</div>
+                    <div class="sim-result-amount" id="simTakeHome" style="font-size:1.2rem;">3,982,078원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 메인 결과 -->
     <div class="result-hero">
         <div class="result-hero-label">주니어 (3년차) 월 실수령액</div>
@@ -291,6 +370,42 @@
 </div>
     </div>
 
+    <!-- 법인유형별 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">법인유형별 연봉 비교</div>
+            <div class="card-badge">3년차 기준</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+            <div class="comparison-item">
+                <div class="comparison-title">Big4 회계법인 (삼일/삼정/한영/안진)</div>
+                <div class="comparison-desc">한국 최대 규모 회계법인, 최고의 수련 환경</div>
+                <div class="comparison-salary">연봉 6,000~8,000만원</div>
+            </div>
+            <div class="comparison-item">
+                <div class="comparison-title">중소 회계법인</div>
+                <div class="comparison-desc">덜 경쟁적이고 유연한 근무 환경</div>
+                <div class="comparison-salary">연봉 4,500~6,000만원</div>
+            </div>
+            <div class="comparison-item">
+                <div class="comparison-title">기업 내 감사팀</div>
+                <div class="comparison-desc">안정적인 급여와 근무 환경</div>
+                <div class="comparison-salary">연봉 5,500~7,000만원</div>
+            </div>
+            <div class="comparison-item">
+                <div class="comparison-title">금융기관 (은행/증권/보험)</div>
+                <div class="comparison-desc">높은 보너스와 복리후생</div>
+                <div class="comparison-salary">연봉 6,000~9,000만원</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 경력/직급별 비교 -->
     <div class="card">
         <div class="card-header">
@@ -349,6 +464,307 @@
         </div>
     </div>
 
+    <!-- Ad Slot 3 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 직급별 급여명세서 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">직급별 상세 급여명세서</div>
+            <div class="card-badge">Big4 기준</div>
+        </div>
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" onclick="switchPayslip('trainee')">수습</button>
+            <button class="payslip-tab" onclick="switchPayslip('junior')">주니어<br><span style="font-size:0.7rem;">(1~2년)</span></button>
+            <button class="payslip-tab" onclick="switchPayslip('senior')">시니어<br><span style="font-size:0.7rem;">(3~5년)</span></button>
+            <button class="payslip-tab" onclick="switchPayslip('manager')">매니저<br><span style="font-size:0.7rem;">(6~9년)</span></button>
+            <button class="payslip-tab" onclick="switchPayslip('partner')">파트너<br><span style="font-size:0.7rem;">(10년+)</span></button>
+        </div>
+
+        <div id="trainee" class="payslip-content active">
+            <div class="payslip-grid">
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">연봉</span>
+                        <span class="payslip-value">4,500만원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 세전</span>
+                        <span class="payslip-value">3,750,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">2,200,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">경력수당</span>
+                        <span class="payslip-value">-</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">성과급</span>
+                        <span class="payslip-value">600,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">초과근무수당</span>
+                        <span class="payslip-value">750,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">4대보험료</span>
+                        <span class="payslip-value">-431,125원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 실수령</span>
+                        <span class="payslip-value" style="font-size:0.95rem; color:var(--accent);">3,288,575원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="junior" class="payslip-content">
+            <div class="payslip-grid">
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">연봉</span>
+                        <span class="payslip-value">5,500만원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 세전</span>
+                        <span class="payslip-value">4,583,333원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">2,600,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">경력수당</span>
+                        <span class="payslip-value">400,000원</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">성과급</span>
+                        <span class="payslip-value">800,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">초과근무수당</span>
+                        <span class="payslip-value">783,333원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">4대보험료</span>
+                        <span class="payslip-value">-601,255원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 실수령</span>
+                        <span class="payslip-value" style="font-size:0.95rem; color:var(--accent);">3,982,078원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="senior" class="payslip-content">
+            <div class="payslip-grid">
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">연봉</span>
+                        <span class="payslip-value">7,000만원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 세전</span>
+                        <span class="payslip-value">5,833,333원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">3,200,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">경력수당</span>
+                        <span class="payslip-value">600,000원</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">성과급</span>
+                        <span class="payslip-value">1,200,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">초과근무수당</span>
+                        <span class="payslip-value">833,333원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">4대보험료</span>
+                        <span class="payslip-value">-822,709원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 실수령</span>
+                        <span class="payslip-value" style="font-size:0.95rem; color:var(--accent);">5,010,624원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="manager" class="payslip-content">
+            <div class="payslip-grid">
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">연봉</span>
+                        <span class="payslip-value">9,000만원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 세전</span>
+                        <span class="payslip-value">7,500,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">4,000,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">경력수당</span>
+                        <span class="payslip-value">1,000,000원</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">성과급</span>
+                        <span class="payslip-value">1,500,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">초과근무수당</span>
+                        <span class="payslip-value">1,000,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">4대보험료</span>
+                        <span class="payslip-value">-1,142,362원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 실수령</span>
+                        <span class="payslip-value" style="font-size:0.95rem; color:var(--accent);">6,357,638원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="partner" class="payslip-content">
+            <div class="payslip-grid">
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">연봉</span>
+                        <span class="payslip-value">1억 5,000만원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 세전</span>
+                        <span class="payslip-value">12,500,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">6,000,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">경력수당</span>
+                        <span class="payslip-value">2,000,000원</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">성과급/보너스</span>
+                        <span class="payslip-value">3,000,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">경영진수당</span>
+                        <span class="payslip-value">1,500,000원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">4대보험료</span>
+                        <span class="payslip-value">-2,319,718원</span>
+                    </div>
+                    <div class="payslip-item">
+                        <span class="payslip-label">월 실수령</span>
+                        <span class="payslip-value" style="font-size:0.95rem; color:var(--accent);">10,180,282원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CPA 자격수당 및 절세전략 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">CPA 자격수당 & 절세전략</div>
+            <div class="card-badge">전문직 특혜</div>
+        </div>
+        <div class="two-col">
+            <div>
+                <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-primary); margin:0 0 12px 0;">CPA 자격수당</h3>
+                <div class="payslip-item" style="border-bottom:1px solid var(--border); padding:10px 0;">
+                    <span class="payslip-label">정산 회계사</span>
+                    <span class="payslip-value">+30만원/월</span>
+                </div>
+                <div class="payslip-item" style="border-bottom:1px solid var(--border); padding:10px 0;">
+                    <span class="payslip-label">감사 담당자</span>
+                    <span class="payslip-value">+25만원/월</span>
+                </div>
+                <div class="payslip-item" style="padding:10px 0;">
+                    <span class="payslip-label">세무 전담</span>
+                    <span class="payslip-value">+20만원/월</span>
+                </div>
+            </div>
+            <div>
+                <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-primary); margin:0 0 12px 0;">절세 전략</h3>
+                <p style="font-size:0.82rem; color:var(--text-secondary); margin:0 0 8px 0;">
+                    <strong style="color:var(--text-primary);">근로소득:</strong> 연봉 기준, 자동 연말정산 환급 가능성
+                </p>
+                <p style="font-size:0.82rem; color:var(--text-secondary); margin:0 0 8px 0;">
+                    <strong style="color:var(--text-primary);">사업소득:</strong> 개업 후 더 많은 비용 처리 가능 (세무사무실, 조세전략 활용)
+                </p>
+                <p style="font-size:0.82rem; color:var(--text-secondary);">
+                    <strong style="color:var(--text-primary);">추천:</strong> 소수 자문료 외 사업소득 과세, 월급 형태의 안정적인 기업 CFO 선택
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 커리어패스 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">회계사 커리어패스</div>
+            <div class="card-badge">경력 개발 경로</div>
+        </div>
+        <div style="margin-top:16px;">
+            <div class="careerpath-item">
+                <div class="careerpath-num">1</div>
+                <div class="careerpath-content">
+                    <h4>Big4 → 기업 CFO</h4>
+                    <p>Big4에서 3~5년 경력 쌓은 후 대기업 CFO/재무담당 전환. 평균 1억 2,000~1억 5,000만원 연봉</p>
+                </div>
+            </div>
+            <div class="careerpath-item">
+                <div class="careerpath-num">2</div>
+                <div class="careerpath-content">
+                    <h4>Big4 → 금융기관</h4>
+                    <p>은행, 증권사, 보험사의 리스크 관리팀, 준법감시인 등으로 이직. 높은 보너스 구조</p>
+                </div>
+            </div>
+            <div class="careerpath-item">
+                <div class="careerpath-num">3</div>
+                <div class="careerpath-content">
+                    <h4>독립 개업 (세무사무실/회계사무실)</h4>
+                    <p>파트너급 이상에서 독립하여 자신의 사무실 개설. 초기 연봉 5,000~8,000만원에서 시작하여 성장 시 무제한</p>
+                </div>
+            </div>
+            <div class="careerpath-item">
+                <div class="careerpath-num">4</div>
+                <div class="careerpath-content">
+                    <h4>학계/공직 진출</h4>
+                    <p>대학 교수, 감사원, 국세청 등 공직기관. 안정성 높고 퇴직금 수준 우수</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 관련 직종 -->
     <div class="card">
         <div class="card-header">
@@ -390,5 +806,92 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 회계사 연봉 시뮬레이터 데이터
+const salaryData = {
+    big4: {
+        0: { salary: 4500, monthly: 375, deduction: 461.4, takeHome: 328.8 },
+        1: { salary: 4800, monthly: 400, deduction: 492, takeHome: 357.7 },
+        2: { salary: 5200, monthly: 433, deduction: 566.8, takeHome: 391.5 },
+        3: { salary: 5500, monthly: 458, deduction: 601.2, takeHome: 398.2 },
+        4: { salary: 6000, monthly: 500, deduction: 666.5, takeHome: 433.5 },
+        5: { salary: 7000, monthly: 583, deduction: 822.7, takeHome: 501.0 },
+        6: { salary: 7500, monthly: 625, deduction: 899.7, takeHome: 539.3 },
+        7: { salary: 8000, monthly: 667, deduction: 976.8, takeHome: 577.2 },
+        8: { salary: 8500, monthly: 708, deduction: 1058.9, takeHome: 616.1 },
+        9: { salary: 9000, monthly: 750, deduction: 1142.3, takeHome: 657.6 },
+        10: { salary: 11000, monthly: 917, deduction: 1503.9, takeHome: 841.1 },
+        15: { salary: 15000, monthly: 1250, deduction: 2319.7, takeHome: 1018.0 }
+    },
+    small: {
+        0: { salary: 3800, monthly: 317, deduction: 391.2, takeHome: 277.5 },
+        1: { salary: 4000, monthly: 333, deduction: 411.8, takeHome: 291.5 },
+        2: { salary: 4500, monthly: 375, deduction: 461.4, takeHome: 328.8 },
+        3: { salary: 5000, monthly: 417, deduction: 545.3, takeHome: 371.7 },
+        5: { salary: 6000, monthly: 500, deduction: 666.5, takeHome: 433.5 },
+        10: { salary: 9500, monthly: 792, deduction: 1201.8, takeHome: 690.2 }
+    },
+    corporate: {
+        0: { salary: 4500, monthly: 375, deduction: 461.4, takeHome: 328.8 },
+        3: { salary: 5500, monthly: 458, deduction: 601.2, takeHome: 398.2 },
+        5: { salary: 7000, monthly: 583, deduction: 822.7, takeHome: 501.0 },
+        10: { salary: 10000, monthly: 833, deduction: 1248.9, takeHome: 724.1 }
+    },
+    finance: {
+        0: { salary: 5000, monthly: 417, deduction: 545.3, takeHome: 371.7 },
+        3: { salary: 6500, monthly: 542, deduction: 728.2, takeHome: 471.8 },
+        5: { salary: 8000, monthly: 667, deduction: 976.8, takeHome: 577.2 },
+        10: { salary: 12000, monthly: 1000, deduction: 1559.8, takeHome: 844.0 }
+    }
+};
+
+function formatNumber(n) {
+    return Math.round(n * 1000000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function updateSimulator() {
+    const career = parseInt(document.getElementById('careerYear').value);
+    const firm = document.getElementById('firmType').value;
+    document.getElementById('careerDisplay').textContent = career + '년';
+
+    const data = salaryData[firm];
+    let dataPoint = data[career];
+
+    if (!dataPoint) {
+        const keys = Object.keys(data).map(Number).sort((a,b) => a-b);
+        for (let i = 0; i < keys.length - 1; i++) {
+            if (career >= keys[i] && career < keys[i+1]) {
+                const ratio = (career - keys[i]) / (keys[i+1] - keys[i]);
+                const d1 = data[keys[i]];
+                const d2 = data[keys[i+1]];
+                dataPoint = {
+                    salary: d1.salary + (d2.salary - d1.salary) * ratio,
+                    monthly: d1.monthly + (d2.monthly - d1.monthly) * ratio,
+                    takeHome: d1.takeHome + (d2.takeHome - d1.takeHome) * ratio
+                };
+                break;
+            }
+        }
+        if (!dataPoint) dataPoint = data[Math.max(...keys)];
+    }
+
+    document.getElementById('simSalary').textContent = Math.round(dataPoint.salary) + '만원';
+    document.getElementById('simPreTax').textContent = formatNumber(dataPoint.monthly) + '원';
+    document.getElementById('simTakeHome').textContent = formatNumber(dataPoint.takeHome) + '원';
+}
+
+document.getElementById('careerYear').addEventListener('input', updateSimulator);
+document.getElementById('firmType').addEventListener('change', updateSimulator);
+
+// 급여명세서 탭 전환
+function switchPayslip(tab) {
+    document.querySelectorAll('.payslip-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.payslip-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
 </body>
 </html>

@@ -51,6 +51,60 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+
+        /* 수입 시뮬레이터 */
+        .sim-box { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .sim-input-group { display: flex; flex-direction: column; gap: 8px; }
+        .sim-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        .sim-input { width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; }
+        .sim-slider { width: 100%; height: 6px; border-radius: 3px; background: #E5E7EB; appearance: none; -webkit-appearance: none; cursor: pointer; }
+        .sim-slider::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .sim-slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; border: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .sim-value { font-size: 0.9rem; font-weight: 700; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .sim-results { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+        .sim-result-item { background: var(--surface-alt); padding: 12px; border-radius: 8px; }
+        .sim-result-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 4px; }
+        .sim-result-val { font-size: 1.2rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        @media (max-width: 768px) {
+            .sim-box { grid-template-columns: 1fr; }
+            .sim-results { grid-template-columns: 1fr; }
+        }
+
+        /* 탭 */
+        .payslip-tabs { margin-bottom: 24px; }
+        .tab-nav { display: flex; gap: 8px; border-bottom: 2px solid #E5E7EB; margin-bottom: 16px; overflow-x: auto; }
+        .tab-btn { padding: 10px 16px; border: none; background: none; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; white-space: nowrap; }
+        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .tab-btn:hover { color: var(--text-primary); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.2s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* 플랫폼 비교 테이블 */
+        .platform-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .platform-table th { background: var(--surface-alt); padding: 12px; text-align: left; font-weight: 700; color: var(--text-secondary); border-bottom: 2px solid #E5E7EB; }
+        .platform-table td { padding: 12px; border-bottom: 1px solid #F3F4F6; }
+        .platform-table tr:hover { background: var(--surface-alt); }
+        .platform-badge { display: inline-block; padding: 4px 8px; font-size: 0.7rem; font-weight: 700; border-radius: 4px; }
+        .badge-high { background: #DCFCE7; color: #166534; }
+        .badge-mid { background: #FEF08A; color: #713F12; }
+        .badge-low { background: #FED7AA; color: #7C2D12; }
+
+        /* 가이드 섹션 */
+        .guide-section { margin-bottom: 20px; }
+        .guide-title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .guide-point { display: flex; gap: 12px; margin-bottom: 12px; padding: 12px; background: var(--surface-alt); border-radius: 8px; border-left: 3px solid var(--accent); }
+        .guide-point-num { font-weight: 700; color: var(--accent); font-size: 0.9rem; flex-shrink: 0; }
+        .guide-point-text { font-size: 0.85rem; color: var(--text-primary); line-height: 1.5; }
+
+        /* 전략 카드 */
+        .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .strategy-card { background: var(--surface-alt); padding: 16px; border-radius: 8px; border-left: 3px solid var(--accent); }
+        .strategy-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+        .strategy-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+        @media (max-width: 768px) {
+            .strategy-grid { grid-template-columns: 1fr; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -208,6 +262,69 @@
         </div>
     </div>
 
+    <!-- 수입 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">배달라이더 수입 시뮬레이터</div>
+            <div class="card-badge">맞춤형 계산</div>
+        </div>
+        <div class="sim-box">
+            <div class="sim-input-group">
+                <label class="sim-label">일 평균 건수</label>
+                <input type="range" id="ordersPerDay" class="sim-slider" min="5" max="40" value="20">
+                <div style="display:flex; justify-content:space-between;">
+                    <span id="ordersDisplay" class="sim-value">20건</span>
+                    <span style="font-size:0.82rem; color:var(--text-secondary);">5~40건</span>
+                </div>
+            </div>
+            <div class="sim-input-group">
+                <label class="sim-label">건당 단가</label>
+                <input type="range" id="pricePerOrder" class="sim-slider" min="2000" max="5000" value="3500" step="100">
+                <div style="display:flex; justify-content:space-between;">
+                    <span id="priceDisplay" class="sim-value">3,500원</span>
+                    <span style="font-size:0.82rem; color:var(--text-secondary);">2,000~5,000원</span>
+                </div>
+            </div>
+            <div class="sim-input-group">
+                <label class="sim-label">주 근무일수</label>
+                <input type="range" id="workDaysPerWeek" class="sim-slider" min="3" max="7" value="5">
+                <div style="display:flex; justify-content:space-between;">
+                    <span id="workDaysDisplay" class="sim-value">5일</span>
+                    <span style="font-size:0.82rem; color:var(--text-secondary);">3~7일</span>
+                </div>
+            </div>
+            <div class="sim-input-group">
+                <label class="sim-label">오토바이 유지비 (월)</label>
+                <input type="number" id="bikeMaintenanceCost" class="sim-input" value="300000" placeholder="300000">
+                <span style="font-size:0.75rem; color:var(--text-secondary);">유류비, 보험료, 감가상각 등</span>
+            </div>
+        </div>
+        <div class="sim-results">
+            <div class="sim-result-item">
+                <div class="sim-result-label">월 총 수입</div>
+                <div class="sim-result-val" id="monthlyGross">0원</div>
+            </div>
+            <div class="sim-result-item">
+                <div class="sim-result-label">필요경비</div>
+                <div class="sim-result-val" id="expenses">0원</div>
+            </div>
+            <div class="sim-result-item">
+                <div class="sim-result-label">순수입</div>
+                <div class="sim-result-val" id="netIncome">0원</div>
+            </div>
+            <div class="sim-result-item">
+                <div class="sim-result-label">3.3% 원천징수 후 수령액</div>
+                <div class="sim-result-val" id="afterTax">0원</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 2컬럼: 공제 상세 + 정보 -->
     <div class="two-col">
         <div class="card" style="margin-bottom:0;">
@@ -291,6 +408,192 @@
 </div>
     </div>
 
+    <!-- 플랫폼별 수입 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">플랫폼별 수입 비교표</div>
+            <div class="card-badge">2026년 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="platform-table">
+                <thead>
+                    <tr>
+                        <th>플랫폼</th>
+                        <th>건당단가 범위</th>
+                        <th>인센티브</th>
+                        <th>월 평균수입</th>
+                        <th>보험지원</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>배달의민족 라이더</strong></td>
+                        <td>3,000~4,500원</td>
+                        <td><span class="platform-badge badge-high">높음</span></td>
+                        <td>3,200만원</td>
+                        <td>산재보험</td>
+                        <td>가장 많은 수요</td>
+                    </tr>
+                    <tr>
+                        <td><strong>쿠팡이츠 배달파트너</strong></td>
+                        <td>3,500~5,500원</td>
+                        <td><span class="platform-badge badge-high">높음</span></td>
+                        <td>3,500만원</td>
+                        <td>산재보험</td>
+                        <td>높은 단가, 경쟁심화</td>
+                    </tr>
+                    <tr>
+                        <td><strong>요기요 라이더</strong></td>
+                        <td>2,500~4,000원</td>
+                        <td><span class="platform-badge badge-mid">중간</span></td>
+                        <td>2,800만원</td>
+                        <td>산재보험</td>
+                        <td>사용자 감소 추세</td>
+                    </tr>
+                    <tr>
+                        <td><strong>로지스밸리/메쉬코리아</strong></td>
+                        <td>4,000~6,000원</td>
+                        <td><span class="platform-badge badge-high">높음</span></td>
+                        <td>3,800만원</td>
+                        <td>산재보험</td>
+                        <td>B2B 배달, 안정적</td>
+                    </tr>
+                    <tr>
+                        <td><strong>직고용 배달 (프랜차이즈)</strong></td>
+                        <td>건당 2,000~3,000원</td>
+                        <td><span class="platform-badge badge-low">낮음</span></td>
+                        <td>2,400만원</td>
+                        <td>4대보험 가입</td>
+                        <td>고정급 + 인센티브</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 근무형태별 수입명세서 (탭) -->
+    <div class="card payslip-tabs">
+        <div class="card-header">
+            <div class="card-title">근무형태별 수입명세서</div>
+        </div>
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('fulltime')">풀타임 (주5일)</button>
+            <button class="tab-btn" onclick="switchTab('parttime')">파트타임 (주3일)</button>
+            <button class="tab-btn" onclick="switchTab('weekend')">주말라이더 (토일)</button>
+            <button class="tab-btn" onclick="switchTab('dawn')">새벽배달 (06~10시)</button>
+        </div>
+
+        <div id="fulltime" class="tab-content active">
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>항목</th><th>내용</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>일 배달건수</td><td>20건</td></tr>
+                        <tr><td>건당 단가</td><td>3,500원</td></tr>
+                        <tr><td>월 근무일</td><td>22일 (주5일)</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">월 총 수입</td><td style="background:var(--surface-alt); font-weight:700; color:var(--accent);">1,540,000원</td></tr>
+                        <tr><td colspan="2" style="font-weight:700; padding:12px 12px; background:#F0F9FF; color:var(--text-primary);">필요경비 (월)</td></tr>
+                        <tr><td>유류비</td><td>120,000원</td></tr>
+                        <tr><td>보험료 (자가보험)</td><td>80,000원</td></tr>
+                        <tr><td>감가상각 (오토바이)</td><td>100,000원</td></tr>
+                        <tr><td>휴대폰/통신비</td><td>50,000원</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">경비 소계</td><td style="background:var(--surface-alt); font-weight:700; color:var(--text-secondary);">350,000원</td></tr>
+                        <tr><td style="background:#FFFBEB; font-weight:700;">순수입</td><td style="background:#FFFBEB; font-weight:700; color:var(--accent);">1,190,000원</td></tr>
+                        <tr><td colspan="2" style="font-weight:700; padding:12px 12px; background:#F0F9FF; color:var(--text-primary);">원천징수 (3.3%)</td></tr>
+                        <tr><td>원천징수액</td><td style="color:var(--accent); font-weight:700;">-50,820원</td></tr>
+                        <tr><td style="background:#FEF3C7; font-weight:700;">실제 수령액</td><td style="background:#FEF3C7; font-weight:700; color:var(--accent); font-size:1.05rem;">1,139,180원</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="parttime" class="tab-content">
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>항목</th><th>내용</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>일 배달건수</td><td>15건</td></tr>
+                        <tr><td>건당 단가</td><td>3,500원</td></tr>
+                        <tr><td>월 근무일</td><td>13일 (주3일)</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">월 총 수입</td><td style="background:var(--surface-alt); font-weight:700; color:var(--accent);">682,500원</td></tr>
+                        <tr><td colspan="2" style="font-weight:700; padding:12px 12px; background:#F0F9FF; color:var(--text-primary);">필요경비 (월)</td></tr>
+                        <tr><td>유류비</td><td>50,000원</td></tr>
+                        <tr><td>보험료</td><td>80,000원</td></tr>
+                        <tr><td>감가상각</td><td>60,000원</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">경비 소계</td><td style="background:var(--surface-alt); font-weight:700; color:var(--text-secondary);">190,000원</td></tr>
+                        <tr><td style="background:#FFFBEB; font-weight:700;">순수입</td><td style="background:#FFFBEB; font-weight:700; color:var(--accent);">492,500원</td></tr>
+                        <tr><td>원천징수액 (3.3%)</td><td style="color:var(--accent); font-weight:700;">-22,523원</td></tr>
+                        <tr><td style="background:#FEF3C7; font-weight:700;">실제 수령액</td><td style="background:#FEF3C7; font-weight:700; color:var(--accent); font-size:1.05rem;">469,977원</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="weekend" class="tab-content">
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>항목</th><th>내용</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>일 배달건수</td><td>25건 (높은 수요)</td></tr>
+                        <tr><td>건당 단가</td><td>4,000원 (주말 보너스)</td></tr>
+                        <tr><td>월 근무일</td><td>8~9일 (토일만)</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">월 총 수입</td><td style="background:var(--surface-alt); font-weight:700; color:var(--accent);">900,000원</td></tr>
+                        <tr><td colspan="2" style="font-weight:700; padding:12px 12px; background:#F0F9FF; color:var(--text-primary);">필요경비 (월)</td></tr>
+                        <tr><td>유류비</td><td>60,000원</td></tr>
+                        <tr><td>보험료</td><td>80,000원</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">경비 소계</td><td style="background:var(--surface-alt); font-weight:700; color:var(--text-secondary);">140,000원</td></tr>
+                        <tr><td style="background:#FFFBEB; font-weight:700;">순수입</td><td style="background:#FFFBEB; font-weight:700; color:var(--accent);">760,000원</td></tr>
+                        <tr><td>원천징수액</td><td style="color:var(--accent); font-weight:700;">-25,080원</td></tr>
+                        <tr><td style="background:#FEF3C7; font-weight:700;">실제 수령액</td><td style="background:#FEF3C7; font-weight:700; color:var(--accent); font-size:1.05rem;">734,920원</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="dawn" class="tab-content">
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>항목</th><th>내용</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>일 배달건수</td><td>35건 (아침피크)</td></tr>
+                        <tr><td>건당 단가</td><td>4,500원 (새벽할증)</td></tr>
+                        <tr><td>월 근무일</td><td>20일 (주5일, 아침만)</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">월 총 수입</td><td style="background:var(--surface-alt); font-weight:700; color:var(--accent);">3,150,000원</td></tr>
+                        <tr><td colspan="2" style="font-weight:700; padding:12px 12px; background:#F0F9FF; color:var(--text-primary);">필요경비 (월)</td></tr>
+                        <tr><td>유류비</td><td>150,000원</td></tr>
+                        <tr><td>보험료</td><td>100,000원</td></tr>
+                        <tr><td>감가상각</td><td>120,000원</td></tr>
+                        <tr><td style="background:var(--surface-alt); font-weight:700;">경비 소계</td><td style="background:var(--surface-alt); font-weight:700; color:var(--text-secondary);">370,000원</td></tr>
+                        <tr><td style="background:#FFFBEB; font-weight:700;">순수입</td><td style="background:#FFFBEB; font-weight:700; color:var(--accent);">2,780,000원</td></tr>
+                        <tr><td>원천징수액</td><td style="color:var(--accent); font-weight:700;">-103,950원</td></tr>
+                        <tr><td style="background:#FEF3C7; font-weight:700;">실제 수령액</td><td style="background:#FEF3C7; font-weight:700; color:var(--accent); font-size:1.05rem;">2,676,050원</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 경력/직급별 비교 -->
     <div class="card">
         <div class="card-header">
@@ -342,6 +645,143 @@
         </div>
     </div>
 
+    <!-- 세금/보험 완벽 가이드 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">세금 · 보험 완벽 가이드</div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-title">종합소득세 신고</div>
+            <div class="guide-point">
+                <div class="guide-point-num">1</div>
+                <div class="guide-point-text"><strong>프리랜서 신분:</strong> 배달라이더는 근로자가 아닌 개인사업자(프리랜서)로 분류되어 3.3% 원천징수 대상입니다.</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">2</div>
+                <div class="guide-point-text"><strong>신고 시기:</strong> 매년 5월 1~31일에 지난해 소득에 대해 종합소득세 신고를 해야 합니다.</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">3</div>
+                <div class="guide-point-text"><strong>필요경비율:</strong> 배달업은 통상 50% 필요경비율을 적용받습니다. (유류비, 보험료, 차량 감가상각 등)</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">4</div>
+                <div class="guide-point-text"><strong>원천징수 환급:</strong> 납부한 3.3% 중 실제 세액보다 많으면 5월 신고 시 환급받습니다.</div>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-title">필요경비 항목 (세액공제 가능)</div>
+            <div class="guide-point">
+                <div class="guide-point-num">유류비</div>
+                <div class="guide-point-text">휘발유/경유 비용. 영수증 보관 필수.</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">차량보험료</div>
+                <div class="guide-point-text">자가보험, 특약보험 등 배달 관련 보험료.</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">감가상각비</div>
+                <div class="guide-point-text">오토바이 구입비의 15%/년 (5년 상각기준).</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">통신비</div>
+                <div class="guide-point-text">휴대폰 요금의 일부 (배달 목적으로 사용하는 부분).</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">수선비</div>
+                <div class="guide-point-text">오토바이 정비, 부품 교체 비용.</div>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-title">산재보험 특례 (중요!)</div>
+            <div class="guide-point">
+                <div class="guide-point-num">보장 대상</div>
+                <div class="guide-point-text">배달라이더는 산재보험 특례 적용 대상입니다. 배달 중 교통사고, 질병으로 인한 사망/장해 시 보장받습니다.</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">보험료</div>
+                <div class="guide-point-text">플랫폼에서 전액 부담하므로 라이더 부담금이 없습니다.</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">보험 미가입 주의</div>
+                <div class="guide-point-text">플랫폼별로 가입 정책이 다르므로, 가입 여부를 반드시 확인하세요.</div>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-title">고용보험 임의가입</div>
+            <div class="guide-point">
+                <div class="guide-point-num">가능 여부</div>
+                <div class="guide-point-text">개인사업자이지만 고용보험에 임의가입할 수 있습니다 (월 8,400원).</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">실업급여 수급 조건</div>
+                <div class="guide-point-text">가입 후 180일 이상 보험료를 낸 후, 이직하면 구직급여를 받을 수 있습니다.</div>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="guide-title">국민연금 · 건강보험 (지역가입)</div>
+            <div class="guide-point">
+                <div class="guide-point-num">의무 가입</div>
+                <div class="guide-point-text">근로자가 아니므로 국민연금/건강보험을 지역가입으로 별도 납부해야 합니다.</div>
+            </div>
+            <div class="guide-point">
+                <div class="guide-point-num">월 소득에 따른 보험료</div>
+                <div class="guide-point-text">월 소득이 높을수록 보험료가 증가합니다. (소득 신고 필수)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 수입 극대화 전략 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">배달 수입 극대화 전략</div>
+        </div>
+
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <h4>피크타임 집중 운영</h4>
+                <p>점심(11~14시), 저녁(17~21시) 피크타임에 집중 배달. 이 시간대 건당 단가가 20~30% 높습니다.</p>
+            </div>
+            <div class="strategy-card">
+                <h4>지역 선택 (골목지도)</h4>
+                <p>아파트 밀집 지역, 대학가, 직장 밀집지역 선택. 짧은 배달거리 = 더 많은 건수 처리 가능.</p>
+            </div>
+            <div class="strategy-card">
+                <h4>오토바이 vs 자전거</h4>
+                <p>오토바이: 원거리 배달, 높은 단가 / 자전거: 짧은거리, 많은 건수. 소득 + 유지비 모두 고려해서 선택.</p>
+            </div>
+            <div class="strategy-card">
+                <h4>다중앱 운영</h4>
+                <p>배달의민족 + 쿠팡이츠 동시 실행으로 주문 대기 시간 최소화. 건수 20~30% 증가 가능.</p>
+            </div>
+            <div class="strategy-card">
+                <h4>날씨 활용</h4>
+                <p>비/눈 오는 날씨 시 할증 수당(2배~3배) 적용. 위험하지만 단가가 매우 높습니다.</p>
+            </div>
+            <div class="strategy-card">
+                <h4>새벽배달 특화</h4>
+                <p>새벽 5~10시 편의점/아침밥 배달. 할증 40~60% + 경쟁 적음. 신체 리듬 조절 필요.</p>
+            </div>
+            <div class="strategy-card">
+                <h4>맛집 지역 점유</h4>
+                <p>인기 맛집 밀집 지역에서 대기하면 주문 빈도 증가. 15~20분마다 배달 처리 가능.</p>
+            </div>
+            <div class="strategy-card">
+                <h4>정산 최적화</h4>
+                <p>필요경비 빠짐없이 기록(영수증 보관). 5월 세무신고 시 50% 필요경비율로 세금 환급 가능.</p>
+            </div>
+        </div>
+
+        <div style="margin-top:20px; padding:16px; background:var(--surface-alt); border-radius:8px; border-left:3px solid #F59E0B;">
+            <p style="font-size:0.85rem; color:var(--text-primary); margin:0;"><strong>⚠️ 안전 최우선:</strong> 수입 극대화보다 안전이 가장 중요합니다. 과속, 신호 위반, 무리한 배달은 사고로 이어집니다. 장기적으로 안정적인 수입을 유지하려면 안전한 운영이 필수입니다.</p>
+        </div>
+    </div>
+
     <!-- 관련 직종 -->
     <div class="card">
         <div class="card-header">
@@ -383,5 +823,66 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<!-- 배달라이더 수입 시뮬레이터 JS -->
+<script>
+function formatCurrency(num) {
+    return Math.round(num).toLocaleString('ko-KR') + '원';
+}
+
+function updateSimulator() {
+    const ordersPerDay = parseInt(document.getElementById('ordersPerDay').value);
+    const pricePerOrder = parseInt(document.getElementById('pricePerOrder').value);
+    const workDaysPerWeek = parseInt(document.getElementById('workDaysPerWeek').value);
+    const bikeMaintenanceCost = parseInt(document.getElementById('bikeMaintenanceCost').value) || 300000;
+
+    document.getElementById('ordersDisplay').textContent = ordersPerDay + '건';
+    document.getElementById('priceDisplay').textContent = pricePerOrder.toLocaleString('ko-KR') + '원';
+    document.getElementById('workDaysDisplay').textContent = workDaysPerWeek + '일';
+
+    const daysPerMonth = Math.ceil(workDaysPerWeek * 4.33);
+    const monthlyGross = ordersPerDay * pricePerOrder * daysPerMonth;
+    const expenses = bikeMaintenanceCost;
+    const netIncome = monthlyGross - expenses;
+    const withholding = monthlyGross * 0.033;
+    const afterTax = monthlyGross - withholding;
+
+    document.getElementById('monthlyGross').textContent = formatCurrency(monthlyGross);
+    document.getElementById('expenses').textContent = formatCurrency(expenses);
+    document.getElementById('netIncome').textContent = formatCurrency(netIncome);
+    document.getElementById('afterTax').textContent = formatCurrency(afterTax);
+}
+
+document.getElementById('ordersPerDay').addEventListener('input', updateSimulator);
+document.getElementById('pricePerOrder').addEventListener('input', updateSimulator);
+document.getElementById('workDaysPerWeek').addEventListener('input', updateSimulator);
+document.getElementById('bikeMaintenanceCost').addEventListener('input', updateSimulator);
+
+updateSimulator();
+</script>
+
+<!-- 탭 네비게이션 JS -->
+<script>
+function switchTab(tabName) {
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-btn');
+
+    contents.forEach(function(content) {
+        content.classList.remove('active');
+    });
+
+    buttons.forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+
+    const activeContent = document.getElementById(tabName);
+    if (activeContent) {
+        activeContent.classList.add('active');
+    }
+
+    event.target.classList.add('active');
+}
+</script>
+
 </body>
 </html>

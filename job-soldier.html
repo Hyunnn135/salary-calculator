@@ -51,6 +51,42 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .sim-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .sim-input-group { display: flex; flex-direction: column; }
+        .sim-input-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+        .sim-input-label select { font-size: 0.9rem; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: white; color: var(--text-primary); font-weight: 500; cursor: pointer; }
+        .sim-results { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
+        .sim-result-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F3F4F6; }
+        .sim-result-row:last-child { border-bottom: none; }
+        .sim-result-label { font-size: 0.9rem; color: var(--text-secondary); }
+        .sim-result-value { font-size: 1rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .sim-highlight { font-size: 1.3rem; color: var(--accent); }
+        .payslip-tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 2px solid var(--border); }
+        .payslip-tab { padding: 12px 20px; background: none; border: none; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+        .payslip-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
+        .payslip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .payslip-item { padding: 12px; background: var(--surface-alt); border-radius: 8px; }
+        .payslip-item-label { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .payslip-item-value { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .benefit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px; }
+        .benefit-card { background: var(--surface-alt); border-radius: 12px; padding: 16px; border-left: 4px solid var(--accent); }
+        .benefit-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin: 0 0 8px 0; }
+        .benefit-card p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
+        .career-path { display: flex; align-items: center; margin-bottom: 16px; }
+        .career-step { background: var(--accent); color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .career-arrow { width: 30px; height: 2px; background: var(--border); margin: 0 12px; }
+        .career-label { flex: 1; }
+        .career-label strong { color: var(--text-primary); }
+        .career-label span { font-size: 0.85rem; color: var(--text-secondary); }
+        @media (max-width: 768px) {
+            .sim-inputs { grid-template-columns: 1fr; }
+            .payslip-grid { grid-template-columns: 1fr; }
+            .benefit-grid { grid-template-columns: 1fr; }
+            .career-arrow { display: none; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -208,6 +244,57 @@
         </div>
     </div>
 
+    <!-- 군인 봉급 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">군인 봉급 시뮬레이터</div>
+            <div class="card-badge">2026년</div>
+        </div>
+        <div class="sim-box">
+            <div class="sim-inputs">
+                <div class="sim-input-group">
+                    <label class="sim-input-label">복무 유형</label>
+                    <select id="dutyType" onchange="updateSimulator()">
+                        <option value="enlisted">의무복무병</option>
+                        <option value="nco">부사관</option>
+                        <option value="officer">장교</option>
+                    </select>
+                </div>
+                <div class="sim-input-group">
+                    <label class="sim-input-label">계급</label>
+                    <select id="rank" onchange="updateSimulator()">
+                        <option value="E1">이병</option>
+                        <option value="E2">일병</option>
+                        <option value="E3">상병</option>
+                        <option value="E4">병장</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sim-results">
+                <div class="sim-result-row">
+                    <span class="sim-result-label">월 기본급</span>
+                    <span class="sim-result-value" id="basicSalary">1,000,000원</span>
+                </div>
+                <div class="sim-result-row">
+                    <span class="sim-result-label">월 수당 합계</span>
+                    <span class="sim-result-value" id="allowances">200,000원</span>
+                </div>
+                <div class="sim-result-row" style="border-bottom: 2px solid var(--border); padding-bottom: 16px;">
+                    <span class="sim-result-label" style="font-weight: 700;">세전 월급</span>
+                    <span class="sim-result-value" id="grossSalary">1,200,000원</span>
+                </div>
+                <div class="sim-result-row">
+                    <span class="sim-result-label">월 총 공제액</span>
+                    <span class="sim-result-value" id="deductions">-150,000원</span>
+                </div>
+                <div class="sim-result-row">
+                    <span class="sim-result-label sim-highlight">월 실수령액</span>
+                    <span class="sim-result-value sim-highlight" id="netSalary">1,050,000원</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 2컬럼: 공제 상세 + 정보 -->
     <div class="two-col">
         <div class="card" style="margin-bottom:0;">
@@ -349,6 +436,391 @@
         </div>
     </div>
 
+    <!-- Ad Slot 1 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 군별 비교표 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">군별 봉급 및 수당 비교</div>
+            <div class="card-badge">병사 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>병사 기본급</th>
+                        <th>특수 수당</th>
+                        <th>특징 및 혜택</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>육군</td>
+                        <td>100만원 (상병)</td>
+                        <td>전방근무수당, 위험수당</td>
+                        <td>최대 규모, 전방/후방 근무 선택</td>
+                    </tr>
+                    <tr>
+                        <td>해군</td>
+                        <td>100만원 (상병)</td>
+                        <td>함정근무수당 (+20만), 잠수함수당 (+30만)</td>
+                        <td>함정 배치 시 추가 수당, 해외 항해 경험</td>
+                    </tr>
+                    <tr>
+                        <td>공군</td>
+                        <td>100만원 (상병)</td>
+                        <td>비행수당, 정비수당, 기술수당</td>
+                        <td>최신 기술 습득, 높은 직무 전문성</td>
+                    </tr>
+                    <tr>
+                        <td>해병대</td>
+                        <td>100만원 (상병)</td>
+                        <td>위험수당 (+15만), 강습상륙훈련수당</td>
+                        <td>정예 전투 부대, 위험수당 최고 수준</td>
+                    </tr>
+                    <tr>
+                        <td>특수부대</td>
+                        <td>100만원 (상병)</td>
+                        <td>특수작전수당 (+40만), 위험수당</td>
+                        <td>특전사/UDT 기준, 수당 최고 수준</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 계급별 급여명세서 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">계급별 상세 급여명세서</div>
+            <div class="card-badge">월급 기준</div>
+        </div>
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" onclick="switchPayslip('recruit')">이병</button>
+            <button class="payslip-tab" onclick="switchPayslip('veteran')">병장</button>
+            <button class="payslip-tab" onclick="switchPayslip('sergeant')">하사</button>
+            <button class="payslip-tab" onclick="switchPayslip('captain')">대위</button>
+            <button class="payslip-tab" onclick="switchPayslip('major')">소령</button>
+        </div>
+
+        <div id="recruit" class="payslip-content active">
+            <div class="payslip-grid">
+                <div class="payslip-item">
+                    <div class="payslip-item-label">기본급</div>
+                    <div class="payslip-item-value">640,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">봉급 등가치</div>
+                    <div class="payslip-item-value">640,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">식사비</div>
+                    <div class="payslip-item-value">150,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">세전 월급</div>
+                    <div class="payslip-item-value">790,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">군인연금</div>
+                    <div class="payslip-item-value">-55,300원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">건강보험</div>
+                    <div class="payslip-item-value">-39,500원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">소득세</div>
+                    <div class="payslip-item-value">-22,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">월 실수령액</div>
+                    <div class="payslip-item-value" style="color:var(--accent);">671,200원</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="veteran" class="payslip-content">
+            <div class="payslip-grid">
+                <div class="payslip-item">
+                    <div class="payslip-item-label">기본급</div>
+                    <div class="payslip-item-value">1,250,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">봉급 등가치</div>
+                    <div class="payslip-item-value">1,250,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">식사비</div>
+                    <div class="payslip-item-value">150,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">세전 월급</div>
+                    <div class="payslip-item-value">1,400,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">군인연금</div>
+                    <div class="payslip-item-value">-98,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">건강보험</div>
+                    <div class="payslip-item-value">-70,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">소득세</div>
+                    <div class="payslip-item-value">-45,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">월 실수령액</div>
+                    <div class="payslip-item-value" style="color:var(--accent);">1,187,000원</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sergeant" class="payslip-content">
+            <div class="payslip-grid">
+                <div class="payslip-item">
+                    <div class="payslip-item-label">기본급</div>
+                    <div class="payslip-item-value">1,650,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">직책수당</div>
+                    <div class="payslip-item-value">120,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">식사비</div>
+                    <div class="payslip-item-value">150,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">세전 월급</div>
+                    <div class="payslip-item-value">1,920,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">군인연금</div>
+                    <div class="payslip-item-value">-134,400원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">건강보험</div>
+                    <div class="payslip-item-value">-96,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">소득세</div>
+                    <div class="payslip-item-value">-65,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">월 실수령액</div>
+                    <div class="payslip-item-value" style="color:var(--accent);">1,624,600원</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="captain" class="payslip-content">
+            <div class="payslip-grid">
+                <div class="payslip-item">
+                    <div class="payslip-item-label">기본급</div>
+                    <div class="payslip-item-value">2,450,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">직책수당</div>
+                    <div class="payslip-item-value">350,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">식사비</div>
+                    <div class="payslip-item-value">150,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">세전 월급</div>
+                    <div class="payslip-item-value">2,950,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">군인연금</div>
+                    <div class="payslip-item-value">-206,500원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">건강보험</div>
+                    <div class="payslip-item-value">-147,500원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">소득세</div>
+                    <div class="payslip-item-value">-125,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">월 실수령액</div>
+                    <div class="payslip-item-value" style="color:var(--accent);">2,471,000원</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="major" class="payslip-content">
+            <div class="payslip-grid">
+                <div class="payslip-item">
+                    <div class="payslip-item-label">기본급</div>
+                    <div class="payslip-item-value">2,850,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">직책수당</div>
+                    <div class="payslip-item-value">450,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">식사비</div>
+                    <div class="payslip-item-value">150,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">세전 월급</div>
+                    <div class="payslip-item-value">3,450,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">군인연금</div>
+                    <div class="payslip-item-value">-241,500원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">건강보험</div>
+                    <div class="payslip-item-value">-172,500원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">소득세</div>
+                    <div class="payslip-item-value">-155,000원</div>
+                </div>
+                <div class="payslip-item">
+                    <div class="payslip-item-label">월 실수령액</div>
+                    <div class="payslip-item-value" style="color:var(--accent);">2,880,000원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 군인 특수 혜택 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">군인 특수 혜택 및 제도</div>
+        </div>
+        <div class="benefit-grid">
+            <div class="benefit-card">
+                <h4>전역금 (퇴직금)</h4>
+                <p>계급과 근속기간에 따라 2년 근무 시 약 2,400만원부터 지급. 전역 후 재정착 지원.</p>
+            </div>
+            <div class="benefit-card">
+                <h4>장병내일준비적금</h4>
+                <p>전역 예정 6개월 전부터 월 최대 50만원까지 적립 가능. 국방부에서 50% 매칭.</p>
+            </div>
+            <div class="benefit-card">
+                <h4>군적금 (병영생활금고)</h4>
+                <p>월 10~50만원 적립 시 연 5% 이상의 높은 이자율 제공.</p>
+            </div>
+            <div class="benefit-card">
+                <h4>장병 월급 비과세</h4>
+                <p>군인 기본급 중 일부가 비과세 대상. 간접적인 세금 혜택.</p>
+            </div>
+            <div class="benefit-card">
+                <h4>군인연금 (기여금 7%)</h4>
+                <p>20년 이상 복무 시 정년퇴직 후 연금 수령. 국민연금보다 유리한 조건.</p>
+            </div>
+            <div class="benefit-card">
+                <h4>관사 및 식비 제공</h4>
+                <p>숙소와 식사 제공으로 실질적인 생활비 절감. 저렴한 생활비가 경제적 강점.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 진급 및 전역 경로 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">진급 체계 및 전역 후 경로</div>
+        </div>
+        <div style="margin-top: 20px;">
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 16px;">의무복무병 경로 (병사 → 전역)</h3>
+            <div class="career-path">
+                <div class="career-step">1</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>이병</strong><br><span>입대 직후, 월급 64만원</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">2</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>일병</strong><br><span>6개월 경과, 월급 80만원</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">3</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>상병</strong><br><span>12개월 경과, 월급 100만원</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">4</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>병장</strong><br><span>18개월 경과, 월급 125만원, 전역까지 약 6개월</span></div>
+            </div>
+
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin: 24px 0 16px;">부사관 장기복무 경로</h3>
+            <div class="career-path">
+                <div class="career-step">1</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>하사 (신임)</strong><br><span>월급 177만원, 4년 이상 근속</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">2</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>중사</strong><br><span>월급 230만원, 근속 5~7년</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">3</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>상사</strong><br><span>월급 280만원, 근속 15년 이상</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">4</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>원사 (최고)</strong><br><span>월급 320만원, 전역금 약 6~7천만원</span></div>
+            </div>
+
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin: 24px 0 16px;">장교 진급 경로</h3>
+            <div class="career-path">
+                <div class="career-step">1</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>소위 (신임)</strong><br><span>월급 197만원, 전문대 이상</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">2</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>중위</strong><br><span>월급 220만원, 근속 약 3년</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">3</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>대위</strong><br><span>월급 270만원, 근속 약 8년</span></div>
+            </div>
+            <div class="career-path">
+                <div class="career-step">4</div>
+                <div class="career-arrow"></div>
+                <div class="career-label"><strong>소령 이상</strong><br><span>월급 345만원 이상, 20년 이상 가능</span></div>
+            </div>
+
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin: 24px 0 16px;">전역 후 취업 경로</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 12px 0;">
+                <strong>공공기관:</strong> 경찰청, 소방청, 교도관, 산림청 등 경력 우대<br>
+                <strong>민간기업:</strong> 보안업체, 물류업체, 건설회사 인정사정 우대<br>
+                <strong>자격증:</strong> 전역 후 국가자격시험 응시 가능 (공무원 시험, 기술자격 등)<br>
+                <strong>창업:</strong> 소상공인 대출 우대, 예비군 의무 병행
+            </p>
+        </div>
+    </div>
+
     <!-- 관련 직종 -->
     <div class="card">
         <div class="card-header">
@@ -390,5 +862,77 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 군인 봉급 시뮬레이터 데이터
+const salaryData = {
+    enlisted: {
+        E1: { basic: 640000, allowance: 150000, name: '이병' },
+        E2: { basic: 800000, allowance: 150000, name: '일병' },
+        E3: { basic: 1000000, allowance: 150000, name: '상병' },
+        E4: { basic: 1250000, allowance: 150000, name: '병장' }
+    },
+    nco: {
+        E1: { basic: 1650000, allowance: 270000, name: '하사' },
+        E2: { basic: 2100000, allowance: 310000, name: '중사' },
+        E3: { basic: 2550000, allowance: 350000, name: '상사' },
+        E4: { basic: 2950000, allowance: 370000, name: '원사' }
+    },
+    officer: {
+        E1: { basic: 1770000, allowance: 200000, name: '소위' },
+        E2: { basic: 1980000, allowance: 220000, name: '중위' },
+        E3: { basic: 2450000, allowance: 350000, name: '대위' },
+        E4: { basic: 3100000, allowance: 450000, name: '소령' }
+    }
+};
+
+function updateSimulator() {
+    const dutyType = document.getElementById('dutyType').value;
+    const rank = document.getElementById('rank').value;
+
+    const salary = salaryData[dutyType][rank];
+    const basicSalary = salary.basic;
+    const allowances = salary.allowance;
+    const grossSalary = basicSalary + allowances;
+
+    // 공제 계산 (군인연금 7%, 건강보험 약 4.5%, 소득세 약 2~3%)
+    const militaryPension = Math.floor(basicSalary * 0.07);
+    const healthInsurance = Math.floor(grossSalary * 0.045);
+    const incomeTax = Math.floor(grossSalary * 0.025);
+    const totalDeductions = militaryPension + healthInsurance + incomeTax;
+    const netSalary = grossSalary - totalDeductions;
+
+    document.getElementById('basicSalary').textContent = basicSalary.toLocaleString('ko-KR') + '원';
+    document.getElementById('allowances').textContent = allowances.toLocaleString('ko-KR') + '원';
+    document.getElementById('grossSalary').textContent = grossSalary.toLocaleString('ko-KR') + '원';
+    document.getElementById('deductions').textContent = '-' + totalDeductions.toLocaleString('ko-KR') + '원';
+    document.getElementById('netSalary').textContent = netSalary.toLocaleString('ko-KR') + '원';
+}
+
+function switchPayslip(tab) {
+    // 모든 content 숨기기
+    document.querySelectorAll('.payslip-content').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    // 모든 탭 비활성화
+    document.querySelectorAll('.payslip-tab').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    // 선택한 content와 탭 활성화
+    const content = document.getElementById(tab);
+    if (content) {
+        content.classList.add('active');
+    }
+
+    // 클릭한 탭 활성화
+    event.target.classList.add('active');
+}
+
+// 초기화
+updateSimulator();
+</script>
+
 </body>
 </html>

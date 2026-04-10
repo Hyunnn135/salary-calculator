@@ -51,6 +51,32 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .sim-box-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); }
+        .sim-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+        .sim-control { display: flex; flex-direction: column; }
+        .sim-control-label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+        .sim-control input, .sim-control select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-family: 'Noto Sans KR', sans-serif; }
+        .sim-result { background: var(--surface-alt); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        .sim-result-label { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .sim-result-value { font-size: 1.4rem; font-weight: 700; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .payslip-tabs { margin-bottom: 24px; }
+        .payslip-nav { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; overflow-x: auto; }
+        .payslip-nav button { padding: 12px 16px; background: transparent; border: none; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; border-bottom: 2px solid transparent; }
+        .payslip-nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .payslip-nav button:hover { color: var(--accent); }
+        .payslip-tab { display: none; }
+        .payslip-tab.active { display: block; }
+        .career-path { display: flex; align-items: center; justify-content: space-between; margin: 20px 0; position: relative; }
+        .career-step { flex: 1; text-align: center; padding: 16px; background: var(--surface-alt); border-radius: 8px; margin: 0 8px; position: relative; z-index: 1; }
+        .career-step-title { font-weight: 700; color: var(--text-primary); font-size: 0.9rem; margin-bottom: 4px; }
+        .career-step-detail { font-size: 0.78rem; color: var(--text-secondary); }
+        .career-arrow { flex: 0 0 20px; text-align: center; color: var(--accent); font-size: 1.2rem; }
+        @media (max-width: 768px) {
+            .sim-controls { grid-template-columns: 1fr; }
+            .career-path { flex-wrap: wrap; }
+            .career-arrow { flex: 0 0 100%; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -208,6 +234,48 @@
         </div>
     </div>
 
+    <!-- 변호사 연봉 시뮬레이터 -->
+    <div class="sim-box">
+        <div class="sim-box-title">변호사 연봉 시뮬레이터</div>
+        <div class="sim-controls">
+            <div class="sim-control">
+                <label class="sim-control-label">경력 (년)</label>
+                <input type="range" id="experience" min="0" max="15" value="3" style="cursor:pointer;">
+                <div style="font-size:0.78rem; color:var(--text-secondary); margin-top:6px;"><span id="expValue">3</span>년차</div>
+            </div>
+            <div class="sim-control">
+                <label class="sim-control-label">근무 유형</label>
+                <select id="workType" onchange="updateSimulator()">
+                    <option value="biglaw">대형로펌 (5대)</option>
+                    <option value="midlaw">중소로펌</option>
+                    <option value="corporate">기업 사내변호사</option>
+                    <option value="nonprofit">공익변호사</option>
+                    <option value="judge">검찰·판사</option>
+                </select>
+            </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:16px;">
+            <div class="sim-result">
+                <div class="sim-result-label">예상 연봉</div>
+                <div class="sim-result-value" id="simSalary">100,000,000<span style="font-size:0.5em;">원</span></div>
+            </div>
+            <div class="sim-result">
+                <div class="sim-result-label">월 세전 급여</div>
+                <div class="sim-result-value" id="simGross" style="font-size:1.2rem;">8,333,333<span style="font-size:0.5em;">원</span></div>
+            </div>
+            <div class="sim-result">
+                <div class="sim-result-label">월 실수령액</div>
+                <div class="sim-result-value" id="simNet" style="font-size:1.2rem;">7,016,931<span style="font-size:0.5em;">원</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 광고 슬롯 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="7829521234" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 2컬럼: 공제 상세 + 정보 -->
     <div class="two-col">
         <div class="card" style="margin-bottom:0;">
@@ -349,6 +417,374 @@
         </div>
     </div>
 
+    <!-- 법률사무소 유형별 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">법률사무소 유형별 비교</div>
+            <div class="card-badge">신입~3년차 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>유형</th>
+                        <th>대표 기관</th>
+                        <th>신입 연봉</th>
+                        <th>3년차 연봉</th>
+                        <th>월 실수령</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5대 대형로펌</td>
+                        <td>김앤장, 광장, 율촌, 세종, 태평양</td>
+                        <td>1억원</td>
+                        <td>1억 5천만원</td>
+                        <td class="accent">7,016,931원</td>
+                        <td style="font-size:0.78rem;">높은 연봉, 야근 많음, 파트너십 경쟁 치열</td>
+                    </tr>
+                    <tr>
+                        <td>중형 로펌</td>
+                        <td>100인 이상</td>
+                        <td>5,500만원</td>
+                        <td>8,000만원</td>
+                        <td class="accent">3,963,697원</td>
+                        <td style="font-size:0.78rem;">work-life balance 나음, 안정적 성장</td>
+                    </tr>
+                    <tr>
+                        <td>소형 개인사무소</td>
+                        <td>1~10인</td>
+                        <td>4,000만원</td>
+                        <td>5,500만원</td>
+                        <td class="accent">2,909,091원</td>
+                        <td style="font-size:0.78rem;">자유도 높음, 사건 개발 중요</td>
+                    </tr>
+                    <tr>
+                        <td>기업 사내변호사</td>
+                        <td>대기업 법무팀</td>
+                        <td>5,500만원</td>
+                        <td>8,000만원</td>
+                        <td class="accent">3,963,697원</td>
+                        <td style="font-size:0.78rem;">정해진 시간, 부가이익(주식옵션)</td>
+                    </tr>
+                    <tr>
+                        <td>공익변호사</td>
+                        <td>대한법률구조공단</td>
+                        <td>3,500만원</td>
+                        <td>4,000만원</td>
+                        <td class="accent">2,545,455원</td>
+                        <td style="font-size:0.78rem;">국가직원 수준, 안정적</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 직급별 급여명세서 (탭형) -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">직급별 급여명세서 (대형로펌 기준)</div>
+        </div>
+        <div class="payslip-tabs">
+            <div class="payslip-nav">
+                <button class="active" onclick="switchPayslip('trainee')">수습 (신입)</button>
+                <button onclick="switchPayslip('junior')">주니어 (1~3년)</button>
+                <button onclick="switchPayslip('senior')">시니어 (4~7년)</button>
+                <button onclick="switchPayslip('partner')">파트너 (10년+)</button>
+                <button onclick="switchPayslip('inhouse')">사내변호사</button>
+            </div>
+
+            <!-- 수습 (신입) -->
+            <div id="trainee" class="payslip-tab active">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">기본급</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">8,333,333<span style="font-size:0.6em;">원</span></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">수당</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">-<span style="font-size:0.6em;">월고정</span></div>
+                    </div>
+                </div>
+                <table class="data-table" style="font-size:0.82rem;">
+                    <tr>
+                        <td>국민연금</td>
+                        <td style="text-align:right;">-187,500원</td>
+                    </tr>
+                    <tr>
+                        <td>건강보험</td>
+                        <td style="text-align:right;">-147,708원</td>
+                    </tr>
+                    <tr>
+                        <td>장기요양보험</td>
+                        <td style="text-align:right;">-19,128원</td>
+                    </tr>
+                    <tr>
+                        <td>고용보험</td>
+                        <td style="text-align:right;">-37,499원</td>
+                    </tr>
+                    <tr>
+                        <td>소득세</td>
+                        <td style="text-align:right;">-125,353원</td>
+                    </tr>
+                    <tr>
+                        <td>지방소득세</td>
+                        <td style="text-align:right;">-12,535원</td>
+                    </tr>
+                    <tr style="border-top:2px solid var(--text-primary); font-weight:700;">
+                        <td>실수령액</td>
+                        <td style="text-align:right; color:var(--accent);">7,016,931원</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 주니어 (1~3년) -->
+            <div id="junior" class="payslip-tab">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">기본급</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">10,416,666<span style="font-size:0.6em;">원</span></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">성과급</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">500~1,000만</div>
+                    </div>
+                </div>
+                <table class="data-table" style="font-size:0.82rem;">
+                    <tr>
+                        <td>국민연금</td>
+                        <td style="text-align:right;">-234,375원</td>
+                    </tr>
+                    <tr>
+                        <td>건강보험</td>
+                        <td style="text-align:right;">-184,635원</td>
+                    </tr>
+                    <tr>
+                        <td>장기요양보험</td>
+                        <td style="text-align:right;">-23,910원</td>
+                    </tr>
+                    <tr>
+                        <td>고용보험</td>
+                        <td style="text-align:right;">-46,874원</td>
+                    </tr>
+                    <tr>
+                        <td>소득세</td>
+                        <td style="text-align:right;">-156,250원</td>
+                    </tr>
+                    <tr>
+                        <td>지방소득세</td>
+                        <td style="text-align:right;">-15,625원</td>
+                    </tr>
+                    <tr style="border-top:2px solid var(--text-primary); font-weight:700;">
+                        <td>실수령액</td>
+                        <td style="text-align:right; color:var(--accent);">8,755,897원</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 시니어 (4~7년) -->
+            <div id="senior" class="payslip-tab">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">기본급</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">13,333,333<span style="font-size:0.6em;">원</span></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">성과급</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">1,500~2,500만</div>
+                    </div>
+                </div>
+                <table class="data-table" style="font-size:0.82rem;">
+                    <tr>
+                        <td>국민연금</td>
+                        <td style="text-align:right;">-300,000원</td>
+                    </tr>
+                    <tr>
+                        <td>건강보험</td>
+                        <td style="text-align:right;">-235,904원</td>
+                    </tr>
+                    <tr>
+                        <td>장기요양보험</td>
+                        <td style="text-align:right;">-30,471원</td>
+                    </tr>
+                    <tr>
+                        <td>고용보험</td>
+                        <td style="text-align:right;">-59,999원</td>
+                    </tr>
+                    <tr>
+                        <td>소득세</td>
+                        <td style="text-align:right;">-200,000원</td>
+                    </tr>
+                    <tr>
+                        <td>지방소득세</td>
+                        <td style="text-align:right;">-20,000원</td>
+                    </tr>
+                    <tr style="border-top:2px solid var(--text-primary); font-weight:700;">
+                        <td>실수령액</td>
+                        <td style="text-align:right; color:var(--accent);">11,556,229원</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 파트너 (10년+) -->
+            <div id="partner" class="payslip-tab">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">기본급 + 파트너쉐어</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">2,500만~5,000만</div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">연 보너스</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">5,000~1억</div>
+                    </div>
+                </div>
+                <div style="padding:16px; background:var(--surface-alt); border-radius:8px; margin-top:12px;">
+                    <p style="font-size:0.85rem; color:var(--text-secondary); margin:0;">파트너는 개인사업자 또는 합자회사 형태로, 월급 + 분배금 구조. 세무처리는 사업소득으로 종합소득세 신고 필요. 실수령액은 개인실적과 사무소 실적에 따라 크게 변동.</p>
+                </div>
+            </div>
+
+            <!-- 사내변호사 -->
+            <div id="inhouse" class="payslip-tab">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">기본급</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">6,250,000<span style="font-size:0.6em;">원</span></div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:4px;">상여금 (연2회)</div>
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--text-primary);">3~6개월치</div>
+                    </div>
+                </div>
+                <table class="data-table" style="font-size:0.82rem;">
+                    <tr>
+                        <td>국민연금</td>
+                        <td style="text-align:right;">-140,625원</td>
+                    </tr>
+                    <tr>
+                        <td>건강보험</td>
+                        <td style="text-align:right;">-110,938원</td>
+                    </tr>
+                    <tr>
+                        <td>장기요양보험</td>
+                        <td style="text-align:right;">-11,736원</td>
+                    </tr>
+                    <tr>
+                        <td>고용보험</td>
+                        <td style="text-align:right;">-28,125원</td>
+                    </tr>
+                    <tr>
+                        <td>소득세</td>
+                        <td style="text-align:right;">-93,750원</td>
+                    </tr>
+                    <tr>
+                        <td>지방소득세</td>
+                        <td style="text-align:right;">-9,375원</td>
+                    </tr>
+                    <tr style="border-top:2px solid var(--text-primary); font-weight:700;">
+                        <td>실수령액</td>
+                        <td style="text-align:right; color:var(--accent);">5,555,451원</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 광고 슬롯 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="7829521235" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 절세 전략 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">변호사 절세 전략</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="padding:16px; background:var(--surface-alt); border-radius:8px;">
+                <h3 style="font-size:0.95rem; font-weight:700; margin:0 0 10px; color:var(--text-primary);">로펌 근무 (근로소득)</h3>
+                <ul style="font-size:0.85rem; color:var(--text-secondary); margin:0; padding:0 0 0 20px;">
+                    <li>신용카드 소득공제: 200만원 한도</li>
+                    <li>연말정산 인적공제 활용</li>
+                    <li>개인연금저축 세액공제 400만원</li>
+                    <li>주택자금 특별공제 (월세/전세)</li>
+                    <li>의료비 세액공제: 의료비 3% 초과분</li>
+                    <li>교육비 공제</li>
+                </ul>
+            </div>
+            <div style="padding:16px; background:var(--surface-alt); border-radius:8px;">
+                <h3 style="font-size:0.95rem; font-weight:700; margin:0 0 10px; color:var(--text-primary);">변호사 개업 (사업소득)</h3>
+                <ul style="font-size:0.85rem; color:var(--text-secondary); margin:0; padding:0 0 0 20px;">
+                    <li>세무사/회계사 비용 공제</li>
+                    <li>사무실 임차료, 통신비 공제</li>
+                    <li>중소기업 특별 세액공제</li>
+                    <li>의료인 소득공제: 수입금액 20%</li>
+                    <li>지방소득세 감면 (조건부)</li>
+                    <li>소득분산 전략 (배우자 고용)</li>
+                </ul>
+            </div>
+        </div>
+        <div style="padding:16px; background:#FEF3C7; border-radius:8px; margin-top:16px; border-left:4px solid #F59E0B;">
+            <p style="font-size:0.85rem; margin:0; color:#92400E;"><strong>주의:</strong> 이 정보는 일반적인 안내이며, 정확한 절세는 세무전문가와 상담이 필요합니다. 변호사의 경우 전문직 과세특례를 받을 수 있으므로 꼭 확인하세요.</p>
+        </div>
+    </div>
+
+    <!-- 커리어패스 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">변호사 커리어패스</div>
+        </div>
+        <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-primary); margin:20px 0 12px;">1. 로펌 내 상승 경로</h3>
+        <div class="career-path">
+            <div class="career-step">
+                <div class="career-step-title">로펌 어소</div>
+                <div class="career-step-detail">1~3년차, 신입 연봉 1억원</div>
+            </div>
+            <div class="career-arrow">→</div>
+            <div class="career-step">
+                <div class="career-step-title">주니어 파트너</div>
+                <div class="career-step-detail">4~7년차, 연봉 1.5~2억원</div>
+            </div>
+            <div class="career-arrow">→</div>
+            <div class="career-step">
+                <div class="career-step-title">시니어 파트너</div>
+                <div class="career-step-detail">10년+, 연봉 3억원+</div>
+            </div>
+        </div>
+
+        <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-primary); margin:20px 0 12px;">2. 사법 경력</h3>
+        <div class="career-path">
+            <div class="career-step">
+                <div class="career-step-title">법원 판사</div>
+                <div class="career-step-detail">정년 60세, 연봉 5,000~8,000만</div>
+            </div>
+            <div class="career-arrow">→</div>
+            <div class="career-step">
+                <div class="career-step-title">로펌 전환</div>
+                <div class="career-step-detail">판사 경력 활용, 시니어 파트너 고연봉</div>
+            </div>
+        </div>
+
+        <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-primary); margin:20px 0 12px;">3. 기업 이동</h3>
+        <div class="career-path">
+            <div class="career-step">
+                <div class="career-step-title">로펌 변호사</div>
+                <div class="career-step-detail">3~5년 경험 쌓기</div>
+            </div>
+            <div class="career-arrow">→</div>
+            <div class="career-step">
+                <div class="career-step-title">사내변호사</div>
+                <div class="career-step-detail">안정적 직장, 추가 보상 (스톡옵션)</div>
+            </div>
+            <div class="career-arrow">→</div>
+            <div class="career-step">
+                <div class="career-step-title">General Counsel (CLO)</div>
+                <div class="career-step-detail">최고법무책임자, 연봉 1억 이상</div>
+            </div>
+        </div>
+    </div>
+
     <!-- 관련 직종 -->
     <div class="card">
         <div class="card-header">
@@ -390,5 +826,115 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 변호사 연봉 시뮬레이터 데이터
+const salaryData = {
+    biglaw: [
+        {exp: 0, salary: 70000000, bonus: 30000000},
+        {exp: 1, salary: 75000000, bonus: 25000000},
+        {exp: 2, salary: 80000000, bonus: 20000000},
+        {exp: 3, salary: 100000000, bonus: 30000000},
+        {exp: 5, salary: 125000000, bonus: 40000000},
+        {exp: 7, salary: 150000000, bonus: 50000000},
+        {exp: 10, salary: 200000000, bonus: 100000000}
+    ],
+    midlaw: [
+        {exp: 0, salary: 40000000, bonus: 5000000},
+        {exp: 1, salary: 45000000, bonus: 8000000},
+        {exp: 2, salary: 50000000, bonus: 10000000},
+        {exp: 3, salary: 55000000, bonus: 10000000},
+        {exp: 5, salary: 70000000, bonus: 15000000},
+        {exp: 7, salary: 85000000, bonus: 20000000},
+        {exp: 10, salary: 100000000, bonus: 25000000}
+    ],
+    corporate: [
+        {exp: 0, salary: 50000000, bonus: 20000000},
+        {exp: 1, salary: 55000000, bonus: 22000000},
+        {exp: 2, salary: 60000000, bonus: 25000000},
+        {exp: 3, salary: 65000000, bonus: 30000000},
+        {exp: 5, salary: 80000000, bonus: 35000000},
+        {exp: 7, salary: 95000000, bonus: 40000000},
+        {exp: 10, salary: 120000000, bonus: 50000000}
+    ],
+    nonprofit: [
+        {exp: 0, salary: 30000000, bonus: 3000000},
+        {exp: 1, salary: 32000000, bonus: 3200000},
+        {exp: 2, salary: 34000000, bonus: 3400000},
+        {exp: 3, salary: 35000000, bonus: 3500000},
+        {exp: 5, salary: 38000000, bonus: 4000000},
+        {exp: 7, salary: 42000000, bonus: 4500000},
+        {exp: 10, salary: 48000000, bonus: 5000000}
+    ],
+    judge: [
+        {exp: 0, salary: 45000000, bonus: 10000000},
+        {exp: 1, salary: 48000000, bonus: 11000000},
+        {exp: 2, salary: 50000000, bonus: 12000000},
+        {exp: 3, salary: 52000000, bonus: 13000000},
+        {exp: 5, salary: 58000000, bonus: 15000000},
+        {exp: 7, salary: 65000000, bonus: 18000000},
+        {exp: 10, salary: 75000000, bonus: 22000000}
+    ]
+};
+
+function getSalaryByExperience(type, years) {
+    const data = salaryData[type];
+    if (!data) return {salary: 100000000, bonus: 30000000};
+
+    let result = data[0];
+    for (let item of data) {
+        if (item.exp <= years) {
+            result = item;
+        }
+    }
+    return result;
+}
+
+function calculateNetSalary(annualSalary) {
+    const monthly = annualSalary / 12;
+    const pension = monthly * 0.045;
+    const health = monthly * 0.03545;
+    const longterm = health * 0.1227;
+    const employment = monthly * 0.009;
+    const incomeTax = Math.max(0, (monthly - 1660000) * 0.06);
+    const localTax = incomeTax * 0.1;
+
+    const totalDeduction = pension + health + longterm + employment + incomeTax + localTax;
+    const net = monthly - totalDeduction;
+
+    return Math.round(net);
+}
+
+function updateSimulator() {
+    const experience = parseInt(document.getElementById('experience').value);
+    const workType = document.getElementById('workType').value;
+    const {salary} = getSalaryByExperience(workType, experience);
+
+    const monthly = Math.round(salary / 12);
+    const net = calculateNetSalary(salary);
+
+    document.getElementById('simSalary').innerHTML = (salary/10000000).toFixed(1) + '<span style="font-size:0.5em;">천만원</span>';
+    document.getElementById('simGross').innerHTML = (monthly).toLocaleString('ko-KR') + '<span style="font-size:0.5em;">원</span>';
+    document.getElementById('simNet').innerHTML = net.toLocaleString('ko-KR') + '<span style="font-size:0.5em;">원</span>';
+}
+
+function switchPayslip(tab) {
+    document.querySelectorAll('.payslip-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.payslip-nav button').forEach(b => b.classList.remove('active'));
+
+    document.getElementById(tab).classList.add('active');
+    event.target.classList.add('active');
+}
+
+document.getElementById('experience').addEventListener('input', function() {
+    document.getElementById('expValue').textContent = this.value;
+    updateSimulator();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateSimulator();
+});
+</script>
+
 </body>
 </html>

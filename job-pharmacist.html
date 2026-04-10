@@ -51,6 +51,37 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border); }
+        .sim-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .sim-input-group { display: flex; flex-direction: column; }
+        .sim-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+        .sim-input, .sim-select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; background: var(--surface-light); color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .sim-result { background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(59, 130, 246, 0.05)); padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent); margin-top: 16px; }
+        .sim-result-item { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.88rem; }
+        .sim-result-item-label { color: var(--text-secondary); }
+        .sim-result-item-value { font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .payslip-tabs { margin-bottom: 24px; }
+        .tab-buttons { display: flex; gap: 0; border-bottom: 2px solid var(--border); overflow-x: auto; margin-bottom: 16px; }
+        .tab-btn { padding: 12px 16px; font-size: 0.85rem; font-weight: 600; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; color: var(--text-secondary); transition: all 0.15s; white-space: nowrap; }
+        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .tab-btn:hover { color: var(--text-primary); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .payslip { background: var(--surface); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+        .payslip-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 0.85rem; border-bottom: 1px solid var(--surface-alt); }
+        .payslip-row.section-title { font-weight: 700; color: var(--text-secondary); background: var(--surface-alt); padding: 12px 8px; margin-top: 8px; margin-left: -20px; margin-right: -20px; padding-left: 20px; }
+        .payslip-row:last-child { border-bottom: none; }
+        .payslip-label { color: var(--text-secondary); }
+        .payslip-value { font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .career-path { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+        .career-step { background: var(--surface); padding: 16px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
+        .career-step-num { font-size: 2rem; font-weight: 900; color: var(--accent); }
+        .career-step-title { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+        .career-step-desc { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; }
+        @media (max-width: 768px) {
+            .sim-row { grid-template-columns: 1fr; }
+            .career-path { grid-template-columns: 1fr 1fr; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -291,6 +322,116 @@
 </div>
     </div>
 
+    <!-- 약사 연봉 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">약사 연봉 시뮬레이터</div>
+            <div class="card-badge">경력 · 근무유형별</div>
+        </div>
+        <div class="sim-box">
+            <div class="sim-row">
+                <div class="sim-input-group">
+                    <label class="sim-label">경력</label>
+                    <input type="range" id="simCareer" class="sim-input" min="0" max="15" value="3" step="1" style="cursor:pointer;">
+                    <span style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;"><span id="careerDisplay">3</span>년</span>
+                </div>
+                <div class="sim-input-group">
+                    <label class="sim-label">근무유형</label>
+                    <select id="simType" class="sim-select">
+                        <option value="local">동네약국</option>
+                        <option value="hospital">병원약국</option>
+                        <option value="pharma">제약회사</option>
+                        <option value="gov">공직(보건소)</option>
+                    </select>
+                </div>
+            </div>
+            <div id="simResult" class="sim-result" style="display:none;">
+                <div class="sim-result-item">
+                    <span class="sim-result-item-label">예상 연봉</span>
+                    <span class="sim-result-item-value" id="simSalary">-</span>
+                </div>
+                <div class="sim-result-item">
+                    <span class="sim-result-item-label">월 세전 급여</span>
+                    <span class="sim-result-item-value" id="simMonthly">-</span>
+                </div>
+                <div class="sim-result-item">
+                    <span class="sim-result-item-label">월 공제액</span>
+                    <span class="sim-result-item-value" id="simDeduction">-</span>
+                </div>
+                <div class="sim-result-item" style="border-top:1px solid rgba(37,99,235,0.2); padding-top:10px; margin-top:10px;">
+                    <span class="sim-result-item-label" style="font-weight:700;">월 실수령액</span>
+                    <span class="sim-result-item-value" style="color:var(--accent); font-size:1rem;">
+                        <span id="simTakeHome">-</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 근무유형별 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">약사 근무유형별 비교</div>
+            <div class="card-badge">3년차 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>근무유형</th>
+                        <th>연봉범위</th>
+                        <th>월 실수령(3년차)</th>
+                        <th>근무시간</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>동네약국</td>
+                            <td>5,500~6,500만원</td>
+                            <td class="accent">3,960,000~4,680,000원</td>
+                            <td>9시간</td>
+                            <td>성과급, 처방 인센티브</td>
+                        </tr>
+                        <tr>
+                            <td>대형 체인약국</td>
+                            <td>5,000~6,000만원</td>
+                            <td class="accent">3,600,000~4,320,000원</td>
+                            <td>8시간</td>
+                            <td>복리후생 우수, 고정급</td>
+                        </tr>
+                        <tr>
+                            <td>병원약제부</td>
+                            <td>5,000~6,000만원</td>
+                            <td class="accent">3,600,000~4,320,000원</td>
+                            <td>8시간</td>
+                            <td>전문약사 자격 취득 용이</td>
+                        </tr>
+                        <tr>
+                            <td>제약회사</td>
+                            <td>6,000~8,000만원</td>
+                            <td class="accent">4,320,000~5,760,000원</td>
+                            <td>8~9시간</td>
+                            <td>보너스, 스톡옵션 있음</td>
+                        </tr>
+                        <tr>
+                            <td>공직약사(보건소)</td>
+                            <td>4,500~5,500만원</td>
+                            <td class="accent">3,240,000~3,960,000원</td>
+                            <td>8시간</td>
+                            <td>공무원 신분, 퇴직금 보장</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <!-- 경력/직급별 비교 -->
     <div class="card">
         <div class="card-header">
@@ -349,6 +490,395 @@
         </div>
     </div>
 
+    <!-- Ad Slot 2 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 경력별 급여명세서 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">경력별 급여명세서</div>
+            <div class="card-badge">동네약국 기준</div>
+        </div>
+        <div class="payslip-tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchPayslipTab(0)">신입</button>
+                <button class="tab-btn" onclick="switchPayslipTab(1)">2년차</button>
+                <button class="tab-btn" onclick="switchPayslipTab(2)">3년차</button>
+                <button class="tab-btn" onclick="switchPayslipTab(3)">5년차</button>
+                <button class="tab-btn" onclick="switchPayslipTab(4)">10년차</button>
+            </div>
+            <div id="payslip-0" class="tab-content active">
+                <div class="payslip">
+                    <div class="payslip-row section-title">기본급 및 수당</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">4,200,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">자격수당</span>
+                        <span class="payslip-value">300,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">처방 인센티브</span>
+                        <span class="payslip-value">200,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">소계</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>세전 월급</strong></span>
+                        <span class="payslip-value">4,700,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">공제액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">국민연금(9%)</span>
+                        <span class="payslip-value">-211,500원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">건강보험</span>
+                        <span class="payslip-value">-160,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">장기요양보험</span>
+                        <span class="payslip-value">-21,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">고용보험</span>
+                        <span class="payslip-value">-40,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">소득세</span>
+                        <span class="payslip-value">-160,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">지방소득세</span>
+                        <span class="payslip-value">-16,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">실수령액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>손에 받는 금액</strong></span>
+                        <span class="payslip-value" style="color:var(--accent);">3,391,500원</span>
+                    </div>
+                </div>
+            </div>
+            <div id="payslip-1" class="tab-content">
+                <div class="payslip">
+                    <div class="payslip-row section-title">기본급 및 수당</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">4,600,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">자격수당</span>
+                        <span class="payslip-value">300,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">처방 인센티브</span>
+                        <span class="payslip-value">250,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">소계</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>세전 월급</strong></span>
+                        <span class="payslip-value">5,150,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">공제액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">국민연금(9%)</span>
+                        <span class="payslip-value">-231,750원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">건강보험</span>
+                        <span class="payslip-value">-175,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">장기요양보험</span>
+                        <span class="payslip-value">-23,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">고용보험</span>
+                        <span class="payslip-value">-45,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">소득세</span>
+                        <span class="payslip-value">-180,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">지방소득세</span>
+                        <span class="payslip-value">-18,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">실수령액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>손에 받는 금액</strong></span>
+                        <span class="payslip-value" style="color:var(--accent);">3,708,250원</span>
+                    </div>
+                </div>
+            </div>
+            <div id="payslip-2" class="tab-content">
+                <div class="payslip">
+                    <div class="payslip-row section-title">기본급 및 수당</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">5,000,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">자격수당</span>
+                        <span class="payslip-value">300,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">처방 인센티브</span>
+                        <span class="payslip-value">300,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">능력급</span>
+                        <span class="payslip-value">200,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">소계</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>세전 월급</strong></span>
+                        <span class="payslip-value">5,800,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">공제액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">국민연금(9%)</span>
+                        <span class="payslip-value">-261,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">건강보험</span>
+                        <span class="payslip-value">-197,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">장기요양보험</span>
+                        <span class="payslip-value">-25,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">고용보험</span>
+                        <span class="payslip-value">-50,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">소득세</span>
+                        <span class="payslip-value">-195,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">지방소득세</span>
+                        <span class="payslip-value">-20,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">실수령액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>손에 받는 금액</strong></span>
+                        <span class="payslip-value" style="color:var(--accent);">4,051,000원</span>
+                    </div>
+                </div>
+            </div>
+            <div id="payslip-3" class="tab-content">
+                <div class="payslip">
+                    <div class="payslip-row section-title">기본급 및 수당</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">5,500,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">자격수당</span>
+                        <span class="payslip-value">400,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">처방 인센티브</span>
+                        <span class="payslip-value">350,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">능력급</span>
+                        <span class="payslip-value">250,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">소계</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>세전 월급</strong></span>
+                        <span class="payslip-value">6,500,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">공제액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">국민연금(9%)</span>
+                        <span class="payslip-value">-292,500원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">건강보험</span>
+                        <span class="payslip-value">-221,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">장기요양보험</span>
+                        <span class="payslip-value">-28,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">고용보험</span>
+                        <span class="payslip-value">-56,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">소득세</span>
+                        <span class="payslip-value">-225,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">지방소득세</span>
+                        <span class="payslip-value">-23,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">실수령액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>손에 받는 금액</strong></span>
+                        <span class="payslip-value" style="color:var(--accent);">4,655,500원</span>
+                    </div>
+                </div>
+            </div>
+            <div id="payslip-4" class="tab-content">
+                <div class="payslip">
+                    <div class="payslip-row section-title">기본급 및 수당</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">기본급</span>
+                        <span class="payslip-value">6,500,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">자격수당</span>
+                        <span class="payslip-value">500,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">처방 인센티브</span>
+                        <span class="payslip-value">400,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">능력급/관리비</span>
+                        <span class="payslip-value">400,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">소계</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>세전 월급</strong></span>
+                        <span class="payslip-value">7,800,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">공제액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">국민연금(9%)</span>
+                        <span class="payslip-value">-351,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">건강보험</span>
+                        <span class="payslip-value">-265,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">장기요양보험</span>
+                        <span class="payslip-value">-33,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">고용보험</span>
+                        <span class="payslip-value">-67,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">소득세</span>
+                        <span class="payslip-value">-280,000원</span>
+                    </div>
+                    <div class="payslip-row">
+                        <span class="payslip-label">지방소득세</span>
+                        <span class="payslip-value">-28,000원</span>
+                    </div>
+                    <div class="payslip-row section-title">실수령액</div>
+                    <div class="payslip-row">
+                        <span class="payslip-label"><strong>손에 받는 금액</strong></span>
+                        <span class="payslip-value" style="color:var(--accent);">5,576,000원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 약사 커리어패스 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">약사 커리어 경로 및 연봉 상승</div>
+        </div>
+        <div class="career-path">
+            <div class="career-step">
+                <div class="career-step-num">1</div>
+                <div class="career-step-title">신입 약사</div>
+                <div class="career-step-desc">약국/병원 입사<br/>연봉 5,000만원</div>
+            </div>
+            <div class="career-step">
+                <div class="career-step-num">2</div>
+                <div class="career-step-title">경력약사</div>
+                <div class="career-step-desc">3~5년차<br/>연봉 5,500~6,500만원</div>
+            </div>
+            <div class="career-step">
+                <div class="career-step-num">3</div>
+                <div class="career-step-title">관리약사</div>
+                <div class="career-step-desc">팀 리드/감시약사<br/>연봉 7,000~8,000만원</div>
+            </div>
+            <div class="career-step">
+                <div class="career-step-num">4</div>
+                <div class="career-step-title">개국약사</div>
+                <div class="career-step-desc">독립 개업<br/>연봉 9,000~15,000만원</div>
+            </div>
+        </div>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:20px 0 12px;">전문약사 자격</h3>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:8px;"><strong>임상약사:</strong> 병원 약제부에서 환자 약물 치료 담당 (추가 급여 100~200만원)</p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:8px;"><strong>약료약사:</strong> 커뮤니티 약국에서 복약 지도 및 약료 서비스 담당</p>
+        <p style="font-size:0.88rem; color:var(--text-secondary);"><strong>조제약사:</strong> 전문 조제 영역 (한약, 유전자 맞춤 의약) 전문성 강화</p>
+    </div>
+
+    <!-- 비과세 및 절세 가이드 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">약사 절세 전략</div>
+        </div>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:0 0 12px;">근로소득 vs 사업소득 비교</h3>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>근로약사</th>
+                        <th>개업약사(사업소득)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>세금 신고</td>
+                            <td>연말정산</td>
+                            <td>종합소득세</td>
+                        </tr>
+                        <tr>
+                            <td>4대보험</td>
+                            <td>회사 부담(절반)</td>
+                            <td>전액 자부담</td>
+                        </tr>
+                        <tr>
+                            <td>필요경비율</td>
+                            <td>불가</td>
+                            <td>약 40~50%</td>
+                        </tr>
+                        <tr>
+                            <td>세액공제</td>
+                            <td>자녀 교육비, 의료비</td>
+                            <td>사업관련 경비</td>
+                        </tr>
+                        <tr>
+                            <td>퇴직금</td>
+                            <td>보장됨</td>
+                            <td>자산으로만 축적</td>
+                        </tr>
+                        <tr>
+                            <td>예상 세율</td>
+                            <td>13~15%</td>
+                            <td>10~25% (소득 수준)</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:20px 0 12px;">절세 팁</h3>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:8px;">✓ <strong>개업약사:</strong> 약국 운영비(임차료, 약사료, 광고비 등) 세부 기록 관리로 필요경비 최대화</p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:8px;">✓ <strong>근로약사:</strong> 교육비 세액공제 (1인당 연 150만원), 의료비 세액공제 활용</p>
+        <p style="font-size:0.88rem; color:var(--text-secondary);"> ✓ <strong>모두:</strong> 국민연금 추가납부 시 소득공제 활용, 연말정산 전용 상품(저축성보험) 검토</p>
+    </div>
+
     <!-- 관련 직종 -->
     <div class="card">
         <div class="card-header">
@@ -390,5 +920,104 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// Pharmacist Salary Simulator
+const salaryData = {
+    local: {
+        0: { min: 5000, max: 6000 },
+        3: { min: 5500, max: 6500 },
+        5: { min: 6000, max: 7500 },
+        10: { min: 7000, max: 9000 },
+        15: { min: 7500, max: 9500 }
+    },
+    hospital: {
+        0: { min: 4200, max: 5000 },
+        3: { min: 5000, max: 6000 },
+        5: { min: 5500, max: 6500 },
+        10: { min: 6000, max: 7200 },
+        15: { min: 6500, max: 7800 }
+    },
+    pharma: {
+        0: { min: 5000, max: 6000 },
+        3: { min: 6000, max: 8000 },
+        5: { min: 8000, max: 12000 },
+        10: { min: 10000, max: 14000 },
+        15: { min: 12000, max: 16000 }
+    },
+    gov: {
+        0: { min: 4500, max: 4800 },
+        3: { min: 4800, max: 5200 },
+        5: { min: 5200, max: 5600 },
+        10: { min: 5600, max: 6000 },
+        15: { min: 6000, max: 6500 }
+    }
+};
+
+function getNetSalary(grossAnnual) {
+    const monthlyGross = grossAnnual / 12;
+    const pension = monthlyGross * 0.09;
+    const health = monthlyGross * 0.034;
+    const longCare = monthlyGross * 0.0085;
+    const employment = monthlyGross * 0.009;
+    const incomeTax = monthlyGross * 0.035;
+    const localTax = incomeTax * 0.1;
+
+    const totalDeduction = pension + health + longCare + employment + incomeTax + localTax;
+    const netMonthly = monthlyGross - totalDeduction;
+
+    return {
+        monthly: monthlyGross,
+        deduction: totalDeduction,
+        net: netMonthly,
+        annual: netMonthly * 12
+    };
+}
+
+function updateSimulator() {
+    const career = parseInt(document.getElementById('simCareer').value);
+    const type = document.getElementById('simType').value;
+
+    document.getElementById('careerDisplay').textContent = career;
+
+    const ranges = salaryData[type];
+    let salaryRange;
+
+    if (career <= 3) {
+        salaryRange = ranges[3] || ranges[0];
+    } else if (career <= 5) {
+        salaryRange = ranges[5];
+    } else if (career <= 10) {
+        salaryRange = ranges[10];
+    } else {
+        salaryRange = ranges[15];
+    }
+
+    const avgSalary = (salaryRange.min + salaryRange.max) / 2;
+    const calculation = getNetSalary(avgSalary);
+
+    document.getElementById('simSalary').textContent = Math.round(avgSalary / 10) * 10 + '만원';
+    document.getElementById('simMonthly').textContent = Math.round(calculation.monthly).toLocaleString('ko-KR') + '원';
+    document.getElementById('simDeduction').textContent = '-' + Math.round(calculation.deduction).toLocaleString('ko-KR') + '원';
+    document.getElementById('simTakeHome').textContent = Math.round(calculation.net).toLocaleString('ko-KR') + '원';
+    document.getElementById('simResult').style.display = 'block';
+}
+
+document.getElementById('simCareer').addEventListener('input', updateSimulator);
+document.getElementById('simType').addEventListener('change', updateSimulator);
+updateSimulator();
+
+// Payslip Tab Switching
+function switchPayslipTab(index) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const btns = document.querySelectorAll('.tab-btn');
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+    btns.forEach(btn => btn.classList.remove('active'));
+
+    document.getElementById('payslip-' + index).classList.add('active');
+    btns[index].classList.add('active');
+}
+</script>
 </body>
 </html>

@@ -51,6 +51,37 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface-alt); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .sim-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .sim-field { }
+        .sim-field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
+        .sim-field input[type="range"] { width: 100%; margin-bottom: 8px; accent-color: var(--accent); }
+        .sim-val { display: inline-block; background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; font-family: 'Inter', sans-serif; }
+        .sim-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .sim-result-card { background: white; padding: 16px; border-radius: 8px; text-align: center; border: 1px solid #E5E7EB; }
+        .sim-r-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; }
+        .sim-r-value { font-size: 1.1rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        @media (max-width: 768px) {
+            .sim-row { grid-template-columns: 1fr; }
+            .sim-results { grid-template-columns: repeat(2, 1fr); }
+        }
+        .payslip-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+        .payslip-tab { padding: 8px 16px; background: var(--surface-alt); border: 1px solid transparent; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+        .payslip-tab:hover { background: var(--accent-light); color: var(--accent); }
+        .payslip-tab.active { background: var(--accent); color: white; }
+        .payslip-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .payslip-table tr { border-bottom: 1px solid #F3F4F6; }
+        .payslip-table td { padding: 12px; text-align: right; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .payslip-table td:first-child { text-align: left; color: var(--text-secondary); font-weight: 600; }
+        .payslip-section-title { font-weight: 700; background: var(--surface-alt); color: var(--text-secondary); font-size: 0.88rem; }
+        .payslip-total { font-weight: 700; background: #F9FAFB; }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
+        @media (max-width: 768px) {
+            .sim-results { grid-template-columns: repeat(2, 1fr); }
+            .payslip-table { font-size: 0.75rem; }
+            .payslip-table td { padding: 8px; }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -291,6 +322,551 @@
 </div>
     </div>
 
+    <!-- 개발자 연차별 연봉 시뮬레이터 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">개발자 연차별 연봉 시뮬레이터</div>
+            <div class="card-badge">실시간 계산</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">경력연차와 기업규모를 선택하면 예상 연봉과 월 실수령액을 실시간으로 계산할 수 있습니다.</p>
+
+        <div class="sim-box">
+            <div class="sim-row">
+                <div class="sim-field">
+                    <label for="simExperience">경력연차</label>
+                    <input type="range" id="simExperience" min="0" max="15" value="3" step="1">
+                    <span class="sim-val" id="simExperienceVal">3년</span>
+                </div>
+                <div class="sim-field">
+                    <label for="simCompanySize">기업규모</label>
+                    <select id="simCompanySize" style="width:100%; padding:8px; border:1px solid #D1D5DB; border-radius:6px; font-size:0.85rem; background:white;">
+                        <option value="startup">스타트업</option>
+                        <option value="small">중소기업</option>
+                        <option value="mid" selected>중견기업</option>
+                        <option value="large">대기업</option>
+                        <option value="bigtech">빅테크 (네카라쿠배)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sim-results">
+                <div class="sim-result-card">
+                    <div class="sim-r-label">예상 연봉</div>
+                    <div class="sim-r-value" id="simAnnualSalary">5,500만원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">월 세전</div>
+                    <div class="sim-r-value" id="simMonthlyPreTax">4,583,333원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">월 공제액</div>
+                    <div class="sim-r-value" id="simMonthlyDeduction">601,255원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">월 실수령액</div>
+                    <div class="sim-r-value" id="simTakeHome">3,982,078원</div>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 신입은 0~2년, 중견급은 3~7년, 시니어는 8년 이상 기준 | 스톡옵션, RSU 등 주식 보상은 제외 | 정확한 계산은 <a href="index.html" style="color:var(--accent); font-weight:600;">연봉 계산기</a>에서 확인하세요</p>
+
+        <div style="margin-top:20px; overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>경력</th>
+                        <th>스타트업</th>
+                        <th>중소기업</th>
+                        <th>중견기업</th>
+                        <th>대기업</th>
+                        <th>빅테크</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>신입 (0~2년)</td>
+                        <td>3,000~3,500만원</td>
+                        <td>2,800~3,200만원</td>
+                        <td>3,500~4,000만원</td>
+                        <td>4,500~5,500만원</td>
+                        <td>5,000~6,500만원</td>
+                    </tr>
+                    <tr>
+                        <td>3년차</td>
+                        <td>4,000~5,000만원</td>
+                        <td>3,500~4,000만원</td>
+                        <td>4,500~5,500만원</td>
+                        <td>5,500~7,000만원</td>
+                        <td>7,000~9,000만원</td>
+                    </tr>
+                    <tr>
+                        <td>5년차</td>
+                        <td>5,000~7,000만원</td>
+                        <td>4,000~5,000만원</td>
+                        <td>5,500~7,000만원</td>
+                        <td>7,000~9,000만원</td>
+                        <td>9,000~12,000만원</td>
+                    </tr>
+                    <tr>
+                        <td>10년차</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>8,000~10,000만원</td>
+                        <td>9,000~12,000만원</td>
+                        <td>12,000~18,000만원</td>
+                    </tr>
+                    <tr>
+                        <td>15년차 (CTO급)</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>12,000~18,000만원</td>
+                        <td>15,000~25,000만원</td>
+                        <td>15,000~25,000만원+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ad slot after simulator -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 기업 유형별 비교 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">기업 유형별 연봉 및 복리후생 비교</div>
+            <div class="card-badge">3년차 기준</div>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>기업유형</th>
+                        <th>대표기업</th>
+                        <th>신입연봉</th>
+                        <th>3년차연봉</th>
+                        <th>월 실수령액(3년차)</th>
+                        <th>특이사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>빅테크</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">네이버/카카오/라인/쿠팡/배민</span></td>
+                        <td style="font-size:0.82rem;">네이버</td>
+                        <td>5,000~6,500만원</td>
+                        <td>7,000~9,000만원</td>
+                        <td class="accent">약 5,000~6,500만원</td>
+                        <td>RSU, 스톡옵션, 정기성과금</td>
+                    </tr>
+                    <tr>
+                        <td><b>대기업 IT</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">삼성SDS/LG CNS/SK C&C</span></td>
+                        <td style="font-size:0.82rem;">삼성SDS</td>
+                        <td>4,500~5,500만원</td>
+                        <td>5,500~7,000만원</td>
+                        <td class="accent">약 3,800~4,800만원</td>
+                        <td>복지포인트, 내재직복지, 안정성</td>
+                    </tr>
+                    <tr>
+                        <td><b>금융IT</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">은행/증권사 IT</span></td>
+                        <td style="font-size:0.82rem;">신한은행</td>
+                        <td>4,200~5,000만원</td>
+                        <td>5,500~6,500만원</td>
+                        <td class="accent">약 3,800~4,500만원</td>
+                        <td>보너스(연 4~6개월), 주택자금대출</td>
+                    </tr>
+                    <tr>
+                        <td><b>중견기업</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">SI/SM 대형사</span></td>
+                        <td style="font-size:0.82rem;">삼정KPMG</td>
+                        <td>3,500~4,000만원</td>
+                        <td>4,500~5,500만원</td>
+                        <td class="accent">약 3,100~3,900만원</td>
+                        <td>프로젝트 수당, 교육지원</td>
+                    </tr>
+                    <tr>
+                        <td><b>스타트업</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">시리즈A~C</span></td>
+                        <td style="font-size:0.82rem;">오늘의집</td>
+                        <td>3,000~4,000만원</td>
+                        <td>4,000~5,500만원</td>
+                        <td class="accent">약 2,800~3,900만원</td>
+                        <td>스톡옵션, 유연근무, 성장기회</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 연봉 협상 팁</b>: 빅테크는 base salary 외 RSU가 연봉의 30~50%를 차지합니다. 금융IT는 보너스를 필수로 확인하고, 스타트업은 스톡옵션의 베스팅 일정을 꼭 체크하세요.
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 실수령액은 4대보험·소득세 반영한 근사치 | 스톡옵션/RSU는 별도 | 회사별로 수당 구성이 다름</p>
+    </div>
+
+    <!-- Ad slot after company comparison -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 연차별 급여명세서 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">경력별 급여명세서 상세 분석</div>
+            <div class="card-badge">대기업 기준</div>
+        </div>
+
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" data-year="1">신입</button>
+            <button class="payslip-tab" data-year="2">2년차</button>
+            <button class="payslip-tab" data-year="3">3년차</button>
+            <button class="payslip-tab" data-year="5">5년차</button>
+            <button class="payslip-tab" data-year="10">10년차</button>
+        </div>
+
+        <!-- 신입 -->
+        <div class="payslip-content active" data-year="1">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>3,500,000원</td></tr>
+                <tr><td>성과급 (연봉의 15%)</td><td>525,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">150,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>4,375,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-245,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-86,000원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,800원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-18,500원</td></tr>
+                <tr><td>소득세</td><td>-142,300원</td></tr>
+                <tr><td>지방소득세</td><td>-14,230원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-508,830원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>3,866,170원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 2년차 -->
+        <div class="payslip-content" data-year="2">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>4,000,000원</td></tr>
+                <tr><td>성과급 (연봉의 15%)</td><td>600,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">150,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>4,950,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-280,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-98,000원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,200원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-21,000원</td></tr>
+                <tr><td>소득세</td><td>-165,400원</td></tr>
+                <tr><td>지방소득세</td><td>-16,540원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-584,140원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>4,365,860원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 3년차 -->
+        <div class="payslip-content" data-year="3">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>4,500,000원</td></tr>
+                <tr><td>성과급 (연봉의 20%)</td><td>900,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">150,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>5,750,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-315,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-113,500원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,800원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-24,000원</td></tr>
+                <tr><td>소득세</td><td>-209,800원</td></tr>
+                <tr><td>지방소득세</td><td>-20,980원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-687,080원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>5,062,920원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 5년차 -->
+        <div class="payslip-content" data-year="5">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>5,500,000원</td></tr>
+                <tr><td>성과급 (연봉의 20%)</td><td>1,100,000원</td></tr>
+                <tr><td>팀리드 수당</td><td>500,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">150,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>7,450,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-405,000원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-147,500원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-4,800원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-31,000원</td></tr>
+                <tr><td>소득세</td><td>-287,600원</td></tr>
+                <tr><td>지방소득세</td><td>-28,760원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-904,660원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>6,545,340원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 10년차 -->
+        <div class="payslip-content" data-year="10">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>7,000,000원</td></tr>
+                <tr><td>성과급 (연봉의 25%)</td><td>1,750,000원</td></tr>
+                <tr><td>개발팀 리드 수당</td><td>750,000원</td></tr>
+                <tr><td>기술 자문료</td><td>500,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">150,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>10,350,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-577,500원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-209,400원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-6,700원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-43,000원</td></tr>
+                <tr><td>소득세</td><td>-487,200원</td></tr>
+                <tr><td>지방소득세</td><td>-48,720원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-1,372,520원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>8,977,480원</b></td></tr>
+            </table>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 비과세 식대·교통비는 4대보험 산정 기준(보수월액)에서 제외되어 실질 공제액이 줄어듦 | 성과급은 연봉 비중이 경력에 따라 다름</p>
+    </div>
+
+    <!-- Ad slot after payslip -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 비과세/절세 전략 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">개발자 비과세 및 절세 전략</div>
+            <div class="card-badge">연봉 협상 필수</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">비과세 수당은 <b>소득세, 4대보험 산정 기준에서 제외</b>됩니다. 같은 연봉이라도 구성을 다르게 하면 실수령액이 수백만원 차이 날 수 있습니다.</p>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>절세 항목</th>
+                        <th>한도</th>
+                        <th>조건</th>
+                        <th>월 절세 효과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>식대 (비과세)</td>
+                        <td>월 20만원</td>
+                        <td>현물 식사 미제공 시</td>
+                        <td class="accent">약 2~3만원</td>
+                    </tr>
+                    <tr>
+                        <td>자가운전보조금</td>
+                        <td>월 20만원</td>
+                        <td>본인 차량 업무 이용 시</td>
+                        <td class="accent">약 2~3만원</td>
+                    </tr>
+                    <tr>
+                        <td>교육훈련비</td>
+                        <td>제한없음</td>
+                        <td>업무 관련 교육만 해당</td>
+                        <td class="accent">최대 5~10만원</td>
+                    </tr>
+                    <tr>
+                        <td>스톡옵션 행사 (비과세)</td>
+                        <td>제한없음</td>
+                        <td>1년 이상 보유 후 행사</td>
+                        <td class="accent">수백만원~</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:20px; overflow-x:auto;">
+            <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:12px;">연봉 협상 시나리오</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>안내</th>
+                        <th>기본급</th>
+                        <th>식대</th>
+                        <th>교통비</th>
+                        <th>연봉합계</th>
+                        <th>월 실수령액</th>
+                        <th>월 차이</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>구성A (비과세 X)</b></td>
+                        <td>5,500만원</td>
+                        <td>0원</td>
+                        <td>0원</td>
+                        <td>5,500만원</td>
+                        <td>약 3,900만원</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><b>구성B (비과세 O)</b></td>
+                        <td>5,300만원</td>
+                        <td>20만원</td>
+                        <td>20만원</td>
+                        <td>5,540만원</td>
+                        <td>약 3,970만원</td>
+                        <td class="accent">+70만원/년</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 개발자 팁 1 - 연봉 협상</b>: "연봉 5,500만원"이 아니라 "기본급 5,300만원 + 비과세 식대 20만원 + 교통비 20만원"을 명시하세요. 같은 총액이라도 세금이 줄어들어 실수령액이 훨씬 높습니다.
+        </div>
+
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 개발자 팁 2 - 스톡옵션/RSU</b>: 빅테크는 스톡옵션, RSU(양도제한조건부주식) 등 주식 보상이 연봉의 30~50%입니다. 행사가격(strike price)과 베스팅 일정(vesting schedule), 세금 시점을 꼭 확인하세요. 특히 IPO 전 초기 스타트업은 실현 가능성을 검토하세요.
+        </div>
+
+        <div style="background:#EDE9FE;border-left:4px solid #8B5CF6;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 개발자 팁 3 - 프리랜서 전환</b>: 프리랜서로 전환 시 종합소득세(5~42%) vs 근로소득세(6~45%)를 비교하세요. 경비율을 높게 잡을 수 있으면 개인사업자가 유리합니다. 단, 4대보험 미가입, 퇴직금 없음을 고려해야 합니다.
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 비과세 한도는 자회사에 따라 다를 수 있음 | 교육훈련비는 인정 범위가 넓어 협상 여지가 있음</p>
+    </div>
+
+    <!-- Ad slot after tax strategy -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 개발자 커리어패스 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">개발자 커리어패스 및 연봉 상승 전략</div>
+            <div class="card-badge">경력별 로드맵</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">개발자 커리어는 IC(Individual Contributor) 트랙과 관리직 트랙으로 나뉩니다. 분야, 회사, 개인 선호도에 따라 경로를 선택할 수 있습니다.</p>
+
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>경력 단계</th>
+                        <th>IC 트랙<br>(엔지니어)</th>
+                        <th>관리직 트랙<br>(팀장/이사)</th>
+                        <th>스타트업<br>CTO 경로</th>
+                        <th>예상 연봉</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>0~2년</b><br>주니어</td>
+                        <td>주니어 엔지니어</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>3,000~5,000만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>2~5년</b><br>미드레벨</td>
+                        <td>미드 엔지니어</td>
+                        <td>팀장</td>
+                        <td>초기멤버 (기술리더)</td>
+                        <td>4,500~7,000만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>5~8년</b><br>시니어</td>
+                        <td>시니어 엔지니어</td>
+                        <td>팀장/개발팀장</td>
+                        <td>개발 리더/VP Eng</td>
+                        <td>7,000~10,000만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>8~10년</b><br>스태프/리드</td>
+                        <td>Staff/Lead<br>엔지니어</td>
+                        <td>부장/실장</td>
+                        <td>CTO (초기 스타트업)</td>
+                        <td>9,000~15,000만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>10년+</b><br>Principal</td>
+                        <td>Principal<br>엔지니어</td>
+                        <td>임원<br>(VP/SVP)</td>
+                        <td>CTO/CEO</td>
+                        <td>15,000~25,000만원+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="font-size:0.88rem; font-weight:700; margin-top:20px; margin-bottom:12px;">분야별 연봉 차이 (3년차 기준)</h4>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>개발 분야</th>
+                        <th>대기업</th>
+                        <th>빅테크</th>
+                        <th>평균 연봉</th>
+                        <th>특징</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>AI/ML</b><br>머신러닝 엔지니어</td>
+                        <td>5,500~7,000만원</td>
+                        <td>8,000~10,000만원</td>
+                        <td>약 6,500만원</td>
+                        <td>경쟁 심함, 박사학위 우대</td>
+                    </tr>
+                    <tr>
+                        <td><b>백엔드/인프라</b><br>서버/클라우드</td>
+                        <td>5,000~6,500만원</td>
+                        <td>7,000~9,000만원</td>
+                        <td>약 6,200만원</td>
+                        <td>가장 수요 많음, 안정적</td>
+                    </tr>
+                    <tr>
+                        <td><b>프론트엔드</b><br>웹/모바일</td>
+                        <td>4,500~6,000만원</td>
+                        <td>6,500~8,500만원</td>
+                        <td>약 5,800만원</td>
+                        <td>비교적 낮음, 성장 빠름</td>
+                    </tr>
+                    <tr>
+                        <td><b>데이터 엔지니어</b><br>빅데이터/분석</td>
+                        <td>5,500~7,000만원</td>
+                        <td>8,000~10,000만원</td>
+                        <td>약 6,700만원</td>
+                        <td>AI/ML 다음으로 핫</td>
+                    </tr>
+                    <tr>
+                        <td><b>DevOps/SRE</b><br>시스템 운영</td>
+                        <td>5,200~6,800만원</td>
+                        <td>7,500~9,500만원</td>
+                        <td>약 6,500만원</td>
+                        <td>경험과 역량에 따라 큼</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 이직으로 연봉 올리기</b>: 평균 이직 시 연봉 인상률은 20~30%입니다. 특히 스타트업 → 빅테크, 중소 → 대기업 이직이 가장 큽니다. 이직 1년 전부터 깃허브, 블로그, 오픈소스 활동으로 포트폴리오를 만들면 협상력이 크게 올라갑니다.
+        </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 해외(미국) 리모트 근무</b>: 실리콘밸리 IT 기업의 리모트 직무는 한국 연봉의 2~3배입니다. 예: 미국 시니어 ($200k) ≈ 한국 4억원+. 비자, 세금, 환율 변동을 고려해도 유리합니다. 영어 수준과 포트폴리오가 중요합니다.
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 연봉은 회사, 지역, 협상력에 따라 큼 | 스톡옵션/RSU는 별도 | AI/ML 분야는 수급이 극도로 부족해 지속 상승 중</p>
+    </div>
+
     <!-- 경력/직급별 비교 -->
     <div class="card">
         <div class="card-header">
@@ -390,5 +966,106 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 개발자 연차별 연봉 시뮬레이터
+(function() {
+    const experienceInput = document.getElementById('simExperience');
+    const companySizeSelect = document.getElementById('simCompanySize');
+    const experienceVal = document.getElementById('simExperienceVal');
+    const annualSalaryVal = document.getElementById('simAnnualSalary');
+    const monthlyPreTaxVal = document.getElementById('simMonthlyPreTax');
+    const monthlyDeductionVal = document.getElementById('simMonthlyDeduction');
+    const takeHomeVal = document.getElementById('simTakeHome');
+
+    // 경력별, 기업규모별 연봉 데이터 (만원)
+    const salaryData = {
+        startup: [35, 40, 50, 70, 65],      // 0, 3, 5, 10, 15년차
+        small: [28, 35, 40, 65, 80],
+        mid: [35, 45, 55, 80, 100],
+        large: [45, 55, 70, 90, 125],
+        bigtech: [50, 70, 90, 120, 180]
+    };
+
+    const experienceLevels = [0, 3, 5, 10, 15];
+
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('ko-KR');
+    }
+
+    function interpolateSalary(experience, companySize) {
+        const data = salaryData[companySize];
+
+        if (experience <= 0) return data[0];
+        if (experience >= 15) return data[4];
+
+        // 3, 5, 10, 15년차 사이 선형 보간
+        let lower = 0, upper = 1;
+        for (let i = 0; i < experienceLevels.length - 1; i++) {
+            if (experience >= experienceLevels[i] && experience <= experienceLevels[i+1]) {
+                lower = experienceLevels[i];
+                upper = experienceLevels[i+1];
+                const ratio = (experience - lower) / (upper - lower);
+                return data[i] + (data[i+1] - data[i]) * ratio;
+            }
+        }
+        return data[0];
+    }
+
+    function updateSimulator() {
+        const experience = parseInt(experienceInput.value);
+        const companySize = companySizeSelect.value;
+
+        // 연봉 계산 (보간)
+        const annualSalary = interpolateSalary(experience, companySize);
+
+        // 월 세전 급여
+        const monthlyPreTax = (annualSalary * 10000) / 12;
+
+        // 공제율 계산 (약 15~22%)
+        let deductionRate = 0.15;
+        if (annualSalary >= 70) deductionRate = 0.18;
+        if (annualSalary >= 90) deductionRate = 0.20;
+        if (annualSalary >= 120) deductionRate = 0.22;
+
+        const monthlyDeduction = monthlyPreTax * deductionRate;
+        const takeHome = monthlyPreTax - monthlyDeduction;
+
+        // UI 업데이트
+        experienceVal.textContent = experience + '년';
+        annualSalaryVal.textContent = formatCurrency(annualSalary * 10000) + '만원';
+        monthlyPreTaxVal.textContent = formatCurrency(monthlyPreTax) + '원';
+        monthlyDeductionVal.textContent = formatCurrency(monthlyDeduction) + '원';
+        takeHomeVal.textContent = formatCurrency(takeHome) + '원';
+    }
+
+    experienceInput.addEventListener('input', updateSimulator);
+    companySizeSelect.addEventListener('change', updateSimulator);
+
+    // 초기값 설정
+    updateSimulator();
+})();
+
+// 급여명세서 탭 기능
+(function() {
+    const tabs = document.querySelectorAll('.payslip-tab');
+    const contents = document.querySelectorAll('.payslip-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const year = this.getAttribute('data-year');
+
+            // 모든 탭과 컨텐츠에서 active 제거
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            // 클릭한 탭과 해당 컨텐츠에 active 추가
+            this.classList.add('active');
+            document.querySelector(`.payslip-content[data-year="${year}"]`).classList.add('active');
+        });
+    });
+})();
+</script>
+
 </body>
 </html>
