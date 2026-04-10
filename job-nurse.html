@@ -11,6 +11,7 @@
     <meta property="og:title" content="간호사 연봉 실수령액 — 3교대 수당·병원별 비교 총정리">
     <meta property="og:description" content="2026년 간호사 연봉 실수령액 완벽 정리. 3교대 야간수당 계산, 종합병원 vs 중소병원 비교, 신규~5년차 급여명세서, 전문간호사 수당 포함.">
     <meta property="og:type" content="website">
+    <link rel="canonical" href="https://salarykorea.site/job-nurse">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -51,6 +52,28 @@
         .salary-links a { display: inline-block; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); background: var(--surface-alt); border-radius: 8px; text-decoration: none; transition: all 0.15s; }
         .salary-links a:hover { color: var(--accent); background: var(--accent-light); }
         .ad-wrap { text-align: center; margin-bottom: 24px; }
+        .sim-box { background: var(--surface-alt); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .sim-row { display: flex; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+        .sim-field { flex: 1; min-width: 200px; }
+        .sim-field label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+        .sim-field input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+        .sim-field .sim-val { font-size: 0.9rem; font-weight: 700; color: var(--accent); text-align: right; display: block; margin-top: 4px; }
+        .sim-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 16px; }
+        .sim-result-card { background: white; border-radius: 10px; padding: 16px; text-align: center; border: 1px solid #E5E7EB; }
+        .sim-result-card .sim-r-label { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .sim-result-card .sim-r-value { font-size: 1.1rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif; }
+        .payslip-tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+        .payslip-tab { padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid #E5E7EB; background: white; color: var(--text-secondary); transition: all 0.15s; }
+        .payslip-tab:hover { background: var(--surface-alt); }
+        .payslip-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .payslip-content { display: none; }
+        .payslip-content.active { display: block; }
+        .payslip-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .payslip-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; }
+        .payslip-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); width: 50%; }
+        .payslip-table td:last-child { text-align: right; font-weight: 600; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+        .payslip-section-title { font-weight: 700; background: var(--surface-alt); padding: 10px 12px; margin-top: 8px; }
+        .payslip-total { font-weight: 800; background: #F0FDF4; padding: 10px 12px; color: var(--accent); }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -354,11 +377,48 @@
     <!-- 야간수당 계산 -->
     <div class="card">
         <div class="card-header">
-            <div class="card-title">3교대 야간수당 실제 계산 (월 8회 기준)</div>
+            <div class="card-title">3교대 야간수당 시뮬레이터</div>
             <div class="card-badge">근로기준법 제56조</div>
         </div>
-        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">야간수당 = <b>통상시급 × 50% × 야간 근무시간</b>. 간호사는 통상 1회 야간근무 8시간이며, 22시~06시 구간에 한해 가산됩니다.</p>
-        <div style="overflow-x:auto;">
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">기본급과 월 야간근무 횟수를 입력하면 야간수당을 실시간으로 계산할 수 있습니다. 야간수당 = <b>통상시급 × 50% × 8시간 × 횟수</b></p>
+
+        <div class="sim-box">
+            <div class="sim-row">
+                <div class="sim-field">
+                    <label for="simBaseSalary">기본급 (단위: 만원)</label>
+                    <input type="range" id="simBaseSalary" min="150" max="500" value="266" step="10">
+                    <span class="sim-val" id="simBaseSalaryVal">266만원</span>
+                </div>
+                <div class="sim-field">
+                    <label for="simNightShifts">월 야간근무 횟수</label>
+                    <input type="range" id="simNightShifts" min="0" max="15" value="8" step="1">
+                    <span class="sim-val" id="simNightShiftsVal">8회</span>
+                </div>
+            </div>
+
+            <div class="sim-results">
+                <div class="sim-result-card">
+                    <div class="sim-r-label">통상시급</div>
+                    <div class="sim-r-value" id="simHourlyRate">1,273원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">1회 야간수당</div>
+                    <div class="sim-r-value" id="simOneNightPay">50,920원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">월 야간수당 합계</div>
+                    <div class="sim-r-value" id="simMonthlyNightPay">407,360원</div>
+                </div>
+                <div class="sim-result-card">
+                    <div class="sim-r-label">예상 월 실수령액</div>
+                    <div class="sim-r-value" id="simTakeHome">2,247,000원</div>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 통상시급 = 기본급 ÷ 209시간 | 야간수당은 과세 항목으로 4대보험·소득세 적용됨 | 실수령액은 근사치이며 정확한 계산은 <a href="index.html" style="color:var(--accent); font-weight:600;">연봉 계산기</a>에서 확인하세요</p>
+
+        <div style="margin-top:20px; overflow-x:auto;">
             <table class="data-table">
                 <thead>
                     <tr>
@@ -374,37 +434,42 @@
                     <tr>
                         <td>신입 (1년차)</td>
                         <td>3,200만원</td>
-                        <td>12,760원</td>
-                        <td>51,040원</td>
-                        <td>408,320원</td>
+                        <td>15,314원</td>
+                        <td>61,256원</td>
+                        <td>490,048원</td>
                         <td class="accent">약 2,735,000원</td>
                     </tr>
                     <tr>
                         <td>경력 3년차</td>
                         <td>3,800만원</td>
-                        <td>15,150원</td>
-                        <td>60,600원</td>
-                        <td>484,800원</td>
+                        <td>18,181원</td>
+                        <td>72,724원</td>
+                        <td>581,792원</td>
                         <td class="accent">약 3,230,000원</td>
                     </tr>
                     <tr>
                         <td>경력 5년차</td>
                         <td>4,500만원</td>
-                        <td>17,940원</td>
-                        <td>71,760원</td>
-                        <td>574,080원</td>
+                        <td>21,531원</td>
+                        <td>86,124원</td>
+                        <td>688,992원</td>
                         <td class="accent">약 3,800,000원</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 통상시급 = 월급 ÷ 209시간 | 야간수당은 과세 항목으로 4대보험·소득세 적용됨</p>
     </div>
 
-    <!-- 종합병원 vs 중소병원 -->
+    <!-- Ad slot after simulator -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 병원 유형별 비교 - 빅5 포함 -->
     <div class="card">
         <div class="card-header">
-            <div class="card-title">종합병원 vs 중소병원 실수령액 비교</div>
+            <div class="card-title">병원 유형별 연봉 및 실수령액 비교</div>
             <div class="card-badge">경력 3년차 기준</div>
         </div>
         <div style="overflow-x:auto;">
@@ -412,87 +477,213 @@
                 <thead>
                     <tr>
                         <th>병원 유형</th>
+                        <th>대표 병원예시</th>
                         <th>연봉 범위</th>
                         <th>월 세전</th>
-                        <th>월 실수령액</th>
-                        <th>주요 특징</th>
+                        <th>월 실수령액(중앙값)</th>
+                        <th>야간수당</th>
+                        <th>복리후생 특징</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>상급종합병원<br><span style="font-size:0.78rem;color:var(--text-secondary);">(대학병원·빅5)</span></td>
-                        <td>4,200~5,000만원</td>
-                        <td>3,500,000원</td>
-                        <td class="accent">3,090,000원</td>
-                        <td style="font-size:0.82rem;">복리후생 우수, 전공간호수당, 연구수당 가능</td>
+                        <td><b>빅5 상급종합</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">서울대·세브란스·삼성서울·서울아산·서울성모</span></td>
+                        <td style="font-size:0.82rem;">서울대병원</td>
+                        <td>4,500~5,500만원</td>
+                        <td>3,750,000원</td>
+                        <td class="accent">3,300~3,980만원</td>
+                        <td>포함</td>
+                        <td style="font-size:0.78rem;">기숙사, 학자금, 복지포인트, 건강검진</td>
                     </tr>
                     <tr>
-                        <td>종합병원<br><span style="font-size:0.78rem;color:var(--text-secondary);">(200병상 이상)</span></td>
-                        <td>3,600~4,400만원</td>
-                        <td>3,166,000원</td>
-                        <td class="accent">2,797,000원</td>
-                        <td style="font-size:0.82rem;">안정적 급여, 교대 체계 정립</td>
+                        <td><b>지방 국립대학병원</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">전공의 전문병원</span></td>
+                        <td style="font-size:0.82rem;">경북대병원</td>
+                        <td>3,800~4,500만원</td>
+                        <td>3,250,000원</td>
+                        <td class="accent">2,850~3,300만원</td>
+                        <td>포함</td>
+                        <td style="font-size:0.78rem;">안정적 복리후생, 교육비 지원</td>
                     </tr>
                     <tr>
-                        <td>중소병원<br><span style="font-size:0.78rem;color:var(--text-secondary);">(100병상 미만)</span></td>
+                        <td><b>종합병원</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">200병상 이상</span></td>
+                        <td style="font-size:0.82rem;">강남세브란스</td>
+                        <td>3,600~4,200만원</td>
+                        <td>3,100,000원</td>
+                        <td class="accent">2,700~3,100만원</td>
+                        <td>포함</td>
+                        <td style="font-size:0.78rem;">정책적 복리, 승진 기회</td>
+                    </tr>
+                    <tr>
+                        <td><b>중소병원</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">100병상 미만</span></td>
+                        <td style="font-size:0.82rem;">의료법인</td>
                         <td>2,800~3,600만원</td>
                         <td>2,666,000원</td>
-                        <td class="accent">2,372,000원</td>
-                        <td style="font-size:0.82rem;">급여 낮으나 근무 강도 완화 가능</td>
+                        <td class="accent">2,300~2,700만원</td>
+                        <td>포함</td>
+                        <td style="font-size:0.78rem;">개인 맞춤 근무 가능</td>
                     </tr>
                     <tr>
-                        <td>의원·클리닉<br><span style="font-size:0.78rem;color:var(--text-secondary);">(외래 전담)</span></td>
+                        <td><b>의원·클리닉</b><br><span style="font-size:0.78rem;color:var(--text-secondary);">외래 전담</span></td>
+                        <td style="font-size:0.82rem;">개인의원</td>
                         <td>2,600~3,200만원</td>
                         <td>2,416,000원</td>
-                        <td class="accent">2,150,000원</td>
-                        <td style="font-size:0.82rem;">교대 없음, 주 5일, 야간수당 없음</td>
+                        <td class="accent">2,150~2,400만원</td>
+                        <td>미포함</td>
+                        <td style="font-size:0.78rem;">주 5일, 야간근무 없음</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 야간수당 미포함 기준. 상급종합병원은 연봉 외 복리후생(기숙사, 학자금 등) 혜택 별도</p>
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 빅5 병원 특유 혜택</b>: 기숙사(무료~보조금), 의료진 자녀 학자금 지원(연 500만원~), 직급 맞춤형 복지포인트, 상반기·하반기 건강검진, 휴가 중 교육비 지원 등이 있습니다. 같은 연봉도 복리후생으로 생활비 차이가 납니다.
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 야간수당은 모두 포함 기준 (월 8회 기준) | 실수령액은 4대보험·소득세 반영한 근사치</p>
     </div>
 
-    <!-- 급여명세서 구조 -->
+    <!-- Ad slot after hospital comparison -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 급여명세서 구조 - 경력별 탭 -->
     <div class="card">
         <div class="card-header">
-            <div class="card-title">신규 vs 경력 5년차 급여명세서 구조</div>
+            <div class="card-title">경력별 급여명세서 상세 분석</div>
             <div class="card-badge">종합병원 기준</div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;overflow-x:auto;">
-            <div>
-                <p style="font-size:0.82rem;font-weight:700;color:var(--accent);margin-bottom:10px;text-align:center;">🔰 신규 1년차</p>
-                <table class="data-table" style="font-size:0.82rem;">
-                    <thead><tr><th>항목</th><th>금액</th></tr></thead>
-                    <tbody>
-                        <tr><td>기본급</td><td>2,000,000원</td></tr>
-                        <tr><td>야간수당 (8회)</td><td>408,000원</td></tr>
-                        <tr><td>식대 <span style="color:#059669;font-size:0.75rem;">(비과세)</span></td><td>200,000원</td></tr>
-                        <tr><td>교통비 <span style="color:#059669;font-size:0.75rem;">(비과세)</span></td><td>100,000원</td></tr>
-                        <tr><td style="font-weight:700;">세전 합계</td><td style="font-weight:700;">2,708,000원</td></tr>
-                        <tr><td>4대보험+세금</td><td style="color:#EF4444;">-290,000원</td></tr>
-                        <tr><td style="font-weight:700;color:var(--accent);">실수령액</td><td style="font-weight:700;color:var(--accent);">2,418,000원</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <p style="font-size:0.82rem;font-weight:700;color:#059669;margin-bottom:10px;text-align:center;">⭐ 경력 5년차</p>
-                <table class="data-table" style="font-size:0.82rem;">
-                    <thead><tr><th>항목</th><th>금액</th></tr></thead>
-                    <tbody>
-                        <tr><td>기본급</td><td>2,850,000원</td></tr>
-                        <tr><td>야간수당 (8회)</td><td>574,000원</td></tr>
-                        <tr><td>식대 <span style="color:#059669;font-size:0.75rem;">(비과세)</span></td><td>200,000원</td></tr>
-                        <tr><td>교통비 <span style="color:#059669;font-size:0.75rem;">(비과세)</span></td><td>100,000원</td></tr>
-                        <tr><td>전문간호사 수당</td><td>150,000원</td></tr>
-                        <tr><td style="font-weight:700;">세전 합계</td><td style="font-weight:700;">3,874,000원</td></tr>
-                        <tr><td>4대보험+세금</td><td style="color:#EF4444;">-450,000원</td></tr>
-                        <tr><td style="font-weight:700;color:var(--accent);">실수령액</td><td style="font-weight:700;color:var(--accent);">3,424,000원</td></tr>
-                    </tbody>
-                </table>
-            </div>
+
+        <div class="payslip-tabs">
+            <button class="payslip-tab active" data-year="1">1년차</button>
+            <button class="payslip-tab" data-year="2">2년차</button>
+            <button class="payslip-tab" data-year="3">3년차</button>
+            <button class="payslip-tab" data-year="4">4년차</button>
+            <button class="payslip-tab" data-year="5">5년차</button>
         </div>
-        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 비과세 식대·교통비는 4대보험 산정 시 제외되어 실질 공제액이 줄어듦</p>
+
+        <!-- 1년차 -->
+        <div class="payslip-content active" data-year="1">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,000,000원</td></tr>
+                <tr><td>직무수당</td><td>100,000원</td></tr>
+                <tr><td>야간수당 (월 8회)</td><td>408,000원</td></tr>
+                <tr><td>휴일근무수당</td><td>150,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>2,958,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-187,200원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-73,400원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,500원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-16,500원</td></tr>
+                <tr><td>소득세</td><td>-126,400원</td></tr>
+                <tr><td>지방소득세</td><td>-12,640원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-418,640원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>2,539,360원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 2년차 -->
+        <div class="payslip-content" data-year="2">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,200,000원</td></tr>
+                <tr><td>직무수당</td><td>120,000원</td></tr>
+                <tr><td>야간수당 (월 8회)</td><td>449,000원</td></tr>
+                <tr><td>휴일근무수당</td><td>160,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>3,229,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-204,200원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-80,300원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-2,700원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-18,100원</td></tr>
+                <tr><td>소득세</td><td>-147,300원</td></tr>
+                <tr><td>지방소득세</td><td>-14,730원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-467,330원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>2,761,670원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 3년차 -->
+        <div class="payslip-content" data-year="3">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,450,000원</td></tr>
+                <tr><td>직무수당</td><td>150,000원</td></tr>
+                <tr><td>야간수당 (월 8회)</td><td>500,000원</td></tr>
+                <tr><td>휴일근무수당</td><td>180,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">150,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>3,630,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-227,300원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-90,800원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,100원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-20,300원</td></tr>
+                <tr><td>소득세</td><td>-172,800원</td></tr>
+                <tr><td>지방소득세</td><td>-17,280원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-531,580원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>3,098,420원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 4년차 -->
+        <div class="payslip-content" data-year="4">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,650,000원</td></tr>
+                <tr><td>직무수당</td><td>180,000원</td></tr>
+                <tr><td>야간수당 (월 8회)</td><td>544,000원</td></tr>
+                <tr><td>휴일근무수당</td><td>200,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">150,000원</span></td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>3,924,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-245,700원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-98,600원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,400원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-21,900원</td></tr>
+                <tr><td>소득세</td><td>-198,300원</td></tr>
+                <tr><td>지방소득세</td><td>-19,830원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-587,730원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>3,336,270원</b></td></tr>
+            </table>
+        </div>
+
+        <!-- 5년차 -->
+        <div class="payslip-content" data-year="5">
+            <table class="payslip-table">
+                <tr><td class="payslip-section-title">급여 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>기본급</td><td>2,850,000원</td></tr>
+                <tr><td>직무수당</td><td>200,000원</td></tr>
+                <tr><td>야간수당 (월 8회)</td><td>574,000원</td></tr>
+                <tr><td>휴일근무수당</td><td>220,000원</td></tr>
+                <tr><td><span style="color:#059669;">식대 (비과세)</span></td><td><span style="color:#059669;">200,000원</span></td></tr>
+                <tr><td><span style="color:#059669;">교통비 (비과세)</span></td><td><span style="color:#059669;">100,000원</span></td></tr>
+                <tr><td>전문간호사 수당</td><td>150,000원</td></tr>
+                <tr class="payslip-total"><td>세전 합계</td><td>4,294,000원</td></tr>
+                <tr><td class="payslip-section-title">공제 항목</td><td class="payslip-section-title"></td></tr>
+                <tr><td>국민연금 (9%)</td><td>-268,200원</td></tr>
+                <tr><td>건강보험 (3.545%)</td><td>-107,300원</td></tr>
+                <tr><td>장기요양 (0.12%)</td><td>-3,700원</td></tr>
+                <tr><td>고용보험 (0.8%)</td><td>-24,100원</td></tr>
+                <tr><td>소득세</td><td>-225,400원</td></tr>
+                <tr><td>지방소득세</td><td>-22,540원</td></tr>
+                <tr class="payslip-total"><td>공제 합계</td><td>-651,240원</td></tr>
+                <tr class="payslip-total"><td><b>실수령액</b></td><td><b>3,642,760원</b></td></tr>
+            </table>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 비과세 식대·교통비는 4대보험 산정 기준(보수월액)에서 제외되어 실질 공제액이 줄어듦 | 휴일근무수당은 월 예시 기준</p>
+    </div>
+
+    <!-- Ad slot after payslip -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- 비과세 항목 -->
@@ -534,70 +725,183 @@
                 </tbody>
             </table>
         </div>
-        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
-            <b>💡 실제 예시</b>: 연봉 3,800만원 간호사가 식대 20만원 + 교통비 20만원 비과세 적용 시<br>
-            → 과세 보수월액 기준이 낮아져 국민연금·건강보험 절감 → 연간 약 <b>50~70만원 추가 절세</b>
+        <div style="margin-top:20px; overflow-x:auto;">
+            <h4 style="font-size:0.88rem; font-weight:700; margin-bottom:12px;">연봉 구간별 비과세 절세 효과 비교</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>연봉</th>
+                        <th>비과세 0원</th>
+                        <th>비과세 20만원</th>
+                        <th>비과세 40만원</th>
+                        <th>절세 효과 (월)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3,000만원</td>
+                        <td>2,080,000원</td>
+                        <td>2,098,000원</td>
+                        <td>2,116,000원</td>
+                        <td class="accent">36,000원</td>
+                    </tr>
+                    <tr>
+                        <td>3,500만원</td>
+                        <td>2,405,000원</td>
+                        <td>2,425,000원</td>
+                        <td>2,445,000원</td>
+                        <td class="accent">40,000원</td>
+                    </tr>
+                    <tr>
+                        <td>4,000만원</td>
+                        <td>2,730,000원</td>
+                        <td>2,752,000원</td>
+                        <td>2,774,000원</td>
+                        <td class="accent">44,000원</td>
+                    </tr>
+                    <tr>
+                        <td>4,500만원</td>
+                        <td>3,055,000원</td>
+                        <td>3,079,000원</td>
+                        <td>3,103,000원</td>
+                        <td class="accent">48,000원</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <div style="background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 현직자 팁</b>: 급여 협상 시 "기본급 3,500만원"보다 "기본급 3,400만원 + 비과세 식대 20만원 + 교통비 20만원"을 요청하세요. 같은 연봉이라도 비과세 항목이 있으면 월 실수령액이 4~5만원 높아집니다.
+        </div>
+
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>💡 추가 비과세 항목</b>: 대학병원 간호사는 연구활동비(월 20만원), 위험근무수당(월 10~20만원)도 비과세로 적용 가능합니다. 입사 시 비과세 항목 명시를 꼭 요청하세요.
+        </div>
+    </div>
+
+    <!-- Ad slot after tax-exempt section -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- 전문간호사 수당 -->
     <div class="card">
         <div class="card-header">
-            <div class="card-title">전문간호사 자격증 수당 정보</div>
-            <div class="card-badge">보건복지부 인정 13개 분야</div>
+            <div class="card-title">전문간호사 자격증 수당 정보 (13개 분야)</div>
+            <div class="card-badge">보건복지부 인정</div>
         </div>
-        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">전문간호사 자격증(APN) 취득 시 병원마다 차이가 있지만 <b>월 10~30만원의 자격수당</b>이 지급됩니다. 수당 지급은 의무가 아니므로 입사 전 확인이 필요합니다.</p>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">전문간호사(Advanced Practice Nurse, APN) 자격증 취득 시 병원마다 차이가 있지만 <b>월 10~30만원의 자격수당</b>이 지급됩니다. 취득 과정은 <b>석사 2년 + 임상경력 3년</b>이며, 보건복지부에서 인정하는 13개 분야가 있습니다.</p>
         <div style="overflow-x:auto;">
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>전문간호사 종류</th>
+                        <th>분야</th>
                         <th>주요 근무지</th>
-                        <th>월 수당 범위</th>
-                        <th>취득 난이도</th>
+                        <th>월 수당</th>
+                        <th>합격률</th>
+                        <th>연간 수당</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>중환자 전문간호사</td>
+                        <td><b>중환자 전문간호사</b></td>
                         <td>종합병원 ICU</td>
-                        <td class="accent">15~30만원</td>
-                        <td>높음 ★★★</td>
+                        <td class="accent">20~30만원</td>
+                        <td>30~40%</td>
+                        <td>240~360만원</td>
                     </tr>
                     <tr>
-                        <td>종양 전문간호사</td>
-                        <td>암병동, 혈액종양과</td>
-                        <td class="accent">10~25만원</td>
-                        <td>높음 ★★★</td>
-                    </tr>
-                    <tr>
-                        <td>감염관리 전문간호사</td>
-                        <td>감염관리실</td>
-                        <td class="accent">10~20만원</td>
-                        <td>중간 ★★</td>
-                    </tr>
-                    <tr>
-                        <td>응급 전문간호사</td>
+                        <td><b>응급 전문간호사</b></td>
                         <td>응급실, 응급센터</td>
-                        <td class="accent">10~20만원</td>
-                        <td>중간 ★★</td>
+                        <td class="accent">15~25만원</td>
+                        <td>35~45%</td>
+                        <td>180~300만원</td>
                     </tr>
                     <tr>
-                        <td>가정 전문간호사</td>
+                        <td><b>종양 전문간호사</b></td>
+                        <td>암병동, 혈액종양과</td>
+                        <td class="accent">15~25만원</td>
+                        <td>25~35%</td>
+                        <td>180~300만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>마취 전문간호사</b></td>
+                        <td>수술실, 마취실</td>
+                        <td class="accent">15~25만원</td>
+                        <td>40~50%</td>
+                        <td>180~300만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>정신건강 전문간호사</b></td>
+                        <td>정신건강복지센터, 병동</td>
+                        <td class="accent">12~20만원</td>
+                        <td>35~45%</td>
+                        <td>144~240만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>가정 전문간호사</b></td>
                         <td>가정간호센터, 방문간호</td>
-                        <td class="accent">10~15만원</td>
-                        <td>중간 ★★</td>
+                        <td class="accent">12~18만원</td>
+                        <td>40~50%</td>
+                        <td>144~216만원</td>
                     </tr>
                     <tr>
-                        <td>정신건강 전문간호사</td>
-                        <td>정신건강복지센터</td>
+                        <td><b>감염관리 전문간호사</b></td>
+                        <td>감염관리실</td>
+                        <td class="accent">12~20만원</td>
+                        <td>45~55%</td>
+                        <td>144~240만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>산업 전문간호사</b></td>
+                        <td>대기업 의료실, 보건관리실</td>
+                        <td class="accent">10~18만원</td>
+                        <td>35~45%</td>
+                        <td>120~216만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>노인 전문간호사</b></td>
+                        <td>요양원, 노인병원</td>
                         <td class="accent">10~15만원</td>
-                        <td>중간 ★★</td>
+                        <td>50~60%</td>
+                        <td>120~180만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>호스피스 전문간호사</b></td>
+                        <td>호스피스병동, 완화의료센터</td>
+                        <td class="accent">10~15만원</td>
+                        <td>40~50%</td>
+                        <td>120~180만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>보건 전문간호사</b></td>
+                        <td>보건소, 공중보건기관</td>
+                        <td class="accent">10~18만원</td>
+                        <td>45~55%</td>
+                        <td>120~216만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>임상 전문간호사</b></td>
+                        <td>종합병원 외래</td>
+                        <td class="accent">10~15만원</td>
+                        <td>35~45%</td>
+                        <td>120~180만원</td>
+                    </tr>
+                    <tr>
+                        <td><b>아동 전문간호사</b></td>
+                        <td>소아과, 아동병동</td>
+                        <td class="accent">12~20만원</td>
+                        <td>30~40%</td>
+                        <td>144~240만원</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 수당은 병원 내규에 따라 다름. 수당 외 전문간호사 우선 승진, 교육비 지원 혜택도 확인할 것</p>
+        <div style="background:#F0FDF4;border-left:4px solid #059669;padding:14px 16px;border-radius:0 8px 8px 0;margin-top:16px;font-size:0.85rem;">
+            <b>취득 과정 및 팁</b>: 석사 과정(2년) 이후 임상경력 3년 충족 후 국가시험 응시. 높은 합격률 분야(감염관리, 노인, 마취)부터 시작하면 진로 안정성이 좋습니다. 대학병원은 전문간호사 우선 승진, 교육비 지원, 특근비 추가 지급 혜택도 있습니다.
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:12px;">* 월 수당은 병원 내규에 따라 다름 | 합격률은 최근 3년 평균 | 연간 수당은 월 수당 × 12개월 기준</p>
     </div>
 
     <!-- 관련 직종 -->
@@ -629,6 +933,8 @@
         </div>
     </div>
 
+</div><!-- .page -->
+
 <footer class="footer">
     <div class="footer-links">
         <a href="about.html">소개</a>
@@ -641,5 +947,79 @@
 <script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
 <script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
 <script src="search.js"></script>
+
+<script>
+// 야간수당 시뮬레이터
+(function() {
+    const baseSalaryInput = document.getElementById('simBaseSalary');
+    const nightShiftsInput = document.getElementById('simNightShifts');
+    const baseSalaryVal = document.getElementById('simBaseSalaryVal');
+    const nightShiftsVal = document.getElementById('simNightShiftsVal');
+    const hourlyRateVal = document.getElementById('simHourlyRate');
+    const oneNightPayVal = document.getElementById('simOneNightPay');
+    const monthlyNightPayVal = document.getElementById('simMonthlyNightPay');
+    const takeHomeVal = document.getElementById('simTakeHome');
+
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('ko-KR');
+    }
+
+    function updateSimulator() {
+        const baseSalary = parseInt(baseSalaryInput.value) * 10000; // 만원 to 원
+        const nightShifts = parseInt(nightShiftsInput.value);
+
+        // 통상시급 = 기본급 ÷ 209
+        const hourlyRate = baseSalary / 209;
+
+        // 1회 야간수당 = 통상시급 × 50% × 8시간
+        const oneNightPay = hourlyRate * 0.5 * 8;
+
+        // 월 야간수당 = 1회 야간수당 × 횟수
+        const monthlyNightPay = oneNightPay * nightShifts;
+
+        // 예상 월 세전 (기본급 + 직무수당 + 야간수당 + 비과세 식대 100만원)
+        const monthlyPreTax = (baseSalary / 12) + 100000 + monthlyNightPay + 300000; // 100만원은 비과세 항목
+
+        // 대략적인 공제율 (약 18~22%)
+        const deductionRate = 0.20;
+        const takeHome = monthlyPreTax * (1 - deductionRate);
+
+        // UI 업데이트
+        baseSalaryVal.textContent = baseSalaryInput.value + '만원';
+        nightShiftsVal.textContent = nightShifts + '회';
+        hourlyRateVal.textContent = formatCurrency(hourlyRate) + '원';
+        oneNightPayVal.textContent = formatCurrency(oneNightPay) + '원';
+        monthlyNightPayVal.textContent = formatCurrency(monthlyNightPay) + '원';
+        takeHomeVal.textContent = formatCurrency(takeHome) + '원';
+    }
+
+    baseSalaryInput.addEventListener('input', updateSimulator);
+    nightShiftsInput.addEventListener('input', updateSimulator);
+
+    // 초기값 설정
+    updateSimulator();
+})();
+
+// 급여명세서 탭 기능
+(function() {
+    const tabs = document.querySelectorAll('.payslip-tab');
+    const contents = document.querySelectorAll('.payslip-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const year = this.getAttribute('data-year');
+
+            // 모든 탭과 컨텐츠에서 active 제거
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            // 클릭한 탭과 해당 컨텐츠에 active 추가
+            this.classList.add('active');
+            document.querySelector(`.payslip-content[data-year="${year}"]`).classList.add('active');
+        });
+    });
+})();
+</script>
+
 </body>
 </html>
