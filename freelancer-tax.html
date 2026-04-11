@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프리랜서 3.3% 세금 계산기 2026 - 실수령액 즉시 확인 | 월급연구소</title>
+    <meta name="google-site-verification" content="ro2hwYnXOh_1OXnZ5hyFkJ663ACoqYU8gvHgL0g2rcI" />
+    <meta name="naver-site-verification" content="c52838d57daadbdbae1bceb6c6131ab62ee07e2a" />
+    <meta name="description" content="프리랜서 3.3% 원천징수 세금 계산기. 계약금액과 경비율을 입력하면 즉시 실수령액을 확인할 수 있습니다. 원천징수 세액, 종합소득세 예상액, 환급/추가납부액을 한눈에 계산하세요.">
+    <meta name="keywords" content="프리랜서 세금 계산기, 3.3% 세금, 프리랜서 실수령액, 프리랜서 종합소득세, 사업소득세 계산, 원천징수 3.3%, 프리랜서 환급">
+    <meta property="og:title" content="프리랜서 3.3% 세금 계산기 - 실수령액 즉시 확인">
+    <meta property="og:description" content="프리랜서 원천징수 3.3% 세금을 자동으로 계산하고 환급 여부를 확인하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://salarykorea.site/freelancer-tax">
+    <meta property="og:image" content="https://salarykorea.site/og-image.png">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="프리랜서 3.3% 세금 계산기 - 실수령액 즉시 확인">
+    <meta name="twitter:description" content="프리랜서 원천징수 3.3% 세금을 자동으로 계산하고 환급 여부를 확인하세요.">
+    <link rel="canonical" href="https://salarykorea.site/freelancer-tax">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <script>if(localStorage.getItem("largeText")==="on")document.documentElement.classList.add("large-text");</script>
+    <style>
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+        @media (max-width: 768px) {
+            .dashboard { grid-template-columns: 1fr; }
+        }
+        /* ══ 폼 요소 ══ */
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display: block; }
+        .form-input-wrap { position: relative; }
+        .form-input { width: 100%; padding: 14px 48px 14px 16px; font-size: 1.5rem; font-weight: 700; font-family: 'Inter', 'Noto Sans KR', sans-serif; border: 1.5px solid var(--border); border-radius: 12px; outline: none; color: var(--text-primary); text-align: right; transition: all 0.2s; background: var(--surface); letter-spacing: -0.5px; }
+        .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .form-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; font-weight: 600; color: var(--text-tertiary); pointer-events: none; }
+        .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.88rem; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); background: var(--surface); outline: none; transition: border-color 0.2s; }
+        .form-select:focus { border-color: var(--accent); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        /* 슬라이더 */
+        .form-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #E5E7EB; outline: none; cursor: pointer; margin-top: 12px; }
+        .form-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer; }
+        .slider-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.7rem; color: var(--text-tertiary); }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; color: white; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
+        .submit-btn:hover { background: #1D4ED8; }
+        /* ══ 결과 영역 ══ */
+        .result-col { display: flex; flex-direction: column; gap: 24px; }
+        .result-placeholder { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px 28px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
+        /* 메인 결과 */
+        .result-hero { background: linear-gradient(135deg, var(--accent-dark), #3B82F6); border-radius: 16px; padding: 32px 28px; text-align: center; display: none; }
+        .result-hero.show { display: block; animation: fadeUp 0.4s ease; }
+        .result-hero.refund { background: linear-gradient(135deg, #1E40AF, #3B82F6); }
+        .result-hero.pay { background: linear-gradient(135deg, #991B1B, #DC2626); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .result-hero-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .result-hero-amount { font-size: 2.8rem; font-weight: 900; color: white; font-family: 'Inter', sans-serif; letter-spacing: -2px; }
+        .result-hero-unit { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        .result-hero-msg { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12); }
+        .result-hero-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin-top: 20px; }
+        .rh-stat { padding: 16px 12px; text-align: center; }
+        .result-hero.refund .rh-stat { background: linear-gradient(135deg, #1E40AF, #3B82F6); }
+        .result-hero.pay .rh-stat { background: linear-gradient(135deg, #991B1B, #DC2626); }
+        .rh-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+        .rh-stat-val { font-size: 0.88rem; color: rgba(255,255,255,0.95); font-weight: 700; font-family: 'Inter', sans-serif; }
+        @media (max-width: 768px) {
+            .result-hero-amount { font-size: 2.2rem; }
+            .rh-stat-val { font-size: 0.78rem; }
+        }
+        /* 공제 상세 카드 (step breakdown) */
+        .breakdown-card { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+        .breakdown-card.show { display: block; animation: fadeUp 0.4s ease 0.08s both; }
+        .step-row { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #F3F4F6; }
+        .step-row:last-child { border-bottom: none; }
+        .step-row.total-row { border-top: 2px solid var(--border); margin-top: 4px; padding-top: 16px; }
+        .step-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 900; color: white; flex-shrink: 0; margin-right: 12px; }
+        .step-name { flex: 1; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        .step-amount { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; min-width: 100px; text-align: right; }
+        .step-amount.minus { color: #DC2626; }
+        .step-amount.plus { color: var(--accent); }
+        .step-amount.result-refund { color: var(--accent); font-size: 1rem; font-weight: 800; }
+        .step-amount.result-pay { color: #DC2626; font-size: 1rem; font-weight: 800; }
+        /* ══ 힌트 텍스트 ══ */
+        .form-hint { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 6px; line-height: 1.5; }
+        /* ══ 저장 / 공유 버튼 ══ */
+        .action-row { display: none; gap: 10px; margin-top: 0; }
+        .action-row.show { display: flex; }
+        .share-btn { flex: 1; padding: 12px; background: #FEE500; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; font-family: 'Noto Sans KR', sans-serif; color: #1D1D1F; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .share-btn:hover { background: #F5DC00; }
+        /* ══ 세율 테이블 ══ */
+        .rate-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 12px 0; }
+        .rate-table th { background: var(--surface-alt); padding: 10px 12px; text-align: left; font-weight: 700; color: var(--text-secondary); font-size: 0.78rem; }
+        .rate-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; color: var(--text-primary); }
+        .rate-table tr:last-child td { border-bottom: none; }
+        .rate-table .highlight { color: var(--accent); font-weight: 700; }
+        /* 하이라이트 박스 */
+        .highlight-box { background: var(--accent-light); border: 1px solid #BFDBFE; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+        .highlight-box p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; margin: 0; }
+        .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; align-items: start; }
+        .info-card ul { padding-left: 18px; margin-bottom: 10px; }
+        .info-card ul li { color: var(--text-secondary); line-height: 1.8; font-size: 0.85rem; margin-bottom: 4px; }
+        /* 광고 */
+        .ad-wrap { margin: 24px 0; min-height: 250px; }
+        .ad-wrap.ad-empty { display: none; }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3416211588228348" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "프리랜서 3.3% 세금 계산기",
+    "description": "프리랜서의 원천징수 3.3% 세금과 종합소득세를 계산하고 환급 여부를 확인합니다.",
+    "url": "https://salarykorea.site/freelancer-tax",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+    },
+    "provider": {
+        "@type": "Organization",
+        "name": "월급연구소",
+        "url": "https://salarykorea.site"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://salarykorea.site/"},
+        {"@type": "ListItem", "position": 2, "name": "프리랜서 3.3% 세금 계산기", "item": "https://salarykorea.site/freelancer-tax"}
+    ]
+}
+    </script>
+</head>
+<body>
+
+<!-- 네비게이션 -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">월급<span>연구소</span></a>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <button class="nav-item-btn">월급 받을 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="index.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연봉 실수령액</a>
+                    <a href="minimum-wage.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>최저시급 계산기</a>
+                    <a href="holiday-pay.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>주휴수당 계산기</a>
+                    <a href="insurance.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>4대보험 계산기</a>
+                    <a href="salary-table.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>실수령액 표</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">세금 낼 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세</a>
+                    <a href="freelancer-tax.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>프리랜서 3.3%</a>
+                    <a href="gift-tax.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>증여세 계산기</a>
+                    <a href="acquisition-tax.html"><div class="nav-dropdown-dot" style="background:#EF4444;"></div>취득세 계산기</a>
+                    <a href="tax-guide.html"><div class="nav-dropdown-dot" style="background:#2563EB;"></div>연말정산 가이드</a>
+                    <a href="guide-income-tax.html"><div class="nav-dropdown-dot" style="background:#F59E0B;"></div>종합소득세 가이드</a>
+                </div>
+            </div>
+                        <div class="nav-item">
+                <button class="nav-item-btn">병원 갈 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="medical-tax.html"><div class="nav-dropdown-dot" style="background:#EC4899;"></div>의료비 세액공제</a>
+                    <a href="silbi.html"><div class="nav-dropdown-dot" style="background:#06B6D4;"></div>실비보험 계산기</a>
+                    <a href="guide-medical-tax.html"><div class="nav-dropdown-dot" style="background:#F472B6;"></div>의료비 공제 가이드</a>
+                    <a href="guide-silbi.html"><div class="nav-dropdown-dot" style="background:#22D3EE;"></div>실비보험 가이드</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="nav-item-btn">퇴사할 때 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="nav-dropdown">
+                    <a href="retirement.html"><div class="nav-dropdown-dot" style="background:#059669;"></div>퇴직금 계산기</a>
+                    <a href="unemployment.html"><div class="nav-dropdown-dot" style="background:#8B5CF6;"></div>실업급여 계산기</a>
+                </div>
+            </div>
+        </div>
+        <button class="search-toggle" onclick="openSearch()" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <div class="lang-selector">
+                <button class="lang-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> KO</button>
+                <div class="lang-dropdown">
+                    <a href="freelancer-tax.html" class="active">한국어</a>
+                </div>
+            </div>
+        <button class="font-toggle" onclick="toggleLargeText()" title="큰 글씨 모드"><span class="ft-small">가</span><span class="ft-big">가</span></button>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-mobile').classList.toggle('open')">☰</button>
+    </div>
+    <div class="nav-mobile">
+        <div class="nav-mobile-settings">
+            <button class="nav-mobile-settings-btn" onclick="toggleLargeText()">
+                <span style="font-size:0.75rem;font-weight:700;">가</span><span style="font-size:1.1rem;font-weight:800;">가</span>
+                큰 글씨 모드
+            </button>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">월급 받을 때</div>
+            <a href="index.html">연봉 실수령액</a>
+            <a href="minimum-wage.html">최저시급 계산기</a>
+            <a href="holiday-pay.html">주휴수당 계산기</a>
+            <a href="insurance.html">4대보험 계산기</a>
+            <a href="salary-table.html">실수령액 표</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">세금 낼 때</div>
+            <a href="income-tax.html">종합소득세 계산기</a>
+            <a href="freelancer-tax.html">프리랜서 3.3%</a>
+            <a href="gift-tax.html">증여세 계산기</a>
+            <a href="acquisition-tax.html">취득세 계산기</a>
+            <a href="tax-guide.html">연말정산 가이드</a>
+            <a href="guide-income-tax.html">종합소득세 가이드</a>
+        </div>
+                <div class="nav-mobile-group">
+            <div class="nav-mobile-title">병원 갈 때</div>
+            <a href="medical-tax.html">의료비 세액공제</a>
+            <a href="silbi.html">실비보험 계산기</a>
+            <a href="guide-medical-tax.html">의료비 공제 가이드</a>
+            <a href="guide-silbi.html">실비보험 가이드</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">퇴사할 때</div>
+            <a href="retirement.html">퇴직금 계산기</a>
+            <a href="unemployment.html">실업급여 계산기</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">기타</div>
+            <a href="about.html">소개</a>
+            <a href="contact.html">문의</a>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">Language</div>
+            <a href="freelancer-tax.html" style="color:var(--accent);font-weight:700;">한국어</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page">
+
+    <div class="page-header">
+        <div class="breadcrumb">세금 낼 때</div>
+        <h1>프리랜서 3.3% 세금 계산기</h1>
+        <p>원천징수 3.3%와 종합소득세를 한 번에 계산하고 실수령액을 바로 확인하세요</p>
+    </div>
+
+    <!-- 광고 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="AUTO" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="dashboard">
+
+        <!-- 입력 영역 -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">계약 정보 입력</div>
+                    <div class="card-badge">2026년</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">월간 계약금액 (또는 연간 총액)</label>
+                    <div class="form-input-wrap">
+                        <input type="text" class="form-input" id="monthlyIncomeInput" placeholder="3,000,000">
+                        <span class="form-unit">원</span>
+                    </div>
+                    <div class="form-hint">월급 기준으로 입력하면 자동으로 연간금액(×12)으로 계산됩니다.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">필요경비율</label>
+                    <div class="form-input-wrap">
+                        <input type="text" class="form-input" id="expenseRate" value="60" style="font-size:1.2rem;">
+                        <span class="form-unit">%</span>
+                    </div>
+                    <div class="form-hint">업종에 따른 경비율을 입력하세요. 기본값은 단순경비율 60%입니다.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">부양가족 수 (본인 포함)</label>
+                    <select class="form-select" id="dependents">
+                        <option value="1">1명 (본인만)</option>
+                        <option value="2">2명</option>
+                        <option value="3">3명</option>
+                        <option value="4">4명</option>
+                        <option value="5">5명 이상</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">소득유형</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <label style="display:flex; align-items:center; gap:10px; padding:10px 14px; border:1.5px solid var(--border); border-radius:10px; cursor:pointer; font-size:0.82rem; font-weight:500; color:var(--text-secondary);">
+                            <input type="radio" name="incomeType" value="simple" checked style="width:18px; height:18px; accent-color:var(--accent);">
+                            단순경비율 (보통)
+                        </label>
+                        <label style="display:flex; align-items:center; gap:10px; padding:10px 14px; border:1.5px solid var(--border); border-radius:10px; cursor:pointer; font-size:0.82rem; font-weight:500; color:var(--text-secondary);">
+                            <input type="radio" name="incomeType" value="standard" style="width:18px; height:18px; accent-color:var(--accent);">
+                            기준경비율 (소수입)
+                        </label>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="calculate()">3.3% 세금 계산하기</button>
+            </div>
+        </div>
+
+        <!-- 결과 영역 -->
+        <div class="result-col">
+
+            <div class="result-placeholder" id="resultPlaceholder">
+                계약금액을 입력하고<br>계산하기 버튼을 눌러주세요
+            </div>
+
+            <!-- 결과 요약 -->
+            <div class="result-hero" id="resultHero">
+                <div class="result-hero-label" id="resultLabel">실수령액</div>
+                <div class="result-hero-amount" id="resultAmount">0</div>
+                <div class="result-hero-unit">원</div>
+                <div class="result-hero-stats">
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">원천징수 (3.3%)</div>
+                        <div class="rh-stat-val" id="subWithholding">-</div>
+                    </div>
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">예상 환급액</div>
+                        <div class="rh-stat-val" id="subRefund">-</div>
+                    </div>
+                    <div class="rh-stat">
+                        <div class="rh-stat-label">최종수령액</div>
+                        <div class="rh-stat-val" id="subFinal">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 세금 계산 상세 -->
+            <div class="breakdown-card" id="detailCard">
+                <div class="card-header">
+                    <div class="card-title">세금 계산 상세</div>
+                </div>
+                <div id="detailRows"></div>
+            </div>
+
+            <!-- 카카오 공유 -->
+            <div class="action-row" id="actionRow">
+                <button class="share-btn" onclick="shareKakao()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.56c-.07.26.22.47.45.33l4.07-2.67c.58.07 1.18.11 1.79.11 5.52 0 10-3.58 10-7.93S17.52 3 12 3z"/></svg>
+                    카카오톡으로 공유하기
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 광고 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="AUTO" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 하단 정보 영역 -->
+    <div class="bottom-grid" style="margin-top:24px;">
+
+        <!-- 원천징수란 -->
+        <div class="info-card">
+            <h2>프리랜서 3.3% 원천징수란?</h2>
+            <p>
+                <strong>프리랜서가 일한 대금을 받을 때 발주처(클라이언트)에서 미리 떼어가는 세금</strong>입니다.
+                소득세 3% + 지방소득세 0.3% = 총 3.3%를 원천징수합니다.
+            </p>
+            <p><strong>원천징수 대상:</strong></p>
+            <ul>
+                <li>프리랜서 (디자인, IT, 영상, 번역, 집필 등)</li>
+                <li>강사료, 원고료, 출연료를 받는 경우</li>
+                <li>기술료, 컨설팅비 등 용역비를 받는 경우</li>
+            </ul>
+            <div class="highlight-box">
+                <p><strong>주의:</strong> 3.3%를 떼어가도 5월에 반드시 종합소득세 신고를 해야 합니다. 경비를 인정받으면 이미 낸 세금보다 적게 나와 환급받는 경우가 많습니다.</p>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="info-card">
+            <h2>자주 묻는 질문</h2>
+            <div class="faq-item">
+                <div class="faq-q">Q. 3.3%를 떼어간 것만으로 세금을 다 낸 건가요?</div>
+                <div class="faq-a">아니요. 3.3%는 임시로 미리 걷는 세금일 뿐입니다. 5월에 종합소득세 신고를 하면 실제 세금과 비교하여 환급 또는 추가 납부가 결정됩니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q. 3.3% 세금을 돌려받을 수 있나요?</div>
+                <div class="faq-a">네. 경비를 인정받으면 실제 세금이 원천징수액(3.3%)보다 낮아져 환급받을 수 있습니다. 대부분의 프리랜서가 환급 대상입니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q. 필요경비율은 어떻게 정하나요?</div>
+                <div class="faq-a">국세청이 업종별로 정한 '단순경비율'을 적용하거나, 실제 지출한 경비를 증명하여 '기준경비율'을 적용할 수 있습니다. 경비율이 높을수록 세금이 줄어듭니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q. 종합소득세 신고는 언제 하나요?</div>
+                <div class="faq-a">매년 5월 1일~5월 31일에 전년도 소득에 대해 신고합니다. 성실신고 확인 대상자는 6월 30일까지 연장됩니다. 홈택스(hometax.go.kr)에서 온라인 신고가 가능합니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q. 환급은 언제 받을 수 있나요?</div>
+                <div class="faq-a">5월에 신고하면 보통 6월~7월 중에 환급금이 계좌로 입금됩니다. 홈택스 간편 신고를 이용하면 더 빠르게 처리될 수 있습니다.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q. 3.3% 세금을 안 내면 어떻게 되나요?</div>
+                <div class="faq-a">발주처에서 성실하게 원천징수하지 않거나 기한 내 납부하지 않으면 가산세가 부과됩니다. 신고를 하지 않으면 무신고 가산세가 발생합니다.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 광고 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="AUTO" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 경비율 안내 -->
+    <div class="info-card" style="margin-bottom:24px;">
+        <h2>업종별 단순경비율 안내</h2>
+        <p>국세청에서 정한 업종별 경비율입니다. 실제 지출이 이보다 많으면 기준경비율을 적용받을 수 있습니다.</p>
+        <table class="rate-table">
+            <thead>
+                <tr><th>업종</th><th>단순경비율</th><th>비고</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>프리랜서 일반</td><td class="highlight">60%</td><td>기본 적용</td></tr>
+                <tr><td>소프트웨어 개발/IT</td><td class="highlight">64%</td><td>고단가 용역</td></tr>
+                <tr><td>유튜버/크리에이터</td><td class="highlight">64%</td><td>콘텐츠 제작</td></tr>
+                <tr><td>디자인 서비스</td><td class="highlight">61%</td><td>그래픽/UI</td></tr>
+                <tr><td>번역/통역</td><td class="highlight">61%</td><td>언어 서비스</td></tr>
+                <tr><td>작가/원고 집필</td><td class="highlight">73%</td><td>집필 용역</td></tr>
+                <tr><td>학원 강사/교육</td><td class="highlight">61%</td><td>교육 용역</td></tr>
+                <tr><td>음악/공연/예술</td><td class="highlight">58%</td><td>공연료</td></tr>
+                <tr><td>부동산 중개</td><td class="highlight">56%</td><td>중개수수료</td></tr>
+                <tr><td>보험설계사</td><td class="highlight">51%</td><td>설계료</td></tr>
+            </tbody>
+        </table>
+        <div class="highlight-box">
+            <p>표에 없는 업종이나 정확한 경비율이 필요하면 국세청 홈택스에서 확인하거나 세무사 상담을 받으세요.</p>
+        </div>
+    </div>
+
+    <!-- 절세 팁 -->
+    <div class="info-card" style="margin-bottom:24px;">
+        <h2>프리랜서가 알아야 할 절세 팁</h2>
+        <p>프리랜서의 종합소득세는 공제 항목을 최대한 활용하여 절세할 수 있습니다.</p>
+
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">1. 경비 인정 확대</h3>
+        <p>사무실 임차료, 통신비, 프로그램 구독료, 도서비, 교육비 등 소득 창출에 필요한 경비를 빠짐없이 인정받으세요. 영수증이나 거래 기록을 충분히 보관해야 합니다.</p>
+
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">2. 인적공제 활용</h3>
+        <p>본인(150만원), 배우자(150만원), 부양가족(150만원씩)을 공제받을 수 있습니다. 부양가족이 있으면 세금이 크게 줄어듭니다.</p>
+
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">3. 기타 공제 항목</h3>
+        <p>건강보험료, 국민연금료, 고용보험료 등 사회보험료를 공제받을 수 있습니다. ISA 통장이나 연금보험에 가입하여 추가 공제를 받을 수 있습니다.</p>
+
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">4. 신고 방식 선택</h3>
+        <p>간편장부는 기장세액공제(20%, 최대 100만원)를 받을 수 있고, 복식부기는 추가 공제는 없지만 정확한 기록으로 세무조사 시 유리합니다.</p>
+
+        <h3 style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin:16px 0 8px;">5. 성실신고 확인서 활용</h3>
+        <p>수입금액 5억원 이상은 성실신고 확인서가 필수입니다. 세무사 상담을 받으면 세액공제(최대 120만원)를 받을 수 있습니다.</p>
+    </div>
+
+    <!-- 광고 -->
+    <div class="ad-wrap">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3416211588228348" data-ad-slot="AUTO" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+<footer class="footer">
+    <div class="footer-links">
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의하기</a>
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div class="footer-copy">© 2026 월급연구소</div>
+</footer>
+
+<script>
+// ── 유틸 ──
+function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
+function parseVal(s) { return parseInt(String(s).replace(/[^0-9]/g, '')) || 0; }
+
+// ── 세금 계산 (종합소득세) ──
+function taxFromBase(t) {
+    if (t <= 0)           return 0;
+    if (t <= 14000000)    return t * 0.06;
+    if (t <= 50000000)    return 840000   + (t - 14000000)  * 0.15;
+    if (t <= 88000000)    return 6240000  + (t - 50000000)  * 0.24;
+    if (t <= 150000000)   return 15360000 + (t - 88000000)  * 0.35;
+    if (t <= 300000000)   return 37060000 + (t - 150000000) * 0.38;
+    if (t <= 500000000)   return 94060000 + (t - 300000000) * 0.40;
+    if (t <= 1000000000)  return 174060000+ (t - 500000000) * 0.42;
+    return 384060000 + (t - 1000000000) * 0.45;
+}
+
+// ── 저장용 변수 ──
+let saved = null;
+
+// ── 입력 연동 ──
+const monthlyIncomeInput = document.getElementById('monthlyIncomeInput');
+const expenseRateInput = document.getElementById('expenseRate');
+const dependentsSelect = document.getElementById('dependents');
+
+monthlyIncomeInput.addEventListener('input', function() {
+    const v = parseVal(this.value);
+    this.value = v ? v.toLocaleString('ko-KR') : '';
+});
+
+expenseRateInput.addEventListener('input', function() {
+    const v = parseVal(this.value);
+    if (v > 99) this.value = '99';
+    if (v < 0) this.value = '0';
+});
+
+function calculate() {
+    const monthlyIncome = parseVal(monthlyIncomeInput.value);
+    if (!monthlyIncome || monthlyIncome < 100000) {
+        alert('월간 계약금액을 올바르게 입력해주세요.');
+        return;
+    }
+
+    // 연간소득 = 월급 × 12
+    const annualIncome = monthlyIncome * 12;
+
+    const expenseRate = parseFloat(expenseRateInput.value) / 100;
+    if (isNaN(expenseRate) || expenseRate < 0 || expenseRate > 0.99) {
+        alert('필요경비율을 0~99 사이로 입력해주세요.');
+        return;
+    }
+
+    const dependents = parseInt(dependentsSelect.value);
+
+    // 1. 3.3% 원천징수
+    const withholding = Math.round(annualIncome * 0.033);
+
+    // 2. 필요경비
+    const expenses = Math.round(annualIncome * expenseRate);
+
+    // 3. 소득금액
+    const incomeAmount = annualIncome - expenses;
+
+    // 4. 인적공제
+    const personalDeduction = dependents * 1500000;
+
+    // 5. 과세표준
+    const taxBase = Math.max(0, incomeAmount - personalDeduction);
+
+    // 6. 산출세액
+    const calculatedTax = Math.round(taxFromBase(taxBase));
+
+    // 7. 표준세액공제
+    const standardCredit = 70000;
+
+    // 8. 결정세액 (소득세)
+    const determinedTax = Math.max(0, calculatedTax - standardCredit);
+
+    // 9. 지방소득세 (10%)
+    const localTax = Math.round(determinedTax * 0.1);
+
+    // 10. 총 세금
+    const totalTax = determinedTax + localTax;
+
+    // 11. 환급/추가납부
+    const refundAmount = withholding - totalTax;
+
+    // 12. 최종 수령액 = 원래 금액 - 3.3% + 환급금
+    const finalAmount = annualIncome - withholding + refundAmount;
+
+    saved = {
+        monthlyIncome,
+        annualIncome,
+        withholding,
+        expenses,
+        incomeAmount,
+        personalDeduction,
+        taxBase,
+        calculatedTax,
+        determinedTax,
+        localTax,
+        totalTax,
+        refundAmount,
+        finalAmount
+    };
+
+    // ── 결과 표시 ──
+    const hero = document.getElementById('resultHero');
+    const isRefund = refundAmount > 0;
+
+    document.getElementById('resultPlaceholder').style.display = 'none';
+    hero.className = 'result-hero show ' + (isRefund ? 'refund' : 'pay');
+    document.getElementById('resultLabel').textContent = '예상 실수령액 (연간)';
+    document.getElementById('resultAmount').textContent = fmt(finalAmount);
+    document.getElementById('subWithholding').textContent = fmt(withholding) + '원';
+    document.getElementById('subRefund').textContent = (isRefund ? '+' : '') + fmt(refundAmount) + '원';
+    document.getElementById('subFinal').textContent = fmt(finalAmount) + '원';
+
+    // ── 상세 내역 ──
+    const steps = [
+        { icon: '1', bg: '#3B82F6', name: '월간 계약금액', amount: fmt(monthlyIncome) + '원', cls: '' },
+        { icon: 'x', bg: '#8B5CF6', name: '연간 수입 (×12개월)', amount: fmt(annualIncome) + '원', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '원천징수 (3.3% = 소득세3% + 지방세0.3%)', amount: '-' + fmt(withholding) + '원', cls: 'minus' },
+        { icon: '=', bg: '#059669', name: '계좌 입금액 (원천징수 후)', amount: fmt(annualIncome - withholding) + '원', cls: '' },
+        { icon: '', bg: '#E5E7EB', name: '', amount: '', cls: '' },
+        { icon: '1', bg: '#3B82F6', name: '소득금액 계산', amount: '', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '필요경비 (' + (expenseRate * 100).toFixed(1) + '%)', amount: '-' + fmt(expenses) + '원', cls: 'minus' },
+        { icon: '=', bg: '#059669', name: '소득금액', amount: fmt(incomeAmount) + '원', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '인적공제 (' + dependents + '명 x 150만원)', amount: '-' + fmt(personalDeduction) + '원', cls: 'minus' },
+        { icon: '=', bg: '#059669', name: '과세표준', amount: fmt(taxBase) + '원', cls: '' },
+        { icon: '', bg: '#E5E7EB', name: '', amount: '', cls: '' },
+        { icon: '2', bg: '#3B82F6', name: '예상 종합소득세 계산', amount: '', cls: '' },
+        { icon: 'x', bg: '#8B5CF6', name: '산출세액 (누진세율 적용)', amount: fmt(calculatedTax) + '원', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '표준세액공제', amount: '-70,000원', cls: 'minus' },
+        { icon: '=', bg: '#EF4444', name: '결정세액 (소득세)', amount: fmt(determinedTax) + '원', cls: '' },
+        { icon: '+', bg: '#2563EB', name: '지방소득세 (10%)', amount: '+' + fmt(localTax) + '원', cls: 'plus' },
+        { icon: '=', bg: '#EF4444', name: '예상 종합소득세 총액', amount: fmt(totalTax) + '원', cls: '' },
+        { icon: '', bg: '#E5E7EB', name: '', amount: '', cls: '' },
+        { icon: '3', bg: '#3B82F6', name: '환급/추가납부 계산', amount: '', cls: '' },
+        { icon: '-', bg: '#F59E0B', name: '이미 낸 원천징수액', amount: '-' + fmt(withholding) + '원', cls: 'minus' },
+        { icon: '=', bg: isRefund ? '#2563EB' : '#DC2626', name: isRefund ? '환급 예상액' : '추가 납부액', amount: (isRefund ? '+' : '') + fmt(refundAmount) + '원', cls: isRefund ? 'plus' : 'minus' }
+    ];
+
+    let html = steps.map(s => {
+        if (!s.name) return `<div style="height:12px;"></div>`;
+        return `
+        <div class="step-row">
+            <div class="step-icon" style="background:${s.bg}">${s.icon}</div>
+            <div class="step-name">${s.name}</div>
+            <div class="step-amount ${s.cls}">${s.amount}</div>
+        </div>
+        `;
+    }).join('');
+
+    html += `
+        <div class="step-row total-row" style="border-top:2px solid var(--border); margin-top:12px; padding-top:16px;">
+            <div class="step-icon" style="background:${isRefund ? '#059669' : '#DC2626'}">★</div>
+            <div class="step-name" style="font-weight:800; color:var(--text-primary);">월평균 실수령액</div>
+            <div class="step-amount" style="color:${isRefund ? 'var(--accent)' : '#DC2626'}; font-size:1rem; font-weight:800;">${fmt(finalAmount / 12)}원</div>
+        </div>
+    `;
+
+    document.getElementById('detailRows').innerHTML = html;
+    document.getElementById('detailCard').classList.add('show');
+
+    // 카카오 공유 버튼 표시
+    document.getElementById('actionRow').classList.add('show');
+    window._shareTax = { isRefund, amount: fmt(refundAmount), monthlyAmount: fmt(finalAmount / 12) };
+}
+
+// 초기값 설정
+monthlyIncomeInput.value = (3000000).toLocaleString('ko-KR');
+</script>
+
+<!-- 카카오 SDK -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
+<script>
+Kakao.init('051ed8019b76b2127b2da56a27b406f2');
+function shareKakao() {
+    if (!window._shareTax) { alert('먼저 계산을 해주세요.'); return; }
+    var d = window._shareTax;
+    var title = d.isRefund
+        ? '내 프리랜서 3.3% 세금 환급액은 ' + d.amount + '원!'
+        : '내 프리랜서 3.3% 세금 추가 납부액은 ' + d.amount + '원';
+    Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: title,
+            description: '프리랜서 3.3% 원천징수 세금을 계산하고 실수령액을 확인해보세요. 월평균 ' + d.monthlyAmount + '원',
+            imageUrl: 'https://salarykorea.site/og-image.png',
+            link: { mobileWebUrl: 'https://salarykorea.site/freelancer-tax', webUrl: 'https://salarykorea.site/freelancer-tax' }
+        },
+        buttons: [{ title: '나도 계산해보기', link: { mobileWebUrl: 'https://salarykorea.site/freelancer-tax', webUrl: 'https://salarykorea.site/freelancer-tax' } }]
+    });
+}
+</script>
+<script>function toggleLargeText(){document.documentElement.classList.toggle("large-text");var on=document.documentElement.classList.contains("large-text");localStorage.setItem("largeText",on?"on":"off");var mb=document.querySelector(".nav-mobile-settings-btn");if(mb){if(on){mb.classList.add("active")}else{mb.classList.remove("active")}}}</script>
+<script>if(document.documentElement.classList.contains("large-text")){var mb=document.querySelector(".nav-mobile-settings-btn");if(mb)mb.classList.add("active");}</script>
+<script src="search.js"></script>
+
+<script>
+(function(){
+    function checkAds(){
+        var wraps = document.querySelectorAll(".ad-wrap");
+        for(var j=0; j<wraps.length; j++){
+            var w = wraps[j];
+            var ins = w.querySelector("ins.adsbygoogle");
+            if(!ins){ w.classList.add("ad-empty"); continue; }
+            var st = ins.getAttribute("data-ad-status");
+            if(st === "filled") continue;
+            if(st === "unfilled"){ w.classList.add("ad-empty"); continue; }
+            if(!ins.querySelector("iframe")){ w.classList.add("ad-empty"); }
+        }
+    }
+    setTimeout(checkAds, 4000);
+    setTimeout(checkAds, 10000);
+})();
+</script>
+</body>
+</html>
