@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="부동산 관련 모든 계산을 한 곳에서 끝내세요. 대출이자, 취득세, 양도소득세, 전월세전환, 전세가율, 청약가점 계산기를 무료로 이용하실 수 있습니다.">
+    <meta name="keywords" content="부동산계산기, 대출이자계산기, 취득세계산기, 양도소득세, 전월세전환, 청약가점">
+    <meta property="og:title" content="부동산 계산기 모음 - 대출이자, 취득세, 양도세 | 부동산연구소">
+    <meta property="og:description" content="부동산 관련 모든 계산을 한 곳에서 끝내세요. 대출이자, 취득세, 양도소득세, 전월세전환, 전세가율, 청약가점.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://budongsan-calculator.site">
+    <meta property="og:image" content="https://budongsan-calculator.site/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="부동산 계산기 모음 - 부동산연구소">
+    <meta name="twitter:description" content="부동산 관련 모든 계산을 한 곳에서 끝내세요.">
+
+    <title>부동산 계산기 모음 - 대출이자, 취득세, 양도세 | 부동산연구소</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="common.css">
+
+    <!-- Page-specific styles -->
+    <style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 44px);
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 3vw, 20px);
+            margin: 0;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Calculator Grid */
+        .calculator-section {
+            margin-bottom: 80px;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+
+        @media (min-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .calculator-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .calculator-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .calculator-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 16px rgba(13, 148, 136, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .calculator-card svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .calculator-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+            color: #1f2937;
+        }
+
+        .calculator-card p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Why Choose Section */
+        .why-section {
+            background: #f9fafb;
+            padding: 48px 20px;
+            border-radius: 12px;
+            margin-bottom: 60px;
+        }
+
+        .why-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 32px 0;
+            text-align: center;
+            color: #1f2937;
+        }
+
+        .why-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .why-feature {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .why-feature h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            color: #1f2937;
+        }
+
+        .why-feature p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section padding */
+        section {
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="index.html" class="navbar-logo">
+                    부동산<span>연구소</span>
+                </a>
+
+                <!-- Mobile menu toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="메뉴 열기">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Navigation menu -->
+                <div class="navbar-menu" id="navbarMenu">
+                    <div class="menu-group">
+                        <div class="menu-group-title">매매할 때</div>
+                        <ul class="menu-items">
+                            <li><a href="mortgage.html">대출이자계산기</a></li>
+                            <li><a href="capital-gains-tax.html">양도소득세계산기</a></li>
+                            <li><a href="acquisition-tax.html">취득세계산기</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="menu-group">
+                        <div class="menu-group-title">임대할 때</div>
+                        <ul class="menu-items">
+                            <li><a href="jeonse-convert.html">전월세전환계산기</a></li>
+                            <li><a href="rent-ratio.html">전세가율계산기</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="menu-group">
+                        <div class="menu-group-title">청약할 때</div>
+                        <ul class="menu-items">
+                            <li><a href="subscription-score.html">청약가점계산기</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>부동산 계산, 한 곳에서 끝내세요</h1>
+            <p>대출이자, 취득세, 양도세, 전월세전환, 청약가점까지</p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-grid">
+                <!-- Mortgage Calculator -->
+                <a href="mortgage.html" class="calculator-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        <path d="M12 12v-3"></path>
+                        <path d="M15 15v2"></path>
+                        <path d="M9 15v2"></path>
+                    </svg>
+                    <h3>대출 이자 계산기</h3>
+                    <p>월금리, 월 납부액, 총 이자를 쉽게 계산하세요</p>
+                </a>
+
+                <!-- Acquisition Tax Calculator -->
+                <a href="acquisition-tax.html" class="calculator-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path>
+                        <path d="M9 7h6"></path>
+                        <path d="M9 11h6"></path>
+                        <path d="M9 15h2"></path>
+                    </svg>
+                    <h3>취득세 계산기</h3>
+                    <p>부동산 구매 시 납부해야 할 취득세를 계산합니다</p>
+                </a>
+
+                <!-- Capital Gains Tax Calculator -->
+                <a href="capital-gains-tax.html" class="calculator-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                    <h3>양도소득세 계산기</h3>
+                    <p>부동산 판매 시 내야 할 세금을 미리 알아보세요</p>
+                </a>
+
+                <!-- Jeonse Conversion Calculator -->
+                <a href="jeonse-convert.html" class="calculator-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 4v6h6"></path>
+                        <path d="M23 20v-6h-6"></path>
+                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                    </svg>
+                    <h3>전월세 전환 계산기</h3>
+                    <p>전세와 월세를 비교하고 전환 비율을 계산하세요</p>
+                </a>
+
+                <!-- Rent Ratio Calculator -->
+                <a href="rent-ratio.html" class="calculator-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <path d="M12 7v5"></path>
+                        <path d="M9.22 9.22l3.54 3.54"></path>
+                        <path d="M7 12h5"></path>
+                        <path d="M9.22 14.78l3.54-3.54"></path>
+                        <path d="M12 17v-5"></path>
+                        <path d="M14.78 14.78l-3.54-3.54"></path>
+                        <path d="M17 12h-5"></path>
+                        <path d="M14.78 9.22l-3.54 3.54"></path>
+                    </svg>
+                    <h3>전세가율 계산기</h3>
+                    <p>전세금이 시세 대비 적정한지 판단하세요</p>
+                </a>
+
+                <!-- Subscription Score Calculator -->
+                <a href="subscription-score.html" class="calculator-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <h3>청약 가점 계산기</h3>
+                    <p>당신의 청약 가점을 계산하고 순위를 확인하세요</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-section">
+        <div class="container">
+            <h2>왜 부동산연구소인가요?</h2>
+            <div class="why-features">
+                <div class="why-feature">
+                    <h3>정확한 계산</h3>
+                    <p>최신 세법과 정책을 반영하여 정확한 계산 결과를 제공합니다</p>
+                </div>
+                <div class="why-feature">
+                    <h3>사용하기 쉬움</h3>
+                    <p>복잡한 부동산 계산을 누구나 쉽게 할 수 있도록 만들었습니다</p>
+                </div>
+                <div class="why-feature">
+                    <h3>완전 무료</h3>
+                    <p>모든 계산기를 무료로 이용할 수 있습니다</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>부동산연구소</h4>
+                    <ul>
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="mortgage.html">대출이자계산기</a></li>
+                        <li><a href="acquisition-tax.html">취득세계산기</a></li>
+                        <li><a href="capital-gains-tax.html">양도소득세계산기</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>더보기</h4>
+                    <ul>
+                        <li><a href="jeonse-convert.html">전월세전환계산기</a></li>
+                        <li><a href="rent-ratio.html">전세가율계산기</a></li>
+                        <li><a href="subscription-score.html">청약가점계산기</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>정보</h4>
+                    <ul>
+                        <li><a href="#privacy">개인정보처리방침</a></li>
+                        <li><a href="#terms">이용약관</a></li>
+                        <li><a href="#contact">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 부동산연구소. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AdSense Placeholder -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+     crossorigin="anonymous"></script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "부동산연구소",
+        "url": "https://budongsan-calculator.site",
+        "description": "부동산 관련 모든 계산을 한 곳에서 끝내세요. 대출이자, 취득세, 양도소득세, 전월세전환, 전세가율, 청약가점 계산기를 무료로 이용하실 수 있습니다.",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "홈",
+                "item": "https://budongsan-calculator.site"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "계산기",
+                "item": "https://budongsan-calculator.site/"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            navbarMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const menuLinks = navbarMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navbarMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="부동산 대출 이자 계산기로 월 상환금, 총 상환금, 이자를 쉽게 계산하세요. 원리금균등, 원금균등, 만기일시 상환 방식 비교.">
+    <meta name="keywords" content="대출계산기, 이자계산기, 월상환금, 대출이자, 부동산계산기">
+    <meta property="og:title" content="부동산 대출 이자 계산기 - 월 상환금 계산 | 부동산연구소">
+    <meta property="og:description" content="원리금균등, 원금균등, 만기일시 등 다양한 상환 방식의 대출 이자를 계산하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://budongsan-calculator.site/mortgage.html">
+    <meta property="og:image" content="https://budongsan-calculator.site/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>부동산 대출 이자 계산기 - 월 상환금 계산 | 부동산연구소</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="common.css">
+
+    <!-- Page-specific styles -->
+    <style>
+        /* ════════════════════════════════════════════════════════════ */
+        /* 대시보드 레이아웃 (Two-column) */
+        /* ════════════════════════════════════════════════════════════ */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 60px;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* 폼 섹션 (왼쪽) */
+        /* ════════════════════════════════════════════════════════════ */
+
+        .form-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .form-section h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--text-primary);
+            font-family: 'Noto Sans KR', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        /* Big Input Style */
+        .form-input.big-input {
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 16px 14px;
+        }
+
+        /* Slider Container */
+        .slider-container {
+            margin-top: 12px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.3);
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.3);
+        }
+
+        .slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+        }
+
+        .slider::-moz-range-track {
+            background: transparent;
+            border: none;
+        }
+
+        .slider-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .slider-value strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Toggle Buttons */
+        .toggle-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 10px 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .toggle-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 32px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(13, 148, 136, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* 결과 섹션 (오른쪽) */
+        /* ════════════════════════════════════════════════════════════ */
+
+        .result-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Hero Result Card */
+        .result-hero {
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            animation: fadeUp 0.6s ease-out 0.1s both;
+        }
+
+        .result-hero-main {
+            font-size: 0.82rem;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-hero-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .result-hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .result-stat {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 16px;
+        }
+
+        .result-stat-label {
+            font-size: 0.75rem;
+            opacity: 0.85;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .result-stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* Breakdown Card */
+        .breakdown-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            animation: fadeUp 0.6s ease-out 0.2s both;
+        }
+
+        .card-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .breakdown-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .b-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--surface-alt);
+        }
+
+        .b-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .b-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .b-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .b-dot.principal {
+            background: var(--accent);
+        }
+
+        .b-dot.interest {
+            background: #F59E0B;
+        }
+
+        .b-amount {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Schedule Table */
+        .schedule-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            animation: fadeUp 0.6s ease-out 0.3s both;
+            overflow-x: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .schedule-table thead {
+            background: var(--surface-alt);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .schedule-table th {
+            padding: 12px 8px;
+            text-align: right;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .schedule-table th:first-child {
+            text-align: left;
+        }
+
+        .schedule-table td {
+            padding: 10px 8px;
+            text-align: right;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .schedule-table td:first-child {
+            text-align: left;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .schedule-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .schedule-table tbody tr:hover {
+            background: var(--surface-alt);
+        }
+
+        /* Chart Container */
+        .chart-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            animation: fadeUp 0.6s ease-out 0.4s both;
+        }
+
+        .chart-container {
+            text-align: center;
+        }
+
+        .chart-bar {
+            display: flex;
+            gap: 8px;
+            height: 200px;
+            margin-bottom: 16px;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .chart-segment {
+            border-radius: 4px 4px 0 0;
+            min-width: 40px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .chart-segment.principal {
+            background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+        }
+
+        .chart-segment.interest {
+            background: linear-gradient(180deg, #FCD34D, #F59E0B);
+        }
+
+        .chart-segment:hover {
+            opacity: 0.8;
+            transform: translateY(-4px);
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 0.82rem;
+        }
+
+        .chart-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        /* Share & Download */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Noto Sans KR', sans-serif;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* 정보 & FAQ 섹션 */
+        /* ════════════════════════════════════════════════════════════ */
+
+        .info-section {
+            margin-bottom: 80px;
+        }
+
+        .info-section h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 28px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+
+        .info-card-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .info-card-item h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-light);
+        }
+
+        .info-card-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .info-card-item p:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-card-item strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Accordion/Details */
+        .faq-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .faq-section h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        details {
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+
+        details:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        summary::after {
+            content: '+';
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        details > p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.8;
+            margin: 12px 0 0 0;
+            padding: 0;
+        }
+
+        /* Related Calculators */
+        .related-section {
+            margin-top: 60px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .related-card h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .related-card p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* 애니메이션 */
+        /* ════════════════════════════════════════════════════════════ */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Hidden state for results */
+        .results-hidden {
+            display: none;
+        }
+
+        /* Empty state */
+        .result-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 0.95rem;
+        }
+
+        /* Counter animation */
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-section {
+                padding: 24px;
+            }
+
+            .form-input.big-input {
+                font-size: 1.15rem;
+            }
+
+            .result-hero {
+                padding: 24px;
+            }
+
+            .result-hero-amount {
+                font-size: 1.6rem;
+            }
+
+            .result-hero-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .result-stat {
+                padding-top: 12px;
+            }
+
+            .schedule-table {
+                font-size: 0.75rem;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                padding: 8px 4px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-bar {
+                min-width: 100%;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">부동산<span>연구소</span></a>
+
+            <div class="nav-menu">
+                <div class="nav-item">
+                    <button class="nav-item-btn">
+                        매매할 때
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown">
+                        <a href="mortgage.html"><span class="nav-dropdown-dot" style="background: var(--accent);"></span>대출이자계산기</a>
+                        <a href="capital-gains-tax.html"><span class="nav-dropdown-dot" style="background: #10B981;"></span>양도소득세계산기</a>
+                        <a href="acquisition-tax.html"><span class="nav-dropdown-dot" style="background: #8B5CF6;"></span>취득세계산기</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <button class="nav-item-btn">
+                        임대할 때
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown">
+                        <a href="jeonse-convert.html"><span class="nav-dropdown-dot" style="background: #EC4899;"></span>전월세전환계산기</a>
+                        <a href="rent-ratio.html"><span class="nav-dropdown-dot" style="background: #06B6D4;"></span>전세가율계산기</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <button class="nav-item-btn">
+                        청약할 때
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown">
+                        <a href="subscription-score.html"><span class="nav-dropdown-dot" style="background: #F59E0B;"></span>청약가점계산기</a>
+                    </div>
+                </div>
+            </div>
+
+            <button class="nav-mobile-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav-mobile" id="mobileMenu">
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">매매할 때</div>
+            <a href="mortgage.html">대출이자계산기</a>
+            <a href="capital-gains-tax.html">양도소득세계산기</a>
+            <a href="acquisition-tax.html">취득세계산기</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">임대할 때</div>
+            <a href="jeonse-convert.html">전월세전환계산기</a>
+            <a href="rent-ratio.html">전세가율계산기</a>
+        </div>
+        <div class="nav-mobile-group">
+            <div class="nav-mobile-title">청약할 때</div>
+            <a href="subscription-score.html">청약가점계산기</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page">
+        <div class="page-header">
+            <div class="breadcrumb">대출 이자 계산기</div>
+            <h1>부동산 대출 이자 계산기</h1>
+            <p>대출금액, 기간, 금리를 입력하면 월 상환금과 총 이자를 자동으로 계산해드립니다. 원리금균등, 원금균등, 만기일시 등 다양한 상환 방식을 비교하세요.</p>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard">
+            <!-- Form Section (Left) -->
+            <div class="form-section">
+                <h2>계산 정보 입력</h2>
+
+                <form id="mortgageForm">
+                    <!-- Loan Amount -->
+                    <div class="form-group">
+                        <label class="form-label">대출 금액</label>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="number" id="principal" class="form-input big-input" placeholder="50000" min="1000" max="10000000" value="50000">
+                            <span style="font-weight: 600; color: var(--text-secondary); white-space: nowrap;">만원</span>
+                        </div>
+                    </div>
+
+                    <!-- Loan Term -->
+                    <div class="form-group">
+                        <label class="form-label" for="term">대출 기간</label>
+                        <select id="term" class="form-select">
+                            <option value="5">5년</option>
+                            <option value="10" selected>10년</option>
+                            <option value="15">15년</option>
+                            <option value="20">20년</option>
+                            <option value="25">25년</option>
+                            <option value="30">30년</option>
+                            <option value="35">35년</option>
+                        </select>
+                    </div>
+
+                    <!-- Interest Rate -->
+                    <div class="form-group">
+                        <label class="form-label" for="rate">연 이자율</label>
+                        <input type="number" id="rate" class="form-input" placeholder="3.5" min="0.1" max="20" step="0.1" value="3.5">
+                        <div class="slider-container">
+                            <input type="range" id="rateSlider" class="slider" min="1" max="100" step="1" value="35">
+                            <div class="slider-value">
+                                <span>1.0%</span>
+                                <strong id="rateDisplay">3.5%</strong>
+                                <span>10.0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Repayment Method -->
+                    <div class="form-group">
+                        <label class="form-label">상환 방식</label>
+                        <div class="toggle-group">
+                            <button type="button" class="toggle-btn active" data-method="equal-payment">원리금균등</button>
+                            <button type="button" class="toggle-btn" data-method="equal-principal">원금균등</button>
+                            <button type="button" class="toggle-btn" data-method="bullet">만기일시</button>
+                        </div>
+                    </div>
+
+                    <!-- Grace Period -->
+                    <div class="form-group">
+                        <label class="form-label" for="grace">거치 기간</label>
+                        <select id="grace" class="form-select">
+                            <option value="0" selected>없음</option>
+                            <option value="1">1년</option>
+                            <option value="2">2년</option>
+                            <option value="3">3년</option>
+                            <option value="5">5년</option>
+                        </select>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <button type="submit" class="submit-btn">계산하기</button>
+                </form>
+            </div>
+
+            <!-- Results Section (Right) -->
+            <div class="result-section" id="resultSection" style="display: none;">
+                <!-- Hero Card -->
+                <div class="result-hero">
+                    <div class="result-hero-main">월 상환금</div>
+                    <div class="result-hero-amount"><span class="counter" id="monthlyPayment">0</span>만원</div>
+                    <div class="result-hero-stats">
+                        <div class="result-stat">
+                            <div class="result-stat-label">총 상환금</div>
+                            <div class="result-stat-value"><span class="counter" id="totalRepayment">0</span>만원</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-label">총 이자</div>
+                            <div class="result-stat-value"><span class="counter" id="totalInterest">0</span>만원</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-label">대출원금</div>
+                            <div class="result-stat-value"><span class="counter" id="principalDisplay">0</span>만원</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-label">상환 기간</div>
+                            <div class="result-stat-value"><span id="periodDisplay">0</span>개월</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakdown Card -->
+                <div class="breakdown-card">
+                    <div class="card-title">상환 구성</div>
+                    <div class="breakdown-items">
+                        <div class="b-item">
+                            <div class="b-label">
+                                <div class="b-dot principal"></div>
+                                <span>원금</span>
+                            </div>
+                            <div class="b-amount"><span class="counter" id="breakdownPrincipal">0</span>만원</div>
+                        </div>
+                        <div class="b-item">
+                            <div class="b-label">
+                                <div class="b-dot interest"></div>
+                                <span>이자</span>
+                            </div>
+                            <div class="b-amount"><span class="counter" id="breakdownInterest">0</span>만원</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <button class="action-btn" id="downloadBtn" title="이미지로 저장">
+                            💾 저장
+                        </button>
+                        <button class="action-btn" id="shareKakaoBtn" title="카카오톡 공유">
+                            📤 공유
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Schedule Card -->
+                <div class="schedule-card">
+                    <div class="card-title">상환 스케줄</div>
+                    <div style="overflow-x: auto;">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>회차</th>
+                                    <th>상환원금</th>
+                                    <th>이자</th>
+                                    <th>월상환금</th>
+                                    <th>잔금</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleTable">
+                                <!-- 동적으로 채워짐 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Chart Card -->
+                <div class="chart-card">
+                    <div class="card-title">상환 비율</div>
+                    <div class="chart-container">
+                        <div class="chart-bar">
+                            <div class="chart-segment principal" id="chartPrincipal" style="width: 0%;"></div>
+                            <div class="chart-segment interest" id="chartInterest" style="width: 0%;"></div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="chart-legend-item">
+                                <div class="chart-legend-dot" style="background: var(--accent);"></div>
+                                <span>원금</span>
+                            </div>
+                            <div class="chart-legend-item">
+                                <div class="chart-legend-dot" style="background: #F59E0B;"></div>
+                                <span>이자</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="result-section">
+                <div class="result-empty" style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px;">
+                    입력 값을 확인하고 계산하기 버튼을 클릭하세요
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="page">
+        <section class="info-section">
+            <h2>대출 상환 방식 안내</h2>
+            <div class="info-grid">
+                <div class="info-card-item">
+                    <h3>원리금균등 (가장 일반적)</h3>
+                    <p>매월 동일한 금액을 납부하는 방식입니다. 초기에는 이자가 많이 포함되어 있으며, 시간이 지날수록 원금 비중이 높아집니다.</p>
+                    <p><strong>특징:</strong> 예측 가능한 현금흐름, 가장 널리 사용됨</p>
+                    <p><strong>추천:</strong> 안정적인 소득이 있는 차용인</p>
+                </div>
+                <div class="info-card-item">
+                    <h3>원금균등</h3>
+                    <p>매월 동일한 원금을 상환하고, 남은 금액에 대한 이자를 추가로 납부합니다. 초기 상환액이 크지만 시간이 지날수록 감소합니다.</p>
+                    <p><strong>특징:</strong> 총 이자가 적음, 초기 부담이 큼</p>
+                    <p><strong>추천:</strong> 초기에 큰 금액을 감당할 수 있는 차용인</p>
+                </div>
+                <div class="info-card-item">
+                    <h3>만기일시 (일시상환)</h3>
+                    <p>대출 기간 동안 이자만 납부하고, 만기에 원금 전체를 일시에 상환하는 방식입니다.</p>
+                    <p><strong>특징:</strong> 초기 부담 가장 적음, 만기에 대량 자금 필요</p>
+                    <p><strong>추천:</strong> 만기 시점에 자금 마련이 예상되는 경우</p>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 60px;">금리 유형 이해하기</h2>
+            <div class="info-grid">
+                <div class="info-card-item">
+                    <h3>고정금리</h3>
+                    <p>대출 전 기간 동안 이자율이 고정되는 방식입니다. 금리 변동의 영향을 받지 않으므로 상환액이 일정합니다.</p>
+                    <p><strong>장점:</strong> 예측 가능, 장기 계획 용이</p>
+                    <p><strong>단점:</strong> 금리가 하락하면 손해</p>
+                </div>
+                <div class="info-card-item">
+                    <h3>변동금리</h3>
+                    <p>시장 금리에 따라 주기적으로 조정되는 방식입니다. 초기 금리는 낮지만 향후 인상될 가능성이 있습니다.</p>
+                    <p><strong>장점:</strong> 초기 금리 저렴</p>
+                    <p><strong>단점:</strong> 금리 인상 시 상환액 증가</p>
+                </div>
+                <div class="info-card-item">
+                    <h3>갭금리(혼합)</h3>
+                    <p>처음 일정 기간은 고정금리, 이후 변동금리로 전환되는 방식입니다. 두 방식의 장점을 조합한 형태입니다.</p>
+                    <p><strong>장점:</strong> 초기 안정성 + 장기 경제성</p>
+                    <p><strong>단점:</strong> 전환 시점에 금리 인상 위험</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="info-section">
+            <div class="faq-section">
+                <h3>자주 묻는 질문</h3>
+
+                <details>
+                    <summary>거치 기간이란 무엇인가요?</summary>
+                    <p>거치 기간은 대출을 받은 후 원금을 갚지 않고 이자만 납부하는 기간입니다. 예를 들어 2년의 거치 기간이 있으면 처음 2년 동안은 이자만 내고, 이후 3년 동안 원금과 이자를 함께 갚게 됩니다. 거치 기간을 설정하면 초기에 상환 부담을 줄일 수 있습니다.</p>
+                </details>
+
+                <details>
+                    <summary>월 상환금이 정확한가요?</summary>
+                    <p>본 계산기는 선택하신 상환 방식과 금리 조건에 따라 정확하게 계산됩니다. 다만 실제 대출 계약 시에는 금융기관의 사정, 수수료, 보험료 등이 추가될 수 있습니다. 정확한 상환액은 대출 실행 전에 금융기관에 확인하시기 바랍니다.</p>
+                </details>
+
+                <details>
+                    <summary>대출금액을 올리면 이자가 어떻게 변하나요?</summary>
+                    <p>대출금액이 증가하면 같은 금리 조건에서도 총 이자액이 높아집니다. 예를 들어 금액을 2배로 늘리면 총 이자도 약 2배 증가합니다. 월 상환금도 비례하여 증가하므로, 대출금액 결정 시 본인의 상환 능력을 충분히 고려하시기 바랍니다.</p>
+                </details>
+
+                <details>
+                    <summary>금리가 1% 올라가면 상환액이 얼마나 증가하나요?</summary>
+                    <p>금리 인상의 영향은 남은 기간에 따라 다릅니다. 대출 초기일수록 영향이 크고, 대출 말기에 가까워질수록 영향이 작습니다. 원리금균등 상환 시 약 5년 대출 기준으로 1% 금리 인상 시 월 상환금이 약 3~4% 증가할 수 있습니다. 정확한 계산을 위해 새 금리로 재계산하기를 권장합니다.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Related Calculators -->
+        <section class="info-section related-section">
+            <h2>다른 부동산 계산기</h2>
+            <div class="related-grid">
+                <a href="acquisition-tax.html" class="related-card">
+                    <h4>취득세 계산기</h4>
+                    <p>부동산을 구매할 때 납부해야 할 취득세를 계산합니다</p>
+                </a>
+                <a href="capital-gains-tax.html" class="related-card">
+                    <h4>양도소득세 계산기</h4>
+                    <p>부동산을 판매할 때 내야 할 양도소득세를 계산합니다</p>
+                </a>
+                <a href="jeonse-convert.html" class="related-card">
+                    <h4>전월세전환 계산기</h4>
+                    <p>전세와 월세의 적정 비율을 계산합니다</p>
+                </a>
+                <a href="rent-ratio.html" class="related-card">
+                    <h4>전세가율 계산기</h4>
+                    <p>전세금이 시세 대비 적정한지 판단합니다</p>
+                </a>
+                <a href="subscription-score.html" class="related-card">
+                    <h4>청약 가점 계산기</h4>
+                    <p>아파트 청약 시 본인의 가점을 계산합니다</p>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div style="max-width: 1120px; margin: 0 auto;">
+            <div class="footer-links">
+                <a href="index.html">홈</a>
+                <a href="#privacy">개인정보처리방침</a>
+                <a href="#terms">이용약관</a>
+                <a href="#contact">문의하기</a>
+            </div>
+            <div class="footer-copy">&copy; 2024 부동산연구소. All rights reserved. | 본 계산기의 결과는 참고용이며, 정확한 상담을 위해 전문가와 상담하시기 바랍니다.</div>
+        </div>
+    </footer>
+
+    <!-- AdSense Placeholder -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx" crossorigin="anonymous"></script>
+
+    <!-- HTML2Canvas for image download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Kakao SDK for sharing -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+    <!-- Main JavaScript -->
+    <script>
+        // Initialize Kakao SDK
+        Kakao.init('YOUR_KAKAO_APP_KEY');
+
+        // Get DOM elements
+        const form = document.getElementById('mortgageForm');
+        const principalInput = document.getElementById('principal');
+        const termSelect = document.getElementById('term');
+        const rateInput = document.getElementById('rate');
+        const rateSlider = document.getElementById('rateSlider');
+        const rateDisplay = document.getElementById('rateDisplay');
+        const gracePeriodSelect = document.getElementById('grace');
+        const resultSection = document.getElementById('resultSection');
+        const emptyState = document.getElementById('emptyState');
+
+        // Repayment method toggle
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        let selectedMethod = 'equal-payment';
+
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedMethod = btn.dataset.method;
+            });
+        });
+
+        // Slider sync
+        rateSlider.addEventListener('input', () => {
+            const value = rateSlider.value / 10;
+            rateInput.value = value.toFixed(1);
+            rateDisplay.textContent = value.toFixed(1) + '%';
+        });
+
+        rateInput.addEventListener('input', () => {
+            const value = Math.max(1, Math.min(100, rateInput.value * 10));
+            rateSlider.value = value;
+            rateDisplay.textContent = rateInput.value + '%';
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Counter animation function
+        function animateCounter(element, target) {
+            const duration = 600;
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const counter = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = Math.round(target).toLocaleString('ko-KR');
+                    clearInterval(counter);
+                } else {
+                    element.textContent = Math.round(current).toLocaleString('ko-KR');
+                }
+            }, 16);
+        }
+
+        // Format number with comma
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('ko-KR');
+        }
+
+        // Calculate mortgage
+        function calculateMortgage(e) {
+            e.preventDefault();
+
+            const principal = parseInt(principalInput.value) || 0;
+            const years = parseInt(termSelect.value);
+            const annualRate = parseFloat(rateInput.value) / 100;
+            const gracePeriod = parseInt(gracePeriodSelect.value);
+
+            if (principal <= 0 || annualRate < 0) {
+                alert('올바른 값을 입력하세요.');
+                return;
+            }
+
+            const months = years * 12;
+            const monthlyRate = annualRate / 12;
+            const graceMonths = gracePeriod * 12;
+            const repaymentMonths = months - graceMonths;
+
+            let schedule = [];
+            let totalInterest = 0;
+            let totalRepayment = principal;
+            let monthlyPayment = 0;
+
+            if (selectedMethod === 'equal-payment') {
+                // 원리금균등: 월 상환금 = P * r * (1+r)^n / ((1+r)^n - 1)
+                if (repaymentMonths > 0 && monthlyRate > 0) {
+                    const factor = Math.pow(1 + monthlyRate, repaymentMonths);
+                    monthlyPayment = (principal * monthlyRate * factor) / (factor - 1);
+                } else if (repaymentMonths > 0) {
+                    monthlyPayment = principal / repaymentMonths;
+                }
+
+                let balance = principal;
+                for (let i = 1; i <= months; i++) {
+                    let interest, principalPayment, payment;
+
+                    if (i <= graceMonths) {
+                        // 거치 기간: 이자만 납부
+                        interest = balance * monthlyRate;
+                        principalPayment = 0;
+                        payment = interest;
+                    } else {
+                        // 상환 기간: 원리금균등
+                        interest = balance * monthlyRate;
+                        principalPayment = monthlyPayment - interest;
+                        payment = monthlyPayment;
+                        balance -= principalPayment;
+                        if (balance < 0) balance = 0;
+                    }
+
+                    totalInterest += interest;
+
+                    if (i <= 12 || i === months) {
+                        schedule.push({
+                            month: i,
+                            principal: principalPayment,
+                            interest: interest,
+                            payment: payment,
+                            balance: Math.max(0, balance)
+                        });
+                    }
+                }
+            } else if (selectedMethod === 'equal-principal') {
+                // 원금균등: 월 원금 = P / (months - graceMonths)
+                const monthlyPrincipal = repaymentMonths > 0 ? principal / repaymentMonths : 0;
+
+                let balance = principal;
+                for (let i = 1; i <= months; i++) {
+                    let interest, principalPayment, payment;
+
+                    if (i <= graceMonths) {
+                        interest = balance * monthlyRate;
+                        principalPayment = 0;
+                        payment = interest;
+                    } else {
+                        interest = balance * monthlyRate;
+                        principalPayment = monthlyPrincipal;
+                        payment = principalPayment + interest;
+                        balance -= principalPayment;
+                    }
+
+                    totalInterest += interest;
+                    monthlyPayment = payment; // First month or latest month payment
+
+                    if (i <= 12 || i === months) {
+                        schedule.push({
+                            month: i,
+                            principal: principalPayment,
+                            interest: interest,
+                            payment: payment,
+                            balance: Math.max(0, balance)
+                        });
+                    }
+                }
+                monthlyPayment = schedule[0].payment; // Use first month payment
+            } else if (selectedMethod === 'bullet') {
+                // 만기일시: 이자만 납부 후 만기에 원금 일시상환
+                monthlyPayment = principal * monthlyRate;
+                totalInterest = monthlyPayment * (months - graceMonths);
+                totalRepayment = principal + totalInterest;
+
+                for (let i = 1; i <= months; i++) {
+                    let interest = principal * monthlyRate;
+                    let principalPayment = 0;
+                    let payment = interest;
+                    let balance = principal;
+
+                    if (i === months) {
+                        principalPayment = principal;
+                        payment = principal + interest;
+                        balance = 0;
+                    }
+
+                    if (i <= 12 || i === months) {
+                        schedule.push({
+                            month: i,
+                            principal: principalPayment,
+                            interest: interest,
+                            payment: payment,
+                            balance: balance
+                        });
+                    }
+                }
+            }
+
+            // Update display
+            resultSection.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            // Animate counters
+            animateCounter(document.getElementById('monthlyPayment'), monthlyPayment);
+            animateCounter(document.getElementById('totalRepayment'), totalRepayment);
+            animateCounter(document.getElementById('totalInterest'), totalInterest);
+            animateCounter(document.getElementById('principalDisplay'), principal);
+            animateCounter(document.getElementById('breakdownPrincipal'), principal);
+            animateCounter(document.getElementById('breakdownInterest'), totalInterest);
+
+            // Update period display
+            document.getElementById('periodDisplay').textContent = months;
+
+            // Update schedule table
+            const scheduleBody = document.getElementById('scheduleTable');
+            scheduleBody.innerHTML = '';
+            schedule.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.month}개월</td>
+                    <td>${formatNumber(row.principal)}</td>
+                    <td>${formatNumber(row.interest)}</td>
+                    <td>${formatNumber(row.payment)}</td>
+                    <td>${formatNumber(row.balance)}</td>
+                `;
+                scheduleBody.appendChild(tr);
+            });
+
+            // Update chart
+            const principalWidth = (principal / totalRepayment) * 100;
+            const interestWidth = (totalInterest / totalRepayment) * 100;
+            document.getElementById('chartPrincipal').style.width = principalWidth + '%';
+            document.getElementById('chartInterest').style.width = interestWidth + '%';
+
+            // Scroll to results on mobile
+            if (window.innerWidth <= 1024) {
+                setTimeout(() => {
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        }
+
+        // Download as image
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const heroCard = document.querySelector('.result-hero');
+            if (!heroCard) return;
+
+            try {
+                const canvas = await html2canvas(heroCard, {
+                    backgroundColor: null,
+                    scale: 2,
+                    logging: false
+                });
+
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = '대출계산_결과.png';
+                link.click();
+            } catch (err) {
+                console.error('Download failed:', err);
+                alert('이미지 저장에 실패했습니다.');
+            }
+        });
+
+        // Kakao share
+        document.getElementById('shareKakaoBtn').addEventListener('click', () => {
+            const monthlyPayment = document.getElementById('monthlyPayment').textContent;
+            const totalInterest = document.getElementById('totalInterest').textContent;
+
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '부동산 대출 이자 계산기',
+                    description: `월 상환금: ${monthlyPayment}만원 | 총 이자: ${totalInterest}만원`,
+                    imageUrl: 'https://budongsan-calculator.site/og-image.png',
+                    link: {
+                        mobileWebUrl: 'https://budongsan-calculator.site/mortgage.html',
+                        webUrl: 'https://budongsan-calculator.site/mortgage.html',
+                    },
+                },
+                buttons: [
+                    {
+                        title: '계산기 이용하기',
+                        link: {
+                            mobileWebUrl: 'https://budongsan-calculator.site/mortgage.html',
+                            webUrl: 'https://budongsan-calculator.site/mortgage.html',
+                        },
+                    },
+                ],
+            });
+        });
+
+        // Form submission
+        form.addEventListener('submit', calculateMortgage);
+
+        // Auto-calculate on input change
+        [principalInput, termSelect, rateInput, gracePeriodSelect].forEach(el => {
+            el.addEventListener('change', calculateMortgage);
+        });
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "홈",
+                "item": "https://budongsan-calculator.site"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "대출 이자 계산기",
+                "item": "https://budongsan-calculator.site/mortgage.html"
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "거치 기간이란 무엇인가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "거치 기간은 대출을 받은 후 원금을 갚지 않고 이자만 납부하는 기간입니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "월 상환금이 정확한가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "본 계산기는 선택하신 상환 방식과 금리 조건에 따라 정확하게 계산됩니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "대출금액을 올리면 이자가 어떻게 변하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "대출금액이 증가하면 같은 금리 조건에서도 총 이자액이 높아집니다."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "부동산 대출 이자 계산기",
+        "url": "https://budongsan-calculator.site/mortgage.html",
+        "description": "부동산 대출 이자를 계산하는 무료 도구입니다.",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        }
+    }
+    </script>
+</body>
+</html>

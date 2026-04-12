@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="청약 가점 계산기로 내 가점을 정확하게 계산해보세요. 무주택 기간, 부양가족 수, 청약통장 가입기간으로 총 가점을 산출하고 당첨 가능성을 확인하세요.">
+    <meta name="keywords" content="청약가점, 청약계산기, 무순위청약, 부동산, 청약통장">
+    <meta name="author" content="부동산연구소">
+    <meta property="og:title" content="청약 가점 계산기 - 내 가점 몇 점?">
+    <meta property="og:description" content="정확한 청약 가점 계산으로 당첨 가능성을 미리 확인해보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://부동산연구소.com/subscription-score">
+
+    <title>청약 가점 계산기 - 내 가점 몇 점? | 부동산연구소</title>
+
+    <link rel="stylesheet" href="common.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+    <style>
+        :root {
+            --accent: #0D9488;
+            --primary: #1F2937;
+            --secondary: #6B7280;
+            --light: #F3F4F6;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --info: #3B82F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #FAFAFA;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+
+        .nav-menu a.active {
+            color: var(--accent);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .page-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: var(--secondary);
+        }
+
+        /* Dashboard Grid */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Input Section */
+        .input-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .input-section h2 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--primary);
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 35px;
+        }
+
+        .form-group select:hover {
+            border-color: var(--accent);
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .option-hint {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-top: 6px;
+        }
+
+        /* Results Section */
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .results-section h2 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Hero Card */
+        .hero-card {
+            background: linear-gradient(135deg, var(--accent) 0%, #059669 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+        }
+
+        .hero-card .score-text {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .hero-card .score-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero-card .score-max {
+            font-size: 18px;
+            opacity: 0.85;
+        }
+
+        /* Progress Bar */
+        .progress-wrapper {
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: var(--light);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent) 0%, #059669 100%);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            box-shadow: 0 2px 4px rgba(13, 148, 136, 0.3);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--secondary);
+            margin-top: 6px;
+        }
+
+        /* Stat Boxes */
+        .stat-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .stat-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-box {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border-left: 4px solid var(--accent);
+        }
+
+        .stat-box-label {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .stat-box-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-box-max {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-top: 4px;
+        }
+
+        /* Breakdown Card */
+        .breakdown-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .breakdown-item {
+            margin-bottom: 20px;
+        }
+
+        .breakdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .breakdown-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .breakdown-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .breakdown-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .breakdown-bar {
+            width: 100%;
+            height: 8px;
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .breakdown-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Message Card */
+        .message-card {
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--accent);
+            background: rgba(13, 148, 136, 0.05);
+        }
+
+        .message-card.high {
+            background: rgba(16, 185, 129, 0.05);
+            border-left-color: var(--success);
+        }
+
+        .message-card.mid {
+            background: rgba(245, 158, 11, 0.05);
+            border-left-color: var(--warning);
+        }
+
+        .message-card.low {
+            background: rgba(239, 68, 68, 0.05);
+            border-left-color: var(--danger);
+        }
+
+        .message-card-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .message-card-text {
+            font-size: 14px;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        /* Info Section */
+        .info-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 60px 0 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card .icon {
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .info-card p {
+            font-size: 14px;
+            color: var(--secondary);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .info-card ul {
+            margin-left: 20px;
+            font-size: 14px;
+            color: var(--secondary);
+            line-height: 1.8;
+        }
+
+        .info-card li {
+            margin-bottom: 8px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            margin: 40px 0;
+        }
+
+        .faq-section h2 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+            color: var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .faq-toggle.active {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            font-size: 14px;
+            color: var(--secondary);
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            margin-top: 15px;
+        }
+
+        /* Related Links */
+        .related-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .related-link {
+            background: linear-gradient(135deg, var(--accent) 0%, #059669 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .related-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        footer a:hover {
+            opacity: 1;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0D8A78;
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #E8EAED;
+        }
+
+        /* Utilities */
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-muted {
+            color: var(--secondary);
+        }
+
+        /* Ad Placeholder */
+        .ad-placeholder {
+            background: var(--light);
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 13px;
+            margin: 30px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 24px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+                font-size: 13px;
+            }
+
+            .input-section,
+            .results-section,
+            .info-card,
+            .faq-section {
+                padding: 20px;
+            }
+
+            .hero-card .score-number {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">부동산<span>연구소</span></a>
+            <ul class="nav-menu">
+                <li><a href="mortgage.html">매매할 때</a></li>
+                <li><a href="capital-gains-tax.html">세금</a></li>
+                <li><a href="acquisition-tax.html">취득세</a></li>
+                <li><a href="jeonse-convert.html">전세</a></li>
+                <li><a href="rent-ratio.html">임대료</a></li>
+                <li><a href="subscription-score.html" class="active">청약</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="page-header">
+            <h1>청약 가점 계산기</h1>
+            <p>무주택 기간, 부양가족 수, 청약통장 가입기간으로 정확한 가점을 계산해보세요</p>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2>📋 가점 정보 입력</h2>
+
+                <div class="form-group">
+                    <label for="holessPeriod">무주택 기간</label>
+                    <select id="holessPeriod" onchange="calculateScore()">
+                        <option value="0">만 30세 미만 미혼 (0점)</option>
+                        <option value="2">1년 미만 (2점)</option>
+                        <option value="4">1~2년 (4점)</option>
+                        <option value="6">2~3년 (6점)</option>
+                        <option value="8">3~4년 (8점)</option>
+                        <option value="10">4~5년 (10점)</option>
+                        <option value="12">5~6년 (12점)</option>
+                        <option value="14">6~7년 (14점)</option>
+                        <option value="16">7~8년 (16점)</option>
+                        <option value="18">8~9년 (18점)</option>
+                        <option value="20">9~10년 (20점)</option>
+                        <option value="22">10~11년 (22점)</option>
+                        <option value="24">11~12년 (24점)</option>
+                        <option value="26">12~13년 (26점)</option>
+                        <option value="28">13~14년 (28점)</option>
+                        <option value="30">14~15년 (30점)</option>
+                        <option value="32">15년 이상 (32점)</option>
+                    </select>
+                    <div class="option-hint">최대 32점</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dependents">부양가족 수</label>
+                    <select id="dependents" onchange="calculateScore()">
+                        <option value="5">0명 (5점)</option>
+                        <option value="10">1명 (10점)</option>
+                        <option value="15">2명 (15점)</option>
+                        <option value="20">3명 (20점)</option>
+                        <option value="25">4명 (25점)</option>
+                        <option value="30">5명 (30점)</option>
+                        <option value="35">6명 이상 (35점)</option>
+                    </select>
+                    <div class="option-hint">최대 35점</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passbook">청약통장 가입기간</label>
+                    <select id="passbook" onchange="calculateScore()">
+                        <option value="1">6개월 미만 (1점)</option>
+                        <option value="2">6~12개월 (2점)</option>
+                        <option value="3">1~2년 (3점)</option>
+                        <option value="4">2~3년 (4점)</option>
+                        <option value="5">3~4년 (5점)</option>
+                        <option value="6">4~5년 (6점)</option>
+                        <option value="7">5~6년 (7점)</option>
+                        <option value="8">6~7년 (8점)</option>
+                        <option value="9">7~8년 (9점)</option>
+                        <option value="10">8~9년 (10점)</option>
+                        <option value="11">9~10년 (11점)</option>
+                        <option value="12">10~11년 (12점)</option>
+                        <option value="13">11~12년 (13점)</option>
+                        <option value="14">12~13년 (14점)</option>
+                        <option value="15">13~14년 (15점)</option>
+                        <option value="16">14~15년 (16점)</option>
+                        <option value="17">15년 이상 (17점)</option>
+                    </select>
+                    <div class="option-hint">최대 17점</div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <h2>📊 가점 결과</h2>
+
+                <!-- Hero Card -->
+                <div class="hero-card">
+                    <div class="score-text">총 가점</div>
+                    <div class="score-number"><span id="totalScore">5</span>점</div>
+                    <div class="score-max">/ 84점 만점</div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-wrapper">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 5.95%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>0점</span>
+                        <span>84점</span>
+                    </div>
+                </div>
+
+                <!-- Stat Boxes -->
+                <div class="stat-boxes">
+                    <div class="stat-box">
+                        <div class="stat-box-label">무주택기간</div>
+                        <div class="stat-box-value"><span id="statHoeless">0</span></div>
+                        <div class="stat-box-max">/ 32점</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-label">부양가족</div>
+                        <div class="stat-box-value"><span id="statDependents">5</span></div>
+                        <div class="stat-box-max">/ 35점</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box-label">가입기간</div>
+                        <div class="stat-box-value"><span id="statPassbook">1</span></div>
+                        <div class="stat-box-max">/ 17점</div>
+                    </div>
+                </div>
+
+                <!-- Breakdown -->
+                <div class="breakdown-card">
+                    <div class="breakdown-item">
+                        <div class="breakdown-header">
+                            <span class="breakdown-label">무주택 기간</span>
+                            <span class="breakdown-value"><span id="breakHoeless">0</span>/32</span>
+                        </div>
+                        <div class="breakdown-bar">
+                            <div class="breakdown-bar-fill" id="breakBarHoeless" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-header">
+                            <span class="breakdown-label">부양가족 수</span>
+                            <span class="breakdown-value"><span id="breakDependents">5</span>/35</span>
+                        </div>
+                        <div class="breakdown-bar">
+                            <div class="breakdown-bar-fill" id="breakBarDependents" style="width: 14.29%"></div>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-header">
+                            <span class="breakdown-label">청약통장 가입기간</span>
+                            <span class="breakdown-value"><span id="breakPassbook">1</span>/17</span>
+                        </div>
+                        <div class="breakdown-bar">
+                            <div class="breakdown-bar-fill" id="breakBarPassbook" style="width: 5.88%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Card -->
+                <div class="message-card" id="messageCard">
+                    <div class="message-card-icon">💡</div>
+                    <div class="message-card-text" id="messageText">
+                        가점을 더 쌓거나 추첨제 위주로 지원하세요
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="shareResult()">
+                        📤 결과 공유
+                    </button>
+                    <button class="btn btn-secondary" onclick="printResult()">
+                        🖨️ 인쇄
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetForm()">
+                        🔄 초기화
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Placeholder -->
+        <div class="ad-placeholder">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"></script>
+            <!-- Subscription Score Ad -->
+            <ins class="adsbygoogle" style="display:block; margin: 20px 0;" data-ad-client="ca-pub-xxxxxxxxxxxxxxxx" data-ad-slot="xxxxxxxxxx" data-ad-format="horizontal"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-card">
+                <h3><span class="icon">❓</span> 가점제란?</h3>
+                <p>청약 가점제는 아파트 분양에 참여할 때 청약자의 자격과 노력도를 점수로 환산하는 제도입니다. 무주택 기간이 길수록, 부양가족이 많을수록, 청약통장 가입기간이 길수록 높은 점수를 받게 됩니다.</p>
+                <p>총 84점 만점으로 계산되며, 높은 가점을 가진 순서대로 당첨 기회가 주어집니다.</p>
+                <ul>
+                    <li>무주택 기간: 0~32점</li>
+                    <li>부양가족 수: 5~35점</li>
+                    <li>청약통장 가입기간: 1~17점</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3><span class="icon">⬆️</span> 가점 높이는 방법</h3>
+                <p>현재 가점이 낮다면 다음의 방법으로 가점을 높일 수 있습니다.</p>
+                <ul>
+                    <li><strong>시간 경과:</strong> 무주택 기간과 청약통장 가입기간은 자동으로 증가합니다</li>
+                    <li><strong>부양가족 증가:</strong> 자녀 출산, 부모 부양 등으로 부양가족 수를 늘릴 수 있습니다</li>
+                    <li><strong>주택 임차:</strong> 현재 무주택이라면 청약 자격 기간이 증가합니다</li>
+                    <li><strong>청약통장 유지:</strong> 매월 일정액을 계속 납입해야 합니다</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>❓ 자주 묻는 질문</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>청약 가점이 높으면 무조건 당첨되나요?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    아니요. 청약은 가점제와 추첨제로 나뉩니다. 가점제는 높은 가점 순으로 당첨되지만, 일반적으로 주택 수의 75%를 가점제로, 25%를 추첨제로 배분합니다. 따라서 높은 가점이라도 당첨을 보장할 수는 없습니다.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>결혼 후 배우자의 가점도 더해지나요?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    아니요. 청약은 개인별로 계산되므로 배우자의 가점이 더해지지 않습니다. 다만 부양가족 수에는 배우자가 포함되지 않으므로 배우자가 있어도 부양가족 점수에는 영향을 주지 않습니다.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>서울의 인기 단지에 당첨되려면 가점이 얼마나 필요한가요?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    서울의 인기 단지는 경쟁이 매우 심해서 최소 60점 이상의 높은 가점이 필요합니다. 일부 특급 단지에서는 70점을 넘어야 하는 경우도 있습니다. 반면 수도권 외곽이나 지방 지역은 40~50점 대의 중간 수준의 가점으로도 당첨 가능성이 높습니다.
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Links -->
+        <div style="text-align: center; margin: 40px 0;">
+            <h2 style="font-size: 24px; margin-bottom: 25px; color: var(--primary); font-weight: 700;">연관 계산기</h2>
+        </div>
+        <div class="related-links">
+            <a href="mortgage.html" class="related-link">
+                💰 대출금액 계산기
+            </a>
+            <a href="capital-gains-tax.html" class="related-link">
+                📊 양도세 계산기
+            </a>
+            <a href="acquisition-tax.html" class="related-link">
+                🏠 취득세 계산기
+            </a>
+            <a href="jeonse-convert.html" class="related-link">
+                🔄 전세전환 계산기
+            </a>
+            <a href="rent-ratio.html" class="related-link">
+                📈 임대료 수익률
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 부동산연구소. All rights reserved.</p>
+        <p style="font-size: 12px; opacity: 0.6;">본 계산기는 교육용 정보 제공 목적이며, 정확한 세금/수익 계산은 전문가와 상담하세요.</p>
+        <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="#privacy">개인정보처리방침</a>
+            <a href="#terms">이용약관</a>
+            <a href="#contact">문의</a>
+            <a href="#sitemap">사이트맵</a>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "청약 가점 계산기",
+        "description": "무주택 기간, 부양가족 수, 청약통장 가입기간으로 정확한 청약 가점을 계산하는 웹 애플리케이션",
+        "url": "https://부동산연구소.com/subscription-score",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "부동산연구소"
+        }
+    }
+    </script>
+
+    <!-- Kakao SDK Initialization -->
+    <script>
+        Kakao.init('YOUR_KAKAO_APP_KEY');
+    </script>
+
+    <!-- Calculator Logic -->
+    <script>
+        function calculateScore() {
+            const hoeless = parseInt(document.getElementById('holessPeriod').value) || 0;
+            const dependents = parseInt(document.getElementById('dependents').value) || 5;
+            const passbook = parseInt(document.getElementById('passbook').value) || 1;
+
+            const total = hoeless + dependents + passbook;
+
+            // Update main score
+            document.getElementById('totalScore').textContent = total;
+
+            // Update stat boxes
+            document.getElementById('statHoeless').textContent = hoeless;
+            document.getElementById('statDependents').textContent = dependents;
+            document.getElementById('statPassbook').textContent = passbook;
+
+            // Update breakdown
+            document.getElementById('breakHoeless').textContent = hoeless;
+            document.getElementById('breakDependents').textContent = dependents;
+            document.getElementById('breakPassbook').textContent = passbook;
+
+            // Update progress bars
+            const progressPercent = (total / 84) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+
+            document.getElementById('breakBarHoeless').style.width = (hoeless / 32) * 100 + '%';
+            document.getElementById('breakBarDependents').style.width = (dependents / 35) * 100 + '%';
+            document.getElementById('breakBarPassbook').style.width = (passbook / 17) * 100 + '%';
+
+            // Update message
+            updateMessage(total);
+        }
+
+        function updateMessage(score) {
+            const messageCard = document.getElementById('messageCard');
+            const messageText = document.getElementById('messageText');
+
+            messageCard.classList.remove('high', 'mid', 'low');
+
+            if (score >= 60) {
+                messageCard.classList.add('high');
+                messageText.textContent = '✨ 서울 인기단지도 도전 가능한 높은 가점이에요';
+            } else if (score >= 40) {
+                messageCard.classList.add('mid');
+                messageText.textContent = '👍 수도권 외곽 및 지방 주요 단지 당첨 가능성이 있어요';
+            } else if (score >= 20) {
+                messageCard.classList.add('low');
+                messageText.textContent = '📝 가점을 더 쌓거나 추첨제 위주로 지원하세요';
+            } else {
+                messageCard.classList.add('low');
+                messageText.textContent = '🎯 무순위/잔여세대 또는 추첨제 지원을 추천해요';
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('holessPeriod').value = '0';
+            document.getElementById('dependents').value = '5';
+            document.getElementById('passbook').value = '1';
+            calculateScore();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+
+            answer.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        function shareResult() {
+            const score = document.getElementById('totalScore').textContent;
+            const message = `내 청약 가점: ${score}점! 🏠\n\n부동산연구소 청약 가점 계산기로 확인해보세요!`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: '청약 가점 계산기',
+                    text: message,
+                    url: window.location.href
+                });
+            } else if (window.Kakao && window.Kakao.isInitialized()) {
+                Kakao.Share.sendDefault({
+                    objectType: 'feed',
+                    content: {
+                        title: '청약 가점 계산기',
+                        description: `내 청약 가점: ${score}점! 정확한 가점을 확인해보세요.`,
+                        imageUrl: '',
+                        link: {
+                            mobileWebUrl: window.location.href,
+                            webUrl: window.location.href
+                        }
+                    },
+                    buttons: [
+                        {
+                            title: '웹으로 보기',
+                            link: {
+                                mobileWebUrl: window.location.href,
+                                webUrl: window.location.href
+                            }
+                        }
+                    ]
+                });
+            } else {
+                const url = window.location.href;
+                const text = `내 청약 가점: ${score}점\n${url}`;
+
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('링크가 복사되었습니다!');
+                    });
+                } else {
+                    alert('공유 기능을 사용할 수 없습니다.');
+                }
+            }
+        }
+
+        function printResult() {
+            const hoeless = document.getElementById('statHoeless').textContent;
+            const dependents = document.getElementById('statDependents').textContent;
+            const passbook = document.getElementById('statPassbook').textContent;
+            const total = document.getElementById('totalScore').textContent;
+
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="ko">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>청약 가점 계산 결과</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; }
+                        h1 { text-align: center; color: #0D9488; margin-bottom: 30px; }
+                        .result-box {
+                            border: 2px solid #0D9488;
+                            padding: 20px;
+                            border-radius: 8px;
+                            margin: 20px 0;
+                            background-color: #f0fffe;
+                        }
+                        .result-item {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 10px 0;
+                            border-bottom: 1px solid #E5E7EB;
+                        }
+                        .result-item:last-child { border-bottom: none; }
+                        .result-label { font-weight: bold; }
+                        .result-value { color: #0D9488; font-weight: bold; }
+                        .total { font-size: 24px; text-align: center; margin-top: 20px; }
+                        .footer { text-align: center; margin-top: 40px; color: #6B7280; font-size: 12px; }
+                    </style>
+                </head>
+                <body>
+                    <h1>청약 가점 계산 결과</h1>
+                    <div class="result-box">
+                        <div class="result-item">
+                            <span class="result-label">무주택 기간</span>
+                            <span class="result-value">${hoeless}점 / 32점</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">부양가족 수</span>
+                            <span class="result-value">${dependents}점 / 35점</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">청약통장 가입기간</span>
+                            <span class="result-value">${passbook}점 / 17점</span>
+                        </div>
+                    </div>
+                    <div class="result-box total">
+                        <strong>총 가점: ${total}점 / 84점</strong>
+                    </div>
+                    <div class="footer">
+                        <p>부동산연구소 청약 가점 계산기</p>
+                        <p>인쇄 일시: ${new Date().toLocaleString('ko-KR')}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            setTimeout(() => printWindow.print(), 250);
+        }
+
+        // Initialize
+        calculateScore();
+    </script>
+</body>
+</html>
