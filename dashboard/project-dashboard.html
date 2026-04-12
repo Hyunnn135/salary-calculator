@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로젝트 대시보드 — 월급연구소</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Nav */
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #1e293b;padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+.top-nav h1{font-size:1.1rem;font-weight:800;color:#f8fafc}
+.top-nav h1 span{color:#3b82f6}
+.top-nav-right{display:flex;gap:12px;align-items:center;font-size:0.8rem;color:#94a3b8}
+.nav-link{padding:6px 14px;background:#334155;border-radius:8px;color:#e2e8f0;font-size:0.78rem;font-weight:600;text-decoration:none;transition:all 0.15s}
+.nav-link:hover{background:#3b82f6;text-decoration:none}
+.nav-link.active{background:#3b82f6}
+
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid-2{grid-template-columns:1fr}}
+
+/* Cards */
+.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:24px;margin-bottom:20px}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.card-title{font-size:0.95rem;font-weight:700;color:#f1f5f9;display:flex;align-items:center;gap:8px}
+.card-badge{font-size:0.7rem;padding:3px 10px;border-radius:20px;font-weight:600}
+.badge-blue{background:#1e3a5f;color:#60a5fa}
+.badge-green{background:#14532d;color:#4ade80}
+.badge-yellow{background:#422006;color:#fbbf24}
+.badge-purple{background:#3b0764;color:#c084fc}
+.badge-red{background:#450a0a;color:#f87171}
+
+/* Progress */
+.progress-bar{height:6px;background:#334155;border-radius:3px;margin:12px 0 6px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width 0.5s}
+.progress-fill.blue{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.progress-fill.green{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.progress-text{font-size:0.75rem;color:#94a3b8}
+
+/* Stats row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:18px;text-align:center}
+.stat-num{font-size:1.8rem;font-weight:800;color:#f8fafc}
+.stat-label{font-size:0.75rem;color:#94a3b8;margin-top:4px}
+
+/* Checklist */
+.checklist{list-style:none}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:8px;font-size:0.85rem;line-height:1.5;cursor:pointer;transition:background 0.15s}
+.checklist li:hover{background:#334155}
+.checklist li.done{opacity:0.5}
+.checklist li.done .task-text{text-decoration:line-through}
+.check-box{width:18px;height:18px;border:2px solid #475569;border-radius:5px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.check-box.checked{background:#3b82f6;border-color:#3b82f6}
+.check-box.checked::after{content:'✓';color:white;font-size:11px;font-weight:bold}
+.task-text{flex:1}
+.task-tag{font-size:0.65rem;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle}
+
+/* Timeline */
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.timeline-item{position:relative;padding-bottom:20px}
+.timeline-dot{position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid #1e293b}
+.timeline-dot.done{background:#4ade80}
+.timeline-dot.current{background:#3b82f6;box-shadow:0 0 8px rgba(59,130,246,0.5)}
+.timeline-dot.upcoming{background:#475569}
+.timeline-date{font-size:0.72rem;color:#64748b;margin-bottom:2px}
+.timeline-content{font-size:0.85rem;color:#e2e8f0}
+
+/* Ideas */
+.idea-card{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:16px;margin-bottom:12px;transition:all 0.15s}
+.idea-card:hover{border-color:#3b82f6}
+.idea-rank{font-size:0.7rem;font-weight:700;color:#3b82f6;margin-bottom:4px}
+.idea-title{font-size:0.9rem;font-weight:700;color:#f1f5f9;margin-bottom:6px}
+.idea-desc{font-size:0.78rem;color:#94a3b8;line-height:1.5}
+.idea-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.idea-tag{font-size:0.65rem;padding:2px 8px;background:#1e293b;border:1px solid #334155;border-radius:10px;color:#94a3b8}
+
+/* Revenue plan */
+.plan-phase{border-left:3px solid #334155;padding:12px 0 12px 16px;margin-bottom:16px}
+.plan-phase.short{border-color:#3b82f6}
+.plan-phase.mid{border-color:#8b5cf6}
+.plan-phase.long{border-color:#22c55e}
+.plan-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.plan-goal{font-size:0.88rem;font-weight:700;color:#f1f5f9;margin-bottom:6px}
+.plan-detail{font-size:0.78rem;color:#94a3b8;line-height:1.6}
+
+/* Section title */
+.section-title{font-size:1.15rem;font-weight:800;color:#f1f5f9;margin:28px 0 16px;display:flex;align-items:center;gap:8px}
+
+/* Note input */
+.note-area{width:100%;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:12px;color:#e2e8f0;font-size:0.84rem;font-family:inherit;resize:vertical;min-height:80px}
+.note-area:focus{outline:none;border-color:#3b82f6}
+.note-save-btn{margin-top:8px;padding:8px 16px;background:#3b82f6;color:white;border:none;border-radius:8px;font-size:0.8rem;font-weight:600;cursor:pointer}
+.note-save-btn:hover{background:#2563eb}
+.note-status{font-size:0.75rem;color:#4ade80;margin-left:8px;opacity:0}
+
+/* Tab */
+.tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid #334155;padding-bottom:0}
+.tab{padding:10px 18px;font-size:0.84rem;font-weight:600;color:#94a3b8;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s}
+.tab:hover{color:#e2e8f0}
+.tab.active{color:#3b82f6;border-bottom-color:#3b82f6}
+.tab-content{display:none}
+.tab-content.active{display:block}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+    <h1>월급<span>연구소</span> 대시보드</h1>
+    <div class="top-nav-right">
+        <a href="project-dashboard.html" class="nav-link active">프로젝트 관리</a>
+        <a href="blog-upload-dashboard.html" class="nav-link">블로그 업로드</a>
+        <span id="last-updated"></span>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- Stats -->
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-num" id="stat-pages">104</div>
+        <div class="stat-label">사이트 페이지 수</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num" id="stat-indexed">8</div>
+        <div class="stat-label">구글 색인 완료</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num" id="stat-blog">10 / 65</div>
+        <div class="stat-label">블로그 업로드</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num" id="stat-adsense">대기 중</div>
+        <div class="stat-label">애드센스 승인</div>
+    </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+    <div class="tab active" onclick="switchTab('tasks')">작업 현황</div>
+    <div class="tab" onclick="switchTab('plan')">수익화 로드맵</div>
+    <div class="tab" onclick="switchTab('ideas')">새 아이디어</div>
+    <div class="tab" onclick="switchTab('schedule')">일정표</div>
+    <div class="tab" onclick="switchTab('notes')">메모</div>
+</div>
+
+<!-- TAB: 작업 현황 -->
+<div class="tab-content active" id="tab-tasks">
+    <div class="grid-2">
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">완료된 작업</div>
+                    <span class="card-badge badge-green" id="done-count">0개</span>
+                </div>
+                <ul class="checklist" id="done-list"></ul>
+            </div>
+        </div>
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">남은 작업</div>
+                    <span class="card-badge badge-blue" id="todo-count">0개</span>
+                </div>
+                <ul class="checklist" id="todo-list"></ul>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">진행률</div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill blue" id="task-progress" style="width:0%"></div></div>
+                <div class="progress-text" id="task-progress-text">0%</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TAB: 수익화 로드맵 -->
+<div class="tab-content" id="tab-plan">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">월 100만원+ 수익화 로드맵</div>
+        </div>
+
+        <div class="plan-phase short">
+            <div class="plan-label" style="color:#3b82f6">단기 (1~3개월)</div>
+            <div class="plan-goal">애드센스 승인 + 일 방문자 100~300명</div>
+            <div class="plan-detail">
+                • 블로그 65개 포스트 완성 및 매일 1개씩 발행<br>
+                • 페이지 100개 이상 채우기 (현재 104개 달성)<br>
+                • 스키마 마크업, 내부 링크 강화 (완료)<br>
+                • 구글 색인 104개 전체 요청 (완료)<br>
+                • 애드센스 승인 획득<br>
+                • 네이버 블로그 → salarykorea.site 유입 동선 구축
+            </div>
+        </div>
+
+        <div class="plan-phase mid">
+            <div class="plan-label" style="color:#8b5cf6">중기 (3~6개월)</div>
+            <div class="plan-goal">애드센스 월 10~30만원 + 제휴 마케팅 시작</div>
+            <div class="plan-detail">
+                • 리더스CPA / 링크프라이스 — 금융·보험 CPA 제휴<br>
+                • 쿠팡파트너스 — 도서·생활용품 추천 콘텐츠<br>
+                • 비교/추천형 콘텐츠 확대<br>
+                • Ezoic 전환 준비 (RPM 20~50% 향상)<br>
+                • 2번째 수익 사이트 구축 시작
+            </div>
+        </div>
+
+        <div class="plan-phase long">
+            <div class="plan-label" style="color:#22c55e">장기 (6~12개월)</div>
+            <div class="plan-goal">복합 수익 월 100만원+</div>
+            <div class="plan-detail">
+                • 애드센스/Ezoic: 30~50만원 (일 방문자 1,500+)<br>
+                • 금융 CPA 제휴: 30~50만원 (보험/대출 상담 일 1~2건)<br>
+                • 쿠팡파트너스 등: 5~15만원<br>
+                • 프리미엄 콘텐츠 (PDF 가이드, 템플릿): 10~30만원<br>
+                • 복수 사이트 운영으로 수익원 다각화
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TAB: 새 아이디어 -->
+<div class="tab-content" id="tab-ideas">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">추가 수익 사이트 아이디어</div>
+            <span class="card-badge badge-purple">5개</span>
+        </div>
+
+        <div class="idea-card">
+            <div class="idea-rank">추천 1순위</div>
+            <div class="idea-title">부동산 계산기 사이트</div>
+            <div class="idea-desc">양도소득세, 취득세, DSR/LTV 대출 한도, 전세-월세 전환, 중개수수료 계산기. salarykorea.site 코드베이스 재활용 가능, 두 사이트 상호 링크로 SEO 시너지.</div>
+            <div class="idea-tags"><span class="idea-tag">CPC 최상위</span><span class="idea-tag">코드 재활용</span><span class="idea-tag">SEO 시너지</span></div>
+        </div>
+
+        <div class="idea-card">
+            <div class="idea-rank">추천 2순위</div>
+            <div class="idea-title">청년/직장인 재테크 가이드</div>
+            <div class="idea-desc">청년도약계좌, 청년내일저축, ISA, IRP 등 정부 지원 금융 상품 비교. 매년 정책 변경으로 에버그린 콘텐츠, 금융 CPA 제휴와 궁합 좋음.</div>
+            <div class="idea-tags"><span class="idea-tag">에버그린</span><span class="idea-tag">CPA 제휴</span><span class="idea-tag">정책 연동</span></div>
+        </div>
+
+        <div class="idea-card">
+            <div class="idea-rank">추천 3순위</div>
+            <div class="idea-title">종합 세금 가이드 사이트</div>
+            <div class="idea-desc">연말정산, 종합소득세, 부가가치세, 프리랜서 세금 전문. 매년 세법 변경으로 자동 콘텐츠 수요, 높은 CPC 키워드 영역.</div>
+            <div class="idea-tags"><span class="idea-tag">높은 CPC</span><span class="idea-tag">매년 업데이트</span></div>
+        </div>
+
+        <div class="idea-card">
+            <div class="idea-rank">아이디어 4</div>
+            <div class="idea-title">생활 밀착형 계산기 모음</div>
+            <div class="idea-desc">BMI, 칼로리, 음주량, 자동차 유지비, 전기요금, 대출이자 등. 개별 CPC 낮지만 검색량 크고 경쟁 낮아 트래픽 빠르게 확보.</div>
+            <div class="idea-tags"><span class="idea-tag">높은 검색량</span><span class="idea-tag">낮은 경쟁</span><span class="idea-tag">빠른 트래픽</span></div>
+        </div>
+
+        <div class="idea-card">
+            <div class="idea-rank">아이디어 5</div>
+            <div class="idea-title">AI 도구 리뷰/비교 사이트</div>
+            <div class="idea-desc">AI 글쓰기, 이미지 생성, 코딩 도구 비교 리뷰. SaaS 제휴 프로그램 20~30% 반복 수수료. 블로그 형태가 더 적합.</div>
+            <div class="idea-tags"><span class="idea-tag">SaaS 제휴</span><span class="idea-tag">반복 수수료</span><span class="idea-tag">빠른 성장</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- TAB: 일정표 -->
+<div class="tab-content" id="tab-schedule">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">일정표</div>
+        </div>
+        <div class="timeline" id="timeline"></div>
+    </div>
+</div>
+
+<!-- TAB: 메모 -->
+<div class="tab-content" id="tab-notes">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">자유 메모</div>
+        </div>
+        <textarea class="note-area" id="note-area" placeholder="자유롭게 메모하세요. 자동 저장됩니다."></textarea>
+        <div style="display:flex;align-items:center;margin-top:8px">
+            <button class="note-save-btn" onclick="saveNotes()">저장</button>
+            <span class="note-status" id="note-status">저장됨</span>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+var STORAGE_KEY = 'project_dashboard_v1';
+
+var TASKS = [
+    // 완료된 작업
+    {id:'t1', text:'사이트 68개 HTML 페이지 제작', done:true, tag:'사이트', tagColor:'#1e3a5f'},
+    {id:'t2', text:'OG 이미지 한국어 버전 교체', done:true, tag:'사이트', tagColor:'#1e3a5f'},
+    {id:'t3', text:'네비게이션 메뉴 업데이트 (3개 신규 페이지)', done:true, tag:'사이트', tagColor:'#1e3a5f'},
+    {id:'t4', text:'블로그 포스트 #001~#028 생성', done:true, tag:'블로그', tagColor:'#422006'},
+    {id:'t5', text:'블로그 포스트 #061~#065 생성', done:true, tag:'블로그', tagColor:'#422006'},
+    {id:'t6', text:'블로그 #001~#010 네이버 업로드 완료', done:true, tag:'블로그', tagColor:'#422006'},
+    {id:'t7', text:'블로그 업로드 대시보드 HTML 제작', done:true, tag:'도구', tagColor:'#3b0764'},
+    {id:'t8', text:'블로그 이모지 제거 + 리치텍스트 복사 적용', done:true, tag:'블로그', tagColor:'#422006'},
+    {id:'t9', text:'내부 링크 강화 — 30개 페이지에 관련 콘텐츠 추가', done:true, tag:'SEO', tagColor:'#14532d'},
+    {id:'t10', text:'FAQ 스키마 — 11개 계산기 페이지에 추가', done:true, tag:'SEO', tagColor:'#14532d'},
+    {id:'t11', text:'구글 색인 요청 — 104개 URL 전체', done:true, tag:'SEO', tagColor:'#14532d'},
+    {id:'t12', text:'구글 색인 자동화 스크립트 구축', done:true, tag:'도구', tagColor:'#3b0764'},
+    {id:'t13', text:'수익화 단기/중기/장기 로드맵 수립', done:true, tag:'전략', tagColor:'#450a0a'},
+    // 남은 작업
+    {id:'t14', text:'블로그 포스트 #029~#060 생성 (32개)', done:false, tag:'블로그', tagColor:'#422006'},
+    {id:'t15', text:'블로그 #011~#028 네이버 업로드 (매일 1개)', done:false, tag:'블로그', tagColor:'#422006'},
+    {id:'t16', text:'애드센스 승인 획득', done:false, tag:'수익화', tagColor:'#450a0a'},
+    {id:'t17', text:'구글 색인 현황 확인 (4/15)', done:false, tag:'SEO', tagColor:'#14532d'},
+    {id:'t18', text:'Selenium 네이버 업로더 디버깅', done:false, tag:'도구', tagColor:'#3b0764'},
+    {id:'t19', text:'제휴 마케팅 플랫폼 가입 (리더스CPA, 링크프라이스)', done:false, tag:'수익화', tagColor:'#450a0a'},
+    {id:'t20', text:'2번째 수익 사이트 기획 및 구축', done:true, tag:'전략', tagColor:'#450a0a'},
+    {id:'t21', text:'프리미엄 콘텐츠 기획 (PDF 가이드 등)', done:false, tag:'수익화', tagColor:'#450a0a'},
+    // 2026-04-12 추가
+    {id:'t22', text:'연말정산 계산기 (year-end-tax.html) 추가', done:true, tag:'사이트', tagColor:'#1e3a5f'},
+    {id:'t23', text:'부동산연구소 사이트 초기 구축 (5페이지)', done:true, tag:'전략', tagColor:'#450a0a'},
+    {id:'t24', text:'부동산 사이트 — 취득세 계산기 (acquisition-tax.html) 제작', done:false, tag:'부동산', tagColor:'#134e4a'},
+    {id:'t25', text:'부동산 사이트 — 전세가율 계산기 (rent-ratio.html) 제작', done:false, tag:'부동산', tagColor:'#134e4a'},
+    {id:'t26', text:'부동산 사이트 도메인 구매 및 배포', done:false, tag:'부동산', tagColor:'#134e4a'},
+];
+
+var SCHEDULE = [
+    {date:'2026-04-12', text:'내부 링크 30페이지 + FAQ 스키마 11페이지 추가, 배포 완료', status:'done'},
+    {date:'2026-04-12', text:'구글 Indexing API로 104개 URL 색인 요청', status:'done'},
+    {date:'2026-04-13', text:'블로그 #006 예약 발행', status:'done'},
+    {date:'2026-04-14', text:'블로그 #007 예약 발행', status:'done'},
+    {date:'2026-04-15', text:'구글 색인 현황 확인 (리마인더 설정됨)', status:'current'},
+    {date:'2026-04-15~05-05', text:'블로그 #008~#028 매일 1개씩 발행', status:'upcoming'},
+    {date:'2026-04 중', text:'애드센스 승인 결과 확인', status:'upcoming'},
+    {date:'2026-04-12', text:'연말정산 계산기 + 부동산연구소 사이트 5페이지 생성', status:'done'},
+    {date:'2026-05 중', text:'블로그 포스트 #029~#060 생성', status:'upcoming'},
+    {date:'2026-05 중', text:'부동산 사이트 취득세/전세가율 계산기 추가 + 도메인 배포', status:'upcoming'},
+    {date:'2026-05~06', text:'제휴 마케팅 시작 (리더스CPA, 쿠팡파트너스)', status:'upcoming'},
+    {date:'2026-06~07', text:'2번째 수익 사이트 구축 시작', status:'upcoming'},
+    {date:'2026-07~', text:'Ezoic 전환 검토, 프리미엄 콘텐츠 출시', status:'upcoming'},
+];
+
+function getState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+}
+function saveState(s) { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+
+function toggleTask(id) {
+    var s = getState();
+    if (!s.tasks) s.tasks = {};
+    s.tasks[id] = !s.tasks[id];
+    saveState(s);
+    renderTasks();
+}
+
+function renderTasks() {
+    var s = getState();
+    var tasks = s.tasks || {};
+    var doneList = document.getElementById('done-list');
+    var todoList = document.getElementById('todo-list');
+    doneList.innerHTML = '';
+    todoList.innerHTML = '';
+    var doneCount = 0, totalCount = TASKS.length;
+
+    TASKS.forEach(function(t) {
+        var isDone = tasks[t.id] !== undefined ? tasks[t.id] : t.done;
+        if (isDone) doneCount++;
+        var li = document.createElement('li');
+        li.className = isDone ? 'done' : '';
+        li.onclick = function() { toggleTask(t.id); };
+        li.innerHTML = '<div class="check-box ' + (isDone ? 'checked' : '') + '"></div>' +
+            '<span class="task-text">' + t.text +
+            '<span class="task-tag" style="background:' + t.tagColor + ';color:#e2e8f0">' + t.tag + '</span></span>';
+        if (isDone) doneList.appendChild(li); else todoList.appendChild(li);
+    });
+
+    document.getElementById('done-count').textContent = doneCount + '개';
+    document.getElementById('todo-count').textContent = (totalCount - doneCount) + '개';
+    var pct = Math.round(doneCount / totalCount * 100);
+    document.getElementById('task-progress').style.width = pct + '%';
+    document.getElementById('task-progress-text').textContent = doneCount + ' / ' + totalCount + ' 완료 (' + pct + '%)';
+}
+
+function renderTimeline() {
+    var el = document.getElementById('timeline');
+    el.innerHTML = '';
+    SCHEDULE.forEach(function(item) {
+        var div = document.createElement('div');
+        div.className = 'timeline-item';
+        div.innerHTML = '<div class="timeline-dot ' + item.status + '"></div>' +
+            '<div class="timeline-date">' + item.date + '</div>' +
+            '<div class="timeline-content">' + item.text + '</div>';
+        el.appendChild(div);
+    });
+}
+
+function switchTab(name) {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelector('.tab[onclick*="' + name + '"]').classList.add('active');
+}
+
+function saveNotes() {
+    var s = getState();
+    s.notes = document.getElementById('note-area').value;
+    saveState(s);
+    var status = document.getElementById('note-status');
+    status.style.opacity = '1';
+    setTimeout(function() { status.style.opacity = '0'; }, 2000);
+}
+
+function loadNotes() {
+    var s = getState();
+    if (s.notes) document.getElementById('note-area').value = s.notes;
+}
+
+// Auto-save notes
+document.getElementById('note-area').addEventListener('input', function() {
+    clearTimeout(this._timeout);
+    this._timeout = setTimeout(saveNotes, 1000);
+});
+
+// Init
+document.getElementById('last-updated').textContent = '마지막 업데이트: ' + new Date().toLocaleDateString('ko-KR');
+renderTasks();
+renderTimeline();
+loadNotes();
+</script>
+</body>
+</html>

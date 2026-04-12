@@ -326,6 +326,13 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     .info-card h2 { font-size: 1.0rem; margin-bottom: 14px; padding-bottom: 12px; }
     .info-card p { font-size: 0.9rem; line-height: 1.85; }
 
+    /* ── article-card 반응형 ── */
+    .article-card {
+        padding: 22px !important;
+        border-radius: 14px;
+    }
+    .article-card h2 { font-size: 1.0rem; margin-bottom: 14px; padding-bottom: 12px; }
+
     /* ── 가이드 CTA ── */
     .guide-cta {
         padding: 22px 18px !important;
@@ -956,7 +963,10 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .large-text .link-section h3 { font-size: 1.15rem; }
 .large-text .link-section a { font-size: 1.0rem; padding: 10px 16px; }
 
-/* ── article-card (가이드 페이지) ── */
+/* ── article-card (관련 계산기/가이드 링크) ── */
+.article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.article-card h2 { font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+
 .large-text .article-card {
     border: 2px solid var(--border) !important;
     border-radius: 18px;
