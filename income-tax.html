@@ -291,6 +291,13 @@
         <div class="breadcrumb">세금 낼 때</div>
         <h1>종합소득세 계산기</h1>
         <p>프리랜서·사업자·임대소득자의 종합소득세를 자동 계산합니다</p>
+        <div class="trust-badge" role="note" aria-label="검증 배지">
+            <span class="trust-badge-dot" aria-hidden="true"></span>
+            <strong>2026년 개정 세법 기준</strong>
+            <span class="trust-badge-sep">·</span>
+            <span>최종 업데이트 2026.04.14</span>
+            <a href="about.html#verification" class="trust-badge-link" aria-label="검증 방법 자세히 보기" title="검증 방법">ⓘ</a>
+        </div>
     </div>
 
     <div class="dashboard">
@@ -381,6 +388,9 @@
                 소득 정보를 입력하고<br>계산하기 버튼을 눌러주세요
             </div>
 
+            <!-- 결과 캡처 영역 (PDF/이미지 저장 대상) -->
+            <div id="captureTarget">
+
             <!-- 결과 요약 -->
             <div class="result-hero" id="resultHero">
                 <div class="result-hero-label" id="resultLabel">환급 예상</div>
@@ -418,6 +428,28 @@
                 <div id="bookkeepingContent"></div>
             </div>
 
+            </div><!-- /#captureTarget -->
+
+            <!-- 결과 저장·공유 액션 -->
+            <div class="result-actions" id="resultActions" hidden>
+                <button type="button" class="ra-btn" data-action="save-pdf" title="결과를 PDF 파일로 저장합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+                    PDF로 저장
+                </button>
+                <button type="button" class="ra-btn" data-action="save-image" title="결과를 이미지로 저장합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    이미지로 저장
+                </button>
+                <button type="button" class="ra-btn" data-action="share-link" title="계산값이 포함된 링크를 복사합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    결과 링크 복사
+                </button>
+                <button type="button" class="ra-btn ra-btn--ghost" data-action="print" title="결과 영역을 인쇄합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    인쇄
+                </button>
+            </div>
+
             <!-- 카카오 공유 -->
             <div class="action-row" id="actionRow">
                 <button class="share-btn" onclick="shareKakao()">
@@ -428,6 +460,39 @@
 
         </div>
     </div>
+
+    <!-- 계산 근거 및 출처 (AI 내성 레이어) -->
+    <section class="sources-footer" aria-label="계산 근거 및 출처">
+        <h3 class="sources-title">📚 이 계산의 근거</h3>
+        <ul class="sources-list">
+            <li>
+                <strong>소득세법 제55조 (세율)</strong>
+                — 2026년 기준 8구간 누진세율 (6% ~ 45%) 적용
+                <a href="https://www.law.go.kr/법령/소득세법" target="_blank" rel="noopener noreferrer">법령 원문</a>
+            </li>
+            <li>
+                <strong>업종별 경비율 고시</strong>
+                — 국세청이 업종별로 고시한 단순경비율·기준경비율 기반
+                <a href="https://www.nts.go.kr/" target="_blank" rel="noopener noreferrer">국세청 공식</a>
+            </li>
+            <li>
+                <strong>인적공제 1인당 150만원</strong>
+                — 본인 및 부양가족 기본공제 기준 반영
+                <a href="https://www.nts.go.kr/" target="_blank" rel="noopener noreferrer">국세청 안내</a>
+            </li>
+            <li>
+                <strong>기장의무 구분 (간편장부 / 복식부기 / 성실신고)</strong>
+                — 업종별 수입금액 기준표에 따라 자동 판정
+                <a href="https://www.hometax.go.kr/" target="_blank" rel="noopener noreferrer">홈택스</a>
+            </li>
+        </ul>
+        <p class="sources-note">
+            ⚠️ 본 계산기는 일반적인 경우에 기반한 <strong>개략 추정치</strong>입니다. 업종·지역·추가 공제 항목 등 개인 상황에 따라 실제 납부·환급액은 달라질 수 있습니다. 실제 신고 전에는 국세청 홈택스의 모두채움 서비스 확인 또는 세무사 상담을 권장합니다.
+        </p>
+        <p class="sources-changelog">
+            최근 반영 내역: 2026.01.01 소득세 8구간 누진세율 · 2026.01.01 업종별 경비율 고시 갱신
+        </p>
+    </section>
 
     <!-- 하단 정보 영역 -->
     <div class="bottom-grid" style="margin-top:24px;">
@@ -884,6 +949,9 @@ function calculate() {
     // 카카오 공유 버튼 표시
     document.getElementById('actionRow').classList.add('show');
     window._shareTax = { isRefund, amount: fmt(Math.abs(finalAmount)) };
+
+    // AI 내성 레이어: 결과 저장/공유 버튼 표시
+    if (window.TrustLayer) { window.TrustLayer.show('resultActions'); }
 }
 
 function showBookkeeping(income) {
@@ -922,6 +990,51 @@ function showBookkeeping(income) {
 // 초기값 설정
 incomeInput.value = (40000000).toLocaleString('ko-KR');
 updatePrepaid();
+
+// === AI 내성 레이어: 공유 링크 복원 ===
+(function restoreFromURL() {
+    try {
+        var p = new URLSearchParams(location.search);
+        var income = p.get('income');
+        var type = p.get('type');
+        var rate = p.get('rate');
+        var dependents = p.get('dependents');
+        var prepaid = p.get('prepaid');
+        if (income) incomeInput.value = Number(income).toLocaleString('ko-KR');
+        if (type) {
+            var tbtn = document.querySelector('.type-btn-group .type-btn[onclick*="' + type + '"]');
+            if (tbtn) tbtn.click();
+        }
+        if (rate) document.getElementById('expenseRate').value = rate;
+        if (dependents) document.getElementById('dependents').value = dependents;
+        if (prepaid) document.getElementById('prepaidInput').value = Number(prepaid).toLocaleString('ko-KR');
+        if (income) { // 파라미터 있으면 자동 계산
+            setTimeout(function () { calculate(); }, 100);
+        }
+    } catch (e) { console.warn('URL 파라미터 복원 실패:', e); }
+})();
+</script>
+
+<!-- AI 내성 레이어 -->
+<script src="trust-layer.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+    if (!window.TrustLayer) return;
+    window.TrustLayer.bind({
+        targetId: 'captureTarget',
+        actionsId: 'resultActions',
+        filename: '종합소득세_계산결과',
+        shareParams: function () {
+            var income = (document.getElementById('incomeInput').value || '').replace(/[^0-9]/g, '');
+            var prepaid = (document.getElementById('prepaidInput').value || '').replace(/[^0-9]/g, '');
+            var rate = document.getElementById('expenseRate').value;
+            var dependents = document.getElementById('dependents').value;
+            var typeBtn = document.querySelector('.type-btn.selected');
+            var type = typeBtn ? (typeBtn.getAttribute('onclick').match(/'([^']+)'/) || [])[1] : '';
+            return { income: income, type: type, rate: rate, dependents: dependents, prepaid: prepaid };
+        }
+    });
+});
 </script>
 
 <!-- 카카오 SDK -->

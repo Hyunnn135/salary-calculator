@@ -1032,3 +1032,259 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     .large-text .breakdown-card { padding: 20px !important; }
     .large-text .article-card { padding: 20px !important; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   AI 내성 레이어 (Trust Layer)
+   - trust-badge: 상단 검증 배지
+   - result-actions: 결과 저장/공유 버튼 그룹
+   - sources-footer: 하단 출처·근거 박스
+   - @media print: 인쇄 전용 스타일
+   =══════════════════════════════════════════════════════════ */
+
+/* --- Trust Badge --- */
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #065F46;
+    margin: 10px 0 0;
+    letter-spacing: -0.2px;
+    line-height: 1.4;
+}
+.trust-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+    flex-shrink: 0;
+}
+.trust-badge-sep {
+    color: #6EE7B7;
+    margin: 0 2px;
+}
+.trust-badge-link {
+    margin-left: 4px;
+    color: #047857;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+.trust-badge-link:hover {
+    background: rgba(6, 95, 70, 0.08);
+    text-decoration: none;
+}
+@media (max-width: 480px) {
+    .trust-badge { font-size: 0.72rem; padding: 6px 12px; }
+    .trust-badge-dot { width: 7px; height: 7px; }
+}
+
+/* --- Result Actions (저장/공유 버튼 그룹) --- */
+.result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+}
+.ra-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.2;
+}
+.ra-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    color: var(--accent-dark);
+}
+.ra-btn:active { transform: translateY(1px); }
+.ra-btn--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+}
+.ra-btn svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+.ra-btn[disabled] {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* 토스트 메시지 */
+.ra-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    padding: 12px 20px;
+    background: #111827;
+    color: white;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s;
+    z-index: 9999;
+}
+.ra-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --- Sources Footer (출처·근거 박스) --- */
+.sources-footer {
+    margin: 32px 0 24px;
+    padding: 24px;
+    background: #F9FAFB;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+.sources-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.3px;
+}
+.sources-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.sources-list li {
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+.sources-list li strong {
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-right: 4px;
+}
+.sources-list li a {
+    margin-left: 6px;
+    color: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 2px 8px;
+    background: var(--accent-light);
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 4px;
+}
+.sources-list li a:hover { text-decoration: underline; }
+.sources-note {
+    font-size: 0.8rem;
+    color: #92400E;
+    background: #FEF3C7;
+    border-left: 3px solid #F59E0B;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 0 0 10px;
+    line-height: 1.55;
+}
+.sources-changelog {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    margin: 0;
+    font-style: italic;
+    letter-spacing: -0.1px;
+}
+
+/* --- 검증 페이지 anchor --- */
+#verification { scroll-margin-top: 80px; }
+
+/* --- @media print (인쇄 전용) --- */
+@media print {
+    .nav,
+    .nav-mobile,
+    .ads-slot,
+    .ad-slot,
+    .adsbygoogle,
+    .action-row,
+    .result-actions,
+    .article-card,
+    .related-calc,
+    footer,
+    .breadcrumb {
+        display: none !important;
+    }
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    .trust-badge {
+        border: 1px solid #333 !important;
+        color: #000 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+    }
+    .trust-badge-dot {
+        background: #000 !important;
+        box-shadow: none !important;
+    }
+    .result-hero {
+        background: white !important;
+        color: black !important;
+        border: 2px solid #333 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+    .result-hero-label,
+    .result-hero-amount,
+    .result-hero-unit,
+    .result-hero-msg,
+    .rh-stat-label,
+    .rh-stat-val {
+        color: black !important;
+    }
+    .breakdown-card {
+        border: 1px solid #666 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+    .sources-footer {
+        background: white !important;
+        border: 1px solid #666 !important;
+        page-break-inside: avoid;
+    }
+    .sources-list li a { display: none !important; }
+    a[href]::after { content: "" !important; }
+}

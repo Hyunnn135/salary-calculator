@@ -56,10 +56,10 @@
 | 8 | 부동산 사이트 — 취득세 계산기 (acquisition-tax.html) 제작 | 부동산 | 미완료 |
 | 9 | 부동산 사이트 — 전세가율 계산기 (rent-ratio.html) 제작 | 부동산 | 미완료 |
 | 10 | 부동산 사이트 도메인 구매 및 배포 | 부동산 | 미완료 |
-| 11 | **AI 내성 재포지셔닝 전략 수립** (docs/ai-resistance/) | 전략 | ✅ 완료 — README + components 초안 |
-| 12 | 공통 컴포넌트 구현 (trust-layer.js + common.css 확장) | 수익화 | 🔜 다음 세션 |
-| 13 | 파일럿 페이지 1개 적용 (AI 내성 3축) | 수익화 | 🔜 파일럿 후보: income-tax / insurance / retirement (현태님 선택) |
-| 14 | 메인 계산기 14개 페이지 롤아웃 | 수익화 | 대기 (파일럿 컨펌 후) |
+| 11 | **AI 내성 재포지셔닝 전략 수립** (docs/ai-resistance/) | 전략 | ✅ 완료 — README + components |
+| 12 | 공통 컴포넌트 구현 (trust-layer.js + common.css 확장) | 수익화 | ✅ 완료 — trust-layer.js(220줄), common.css 3컴포넌트 + @media print |
+| 13 | 파일럿 페이지 income-tax.html 적용 (3축) | 수익화 | ✅ 구현 완료 → 배포 후 실제 작동 검증 대기 |
+| 14 | 메인 계산기 14개 페이지 롤아웃 | 수익화 | 대기 (파일럿 배포 검증 후) |
 | 15 | PDF 기획안 v2 리라이트 (워크시트/템플릿 중심) | 수익화 | 대기 (파일럿 결과 반영 후) |
 
 ## 완료된 작업 (16개)
