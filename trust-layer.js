@@ -6,7 +6,9 @@
  *  - PDF 저장 (html2canvas + jsPDF)
  *  - 이미지 저장 (html2canvas → PNG)
  *  - 공유 링크 복사 (URL 파라미터 인코딩)
- *  - 인쇄
+ *
+ * 인쇄 기능은 2026-04-14에 제거됨 — PDF 저장으로 대체.
+ * (브라우저 Ctrl+P 는 common.css @media print 가 여전히 지원)
  *
  * 라이브러리는 버튼 클릭 시점에 lazy-load.
  *
@@ -15,7 +17,6 @@
  *     <button class="ra-btn" data-action="save-pdf">PDF로 저장</button>
  *     <button class="ra-btn" data-action="save-image">이미지로 저장</button>
  *     <button class="ra-btn" data-action="share-link">결과 링크 복사</button>
- *     <button class="ra-btn ra-btn--ghost" data-action="print">인쇄</button>
  *   </div>
  *   <script>
  *     TrustLayer.bind({
@@ -318,10 +319,6 @@
         document.body.removeChild(ta);
     }
 
-    function printPage() {
-        window.print();
-    }
-
     var _cfg = null;
 
     function bind(opts) {
@@ -339,8 +336,6 @@
                 saveAsImage(_cfg.targetId, _cfg.filename || "결과", btn);
             } else if (action === "share-link") {
                 copyShareURL(_cfg.shareParams);
-            } else if (action === "print") {
-                printPage();
             }
         });
     }
@@ -362,7 +357,6 @@
         saveAsPDF: saveAsPDF,
         saveAsImage: saveAsImage,
         copyShareURL: copyShareURL,
-        print: printPage,
         toast: toast
     };
 })(window, document);
