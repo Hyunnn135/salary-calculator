@@ -1407,51 +1407,112 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 
 /* --- @media print (인쇄 전용) --- */
 @media print {
+    @page { margin: 15mm; }
+
+    /* ── 숨김: 결과 외 영역 전부 ── */
     .nav,
     .nav-mobile,
     .ads-slot,
     .ad-slot,
     .adsbygoogle,
+    .ad-wrap,
     .action-row,
     .result-actions,
     .article-card,
     .related-calc,
     footer,
-    .breadcrumb {
+    .breadcrumb,
+    .page-header,
+    .bottom-grid,
+    .info-card,
+    .faq-item,
+    .result-placeholder,
+    .trust-badge {
         display: none !important;
     }
-    body {
+
+    /* ── 입력 컬럼 숨김: dashboard 첫 번째 자식이 입력 영역 ── */
+    .dashboard { display: block !important; }
+    .dashboard > div:first-child { display: none !important; }
+
+    /* ── 캡처 전용 메타는 인쇄에도 노출 ── */
+    .capture-only { display: block !important; }
+    #captureMeta {
+        display: block !important;
+        border: 1px solid #999 !important;
+        padding: 14px !important;
+        margin-bottom: 16px !important;
+        border-radius: 6px !important;
+        page-break-inside: avoid;
+    }
+    #captureMeta .cm-title {
+        font-weight: 700 !important;
+        font-size: 0.85rem !important;
+        color: #000 !important;
+        margin-bottom: 10px !important;
+    }
+    #captureMeta .cm-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        padding: 4px 0 !important;
+        font-size: 0.82rem !important;
+        color: #000 !important;
+        border-bottom: 1px dotted #ccc !important;
+    }
+    #captureMeta .cm-row strong { color: #000 !important; font-weight: 700 !important; }
+
+    /* ── 본문/배경 ── */
+    html, body {
         background: white !important;
         color: black !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
-    .trust-badge {
-        border: 1px solid #333 !important;
-        color: #000 !important;
-        background: #fff !important;
-        box-shadow: none !important;
+    .page {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
     }
-    .trust-badge-dot {
-        background: #000 !important;
-        box-shadow: none !important;
+    .result-col {
+        display: block !important;
+        gap: 0 !important;
+        padding: 0 !important;
     }
+
+    /* ── 컴포넌트 스타일 ── */
     .result-hero {
         background: white !important;
         color: black !important;
         border: 2px solid #333 !important;
         box-shadow: none !important;
         page-break-inside: avoid;
+        page-break-after: avoid;
+        margin-bottom: 14px !important;
     }
     .result-hero-label,
     .result-hero-amount,
     .result-hero-unit,
     .result-hero-msg,
+    .rh-stat,
     .rh-stat-label,
     .rh-stat-val {
         color: black !important;
+        background: white !important;
+    }
+    .result-hero-stats {
+        background: white !important;
+        border: 1px solid #999 !important;
     }
     .breakdown-card {
+        display: block !important;
+        background: white !important;
         border: 1px solid #666 !important;
         box-shadow: none !important;
+        page-break-inside: avoid;
+        margin-bottom: 14px !important;
+    }
+    .breakdown-card:not(.show) { display: none !important; }
+    .step-row, .b-item, .b-total {
         page-break-inside: avoid;
     }
     .sources-footer {

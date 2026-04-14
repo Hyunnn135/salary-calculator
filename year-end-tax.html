@@ -407,6 +407,12 @@
                 왼쪽에서 정보를 입력하고<br>계산 버튼을 눌러주세요
             </div>
 
+            <!-- 결과 캡처 영역 (PDF/이미지 저장 대상) -->
+            <div id="captureTarget">
+
+            <!-- 입력 조건 요약 (캡처 시에만 노출) -->
+            <div class="capture-meta capture-only" id="captureMeta"></div>
+
             <!-- 메인 결과 -->
             <div class="result-hero" id="resultCard">
                 <div class="result-hero-label" id="resultLabel">예상 환급액</div>
@@ -458,12 +464,30 @@
                 </div>
             </div>
 
-            <!-- 저장/공유 -->
-            <div class="action-row" id="actionRow">
-                <button class="save-btn" onclick="saveImage()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div><!-- /#captureTarget -->
+
+            <!-- 결과 저장·공유 액션 -->
+            <div class="result-actions" id="resultActions" hidden>
+                <button type="button" class="ra-btn" data-action="save-pdf" title="결과를 PDF 파일로 저장합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+                    PDF 저장
+                </button>
+                <button type="button" class="ra-btn" data-action="save-image" title="결과를 이미지로 저장합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     이미지 저장
                 </button>
+                <button type="button" class="ra-btn" data-action="share-link" title="계산값이 포함된 링크를 복사합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    링크 복사
+                </button>
+                <button type="button" class="ra-btn" data-action="print" title="결과 영역을 인쇄합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    인쇄
+                </button>
+            </div>
+
+            <!-- 카카오 공유 -->
+            <div class="action-row" id="actionRow">
                 <button class="share-btn" onclick="shareKakao()">
                     <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카카오톡" width="20" height="20">
                     카카오톡 공유
@@ -842,6 +866,36 @@ function calculate() {
     document.getElementById('actionRow').classList.add('show');
 
     window._shareAmount = (isRefund ? '환급 ' : '추가납부 ') + fmt(Math.abs(diff)) + '원';
+
+    // 캡처 전용 입력 요약 채우기
+    var meta = document.getElementById('captureMeta');
+    if (meta) {
+        var depSel = document.getElementById('dependents');
+        var depLabel = depSel && depSel.selectedIndex >= 0
+            ? depSel.options[depSel.selectedIndex].text
+            : dependents + '명';
+        var chSel = document.getElementById('children');
+        var chLabel = chSel && chSel.selectedIndex >= 0
+            ? chSel.options[chSel.selectedIndex].text
+            : children + '명';
+        var cardTotal = credit + debit + market + transport;
+        var specialTotal = medical + education + insPremium + donation + rent;
+        var pensionTotal = pension + irp;
+        meta.innerHTML =
+            '<div class="cm-title">입력 조건</div>' +
+            '<div class="cm-grid">' +
+                '<div class="cm-row"><span>총급여</span><strong>' + fmt(salary) + '원</strong></div>' +
+                '<div class="cm-row"><span>부양가족</span><strong>' + depLabel + '</strong></div>' +
+                '<div class="cm-row"><span>자녀 세액공제</span><strong>' + chLabel + '</strong></div>' +
+                '<div class="cm-row"><span>신용·체크카드 등 지출</span><strong>' + fmt(cardTotal) + '원</strong></div>' +
+                '<div class="cm-row"><span>의료·교육·보험·기부·월세 합계</span><strong>' + fmt(specialTotal) + '원</strong></div>' +
+                '<div class="cm-row"><span>연금저축 + IRP</span><strong>' + fmt(pensionTotal) + '원</strong></div>' +
+                '<div class="cm-row"><span>기납부세액</span><strong>' + fmt(paidTax) + '원</strong></div>' +
+            '</div>';
+    }
+
+    // AI 내성 레이어: 결과 저장/공유 버튼 표시
+    if (window.TrustLayer) { window.TrustLayer.show('resultActions'); }
 }
 
 function counter(id, target, ms) {
@@ -857,19 +911,39 @@ function counter(id, target, ms) {
     requestAnimationFrame(tick);
 }
 
-function saveImage() {
-    var btn = document.querySelector('.save-btn');
-    btn.classList.add('loading');
-    var target = document.getElementById('resultCard');
-    html2canvas(target, { scale: 2, borderRadius: 16 }).then(function(canvas) {
-        var link = document.createElement('a');
-        link.download = '연말정산_계산결과.png';
-        link.href = canvas.toDataURL();
-        link.click();
-        btn.classList.remove('loading');
-    }).catch(function() { btn.classList.remove('loading'); });
-}
+// saveImage() 함수는 trust-layer.js 로 대체됨
 </script>
+
+<!-- AI 내성 레이어 -->
+<script src="trust-layer.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+    if (!window.TrustLayer) return;
+    window.TrustLayer.bind({
+        targetId: 'captureTarget',
+        actionsId: 'resultActions',
+        filename: '연말정산_계산결과',
+        calculatorName: '연말정산 계산기',
+        taxYear: '2026년 귀속',
+        basisInfo: '2026년 개정 세법 기준 · 최종 업데이트 2026.04.14',
+        sourceURL: 'salarykorea.site/year-end-tax',
+        metaId: 'captureMeta',
+        references: [
+            '소득세법 제47조 (근로소득공제) · 제59조의2~59조의4 (세액공제)',
+            '국세청 홈택스 — 연말정산 간소화 서비스 안내',
+            '2026년 개정세법 해설 (기획재정부)'
+        ],
+        disclaimer: '본 결과는 참고용 추정치이며, 실제 정산은 국세청 홈택스에서 확인하세요.',
+        shareParams: function () {
+            var salary = (document.getElementById('salaryInput').value || '').replace(/[^0-9]/g, '');
+            var dep = document.getElementById('dependents').value;
+            var ch = document.getElementById('children').value;
+            return { salary: salary, dep: dep, ch: ch };
+        }
+    });
+});
+</script>
+
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
 <script>
 Kakao.init('051ed8019b76b2127b2da56a27b406f2');

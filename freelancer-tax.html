@@ -358,6 +358,12 @@
                 계약금액을 입력하고<br>계산하기 버튼을 눌러주세요
             </div>
 
+            <!-- 결과 캡처 영역 (PDF/이미지 저장 대상) -->
+            <div id="captureTarget">
+
+            <!-- 입력 조건 요약 (캡처 시에만 노출) -->
+            <div class="capture-meta capture-only" id="captureMeta"></div>
+
             <!-- 결과 요약 -->
             <div class="result-hero" id="resultHero">
                 <div class="result-hero-label" id="resultLabel">실수령액</div>
@@ -385,6 +391,28 @@
                     <div class="card-title">세금 계산 상세</div>
                 </div>
                 <div id="detailRows"></div>
+            </div>
+
+            </div><!-- /#captureTarget -->
+
+            <!-- 결과 저장·공유 액션 -->
+            <div class="result-actions" id="resultActions" hidden>
+                <button type="button" class="ra-btn" data-action="save-pdf" title="결과를 PDF 파일로 저장합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+                    PDF 저장
+                </button>
+                <button type="button" class="ra-btn" data-action="save-image" title="결과를 이미지로 저장합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    이미지 저장
+                </button>
+                <button type="button" class="ra-btn" data-action="share-link" title="계산값이 포함된 링크를 복사합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    링크 복사
+                </button>
+                <button type="button" class="ra-btn" data-action="print" title="결과 영역을 인쇄합니다">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    인쇄
+                </button>
             </div>
 
             <!-- 카카오 공유 -->
@@ -514,7 +542,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
-        <\!-- FAQ Section -->
+        <!-- FAQ Section -->
 <div class="card" style="margin-bottom:24px; max-width:800px; margin-left:auto; margin-right:auto;">
     <div class="card-header"><div class="card-title">자주 묻는 질문</div></div>
     <div style="display:grid; gap:16px;">
@@ -770,10 +798,69 @@ function calculate() {
     // 카카오 공유 버튼 표시
     document.getElementById('actionRow').classList.add('show');
     window._shareTax = { isRefund, amount: fmt(refundAmount), monthlyAmount: fmt(finalAmount / 12) };
+
+    // 캡처 전용 입력 요약 채우기
+    const meta = document.getElementById('captureMeta');
+    if (meta) {
+        const typeRadio = document.querySelector('input[name="incomeType"]:checked');
+        const typeLabel = typeRadio
+            ? (typeRadio.value === 'simple' ? '단순경비율' : '기준경비율')
+            : '-';
+        const dependentsSel = document.getElementById('dependents');
+        const dependentsLabel = dependentsSel && dependentsSel.selectedIndex >= 0
+            ? dependentsSel.options[dependentsSel.selectedIndex].text
+            : dependents + '명';
+        meta.innerHTML =
+            '<div class="cm-title">입력 조건</div>' +
+            '<div class="cm-grid">' +
+                '<div class="cm-row"><span>월간 계약금액</span><strong>' + fmt(monthlyIncome) + '원</strong></div>' +
+                '<div class="cm-row"><span>연간 수입 (×12)</span><strong>' + fmt(annualIncome) + '원</strong></div>' +
+                '<div class="cm-row"><span>필요경비율</span><strong>' + (expenseRate * 100).toFixed(1) + '%</strong></div>' +
+                '<div class="cm-row"><span>소득유형</span><strong>' + typeLabel + '</strong></div>' +
+                '<div class="cm-row"><span>부양가족</span><strong>' + dependentsLabel + '</strong></div>' +
+                '<div class="cm-row"><span>원천징수 (3.3%)</span><strong>' + fmt(withholding) + '원</strong></div>' +
+            '</div>';
+    }
+
+    // AI 내성 레이어: 결과 저장/공유 버튼 표시
+    if (window.TrustLayer) { window.TrustLayer.show('resultActions'); }
 }
 
 // 초기값 설정
 monthlyIncomeInput.value = (3000000).toLocaleString('ko-KR');
+</script>
+
+<!-- AI 내성 레이어 -->
+<script src="trust-layer.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+    if (!window.TrustLayer) return;
+    window.TrustLayer.bind({
+        targetId: 'captureTarget',
+        actionsId: 'resultActions',
+        filename: '프리랜서_33_세금_계산결과',
+        // 캡처 전용 메타데이터
+        calculatorName: '프리랜서 3.3% 세금 계산기',
+        taxYear: '2026년 귀속',
+        basisInfo: '2026년 개정 세법 기준 · 최종 업데이트 2026.04.14',
+        sourceURL: 'salarykorea.site/freelancer-tax',
+        metaId: 'captureMeta',
+        references: [
+            '소득세법 제127조 (원천징수의무) · 제129조 (원천징수세율)',
+            '국세청 홈택스 — 사업소득 원천징수 안내',
+            '2026년 개정세법 해설 (기획재정부)'
+        ],
+        disclaimer: '본 결과는 참고용이며, 실제 신고는 국세청 홈택스에서 확인하세요.',
+        shareParams: function () {
+            var monthly = (document.getElementById('monthlyIncomeInput').value || '').replace(/[^0-9]/g, '');
+            var rate = (document.getElementById('expenseRate').value || '').replace(/[^0-9.]/g, '');
+            var dependents = document.getElementById('dependents').value;
+            var typeRadio = document.querySelector('input[name="incomeType"]:checked');
+            var type = typeRadio ? typeRadio.value : '';
+            return { monthly: monthly, rate: rate, dependents: dependents, type: type };
+        }
+    });
+});
 </script>
 
 <!-- 카카오 SDK -->
