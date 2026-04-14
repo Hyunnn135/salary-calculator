@@ -86,14 +86,22 @@
     async function captureElement(el, scale) {
         await loadScript(HTML2CANVAS_URL);
 
+        // 화질 향상: devicePixelRatio 고려한 실질 scale 계산.
+        // 레티나: 3~4, 일반 디스플레이: 3.
+        var dpr = window.devicePixelRatio || 1;
+        var effectiveScale = scale || Math.max(3, Math.min(dpr * 2, 4));
+
         // html2canvas는 원본 DOM을 off-document에 clone해서 렌더링함.
         // clone 시점에 .show 클래스에 의해서만 display되는 요소들이 보이지 않는 문제 방지 →
         // clone된 DOM에 직접 inline style 주입해서 강제로 display 유지.
         return await window.html2canvas(el, {
             backgroundColor: "#FFFFFF",
-            scale: scale || 2,
+            scale: effectiveScale,
             useCORS: true,
             logging: false,
+            imageTimeout: 0,
+            allowTaint: false,
+            letterRendering: true,
             onclone: function (clonedDoc) {
                 try {
                     // 결과 카드들: .show가 붙은 것만 display
@@ -146,24 +154,32 @@
         if (!el) { toast("결과 영역을 찾을 수 없어요"); return; }
         setBtnBusy(btn, true, "PDF 만드는 중...");
         try {
-            var canvas = await captureElement(el, 2);
+            var canvas = await captureElement(el);
             await loadScript(JSPDF_URL);
             var jsPDF = window.jspdf ? window.jspdf.jsPDF : window.jsPDF;
-            var pdf = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
+            // compress: false → PDF 내부 이미지 스트림 압축 해제로 화질 보존.
+            var pdf = new jsPDF({
+                orientation: "p",
+                unit: "mm",
+                format: "a4",
+                compress: false,
+                putOnlyUsedFonts: true
+            });
             var pageW = pdf.internal.pageSize.getWidth();
             var pageH = pdf.internal.pageSize.getHeight();
             var imgW = pageW - 20; // 여백 10mm씩
             var imgH = (canvas.height * imgW) / canvas.width;
             var y = 10;
+            // PNG + compression 'SLOW' → 최고 화질 (파일 크기 vs 화질 균형)
+            var imgData = canvas.toDataURL("image/png", 1.0);
             if (imgH <= pageH - 20) {
-                pdf.addImage(canvas.toDataURL("image/png"), "PNG", 10, y, imgW, imgH);
+                pdf.addImage(imgData, "PNG", 10, y, imgW, imgH, undefined, "SLOW");
             } else {
                 // 세로로 긴 경우: 여러 페이지로 분할
-                var imgData = canvas.toDataURL("image/png");
                 var remainingH = imgH;
                 var offsetY = 0;
                 while (remainingH > 0) {
-                    pdf.addImage(imgData, "PNG", 10, y - offsetY, imgW, imgH);
+                    pdf.addImage(imgData, "PNG", 10, y - offsetY, imgW, imgH, undefined, "SLOW");
                     remainingH -= (pageH - 20);
                     if (remainingH > 0) {
                         pdf.addPage();
@@ -186,10 +202,10 @@
         if (!el) { toast("결과 영역을 찾을 수 없어요"); return; }
         setBtnBusy(btn, true, "이미지 만드는 중...");
         try {
-            var canvas = await captureElement(el, 2);
+            var canvas = await captureElement(el);
             var link = document.createElement("a");
             link.download = filename + "_" + todayStr() + ".png";
-            link.href = canvas.toDataURL("image/png");
+            link.href = canvas.toDataURL("image/png", 1.0);
             link.click();
             toast("이미지가 저장되었어요");
         } catch (e) {

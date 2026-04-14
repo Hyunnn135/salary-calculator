@@ -1093,7 +1093,7 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .result-actions {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 6px;
     margin-top: 16px;
     padding-top: 16px;
     border-top: 1px dashed var(--border);
@@ -1102,13 +1102,13 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
     width: 100%;
-    padding: 10px 12px;
+    padding: 10px 6px;
     background: var(--surface);
     border: 1.5px solid var(--border);
     border-radius: 10px;
-    font-size: 0.83rem;
+    font-size: 0.78rem;
     font-weight: 600;
     font-family: 'Noto Sans KR', sans-serif;
     color: var(--text-primary);
@@ -1116,6 +1116,10 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     transition: all 0.15s;
     line-height: 1.2;
     box-sizing: border-box;
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .ra-btn:hover {
     border-color: var(--accent);
@@ -1129,8 +1133,8 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     color: var(--text-primary);
 }
 .ra-btn svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     flex-shrink: 0;
 }
 .ra-btn[disabled] {
@@ -1138,10 +1142,11 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     cursor: wait;
 }
 @media (max-width: 640px) {
-    .result-actions { grid-template-columns: repeat(2, 1fr); }
+    .result-actions { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .ra-btn { font-size: 0.82rem; padding: 11px 10px; }
 }
 @media (max-width: 380px) {
-    .ra-btn { font-size: 0.78rem; padding: 9px 8px; }
+    .ra-btn { font-size: 0.78rem; padding: 10px 8px; }
 }
 
 /* 토스트 메시지 */
