@@ -1,9 +1,11 @@
 # salarykorea.site (월급연구소) — 프로젝트 컨텍스트
 
+> ⚠️ **0순위 필독:** `~/Desktop/Projects/WORKFLOW_RULES.md` (모든 프로젝트 공통 마스터 규칙)
 > 이 파일은 Claude가 프로젝트 맥락을 빠르게 파악하기 위한 참조 문서입니다.
 > Dispatch, Cowork, 코드 세션 어디서든 이 파일을 먼저 읽으면 현재 상황을 파악할 수 있습니다.
-> **최종 업데이트: 2026-04-13**
-> **데이터 소스: ~/Desktop/Projects/dashboard/project-data.json (단일 진실 소스)**
+> **최종 업데이트: 2026-04-14**
+> **데이터 소스: ~/Desktop/Projects/masterboard/project-data.json (단일 진실 소스)**
+> **읽기 순서:** WORKFLOW_RULES.md → 이 파일(PROJECT-CONTEXT.md)
 
 ---
 
@@ -26,11 +28,11 @@
 
 ```
 ~/Desktop/Projects/
-├── dashboard/ ← 전체 프로젝트 관리 (Projects 루트)
+├── masterboard/ ← 전체 프로젝트 관리 (Projects 루트)
 │   ├── project-data.json ← 단일 데이터 소스
 │   ├── project-data.js
-│   ├── project-dashboard.html
-│   └── blog-upload-dashboard.html
+│   ├── project-masterboard.html
+│   └── blog-upload-board.html
 ├── salarykorea/ ← 월급연구소 사이트
 │   ├── *.html (106개+ 계산기 페이지)
 │   ├── common.css, ads.txt, push.sh
@@ -63,7 +65,7 @@
 - ~~블로그 포스트 #001~#028 생성~~ [블로그]
 - ~~블로그 포스트 #061~#065 생성~~ [블로그]
 - ~~블로그 #001~#010 네이버 업로드 완료~~ [블로그]
-- ~~블로그 업로드 대시보드 HTML 제작~~ [도구]
+- ~~블로그 업로드 마스터보드 HTML 제작~~ [도구]
 - ~~블로그 이모지 제거 + 리치텍스트 복사 적용~~ [블로그]
 - ~~내부 링크 강화 — 30개 페이지에 관련 콘텐츠 추가~~ [SEO]
 - ~~FAQ 스키마 — 11개 계산기 페이지에 추가~~ [SEO]
@@ -140,6 +142,6 @@
 ---
 
 > **동기화 방법:**
-> - 데이터 수정: `~/Desktop/Projects/dashboard/project-data.json` 직접 수정
+> - 데이터 수정: `~/Desktop/Projects/masterboard/project-data.json` 직접 수정
 > - 전체 동기화: `python3 ~/Desktop/Projects/salarykorea/tools/sync-context.py sync`
-> - 대시보드는 project-data.js를 자동으로 읽어서 렌더링함
+> - 마스터보드는 project-data.js를 자동으로 읽어서 렌더링함
