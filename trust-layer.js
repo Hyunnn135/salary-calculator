@@ -224,36 +224,29 @@
             var canvas = await captureElement(el);
             await loadScript(JSPDF_URL);
             var jsPDF = window.jspdf ? window.jspdf.jsPDF : window.jsPDF;
-            // compress: false → PDF 내부 이미지 스트림 압축 해제로 화질 보존.
+
+            // ── 단일 긴 페이지 방식 ──
+            // A4 너비(210mm)는 유지하되 높이를 콘텐츠에 맞춰 가변 설정.
+            // → 페이지 경계 자체가 없어 행/문자 잘림 원천 차단.
+            // → 디지털 공유(카톡·메신저)에 최적화, 인쇄 시 프린터가 "페이지에 맞춤"으로 자동 축소.
+            var pageW = 210;              // mm (A4 너비 고정)
+            var margin = 10;              // mm (좌우·상하 여백)
+            var imgW = pageW - margin * 2;
+            var imgH = (canvas.height * imgW) / canvas.width;
+            var pageH = imgH + margin * 2; // 콘텐츠 높이 + 상하 여백
+
             var pdf = new jsPDF({
                 orientation: "p",
                 unit: "mm",
-                format: "a4",
+                format: [pageW, pageH], // 커스텀 페이지 사이즈
                 compress: false,
                 putOnlyUsedFonts: true
             });
-            var pageW = pdf.internal.pageSize.getWidth();
-            var pageH = pdf.internal.pageSize.getHeight();
-            var imgW = pageW - 20; // 여백 10mm씩
-            var imgH = (canvas.height * imgW) / canvas.width;
-            var y = 10;
-            // PNG + compression 'SLOW' → 최고 화질 (파일 크기 vs 화질 균형)
+
+            // PNG + 'SLOW' compression → 최고 화질
             var imgData = canvas.toDataURL("image/png", 1.0);
-            if (imgH <= pageH - 20) {
-                pdf.addImage(imgData, "PNG", 10, y, imgW, imgH, undefined, "SLOW");
-            } else {
-                // 세로로 긴 경우: 여러 페이지로 분할
-                var remainingH = imgH;
-                var offsetY = 0;
-                while (remainingH > 0) {
-                    pdf.addImage(imgData, "PNG", 10, y - offsetY, imgW, imgH, undefined, "SLOW");
-                    remainingH -= (pageH - 20);
-                    if (remainingH > 0) {
-                        pdf.addPage();
-                        offsetY += (pageH - 20);
-                    }
-                }
-            }
+            pdf.addImage(imgData, "PNG", margin, margin, imgW, imgH, undefined, "SLOW");
+
             pdf.save(filename + "_" + todayStr() + ".pdf");
             toast("PDF가 저장되었어요");
         } catch (e) {
