@@ -85,11 +85,59 @@
 
     async function captureElement(el, scale) {
         await loadScript(HTML2CANVAS_URL);
+
+        // html2canvas는 원본 DOM을 off-document에 clone해서 렌더링함.
+        // clone 시점에 .show 클래스에 의해서만 display되는 요소들이 보이지 않는 문제 방지 →
+        // clone된 DOM에 직접 inline style 주입해서 강제로 display 유지.
         return await window.html2canvas(el, {
             backgroundColor: "#FFFFFF",
             scale: scale || 2,
             useCORS: true,
-            logging: false
+            logging: false,
+            onclone: function (clonedDoc) {
+                try {
+                    // 결과 카드들: .show가 붙은 것만 display
+                    var showItems = clonedDoc.querySelectorAll(
+                        ".result-hero.show, .breakdown-card.show, .action-row.show"
+                    );
+                    showItems.forEach(function (node) {
+                        node.style.display = "block";
+                        node.style.visibility = "visible";
+                        node.style.opacity = "1";
+                        node.style.animation = "none"; // fadeUp 애니메이션 중간에 캡처되는 것 방지
+                    });
+                    // result-hero는 flex 자식 배치이므로 display:block보단 원래 block이 맞음.
+                    // 그러나 result-hero-stats 내부는 grid 유지 필요.
+                    var stats = clonedDoc.querySelectorAll(".result-hero-stats");
+                    stats.forEach(function (s) {
+                        s.style.display = "grid";
+                    });
+                    // action-row는 flex
+                    var actionRow = clonedDoc.querySelector(".action-row.show");
+                    if (actionRow) actionRow.style.display = "flex";
+                    // 캡처 대상에 배경과 패딩을 inline으로 부여 (PDF/이미지 가장자리 여백)
+                    var root = clonedDoc.getElementById(el.id);
+                    if (root) {
+                        root.style.background = "#FFFFFF";
+                        root.style.padding = "20px";
+                        root.style.borderRadius = "12px";
+                        root.style.display = "block";
+                    }
+                    // 결과 저장 버튼·카카오 공유 버튼은 캡처 결과에서 숨김
+                    var hideInCapture = clonedDoc.querySelectorAll(".result-actions, .action-row");
+                    hideInCapture.forEach(function (n) { n.style.display = "none"; });
+                    // 상단에 Trust Badge 복제 삽입 (캡처 결과에 검증 정보가 함께 찍히도록)
+                    var badgeOrig = document.querySelector(".trust-badge");
+                    if (badgeOrig && root && !root.querySelector(".trust-badge-clone")) {
+                        var badgeClone = badgeOrig.cloneNode(true);
+                        badgeClone.classList.add("trust-badge-clone");
+                        badgeClone.style.marginBottom = "16px";
+                        root.insertBefore(badgeClone, root.firstChild);
+                    }
+                } catch (e) {
+                    console.warn("onclone 처리 중 경고:", e);
+                }
+            }
         });
     }
 

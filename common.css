@@ -1091,8 +1091,8 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 
 /* --- Result Actions (저장/공유 버튼 그룹) --- */
 .result-actions {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     margin-top: 16px;
     padding-top: 16px;
@@ -1101,8 +1101,10 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .ra-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    padding: 10px 14px;
+    width: 100%;
+    padding: 10px 12px;
     background: var(--surface);
     border: 1.5px solid var(--border);
     border-radius: 10px;
@@ -1113,6 +1115,7 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     cursor: pointer;
     transition: all 0.15s;
     line-height: 1.2;
+    box-sizing: border-box;
 }
 .ra-btn:hover {
     border-color: var(--accent);
@@ -1120,9 +1123,10 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     color: var(--accent-dark);
 }
 .ra-btn:active { transform: translateY(1px); }
+/* ghost variant 스타일은 통일 — 크기/배경은 일반 버튼과 동일, 클래스만 유지 */
 .ra-btn--ghost {
-    background: transparent;
-    color: var(--text-secondary);
+    background: var(--surface);
+    color: var(--text-primary);
 }
 .ra-btn svg {
     width: 15px;
@@ -1132,6 +1136,12 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
 .ra-btn[disabled] {
     opacity: 0.6;
     cursor: wait;
+}
+@media (max-width: 640px) {
+    .result-actions { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 380px) {
+    .ra-btn { font-size: 0.78rem; padding: 9px 8px; }
 }
 
 /* 토스트 메시지 */
