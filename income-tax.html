@@ -391,6 +391,9 @@
             <!-- 결과 캡처 영역 (PDF/이미지 저장 대상) -->
             <div id="captureTarget">
 
+            <!-- 입력 조건 요약 (캡처 시에만 노출) -->
+            <div class="capture-meta capture-only" id="captureMeta"></div>
+
             <!-- 결과 요약 -->
             <div class="result-hero" id="resultHero">
                 <div class="result-hero-label" id="resultLabel">환급 예상</div>
@@ -891,14 +894,13 @@ function calculate() {
     document.getElementById('resultPlaceholder').style.display = 'none';
     hero.className = 'result-hero show ' + (isRefund ? 'refund' : 'pay');
     document.getElementById('resultLabel').textContent = isRefund ? '환급 예상' : '추가 납부 예상';
-    document.getElementById('resultAmount').textContent = (isRefund ? '-' : '+') + fmt(Math.abs(finalAmount));
+    document.getElementById('resultAmount').textContent = fmt(Math.abs(finalAmount));
     document.getElementById('subDetermined').textContent = fmt(determinedTax) + '원';
     document.getElementById('subLocal').textContent = fmt(localTax) + '원';
     document.getElementById('subPrepaid').textContent = fmt(prepaid) + '원';
 
     // ── 상세 내역 ──
     const finalClass = isRefund ? 'result-refund' : 'result-pay';
-    const finalSign = isRefund ? '-' : '+';
 
     const steps = [
         { icon: '1', bg: '#3B82F6', name: '총 수입금액', amount: fmt(totalIncome) + '원', cls: '' },
@@ -936,7 +938,7 @@ function calculate() {
         <div class="step-row total-row">
             <div class="step-icon" style="background:${isRefund ? '#2563EB' : '#DC2626'}">★</div>
             <div class="step-name" style="font-weight:800; color:var(--text-primary);">${isRefund ? '환급 예상액' : '추가 납부액'}</div>
-            <div class="step-amount ${finalClass}">${finalSign}${fmt(Math.abs(finalAmount))}원</div>
+            <div class="step-amount ${finalClass}">${fmt(Math.abs(finalAmount))}원</div>
         </div>
     `;
 
@@ -949,6 +951,35 @@ function calculate() {
     // 카카오 공유 버튼 표시
     document.getElementById('actionRow').classList.add('show');
     window._shareTax = { isRefund, amount: fmt(Math.abs(finalAmount)) };
+
+    // 캡처 전용 입력 요약 채우기
+    const meta = document.getElementById('captureMeta');
+    if (meta) {
+        const typeBtn = document.querySelector('.type-btn.selected');
+        const typeLabel = typeBtn ? typeBtn.textContent.trim() : '-';
+        const industrySel = document.getElementById('industrySelect');
+        const industryLabel = industrySel && industrySel.selectedIndex >= 0
+            ? industrySel.options[industrySel.selectedIndex].text
+            : '-';
+        const dependentsSel = document.getElementById('dependents');
+        const dependentsLabel = dependentsSel && dependentsSel.selectedIndex >= 0
+            ? dependentsSel.options[dependentsSel.selectedIndex].text
+            : dependents + '명';
+        const reliefList = [];
+        if (smeRelief) reliefList.push('중소기업 특별세액감면');
+        if (sinceReporting) reliefList.push('성실신고 세액공제');
+        const reliefText = reliefList.length ? reliefList.join(', ') : '없음';
+        meta.innerHTML =
+            '<div class="cm-title">입력 조건</div>' +
+            '<div class="cm-grid">' +
+                '<div class="cm-row"><span>소득 유형</span><strong>' + typeLabel + '</strong></div>' +
+                '<div class="cm-row"><span>총 수입금액</span><strong>' + fmt(totalIncome) + '원</strong></div>' +
+                '<div class="cm-row"><span>업종 · 경비율</span><strong>' + industryLabel + ' (' + (expenseRate * 100).toFixed(1) + '%)</strong></div>' +
+                '<div class="cm-row"><span>부양가족</span><strong>' + dependentsLabel + '</strong></div>' +
+                '<div class="cm-row"><span>기납부세액</span><strong>' + fmt(prepaid) + '원</strong></div>' +
+                '<div class="cm-row"><span>세액감면</span><strong>' + reliefText + '</strong></div>' +
+            '</div>';
+    }
 
     // AI 내성 레이어: 결과 저장/공유 버튼 표시
     if (window.TrustLayer) { window.TrustLayer.show('resultActions'); }
@@ -1024,6 +1055,18 @@ window.addEventListener('DOMContentLoaded', function () {
         targetId: 'captureTarget',
         actionsId: 'resultActions',
         filename: '종합소득세_계산결과',
+        // 캡처 전용 메타데이터
+        calculatorName: '종합소득세 계산기',
+        taxYear: '2026년 귀속',
+        basisInfo: '2026년 개정 세법 기준 · 최종 업데이트 2026.04.14',
+        sourceURL: 'salarykorea.site/income-tax',
+        metaId: 'captureMeta',
+        references: [
+            '소득세법 제55조 (세율) · 제59조의2 (특별세액공제)',
+            '국세청 홈택스 — 종합소득세 신고 안내',
+            '2026년 개정세법 해설 (기획재정부)'
+        ],
+        disclaimer: '본 결과는 참고용이며, 실제 신고는 국세청 홈택스에서 확인하세요.',
         shareParams: function () {
             var income = (document.getElementById('incomeInput').value || '').replace(/[^0-9]/g, '');
             var prepaid = (document.getElementById('prepaidInput').value || '').replace(/[^0-9]/g, '');

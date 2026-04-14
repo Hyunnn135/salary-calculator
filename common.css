@@ -1089,6 +1089,165 @@ body { font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif; backgrou
     .trust-badge-dot { width: 7px; height: 7px; }
 }
 
+/* --- 캡처 전용 요소 (PDF/이미지 출력 시에만 보임) --- */
+/* .capture-only는 화면에서는 숨기고 trust-layer.js의 onclone에서 강제 노출 */
+.capture-only {
+    display: none;
+}
+
+/* --- 캡처용 헤더: salarykorea 브랜딩 + 계산기명 + 연도/날짜 --- */
+.capture-header-clone {
+    margin: 0 0 18px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+    border: 1px solid #DBEAFE;
+    border-radius: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text-primary);
+}
+.capture-header-clone .ch-brand {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #2563EB;
+    letter-spacing: -0.2px;
+    margin-bottom: 6px;
+}
+.capture-header-clone .ch-brand span {
+    color: #64748B;
+    font-weight: 600;
+}
+.capture-header-clone .ch-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+.capture-header-clone .ch-meta {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #64748B;
+    letter-spacing: -0.2px;
+}
+
+/* --- 캡처용 Trust Badge (재구성판) --- */
+.capture-trust-badge {
+    display: block;
+    padding: 8px 14px;
+    margin: 0 0 14px;
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #065F46;
+    letter-spacing: -0.2px;
+    line-height: 1.4;
+    text-align: center;
+}
+.capture-trust-badge::before {
+    content: "●";
+    color: #10B981;
+    margin-right: 6px;
+    font-size: 0.7rem;
+}
+
+/* --- 캡처용 입력 조건 요약 --- */
+.capture-meta {
+    margin: 0 0 16px;
+    padding: 14px 18px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.capture-meta .cm-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #E2E8F0;
+}
+.capture-meta .cm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 18px;
+}
+.capture-meta .cm-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    padding: 3px 0;
+}
+.capture-meta .cm-row span {
+    color: #64748B;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+.capture-meta .cm-row strong {
+    color: #0F172A;
+    font-weight: 700;
+    text-align: right;
+    letter-spacing: -0.2px;
+}
+
+/* --- 캡처용 푸터: 출처/근거 --- */
+.capture-footer-clone {
+    margin: 16px 0 0;
+    padding: 14px 18px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.capture-footer-clone .cf-title {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #334155;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+}
+.capture-footer-clone .cf-list {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 0;
+}
+.capture-footer-clone .cf-list li {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #475569;
+    padding-left: 12px;
+    position: relative;
+    letter-spacing: -0.2px;
+}
+.capture-footer-clone .cf-list li::before {
+    content: "·";
+    position: absolute;
+    left: 2px;
+    color: #94A3B8;
+    font-weight: 800;
+}
+.capture-footer-clone .cf-url {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #2563EB;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+}
+.capture-footer-clone .cf-disclaimer {
+    font-size: 0.72rem;
+    color: #94A3B8;
+    line-height: 1.5;
+    padding-top: 8px;
+    border-top: 1px dashed #E2E8F0;
+    letter-spacing: -0.2px;
+}
+
 /* --- Result Actions (저장/공유 버튼 그룹) --- */
 .result-actions {
     display: grid;

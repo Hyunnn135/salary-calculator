@@ -83,6 +83,79 @@
         }
     }
 
+    function todayLong() {
+        var d = new Date();
+        var y = d.getFullYear();
+        var m = String(d.getMonth() + 1).padStart(2, "0");
+        var dd = String(d.getDate()).padStart(2, "0");
+        return y + "-" + m + "-" + dd;
+    }
+
+    /**
+     * onclone 단계에서 캡처 영역에 다음 요소를 동적으로 주입:
+     *  1) 캡처 헤더 (브랜드 + 계산기명 + 연도/날짜)
+     *  2) Trust Badge (config에서 재구성 — cloneNode 의존성 제거)
+     *  3) 입력 조건 메타 노출
+     *  4) 캡처 푸터 (참고자료 + URL + 면책)
+     */
+    function injectCaptureChrome(clonedDoc, root, cfg) {
+        if (!root || !cfg) return;
+
+        // 1) 헤더
+        if (cfg.calculatorName && !root.querySelector(".capture-header-clone")) {
+            var header = clonedDoc.createElement("div");
+            header.className = "capture-header-clone";
+            var taxYear = cfg.taxYear ? cfg.taxYear + " · " : "";
+            header.innerHTML =
+                '<div class="ch-brand">월급연구소 <span>· salarykorea.site</span></div>' +
+                '<div class="ch-title">' + cfg.calculatorName + '</div>' +
+                '<div class="ch-meta">' + taxYear + todayLong() + ' 생성</div>';
+            root.insertBefore(header, root.firstChild);
+        }
+
+        // 2) Trust Badge — config 기반 재구성 (cloneNode보다 안정적)
+        if (cfg.basisInfo && !root.querySelector(".capture-trust-badge")) {
+            var badge = clonedDoc.createElement("div");
+            badge.className = "capture-trust-badge";
+            badge.textContent = cfg.basisInfo;
+            // 헤더 바로 다음에 배치
+            var firstHeader = root.querySelector(".capture-header-clone");
+            if (firstHeader && firstHeader.nextSibling) {
+                root.insertBefore(badge, firstHeader.nextSibling);
+            } else {
+                root.insertBefore(badge, root.firstChild);
+            }
+        }
+
+        // 3) 입력 메타 노출
+        if (cfg.metaId) {
+            var metaEl = clonedDoc.getElementById(cfg.metaId);
+            if (metaEl) {
+                metaEl.style.display = "block";
+            }
+        }
+
+        // 4) 푸터
+        if (cfg.references && cfg.references.length && !root.querySelector(".capture-footer-clone")) {
+            var footer = clonedDoc.createElement("div");
+            footer.className = "capture-footer-clone";
+            var listHTML = cfg.references.map(function (r) {
+                return '<li>' + r + '</li>';
+            }).join("");
+            var html =
+                '<div class="cf-title">참고 자료</div>' +
+                '<ul class="cf-list">' + listHTML + '</ul>';
+            if (cfg.sourceURL) {
+                html += '<div class="cf-url">' + cfg.sourceURL + '</div>';
+            }
+            if (cfg.disclaimer) {
+                html += '<div class="cf-disclaimer">* ' + cfg.disclaimer + '</div>';
+            }
+            footer.innerHTML = html;
+            root.appendChild(footer);
+        }
+    }
+
     async function captureElement(el, scale) {
         await loadScript(HTML2CANVAS_URL);
 
@@ -127,21 +200,15 @@
                     var root = clonedDoc.getElementById(el.id);
                     if (root) {
                         root.style.background = "#FFFFFF";
-                        root.style.padding = "20px";
+                        root.style.padding = "24px";
                         root.style.borderRadius = "12px";
                         root.style.display = "block";
                     }
                     // 결과 저장 버튼·카카오 공유 버튼은 캡처 결과에서 숨김
                     var hideInCapture = clonedDoc.querySelectorAll(".result-actions, .action-row");
                     hideInCapture.forEach(function (n) { n.style.display = "none"; });
-                    // 상단에 Trust Badge 복제 삽입 (캡처 결과에 검증 정보가 함께 찍히도록)
-                    var badgeOrig = document.querySelector(".trust-badge");
-                    if (badgeOrig && root && !root.querySelector(".trust-badge-clone")) {
-                        var badgeClone = badgeOrig.cloneNode(true);
-                        badgeClone.classList.add("trust-badge-clone");
-                        badgeClone.style.marginBottom = "16px";
-                        root.insertBefore(badgeClone, root.firstChild);
-                    }
+                    // 캡처 헤더/Trust Badge/입력메타/푸터 주입
+                    injectCaptureChrome(clonedDoc, root, _cfg);
                 } catch (e) {
                     console.warn("onclone 처리 중 경고:", e);
                 }
